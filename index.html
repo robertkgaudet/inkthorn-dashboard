@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INKTHORN — Intelligence Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-horizon" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-block">
+        <h1 class="logo">INKTHORN</h1>
+        <p class="subtitle">Intelligence Dashboard</p>
+      </div>
+      <nav class="nav-bar" id="nav-bar" role="navigation" aria-label="Panel navigation">
+        <!-- tabs injected by app.js -->
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content" id="main-content">
+    <div class="loading-state" id="loading-state">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Connecting to agents…</p>
+    </div>
+    <!-- panels injected by app.js -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-updated" id="footer-updated">Last updated: —</span>
+      <span class="footer-divider">·</span>
+      <span class="footer-brand">Powered by <span class="brand-highlight">InkThorn Agents</span></span>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

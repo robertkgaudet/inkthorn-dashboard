@@ -1,0 +1,31 @@
+{
+  "title": "INKTHORN",
+  "subtitle": "Intelligence Dashboard",
+  "updated": "2026-03-20T00:00:00Z",
+  "panels": [
+    {
+      "id": "live-music",
+      "label": "🎵 Live Music",
+      "agent": "Rob-Agent",
+      "type": "live-music",
+      "data": "data/live-music.json",
+      "description": "Tonight's live music in New Orleans via WWOZ"
+    },
+    {
+      "id": "weather",
+      "label": "🌤️ Weather",
+      "agent": "Rob-Agent",
+      "type": "weather",
+      "data": "data/weather.json",
+      "description": "New Orleans weather"
+    },
+    {
+      "id": "digest",
+      "label": "📰 Daily Digest",
+      "agent": "Rob-Agent",
+      "type": "digest",
+      "data": "data/digest.json",
+      "description": "Daily briefing from your agents"
+    }
+  ]
+}
