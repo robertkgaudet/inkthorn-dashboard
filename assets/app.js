@@ -360,8 +360,22 @@ async function init() {
     const tab = document.createElement('button');
     tab.className = 'nav-tab' + (idx === 0 ? ' active' : '');
     tab.textContent = panelConfig.label;
-    tab.setAttribute('aria-controls', `panel-${panelConfig.id}`);
     tab.setAttribute('role', 'tab');
+
+    // Playbook panel: redirect to protected standalone page
+    if (panelConfig.type === 'playbook') {
+      tab.setAttribute('aria-label', `${panelConfig.label} (opens protected page)`);
+      tab.addEventListener('click', () => {
+        window.location.href = 'playbook.html';
+      });
+      navBar.appendChild(tab);
+      tabEls.push(tab);
+      // Push a null placeholder so indices stay aligned
+      panelEls.push(null);
+      return;
+    }
+
+    tab.setAttribute('aria-controls', `panel-${panelConfig.id}`);
     tab.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
     navBar.appendChild(tab);
     tabEls.push(tab);
@@ -393,14 +407,15 @@ async function init() {
         t.setAttribute('aria-selected', i === idx ? 'true' : 'false');
       });
       panelEls.forEach((p, i) => {
-        p.classList.toggle('active', i === idx);
+        if (p) p.classList.toggle('active', i === idx);
       });
     });
   });
 
-  // Load all panels concurrently
+  // Load all panels concurrently (skip playbook — it has no panel div)
   panels.forEach((panelConfig, idx) => {
-    loadPanel(panelConfig, panelEls[idx]);
+    if (panelConfig.type === 'playbook') return;
+    if (panelEls[idx]) loadPanel(panelConfig, panelEls[idx]);
   });
 }
 

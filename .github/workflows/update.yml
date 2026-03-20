@@ -33,10 +33,17 @@ jobs:
       - name: Fetch Weather
         run: node scripts/fetch-weather.js
       
+      - name: Encrypt Playbook
+        env:
+          STATICRYPT_PASSWORD: ${{ secrets.STATICRYPT_PASSWORD }}
+        run: |
+          npx staticrypt playbook-source.html -p "$STATICRYPT_PASSWORD" --short
+          mv encrypted/playbook-source.html playbook.html
+
       - name: Commit updated data
         run: |
           git config user.name "InkThorn Bot"
           git config user.email "inkthorn-bot@users.noreply.github.com"
-          git add data/
+          git add data/ playbook.html
           git diff --staged --quiet || git commit -m "chore: update dashboard data [skip ci] $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git push
