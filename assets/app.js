@@ -124,60 +124,117 @@ function renderLiveMusic(data, el) {
 }
 
 /**
- * renderWeather — shows a weather card or pending state.
+ * renderWeather — shows current conditions prominently, then 3-day forecast cards.
  */
 function renderWeather(data, el) {
-  if (data.status === 'pending' || !data.current) {
-    el.innerHTML = pendingCard(data.message || 'Weather data not yet available.', '🌤️');
+  if (!data || data.status === 'pending') {
+    el.innerHTML = `<div class="no-data-card"><span class="no-data-icon">🌤️</span><p>No weather data yet — agent hasn't published.</p></div>`;
     return;
   }
+
   const c = data.current;
-  el.innerHTML = `
-    <div class="card weather-card">
-      <span class="weather-icon">${escHtml(c.icon || '🌡️')}</span>
-      <div class="weather-temp">${escHtml(String(c.temp_f || '—'))}°F</div>
-      <div class="weather-desc">${escHtml(c.description || '')}</div>
-      <div class="weather-details">
-        ${c.humidity != null ? `
-        <div class="weather-detail">
-          <div class="weather-detail-label">Humidity</div>
-          <div class="weather-detail-value">${escHtml(String(c.humidity))}%</div>
-        </div>` : ''}
-        ${c.wind_mph != null ? `
-        <div class="weather-detail">
-          <div class="weather-detail-label">Wind</div>
-          <div class="weather-detail-value">${escHtml(String(c.wind_mph))} mph</div>
-        </div>` : ''}
-        ${c.feels_like_f != null ? `
-        <div class="weather-detail">
-          <div class="weather-detail-label">Feels Like</div>
-          <div class="weather-detail-value">${escHtml(String(c.feels_like_f))}°F</div>
-        </div>` : ''}
-        ${c.location ? `
-        <div class="weather-detail">
-          <div class="weather-detail-label">Location</div>
-          <div class="weather-detail-value">${escHtml(c.location)}</div>
-        </div>` : ''}
+  const html = `
+    <div class="card weather-current">
+      <div class="weather-main">
+        <span class="weather-emoji">${c.emoji}</span>
+        <div class="weather-temps">
+          <span class="weather-temp">${c.temp_f}°F</span>
+          <span class="weather-feels">Feels like ${c.feels_like_f}°F</span>
+        </div>
+        <div class="weather-desc-block">
+          <span class="weather-description">${c.description}</span>
+          <span class="weather-location">📍 ${data.location}</span>
+        </div>
       </div>
-    </div>`;
+      <div class="weather-details">
+        <span>💧 Humidity: ${c.humidity}%</span>
+        <span>💨 Wind: ${c.wind_mph} mph ${c.wind_dir}</span>
+        <span>👁️ Visibility: ${c.visibility_miles} mi</span>
+        <span>☀️ UV Index: ${c.uv_index}</span>
+      </div>
+    </div>
+    <div class="weather-forecast">
+      ${(data.forecast || []).map(day => `
+        <div class="card weather-day">
+          <div class="forecast-label">${day.label}</div>
+          <div class="forecast-emoji">${day.emoji}</div>
+          <div class="forecast-temps">${day.high_f}° / ${day.low_f}°</div>
+          <div class="forecast-desc">${day.description}</div>
+          <div class="forecast-rain">🌧️ ${day.chance_of_rain}%</div>
+          <div class="forecast-sun">🌅 ${day.sunrise} · 🌇 ${day.sunset}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  el.innerHTML = html;
 }
 
 /**
- * renderDigest — renders a list of digest items.
+ * renderPlaybook — renders notes and structured items from the playbook.
  */
-function renderDigest(data, el) {
-  if (data.status === 'pending' || !data.items || !data.items.length) {
-    el.innerHTML = pendingCard(data.message || 'Digest not yet available.', '📰');
+function renderPlaybook(data, el) {
+  if (!data || data.status === 'pending') {
+    el.innerHTML = `<div class="no-data-card"><span class="no-data-icon">📋</span><p>No playbook data yet — agent hasn't published.</p></div>`;
     return;
   }
-  const items = data.items.map(item => `
-    <div class="card digest-item">
-      ${item.category ? `<div class="digest-category">${escHtml(item.category)}</div>` : ''}
-      ${item.headline ? `<div class="digest-headline">${escHtml(item.headline)}</div>` : ''}
-      ${item.body ? `<div class="digest-body">${escHtml(item.body)}</div>` : ''}
-      ${item.time ? `<div class="digest-time">${escHtml(item.time)}</div>` : ''}
-    </div>`).join('');
-  el.innerHTML = items;
+
+  const allItems = [];
+
+  // Add notes from the notes array
+  if (data.notes && data.notes.length > 0) {
+    data.notes.forEach(note => {
+      allItems.push({
+        timestamp: note.timestamp,
+        type: 'note',
+        category: 'note',
+        title: '📝 Note',
+        body: note.text,
+        source: note.source || 'telegram'
+      });
+    });
+  }
+
+  // Add structured items
+  if (data.items && data.items.length > 0) {
+    data.items.forEach(item => allItems.push(item));
+  }
+
+  if (allItems.length === 0) {
+    el.innerHTML = `<div class="no-data-card"><span class="no-data-icon">📋</span><p>Your playbook is empty — text me a note on Telegram to get started!</p></div>`;
+    return;
+  }
+
+  // Sort by timestamp descending (newest first)
+  allItems.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+  const categoryColors = {
+    note: 'var(--cyan)',
+    system: 'var(--purple)',
+    briefing: 'var(--pink)',
+    reminder: '#f59e0b',
+    default: 'var(--purple)'
+  };
+
+  const html = allItems.map(item => {
+    const color = categoryColors[item.category] || categoryColors.default;
+    const time = new Date(item.timestamp).toLocaleString('en-US', {
+      month: 'short', day: 'numeric',
+      hour: 'numeric', minute: '2-digit',
+      hour12: true
+    });
+    return `
+      <div class="card playbook-card">
+        <div class="playbook-header">
+          <span class="playbook-title" style="color: ${color}">${item.title || 'Note'}</span>
+          <span class="playbook-time">${time}</span>
+        </div>
+        <p class="playbook-body">${item.body}</p>
+        ${item.source ? `<span class="playbook-source">via ${item.source}</span>` : ''}
+      </div>
+    `;
+  }).join('');
+
+  el.innerHTML = html;
 }
 
 /**
@@ -210,7 +267,7 @@ function pendingCard(message, icon = '⏳') {
 const RENDERERS = {
   'live-music': renderLiveMusic,
   'weather':    renderWeather,
-  'digest':     renderDigest,
+  'playbook':   renderPlaybook,
 };
 
 function getRenderer(type) {

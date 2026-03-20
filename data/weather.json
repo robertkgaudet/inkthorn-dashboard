@@ -1,1 +1,56 @@
-{"agent": "Rob-Agent", "updated": null, "status": "pending", "message": "Weather agent not yet configured"}
+{
+  "agent": "Rob-Agent",
+  "updated": "2026-03-20T23:27:28.902Z",
+  "status": "ok",
+  "location": "New Orleans, LA",
+  "current": {
+    "temp_f": 74,
+    "feels_like_f": 75,
+    "humidity": 37,
+    "description": "Sunny",
+    "code": "113",
+    "emoji": "☀️",
+    "wind_mph": 6,
+    "wind_dir": "SSW",
+    "visibility_miles": 16,
+    "uv_index": 0
+  },
+  "forecast": [
+    {
+      "date": "2026-03-20",
+      "label": "Thu, Mar 19",
+      "high_f": 85,
+      "low_f": 49,
+      "description": "Clear",
+      "emoji": "☀️",
+      "sunrise": "07:04 AM",
+      "sunset": "07:12 PM",
+      "avg_humidity": 61,
+      "chance_of_rain": 0
+    },
+    {
+      "date": "2026-03-21",
+      "label": "Fri, Mar 20",
+      "high_f": 83,
+      "low_f": 56,
+      "description": "Partly Cloudy",
+      "emoji": "⛅",
+      "sunrise": "07:03 AM",
+      "sunset": "07:13 PM",
+      "avg_humidity": 75,
+      "chance_of_rain": 0
+    },
+    {
+      "date": "2026-03-22",
+      "label": "Sat, Mar 21",
+      "high_f": 75,
+      "low_f": 62,
+      "description": "Overcast",
+      "emoji": "☁️",
+      "sunrise": "07:02 AM",
+      "sunset": "07:13 PM",
+      "avg_humidity": 78,
+      "chance_of_rain": 0
+    }
+  ]
+}

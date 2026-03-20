@@ -20,12 +20,12 @@
       "description": "New Orleans weather"
     },
     {
-      "id": "digest",
-      "label": "📰 Daily Digest",
+      "id": "playbook",
+      "label": "📋 Daily Playbook",
       "agent": "Rob-Agent",
-      "type": "digest",
-      "data": "data/digest.json",
-      "description": "Daily briefing from your agents"
+      "type": "playbook",
+      "data": "data/playbook.json",
+      "description": "Your daily notes, briefings, and agent updates"
     }
   ]
 }
