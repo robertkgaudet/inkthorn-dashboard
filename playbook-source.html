@@ -385,6 +385,49 @@
       margin-top: 3px;
       font-family: monospace;
     }
+    .pb-meal-cals {
+      font-size: 0.65rem;
+      color: #fbbf24;
+      font-family: monospace;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+    .pb-day-total {
+      padding: 10px 12px;
+      background: rgba(0,0,0,0.3);
+      border-top: 1px solid rgba(168,85,247,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .pb-day-total-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: #7878a8;
+      text-transform: uppercase;
+    }
+    .pb-day-total-cals {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #fbbf24;
+    }
+    .pb-day-total-bar {
+      flex: 1;
+      height: 4px;
+      background: rgba(168,85,247,0.2);
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 0 8px;
+    }
+    .pb-day-total-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.6s ease;
+    }
 
     /* Shopping list */
     .pb-shopping-grid {
@@ -662,10 +705,25 @@
             <div class="pb-meal-type meal-type-${type}">${mealEmoji[type]} ${type}</div>
             <div class="pb-meal-name">${escHtml(meal.name)}</div>
             <div class="pb-meal-desc">${escHtml(meal.description||'')}</div>
-            ${meal.prep_time ? `<div class="pb-meal-prep">⏱ ${escHtml(meal.prep_time)}</div>` : ''}
+            <div style="display:flex;gap:10px;align-items:center;margin-top:3px">
+              ${meal.prep_time ? `<div class="pb-meal-prep">⏱ ${escHtml(meal.prep_time)}</div>` : ''}
+              ${meal.calories ? `<div class="pb-meal-cals">🔥 ${meal.calories} cal</div>` : ''}
+            </div>
           </div>`;
         });
-        calHtml += '</div>';
+
+        // Daily calorie total bar
+        const target = data.daily_target || 2000;
+        const total = day.total_calories || 0;
+        const pct = Math.min(100, Math.round((total / target) * 100));
+        const barColor = pct > 110 ? '#ef4444' : pct > 95 ? '#fbbf24' : '#4ade80';
+        calHtml += `
+          <div class="pb-day-total">
+            <div class="pb-day-total-label">Daily Total</div>
+            <div class="pb-day-total-bar"><div class="pb-day-total-fill" style="width:${pct}%;background:${barColor}"></div></div>
+            <div class="pb-day-total-cals">${total} <span style="font-size:0.55rem;color:#7878a8">/ ${target}</span></div>
+          </div>
+        </div>`;
       });
       calHtml += '</div>';
 
