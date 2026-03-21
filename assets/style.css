@@ -159,8 +159,7 @@ body {
   width: 64px;
   height: 64px;
   object-fit: contain;
-  mix-blend-mode: multiply;
-  filter: drop-shadow(0 0 8px rgba(255,45,135,0.4));
+  filter: drop-shadow(0 0 8px rgba(255,45,135,0.5));
   flex-shrink: 0;
 }
 
