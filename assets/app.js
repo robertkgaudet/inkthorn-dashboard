@@ -106,7 +106,7 @@ function renderLiveMusic(data, el) {
   const topGenre  = Object.entries(topGenres).sort((a,b) => b[1]-a[1])[0];
 
   const statsHtml = `
-    <div class="stats-row">
+    <div class="stats-row-wrapper"><div class="stats-row">
       <div class="stat-card">
         <div class="stat-value">${shows.length}</div>
         <div class="stat-label">Tonight's Shows</div>
@@ -123,7 +123,7 @@ function renderLiveMusic(data, el) {
         <div class="stat-value stat-value-sm">${topGenre ? escHtml(topGenre[0]) : '—'}</div>
         <div class="stat-label">${topGenre ? `Top Genre · ${topGenre[1]} shows` : 'Genre data'}</div>
       </div>
-    </div>`;
+    </div></div>`;
 
   let html = statsHtml + `<p class="show-count-summary">Showing <span>${shows.length}</span> performances · ${escHtml(data.date)}</p>`;
 
@@ -269,6 +269,39 @@ function renderPlaybook(data, el) {
   // Sort by timestamp descending (newest first)
   allItems.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
+  // Stats
+  const totalItems = allItems.length;
+  const todayItems = allItems.filter(i => {
+    const d = new Date(i.timestamp);
+    const now = new Date();
+    return d.toDateString() === now.toDateString();
+  }).length;
+  const cats = {};
+  allItems.forEach(i => { cats[i.category] = (cats[i.category] || 0) + 1; });
+  const topCat = Object.entries(cats).sort((a,b) => b[1]-a[1])[0];
+  const latest = allItems[0];
+  const latestTime = latest ? new Date(latest.timestamp).toLocaleString('en-US', {month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true}) : '—';
+
+  const playbookStats = `
+    <div class="stats-row-wrapper"><div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value">${totalItems}</div>
+        <div class="stat-label">Total Items</div>
+      </div>
+      <div class="stat-card stat-card-highlight">
+        <div class="stat-value">${todayItems}</div>
+        <div class="stat-label">Added Today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value stat-value-sm">${topCat ? escHtml(topCat[0]) : '—'}</div>
+        <div class="stat-label">${topCat ? `Top Category · ${topCat[1]}` : 'Category'}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value stat-value-sm">${escHtml(latestTime)}</div>
+        <div class="stat-label">Latest Entry</div>
+      </div>
+    </div></div>`;
+
   const categoryColors = {
     note: 'var(--cyan)',
     system: 'var(--purple)',
@@ -277,7 +310,7 @@ function renderPlaybook(data, el) {
     default: 'var(--purple)'
   };
 
-  const html = allItems.map(item => {
+  const html = playbookStats + allItems.map(item => {
     const color = categoryColors[item.category] || categoryColors.default;
     const time = new Date(item.timestamp).toLocaleString('en-US', {
       month: 'short', day: 'numeric',
@@ -297,6 +330,99 @@ function renderPlaybook(data, el) {
   }).join('');
 
   el.innerHTML = html;
+}
+
+/**
+ * renderSchedule — renders scheduled tasks with stat summary + task cards.
+ */
+function renderSchedule(data, el) {
+  if (!data || !data.tasks || data.tasks.length === 0) {
+    el.innerHTML = `<div class="no-data-card"><span class="no-data-icon">⚙️</span><p>No scheduled tasks yet.</p></div>`;
+    return;
+  }
+
+  const tasks = data.tasks;
+  const active = tasks.filter(t => t.status === 'active').length;
+  const byCategory = {};
+  tasks.forEach(t => { byCategory[t.category] = (byCategory[t.category] || 0) + 1; });
+  const topCat = Object.entries(byCategory).sort((a,b) => b[1]-a[1])[0];
+
+  const categoryColors = {
+    wellness:  'var(--pink)',
+    dashboard: 'var(--cyan)',
+    reminder:  '#fbbf24',
+    default:   'var(--purple)',
+  };
+
+  const categoryIcons = {
+    wellness:  '💚',
+    dashboard: '📊',
+    reminder:  '⏰',
+    default:   '⚙️',
+  };
+
+  const statsHtml = `
+    <div class="stats-row-wrapper"><div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value">${tasks.length}</div>
+        <div class="stat-label">Total Tasks</div>
+      </div>
+      <div class="stat-card stat-card-highlight">
+        <div class="stat-value">${active}</div>
+        <div class="stat-label">Active Now</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value stat-value-sm">${topCat ? escHtml(topCat[0]) : '—'}</div>
+        <div class="stat-label">${topCat ? `Top Category · ${topCat[1]}` : 'Category'}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value stat-value-sm">${escHtml(data.updated ? new Date(data.updated).toLocaleDateString('en-US', {month:'short',day:'numeric'}) : '—')}</div>
+        <div class="stat-label">Last Synced</div>
+      </div>
+    </div></div>`;
+
+  // Group by category
+  const grouped = {};
+  tasks.forEach(t => {
+    const cat = t.category || 'default';
+    if (!grouped[cat]) grouped[cat] = [];
+    grouped[cat].push(t);
+  });
+
+  let cardsHtml = '';
+  for (const [cat, catTasks] of Object.entries(grouped)) {
+    const color = categoryColors[cat] || categoryColors.default;
+    const icon  = categoryIcons[cat]  || categoryIcons.default;
+    cardsHtml += `
+      <div class="time-group">
+        <h3 class="time-group-header" style="color:${color};text-shadow:0 0 10px ${color}40;">
+          ${icon} ${escHtml(cat.charAt(0).toUpperCase() + cat.slice(1))}
+          <span class="time-group-count">${catTasks.length} task${catTasks.length !== 1 ? 's' : ''}</span>
+        </h3>
+        ${catTasks.map(t => {
+          const color = categoryColors[t.category] || categoryColors.default;
+          const statusDot = t.status === 'active'
+            ? `<span class="schedule-status schedule-status-active">● ACTIVE</span>`
+            : `<span class="schedule-status schedule-status-paused">● PAUSED</span>`;
+          return `
+            <div class="card">
+              <div class="schedule-card">
+                <div class="schedule-top">
+                  <span class="schedule-title" style="color:${color}">${escHtml(t.title)}</span>
+                  ${statusDot}
+                </div>
+                <div class="schedule-desc">${escHtml(t.description)}</div>
+                <div class="schedule-meta">
+                  <span class="schedule-when">🕐 ${escHtml(t.schedule)}</span>
+                  ${t.next ? `<span class="schedule-next">▶ Next: ${escHtml(t.next)}</span>` : ''}
+                </div>
+              </div>
+            </div>`;
+        }).join('')}
+      </div>`;
+  }
+
+  el.innerHTML = statsHtml + cardsHtml;
 }
 
 /**
@@ -330,6 +456,7 @@ const RENDERERS = {
   'live-music': renderLiveMusic,
   'weather':    renderWeather,
   'playbook':   renderPlaybook,
+  'schedule':   renderSchedule,
 };
 
 function getRenderer(type) {

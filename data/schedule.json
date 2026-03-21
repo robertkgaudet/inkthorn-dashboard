@@ -1,0 +1,51 @@
+{
+  "agent": "Rob-Agent",
+  "updated": "2026-03-21T20:09:00Z",
+  "tasks": [
+    {
+      "id": "mental-health-morning",
+      "title": "Morning Check-In",
+      "description": "Daily mental health check-in message",
+      "schedule": "Daily ~9–10am CDT",
+      "category": "wellness",
+      "status": "active",
+      "next": "Tomorrow ~9am"
+    },
+    {
+      "id": "mental-health-afternoon",
+      "title": "Afternoon Check-In",
+      "description": "Daily mental health check-in message",
+      "schedule": "Daily ~1–2pm CDT",
+      "category": "wellness",
+      "status": "active",
+      "next": "Today ~1pm"
+    },
+    {
+      "id": "mental-health-evening",
+      "title": "Evening Check-In",
+      "description": "Daily mental health check-in message",
+      "schedule": "Daily ~7–8pm CDT",
+      "category": "wellness",
+      "status": "active",
+      "next": "Today ~7pm"
+    },
+    {
+      "id": "dashboard-morning-update",
+      "title": "Dashboard Morning Refresh",
+      "description": "Scrapes WWOZ live music + weather, pushes to inkthorn.ai",
+      "schedule": "Daily 8:00am CDT",
+      "category": "dashboard",
+      "status": "active",
+      "next": "Tomorrow 8am"
+    },
+    {
+      "id": "dashboard-evening-update",
+      "title": "Dashboard Evening Refresh",
+      "description": "Scrapes WWOZ live music + weather, pushes to inkthorn.ai",
+      "schedule": "Daily 6:00pm CDT",
+      "category": "dashboard",
+      "status": "active",
+      "next": "Today 6pm"
+    }
+  ]
+}
