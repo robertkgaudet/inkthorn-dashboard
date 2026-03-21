@@ -150,37 +150,65 @@ body {
 /* ── Logo ──────────────────────────────────────────────────── */
 .logo-block {
   text-align: center;
+  position: relative;
+  display: inline-block;
+  padding: 10px 28px 10px;
+  /* Candy-stripe border using repeating-linear-gradient */
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 6px,
+    rgba(255, 45, 135, 0.55) 6px,
+    rgba(255, 45, 135, 0.55) 12px
+  );
+  background-size: 100% 4px;
+  background-repeat: no-repeat;
+  background-position: top center, bottom center;
+  border-top: 3px solid var(--pink);
+  border-bottom: 3px solid var(--pink);
+}
+
+/* Star accents flanking the logo */
+.logo-block::before,
+.logo-block::after {
+  content: '✦';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: var(--pink);
+  opacity: 0.8;
+  animation: star-pulse 3s ease-in-out infinite;
+}
+.logo-block::before { left: 6px; }
+.logo-block::after  { right: 6px; }
+
+@keyframes star-pulse {
+  0%, 100% { opacity: 0.5; transform: translateY(-50%) scale(1); }
+  50%       { opacity: 1;   transform: translateY(-50%) scale(1.15); }
 }
 
 .logo {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 8vw, 4rem);
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  color: var(--pink);
+  font-family: 'Permanent Marker', cursive;
+  font-size: clamp(2.2rem, 8vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: #f5f0e8;
   text-shadow:
-    0 0 10px var(--pink),
-    0 0 20px var(--pink),
-    0 0 40px var(--pink),
-    0 0 80px var(--pink-glow);
-  animation: logo-flicker 8s ease-in-out infinite;
+    3px 3px 0px rgba(255, 45, 135, 0.6),
+    0 0 20px rgba(255, 45, 135, 0.25);
   line-height: 1;
-}
-
-@keyframes logo-flicker {
-  0%, 92%, 94%, 100% { opacity: 1; }
-  93%                { opacity: 0.85; }
 }
 
 .subtitle {
   font-family: var(--font-display);
-  font-size: clamp(0.6rem, 2vw, 0.75rem);
+  font-size: clamp(0.55rem, 2vw, 0.7rem);
   font-weight: 400;
-  letter-spacing: 0.5em;
-  color: var(--cyan);
-  text-shadow: 0 0 10px var(--cyan-glow);
+  letter-spacing: 0.45em;
+  color: #f5f0e8;
+  opacity: 0.7;
   text-transform: uppercase;
-  margin-top: 4px;
+  margin-top: 5px;
 }
 
 /* ── Nav Bar ───────────────────────────────────────────────── */

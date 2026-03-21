@@ -9,15 +9,47 @@
   <meta http-equiv="pragma" content="no-cache" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
   <style>
     body {
       background: #070711;
-      color: #e0e0ff;
+      color: #f0f0ff;
       font-family: 'Space Grotesk', sans-serif;
       margin: 0;
       padding: 0;
+    }
+    .playbook-header-bar {
+      background: rgba(7, 7, 17, 0.95);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .playbook-back-link {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #00f5ff;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+    }
+    .playbook-back-link:hover { opacity: 0.75; }
+    .playbook-header-logo {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.3rem;
+      color: #f5f0e8;
+      text-shadow: 2px 2px 0 rgba(255,45,135,0.5);
+      letter-spacing: 0.04em;
     }
     .playbook-standalone {
       max-width: 800px;
@@ -26,16 +58,15 @@
     }
     .playbook-logo {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 900;
-      color: #ff2d87;
-      text-shadow: 0 0 18px rgba(255,45,135,0.7);
+      font-size: 1rem;
+      font-weight: 700;
+      color: #b0b0d8;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       margin-bottom: 0.2rem;
     }
     .playbook-subtitle {
-      color: #9090c0;
+      color: #7878a8;
       font-size: 0.85rem;
       letter-spacing: 0.1em;
       margin-bottom: 2rem;
@@ -61,6 +92,11 @@
   </style>
 </head>
 <body>
+  <div class="playbook-header-bar">
+    <a href="index.html" class="playbook-back-link">← Dashboard</a>
+    <span class="playbook-header-logo">InkThorn</span>
+    <span style="width:80px"></span>
+  </div>
   <div class="playbook-standalone">
     <div class="playbook-logo">INKTHORN</div>
     <div class="playbook-subtitle">📋 DAILY PLAYBOOK</div>
