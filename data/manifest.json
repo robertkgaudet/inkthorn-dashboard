@@ -20,16 +20,8 @@
       "description": "New Orleans weather"
     },
     {
-      "id": "schedule",
-      "label": "⚙️ Schedule",
-      "agent": "Rob-Agent",
-      "type": "schedule",
-      "data": "data/schedule.json",
-      "description": "Active scheduled tasks and automations"
-    },
-    {
       "id": "playbook",
-      "label": "📋 Daily Playbook",
+      "label": "📋 My Playbook",
       "agent": "Rob-Agent",
       "type": "playbook",
       "data": "data/playbook.json",
