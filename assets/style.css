@@ -150,96 +150,37 @@ body {
 /* ── Logo ──────────────────────────────────────────────────── */
 .logo-block {
   text-align: center;
-  position: relative;
-  display: inline-block;
-  padding: 2px 28px 4px;
 }
 
 .logo {
-  font-family: 'Permanent Marker', cursive;
-  font-size: clamp(2.4rem, 9vw, 4.4rem);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 1px;
-}
-
-/* Individual letter styling — each slightly different */
-.logo-l {
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-.logo-l:hover { transform: scale(1.2) rotate(0deg) !important; }
-
-.l-i  { color: #ff2d87; font-size: 0.9em;  transform: rotate(-4deg)  translateY(3px);  text-shadow: 3px 3px 0 rgba(255,45,135,0.5);   }
-.l-n1 { color: #f5f0e8; font-size: 1.1em;  transform: rotate(2deg)   translateY(-4px); text-shadow: 3px 3px 0 rgba(0,245,255,0.4);    }
-.l-k  { color: #00f5ff; font-size: 0.95em; transform: rotate(-2deg)  translateY(2px);  text-shadow: 3px 3px 0 rgba(0,245,255,0.5);    }
-.l-t  { color: #fbbf24; font-size: 1.15em; transform: rotate(3deg)   translateY(-5px); text-shadow: 3px 3px 0 rgba(251,191,36,0.5);   }
-.l-h  { color: #ff2d87; font-size: 0.88em; transform: rotate(-3deg)  translateY(4px);  text-shadow: 3px 3px 0 rgba(255,45,135,0.5);   }
-.l-o  { color: #a855f7; font-size: 1.12em; transform: rotate(2.5deg) translateY(-3px); text-shadow: 3px 3px 0 rgba(168,85,247,0.5);   }
-.l-r  { color: #f5f0e8; font-size: 0.92em; transform: rotate(-1.5deg)translateY(2px);  text-shadow: 3px 3px 0 rgba(255,45,135,0.35);  }
-.l-n2 { color: #00f5ff; font-size: 1.08em; transform: rotate(3.5deg) translateY(-4px); text-shadow: 3px 3px 0 rgba(0,245,255,0.45);   }
-
-/* Finial rows */
-.logo-finials {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: var(--pink);
+  text-shadow:
+    0 0 10px var(--pink),
+    0 0 20px var(--pink),
+    0 0 40px var(--pink),
+    0 0 80px var(--pink-glow);
+  animation: logo-flicker 8s ease-in-out infinite;
   line-height: 1;
 }
-.logo-finials-top    { margin-bottom: 4px; }
-.logo-finials-bottom { margin-top: 4px; }
 
-.fin {
-  display: inline-block;
-  font-style: normal;
-  line-height: 1;
-  animation: fin-twinkle 4s ease-in-out infinite;
+@keyframes logo-flicker {
+  0%, 92%, 94%, 100% { opacity: 1; }
+  93%                { opacity: 0.85; }
 }
-.fin-fleur { font-size: 0.85rem; animation-duration: 5s; }
-.fin-star4 { font-size: 0.65rem; animation-duration: 3.5s; }
-.fin-star5 { font-size: 0.7rem;  animation-duration: 4.5s; }
-.fin-dot   { font-size: 0.45rem; animation-duration: 2.8s; }
-.fin-heart { font-size: 0.65rem; animation-duration: 3.8s; }
-
-@keyframes fin-twinkle {
-  0%, 100% { opacity: 0.55; transform: scale(1); }
-  50%       { opacity: 1;    transform: scale(1.2); }
-}
-
-/* Finial colors — matching the letter palette */
-.fin-c1 { color: #ff2d87; animation-delay: 0s;    }
-.fin-c2 { color: #00f5ff; animation-delay: 0.4s;  }
-.fin-c3 { color: #fbbf24; animation-delay: 0.8s;  }
-.fin-c4 { color: #a855f7; animation-delay: 1.2s;  }
-.fin-c5 { color: #f5f0e8; animation-delay: 0.2s;  }
-.fin-c6 { color: #ff2d87; animation-delay: 1.6s;  }
-.fin-c7 { color: #00f5ff; animation-delay: 0.6s;  }
-
-/* Stagger twinkle delays so they don't all pulse together */
-.logo-finials .fin:nth-child(1) { animation-delay: 0s;    }
-.logo-finials .fin:nth-child(2) { animation-delay: 0.5s;  }
-.logo-finials .fin:nth-child(3) { animation-delay: 1.0s;  }
-.logo-finials .fin:nth-child(4) { animation-delay: 1.5s;  }
-.logo-finials .fin:nth-child(5) { animation-delay: 2.0s;  }
-.logo-finials .fin:nth-child(6) { animation-delay: 2.5s;  }
-.logo-finials .fin:nth-child(7) { animation-delay: 3.0s;  }
-.logo-finials .fin:nth-child(8) { animation-delay: 3.5s;  }
-.logo-finials .fin:nth-child(9) { animation-delay: 4.0s;  }
 
 .subtitle {
   font-family: var(--font-display);
-  font-size: clamp(0.55rem, 2vw, 0.7rem);
+  font-size: clamp(0.6rem, 2vw, 0.75rem);
   font-weight: 400;
-  letter-spacing: 0.45em;
-  color: #f5f0e8;
-  opacity: 0.6;
+  letter-spacing: 0.5em;
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan-glow);
   text-transform: uppercase;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 /* ── Nav Bar ───────────────────────────────────────────────── */
