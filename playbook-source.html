@@ -299,6 +299,124 @@
     }
     .pb-empty-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
 
+    /* ── Meal Plan ── */
+    .pb-meal-week {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      margin-bottom: 32px;
+      overflow-x: auto;
+    }
+    .pb-day-col {
+      background: rgba(22,12,45,0.92);
+      border: 1px solid rgba(168,85,247,0.45);
+      border-radius: 8px;
+      overflow: hidden;
+      min-width: 140px;
+      transition: all 0.3s;
+    }
+    .pb-day-col:hover {
+      border-color: #a855f7;
+      box-shadow: 0 0 14px rgba(168,85,247,0.2);
+      transform: translateY(-2px);
+    }
+    .pb-day-header {
+      background: rgba(168,85,247,0.15);
+      border-bottom: 1px solid rgba(168,85,247,0.3);
+      padding: 10px 12px;
+      text-align: center;
+    }
+    .pb-day-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: #a855f7;
+      text-transform: uppercase;
+    }
+    .pb-day-date {
+      font-size: 0.72rem;
+      color: #7878a8;
+      margin-top: 2px;
+    }
+    .pb-meal-slot {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+    }
+    .pb-meal-slot:last-child { border-bottom: none; }
+    .pb-meal-type {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .meal-type-breakfast { color: #fbbf24; }
+    .meal-type-lunch     { color: #00f5ff; }
+    .meal-type-dinner    { color: #ff2d87; }
+    .meal-type-snack     { color: #4ade80; }
+    .pb-meal-name {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #f0f0ff;
+      line-height: 1.3;
+      margin-bottom: 3px;
+    }
+    .pb-meal-desc {
+      font-size: 0.68rem;
+      color: #7878a8;
+      line-height: 1.4;
+    }
+    .pb-meal-prep {
+      font-size: 0.6rem;
+      color: #a855f7;
+      margin-top: 3px;
+      font-family: monospace;
+    }
+
+    /* Shopping list */
+    .pb-shopping-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .pb-shopping-cat {
+      background: rgba(22,12,45,0.92);
+      border: 1px solid rgba(168,85,247,0.45);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .pb-shopping-cat-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .pb-shopping-cat-title.cat-produce  { color: #4ade80; }
+    .pb-shopping-cat-title.cat-protein  { color: #ff2d87; }
+    .pb-shopping-cat-title.cat-dairy    { color: #00f5ff; }
+    .pb-shopping-cat-title.cat-pantry   { color: #fbbf24; }
+    .pb-shopping-cat-title.cat-other    { color: #a855f7; }
+    .pb-shopping-item {
+      font-size: 0.82rem;
+      color: #b0b0d8;
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(168,85,247,0.1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pb-shopping-item:last-child { border-bottom: none; }
+    .pb-shopping-item::before {
+      content: '·';
+      color: #a855f7;
+      font-weight: 700;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 640px) {
       .pb-stats {
@@ -359,6 +477,7 @@
     <nav class="pb-tabs" id="pb-tabs">
       <button class="pb-tab active" data-panel="notes">📝 Notes & Briefings</button>
       <button class="pb-tab" data-panel="schedule">⚙️ Schedule</button>
+      <button class="pb-tab" data-panel="meals">🍽️ Meal Plan</button>
     </nav>
 
     <!-- Notes Panel -->
@@ -369,6 +488,11 @@
     <!-- Schedule Panel -->
     <div class="pb-panel" id="panel-schedule">
       <div id="schedule-content"><div class="pb-empty"><div class="pb-empty-icon">⏳</div><p>Loading…</p></div></div>
+    </div>
+
+    <!-- Meal Plan Panel -->
+    <div class="pb-panel" id="panel-meals">
+      <div id="meals-content"><div class="pb-empty"><div class="pb-empty-icon">⏳</div><p>Loading…</p></div></div>
     </div>
 
   </div>
@@ -493,12 +617,76 @@
       el.innerHTML = html;
     }
 
+    // Render meal plan
+    function renderMeals(data) {
+      const el = document.getElementById('meals-content');
+      if (!data || !data.days) {
+        el.innerHTML = '<div class="pb-empty"><div class="pb-empty-icon">🍽️</div><p>No meal plan yet.</p></div>';
+        return;
+      }
+
+      const mealTypes = ['breakfast','lunch','dinner','snack'];
+      const mealEmoji = { breakfast:'🌅', lunch:'☀️', dinner:'🌙', snack:'🍎' };
+
+      // Calendar grid
+      let calHtml = `
+        <div class="pb-section-header">Week of ${escHtml(data.week_of)} <span class="pb-section-count">${data.days.length} days</span></div>
+        <div class="pb-meal-week">`;
+
+      data.days.forEach(day => {
+        const dayParts = day.label.split(',');
+        const dayName = dayParts[0];
+        const dayDate = dayParts[1] ? dayParts[1].trim() : '';
+        calHtml += `<div class="pb-day-col">
+          <div class="pb-day-header">
+            <div class="pb-day-name">${escHtml(dayName)}</div>
+            <div class="pb-day-date">${escHtml(dayDate)}</div>
+          </div>`;
+        mealTypes.forEach(type => {
+          const meal = day.meals[type];
+          if (!meal) return;
+          calHtml += `<div class="pb-meal-slot">
+            <div class="pb-meal-type meal-type-${type}">${mealEmoji[type]} ${type}</div>
+            <div class="pb-meal-name">${escHtml(meal.name)}</div>
+            <div class="pb-meal-desc">${escHtml(meal.description||'')}</div>
+            ${meal.prep_time ? `<div class="pb-meal-prep">⏱ ${escHtml(meal.prep_time)}</div>` : ''}
+          </div>`;
+        });
+        calHtml += '</div>';
+      });
+      calHtml += '</div>';
+
+      // Shopping list
+      const sl = data.shopping_list || {};
+      const catColors = { produce:'#4ade80', protein:'#ff2d87', dairy:'#00f5ff', pantry:'#fbbf24', other:'#a855f7' };
+      let shopHtml = `<div class="pb-section-header" style="margin-top:24px">🛒 Shopping List <span class="pb-section-count">${Object.values(sl).flat().length} items</span></div>
+        <div class="pb-shopping-grid">`;
+      for (const [cat, items] of Object.entries(sl)) {
+        if (!items.length) continue;
+        shopHtml += `<div class="pb-shopping-cat">
+          <div class="pb-shopping-cat-title cat-${cat}">${cat.charAt(0).toUpperCase()+cat.slice(1)}</div>
+          ${items.map(i=>`<div class="pb-shopping-item">${escHtml(i)}</div>`).join('')}
+        </div>`;
+      }
+      shopHtml += '</div>';
+
+      if (data.notes) {
+        shopHtml += `<div class="pb-item-card" style="margin-top:16px">
+          <div class="pb-item-top"><span class="pb-item-title" style="color:#4ade80">💡 Notes</span></div>
+          <p class="pb-item-body">${escHtml(data.notes)}</p>
+        </div>`;
+      }
+
+      el.innerHTML = calHtml + shopHtml;
+    }
+
     // Load data
     (async function() {
       try {
-        const [playbook, schedule] = await Promise.all([
+        const [playbook, schedule, meals] = await Promise.all([
           fetch('data/playbook.json?_='+Date.now()).then(r=>r.json()),
-          fetch('data/schedule.json?_='+Date.now()).then(r=>r.json()).catch(()=>null)
+          fetch('data/schedule.json?_='+Date.now()).then(r=>r.json()).catch(()=>null),
+          fetch('data/meal-plan.json?_='+Date.now()).then(r=>r.json()).catch(()=>null)
         ]);
         renderNotes(playbook);
         if (schedule) renderSched(schedule);
@@ -507,6 +695,9 @@
           document.getElementById('schedule-content').innerHTML =
             '<div class="pb-empty"><div class="pb-empty-icon">⚙️</div><p>No schedule data available.</p></div>';
         }
+        if (meals) renderMeals(meals);
+        else document.getElementById('meals-content').innerHTML =
+          '<div class="pb-empty"><div class="pb-empty-icon">🍽️</div><p>No meal plan yet.</p></div>';
       } catch(err) {
         document.getElementById('notes-content').innerHTML =
           '<div class="pb-empty"><div class="pb-empty-icon">⚠️</div><p>Failed to load: '+err.message+'</p></div>';
