@@ -301,24 +301,35 @@
 
     /* ── Meal Plan ── */
     .pb-meal-week {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
+      display: flex;
+      gap: 12px;
       margin-bottom: 32px;
       overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 8px;
     }
+    .pb-meal-week::-webkit-scrollbar { display: none; }
     .pb-day-col {
       background: rgba(22,12,45,0.92);
       border: 1px solid rgba(168,85,247,0.45);
       border-radius: 8px;
       overflow: hidden;
-      min-width: 140px;
-      transition: all 0.3s;
+      flex: 0 0 calc(100% - 32px);
+      max-width: 520px;
+      scroll-snap-align: center;
+      transition: border-color 0.3s;
+    }
+    @media (min-width: 700px) {
+      .pb-day-col { flex: 0 0 340px; }
+    }
+    .pb-day-col.is-today {
+      border-color: #00f5ff;
+      box-shadow: 0 0 16px rgba(0,245,255,0.2);
     }
     .pb-day-col:hover {
       border-color: #a855f7;
-      box-shadow: 0 0 14px rgba(168,85,247,0.2);
-      transform: translateY(-2px);
     }
     .pb-day-header {
       background: rgba(168,85,247,0.15);
@@ -627,19 +638,21 @@
 
       const mealTypes = ['breakfast','lunch','dinner','snack'];
       const mealEmoji = { breakfast:'🌅', lunch:'☀️', dinner:'🌙', snack:'🍎' };
+      const todayStr = new Date().toISOString().slice(0,10);
 
       // Calendar grid
       let calHtml = `
-        <div class="pb-section-header">Week of ${escHtml(data.week_of)} <span class="pb-section-count">${data.days.length} days</span></div>
-        <div class="pb-meal-week">`;
+        <div class="pb-section-header">Week of ${escHtml(data.week_of)} <span class="pb-section-count">${data.days.length} days · swipe to browse</span></div>
+        <div class="pb-meal-week" id="meal-week-scroll">`;
 
       data.days.forEach(day => {
+        const isToday = day.date === todayStr;
         const dayParts = day.label.split(',');
         const dayName = dayParts[0];
         const dayDate = dayParts[1] ? dayParts[1].trim() : '';
-        calHtml += `<div class="pb-day-col">
+        calHtml += `<div class="pb-day-col${isToday ? ' is-today' : ''}" data-date="${escHtml(day.date)}">
           <div class="pb-day-header">
-            <div class="pb-day-name">${escHtml(dayName)}</div>
+            <div class="pb-day-name">${isToday ? '▶ TODAY — ' : ''}${escHtml(dayName)}</div>
             <div class="pb-day-date">${escHtml(dayDate)}</div>
           </div>`;
         mealTypes.forEach(type => {
@@ -678,6 +691,18 @@
       }
 
       el.innerHTML = calHtml + shopHtml;
+
+      // Scroll to today's card
+      requestAnimationFrame(() => {
+        const scroller = document.getElementById('meal-week-scroll');
+        const todayCard = scroller && scroller.querySelector('.is-today');
+        if (todayCard && scroller) {
+          const cardLeft = todayCard.offsetLeft;
+          const scrollerWidth = scroller.offsetWidth;
+          const cardWidth = todayCard.offsetWidth;
+          scroller.scrollLeft = cardLeft - (scrollerWidth / 2) + (cardWidth / 2);
+        }
+      });
     }
 
     // Load data
