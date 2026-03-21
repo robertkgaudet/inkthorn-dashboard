@@ -8,6 +8,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
+  <script>
+    // Set header height CSS var as early as possible and after fonts load
+    function updateHeaderHeight() {
+      const h = document.querySelector('.site-header');
+      if (h) document.documentElement.style.setProperty('--header-height', h.offsetHeight + 'px');
+    }
+    document.addEventListener('DOMContentLoaded', updateHeaderHeight);
+    document.fonts && document.fonts.ready && document.fonts.ready.then(updateHeaderHeight);
+    window.addEventListener('resize', updateHeaderHeight);
+  </script>
 </head>
 <body>
 
