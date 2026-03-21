@@ -301,7 +301,26 @@
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
-      .pb-stats { grid-template-columns: repeat(2, 1fr); top: 50px; }
+      .pb-stats {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        top: 50px;
+      }
+      .pb-stats .stat-card {
+        padding: 10px 6px;
+      }
+      .pb-stats .stat-value {
+        font-size: 1.2rem;
+        margin-bottom: 3px;
+      }
+      .pb-stats .stat-value-sm {
+        font-size: 0.72rem;
+        padding-top: 2px;
+      }
+      .pb-stats .stat-label {
+        font-size: 0.55rem;
+        letter-spacing: 0.04em;
+      }
       .pb-wrap { padding: 16px 16px 48px; }
       .pb-header-inner { padding: 10px 16px; }
       .pb-schedule-grid { grid-template-columns: 1fr; }
