@@ -224,91 +224,110 @@ function decodeEntities(str) {
 /**
  * Parse WWOZ livewire HTML and extract shows.
  * Returns array of { venue, artist, time, time_sort, genre }
+ *
+ * Current WWOZ structure (2026):
+ *   <div class="panel panel-default">
+ *     <div class="panel-heading">
+ *       <h3 class="panel-title"><a href="/organizations/...">Venue Name</a></h3>
+ *     </div>
+ *     <div class="panel-body">
+ *       <div class="row">
+ *         <div class="col-xs-10 calendar-info">
+ *           <p class="truncate"><a href="/events/...">Artist Name</a></p>
+ *           <p>Saturday, March 21 at 3:00pm</p>
+ *         </div>
+ *       </div>
+ *     </div>
+ *   </div>
  */
 function parseWwozHtml(html) {
   const shows = [];
 
-  // Find the main livewire content area
-  const contentMatch = html.match(/<div[^>]+class="[^"]*livewire[^"]*"[^>]*>([\s\S]*?)<\/div>\s*(?=<div[^>]+class="[^"]*view-footer)/i);
-  const content = contentMatch ? contentMatch[1] : html;
+  // Split on panel blocks — each venue is wrapped in a panel
+  // We look for h3.panel-title blocks followed by calendar-info entries
+  const panelPattern = /<h3[^>]+class="[^"]*panel-title[^"]*"[^>]*>([\s\S]*?)<\/h3>/gi;
+  let pm;
 
-  // Split on venue headers (h3 tags)
-  // WWOZ uses h3 for venue names in the livewire listing
-  const venueBlocks = content.split(/<h3[^>]*>/i).slice(1);
+  while ((pm = panelPattern.exec(html)) !== null) {
+    // Extract venue name from the <a> tag (or plain text)
+    const venueInner = pm[1];
+    const venueLinkMatch = venueInner.match(/<a[^>]*>([^<]+)<\/a>/i);
+    const venue = decodeEntities(
+      (venueLinkMatch ? venueLinkMatch[1] : stripTags(venueInner)).trim()
+    );
+    if (!venue || venue.length < 2) continue;
 
-  for (const block of venueBlocks) {
-    // Extract venue name (text before </h3>)
-    const venueMatch = block.match(/^([^<]*)<\/h3>/i);
-    if (!venueMatch) continue;
-    const venue = decodeEntities(venueMatch[1].trim());
-    if (!venue) continue;
+    // Look ahead in the HTML from this point for calendar-info divs
+    // until the next panel-title (next venue)
+    const nextPanelIdx = html.indexOf('panel-title', pm.index + pm[0].length);
+    const blockEnd = nextPanelIdx > 0 ? nextPanelIdx : pm.index + 5000;
+    const block = html.slice(pm.index + pm[0].length, blockEnd);
 
-    // Find all listing rows in this block
-    // Each row typically has a time and an artist
-    const rowPattern = /<div[^>]+class="[^"]*views-row[^"]*"[^>]*>([\s\S]*?)(?=<div[^>]+class="[^"]*views-row|<h3|$)/gi;
-    let rowMatch;
+    // Find all col-xs-10 calendar-info divs in this block
+    const infoPattern = /<div[^>]+class="[^"]*col-xs-10 calendar-info[^"]*"[^>]*>([\s\S]*?)(?=<div[^>]+class="[^"]*col-xs-10 calendar-info|<\/div>\s*<\/div>\s*<\/div>|$)/gi;
+    let im;
 
-    while ((rowMatch = rowPattern.exec(block)) !== null) {
-      const row = rowMatch[1];
+    while ((im = infoPattern.exec(block)) !== null) {
+      const entry = im[1];
 
-      // Extract time — look for common time patterns
-      const timePatterns = [
-        /(\d{1,2}(?::\d{2})?\s*(?:am|pm))/i,
-        /(\d{1,2}(?::\d{2})?\s*(?:AM|PM))/,
-      ];
+      // Artist: <p class="truncate"><a ...>Artist Name</a></p>
+      const artistMatch = entry.match(/<p[^>]+class="[^"]*truncate[^"]*"[^>]*>[\s\S]*?<a[^>]*>([^<]+)<\/a>/i);
+      if (!artistMatch) continue;
+      const artist = decodeEntities(artistMatch[1].trim());
+      if (!artist || artist.length < 2) continue;
 
-      let rawTime = null;
-      for (const tp of timePatterns) {
-        const tm = row.match(tp);
-        if (tm) { rawTime = tm[1]; break; }
-      }
-
-      // Extract artist — strip all tags, decode entities
-      const artistRaw = stripTags(row);
-      // Remove time portion from artist string
-      const artistClean = decodeEntities(
-        artistRaw.replace(/\d{1,2}(?::\d{2})?\s*(?:am|pm)/gi, '').trim()
-      );
-
-      if (!artistClean || artistClean.length < 2) continue;
-
+      // Time: appears in a <p> containing "at \d{1,2}:\d{2}(am|pm)"
+      const timeMatch = entry.match(/\bat\s+(\d{1,2}(?::\d{2})?\s*(?:am|pm))/i);
+      const rawTime = timeMatch ? timeMatch[1].trim() : null;
       const parsed = rawTime ? parseTime(rawTime) : null;
 
       shows.push({
-        time:      parsed ? parsed.display : (rawTime || 'TBD'),
-        time_sort: parsed ? parsed.sort : 0,
-        artist:    artistClean,
+        time:         parsed ? parsed.display : (rawTime || 'TBD'),
+        time_sort:    parsed ? parsed.sort : 0,
+        artist,
         venue,
-        genre:     guessGenre(artistClean + ' ' + venue),
+        genre:        guessGenre(artist + ' ' + venue),
         neighborhood: guessNeighborhood(venue),
       });
     }
   }
 
-  // If the structured parse found nothing, try a simpler pattern:
+  // Fallback: if structured parse found nothing, try simple calendar-info scan
   if (shows.length === 0) {
     console.warn('[WWOZ Scraper] Structured parse found 0 shows; trying fallback pattern...');
-    const fallbackVenuePattern = /<h3[^>]*>([^<]+)<\/h3>/gi;
-    let vm;
-    while ((vm = fallbackVenuePattern.exec(html)) !== null) {
-      const venue = decodeEntities(vm[1].trim());
-      // Look ahead for time + artist pairs within next 2000 chars
-      const lookahead = html.slice(vm.index, vm.index + 2000);
-      const timeArtistPattern = /(\d{1,2}(?::\d{2})?\s*(?:am|pm))[^<]*<[^>]+>([^<]{3,80})</gi;
-      let tam;
-      while ((tam = timeArtistPattern.exec(lookahead)) !== null) {
-        const parsed = parseTime(tam[1]);
-        const artist = decodeEntities(tam[2].trim());
-        if (!artist) continue;
-        shows.push({
-          time:         parsed ? parsed.display : tam[1],
-          time_sort:    parsed ? parsed.sort : 0,
-          artist,
-          venue,
-          genre:        guessGenre(artist + ' ' + venue),
-          neighborhood: guessNeighborhood(venue),
-        });
+
+    // Build a flat list of (venue, artist, time) by walking the HTML linearly
+    // Match calendar-info blocks and grab artist + time
+    const fallbackPattern = /<div[^>]+class="[^"]*col-xs-10 calendar-info[^"]*"[^>]*>([\s\S]*?)(?=<div[^>]+class="[^"]*col-xs-10 calendar-info|<\/div>\s*<\/div>\s*<\/div>\s*<\/div>)/gi;
+    let fm;
+    while ((fm = fallbackPattern.exec(html)) !== null) {
+      const entry = fm[1];
+      const artistMatch = entry.match(/<p[^>]+class="[^"]*truncate[^"]*"[^>]*>[\s\S]*?<a[^>]*>([^<]+)<\/a>/i);
+      if (!artistMatch) continue;
+      const artist = decodeEntities(artistMatch[1].trim());
+      if (!artist) continue;
+
+      const timeMatch = entry.match(/\bat\s+(\d{1,2}(?::\d{2})?\s*(?:am|pm))/i);
+      const rawTime = timeMatch ? timeMatch[1].trim() : null;
+      const parsed = rawTime ? parseTime(rawTime) : null;
+
+      // Find the closest preceding venue (h3.panel-title)
+      const precedingHtml = html.slice(0, fm.index);
+      const lastVenueMatch = [...precedingHtml.matchAll(/<h3[^>]+class="[^"]*panel-title[^"]*"[^>]*>([\s\S]*?)<\/h3>/gi)].pop();
+      let venue = 'Unknown Venue';
+      if (lastVenueMatch) {
+        const vl = lastVenueMatch[1].match(/<a[^>]*>([^<]+)<\/a>/i);
+        venue = decodeEntities((vl ? vl[1] : stripTags(lastVenueMatch[1])).trim());
       }
+
+      shows.push({
+        time:         parsed ? parsed.display : (rawTime || 'TBD'),
+        time_sort:    parsed ? parsed.sort : 0,
+        artist,
+        venue,
+        genre:        guessGenre(artist + ' ' + venue),
+        neighborhood: guessNeighborhood(venue),
+      });
     }
   }
 
