@@ -761,10 +761,10 @@ body {
 /* ── Stats Row ──────────────────────────────────────── */
 .stats-row-wrapper {
   position: sticky;
-  top: 0;
+  top: var(--header-height, 128px);
   z-index: 50;
-  background: linear-gradient(to bottom, var(--bg-base) 80%, transparent 100%);
-  padding: 10px 0 12px;
+  background: linear-gradient(to bottom, var(--bg-base) 85%, transparent 100%);
+  padding: 10px 0 14px;
   margin: -8px 0 16px;
 }
 

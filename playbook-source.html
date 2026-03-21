@@ -9,29 +9,29 @@
   <meta http-equiv="pragma" content="no-cache" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
   <style>
-    body {
-      background: #070711;
-      color: #f0f0ff;
-      font-family: 'Space Grotesk', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    .playbook-header-bar {
-      background: rgba(7, 7, 17, 0.95);
-      border-bottom: 1px solid rgba(168, 85, 247, 0.2);
-      padding: 12px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    /* ── Playbook Page Overrides ── */
+    .pb-header {
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(12px);
+      background: rgba(7,7,17,0.96);
+      border-bottom: 1px solid rgba(168,85,247,0.2);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
-    .playbook-back-link {
+    .pb-header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .pb-back {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 0.85rem;
       font-weight: 600;
@@ -42,80 +42,454 @@
       align-items: center;
       gap: 6px;
       transition: opacity 0.2s;
+      white-space: nowrap;
     }
-    .playbook-back-link:hover { opacity: 0.75; }
-    .playbook-header-logo {
-      font-family: 'Permanent Marker', cursive;
-      font-size: 1.3rem;
-      color: #f5f0e8;
-      text-shadow: 2px 2px 0 rgba(255,45,135,0.5);
-      letter-spacing: 0.04em;
-    }
-    .playbook-standalone {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem 1rem 4rem;
-    }
-    .playbook-logo {
+    .pb-back:hover { opacity: 0.7; }
+    .pb-logo {
       font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      color: #ff2d87;
+      text-shadow: 0 0 10px #ff2d87, 0 0 20px rgba(255,45,135,0.5);
+    }
+    .pb-logo-sub {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.4em;
+      color: #00f5ff;
+      text-shadow: 0 0 8px rgba(0,245,255,0.5);
+      text-transform: uppercase;
+      display: block;
+      text-align: center;
+      margin-top: 2px;
+    }
+    .pb-date {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: #7878a8;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* ── Layout ── */
+    .pb-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 24px 64px;
+    }
+
+    /* ── Stats Bar ── */
+    .pb-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      position: sticky;
+      top: 57px;
+      z-index: 50;
+      background: linear-gradient(to bottom, #070711 80%, transparent 100%);
+      padding: 12px 0 14px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Tab Nav ── */
+    .pb-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .pb-tab {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      padding: 7px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(168,85,247,0.45);
+      background: rgba(168,85,247,0.07);
+      color: #9090c0;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .pb-tab:hover { border-color: #a855f7; color: #a855f7; }
+    .pb-tab.active {
+      border-color: #00f5ff;
+      color: #00f5ff;
+      background: rgba(0,245,255,0.08);
+      text-shadow: 0 0 8px rgba(0,245,255,0.6);
+      box-shadow: 0 0 12px rgba(0,245,255,0.15);
+    }
+
+    /* ── Panel Sections ── */
+    .pb-panel { display: none; animation: panel-in 0.3s ease; }
+    .pb-panel.active { display: block; }
+    @keyframes panel-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Notes & Items ── */
+    .pb-section-header {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #00f5ff;
+      text-shadow: 0 0 10px rgba(0,245,255,0.6);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(0,245,255,0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pb-section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,245,255,0.2), transparent);
+    }
+    .pb-section-count {
+      font-size: 0.6rem;
+      color: #7878a8;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Schedule Cards ── */
+    .pb-schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .pb-sched-card {
+      background: rgba(22,12,45,0.92);
+      border: 1px solid rgba(168,85,247,0.45);
+      border-radius: 8px;
+      padding: 16px 18px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .pb-sched-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      border-radius: 8px 0 0 8px;
+    }
+    .pb-sched-card.cat-wellness::before  { background: #ff2d87; box-shadow: 0 0 8px rgba(255,45,135,0.6); }
+    .pb-sched-card.cat-dashboard::before { background: #00f5ff; box-shadow: 0 0 8px rgba(0,245,255,0.6); }
+    .pb-sched-card.cat-reminder::before  { background: #fbbf24; box-shadow: 0 0 8px rgba(251,191,36,0.6); }
+    .pb-sched-card.cat-default::before   { background: #a855f7; box-shadow: 0 0 8px rgba(168,85,247,0.6); }
+    .pb-sched-card:hover {
+      border-color: #a855f7;
+      transform: translateY(-2px);
+      box-shadow: 0 0 16px rgba(168,85,247,0.2);
+    }
+    .pb-sched-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+      padding-left: 10px;
+    }
+    .pb-sched-title {
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 1rem;
       font-weight: 700;
+      color: #f0f0ff;
+    }
+    .pb-sched-badge {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      white-space: nowrap;
+    }
+    .badge-active { color: #4ade80; background: rgba(74,222,128,0.1); }
+    .badge-paused { color: #7878a8; background: rgba(120,120,168,0.1); }
+    .pb-sched-desc {
+      font-size: 0.88rem;
       color: #b0b0d8;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 0.2rem;
+      padding-left: 10px;
+      margin-bottom: 10px;
+      line-height: 1.5;
     }
-    .playbook-subtitle {
-      color: #7878a8;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      margin-bottom: 2rem;
-    }
-    #playbook-content .no-data-card {
+    .pb-sched-meta {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 3rem;
-      color: #5a5a8a;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-left: 10px;
     }
-    #playbook-content .no-data-icon {
-      font-size: 2.5rem;
-      margin-bottom: 0.75rem;
+    .pb-sched-time {
+      font-size: 0.78rem;
+      color: #7878a8;
+      font-family: monospace;
     }
-    .loading-pulse {
+    .pb-sched-next {
+      font-size: 0.78rem;
+      color: #00f5ff;
+      font-family: monospace;
+    }
+
+    /* ── Playbook Item Cards ── */
+    .pb-item-card {
+      background: rgba(22,12,45,0.92);
+      border: 1px solid rgba(168,85,247,0.45);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+    .pb-item-card:hover {
+      border-color: #a855f7;
+      transform: translateY(-2px);
+      box-shadow: 0 0 14px rgba(168,85,247,0.2);
+    }
+    .pb-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .pb-item-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .pb-item-time {
+      font-size: 0.72rem;
+      color: #7878a8;
+      font-family: monospace;
+    }
+    .pb-item-body {
+      color: #f0f0ff;
+      font-size: 1rem;
+      line-height: 1.75;
+      margin: 0 0 8px;
+      white-space: pre-wrap;
+    }
+    .pb-item-source {
+      font-size: 0.65rem;
+      color: #7878a8;
+      font-family: monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Empty state ── */
+    .pb-empty {
       text-align: center;
-      color: #5a5a8a;
       padding: 3rem;
-      font-size: 0.9rem;
-      letter-spacing: 0.1em;
+      color: #7878a8;
+    }
+    .pb-empty-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .pb-stats { grid-template-columns: repeat(2, 1fr); top: 50px; }
+      .pb-wrap { padding: 16px 16px 48px; }
+      .pb-header-inner { padding: 10px 16px; }
+      .pb-schedule-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="playbook-header-bar">
-    <a href="index.html" class="playbook-back-link">← Dashboard</a>
-    <span class="playbook-header-logo">InkThorn</span>
-    <span style="width:80px"></span>
-  </div>
-  <div class="playbook-standalone">
-    <div class="playbook-logo">INKTHORN</div>
-    <div class="playbook-subtitle">📋 DAILY PLAYBOOK</div>
-    <div id="playbook-content">
-      <div class="loading-pulse">Loading playbook…</div>
+
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-horizon" aria-hidden="true"></div>
+
+  <!-- Sticky Header -->
+  <header class="pb-header">
+    <div class="pb-header-inner">
+      <a href="index.html" class="pb-back">← Dashboard</a>
+      <div style="text-align:center">
+        <div class="pb-logo">INKTHORN</div>
+        <span class="pb-logo-sub">Daily Playbook</span>
+      </div>
+      <div class="pb-date" id="pb-date">—</div>
     </div>
+  </header>
+
+  <div class="pb-wrap">
+
+    <!-- Stats Bar -->
+    <div class="pb-stats" id="pb-stats">
+      <div class="stat-card"><div class="stat-value" id="stat-total">—</div><div class="stat-label">Total Items</div></div>
+      <div class="stat-card stat-card-highlight"><div class="stat-value" id="stat-today">—</div><div class="stat-label">Added Today</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-tasks">—</div><div class="stat-label">Active Tasks</div></div>
+      <div class="stat-card"><div class="stat-value stat-value-sm" id="stat-latest">—</div><div class="stat-label">Latest Entry</div></div>
+    </div>
+
+    <!-- Tab Nav -->
+    <nav class="pb-tabs" id="pb-tabs">
+      <button class="pb-tab active" data-panel="notes">📝 Notes & Briefings</button>
+      <button class="pb-tab" data-panel="schedule">⚙️ Schedule</button>
+    </nav>
+
+    <!-- Notes Panel -->
+    <div class="pb-panel active" id="panel-notes">
+      <div id="notes-content"><div class="pb-empty"><div class="pb-empty-icon">⏳</div><p>Loading…</p></div></div>
+    </div>
+
+    <!-- Schedule Panel -->
+    <div class="pb-panel" id="panel-schedule">
+      <div id="schedule-content"><div class="pb-empty"><div class="pb-empty-icon">⏳</div><p>Loading…</p></div></div>
+    </div>
+
   </div>
 
   <script src="assets/app.js"></script>
   <script>
-    (async function () {
-      const el = document.getElementById('playbook-content');
+    // Set today's date in header
+    document.getElementById('pb-date').textContent = new Date().toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+    });
+
+    // Tab switching
+    document.getElementById('pb-tabs').addEventListener('click', e => {
+      const btn = e.target.closest('.pb-tab');
+      if (!btn) return;
+      document.querySelectorAll('.pb-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.pb-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+    });
+
+    // Category colors/icons for schedule
+    const CAT_COLORS = { wellness: '#ff2d87', dashboard: '#00f5ff', reminder: '#fbbf24', default: '#a855f7' };
+
+    // Render playbook notes
+    function renderNotes(data) {
+      const el = document.getElementById('notes-content');
+      const allItems = [];
+      (data.notes || []).forEach(n => allItems.push({
+        timestamp: n.timestamp, type: 'note', category: 'note',
+        title: '📝 Note', body: n.text, source: n.source || 'telegram'
+      }));
+      (data.items || []).forEach(i => allItems.push(i));
+
+      if (!allItems.length) {
+        el.innerHTML = '<div class="pb-empty"><div class="pb-empty-icon">📋</div><p>Nothing here yet — text me a note on Telegram!</p></div>';
+        return;
+      }
+
+      allItems.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+      const catColors = { note:'#00f5ff', system:'#a855f7', briefing:'#ff2d87', review:'#fbbf24', reminder:'#fbbf24', default:'#a855f7' };
+      const today = new Date().toDateString();
+      const todayItems = allItems.filter(i => new Date(i.timestamp).toDateString() === today);
+      const olderItems = allItems.filter(i => new Date(i.timestamp).toDateString() !== today);
+
+      const renderItem = item => {
+        const color = catColors[item.category] || catColors.default;
+        const time = new Date(item.timestamp).toLocaleString('en-US', {
+          month:'short', day:'numeric', hour:'numeric', minute:'2-digit', hour12:true
+        });
+        return `<div class="pb-item-card">
+          <div class="pb-item-top">
+            <span class="pb-item-title" style="color:${color}">${escHtml(item.title || 'Note')}</span>
+            <span class="pb-item-time">${time}</span>
+          </div>
+          <p class="pb-item-body">${escHtml(item.body || '')}</p>
+          ${item.source ? `<span class="pb-item-source">via ${escHtml(item.source)}</span>` : ''}
+        </div>`;
+      };
+
+      let html = '';
+      if (todayItems.length) {
+        html += `<div class="pb-section-header">Today <span class="pb-section-count">${todayItems.length} item${todayItems.length!==1?'s':''}</span></div>`;
+        html += todayItems.map(renderItem).join('');
+      }
+      if (olderItems.length) {
+        html += `<div class="pb-section-header" style="margin-top:24px">Earlier <span class="pb-section-count">${olderItems.length} item${olderItems.length!==1?'s':''}</span></div>`;
+        html += olderItems.map(renderItem).join('');
+      }
+      el.innerHTML = html;
+
+      // Update stats
+      const topCats = {};
+      allItems.forEach(i => { topCats[i.category] = (topCats[i.category]||0)+1; });
+      document.getElementById('stat-total').textContent = allItems.length;
+      document.getElementById('stat-today').textContent = todayItems.length;
+      const latestTime = new Date(allItems[0].timestamp).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
+      document.getElementById('stat-latest').textContent = latestTime;
+    }
+
+    // Render schedule
+    function renderSched(data) {
+      const el = document.getElementById('schedule-content');
+      if (!data || !data.tasks || !data.tasks.length) {
+        el.innerHTML = '<div class="pb-empty"><div class="pb-empty-icon">⚙️</div><p>No scheduled tasks yet.</p></div>';
+        return;
+      }
+      const tasks = data.tasks;
+      document.getElementById('stat-tasks').textContent = tasks.filter(t=>t.status==='active').length;
+
+      // Group by category
+      const groups = {};
+      tasks.forEach(t => { const c = t.category||'default'; (groups[c]=groups[c]||[]).push(t); });
+
+      const catIcons = { wellness:'💚', dashboard:'📊', reminder:'⏰', default:'⚙️' };
+      let html = '';
+      for (const [cat, items] of Object.entries(groups)) {
+        const color = CAT_COLORS[cat] || CAT_COLORS.default;
+        const icon  = catIcons[cat] || catIcons.default;
+        html += `<div class="pb-section-header" style="color:${color};text-shadow:0 0 10px ${color}40">
+          ${icon} ${cat.charAt(0).toUpperCase()+cat.slice(1)}
+          <span class="pb-section-count">${items.length} task${items.length!==1?'s':''}</span>
+        </div>
+        <div class="pb-schedule-grid">`;
+        items.forEach(t => {
+          const color = CAT_COLORS[t.category]||CAT_COLORS.default;
+          html += `<div class="pb-sched-card cat-${t.category||'default'}">
+            <div class="pb-sched-top">
+              <span class="pb-sched-title">${escHtml(t.title)}</span>
+              <span class="pb-sched-badge ${t.status==='active'?'badge-active':'badge-paused'}">● ${(t.status||'unknown').toUpperCase()}</span>
+            </div>
+            <div class="pb-sched-desc">${escHtml(t.description)}</div>
+            <div class="pb-sched-meta">
+              <span class="pb-sched-time">🕐 ${escHtml(t.schedule)}</span>
+              ${t.next?`<span class="pb-sched-next">▶ Next: ${escHtml(t.next)}</span>`:''}
+            </div>
+          </div>`;
+        });
+        html += '</div>';
+      }
+      el.innerHTML = html;
+    }
+
+    // Load data
+    (async function() {
       try {
-        const res = await fetch('data/playbook.json?_=' + Date.now());
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const data = await res.json();
-        renderPlaybook(data, el);
-      } catch (err) {
-        el.innerHTML = '<div class="no-data-card"><span class="no-data-icon">⚠️</span><p>Failed to load playbook data.</p></div>';
+        const [playbook, schedule] = await Promise.all([
+          fetch('data/playbook.json?_='+Date.now()).then(r=>r.json()),
+          fetch('data/schedule.json?_='+Date.now()).then(r=>r.json()).catch(()=>null)
+        ]);
+        renderNotes(playbook);
+        if (schedule) renderSched(schedule);
+        else {
+          document.getElementById('stat-tasks').textContent = '0';
+          document.getElementById('schedule-content').innerHTML =
+            '<div class="pb-empty"><div class="pb-empty-icon">⚙️</div><p>No schedule data available.</p></div>';
+        }
+      } catch(err) {
+        document.getElementById('notes-content').innerHTML =
+          '<div class="pb-empty"><div class="pb-empty-icon">⚠️</div><p>Failed to load: '+err.message+'</p></div>';
       }
     })();
   </script>

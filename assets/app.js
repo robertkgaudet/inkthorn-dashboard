@@ -608,4 +608,14 @@ async function init() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+  // Set --header-height CSS var so sticky stats row sits just below the header
+  const setHeaderHeight = () => {
+    const h = document.querySelector('.site-header');
+    if (h) document.documentElement.style.setProperty('--header-height', h.offsetHeight + 'px');
+  };
+  setHeaderHeight();
+  window.addEventListener('resize', setHeaderHeight);
+
+  init();
+});
