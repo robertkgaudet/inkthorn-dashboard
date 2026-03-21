@@ -848,26 +848,27 @@ body {
 @media (max-width: 640px) {
   .stats-row {
     grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
+    gap: 4px;
   }
   .stats-row-wrapper {
-    margin: -4px 0 10px;
-    padding: 8px 0 10px;
+    margin: -4px 0 8px;
+    padding: 6px 0 8px;
   }
   .stat-card {
-    padding: 10px 6px;
+    padding: 8px 4px;
   }
   .stat-value {
-    font-size: 1.2rem;
-    margin-bottom: 3px;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
   }
   .stat-value-sm {
-    font-size: 0.72rem;
-    padding-top: 2px;
+    font-size: 0.62rem;
+    padding-top: 1px;
+    line-height: 1.2;
   }
   .stat-label {
-    font-size: 0.55rem;
-    letter-spacing: 0.04em;
+    font-size: 0.48rem;
+    letter-spacing: 0.03em;
   }
 }
 
