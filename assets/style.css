@@ -159,7 +159,7 @@ body {
   width: 64px;
   height: 64px;
   object-fit: contain;
-  filter: drop-shadow(0 0 8px rgba(255,45,135,0.5));
+  filter: brightness(1.4) drop-shadow(0 0 8px rgba(255,45,135,0.6));
   flex-shrink: 0;
 }
 
