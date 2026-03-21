@@ -147,6 +147,32 @@ body {
   gap: 16px;
 }
 
+/* ── Header Top Row (mascot + logo) ────────────────────────── */
+.header-top-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 16px;
+}
+
+.mascot {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 0 8px rgba(255,45,135,0.4));
+  flex-shrink: 0;
+}
+
+.mascot-flip {
+  transform: scaleX(-1);
+}
+
+@media (max-width: 640px) {
+  .mascot { width: 44px; height: 44px; }
+  .header-top-row { gap: 10px; }
+}
+
 /* ── Logo ──────────────────────────────────────────────────── */
 .logo-block {
   text-align: center;
