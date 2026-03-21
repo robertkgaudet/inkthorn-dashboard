@@ -37,8 +37,8 @@ jobs:
         env:
           STATICRYPT_PASSWORD: ${{ secrets.STATICRYPT_PASSWORD }}
         run: |
-          npx staticrypt playbook-source.html -p "$STATICRYPT_PASSWORD" --short
-          mv encrypted/playbook-source.html playbook.html
+          yes | npx staticrypt playbook-source.html -p "$STATICRYPT_PASSWORD" --short || true
+          cp encrypted/playbook-source.html playbook.html
 
       - name: Commit updated data
         run: |
