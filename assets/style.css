@@ -20,13 +20,13 @@
   --purple-border:  rgba(168, 85, 247, 0.45);
   --purple-glow:    rgba(168, 85, 247, 0.7);
 
-  --text-primary:   #e0e0ff;
-  --text-secondary: #9090c0;
-  --text-muted:     #5a5a8a;
+  --text-primary:   #f0f0ff;
+  --text-secondary: #b0b0d8;
+  --text-muted:     #7878a8;
   --text-white:     #ffffff;
 
   --font-display:   'Orbitron', sans-serif;
-  --font-body:      'Rajdhani', sans-serif;
+  --font-body:      'Space Grotesk', sans-serif;
 
   --radius:         8px;
   --radius-pill:    999px;
@@ -50,8 +50,8 @@ body {
   background-color: var(--bg-base);
   color: var(--text-primary);
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.65;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
@@ -346,10 +346,10 @@ body {
 
 /* ── Cards ─────────────────────────────────────────────────── */
 .card {
-  background: var(--bg-card);
+  background: rgba(22, 12, 45, 0.92);
   border: 1px solid var(--purple-border);
   border-radius: var(--radius);
-  padding: 16px;
+  padding: 16px 18px;
   margin-bottom: 12px;
   transition: all var(--glow-transition);
   position: relative;
@@ -413,18 +413,18 @@ body {
 }
 
 .show-artist {
-  font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
   font-weight: 700;
   color: var(--text-white);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   grid-column: 2;
   grid-row: 1;
   line-height: 1.3;
 }
 
 .show-venue {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--cyan);
   text-shadow: 0 0 6px rgba(0, 245, 255, 0.3);
@@ -433,8 +433,8 @@ body {
 }
 
 .show-neighborhood {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
   font-style: italic;
 }
 
@@ -776,19 +776,19 @@ body {
   letter-spacing: 0.1em;
 }
 .playbook-time {
-  font-size: 0.7rem;
-  color: rgba(224, 224, 255, 0.4);
+  font-size: 0.75rem;
+  color: var(--text-muted);
   font-family: monospace;
 }
 .playbook-body {
-  color: #e0e0ff;
-  line-height: 1.6;
+  color: var(--text-primary);
+  line-height: 1.75;
   margin: 0 0 8px 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 .playbook-source {
-  font-size: 0.65rem;
-  color: rgba(224, 224, 255, 0.3);
+  font-size: 0.68rem;
+  color: var(--text-muted);
   font-family: monospace;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -834,7 +834,7 @@ body {
 }
 .weather-description {
   font-size: 1.1rem;
-  color: #e0e0ff;
+  color: var(--text-primary);
   font-weight: 600;
 }
 .weather-location {
@@ -845,8 +845,8 @@ body {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  font-size: 0.85rem;
-  color: rgba(224, 224, 255, 0.6);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
   border-top: 1px solid rgba(168, 85, 247, 0.2);
   padding-top: 12px;
 }
@@ -879,8 +879,8 @@ body {
   margin-bottom: 4px;
 }
 .forecast-desc {
-  font-size: 0.75rem;
-  color: rgba(224, 224, 255, 0.7);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
   margin-bottom: 6px;
 }
 .forecast-rain {
@@ -889,8 +889,8 @@ body {
   margin-bottom: 4px;
 }
 .forecast-sun {
-  font-size: 0.65rem;
-  color: rgba(224, 224, 255, 0.4);
+  font-size: 0.68rem;
+  color: var(--text-muted);
   line-height: 1.6;
 }
 @media (max-width: 600px) {
