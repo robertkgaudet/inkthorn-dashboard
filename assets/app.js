@@ -98,7 +98,34 @@ function renderLiveMusic(data, el) {
   const evening   = shows.filter(s => s.time_sort >= 1800 && s.time_sort < 2100);
   const night     = shows.filter(s => s.time_sort >= 2100 || s.time_sort < 600);
 
-  let html = `<p class="show-count-summary">Showing <span>${shows.length}</span> performances · ${escHtml(data.date)}</p>`;
+  // Build stats
+  const remaining = firstUpcomingIdx === -1 ? 0 : shows.length - firstUpcomingIdx;
+  const nextShow  = firstUpcomingIdx !== -1 ? shows[firstUpcomingIdx] : null;
+  const topGenres = {};
+  shows.forEach(s => { topGenres[s.genre] = (topGenres[s.genre] || 0) + 1; });
+  const topGenre  = Object.entries(topGenres).sort((a,b) => b[1]-a[1])[0];
+
+  const statsHtml = `
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value">${shows.length}</div>
+        <div class="stat-label">Tonight's Shows</div>
+      </div>
+      <div class="stat-card stat-card-highlight">
+        <div class="stat-value stat-value-sm">${nextShow ? escHtml(nextShow.artist) : 'All done'}</div>
+        <div class="stat-label">${nextShow ? '▶ Up Next · ' + escHtml(nextShow.time) : 'No more shows'}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">${remaining}</div>
+        <div class="stat-label">Shows Remaining</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value stat-value-sm">${topGenre ? escHtml(topGenre[0]) : '—'}</div>
+        <div class="stat-label">${topGenre ? `Top Genre · ${topGenre[1]} shows` : 'Genre data'}</div>
+      </div>
+    </div>`;
+
+  let html = statsHtml + `<p class="show-count-summary">Showing <span>${shows.length}</span> performances · ${escHtml(data.date)}</p>`;
 
   // Inject a "NOW" marker before the first upcoming show
   let nowMarkerId = null;
