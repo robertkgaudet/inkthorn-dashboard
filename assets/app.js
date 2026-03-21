@@ -83,18 +83,43 @@ function renderLiveMusic(data, el) {
     return;
   }
 
+  // Current time as a sort-comparable number (e.g. 14:35 → 1435)
+  const now = new Date();
+  const nowSort = now.getHours() * 100 + now.getMinutes();
+  const normNow = nowSort < 600 ? nowSort + 2400 : nowSort;
+
+  // Find the first show at or after now
+  const firstUpcomingIdx = shows.findIndex(s => {
+    const norm = s.time_sort < 600 ? s.time_sort + 2400 : s.time_sort;
+    return norm >= normNow;
+  });
+
   const afternoon = shows.filter(s => s.time_sort >= 1100 && s.time_sort < 1800);
   const evening   = shows.filter(s => s.time_sort >= 1800 && s.time_sort < 2100);
   const night     = shows.filter(s => s.time_sort >= 2100 || s.time_sort < 600);
 
   let html = `<p class="show-count-summary">Showing <span>${shows.length}</span> performances · ${escHtml(data.date)}</p>`;
 
+  // Inject a "NOW" marker before the first upcoming show
+  let nowMarkerId = null;
+  let nowMarkerInserted = false;
+
   const renderGroup = (label, groupShows) => {
     if (!groupShows.length) return '';
     let cards = groupShows.map(show => {
+      const showIdx = shows.indexOf(show);
       const neighborhood = show.neighborhood ? `<span class="show-neighborhood">${escHtml(show.neighborhood)}</span>` : '';
-      return `
-        <div class="card">
+
+      // Insert NOW marker before the first upcoming show
+      let nowMarker = '';
+      if (!nowMarkerInserted && firstUpcomingIdx !== -1 && showIdx === firstUpcomingIdx) {
+        nowMarkerId = 'now-marker';
+        nowMarker = `<div id="now-marker" class="now-marker"><span class="now-marker-line"></span><span class="now-marker-label">▶ NOW</span><span class="now-marker-line"></span></div>`;
+        nowMarkerInserted = true;
+      }
+
+      return `${nowMarker}
+        <div class="card${showIdx === firstUpcomingIdx ? ' card-next-up' : ''}">
           <div class="show-card">
             <div class="show-time">${escHtml(show.time)}</div>
             <div class="show-artist">${escHtml(show.artist)}</div>
@@ -121,6 +146,16 @@ function renderLiveMusic(data, el) {
   html += renderGroup('Night', night);
 
   el.innerHTML = html;
+
+  // Scroll to NOW marker after a short delay (let layout settle)
+  if (nowMarkerId) {
+    setTimeout(() => {
+      const marker = document.getElementById(nowMarkerId);
+      if (marker) {
+        marker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 400);
+  }
 }
 
 /**
