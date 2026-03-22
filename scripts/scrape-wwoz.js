@@ -270,10 +270,11 @@ function parseWwozHtml(html) {
     while ((im = infoPattern.exec(block)) !== null) {
       const entry = im[1];
 
-      // Artist: <p class="truncate"><a ...>Artist Name</a></p>
-      const artistMatch = entry.match(/<p[^>]+class="[^"]*truncate[^"]*"[^>]*>[\s\S]*?<a[^>]*>([^<]+)<\/a>/i);
+      // Artist: <p class="truncate"><a href="/events/...">Artist Name</a></p>
+      const artistMatch = entry.match(/<p[^>]+class="[^"]*truncate[^"]*"[^>]*>[\s\S]*?<a[^>]*href="([^"]*)"[^>]*>([^<]+)<\/a>/i);
       if (!artistMatch) continue;
-      const artist = decodeEntities(artistMatch[1].trim());
+      const artistUrl = artistMatch[1] ? 'https://wwoz.org' + artistMatch[1] : null;
+      const artist = decodeEntities(artistMatch[2].trim());
       if (!artist || artist.length < 2) continue;
 
       // Time: appears in a <p> containing "at \d{1,2}:\d{2}(am|pm)"
@@ -285,6 +286,7 @@ function parseWwozHtml(html) {
         time:         parsed ? parsed.display : (rawTime || 'TBD'),
         time_sort:    parsed ? parsed.sort : 0,
         artist,
+        url:          artistUrl,
         venue,
         genre:        guessGenre(artist + ' ' + venue),
         neighborhood: guessNeighborhood(venue),

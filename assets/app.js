@@ -149,7 +149,7 @@ function renderLiveMusic(data, el) {
         <div class="card${showIdx === firstUpcomingIdx ? ' card-next-up' : ''}">
           <div class="show-card">
             <div class="show-time">${escHtml(show.time)}</div>
-            <div class="show-artist">${escHtml(show.artist)}</div>
+            <div class="show-artist">${show.url ? `<a href="${escHtml(show.url)}" target="_blank" rel="noopener" class="show-artist-link">${escHtml(show.artist)}</a>` : escHtml(show.artist)}</div>
             <div class="show-genre">${genreBadge(show.genre)}</div>
             <div class="show-venue-block">
               <span class="show-venue">${escHtml(show.venue)}</span>

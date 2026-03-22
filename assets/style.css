@@ -450,6 +450,17 @@ body {
   line-height: 1.3;
 }
 
+.show-artist-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  transition: border-color 0.2s, color 0.2s;
+}
+.show-artist-link:hover {
+  color: var(--cyan);
+  border-bottom-color: var(--cyan);
+}
+
 .show-venue {
   font-size: 0.9rem;
   font-weight: 500;
