@@ -604,6 +604,54 @@
     .script-btn-thumb { border: 1px solid rgba(168,85,247,0.5); background: rgba(168,85,247,0.08); color: #a855f7; }
     .script-btn-thumb:hover { background: rgba(168,85,247,0.18); }
     .script-btn-expand { border: 1px solid rgba(120,120,168,0.3); background: rgba(120,120,168,0.05); color: #9090c0; }
+    .script-btn-teleprompter { border: 1px solid rgba(251,191,36,0.5); background: rgba(251,191,36,0.08); color: #fbbf24; }
+    .script-btn-teleprompter:hover { background: rgba(251,191,36,0.2); box-shadow: 0 0 10px rgba(251,191,36,0.2); }
+
+    /* ── Teleprompter ── */
+    .tp-ctrl-btn {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(168,85,247,0.4);
+      background: rgba(168,85,247,0.08);
+      color: #a855f7;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tp-ctrl-btn:hover { background: rgba(168,85,247,0.2); border-color: #a855f7; }
+    #tp-modal.controls-hidden #tp-controls { opacity: 0; pointer-events: none; }
+    #tp-modal.mirrored #tp-scroll { transform: scaleX(-1); }
+    #tp-modal.mirrored #tp-reading-line { display: none; }
+    @keyframes tp-cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .tp-cursor { display: inline-block; width: 3px; height: 1.1em; background: #fbbf24; vertical-align: middle; margin-left: 4px; animation: tp-cursor-blink 1s step-end infinite; }
+    /* Paragraph breaks in teleprompter */
+    #tp-script-text p {
+      margin-bottom: 1.4em;
+    }
+    #tp-script-text .tp-stage-direction {
+      color: #7878a8;
+      font-style: italic;
+      font-size: 0.85em;
+    }
+    /* Keyboard hint */
+    #tp-keyboard-hint {
+      position: absolute;
+      bottom: 20px;
+      right: 24px;
+      z-index: 15;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.2);
+      pointer-events: none;
+    }
     .script-filter-btn {
       font-family: 'Orbitron', sans-serif;
       font-size: 0.55rem;
@@ -732,6 +780,66 @@
           <div id="thumb-meta" style="margin-top:12px;font-size:0.72rem;color:#7878a8;font-family:monospace;"></div>
         </div>
       </div>
+
+      <!-- ══ TELEPROMPTER MODAL ══ -->
+      <div id="tp-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:#000;flex-direction:column;">
+
+        <!-- Control Bar -->
+        <div id="tp-controls" style="
+          display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+          padding:12px 20px;
+          background:rgba(7,7,17,0.97);
+          border-bottom:2px solid rgba(251,191,36,0.4);
+          backdrop-filter:blur(10px);
+          transition:opacity 0.5s;
+          position:relative;z-index:20;
+        ">
+          <div id="tp-brand-pill" style="font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.15em;padding:4px 12px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;"></div>
+          <div id="tp-title" style="font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:700;color:#f0f0ff;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></div>
+          <div style="flex:1"></div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-family:'Orbitron',sans-serif;font-size:0.55rem;letter-spacing:0.1em;color:#7878a8;">SPEED</span>
+            <button class="tp-ctrl-btn" id="tp-slower">−</button>
+            <span id="tp-speed-display" style="font-family:'Orbitron',sans-serif;font-size:0.7rem;font-weight:700;color:#fbbf24;min-width:36px;text-align:center;">1×</span>
+            <button class="tp-ctrl-btn" id="tp-faster">+</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-family:'Orbitron',sans-serif;font-size:0.55rem;letter-spacing:0.1em;color:#7878a8;">SIZE</span>
+            <button class="tp-ctrl-btn" id="tp-smaller">A−</button>
+            <button class="tp-ctrl-btn" id="tp-bigger">A+</button>
+          </div>
+          <button class="tp-ctrl-btn" id="tp-mirror">⇔ MIRROR</button>
+          <button id="tp-playpause" style="font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;padding:8px 20px;border-radius:999px;border:2px solid #fbbf24;background:rgba(251,191,36,0.15);color:#fbbf24;cursor:pointer;white-space:nowrap;transition:all 0.2s;">▶ PLAY</button>
+          <button class="tp-ctrl-btn" id="tp-restart">↺ RESTART</button>
+          <button class="tp-ctrl-btn" id="tp-fullscreen">⛶ FULL</button>
+          <button class="tp-ctrl-btn" id="tp-close" style="color:#ff2d87;border-color:rgba(255,45,135,0.4);">✕ CLOSE</button>
+        </div>
+
+        <!-- Progress bar -->
+        <div style="height:3px;background:rgba(251,191,36,0.15);position:relative;z-index:20;">
+          <div id="tp-progress" style="height:100%;background:#fbbf24;width:0%;box-shadow:0 0 8px rgba(251,191,36,0.6);"></div>
+        </div>
+
+        <!-- Reading line -->
+        <div id="tp-reading-line" style="position:absolute;left:0;right:0;top:50%;height:3px;background:linear-gradient(90deg,transparent,rgba(251,191,36,0.5),rgba(251,191,36,0.9),rgba(251,191,36,0.5),transparent);pointer-events:none;z-index:10;box-shadow:0 0 20px rgba(251,191,36,0.4);"></div>
+
+        <!-- Fade overlays -->
+        <div style="position:absolute;left:0;right:0;top:65px;height:130px;background:linear-gradient(to bottom,#000,transparent);pointer-events:none;z-index:8;"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:180px;background:linear-gradient(to top,#000,transparent);pointer-events:none;z-index:8;"></div>
+
+        <!-- Scroll container -->
+        <div id="tp-scroll" style="flex:1;overflow:hidden;position:relative;padding:0 10%;cursor:pointer;">
+          <div id="tp-hook-section" style="padding-top:45vh;padding-bottom:4vh;opacity:0.4;text-align:center;">
+            <div style="font-family:'Orbitron',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.3em;color:#ff2d87;margin-bottom:16px;">🪝 HOOK — READ THIS FIRST</div>
+            <div id="tp-hook-text" style="color:#e0e0ff;font-style:italic;line-height:1.6;"></div>
+          </div>
+          <div style="text-align:center;padding:3vh 0;">
+            <div style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.4em;color:#fbbf24;opacity:0.4;">── SCRIPT BEGINS ──</div>
+          </div>
+          <div id="tp-script-text" style="color:#ffffff;line-height:1.9;padding-bottom:55vh;"></div>
+        </div>
+
+      </div><!-- /#tp-modal -->
 
     </div><!-- /#panel-scripts -->
 
@@ -1283,6 +1391,7 @@ For each brand below, tell me: which platforms have active accounts, which are p
           <button class="script-btn script-btn-copy" onclick="copyScript('${s.id}')">⎘ COPY SCRIPT</button>
           <button class="script-btn script-btn-copy" onclick="copyCaption('${s.id}')">⎘ COPY CAPTION</button>
           <button class="script-btn script-btn-thumb" onclick="openThumbModal('${s.id}')">🖼 THUMBNAIL</button>
+          <button class="script-btn script-btn-teleprompter" onclick="openTeleprompter('${s.id}')">📺 TELEPROMPTER</button>
         </div>
       </div>`;
     }
@@ -1478,6 +1587,284 @@ For each brand below, tell me: which platforms have active accounts, which are p
       document.getElementById('thumb-meta').textContent =
         `${s.id} · ${s.brand_label} · ${s.platform.toUpperCase()} · ${s.duration} · 1280×720px`;
     }
+
+    // ══════════════════════════════════════════════════════
+    // TELEPROMPTER ENGINE
+    // ══════════════════════════════════════════════════════
+    (function() {
+      let _tpScript   = null;
+      let _tpRunning  = false;
+      let _tpSpeed    = 1.0;   // px per frame multiplier
+      let _tpFontSize = 42;    // px
+      let _tpRAF      = null;
+      let _tpScrollY  = 0;
+      let _tpMirrored = false;
+      let _tpCtrlTimeout = null;
+
+      const BASE_SPEED = 0.6; // px per frame at 1× — comfortable reading pace
+
+      const modal    = document.getElementById('tp-modal');
+      const scrollEl = document.getElementById('tp-scroll');
+      const hookEl   = document.getElementById('tp-hook-text');
+      const scriptEl = document.getElementById('tp-script-text');
+      const progress = document.getElementById('tp-progress');
+      const ppBtn    = document.getElementById('tp-playpause');
+      const speedDisp= document.getElementById('tp-speed-display');
+
+      // ── Open ──
+      window.openTeleprompter = function(id) {
+        _tpScript = _allScripts.find(s => s.id === id);
+        if (!_tpScript) return;
+        _tpRunning = false;
+        _tpScrollY = 0;
+        cancelAnimationFrame(_tpRAF);
+
+        const cfg = BRAND_CFG[_tpScript.brand] || BRAND_CFG.personal;
+
+        // Brand pill
+        const pill = document.getElementById('tp-brand-pill');
+        pill.textContent = cfg.label;
+        pill.style.color = cfg.color;
+        pill.style.borderColor = cfg.color + '80';
+
+        // Title
+        document.getElementById('tp-title').textContent =
+          _tpScript.platform.toUpperCase() + ' · ' + _tpScript.duration + ' · ' + _tpScript.type.toUpperCase();
+
+        // Hook text
+        hookEl.style.fontSize = Math.round(_tpFontSize * 0.9) + 'px';
+        hookEl.textContent = '"' + _tpScript.hook + '"';
+
+        // Script text — parse [stage directions] and double-newlines
+        scriptEl.style.fontSize = _tpFontSize + 'px';
+        scriptEl.innerHTML = formatTeleprompterText(_tpScript.script);
+
+        // Add keyboard hint
+        let hint = document.getElementById('tp-keyboard-hint');
+        if (!hint) {
+          hint = document.createElement('div');
+          hint.id = 'tp-keyboard-hint';
+          hint.textContent = 'SPACE: play/pause  ↑↓: speed  F: fullscreen  ESC: close';
+          modal.appendChild(hint);
+        }
+
+        // Reset scroll
+        scrollEl.scrollTop = 0;
+        _tpScrollY = 0;
+        updateProgress();
+        ppBtn.textContent = '▶ PLAY';
+        ppBtn.style.background = 'rgba(251,191,36,0.15)';
+
+        modal.style.display = 'flex';
+        showControls();
+      };
+
+      function formatTeleprompterText(text) {
+        // Split into paragraphs on double newlines or single newlines
+        const paras = text.split(/\n\n+/);
+        return paras.map(para => {
+          // Stage directions: lines starting with [ or all-caps bracketed
+          const lines = para.split('\n').map(line => {
+            if (/^\[.*\]$/.test(line.trim()) || /^\[/.test(line.trim())) {
+              return `<span class="tp-stage-direction">${escHtml(line)}</span>`;
+            }
+            return escHtml(line);
+          }).join('<br>');
+          return `<p>${lines}</p>`;
+        }).join('');
+      }
+
+      // ── Animation loop ──
+      function tick() {
+        if (!_tpRunning) return;
+        _tpScrollY += BASE_SPEED * _tpSpeed;
+        scrollEl.scrollTop = _tpScrollY;
+        updateProgress();
+
+        // Auto-stop at end
+        const maxScroll = scrollEl.scrollHeight - scrollEl.clientHeight;
+        if (_tpScrollY >= maxScroll) {
+          _tpRunning = false;
+          ppBtn.textContent = '▶ PLAY';
+          ppBtn.style.background = 'rgba(251,191,36,0.15)';
+          return;
+        }
+        _tpRAF = requestAnimationFrame(tick);
+      }
+
+      function updateProgress() {
+        const maxScroll = scrollEl.scrollHeight - scrollEl.clientHeight;
+        const pct = maxScroll > 0 ? Math.min(100, (_tpScrollY / maxScroll) * 100) : 0;
+        progress.style.width = pct + '%';
+      }
+
+      // ── Controls visibility (auto-hide in fullscreen during playback) ──
+      function showControls() {
+        modal.classList.remove('controls-hidden');
+        clearTimeout(_tpCtrlTimeout);
+        if (_tpRunning && document.fullscreenElement) {
+          _tpCtrlTimeout = setTimeout(() => modal.classList.add('controls-hidden'), 3000);
+        }
+      }
+
+      // ── Play / Pause ──
+      ppBtn.addEventListener('click', togglePlay);
+      scrollEl.addEventListener('click', togglePlay);
+
+      function togglePlay() {
+        _tpRunning = !_tpRunning;
+        if (_tpRunning) {
+          // If we're near the end, restart
+          const maxScroll = scrollEl.scrollHeight - scrollEl.clientHeight;
+          if (_tpScrollY >= maxScroll - 10) {
+            _tpScrollY = 0;
+            scrollEl.scrollTop = 0;
+          }
+          ppBtn.textContent = '⏸ PAUSE';
+          ppBtn.style.background = 'rgba(251,191,36,0.3)';
+          _tpRAF = requestAnimationFrame(tick);
+          if (document.fullscreenElement) {
+            _tpCtrlTimeout = setTimeout(() => modal.classList.add('controls-hidden'), 3000);
+          }
+        } else {
+          cancelAnimationFrame(_tpRAF);
+          ppBtn.textContent = '▶ PLAY';
+          ppBtn.style.background = 'rgba(251,191,36,0.15)';
+          showControls();
+        }
+      }
+
+      // ── Speed ──
+      const SPEEDS = [0.3, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0];
+      let _speedIdx = 3;
+
+      document.getElementById('tp-slower').addEventListener('click', () => {
+        _speedIdx = Math.max(0, _speedIdx - 1);
+        _tpSpeed = SPEEDS[_speedIdx];
+        speedDisp.textContent = _tpSpeed + '×';
+        showControls();
+      });
+      document.getElementById('tp-faster').addEventListener('click', () => {
+        _speedIdx = Math.min(SPEEDS.length-1, _speedIdx + 1);
+        _tpSpeed = SPEEDS[_speedIdx];
+        speedDisp.textContent = _tpSpeed + '×';
+        showControls();
+      });
+
+      // ── Font size ──
+      document.getElementById('tp-smaller').addEventListener('click', () => {
+        _tpFontSize = Math.max(24, _tpFontSize - 4);
+        applyFontSize();
+        showControls();
+      });
+      document.getElementById('tp-bigger').addEventListener('click', () => {
+        _tpFontSize = Math.min(96, _tpFontSize + 4);
+        applyFontSize();
+        showControls();
+      });
+      function applyFontSize() {
+        scriptEl.style.fontSize = _tpFontSize + 'px';
+        hookEl.style.fontSize = Math.round(_tpFontSize * 0.9) + 'px';
+      }
+
+      // ── Mirror ──
+      document.getElementById('tp-mirror').addEventListener('click', () => {
+        _tpMirrored = !_tpMirrored;
+        modal.classList.toggle('mirrored', _tpMirrored);
+        document.getElementById('tp-mirror').style.color = _tpMirrored ? '#fbbf24' : '';
+        showControls();
+      });
+
+      // ── Restart ──
+      document.getElementById('tp-restart').addEventListener('click', () => {
+        _tpScrollY = 0;
+        scrollEl.scrollTop = 0;
+        updateProgress();
+        showControls();
+      });
+
+      // ── Fullscreen ──
+      document.getElementById('tp-fullscreen').addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          modal.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen();
+        }
+        showControls();
+      });
+
+      document.addEventListener('fullscreenchange', () => {
+        const btn = document.getElementById('tp-fullscreen');
+        if (document.fullscreenElement) {
+          btn.textContent = '⛶ EXIT FULL';
+          // Reposition reading line relative to viewport
+          document.getElementById('tp-reading-line').style.top = '50%';
+        } else {
+          btn.textContent = '⛶ FULL';
+          showControls();
+        }
+      });
+
+      // ── Close ──
+      document.getElementById('tp-close').addEventListener('click', closeTeleprompter);
+      function closeTeleprompter() {
+        _tpRunning = false;
+        cancelAnimationFrame(_tpRAF);
+        if (document.fullscreenElement) document.exitFullscreen();
+        modal.style.display = 'none';
+        modal.classList.remove('controls-hidden', 'mirrored');
+        _tpMirrored = false;
+      }
+
+      // ── Mouse move shows controls ──
+      modal.addEventListener('mousemove', showControls);
+
+      // ── Keyboard shortcuts ──
+      document.addEventListener('keydown', e => {
+        if (modal.style.display === 'none') return;
+        showControls();
+        switch(e.code) {
+          case 'Space':
+            e.preventDefault();
+            togglePlay();
+            break;
+          case 'Escape':
+            if (!document.fullscreenElement) closeTeleprompter();
+            break;
+          case 'ArrowUp':
+            e.preventDefault();
+            _speedIdx = Math.min(SPEEDS.length-1, _speedIdx + 1);
+            _tpSpeed = SPEEDS[_speedIdx];
+            speedDisp.textContent = _tpSpeed + '×';
+            break;
+          case 'ArrowDown':
+            e.preventDefault();
+            _speedIdx = Math.max(0, _speedIdx - 1);
+            _tpSpeed = SPEEDS[_speedIdx];
+            speedDisp.textContent = _tpSpeed + '×';
+            break;
+          case 'KeyF':
+            document.getElementById('tp-fullscreen').click();
+            break;
+          case 'KeyR':
+            document.getElementById('tp-restart').click();
+            break;
+          case 'BracketLeft':
+            document.getElementById('tp-smaller').click();
+            break;
+          case 'BracketRight':
+            document.getElementById('tp-bigger').click();
+            break;
+        }
+      });
+
+      // ── Sync manual scrolling ──
+      scrollEl.addEventListener('scroll', () => {
+        _tpScrollY = scrollEl.scrollTop;
+        updateProgress();
+      });
+
+    })(); // end teleprompter IIFE
 
     // Category colors/icons for schedule
     const CAT_COLORS = { wellness: '#ff2d87', dashboard: '#00f5ff', reminder: '#fbbf24', default: '#a855f7' };
