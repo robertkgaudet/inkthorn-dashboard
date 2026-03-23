@@ -1,0 +1,254 @@
+{
+  "updated": "2026-03-23",
+  "hook_formula": "Interruption + Cognitive Dissonance + Open Loop Question",
+  "brands": ["personal", "openclaw", "groundforce", "stability", "textos", "reyla"],
+  "scripts": [
+
+    {
+      "id": "p-001",
+      "brand": "personal",
+      "brand_label": "Rob Gaudet",
+      "platform": "all",
+      "duration": "15s",
+      "type": "video",
+      "hook": "The man who built the Cajun Navy is now building AI — and most people have no idea why.",
+      "script": "I've been in a hurricane. I've pulled people out of floodwater. And I've spent 30 years building technology. Nobody told me those two things would collide. But here we are. And what I'm building right now might be the most important thing I've ever done.",
+      "caption": "From disaster zones to AI — the story most people don't know. 👇 [link in bio]",
+      "hashtags": "#AI #CajunNavy #Innovation #DisasterResponse #Entrepreneur"
+    },
+    {
+      "id": "p-002",
+      "brand": "personal",
+      "brand_label": "Rob Gaudet",
+      "platform": "tiktok",
+      "duration": "30s",
+      "type": "video",
+      "hook": "I texted an AI at 2am last night and it ran my entire morning for me. Here's what happened.",
+      "script": "This is going to sound insane. But last night I sent a text message to an AI assistant. By the time I woke up this morning, it had checked my email, summarized my calendar, flagged the one meeting I needed to prep for, and drafted three social posts for my nonprofit. I didn't install an app. I didn't open a laptop. I just... texted. The future isn't an app. It's a conversation. And it's already here.",
+      "caption": "I texted an AI at 2am and it worked while I slept 😳 Here's exactly what it did 👇",
+      "hashtags": "#AIAssistant #TextOS #FutureOfWork #Productivity #TechFounder"
+    },
+    {
+      "id": "p-003",
+      "brand": "personal",
+      "brand_label": "Rob Gaudet",
+      "platform": "linkedin",
+      "duration": "60s",
+      "type": "video",
+      "hook": "30 years in tech. 500,000 followers. And I almost quit everything 3 years ago.",
+      "script": "Here's what nobody talks about when they hear my story. I've built companies. I've led disaster responses. I've spoken at national conferences. And in 2023, I sat in my office and thought — what's actually next? I'd spent decades building other people's visions. The Cajun Navy was mine, but it was born in crisis, not in strategy. So I made a decision. I was going to build the things I'd always said should exist. An AI that actually works for everyday people. A platform that helps communities survive disasters. Technology that doesn't require a PhD to use. Three years later? We're building it. And I document everything — the wins, the failures, the 2am texts to AI bots. Follow along if you want the real version.",
+      "caption": "30 years in tech, a movement built in floodwater, and the decision that changed everything. The real version — unfiltered. 👇",
+      "hashtags": "#Founder #Leadership #AI #CajunNavy #BuildInPublic #Innovation"
+    },
+    {
+      "id": "p-004",
+      "brand": "personal",
+      "brand_label": "Rob Gaudet",
+      "platform": "x",
+      "duration": "15s",
+      "type": "text",
+      "hook": "Everyone is building AI for people who already know how to use AI.",
+      "script": "Everyone is building AI for people who already know how to use AI.\n\nI'm building it for the person who just wants to text and get a result.\n\nBig difference.\n\nThread 🧵",
+      "caption": "",
+      "hashtags": "#AI #TextOS #Innovation #EarlyAdopters"
+    },
+    {
+      "id": "p-005",
+      "brand": "personal",
+      "brand_label": "Rob Gaudet",
+      "platform": "instagram",
+      "duration": "15s",
+      "type": "photo",
+      "hook": "Most people wait for the perfect moment. I've learned there isn't one.",
+      "script": "[Photo of Rob in the field / at a whiteboard / on stage]\n\nCaption delivers the payload — hook and value in the first line before the fold.",
+      "caption": "Most people wait for the perfect moment to start. I've been through enough hurricanes to know — the perfect moment doesn't exist. You start in the storm. 🌊 #BuildInPublic #Founder #CajunNavy",
+      "hashtags": "#BuildInPublic #Founder #CajunNavy #Louisiana #Resilience"
+    },
+
+    {
+      "id": "oc-001",
+      "brand": "openclaw",
+      "brand_label": "OpenClaw Journey",
+      "platform": "all",
+      "duration": "60s",
+      "type": "video",
+      "hook": "I gave an AI access to my entire life — texts, email, calendar, files. What happened next was either brilliant or terrifying.",
+      "script": "Full disclosure: I am not a normal person for doing this. I set up a system called OpenClaw — it's an AI platform that connects to everything. My phone, my email, my calendar, my files. I gave it access to all of it. And then I just... started talking to it. Like a person. And it started doing things. Real things. It drafted a blog post, flagged an urgent email, checked the weather before I had a meeting outdoors, and wrote copy for my nonprofit. In one session. Now here's the question I want you to sit with: if technology this powerful existed 20 years ago, how different would your life be? Because it exists today. And most people still haven't found it yet.",
+      "caption": "I gave AI access to my entire life. Here's what it actually did 👇 Not hype — this is my real setup. #OpenClaw #AIAssistant #BuildInPublic",
+      "hashtags": "#OpenClaw #AI #TechFounder #BuildInPublic #AIAssistant #Innovation"
+    },
+    {
+      "id": "oc-002",
+      "brand": "openclaw",
+      "brand_label": "OpenClaw Journey",
+      "platform": "tiktok",
+      "duration": "30s",
+      "type": "video",
+      "hook": "This AI setup took me 6 hours to build. It saves me 3 hours every single day.",
+      "script": "Six hours of setup. Three hours saved every day. That's a 6-day payback period on my time investment. I'm talking about OpenClaw — an open-source AI platform that runs on YOUR hardware and connects to YOUR accounts. Not a subscription. Not someone else's cloud. Yours. It's not for everyone. It's for people who've ever thought — I should be able to automate THIS. If that's you, I'll show you exactly how I set mine up. Follow for the full breakdown.",
+      "caption": "6 hours to set up. Saves me 3 hours every day. Is that math? 😤 Full OpenClaw setup breakdown coming. Follow 👆",
+      "hashtags": "#OpenClaw #OpenSource #AI #Automation #TechFounder #Productivity"
+    },
+    {
+      "id": "oc-003",
+      "brand": "openclaw",
+      "brand_label": "OpenClaw Journey",
+      "platform": "youtube",
+      "duration": "5min",
+      "type": "video",
+      "hook": "What if your AI assistant already knew everything about your day — before you woke up?",
+      "script": "Open with that question on screen. Hold for 3 seconds.\n\n[INTRO]\nMy name is Rob Gaudet. I've been a software architect for 30 years. I built a movement called the Cajun Navy. And about 6 months ago, I started building the most personal technology project of my life.\n\n[THE PROBLEM]\nEvery AI product on the market asks you to change your behavior for it. Download this app. Learn this interface. Subscribe to this service. And even then — it only works when you're in front of it. I don't want that. I want something that works while I sleep.\n\n[THE DISCOVERY]\nOpenClaw is an open-source AI platform. It runs on your own hardware. It connects to your messaging apps — Signal, Telegram, WhatsApp. It has access to your files, calendar, and tools. And it can be configured to do proactive work — check your email at 8am, flag urgent items, prep your day before you touch your phone.\n\n[THE REALITY CHECK]\nHere's what they don't tell you in the marketing: it takes work to set up. This is for innovators. The people on the early part of Rogers' Diffusion of Innovation curve. If you've ever built a Raspberry Pi project, customized your dotfiles, or run your own server — this is for you.\n\n[THE DEMO]\nLet me show you a real session from this morning...\n[Walk through actual OpenClaw session — what messages came in, what the AI did proactively]\n\n[THE BIGGER POINT]\nBut here's why I'm documenting all of this publicly. I'm also building TextOS.ai — which takes everything I'm learning from OpenClaw and wraps it in something so simple that all you have to do is text a Telegram bot to get started. No setup. No hardware. Just text.\n\nTwo products. One mission. Make AI actually work for real people.\n\n[CTA]\nSubscribe for the weekly breakdown. Every Friday I publish exactly what my AI did that week — what worked, what didn't, and what I'm building next.",
+      "caption": "What if your AI knew your whole day before you woke up? I set this up. Here's exactly how it works — and what I'm building next. [Full OpenClaw journey]",
+      "hashtags": "#OpenClaw #AI #BuildInPublic #AIAssistant #OpenSource #TechFounder #Automation"
+    },
+    {
+      "id": "oc-004",
+      "brand": "openclaw",
+      "brand_label": "OpenClaw Journey",
+      "platform": "reddit",
+      "duration": "text",
+      "type": "text",
+      "hook": "I've been using OpenClaw for 3 months. Here's the honest breakdown — what's amazing, what's rough, and what I'm watching.",
+      "script": "Posted to r/selfhosted, r/homeassistant, r/MachineLearning\n\nTitle: 3 months with OpenClaw — honest review from a 30-year software architect\n\nI'm not affiliated with OpenClaw. I'm a software architect and founder who set it up because I wanted an AI assistant that ran on my own infrastructure.\n\n**What works amazingly:**\n- Telegram integration is genuinely seamless\n- Proactive heartbeat checks are a game-changer for inbox management\n- The skills system is extensible in a way that feels like real engineering, not IFTTT\n- My morning briefing arrives before I pick up my phone\n\n**What's rough:**\n- Initial setup assumes comfort with Node.js, CLI, and self-hosting — not for casual users\n- Documentation exists but you'll spend time in the source code\n- No GUI config — everything is file-based (I actually like this, but your mileage will vary)\n\n**What I'm watching:**\n- The skill ecosystem is early but growing fast\n- I'm curious how it scales with more integrations\n\n**Why I'm also building TextOS.ai:**\nOpenClaw showed me what's possible when AI has full context and persistent memory. But 95% of people will never set this up. So I'm building TextOS — same philosophy, zero setup required, text a bot on Telegram. Happy to answer questions.",
+      "caption": "",
+      "hashtags": "r/selfhosted r/homeassistant r/artificial"
+    },
+
+    {
+      "id": "gf-001",
+      "brand": "groundforce",
+      "brand_label": "Ground Force Humanitarian Aid",
+      "platform": "all",
+      "duration": "15s",
+      "type": "video",
+      "hook": "When the government said it would take 72 hours to respond — we were already there.",
+      "script": "When the government said it would take 72 hours — we were already on the water. That's not a criticism. That's the gap we fill. Ground Force exists because in a disaster, 72 hours is a death sentence for some people. We don't wait for permission. We go.",
+      "caption": "When the 72-hour response window is too late — we're already there. 🌊 This is why Ground Force exists. #GroundForce #HumanitarianAid #DisasterResponse #CajunNavy",
+      "hashtags": "#GroundForce #HumanitarianAid #DisasterResponse #CajunNavy #Louisiana #Volunteer"
+    },
+    {
+      "id": "gf-002",
+      "brand": "groundforce",
+      "brand_label": "Ground Force Humanitarian Aid",
+      "platform": "instagram",
+      "duration": "30s",
+      "type": "video",
+      "hook": "This photo looks like a rescue mission. It was actually a Tuesday.",
+      "script": "[Photo/video from field operations]\n\nPeople ask me what it's like to run a humanitarian operation. The honest answer? It looks like chaos from the outside. From the inside, it's just people doing the next right thing. This was taken during [operation/event]. The water was [height]. The family we pulled out had been waiting [time]. They didn't need a press release. They needed a boat. That's Ground Force.",
+      "caption": "They didn't need a press release. They needed a boat. 🚤 [Tag someone who shows up when it matters] #GroundForce #Volunteer #DisasterRelief",
+      "hashtags": "#GroundForce #HumanitarianAid #Volunteer #DisasterRelief #CajunNavy #Louisiana"
+    },
+    {
+      "id": "gf-003",
+      "brand": "groundforce",
+      "brand_label": "Ground Force Humanitarian Aid",
+      "platform": "facebook",
+      "duration": "3min",
+      "type": "video",
+      "hook": "I've never told the full story of how the Cajun Navy was born. Until now.",
+      "script": "I want to take a few minutes and tell you the real story. Not the polished version. The one that starts with a decision made in a parking lot, with boats lined up, and no authority in sight except the need in front of us.\n\nIt was [year]. Hurricane [name] had hit [area]. The official response was overwhelmed. People were on rooftops. We had boats. And someone asked — are we waiting for permission or are we going?\n\nWe went.\n\nThat moment — that decision — is the DNA of everything we've built since. Ground Force Humanitarian Aid exists because we proved that ordinary people with boats, radios, and the will to show up can do extraordinary things.\n\nWe've responded to [X] disasters. We've helped [X] families. And we've never once waited for permission.\n\nIf that story moves you — share it. And if you want to be part of what comes next, the link is in the bio.",
+      "caption": "The real story of how the Cajun Navy was born — told for the first time. Share if this moves you. 🌊 #CajunNavy #GroundForce #DisasterResponse #Louisiana",
+      "hashtags": "#CajunNavy #GroundForce #HumanitarianAid #Louisiana #Resilience #DisasterResponse"
+    },
+
+    {
+      "id": "st-001",
+      "brand": "stability",
+      "brand_label": "Stability.org",
+      "platform": "linkedin",
+      "duration": "60s",
+      "type": "video",
+      "hook": "Most cities won't survive the next major disaster. And the data proves it.",
+      "script": "I've spent decades in disaster response. And here's the uncomfortable truth that nobody in government wants to say out loud: most American cities are not resilient. Not to a major hurricane. Not to a prolonged grid outage. Not to the scenarios that are no longer hypothetical — they're scheduled.\n\nStability.org exists to change that. We build the technology infrastructure that helps communities coordinate, communicate, and recover faster.\n\nThis isn't a nonprofit pitch. It's an engineering problem. And engineers solve engineering problems.\n\nIf you work in emergency management, city government, or civic technology — let's talk. The link is in the comments.",
+      "caption": "Most cities won't survive the next major disaster. I've seen it. I'm building the fix. 🏛️ #Stability #CivicTech #EmergencyManagement #Resilience",
+      "hashtags": "#Stability #CivicTech #EmergencyManagement #Resilience #GovTech #DisasterPreparedness"
+    },
+    {
+      "id": "st-002",
+      "brand": "stability",
+      "brand_label": "Stability.org",
+      "platform": "x",
+      "duration": "15s",
+      "type": "text",
+      "hook": "Your city's disaster plan was written in 2009. That's the problem.",
+      "script": "Your city's disaster plan was written in 2009.\n\nThe technology available in 2009:\n- No Slack\n- No AirDrop\n- No real-time mapping\n- No AI coordination tools\n\nThe disasters coming in 2026:\n- Bigger\n- Faster\n- More connected\n\nThe gap between those two realities is where Stability.org lives.\n\nThread on what we're building 🧵",
+      "caption": "",
+      "hashtags": "#Stability #CivicTech #EmergencyManagement #GovTech"
+    },
+
+    {
+      "id": "tx-001",
+      "brand": "textos",
+      "brand_label": "TextOS.ai",
+      "platform": "tiktok",
+      "duration": "30s",
+      "type": "video",
+      "hook": "You have 47 apps on your phone. What if you deleted all of them and just... texted?",
+      "script": "Hear me out. What if everything you use apps for — scheduling, reminders, notes, research, drafting emails, answering questions — what if all of that happened in a single text conversation? No app switching. No notifications you didn't ask for. Just a text message that actually knows what you're doing and actually helps. That's TextOS. Text the bot. Get results. No setup. No download. Just text. Link in bio.",
+      "caption": "47 apps → 1 text message. What if that was actually possible? 😳 Text @textosaibot on Telegram and see for yourself. #TextOS #AI #Productivity",
+      "hashtags": "#TextOS #AI #Productivity #NoCode #FutureOfWork #AIAssistant #Telegram"
+    },
+    {
+      "id": "tx-002",
+      "brand": "textos",
+      "brand_label": "TextOS.ai",
+      "platform": "instagram",
+      "duration": "15s",
+      "type": "video",
+      "hook": "OpenClaw is for engineers. TextOS is for everyone else.",
+      "script": "I'll be honest with you. I use OpenClaw. It took me 6 hours to set up and it's incredible. But I know most people will never do that. So I built TextOS — same AI power, zero setup. Text @textosaibot on Telegram. That's it. That's the whole onboarding. Try it right now.",
+      "caption": "OpenClaw for engineers. TextOS for everyone else. Text @textosaibot on Telegram — no download, no setup, no catch. 🤖 #TextOS #AI #Telegram",
+      "hashtags": "#TextOS #AI #Telegram #EarlyAdopter #AIAssistant #Productivity"
+    },
+    {
+      "id": "tx-003",
+      "brand": "textos",
+      "brand_label": "TextOS.ai",
+      "platform": "youtube",
+      "duration": "3min",
+      "type": "video",
+      "hook": "I built the AI assistant I always wanted. And then I made it so simple a 70-year-old could use it.",
+      "script": "[OPEN on phone showing Telegram conversation with TextOS bot]\n\nThis is a conversation I had with an AI this morning. I'm going to show you the whole thing unedited.\n\n[Show actual conversation — tasks completed, responses]\n\nHere's why this matters. I've been building AI tools for years. And the best one I've built — OpenClaw — requires technical setup that most people will never do. I watched people I care about — my family, my team, non-tech people — miss out on something genuinely useful because the barrier to entry was too high.\n\nSo I built TextOS.\n\nHere's the entire setup: Text @textosaibot on Telegram. That's it. No account creation. No credit card. No app download. You're talking to an AI assistant in under 60 seconds.\n\nI'm going to show you exactly what it can do:\n[Demo — 5-7 use cases: scheduling, research, drafting, reminders, questions]\n\nTextOS is for the person who knows AI is useful but doesn't have time to become a prompt engineer. It's for the early adopter who wants results, not setup.\n\nLink in the description. Go text the bot right now. Tell me what you used it for in the comments.",
+      "caption": "I built the AI assistant I always wanted — then made it so simple anyone can use it. Zero setup. Text the bot. That's all. #TextOS #AI #AIAssistant",
+      "hashtags": "#TextOS #AI #AIAssistant #Productivity #Telegram #EarlyAdopter #NoCode"
+    },
+    {
+      "id": "tx-004",
+      "brand": "textos",
+      "brand_label": "TextOS.ai",
+      "platform": "reddit",
+      "duration": "text",
+      "type": "text",
+      "hook": "I built an AI assistant that requires zero setup — you just text it on Telegram. Roast me.",
+      "script": "Posted to r/artificial, r/productivity, r/SaaS\n\nTitle: Built TextOS — an AI assistant you access by texting a Telegram bot. No setup, no download. Here's the honest pitch.\n\nI'm Rob Gaudet — 30 years as a software architect, founder of the Cajun Navy disaster response movement. I've been building with AI for years and my personal setup (OpenClaw, open-source, self-hosted) is genuinely powerful — but it requires hours of technical setup.\n\nI built TextOS for the other 95% of people.\n\nHere's the whole pitch: Text @textosaibot on Telegram. You're talking to an AI assistant in under 60 seconds. It can help you:\n- Draft emails and messages\n- Set reminders\n- Answer questions\n- Research topics\n- Organize your thinking\n- And more as I ship features\n\nWhy Telegram? Because it already has 900M users, no download friction, and the bot API is genuinely excellent for this use case.\n\nWhy am I the person to build this? Because I've lived both sides — the technical OpenClaw side and the 'my family can't use any of this' side. TextOS bridges that gap.\n\nAsk me anything. Looking for honest feedback, not validation.",
+      "caption": "",
+      "hashtags": "r/artificial r/productivity r/SaaS r/entrepreneur"
+    },
+
+    {
+      "id": "ry-001",
+      "brand": "reyla",
+      "brand_label": "Reyla.ai",
+      "platform": "tiktok",
+      "duration": "15s",
+      "type": "video",
+      "hook": "Most AI feels like talking to a search engine. Reyla actually listens.",
+      "script": "Here's what bothers me about every AI product on the market. They're brilliant at answering questions. They're terrible at actually knowing you. Reyla is different. It remembers. It learns your preferences. It adapts. Not because it's magic — because we built it that way. Coming soon. Follow for early access.",
+      "caption": "Most AI answers questions. Reyla learns you. 🤖 Early access dropping soon — follow to be first. #Reyla #AI #PersonalAI",
+      "hashtags": "#Reyla #AI #PersonalAI #ArtificialIntelligence #EarlyAccess #TechFounder"
+    },
+    {
+      "id": "ry-002",
+      "brand": "reyla",
+      "brand_label": "Reyla.ai",
+      "platform": "linkedin",
+      "duration": "60s",
+      "type": "video",
+      "hook": "The difference between AI that helps you and AI that just responds to you is enormous. Here's what it looks like.",
+      "script": "I want to draw a distinction that I think matters enormously for where AI goes next.\n\nThere's AI that responds. You ask it something, it answers. That's most of what exists today.\n\nAnd there's AI that helps. It knows your context. It remembers what you care about. It surfaces things before you think to ask for them.\n\nThe gap between those two experiences is the difference between a search engine and a genuine assistant.\n\nReyla.ai is built for the second category. I'll be sharing more soon. If you work in AI, product development, or are building with AI — follow along. The interesting part is coming.",
+      "caption": "AI that responds vs AI that helps — the gap is bigger than most people realize. Here's what 'actually helps' looks like. #Reyla #AI #ProductDevelopment",
+      "hashtags": "#Reyla #AI #ArtificialIntelligence #ProductDevelopment #SaaS #TechFounder #Innovation"
+    }
+
+  ]
+}

@@ -471,6 +471,156 @@
       font-weight: 700;
     }
 
+    /* ── Scripts Panel ── */
+    .script-card {
+      background: rgba(22,12,45,0.92);
+      border: 1px solid rgba(168,85,247,0.35);
+      border-radius: 10px;
+      padding: 0;
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+    .script-card:hover {
+      border-color: #a855f7;
+      box-shadow: 0 0 18px rgba(168,85,247,0.18);
+      transform: translateY(-1px);
+    }
+    .script-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px 10px;
+      flex-wrap: wrap;
+    }
+    .script-brand-pill {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      white-space: nowrap;
+    }
+    .script-platform-tag {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: #7878a8;
+      border: 1px solid rgba(120,120,168,0.3);
+      border-radius: 999px;
+      padding: 2px 8px;
+      white-space: nowrap;
+    }
+    .script-duration-tag {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 2px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .script-type-icon { font-size: 0.9rem; }
+    .script-id { font-family: monospace; font-size: 0.6rem; color: #7878a8; margin-left: auto; }
+    .script-hook {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f0f0ff;
+      padding: 0 18px 10px;
+      line-height: 1.4;
+    }
+    .script-hook-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: #ff2d87;
+      text-shadow: 0 0 8px rgba(255,45,135,0.5);
+      padding: 0 18px 4px;
+    }
+    .script-body-wrap {
+      border-top: 1px solid rgba(168,85,247,0.2);
+      padding: 14px 18px;
+    }
+    .script-section-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .script-text {
+      font-size: 0.9rem;
+      color: #d0d0f0;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      background: rgba(0,0,0,0.25);
+      border-radius: 6px;
+      padding: 12px;
+      border: 1px solid rgba(168,85,247,0.15);
+      cursor: text;
+      user-select: all;
+      margin-bottom: 14px;
+    }
+    .script-caption {
+      font-size: 0.82rem;
+      color: #b0b0d8;
+      background: rgba(0,245,255,0.05);
+      border-radius: 6px;
+      padding: 10px 12px;
+      border: 1px solid rgba(0,245,255,0.15);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .script-hashtags {
+      font-size: 0.75rem;
+      color: #00f5ff;
+      opacity: 0.7;
+    }
+    .script-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 10px 18px 14px;
+      border-top: 1px solid rgba(168,85,247,0.15);
+    }
+    .script-btn {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 5px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .script-btn-copy { border: 1px solid rgba(0,245,255,0.5); background: rgba(0,245,255,0.08); color: #00f5ff; }
+    .script-btn-copy:hover { background: rgba(0,245,255,0.18); }
+    .script-btn-thumb { border: 1px solid rgba(168,85,247,0.5); background: rgba(168,85,247,0.08); color: #a855f7; }
+    .script-btn-thumb:hover { background: rgba(168,85,247,0.18); }
+    .script-btn-expand { border: 1px solid rgba(120,120,168,0.3); background: rgba(120,120,168,0.05); color: #9090c0; }
+    .script-filter-btn {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(168,85,247,0.35);
+      background: rgba(168,85,247,0.05);
+      color: #9090c0;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .script-filter-btn:hover { border-color: #a855f7; color: #a855f7; }
+    .script-filter-btn.active { border-color: #00f5ff; color: #00f5ff; background: rgba(0,245,255,0.08); }
+
     /* ── Responsive ── */
     @media (max-width: 640px) {
       .pb-stats {
@@ -532,6 +682,7 @@
       <button class="pb-tab active" data-panel="notes">📝 Notes & Briefings</button>
       <button class="pb-tab" data-panel="schedule">⚙️ Schedule</button>
       <button class="pb-tab" data-panel="meals">🍽️ Meal Plan</button>
+      <button class="pb-tab" data-panel="scripts">🎬 Daily Scripts</button>
       <button class="pb-tab" data-panel="social">📣 Social Media Marketing</button>
     </nav>
 
@@ -549,6 +700,40 @@
     <div class="pb-panel" id="panel-meals">
       <div id="meals-content"><div class="pb-empty"><div class="pb-empty-icon">⏳</div><p>Loading…</p></div></div>
     </div>
+
+    <!-- Daily Scripts Panel -->
+    <div class="pb-panel" id="panel-scripts">
+
+      <!-- Filter Bar -->
+      <div id="scripts-filters" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;align-items:center;">
+        <span style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:#7878a8;white-space:nowrap">FILTER:</span>
+        <div id="scripts-brand-filters" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+        <div style="width:1px;height:20px;background:rgba(168,85,247,0.3);margin:0 4px;"></div>
+        <div id="scripts-platform-filters" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+        <div style="flex:1;"></div>
+        <button id="scripts-random-btn" style="font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:6px 16px;border-radius:999px;border:1px solid #ff2d87;background:rgba(255,45,135,0.1);color:#ff2d87;cursor:pointer;white-space:nowrap;">🎲 RANDOM SCRIPT</button>
+      </div>
+
+      <!-- Scripts Grid -->
+      <div id="scripts-grid"></div>
+
+      <!-- Thumbnail Generator Modal -->
+      <div id="thumb-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;flex-direction:column;gap:16px;">
+        <div style="max-width:640px;width:90%;background:rgba(14,7,30,0.98);border:1px solid rgba(168,85,247,0.5);border-radius:12px;padding:24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <span style="font-family:'Orbitron',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.15em;color:#a855f7;">🖼 THUMBNAIL GENERATOR</span>
+            <button id="thumb-close" style="background:none;border:none;color:#7878a8;font-size:1.2rem;cursor:pointer;">✕</button>
+          </div>
+          <canvas id="thumb-canvas" width="1280" height="720" style="width:100%;border-radius:8px;border:1px solid rgba(168,85,247,0.3);"></canvas>
+          <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+            <button id="thumb-download" style="font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;padding:8px 20px;border-radius:999px;border:none;background:#a855f7;color:#fff;cursor:pointer;">⬇ DOWNLOAD PNG</button>
+            <button id="thumb-regen" style="font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;padding:8px 20px;border-radius:999px;border:1px solid rgba(168,85,247,0.5);background:rgba(168,85,247,0.1);color:#a855f7;cursor:pointer;">↺ REGENERATE</button>
+          </div>
+          <div id="thumb-meta" style="margin-top:12px;font-size:0.72rem;color:#7878a8;font-family:monospace;"></div>
+        </div>
+      </div>
+
+    </div><!-- /#panel-scripts -->
 
     <!-- Social Media Marketing Panel -->
     <div class="pb-panel" id="panel-social">
@@ -959,7 +1144,340 @@ For each brand below, tell me: which platforms have active accounts, which are p
       document.querySelectorAll('.pb-panel').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+      if (btn.dataset.panel === 'scripts' && !window._scriptsLoaded) loadScripts();
     });
+
+    // ══════════════════════════════════════════════════════
+    // SCRIPTS ENGINE
+    // ══════════════════════════════════════════════════════
+
+    const BRAND_CFG = {
+      personal:    { color: '#ff2d87', label: 'ROB GAUDET',    bg1:'#0a0015', bg2:'#1a0030', secondary:'#00f5ff' },
+      openclaw:    { color: '#00f5ff', label: 'OPENCLAW',      bg1:'#070711', bg2:'#0d0d2a', secondary:'#a855f7' },
+      groundforce: { color: '#4ade80', label: 'GROUND FORCE',  bg1:'#030d0a', bg2:'#0a1e10', secondary:'#00f5ff' },
+      stability:   { color: '#00f5ff', label: 'STABILITY.ORG', bg1:'#07070f', bg2:'#0d1525', secondary:'#a855f7' },
+      textos:      { color: '#a855f7', label: 'TEXTOS.AI',     bg1:'#0e0515', bg2:'#1a0a2e', secondary:'#ff2d87' },
+      reyla:       { color: '#fbbf24', label: 'REYLA.AI',      bg1:'#100c00', bg2:'#201500', secondary:'#ff2d87' },
+    };
+    const DURATION_COLOR = { '15s':'#4ade80','30s':'#00f5ff','60s':'#fbbf24','3min':'#ff2d87','5min':'#a855f7','text':'#7878a8' };
+    const TYPE_ICON = { video:'▶', text:'✦', photo:'◈' };
+    const PLATFORM_ICONS = { all:'🌐', tiktok:'🎵', instagram:'📸', youtube:'▶️', linkedin:'💼', x:'𝕏', facebook:'👥', reddit:'👽' };
+
+    let _allScripts = [];
+    let _filterBrand = 'all';
+    let _filterPlatform = 'all';
+    let _currentThumbScript = null;
+
+    async function loadScripts() {
+      window._scriptsLoaded = true;
+      try {
+        const data = await fetch('data/scripts.json?_='+Date.now()).then(r=>r.json());
+        _allScripts = data.scripts || [];
+        buildScriptFilters(data);
+        renderScripts();
+      } catch(e) {
+        document.getElementById('scripts-grid').innerHTML =
+          '<div class="pb-empty"><div class="pb-empty-icon">⚠️</div><p>Could not load scripts: '+e.message+'</p></div>';
+      }
+    }
+
+    function buildScriptFilters(data) {
+      const brands = ['all', ...new Set(_allScripts.map(s=>s.brand))];
+      const platforms = ['all', ...new Set(_allScripts.map(s=>s.platform))];
+
+      const bf = document.getElementById('scripts-brand-filters');
+      brands.forEach(b => {
+        const cfg = BRAND_CFG[b] || {};
+        const btn = document.createElement('button');
+        btn.className = 'script-filter-btn' + (b==='all'?' active':'');
+        btn.dataset.brand = b;
+        btn.textContent = b === 'all' ? 'ALL BRANDS' : (cfg.label || b.toUpperCase());
+        if (b !== 'all') btn.style.cssText = `border-color:${cfg.color}44;color:${cfg.color === _filterBrand ? cfg.color : '#9090c0'}`;
+        btn.addEventListener('click', () => {
+          _filterBrand = b;
+          bf.querySelectorAll('.script-filter-btn').forEach(x=>x.classList.remove('active'));
+          btn.classList.add('active');
+          renderScripts();
+        });
+        bf.appendChild(btn);
+      });
+
+      const pf = document.getElementById('scripts-platform-filters');
+      platforms.forEach(p => {
+        const btn = document.createElement('button');
+        btn.className = 'script-filter-btn' + (p==='all'?' active':'');
+        btn.dataset.platform = p;
+        btn.textContent = (PLATFORM_ICONS[p]||'') + ' ' + p.toUpperCase();
+        btn.addEventListener('click', () => {
+          _filterPlatform = p;
+          pf.querySelectorAll('.script-filter-btn').forEach(x=>x.classList.remove('active'));
+          btn.classList.add('active');
+          renderScripts();
+        });
+        pf.appendChild(btn);
+      });
+
+      document.getElementById('scripts-random-btn').addEventListener('click', () => {
+        const filtered = getFilteredScripts();
+        if (!filtered.length) return;
+        const s = filtered[Math.floor(Math.random()*filtered.length)];
+        const card = document.getElementById('script-card-'+s.id);
+        if (card) { card.scrollIntoView({behavior:'smooth',block:'center'}); card.style.boxShadow='0 0 30px rgba(255,45,135,0.5)'; setTimeout(()=>card.style.boxShadow='',2000); }
+      });
+    }
+
+    function getFilteredScripts() {
+      return _allScripts.filter(s => {
+        if (_filterBrand !== 'all' && s.brand !== _filterBrand) return false;
+        if (_filterPlatform !== 'all' && s.platform !== _filterPlatform && s.platform !== 'all') return false;
+        return true;
+      });
+    }
+
+    function renderScripts() {
+      const scripts = getFilteredScripts();
+      const grid = document.getElementById('scripts-grid');
+      if (!scripts.length) {
+        grid.innerHTML = '<div class="pb-empty"><div class="pb-empty-icon">🎬</div><p>No scripts match this filter.</p></div>';
+        return;
+      }
+      // Group by brand
+      const groups = {};
+      scripts.forEach(s => { (groups[s.brand]=groups[s.brand]||[]).push(s); });
+
+      let html = '';
+      for (const [brand, items] of Object.entries(groups)) {
+        const cfg = BRAND_CFG[brand] || {color:'#a855f7',label:brand.toUpperCase()};
+        html += `<div class="pb-section-header" style="color:${cfg.color};text-shadow:0 0 10px ${cfg.color}40;margin-top:${html?'32px':'0'}">
+          ${cfg.label} <span class="pb-section-count">${items.length} script${items.length!==1?'s':''} today</span>
+        </div>`;
+        items.forEach(s => { html += renderScriptCard(s); });
+      }
+      grid.innerHTML = html;
+    }
+
+    function renderScriptCard(s) {
+      const cfg = BRAND_CFG[s.brand] || {color:'#a855f7'};
+      const dc = DURATION_COLOR[s.duration] || '#fff';
+      const ti = TYPE_ICON[s.type] || '▶';
+      const pi = PLATFORM_ICONS[s.platform] || '';
+      return `<div class="script-card" id="script-card-${escHtml(s.id)}">
+        <div class="script-card-header">
+          <span class="script-brand-pill" style="color:${cfg.color};border-color:${cfg.color}60;">${cfg.label||s.brand.toUpperCase()}</span>
+          <span class="script-platform-tag">${pi} ${escHtml(s.platform.toUpperCase())}</span>
+          <span class="script-duration-tag" style="color:${dc};border:1px solid ${dc}50;background:${dc}12;">⏱ ${escHtml(s.duration)}</span>
+          <span class="script-type-icon">${ti}</span>
+          <span class="script-id">${escHtml(s.id)}</span>
+        </div>
+        <div class="script-hook-label">🪝 HOOK — INTERRUPT · DISSONANCE · OPEN LOOP</div>
+        <div class="script-hook">"${escHtml(s.hook)}"</div>
+        <div class="script-body-wrap" id="script-body-${escHtml(s.id)}" style="display:none">
+          <div class="script-section-label" style="color:${cfg.color}">📜 SCRIPT</div>
+          <div class="script-text" id="script-text-${escHtml(s.id)}">${escHtml(s.script)}</div>
+          ${s.caption ? `<div class="script-section-label" style="color:#00f5ff">📝 CAPTION</div>
+          <div class="script-caption">${escHtml(s.caption)}</div>` : ''}
+          ${s.hashtags ? `<div class="script-hashtags">${escHtml(s.hashtags)}</div>` : ''}
+        </div>
+        <div class="script-actions">
+          <button class="script-btn script-btn-expand" onclick="toggleScriptBody('${s.id}')">▼ EXPAND SCRIPT</button>
+          <button class="script-btn script-btn-copy" onclick="copyScript('${s.id}')">⎘ COPY SCRIPT</button>
+          <button class="script-btn script-btn-copy" onclick="copyCaption('${s.id}')">⎘ COPY CAPTION</button>
+          <button class="script-btn script-btn-thumb" onclick="openThumbModal('${s.id}')">🖼 THUMBNAIL</button>
+        </div>
+      </div>`;
+    }
+
+    function toggleScriptBody(id) {
+      const body = document.getElementById('script-body-'+id);
+      const btn = body.parentElement.querySelector('.script-btn-expand');
+      if (body.style.display === 'none') {
+        body.style.display = 'block';
+        if (btn) btn.textContent = '▲ COLLAPSE';
+      } else {
+        body.style.display = 'none';
+        if (btn) btn.textContent = '▼ EXPAND SCRIPT';
+      }
+    }
+
+    function copyScript(id) {
+      const s = _allScripts.find(x=>x.id===id);
+      if (!s) return;
+      const text = `HOOK:\n${s.hook}\n\nSCRIPT:\n${s.script}${s.caption?'\n\nCAPTION:\n'+s.caption:''}${s.hashtags?'\n\n'+s.hashtags:''}`;
+      navigator.clipboard.writeText(text).then(()=>{
+        const btn = document.querySelector(`#script-card-${id} .script-btn-copy`);
+        if (btn) { const orig=btn.textContent; btn.textContent='✅ COPIED'; setTimeout(()=>btn.textContent=orig,1500); }
+      });
+    }
+
+    function copyCaption(id) {
+      const s = _allScripts.find(x=>x.id===id);
+      if (!s) return;
+      const text = (s.caption||s.hook) + (s.hashtags ? '\n\n'+s.hashtags : '');
+      navigator.clipboard.writeText(text).then(()=>{
+        const btns = document.querySelectorAll(`#script-card-${id} .script-btn-copy`);
+        if (btns[1]) { const orig=btns[1].textContent; btns[1].textContent='✅ COPIED'; setTimeout(()=>btns[1].textContent=orig,1500); }
+      });
+    }
+
+    // ══════════════════════════════════════════════════════
+    // THUMBNAIL GENERATOR (Canvas)
+    // ══════════════════════════════════════════════════════
+
+    function openThumbModal(id) {
+      _currentThumbScript = _allScripts.find(s=>s.id===id);
+      if (!_currentThumbScript) return;
+      const modal = document.getElementById('thumb-modal');
+      modal.style.display = 'flex';
+      drawThumbnail(_currentThumbScript);
+    }
+
+    document.getElementById('thumb-close').addEventListener('click', () => {
+      document.getElementById('thumb-modal').style.display = 'none';
+    });
+    document.getElementById('thumb-download').addEventListener('click', () => {
+      if (!_currentThumbScript) return;
+      const canvas = document.getElementById('thumb-canvas');
+      const a = document.createElement('a');
+      a.download = `thumbnail-${_currentThumbScript.id}.png`;
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    });
+    document.getElementById('thumb-regen').addEventListener('click', () => {
+      if (_currentThumbScript) drawThumbnail(_currentThumbScript);
+    });
+
+    function wrapCanvasText(ctx, text, maxWidth) {
+      const words = text.split(' ');
+      const lines = [];
+      let line = '';
+      for (const word of words) {
+        const test = line ? line + ' ' + word : word;
+        if (ctx.measureText(test).width > maxWidth && line) {
+          lines.push(line);
+          line = word;
+        } else line = test;
+      }
+      if (line) lines.push(line);
+      return lines;
+    }
+
+    function hexToRgb(hex) {
+      const r = parseInt(hex.slice(1,3),16);
+      const g = parseInt(hex.slice(3,5),16);
+      const b = parseInt(hex.slice(5,7),16);
+      return {r,g,b};
+    }
+
+    function drawThumbnail(s) {
+      const canvas = document.getElementById('thumb-canvas');
+      const ctx = canvas.getContext('2d');
+      const W = 1280, H = 720;
+      const cfg = BRAND_CFG[s.brand] || BRAND_CFG.personal;
+      const dc = DURATION_COLOR[s.duration] || '#ffffff';
+      const ti = TYPE_ICON[s.type] || '▶';
+
+      // ── Background gradient ──
+      const bg = ctx.createLinearGradient(0, 0, W, H);
+      bg.addColorStop(0, cfg.bg1);
+      bg.addColorStop(1, cfg.bg2);
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, W, H);
+
+      // ── Grid lines ──
+      ctx.strokeStyle = cfg.primary + '18';
+      ctx.lineWidth = 1;
+      for (let x = 0; x <= W; x += 213) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+      for (let y = 0; y <= H; y += 144) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+
+      // ── Glow blob ──
+      const primaryRgb = hexToRgb(cfg.color);
+      const glow = ctx.createRadialGradient(350, 360, 10, 350, 360, 380);
+      glow.addColorStop(0, `rgba(${primaryRgb.r},${primaryRgb.g},${primaryRgb.b},0.12)`);
+      glow.addColorStop(1, 'transparent');
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, W, H);
+
+      // ── Top brand bar ──
+      ctx.fillStyle = cfg.color + '22';
+      ctx.fillRect(0, 0, W, 72);
+      ctx.strokeStyle = cfg.color;
+      ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(0,72); ctx.lineTo(W,72); ctx.stroke();
+
+      // ── Left accent stripe ──
+      ctx.fillStyle = cfg.color;
+      ctx.fillRect(0, 0, 8, H);
+
+      // ── Bottom bar ──
+      const secRgb = hexToRgb(cfg.secondary);
+      ctx.fillStyle = `rgba(${secRgb.r},${secRgb.g},${secRgb.b},0.12)`;
+      ctx.fillRect(0, H-72, W, 72);
+      ctx.strokeStyle = cfg.secondary;
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(0,H-72); ctx.lineTo(W,H-72); ctx.stroke();
+
+      // ── Brand label (top left) ──
+      ctx.font = 'bold 28px monospace';
+      ctx.fillStyle = cfg.color;
+      ctx.fillText(cfg.label, 40, 46);
+
+      // ── Platform tag (top right) ──
+      ctx.font = 'bold 22px monospace';
+      ctx.fillStyle = cfg.secondary;
+      ctx.textAlign = 'right';
+      ctx.fillText(s.platform.toUpperCase(), W - 40, 46);
+      ctx.textAlign = 'left';
+
+      // ── Hook formula label ──
+      ctx.font = 'bold 18px monospace';
+      ctx.fillStyle = '#ff2d87';
+      ctx.fillText('🪝  HOOK — INTERRUPT · DISSONANCE · OPEN LOOP', 40, 115);
+
+      // ── Hook text (main headline) ──
+      ctx.font = 'bold 56px sans-serif';
+      const hookLines = wrapCanvasText(ctx, s.hook, W - 120);
+      const hookY = 170;
+      const lineH = 68;
+      hookLines.slice(0,5).forEach((line, i) => {
+        // Shadow
+        ctx.fillStyle = 'rgba(0,0,0,0.5)';
+        ctx.fillText(line, 43, hookY + i*lineH + 3);
+        // Text
+        ctx.fillStyle = '#f0f0ff';
+        ctx.fillText(line, 40, hookY + i*lineH);
+      });
+
+      // ── Type icon (bottom left) ──
+      const botY = H - 20;
+      ctx.font = 'bold 30px monospace';
+      ctx.fillStyle = cfg.color;
+      ctx.fillText(ti + ' ' + s.type.toUpperCase(), 40, botY);
+
+      // ── Duration (bottom right) ──
+      ctx.font = 'bold 28px monospace';
+      ctx.fillStyle = dc;
+      ctx.textAlign = 'right';
+      ctx.fillText('⏱ ' + s.duration, W - 40, botY);
+      ctx.textAlign = 'left';
+
+      // ── Hook formula watermark (center bottom) ──
+      ctx.font = '16px monospace';
+      ctx.fillStyle = 'rgba(255,255,255,0.18)';
+      ctx.textAlign = 'center';
+      ctx.fillText('INTERRUPT · COGNITIVE DISSONANCE · OPEN LOOP', W/2, H - 14);
+      ctx.textAlign = 'left';
+
+      // ── Script ID ──
+      ctx.font = '14px monospace';
+      ctx.fillStyle = 'rgba(255,255,255,0.15)';
+      ctx.textAlign = 'right';
+      ctx.fillText(s.id, W - 14, H - 14);
+      ctx.textAlign = 'left';
+
+      // Update meta
+      document.getElementById('thumb-meta').textContent =
+        `${s.id} · ${s.brand_label} · ${s.platform.toUpperCase()} · ${s.duration} · 1280×720px`;
+    }
 
     // Category colors/icons for schedule
     const CAT_COLORS = { wellness: '#ff2d87', dashboard: '#00f5ff', reminder: '#fbbf24', default: '#a855f7' };
