@@ -22,10 +22,28 @@ const OUT_DIR   = path.join(__dirname, '..', 'data');
 const LEADS_JSON = path.join(OUT_DIR, 'leads.json');
 const LEADS_CSV  = path.join(OUT_DIR, 'leads.csv');
 
-// New Orleans center + radius (meters) — covers metro area
-const NOLA_LAT  = 29.9511;
-const NOLA_LNG  = -90.0715;
-const RADIUS_M  = 25000; // ~15.5 miles covers most of metro
+// Search grid: New Orleans + all surrounding cities/parishes
+// Multiple center points ensure full coverage without gaps
+const SEARCH_ZONES = [
+  { name: 'New Orleans Uptown/Garden District', lat: 29.9245, lng: -90.0893, radius: 6000 },
+  { name: 'New Orleans CBD/French Quarter',     lat: 29.9566, lng: -90.0680, radius: 5000 },
+  { name: 'New Orleans Mid-City',               lat: 29.9790, lng: -90.0874, radius: 5000 },
+  { name: 'New Orleans Gentilly/Lakeview',      lat: 29.9956, lng: -90.0549, radius: 6000 },
+  { name: 'New Orleans East',                   lat: 30.0149, lng: -89.9562, radius: 8000 },
+  { name: 'Algiers/West Bank NOLA',             lat: 29.9128, lng: -90.0375, radius: 6000 },
+  { name: 'Metairie',                           lat: 29.9996, lng: -90.1674, radius: 7000 },
+  { name: 'Kenner',                             lat: 29.9940, lng: -90.2415, radius: 6000 },
+  { name: 'Elmwood/Harahan',                    lat: 29.9549, lng: -90.2056, radius: 5000 },
+  { name: 'Gretna/Terrytown',                   lat: 29.9144, lng: -90.0543, radius: 6000 },
+  { name: 'Harvey/Marrero',                     lat: 29.9010, lng: -90.0779, radius: 7000 },
+  { name: 'Westwego/Avondale',                  lat: 29.9054, lng: -90.1434, radius: 5000 },
+  { name: 'Chalmette/Arabi (St. Bernard)',      lat: 29.9418, lng: -89.9675, radius: 6000 },
+  { name: 'Slidell',                            lat: 30.2752, lng: -89.7812, radius: 7000 },
+  { name: 'Mandeville/Covington',               lat: 30.3585, lng: -90.0632, radius: 7000 },
+  { name: 'Lacombe/Pearl River (St. Tammany)',  lat: 30.3180, lng: -89.9281, radius: 6000 },
+  { name: 'LaPlace/Reserve (St. John)',         lat: 30.0688, lng: -90.4793, radius: 6000 },
+  { name: 'Destrehan/Boutte (St. Charles)',     lat: 29.9452, lng: -90.3652, radius: 5000 },
+];
 
 // Business categories to sweep — these are Google Places "includedTypes"
 const ALL_CATEGORIES = [
@@ -98,64 +116,69 @@ function httpPost(url, body, headers = {}) {
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// ── Fetch one category ────────────────────────────────────────────────────────
+// ── Fetch one category across all zones ──────────────────────────────────────
 async function fetchCategory(type) {
   const results = [];
-  let pageToken = null;
-  let page = 0;
+  const seenIds = new Set();
 
-  do {
-    page++;
-    const body = {
-      includedTypes: [type],
-      maxResultCount: 20,
-      locationRestriction: {
-        circle: {
-          center: { latitude: NOLA_LAT, longitude: NOLA_LNG },
-          radius: RADIUS_M,
+  for (const zone of SEARCH_ZONES) {
+    let pageToken = null;
+
+    do {
+      const body = {
+        includedTypes: [type],
+        maxResultCount: 20,
+        locationRestriction: {
+          circle: {
+            center: { latitude: zone.lat, longitude: zone.lng },
+            radius: zone.radius,
+          },
         },
-      },
-    };
-    if (pageToken) body.pageToken = pageToken;
+      };
+      if (pageToken) body.pageToken = pageToken;
 
-    const res = await httpPost(
-      'https://places.googleapis.com/v1/places:searchNearby',
-      body
-    );
+      const res = await httpPost(
+        'https://places.googleapis.com/v1/places:searchNearby',
+        body
+      );
 
-    if (res.status !== 200) {
-      console.warn(`  ⚠ API error ${res.status} for ${type}: ${JSON.stringify(res.body).slice(0,200)}`);
-      break;
-    }
-
-    const places = res.body.places || [];
-    for (const p of places) {
-      // Filter: no website, business is operational
-      if (!p.websiteUri && p.businessStatus !== 'CLOSED_PERMANENTLY') {
-        results.push({
-          id:           p.id || '',
-          name:         p.displayName?.text || '',
-          address:      p.formattedAddress || '',
-          phone:        p.nationalPhoneNumber || '',
-          website:      '', // confirmed: none
-          rating:       p.rating || null,
-          reviewCount:  p.userRatingCount || 0,
-          types:        (p.types || []).join(', '),
-          category:     type,
-          mapsUrl:      p.googleMapsUri || '',
-          photoRef:     p.photos?.[0]?.name || '',
-          status:       p.businessStatus || 'OPERATIONAL',
-          scrapedAt:    new Date().toISOString(),
-        });
+      if (res.status !== 200) {
+        // Log quietly and move to next zone
+        process.stdout.write(`[${res.status}] `);
+        break;
       }
-    }
 
-    pageToken = res.body.nextPageToken || null;
+      const places = res.body.places || [];
+      for (const p of places) {
+        if (seenIds.has(p.id)) continue; // dedupe across zones
+        seenIds.add(p.id);
+        // Filter: no website, business is operational
+        if (!p.websiteUri && p.businessStatus !== 'CLOSED_PERMANENTLY') {
+          results.push({
+            id:          p.id || '',
+            name:        p.displayName?.text || '',
+            address:     p.formattedAddress || '',
+            phone:       p.nationalPhoneNumber || '',
+            website:     '',
+            rating:      p.rating || null,
+            reviewCount: p.userRatingCount || 0,
+            types:       (p.types || []).join(', '),
+            category:    type,
+            zone:        zone.name,
+            mapsUrl:     p.googleMapsUri || '',
+            photoRef:    p.photos?.[0]?.name || '',
+            status:      p.businessStatus || 'OPERATIONAL',
+            scrapedAt:   new Date().toISOString(),
+          });
+        }
+      }
 
-    // Rate limit: 1 req/sec
-    if (pageToken) await sleep(1200);
+      pageToken = res.body.nextPageToken || null;
+      if (pageToken) await sleep(1200); // rate limit
+    } while (pageToken && results.length < maxResults);
 
-  } while (pageToken && results.length < maxResults);
+    await sleep(200); // brief pause between zones
+  }
 
   return results;
 }
@@ -203,7 +226,7 @@ function toCSV(leads) {
 // ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
   console.log('\n🦞 InkThorn Crustacean — Lead Scraper');
-  console.log(`📍 Area: New Orleans Metro (${RADIUS_M/1000}km radius)`);
+  console.log(`📍 Coverage: ${SEARCH_ZONES.length} zones — NOLA + Metairie, Kenner, Gretna, Harvey, Chalmette, Slidell, Mandeville, Covington, LaPlace`);
   console.log(`📂 Categories: ${categoriesToRun.length} (${categoriesToRun.slice(0,4).join(', ')}${categoriesToRun.length > 4 ? '…' : ''})`);
   console.log(`🎯 Filter: No website · Operational businesses only\n`);
 
