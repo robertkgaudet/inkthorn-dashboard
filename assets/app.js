@@ -540,6 +540,21 @@ async function init() {
     return;
   }
 
+  // ── Inject external nav links (Blog, Crustacean) ──
+  const blogBtn = document.createElement('a');
+  blogBtn.href = '/blog';
+  blogBtn.className = 'nav-tab nav-tab-external';
+  blogBtn.textContent = '✍️ Blog';
+  blogBtn.title = 'Rob Gaudet\'s Blog';
+  navBar.appendChild(blogBtn);
+
+  const crustBtn = document.createElement('a');
+  crustBtn.href = '/crustacean';
+  crustBtn.className = 'nav-tab nav-tab-external';
+  crustBtn.textContent = '🦞 Crustacean';
+  crustBtn.title = 'InkThorn Crustacean Web Development';
+  navBar.appendChild(crustBtn);
+
   // Build tabs + panels
   const tabEls   = [];
   const panelEls = [];

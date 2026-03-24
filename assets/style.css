@@ -261,6 +261,19 @@ body {
     inset 0 0 12px rgba(0, 245, 255, 0.05);
 }
 
+/* External nav links (Blog, Crustacean) */
+a.nav-tab-external {
+  text-decoration: none;
+  border-color: rgba(255, 45, 135, 0.3);
+  color: rgba(255,45,135,0.8);
+  background: rgba(255, 45, 135, 0.05);
+}
+a.nav-tab-external:hover {
+  border-color: #ff2d87;
+  color: #ff2d87;
+  box-shadow: 0 0 10px rgba(255,45,135,0.3), inset 0 0 10px rgba(255,45,135,0.05);
+}
+
 /* ── Main Content ──────────────────────────────────────────── */
 .main-content {
   position: relative;
