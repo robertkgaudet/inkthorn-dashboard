@@ -84,39 +84,22 @@ const categoriesToRun = singleCategory
   : ALL_CATEGORIES.slice(0, 8); // Default: first 8 categories (safe free tier)
 
 // ── HTTP helper ───────────────────────────────────────────────────────────────
-function httpPost(url, body, headers = {}) {
+function httpGet(url) {
   return new Promise((resolve, reject) => {
-    const parsed = new URL(url);
-    const data = JSON.stringify(body);
-    const options = {
-      hostname: parsed.hostname,
-      path: parsed.pathname + parsed.search,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(data),
-        'X-Goog-Api-Key': API_KEY,
-        'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress,places.nationalPhoneNumber,places.websiteUri,places.rating,places.userRatingCount,places.businessStatus,places.types,places.googleMapsUri,places.currentOpeningHours,places.photos',
-        ...headers,
-      },
-    };
-    const req = https.request(options, res => {
+    https.get(url, res => {
       let buf = '';
       res.on('data', c => buf += c);
       res.on('end', () => {
         try { resolve({ status: res.statusCode, body: JSON.parse(buf) }); }
         catch (e) { reject(new Error('JSON parse error: ' + buf.slice(0, 200))); }
       });
-    });
-    req.on('error', reject);
-    req.write(data);
-    req.end();
+    }).on('error', reject);
   });
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// ── Fetch one category across all zones ──────────────────────────────────────
+// ── Fetch one category across all zones (old Places API) ─────────────────────
 async function fetchCategory(type) {
   const results = [];
   const seenIds = new Set();
@@ -125,62 +108,81 @@ async function fetchCategory(type) {
     let pageToken = null;
 
     do {
-      const body = {
-        includedTypes: [type],
-        maxResultCount: 20,
-        locationRestriction: {
-          circle: {
-            center: { latitude: zone.lat, longitude: zone.lng },
-            radius: zone.radius,
-          },
-        },
-      };
-      if (pageToken) body.pageToken = pageToken;
+      let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json`
+        + `?location=${zone.lat},${zone.lng}`
+        + `&radius=${zone.radius}`
+        + `&type=${encodeURIComponent(type)}`
+        + `&key=${API_KEY}`;
+      if (pageToken) url += `&pagetoken=${encodeURIComponent(pageToken)}`;
 
-      const res = await httpPost(
-        'https://places.googleapis.com/v1/places:searchNearby',
-        body
-      );
+      const res = await httpGet(url);
 
-      if (res.status !== 200) {
-        // Log quietly and move to next zone
-        process.stdout.write(`[${res.status}] `);
+      if (res.status !== 200 || res.body.status === 'REQUEST_DENIED' || res.body.status === 'INVALID_REQUEST') {
+        process.stdout.write(`[${res.body.status||res.status}] `);
         break;
       }
 
-      const places = res.body.places || [];
+      // ZERO_RESULTS is fine — just no results in this zone for this type
+      if (res.body.status === 'ZERO_RESULTS') break;
+
+      const places = res.body.results || [];
       for (const p of places) {
-        if (seenIds.has(p.id)) continue; // dedupe across zones
-        seenIds.add(p.id);
-        // Filter: no website, business is operational
-        if (!p.websiteUri && p.businessStatus !== 'CLOSED_PERMANENTLY') {
+        if (seenIds.has(p.place_id)) continue;
+        seenIds.add(p.place_id);
+
+        // Skip permanently closed
+        if (p.business_status === 'CLOSED_PERMANENTLY') continue;
+
+        // Key filter: no website field in basic response
+        // We'll do a detail lookup only for promising leads (rated businesses)
+        // to keep API costs low — unrated/low-review places get skipped
+        if (!p.website) {
           results.push({
-            id:          p.id || '',
-            name:        p.displayName?.text || '',
-            address:     p.formattedAddress || '',
-            phone:       p.nationalPhoneNumber || '',
+            id:          p.place_id || '',
+            name:        p.name || '',
+            address:     p.vicinity || '',
+            phone:       '', // populated in detail pass
             website:     '',
             rating:      p.rating || null,
-            reviewCount: p.userRatingCount || 0,
+            reviewCount: p.user_ratings_total || 0,
             types:       (p.types || []).join(', '),
             category:    type,
             zone:        zone.name,
-            mapsUrl:     p.googleMapsUri || '',
-            photoRef:    p.photos?.[0]?.name || '',
-            status:      p.businessStatus || 'OPERATIONAL',
+            mapsUrl:     `https://www.google.com/maps/place/?q=place_id:${p.place_id}`,
+            photoRef:    p.photos?.[0]?.photo_reference || '',
+            status:      p.business_status || 'OPERATIONAL',
             scrapedAt:   new Date().toISOString(),
           });
         }
       }
 
-      pageToken = res.body.nextPageToken || null;
-      if (pageToken) await sleep(1200); // rate limit
+      pageToken = res.body.next_page_token || null;
+      if (pageToken) await sleep(2000); // Google requires ~2s before next_page_token is valid
     } while (pageToken && results.length < maxResults);
 
-    await sleep(200); // brief pause between zones
+    await sleep(150);
   }
 
   return results;
+}
+
+// ── Enrich a lead with phone via Place Details ────────────────────────────────
+async function enrichLeadPhone(lead) {
+  const url = `https://maps.googleapis.com/maps/api/place/details/json`
+    + `?place_id=${lead.id}`
+    + `&fields=formatted_phone_number,website,formatted_address`
+    + `&key=${API_KEY}`;
+  try {
+    const res = await httpGet(url);
+    if (res.body.status === 'OK') {
+      const r = res.body.result;
+      // If they actually have a website in details, remove from leads
+      if (r.website) return null;
+      lead.phone   = r.formatted_phone_number || '';
+      lead.address = r.formatted_address || lead.address;
+    }
+  } catch {}
+  return lead;
 }
 
 // ── Generate outreach copy ────────────────────────────────────────────────────
@@ -256,6 +258,23 @@ async function main() {
       console.log(`❌ Error: ${e.message}`);
     }
     await sleep(300);
+  }
+
+  // ── Enrich with phone numbers via Place Details ──
+  if (allLeads.length > 0) {
+    console.log(`\n📞 Enriching ${allLeads.length} leads with phone numbers (Detail API)...`);
+    const enriched = [];
+    for (let i = 0; i < allLeads.length; i++) {
+      const lead = allLeads[i];
+      process.stdout.write(`\r   ${i+1}/${allLeads.length} — ${lead.name.slice(0,40).padEnd(40)}`);
+      const result = await enrichLeadPhone(lead);
+      if (result) enriched.push(result); // null = actually has website, discard
+      await sleep(100);
+    }
+    console.log(`\n   ✅ ${enriched.length} confirmed no-website leads after detail check`);
+    // Replace allLeads with enriched
+    allLeads.length = 0;
+    allLeads.push(...enriched);
   }
 
   console.log(`\n✅ Scan complete`);
