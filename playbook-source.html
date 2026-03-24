@@ -669,6 +669,12 @@
     .script-filter-btn:hover { border-color: #a855f7; color: #a855f7; }
     .script-filter-btn.active { border-color: #00f5ff; color: #00f5ff; background: rgba(0,245,255,0.08); }
 
+    /* ── Leads Table ── */
+    #leads-table { font-family: 'Space Grotesk', sans-serif; }
+    #leads-table tbody tr:hover { background: rgba(74,222,128,0.07) !important; }
+    #leads-search:focus { border-color: #00f5ff; box-shadow: 0 0 0 2px rgba(0,245,255,0.12); }
+    #leads-cat-filter:focus { border-color: #4ade80; }
+
     /* ── Responsive ── */
     @media (max-width: 640px) {
       .pb-stats {
@@ -731,6 +737,7 @@
       <button class="pb-tab" data-panel="schedule">⚙️ Schedule</button>
       <button class="pb-tab" data-panel="meals">🍽️ Meal Plan</button>
       <button class="pb-tab" data-panel="scripts">🎬 Daily Scripts</button>
+      <button class="pb-tab" data-panel="leads">🦞 Crustacean Leads</button>
       <button class="pb-tab" data-panel="social">📣 Social Media Marketing</button>
     </nav>
 
@@ -842,6 +849,52 @@
       </div><!-- /#tp-modal -->
 
     </div><!-- /#panel-scripts -->
+
+    <!-- Crustacean Leads Panel -->
+    <div class="pb-panel" id="panel-leads">
+
+      <!-- Header + controls -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+        <div>
+          <div class="pb-section-header" style="color:#4ade80;text-shadow:0 0 10px rgba(74,222,128,0.6);margin-bottom:4px;border:none;">
+            🦞 Demo Sites — New Orleans Leads
+          </div>
+          <div style="font-size:0.8rem;color:#7878a8;font-family:monospace;" id="leads-count-label">Loading…</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <!-- Category filter -->
+          <select id="leads-cat-filter" style="font-family:'Space Grotesk',sans-serif;font-size:0.8rem;font-weight:600;padding:6px 12px;border-radius:8px;border:1px solid rgba(74,222,128,0.4);background:rgba(22,12,45,0.9);color:#4ade80;cursor:pointer;outline:none;">
+            <option value="">All Categories</option>
+          </select>
+          <!-- Search -->
+          <input id="leads-search" type="text" placeholder="Search businesses…" style="font-family:'Space Grotesk',sans-serif;font-size:0.85rem;padding:6px 14px;border-radius:8px;border:1px solid rgba(0,245,255,0.3);background:rgba(22,12,45,0.9);color:#f0f0ff;outline:none;width:200px;" />
+          <!-- Download CSV -->
+          <a href="data/leads.csv" download style="font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.1em;padding:7px 16px;border-radius:999px;border:1px solid rgba(74,222,128,0.4);background:rgba(74,222,128,0.08);color:#4ade80;text-decoration:none;white-space:nowrap;">⬇ CSV</a>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div style="overflow-x:auto;">
+        <table id="leads-table" style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+          <thead>
+            <tr style="background:rgba(74,222,128,0.08);border-bottom:2px solid rgba(74,222,128,0.3);">
+              <th style="text-align:left;padding:10px 14px;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.15em;color:#4ade80;white-space:nowrap;">#</th>
+              <th style="text-align:left;padding:10px 14px;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.15em;color:#4ade80;white-space:nowrap;">BUSINESS</th>
+              <th style="text-align:left;padding:10px 14px;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.15em;color:#4ade80;white-space:nowrap;">CATEGORY</th>
+              <th style="text-align:left;padding:10px 14px;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.15em;color:#4ade80;white-space:nowrap;">PHONE</th>
+              <th style="text-align:left;padding:10px 14px;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.15em;color:#4ade80;white-space:nowrap;">RATING</th>
+              <th style="text-align:left;padding:10px 14px;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.15em;color:#4ade80;white-space:nowrap;">DEMO SITE</th>
+            </tr>
+          </thead>
+          <tbody id="leads-tbody"></tbody>
+        </table>
+      </div>
+      <div id="leads-empty" style="display:none;text-align:center;padding:3rem;color:#7878a8;">
+        <div style="font-size:2rem;margin-bottom:8px;">🔍</div>
+        <p>No results match your search.</p>
+      </div>
+
+    </div><!-- /#panel-leads -->
 
     <!-- Social Media Marketing Panel -->
     <div class="pb-panel" id="panel-social">
@@ -1253,6 +1306,7 @@ For each brand below, tell me: which platforms have active accounts, which are p
       btn.classList.add('active');
       document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
       if (btn.dataset.panel === 'scripts' && !window._scriptsLoaded) loadScripts();
+      if (btn.dataset.panel === 'leads'   && !window._leadsLoaded)   loadLeads();
     });
 
     // ══════════════════════════════════════════════════════
@@ -1865,6 +1919,125 @@ For each brand below, tell me: which platforms have active accounts, which are p
       });
 
     })(); // end teleprompter IIFE
+
+    // ══════════════════════════════════════════════════════
+    // CRUSTACEAN LEADS ENGINE
+    // ══════════════════════════════════════════════════════
+    (function() {
+      let _allLeads = [];
+      let _filteredLeads = [];
+      let _catFilter = '';
+      let _searchQuery = '';
+
+      const CAT_COLORS = {
+        restaurant: '#ff2d87', cafe: '#fbbf24', bar: '#a855f7',
+        bakery: '#f0b840', meal_delivery: '#00f5ff',
+        hair_salon: '#ff2d87', beauty_salon: '#ff2d87',
+        barber_shop: '#4ade80', default: '#4ade80',
+      };
+      const CAT_LABELS = {
+        restaurant: 'Restaurant', cafe: 'Café', bar: 'Bar / Lounge',
+        bakery: 'Bakery', meal_delivery: 'Delivery',
+        hair_salon: 'Hair Salon', beauty_salon: 'Beauty Salon',
+        barber_shop: 'Barber Shop',
+      };
+
+      window.loadLeads = async function() {
+        window._leadsLoaded = true;
+        try {
+          // Load full leads data (has rating, address, etc.)
+          const data = await fetch('data/leads.json?_='+Date.now()).then(r=>r.json());
+          _allLeads = data.leads || [];
+
+          // Populate category dropdown
+          const cats = [...new Set(_allLeads.map(l=>l.category))].sort();
+          const sel = document.getElementById('leads-cat-filter');
+          cats.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c;
+            opt.textContent = CAT_LABELS[c] || c.replace(/_/g,' ').replace(/\b\w/g,x=>x.toUpperCase());
+            sel.appendChild(opt);
+          });
+
+          renderLeads();
+
+          // Wire filters
+          sel.addEventListener('change', () => { _catFilter = sel.value; renderLeads(); });
+          document.getElementById('leads-search').addEventListener('input', e => {
+            _searchQuery = e.target.value.toLowerCase();
+            renderLeads();
+          });
+        } catch(e) {
+          document.getElementById('leads-tbody').innerHTML =
+            `<tr><td colspan="6" style="padding:2rem;color:#ff2d87;text-align:center;">Failed to load leads: ${e.message}</td></tr>`;
+        }
+      };
+
+      function renderLeads() {
+        const q = _searchQuery;
+        _filteredLeads = _allLeads.filter(l => {
+          if (_catFilter && l.category !== _catFilter) return false;
+          if (q && !l.name.toLowerCase().includes(q) && !l.address.toLowerCase().includes(q) && !(l.phone||'').includes(q)) return false;
+          return true;
+        });
+
+        const label = document.getElementById('leads-count-label');
+        label.textContent = `${_filteredLeads.length.toLocaleString()} of ${_allLeads.length.toLocaleString()} leads · Click any row to open demo site`;
+
+        const tbody = document.getElementById('leads-tbody');
+        const empty = document.getElementById('leads-empty');
+
+        if (!_filteredLeads.length) {
+          tbody.innerHTML = '';
+          empty.style.display = 'block';
+          return;
+        }
+        empty.style.display = 'none';
+
+        const demoBase = 'https://inkthorn.ai/crustacean/demos/';
+
+        tbody.innerHTML = _filteredLeads.map((l, i) => {
+          const color = CAT_COLORS[l.category] || CAT_COLORS.default;
+          const catLabel = (CAT_LABELS[l.category] || l.category.replace(/_/g,' ')).replace(/\b\w/g,x=>x.toUpperCase());
+          const slug = slugifyLead(l.name);
+          const demoUrl = demoBase + slug + '/';
+          const stars = l.rating ? '★'.repeat(Math.floor(l.rating)) + (l.rating%1>=0.5?'½':'') : '—';
+          const rowStyle = 'border-bottom:1px solid rgba(168,85,247,0.12);transition:background 0.15s;cursor:pointer;';
+          return `<tr style="${rowStyle}" onclick="window.open('${escHtml(demoUrl)}','_blank')"
+                      onmouseover="this.style.background='rgba(74,222,128,0.07)'"
+                      onmouseout="this.style.background=''"
+                      title="Open demo site for ${escHtml(l.name)}">
+            <td style="padding:10px 14px;color:#7878a8;font-family:monospace;font-size:0.75rem;white-space:nowrap;">${i+1}</td>
+            <td style="padding:10px 14px;">
+              <div style="font-weight:700;color:#f0f0ff;font-size:0.9rem;">${escHtml(l.name)}</div>
+              <div style="font-size:0.72rem;color:#7878a8;margin-top:2px;">${escHtml(l.address.split(',').slice(0,2).join(','))}</div>
+            </td>
+            <td style="padding:10px 14px;">
+              <span style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.1em;padding:3px 10px;border-radius:999px;border:1px solid ${color}60;color:${color};background:${color}12;white-space:nowrap;">${escHtml(catLabel)}</span>
+            </td>
+            <td style="padding:10px 14px;font-family:monospace;font-size:0.8rem;color:#00f5ff;white-space:nowrap;">
+              ${l.phone ? `<a href="tel:${l.phone.replace(/\D/g,'')}" onclick="event.stopPropagation()" style="color:#00f5ff;text-decoration:none;" title="Call">${escHtml(l.phone)}</a>` : '<span style="color:#7878a8">—</span>'}
+            </td>
+            <td style="padding:10px 14px;white-space:nowrap;">
+              ${l.rating
+                ? `<span style="color:#fbbf24;font-size:0.85rem;">${stars}</span>
+                   <span style="color:#7878a8;font-size:0.72rem;margin-left:4px;">${l.rating} (${(l.reviewCount||0).toLocaleString()})</span>`
+                : '<span style="color:#7878a8">—</span>'}
+            </td>
+            <td style="padding:10px 14px;">
+              <a href="${escHtml(demoUrl)}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
+                 style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.08em;padding:5px 12px;border-radius:999px;border:1px solid rgba(74,222,128,0.4);background:rgba(74,222,128,0.08);color:#4ade80;text-decoration:none;white-space:nowrap;display:inline-block;">
+                VIEW SITE ↗
+              </a>
+            </td>
+          </tr>`;
+        }).join('');
+      }
+
+      function slugifyLead(str) {
+        return String(str).toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').trim();
+      }
+    })();
 
     // Category colors/icons for schedule
     const CAT_COLORS = { wellness: '#ff2d87', dashboard: '#00f5ff', reminder: '#fbbf24', default: '#a855f7' };
