@@ -11,9 +11,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
 
-  <!-- Stripe.js -->
-  <script src="https://js.stripe.com/v3/"></script>
-
   <style>
     /* ══════════════════════════════════════════
        RESET & BASE
@@ -1488,47 +1485,7 @@
         </div>
       </div>
 
-      <form id="checkout-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="first-name">First Name</label>
-            <input class="form-input" type="text" id="first-name" placeholder="Marcus" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="last-name">Last Name</label>
-            <input class="form-input" type="text" id="last-name" placeholder="Johnson" required />
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="business-name">Business Name</label>
-          <input class="form-input" type="text" id="business-name" placeholder="Your Business Name" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="email">Email Address</label>
-          <input class="form-input" type="email" id="email" placeholder="you@yourbusiness.com" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="phone">Phone Number</label>
-          <input class="form-input" type="tel" id="phone" placeholder="(504) 555-0100" />
-        </div>
-        <div class="modal-divider"></div>
-        <div class="form-group">
-          <label class="form-label">Card Details</label>
-          <div id="card-element"></div>
-          <div id="card-errors" role="alert"></div>
-        </div>
-        <button type="submit" class="btn btn-primary checkout-btn" id="submit-btn">
-          Start My Plan — <span id="btn-price">$79/mo</span>
-        </button>
-        <div class="secure-note">
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"/></svg>
-          Secured by Stripe · 256-bit SSL · 14-day money-back guarantee
-        </div>
-        <div class="modal-divider"></div>
-        <div class="modal-includes">
-          <strong>What happens next:</strong> After payment, we'll email you within 2 hours to confirm your business details and schedule your review call. Your site goes live within 48 hours.
-        </div>
-      </form>
+      <form id="checkout-form"></form>
 
       <!-- Success state -->
       <div id="checkout-success" style="display:none;text-align:center;padding:20px 0;">
@@ -1542,103 +1499,88 @@
 
   <script>
     // ══════════════════════════════════════════
-    // STRIPE INTEGRATION
-    // NOTE: Replace with your live Stripe publishable key
+    // STRIPE PAYMENT LINKS — fully hosted checkout, no backend needed
     // ══════════════════════════════════════════
-    const STRIPE_PK = 'pk_test_REPLACE_WITH_YOUR_STRIPE_KEY';
-
-    // Plan config — replace price IDs with your actual Stripe price IDs
-    const PLANS = {
+    const PAYMENT_LINKS = {
       starter: {
-        name: 'Presence',
-        tier: 'Starter Plan',
-        annual:  { amount: '$39', period: '/month', note: 'Billed $468/year', priceId: 'price_starter_annual' },
-        monthly: { amount: '$47', period: '/month', note: 'Billed monthly', priceId: 'price_starter_monthly' },
+        annual:  'https://buy.stripe.com/test_aFa9AMaxN0TjcYD4p38k801',
+        monthly: 'https://buy.stripe.com/test_7sY6oA7lBatT9Mr7Bf8k800',
       },
       pro: {
-        name: 'Growth',
-        tier: 'Professional Plan',
-        annual:  { amount: '$79', period: '/month', note: 'Billed $948/year', priceId: 'price_pro_annual' },
-        monthly: { amount: '$95', period: '/month', note: 'Billed monthly', priceId: 'price_pro_monthly' },
+        annual:  'https://buy.stripe.com/test_4gM7sE5dt6dDbUzf3H8k803',
+        monthly: 'https://buy.stripe.com/test_dRmbIU9tJ7hHbUzbRv8k802',
       },
       premium: {
-        name: 'Commerce',
-        tier: 'Premium Plan',
-        annual:  { amount: '$149', period: '/month', note: 'Billed $1,788/year', priceId: 'price_premium_annual' },
-        monthly: { amount: '$179', period: '/month', note: 'Billed monthly', priceId: 'price_premium_monthly' },
+        annual:  'https://buy.stripe.com/test_9B6aEQ5dtdG5aQvg7L8k805',
+        monthly: 'https://buy.stripe.com/test_cNicMYgWb6dDe2H2gV8k804',
       },
     };
 
-    let _billing = 'annual';
-    let _currentPlan = 'pro';
-    let _stripe, _cardElement;
+    const PLAN_META = {
+      starter: { name: 'Presence', tier: 'Starter Plan',
+        annual:  { display: '$39/mo', note: 'Billed $468/year · Save $96' },
+        monthly: { display: '$47/mo', note: 'Billed monthly · No commitment' } },
+      pro: { name: 'Growth', tier: 'Professional Plan',
+        annual:  { display: '$79/mo', note: 'Billed $948/year · Save $192' },
+        monthly: { display: '$95/mo', note: 'Billed monthly · No commitment' } },
+      premium: { name: 'Commerce', tier: 'Premium Plan',
+        annual:  { display: '$149/mo', note: 'Billed $1,788/year · Save $360' },
+        monthly: { display: '$179/mo', note: 'Billed monthly · No commitment' } },
+    };
 
-    // Init Stripe (deferred until modal opens to avoid console errors with placeholder key)
-    function initStripe() {
-      if (_stripe) return;
-      try {
-        _stripe = Stripe(STRIPE_PK);
-        const elements = _stripe.elements();
-        _cardElement = elements.create('card', {
-          style: {
-            base: {
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontSize: '15px',
-              color: '#111827',
-              '::placeholder': { color: '#9ca3af' },
-            },
-            invalid: { color: '#dc2626' },
-          },
-        });
-        _cardElement.mount('#card-element');
-        _cardElement.on('change', e => {
-          document.getElementById('card-errors').textContent = e.error ? e.error.message : '';
-        });
-      } catch(e) {
-        console.warn('Stripe not initialized — add your publishable key');
-      }
-    }
+    let _billing = 'annual';
 
     // Billing toggle
-    const toggleBtn = document.getElementById('billing-toggle');
-    toggleBtn.addEventListener('click', () => {
+    document.getElementById('billing-toggle').addEventListener('click', () => {
       _billing = _billing === 'annual' ? 'monthly' : 'annual';
-      toggleBtn.classList.toggle('monthly', _billing === 'monthly');
+      document.getElementById('billing-toggle').classList.toggle('monthly', _billing === 'monthly');
       document.getElementById('toggle-annual').classList.toggle('active', _billing === 'annual');
       document.getElementById('toggle-monthly').classList.toggle('active', _billing === 'monthly');
       updatePricingDisplay();
     });
 
     function updatePricingDisplay() {
-      const annual = _billing === 'annual';
-      // Starter
-      document.getElementById('price-starter').textContent = annual ? '39' : '47';
-      document.getElementById('note-starter').textContent = annual ? 'Billed $468/year · Save $96' : 'Billed monthly · No commitment';
-      // Pro
-      document.getElementById('price-pro').textContent = annual ? '79' : '95';
-      document.getElementById('note-pro').textContent = annual ? 'Billed $948/year · Save $192' : 'Billed monthly · No commitment';
-      // Premium
-      document.getElementById('price-premium').textContent = annual ? '149' : '179';
-      document.getElementById('note-premium').textContent = annual ? 'Billed $1,788/year · Save $360' : 'Billed monthly · No commitment';
+      const a = _billing === 'annual';
+      document.getElementById('price-starter').textContent = a ? '39' : '47';
+      document.getElementById('note-starter').textContent  = a ? 'Billed $468/year · Save $96'   : 'Billed monthly · No commitment';
+      document.getElementById('price-pro').textContent     = a ? '79' : '95';
+      document.getElementById('note-pro').textContent      = a ? 'Billed $948/year · Save $192'  : 'Billed monthly · No commitment';
+      document.getElementById('price-premium').textContent = a ? '149' : '179';
+      document.getElementById('note-premium').textContent  = a ? 'Billed $1,788/year · Save $360': 'Billed monthly · No commitment';
     }
 
-    // Checkout modal
+    // openCheckout → show a branded confirmation modal then redirect to Stripe
     function openCheckout(plan) {
-      _currentPlan = plan;
-      const p = PLANS[plan];
-      const b = p[_billing];
-      document.getElementById('modal-plan-badge').textContent = p.tier;
-      document.getElementById('modal-title').textContent = 'Get ' + p.name + ' — Live in 48hrs';
-      document.getElementById('modal-desc').textContent = 'Fill in your details and your site goes live within 48 hours.';
-      document.getElementById('modal-price-label').textContent = _billing === 'annual' ? 'Annual plan (best value)' : 'Monthly plan';
-      document.getElementById('modal-price-sub').textContent = b.note;
-      document.getElementById('modal-price-display').textContent = b.amount;
-      document.getElementById('modal-price-period').textContent = b.period;
-      document.getElementById('btn-price').textContent = b.amount + b.period;
-      document.getElementById('checkout-form').style.display = 'block';
-      document.getElementById('checkout-success').style.display = 'none';
+      const p    = PLAN_META[plan];
+      const b    = p[_billing];
+      const link = PAYMENT_LINKS[plan][_billing];
+
+      document.getElementById('modal-plan-badge').textContent   = p.tier;
+      document.getElementById('modal-title').textContent        = 'Get ' + p.name + ' — Live in 48 hrs';
+      document.getElementById('modal-desc').textContent         = 'You\'ll be taken to Stripe\'s secure checkout. No hidden fees, cancel any time.';
+      document.getElementById('modal-price-label').textContent  = _billing === 'annual' ? 'Annual plan (best value)' : 'Monthly plan';
+      document.getElementById('modal-price-sub').textContent    = b.note;
+      document.getElementById('modal-price-display').textContent= b.display.replace('/mo','');
+      document.getElementById('modal-price-period').textContent = '/month';
       document.getElementById('checkout-modal').classList.add('open');
-      setTimeout(initStripe, 100);
+
+      // Replace form with a single CTA button pointing to Stripe Payment Link
+      document.getElementById('checkout-form').innerHTML = `
+        <div style="text-align:center;padding:8px 0 24px;">
+          <p style="font-size:0.88rem;color:var(--gray-500);margin-bottom:28px;line-height:1.6;">
+            Stripe's secure checkout collects your card, name, email, phone, and business name.<br>
+            You'll be redirected back here when done.
+          </p>
+          <a href="${link}" target="_blank" rel="noopener"
+             class="btn btn-primary"
+             style="width:100%;display:block;padding:16px;font-size:1.05rem;border-radius:10px;text-decoration:none;">
+            Proceed to Secure Checkout →
+          </a>
+          <div class="secure-note" style="margin-top:14px;">
+            <svg width="13" height="13" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"/></svg>
+            Secured by Stripe · 256-bit SSL · 14-day money-back guarantee
+          </div>
+        </div>`;
     }
 
     function closeCheckout() {
@@ -1648,53 +1590,16 @@
       if (e.target === this) closeCheckout();
     });
 
-    // Form submit
-    document.getElementById('checkout-form').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = document.getElementById('submit-btn');
-      btn.disabled = true;
-      btn.textContent = 'Processing…';
-
-      if (!_stripe || !_cardElement) {
-        // Demo mode — no real Stripe key yet
+    // Success state — shown when redirected back with ?success=1
+    if (new URLSearchParams(window.location.search).get('success') === '1') {
+      document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('checkout-modal');
+        modal.classList.add('open');
         document.getElementById('checkout-form').style.display = 'none';
         document.getElementById('checkout-success').style.display = 'block';
-        return;
-      }
-
-      try {
-        const { paymentMethod, error } = await _stripe.createPaymentMethod({
-          type: 'card',
-          card: _cardElement,
-          billing_details: {
-            name: document.getElementById('first-name').value + ' ' + document.getElementById('last-name').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-          },
-        });
-
-        if (error) {
-          document.getElementById('card-errors').textContent = error.message;
-          btn.disabled = false;
-          btn.innerHTML = 'Start My Plan — <span id="btn-price">' + PLANS[_currentPlan][_billing].amount + PLANS[_currentPlan][_billing].period + '</span>';
-          return;
-        }
-
-        // Send paymentMethod.id + plan + billing + customer info to your backend
-        // For now, show success (wire up backend endpoint separately)
-        console.log('Payment method created:', paymentMethod.id);
-        console.log('Plan:', _currentPlan, '| Billing:', _billing);
-        console.log('Customer:', document.getElementById('email').value);
-
-        document.getElementById('checkout-form').style.display = 'none';
-        document.getElementById('checkout-success').style.display = 'block';
-
-      } catch(err) {
-        document.getElementById('card-errors').textContent = 'Something went wrong. Please try again.';
-        btn.disabled = false;
-        btn.innerHTML = 'Start My Plan — <span id="btn-price">' + PLANS[_currentPlan][_billing].amount + PLANS[_currentPlan][_billing].period + '</span>';
-      }
-    });
+        document.querySelector('.modal-close').style.display = 'block';
+      });
+    }
 
     // Nav smooth scroll helpers
     function scrollToPricing(e) { e.preventDefault(); document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' }); }
