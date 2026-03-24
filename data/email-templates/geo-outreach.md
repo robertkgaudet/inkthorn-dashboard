@@ -22,7 +22,7 @@ We built a GEO-optimized website for {{business_name}} — already live at a pre
 
 It takes 2 minutes to look at. If you like it, you can have it live today for $39/mo.
 
-If you have questions, you can also [book a free 15-minute call with us](YOUR_CALENDLY_URL).
+If you have questions, you can also [book a free 15-minute call with us](https://calendly.com/inkthorn).
 
 — Rob Gaudet
 InkThorn Crustacean | New Orleans Web Development
@@ -55,7 +55,7 @@ We already built a GEO-ready site for {{business_name}}. It includes:
 
 **[Get Your GEO-Ready Site →](https://inkthorn.ai/crustacean)**
 
-Or, if you'd rather talk first: **[Book a free 15-min call →](YOUR_CALENDLY_URL)**
+Or, if you'd rather talk first: **[Book a free 15-min call →](https://calendly.com/inkthorn)**
 
 No contracts. 14-day money-back guarantee.
 
@@ -84,7 +84,7 @@ Your preview is ready. Takes 2 minutes to see.
 
 Plans start at $39/mo. Cancel anytime.
 
-If you'd rather talk to a human first: [Book a free call →](YOUR_CALENDLY_URL)
+If you'd rather talk to a human first: [Book a free call →](https://calendly.com/inkthorn)
 
 — Rob Gaudet
 InkThorn | New Orleans, Louisiana
@@ -102,5 +102,5 @@ InkThorn | New Orleans, Louisiana
 - Send time: Tuesday–Thursday, 9–11am CDT (best open rates for B2B)
 
 ## Calendly Placeholder
-Replace `YOUR_CALENDLY_URL` in all emails and on the website with your actual Calendly link.
+Replace `https://calendly.com/inkthorn` in all emails and on the website with your actual Calendly link.
 Suggested event type: "Free 15-Minute Website Chat" — 15 min, no buffer needed.
