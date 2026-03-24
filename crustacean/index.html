@@ -1833,6 +1833,93 @@
         if (!wasOpen) item.classList.add('open');
       });
     });
+
+    // ══════════════════════════════════════════
+    // PERSONALIZED CLAIM MODE
+    // Activated when URL contains ?claim=business-slug
+    // Optional: &cat=restaurant|beauty_salon|bar|bakery|hair_salon|cafe
+    // ══════════════════════════════════════════
+    (function() {
+      const params   = new URLSearchParams(window.location.search);
+      const claimRaw = params.get('claim');
+      const cat      = params.get('cat') || 'business';
+      if (!claimRaw) return;
+
+      // Decode slug → display name ("mothers-restaurant" → "Mother's Restaurant")
+      function slugToName(slug) {
+        return slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      }
+      const bizName = slugToName(claimRaw);
+
+      // Category → friendly label
+      const catLabels = {
+        restaurant: 'restaurant', bar: 'bar', bakery: 'bakery',
+        beauty_salon: 'beauty salon', hair_salon: 'hair salon', cafe: 'café',
+        meal_delivery: 'restaurant'
+      };
+      const catLabel = catLabels[cat] || cat.replace(/_/g, ' ');
+
+      // ── Inject claim banner at very top ──
+      const banner = document.createElement('div');
+      banner.id = 'claim-banner';
+      banner.innerHTML = `
+        <div style="background:linear-gradient(90deg,#c9922a,#f0b840);color:#0f1f3d;padding:14px 24px;text-align:center;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:700;position:relative;z-index:200;">
+          🦞 Your website for <strong>${bizName}</strong> is built and ready to claim — scroll down to get it live today.
+          <a href="#pricing" onclick="scrollToPricing(event)" style="margin-left:16px;background:#0f1f3d;color:white;padding:6px 18px;border-radius:999px;font-size:0.82rem;text-decoration:none;white-space:nowrap;">Claim It Now →</a>
+        </div>`;
+      document.body.prepend(banner);
+
+      // ── Rewrite hero ──
+      const h1 = document.querySelector('.hero h1');
+      if (h1) h1.innerHTML = `Your <span>${bizName}</span> Website Is Built.<br>Claim It Before Someone Else Does.`;
+
+      const sub = document.querySelector('.hero-sub');
+      if (sub) sub.innerHTML = `We already built a GEO-optimized website for <strong>${bizName}</strong> using your Google listing. It's ready to go live — all you have to do is claim it. ChatGPT, Claude, and your next 100 customers will finally be able to find you.`;
+
+      const speech = document.querySelector('.hero-mascot-speech');
+      if (speech) speech.innerHTML = `"${bizName} — ChatGPT doesn't know you yet. This fixes that."<em>— The Crustacean, Chief GEO Officer</em>`;
+
+      // ── Swap primary CTA ──
+      const primaryCta = document.querySelector('.hero-actions .btn-primary');
+      if (primaryCta) {
+        primaryCta.textContent = `Claim ${bizName}'s Site →`;
+      }
+
+      // ── Update nav CTA ──
+      const navCta = document.querySelector('.nav-cta');
+      if (navCta) navCta.textContent = `Claim My Site →`;
+
+      // ── Pre-fill checkout modal with biz name ──
+      window._claimBizName = bizName;
+      const origOpen = window.openCheckout;
+      window.openCheckout = function(plan) {
+        origOpen(plan);
+        // Pre-fill if there's a biz name field in the form (future-proofing)
+        setTimeout(() => {
+          const bizField = document.getElementById('field-biz');
+          if (bizField) bizField.value = bizName;
+        }, 100);
+      };
+
+      // ── Proof bar: swap generic stat for personalized ──
+      const statNums = document.querySelectorAll('.proof-stat-num');
+      const statLabels = document.querySelectorAll('.proof-stat-label');
+      if (statNums[3]) { statNums[3].textContent = 'Ready'; statLabels[3].textContent = `${bizName} — Claim Now`; }
+
+      // ── Badge ──
+      const badge = document.querySelector('.hero-badge');
+      if (badge) badge.innerHTML = `<svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/></svg> Built for ${bizName} · New Orleans ${catLabel}`;
+
+      // ── Add urgency note near pricing ──
+      const pricingHeader = document.querySelector('#pricing .section-header');
+      if (pricingHeader) {
+        const urgency = document.createElement('div');
+        urgency.style = 'text-align:center;margin-bottom:24px;';
+        urgency.innerHTML = `<span style="background:#fef3c7;border:1px solid #f59e0b;color:#92400e;padding:8px 20px;border-radius:999px;font-size:0.85rem;font-weight:600;">⚡ Your ${bizName} site is pre-built — pick a plan and go live in 48 hours</span>`;
+        pricingHeader.after(urgency);
+      }
+
+    })();
   </script>
 
 </body>
