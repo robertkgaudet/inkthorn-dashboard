@@ -68,6 +68,231 @@ function formatTimestamp(isoString) {
 // ── Renderers ──────────────────────────────────────────────────
 
 /**
+ * renderNolaEvents — unified music + comedy view with category filter tabs.
+ * Fetches both live-music.json (WWOZ) and comedy.json (504Comedy) in parallel.
+ */
+async function renderNolaEvents(data, el) {
+  // data is already live-music.json; we need to fetch comedy separately
+  let comedyData = null;
+  try {
+    comedyData = await fetch('data/comedy.json?_=' + Date.now()).then(r => r.json());
+  } catch (e) { /* comedy optional */ }
+
+  // Build unified event list
+  const allEvents = [];
+
+  // Music — today only from WWOZ
+  const musicShows = (data.shows || []).slice().sort((a, b) => {
+    const norm = t => (t < 600 ? t + 2400 : t);
+    return norm(a.time_sort) - norm(b.time_sort);
+  });
+  for (const s of musicShows) {
+    allEvents.push({
+      category:  'music',
+      day:       'Today',
+      date:      new Date().toISOString().slice(0, 10),
+      time:      s.time || 'TBD',
+      time_sort: s.time_sort || 0,
+      title:     s.artist || '',
+      url:       s.url    || '',
+      venue:     s.venue  || '',
+      subtype:   s.genre  || '',
+      neighborhood: s.neighborhood || '',
+      cost:      '',
+      repeat:    '',
+    });
+  }
+
+  // Comedy — full week from 504Comedy
+  if (comedyData && comedyData.shows) {
+    for (const s of comedyData.shows) {
+      allEvents.push({
+        category:  'comedy',
+        day:       s.day  || s.date || 'Unknown',
+        date:      s.date || '',
+        time:      s.time || 'TBD',
+        time_sort: s.time_sort || 0,
+        title:     s.title || '',
+        url:       s.url   || '',
+        venue:     s.venue || '',
+        subtype:   s.type  || 'Comedy',
+        neighborhood: '',
+        cost:      s.cost   || '',
+        repeat:    s.repeat || '',
+      });
+    }
+  }
+
+  if (!allEvents.length) {
+    el.innerHTML = pendingCard('No event data found.', '🎭');
+    return;
+  }
+
+  // ── Filter state ──
+  let activeFilter = 'all';
+
+  // ── Render function ──
+  function renderFiltered() {
+    const filtered = activeFilter === 'all'
+      ? allEvents
+      : allEvents.filter(e => e.category === activeFilter);
+
+    // Group by day
+    const dayMap = new Map();
+    for (const ev of filtered) {
+      const key = ev.day + '||' + ev.date;
+      if (!dayMap.has(key)) dayMap.set(key, { label: ev.day, date: ev.date, events: [] });
+      dayMap.get(key).events.push(ev);
+    }
+
+    // Sort each day's events
+    for (const g of dayMap.values()) {
+      g.events.sort((a, b) => {
+        const norm = t => (t < 600 ? t + 2400 : t);
+        return norm(a.time_sort) - norm(b.time_sort);
+      });
+    }
+
+    // NOW marker logic for music (today only)
+    const now = new Date();
+    const nowSort = now.getHours() * 100 + now.getMinutes();
+    const normNow = nowSort < 600 ? nowSort + 2400 : nowSort;
+    let nowMarkerInserted = false;
+
+    // Stats
+    const totalMusic  = allEvents.filter(e => e.category === 'music').length;
+    const totalComedy = allEvents.filter(e => e.category === 'comedy').length;
+    const musicLeft   = musicShows.filter(s => {
+      const norm = s.time_sort < 600 ? s.time_sort + 2400 : s.time_sort;
+      return norm >= normNow;
+    }).length;
+    const nextMusic = musicShows.find(s => {
+      const norm = s.time_sort < 600 ? s.time_sort + 2400 : s.time_sort;
+      return norm >= normNow;
+    });
+    const todayComedy = allEvents.filter(e => e.category === 'comedy' && e.day === 'Today').length;
+
+    const statsHtml = `
+      <div class="stats-row-wrapper"><div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-value">${totalMusic}</div>
+          <div class="stat-label">Music Shows</div>
+        </div>
+        <div class="stat-card stat-card-highlight">
+          <div class="stat-value stat-value-sm">${nextMusic ? escHtml(nextMusic.artist) : 'All done'}</div>
+          <div class="stat-label">${nextMusic ? '▶ Up Next · ' + escHtml(nextMusic.time) : 'No more music'}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${musicLeft}</div>
+          <div class="stat-label">Music Remaining</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${totalComedy}</div>
+          <div class="stat-label">Comedy This Week</div>
+        </div>
+      </div></div>`;
+
+    // Filter bar
+    const filters = [
+      { key: 'all',    label: 'All Events',  color: '#00f5ff', bg: 'rgba(0,245,255,0.12)',   border: 'rgba(0,245,255,0.4)' },
+      { key: 'music',  label: '🎵 Music',    color: '#a855f7', bg: 'rgba(168,85,247,0.12)', border: 'rgba(168,85,247,0.4)' },
+      { key: 'comedy', label: '🎤 Comedy',   color: '#ff2d87', bg: 'rgba(255,45,135,0.12)', border: 'rgba(255,45,135,0.4)' },
+    ];
+    const filterBarHtml = `
+      <div class="events-filter-bar" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;align-items:center;">
+        ${filters.map(f => {
+          const isActive = f.key === activeFilter;
+          return `<button
+            class="ev-cat-btn"
+            data-cat="${f.key}"
+            style="font-family:'Space Grotesk',sans-serif;font-size:0.78rem;font-weight:600;padding:6px 16px;border-radius:999px;border:1px solid ${isActive ? f.border : f.border.replace('0.4','0.25')};background:${isActive ? f.bg : 'transparent'};color:${f.color};cursor:pointer;transition:all 0.2s;"
+          >${f.label}</button>`;
+        }).join('')}
+        <span style="margin-left:auto;font-family:'Space Grotesk',sans-serif;font-size:0.7rem;color:#4a4a6a;">${filtered.length} events</span>
+      </div>`;
+
+    // Day groups
+    let groupsHtml = '';
+    for (const [, group] of dayMap) {
+      const isToday = group.label === 'Today';
+      groupsHtml += `<div class="time-group">`;
+      groupsHtml += `<h3 class="time-group-header">${escHtml(group.label)}${group.date && group.date !== group.label ? `<span class="time-group-count" style="color:#4a4a6a;font-weight:400;">${escHtml(group.date)}</span>` : `<span class="time-group-count">${group.events.length} event${group.events.length !== 1 ? 's' : ''}</span>`}</h3>`;
+
+      for (const ev of group.events) {
+        const isMusic  = ev.category === 'music';
+        const catColor  = isMusic ? '#a855f7' : '#ff2d87';
+        const catBorder = isMusic ? 'rgba(168,85,247,0.2)' : 'rgba(255,45,135,0.2)';
+        const catBg     = isMusic ? 'rgba(168,85,247,0.05)' : 'rgba(255,45,135,0.05)';
+        const catIcon   = isMusic ? '🎵' : '🎤';
+
+        // NOW marker for music
+        let nowMarker = '';
+        if (isToday && isMusic && !nowMarkerInserted) {
+          const norm = ev.time_sort < 600 ? ev.time_sort + 2400 : ev.time_sort;
+          if (norm >= normNow) {
+            nowMarker = `<div id="now-marker" class="now-marker"><span class="now-marker-line"></span><span class="now-marker-label">▶ NOW</span><span class="now-marker-line"></span></div>`;
+            nowMarkerInserted = true;
+          }
+        }
+
+        const titleHtml = ev.url
+          ? `<a href="${escHtml(ev.url)}" target="_blank" rel="noopener" class="show-artist-link" style="color:#e2e2f0;">${escHtml(ev.title)}</a>`
+          : escHtml(ev.title);
+
+        const meta = [];
+        if (ev.venue)       meta.push(`📍 ${escHtml(ev.venue)}`);
+        if (ev.neighborhood) meta.push(`<span style="color:#4a4a6a;">· ${escHtml(ev.neighborhood)}</span>`);
+        if (ev.subtype)     meta.push(`<span class="genre-badge ${isMusic ? (GENRE_CLASS_MAP[ev.subtype] || 'genre-other') : ''}" style="${isMusic ? '' : 'background:rgba(255,45,135,0.12);color:#ff2d87;border-color:rgba(255,45,135,0.3);'}">${escHtml(ev.subtype)}</span>`);
+        if (ev.repeat && !isMusic) meta.push(`<span style="color:#3a3a5a;font-style:italic;font-size:0.7rem;">${escHtml(ev.repeat)}</span>`);
+
+        const costBadge = ev.cost
+          ? `<span style="font-size:0.75rem;font-weight:700;color:${ev.cost === 'FREE' ? '#4ade80' : '#fbbf24'};white-space:nowrap;">${escHtml(ev.cost)}</span>`
+          : '';
+
+        groupsHtml += `${nowMarker}
+          <div class="card" style="border-color:${catBorder};background:${catBg};">
+            <div class="show-card">
+              <div class="show-time" style="color:${catColor};">${escHtml(ev.time)}</div>
+              <div class="show-artist">${titleHtml}</div>
+              <div class="show-genre" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">${meta.join(' ')}</div>
+              <div class="show-venue-block" style="display:flex;align-items:center;gap:8px;">
+                <span style="font-size:0.6rem;padding:2px 8px;border-radius:999px;border:1px solid ${catBorder};color:${catColor};font-family:'Orbitron',sans-serif;letter-spacing:0.08em;">${catIcon}</span>
+                ${costBadge}
+              </div>
+            </div>
+          </div>`;
+      }
+
+      groupsHtml += `</div>`;
+    }
+
+    contentEl.innerHTML = statsHtml + filterBarHtml + groupsHtml;
+
+    // Wire filter buttons
+    contentEl.querySelectorAll('.ev-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeFilter = btn.dataset.cat;
+        renderFiltered();
+        // Smooth scroll back to top of panel
+        el.closest('.panel-content') && el.closest('.panel-content').scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // NOW marker scroll
+    setTimeout(() => {
+      const marker = document.getElementById('now-marker');
+      if (marker) marker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 400);
+  }
+
+  // Wrapper div so we can re-render inside it
+  const contentEl = document.createElement('div');
+  el.innerHTML = '';
+  el.appendChild(contentEl);
+  renderFiltered();
+}
+
+/**
  * renderLiveMusic — groups shows into Afternoon / Evening / Night buckets,
  * renders each as a section with time-sorted show cards.
  */
@@ -453,10 +678,11 @@ function pendingCard(message, icon = '⏳') {
 // ── Renderer Dispatch ──────────────────────────────────────────
 
 const RENDERERS = {
-  'live-music': renderLiveMusic,
-  'weather':    renderWeather,
-  'playbook':   renderPlaybook,
-  'schedule':   renderSchedule,
+  'nola-events': renderNolaEvents,
+  'live-music':  renderLiveMusic,
+  'weather':     renderWeather,
+  'playbook':    renderPlaybook,
+  'schedule':    renderSchedule,
 };
 
 function getRenderer(type) {

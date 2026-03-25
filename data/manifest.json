@@ -5,11 +5,11 @@
   "panels": [
     {
       "id": "live-music",
-      "label": "🎵 Live Music",
+      "label": "🎭 NOLA Events",
       "agent": "Rob-Agent",
-      "type": "live-music",
+      "type": "nola-events",
       "data": "data/live-music.json",
-      "description": "Tonight's live music in New Orleans via WWOZ"
+      "description": "Live music (WWOZ) + comedy (504Comedy) in New Orleans"
     },
     {
       "id": "weather",
