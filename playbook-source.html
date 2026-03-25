@@ -738,6 +738,7 @@
       <button class="pb-tab" data-panel="meals">🍽️ Meal Plan</button>
       <button class="pb-tab" data-panel="scripts">🎬 Daily Scripts</button>
       <button class="pb-tab" data-panel="leads">🦞 Crustacean Leads</button>
+      <button class="pb-tab" data-panel="events">🎭 NOLA Events</button>
       <button class="pb-tab" data-panel="social">📣 Social Media Marketing</button>
     </nav>
 
@@ -895,6 +896,26 @@
       </div>
 
     </div><!-- /#panel-leads -->
+
+    <!-- Events Panel -->
+    <div class="pb-panel" id="panel-events">
+
+      <!-- Filter Bar -->
+      <div id="events-filter-bar" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;align-items:center;">
+        <span style="font-family:'Orbitron',sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:#7878a8;white-space:nowrap">CATEGORY:</span>
+        <div id="events-category-filters" style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="ev-filter-btn active" data-cat="all"    style="font-family:'Space Grotesk',sans-serif;font-size:0.75rem;font-weight:600;padding:5px 14px;border-radius:999px;border:1px solid rgba(0,245,255,0.4);background:rgba(0,245,255,0.12);color:#00f5ff;cursor:pointer;transition:all 0.2s;">All</button>
+          <button class="ev-filter-btn"        data-cat="music"  style="font-family:'Space Grotesk',sans-serif;font-size:0.75rem;font-weight:600;padding:5px 14px;border-radius:999px;border:1px solid rgba(168,85,247,0.3);background:transparent;color:#a855f7;cursor:pointer;transition:all 0.2s;">🎵 Music</button>
+          <button class="ev-filter-btn"        data-cat="comedy" style="font-family:'Space Grotesk',sans-serif;font-size:0.75rem;font-weight:600;padding:5px 14px;border-radius:999px;border:1px solid rgba(255,45,135,0.3);background:transparent;color:#ff2d87;cursor:pointer;transition:all 0.2s;">🎤 Comedy</button>
+        </div>
+        <div style="flex:1;"></div>
+        <span id="events-updated" style="font-family:'Space Grotesk',sans-serif;font-size:0.7rem;color:#4a4a6a;"></span>
+      </div>
+
+      <!-- Events Content -->
+      <div id="events-content"><div class="pb-empty"><div class="pb-empty-icon">⏳</div><p>Loading…</p></div></div>
+
+    </div><!-- /#panel-events -->
 
     <!-- Social Media Marketing Panel -->
     <div class="pb-panel" id="panel-social">
@@ -1307,6 +1328,7 @@ For each brand below, tell me: which platforms have active accounts, which are p
       document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
       if (btn.dataset.panel === 'scripts' && !window._scriptsLoaded) loadScripts();
       if (btn.dataset.panel === 'leads'   && !window._leadsLoaded)   loadLeads();
+      if (btn.dataset.panel === 'events'  && !window._eventsLoaded)  loadEvents();
     });
 
     // ══════════════════════════════════════════════════════
@@ -2257,6 +2279,194 @@ For each brand below, tell me: which platforms have active accounts, which are p
           '<div class="pb-empty"><div class="pb-empty-icon">⚠️</div><p>Failed to load: '+err.message+'</p></div>';
       }
     })();
+
+    // ══════════════════════════════════════════════════════
+    // EVENTS ENGINE (Music + Comedy)
+    // ══════════════════════════════════════════════════════
+
+    let _allEvents = [];
+    let _eventsFilter = 'all';
+
+    function escEvt(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function renderEvents() {
+      const container = document.getElementById('events-content');
+      const filtered = _eventsFilter === 'all'
+        ? _allEvents
+        : _allEvents.filter(e => e.category === _eventsFilter);
+
+      if (!filtered.length) {
+        container.innerHTML = '<div class="pb-empty"><div class="pb-empty-icon">🎭</div><p>No events found for this filter.</p></div>';
+        return;
+      }
+
+      // Group by day/date label
+      const dayMap = new Map();
+      for (const ev of filtered) {
+        const key = (ev.day || ev.date || 'Unknown');
+        if (!dayMap.has(key)) dayMap.set(key, { label: key, date: ev.date, events: [] });
+        dayMap.get(key).events.push(ev);
+      }
+
+      let html = '';
+      for (const [, group] of dayMap) {
+        html += `<div style="margin-bottom:28px;">`;
+        html += `<div style="font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.2em;color:#a855f7;text-transform:uppercase;padding:8px 0;border-bottom:1px solid rgba(168,85,247,0.2);margin-bottom:12px;">`;
+        html += escEvt(group.label);
+        if (group.date && group.date !== group.label) html += ` <span style="color:#4a4a6a;font-size:0.6rem;">${escEvt(group.date)}</span>`;
+        html += `</div>`;
+        html += `<div style="display:grid;gap:8px;">`;
+
+        for (const ev of group.events) {
+          const isMusic   = ev.category === 'music';
+          const isComedy  = ev.category === 'comedy';
+          const catColor  = isMusic ? '#a855f7' : '#ff2d87';
+          const catBg     = isMusic ? 'rgba(168,85,247,0.08)' : 'rgba(255,45,135,0.08)';
+          const catBorder = isMusic ? 'rgba(168,85,247,0.2)' : 'rgba(255,45,135,0.2)';
+          const catLabel  = isMusic ? '🎵 Music' : '🎤 Comedy';
+          const catIcon   = isMusic ? '🎵' : '🎤';
+
+          const title    = ev.title || ev.artist || 'Unknown';
+          const venue    = ev.venue || '';
+          const time     = ev.time || '';
+          const subtype  = isComedy ? (ev.type || '') : (ev.genre || '');
+          const cost     = isComedy ? (ev.cost || '') : '';
+          const url      = ev.url || '';
+          const repeat   = isComedy ? (ev.repeat || '') : '';
+
+          html += `<div style="display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:8px;border:1px solid ${catBorder};background:${catBg};transition:border-color 0.2s;" onmouseover="this.style.borderColor='${catColor}'" onmouseout="this.style.borderColor='${catBorder}'">`;
+
+          // Time column
+          html += `<div style="min-width:54px;text-align:right;font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;color:${catColor};white-space:nowrap;">${escEvt(time)}</div>`;
+
+          // Separator
+          html += `<div style="width:2px;height:36px;background:${catBorder};border-radius:1px;flex-shrink:0;"></div>`;
+
+          // Main info
+          html += `<div style="flex:1;min-width:0;">`;
+          if (url) {
+            html += `<a href="${escEvt(url)}" target="_blank" rel="noopener" style="font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:600;color:#e2e2f0;text-decoration:none;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" onmouseover="this.style.color='${catColor}'" onmouseout="this.style.color='#e2e2f0'">${escEvt(title)}</a>`;
+          } else {
+            html += `<div style="font-family:'Space Grotesk',sans-serif;font-size:0.9rem;font-weight:600;color:#e2e2f0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escEvt(title)}</div>`;
+          }
+          html += `<div style="font-family:'Space Grotesk',sans-serif;font-size:0.78rem;color:#7878a8;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">`;
+          if (venue) html += `📍 ${escEvt(venue)}`;
+          if (subtype) html += `<span style="margin-left:10px;color:#4a4a6a;">· ${escEvt(subtype)}</span>`;
+          if (repeat)  html += `<span style="margin-left:10px;color:#3a3a5a;font-style:italic;">${escEvt(repeat)}</span>`;
+          html += `</div>`;
+          html += `</div>`;
+
+          // Right: category badge + cost
+          html += `<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;">`;
+          html += `<span style="font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.1em;padding:3px 8px;border-radius:999px;border:1px solid ${catBorder};color:${catColor};white-space:nowrap;">${catIcon}</span>`;
+          if (cost) html += `<span style="font-family:'Space Grotesk',sans-serif;font-size:0.75rem;font-weight:700;color:${cost === 'FREE' ? '#4ade80' : '#fbbf24'};">${escEvt(cost)}</span>`;
+          html += `</div>`;
+
+          html += `</div>`; // end event row
+        }
+
+        html += `</div></div>`; // end grid + day group
+      }
+
+      container.innerHTML = html;
+    }
+
+    async function loadEvents() {
+      window._eventsLoaded = true;
+      const container = document.getElementById('events-content');
+
+      try {
+        const [musicData, comedyData] = await Promise.all([
+          fetch('data/live-music.json?_='+Date.now()).then(r=>r.json()).catch(()=>null),
+          fetch('data/comedy.json?_='+Date.now()).then(r=>r.json()).catch(()=>null),
+        ]);
+
+        _allEvents = [];
+        const today = new Date().toISOString().slice(0,10);
+
+        // Music events — from WWOZ live-music.json (today only, single-day format)
+        if (musicData && musicData.shows) {
+          for (const s of musicData.shows) {
+            _allEvents.push({
+              category: 'music',
+              day:      'Today (Music)',
+              date:     today,
+              time:     s.time || 'TBD',
+              time_sort: s.time_sort || 0,
+              title:    s.artist || '',
+              url:      s.url || '',
+              venue:    s.venue || '',
+              genre:    s.genre || '',
+            });
+          }
+        }
+
+        // Comedy events — from 504Comedy comedy.json (full week)
+        if (comedyData && comedyData.shows) {
+          for (const s of comedyData.shows) {
+            _allEvents.push({
+              category: 'comedy',
+              day:      s.day || s.date || 'Unknown',
+              date:     s.date || '',
+              time:     s.time || 'TBD',
+              time_sort: s.time_sort || 0,
+              title:    s.title || '',
+              url:      s.url || '',
+              venue:    s.venue || '',
+              type:     s.type || 'Comedy',
+              cost:     s.cost || '',
+              repeat:   s.repeat || '',
+            });
+          }
+        }
+
+        // Updated timestamp
+        const updEl = document.getElementById('events-updated');
+        const timestamps = [
+          musicData  ? musicData.updated  : null,
+          comedyData ? comedyData.updated : null,
+        ].filter(Boolean);
+        if (timestamps.length && updEl) {
+          const latest = timestamps.sort().pop();
+          const d = new Date(latest);
+          updEl.textContent = 'Updated ' + d.toLocaleString('en-US', {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+        }
+
+        // Wire up filter buttons
+        document.querySelectorAll('.ev-filter-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.ev-filter-btn').forEach(b => {
+              b.style.background = 'transparent';
+              b.style.borderColor = b.dataset.cat === 'music'
+                ? 'rgba(168,85,247,0.3)'
+                : b.dataset.cat === 'comedy'
+                  ? 'rgba(255,45,135,0.3)'
+                  : 'rgba(0,245,255,0.3)';
+            });
+            btn.style.background = btn.dataset.cat === 'music'
+              ? 'rgba(168,85,247,0.15)'
+              : btn.dataset.cat === 'comedy'
+                ? 'rgba(255,45,135,0.15)'
+                : 'rgba(0,245,255,0.12)';
+            btn.style.borderColor = btn.dataset.cat === 'music'
+              ? 'rgba(168,85,247,0.6)'
+              : btn.dataset.cat === 'comedy'
+                ? 'rgba(255,45,135,0.6)'
+                : 'rgba(0,245,255,0.6)';
+            _eventsFilter = btn.dataset.cat;
+            renderEvents();
+          });
+        });
+
+        renderEvents();
+
+      } catch(err) {
+        container.innerHTML = '<div class="pb-empty"><div class="pb-empty-icon">⚠️</div><p>Failed to load events: ' + escEvt(err.message) + '</p></div>';
+      }
+    }
+
   </script>
 </body>
 </html>

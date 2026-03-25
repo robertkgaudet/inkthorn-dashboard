@@ -29,7 +29,10 @@ jobs:
             DATE_ARG="--date ${{ github.event.inputs.date }}"
           fi
           node scripts/scrape-wwoz.js $DATE_ARG
-      
+
+      - name: Scrape 504Comedy Events
+        run: node scripts/scrape-504comedy.js
+
       - name: Fetch Weather
         run: node scripts/fetch-weather.js
       
