@@ -266,7 +266,7 @@ async function renderNolaEvents(data, el) {
       groupsHtml += `</div>`;
     }
 
-    contentEl.innerHTML = statsHtml + filterBarHtml + groupsHtml;
+    contentEl.innerHTML = filterBarHtml + statsHtml + groupsHtml;
 
     // Wire filter buttons
     contentEl.querySelectorAll('.ev-cat-btn').forEach(btn => {
