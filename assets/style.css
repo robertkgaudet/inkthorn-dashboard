@@ -211,17 +211,22 @@ body {
 /* ── Nav Bar ───────────────────────────────────────────────── */
 .nav-bar {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-wrap: nowrap;
+  gap: 6px;
   justify-content: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 2px;
 }
+.nav-bar::-webkit-scrollbar { display: none; }
 
 .nav-tab {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: clamp(0.7rem, 2.2vw, 0.88rem);
   font-weight: 600;
-  letter-spacing: 0.03em;
-  padding: 7px 18px;
+  letter-spacing: 0.02em;
+  padding: 6px 13px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--purple-border);
   background: rgba(168, 85, 247, 0.07);
@@ -229,6 +234,7 @@ body {
   cursor: pointer;
   transition: all var(--glow-transition);
   white-space: nowrap;
+  flex-shrink: 0;
   position: relative;
   overflow: hidden;
 }

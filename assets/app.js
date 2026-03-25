@@ -192,14 +192,14 @@ async function renderNolaEvents(data, el) {
         </div>
       </div></div>`;
 
-    // Filter bar
+    // Filter bar (sticky so it stays visible while scrolling)
     const filters = [
       { key: 'all',    label: 'All Events',  color: '#00f5ff', bg: 'rgba(0,245,255,0.12)',   border: 'rgba(0,245,255,0.4)' },
       { key: 'music',  label: '🎵 Music',    color: '#a855f7', bg: 'rgba(168,85,247,0.12)', border: 'rgba(168,85,247,0.4)' },
       { key: 'comedy', label: '🎤 Comedy',   color: '#ff2d87', bg: 'rgba(255,45,135,0.12)', border: 'rgba(255,45,135,0.4)' },
     ];
     const filterBarHtml = `
-      <div class="events-filter-bar" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;align-items:center;">
+      <div class="events-filter-bar" style="position:sticky;top:var(--header-height,0);z-index:50;background:rgba(7,7,17,0.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;flex-wrap:wrap;gap:8px;padding:10px 0 12px;margin-bottom:16px;align-items:center;border-bottom:1px solid rgba(168,85,247,0.15);">
         ${filters.map(f => {
           const isActive = f.key === activeFilter;
           return `<button
@@ -216,7 +216,7 @@ async function renderNolaEvents(data, el) {
     for (const [, group] of dayMap) {
       const isToday = group.label === 'Today';
       groupsHtml += `<div class="time-group">`;
-      groupsHtml += `<h3 class="time-group-header">${escHtml(group.label)}${group.date && group.date !== group.label ? `<span class="time-group-count" style="color:#4a4a6a;font-weight:400;">${escHtml(group.date)}</span>` : `<span class="time-group-count">${group.events.length} event${group.events.length !== 1 ? 's' : ''}</span>`}</h3>`;
+      groupsHtml += `<h3 class="time-group-header">${escHtml(group.label)}<span class="time-group-count">${group.events.length} event${group.events.length !== 1 ? 's' : ''}</span></h3>`;
 
       for (const ev of group.events) {
         const isMusic  = ev.category === 'music';
