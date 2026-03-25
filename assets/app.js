@@ -172,13 +172,13 @@ async function renderNolaEvents(data, el) {
     });
     const todayComedy = allEvents.filter(e => e.category === 'comedy' && e.day === 'Today').length;
 
-    const totalEvents = totalMusic + totalComedy;
+    const todayTotal = totalMusic + todayComedy;
     const todayDate = new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
     const statsHtml = `
       <div class="events-hero">
         <div class="events-hero-label">LIVE IN NEW ORLEANS</div>
-        <div class="events-hero-count">${totalEvents}</div>
-        <div class="events-hero-sub">events happening this week</div>
+        <div class="events-hero-count">${todayTotal}</div>
+        <div class="events-hero-sub">events happening today</div>
         <div class="events-hero-date">${escHtml(todayDate)}</div>
       </div>
       <div class="stats-row-wrapper"><div class="stats-row">
@@ -187,8 +187,8 @@ async function renderNolaEvents(data, el) {
           <div class="stat-label">🎵 Music Tonight</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">${totalComedy}</div>
-          <div class="stat-label">🎤 Comedy This Week</div>
+          <div class="stat-value">${todayComedy}</div>
+          <div class="stat-label">🎤 Comedy Today</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">${musicLeft}</div>
