@@ -198,8 +198,9 @@ async function renderNolaEvents(data, el) {
       { key: 'music',  label: '🎵 Music',    color: '#a855f7', bg: 'rgba(168,85,247,0.12)', border: 'rgba(168,85,247,0.4)' },
       { key: 'comedy', label: '🎤 Comedy',   color: '#ff2d87', bg: 'rgba(255,45,135,0.12)', border: 'rgba(255,45,135,0.4)' },
     ];
+    const headerH = document.querySelector('.site-header')?.offsetHeight || 0;
     const filterBarHtml = `
-      <div class="events-filter-bar" style="position:sticky;top:var(--header-height,0);z-index:50;background:rgba(7,7,17,0.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;flex-wrap:wrap;gap:8px;padding:10px 0 12px;margin-bottom:16px;align-items:center;border-bottom:1px solid rgba(168,85,247,0.15);">
+      <div class="events-filter-bar" style="position:sticky;top:${headerH}px;z-index:50;background:rgba(7,7,17,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;flex-wrap:wrap;gap:8px;padding:8px 0 10px;margin-bottom:8px;align-items:center;border-bottom:1px solid rgba(168,85,247,0.15);">
         ${filters.map(f => {
           const isActive = f.key === activeFilter;
           return `<button
