@@ -172,23 +172,31 @@ async function renderNolaEvents(data, el) {
     });
     const todayComedy = allEvents.filter(e => e.category === 'comedy' && e.day === 'Today').length;
 
+    const totalEvents = totalMusic + totalComedy;
+    const todayDate = new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
     const statsHtml = `
+      <div class="events-hero">
+        <div class="events-hero-label">LIVE IN NEW ORLEANS</div>
+        <div class="events-hero-count">${totalEvents}</div>
+        <div class="events-hero-sub">events happening this week</div>
+        <div class="events-hero-date">${escHtml(todayDate)}</div>
+      </div>
       <div class="stats-row-wrapper"><div class="stats-row">
         <div class="stat-card">
           <div class="stat-value">${totalMusic}</div>
-          <div class="stat-label">Music Shows</div>
-        </div>
-        <div class="stat-card stat-card-highlight">
-          <div class="stat-value stat-value-sm">${nextMusic ? escHtml(nextMusic.artist) : 'All done'}</div>
-          <div class="stat-label">${nextMusic ? '▶ Up Next · ' + escHtml(nextMusic.time) : 'No more music'}</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">${musicLeft}</div>
-          <div class="stat-label">Music Remaining</div>
+          <div class="stat-label">🎵 Music Tonight</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">${totalComedy}</div>
-          <div class="stat-label">Comedy This Week</div>
+          <div class="stat-label">🎤 Comedy This Week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${musicLeft}</div>
+          <div class="stat-label">🕐 Music Still On</div>
+        </div>
+        <div class="stat-card stat-card-highlight">
+          <div class="stat-value stat-value-sm">${nextMusic ? escHtml(nextMusic.artist) : 'All done'}</div>
+          <div class="stat-label">${nextMusic ? '▶ Up Next · ' + escHtml(nextMusic.time) : 'No more shows'}</div>
         </div>
       </div></div>`;
 
