@@ -1,95 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-03-25T23:08:47.775Z",
+  "updated": "2026-03-26T13:33:03.121Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-03-25",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Stoned vs. Drunk vs. Sober",
-      "url": "https://504comedy.com/event/1128/stoned-vs-drunk-vs-sober",
-      "venue": "The Howlin' Wolf",
-      "type": "Stand-up",
-      "cost": "$10",
-      "repeat": "Fourth Wednesday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-03-25",
-      "time": "8:30pm",
-      "time_sort": 2030,
-      "title": "Open Gym Comedy Open Mic",
-      "url": "https://504comedy.com/event/1322/open-gym-comedy-open-mic",
-      "venue": "Sports Drink",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Wednesday",
-      "start_dt": "2026-04-29T20:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-03-25",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "Think You're Funny?",
-      "url": "https://504comedy.com/event/44/thinkyourefunny",
-      "venue": "Carrollton Station",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Wednesday",
-      "start_dt": "2026-03-25T21:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-03-25",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "Comedy night at Prytania Bar",
-      "url": "https://504comedy.com/event/928/comedy-night-at-prytania-bar",
-      "venue": "Prytania Bar",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Wednesday",
-      "start_dt": "2026-03-25T21:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-03-25",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "Humpday HiJenks",
-      "url": "https://504comedy.com/event/1297/humpday-hijenks",
-      "venue": "One More Pie",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Wednesday",
-      "start_dt": "2026-03-25T21:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-03-25",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "One More Pie Comedy Open Mic",
-      "url": "https://504comedy.com/event/1316/one-more-pie-comedy-open-mic",
-      "venue": "Restaurant",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Wednesday",
-      "start_dt": "2026-03-25T21:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-03-26",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -99,11 +15,11 @@
       "type": "Open Mic",
       "cost": "$5",
       "repeat": "Every Thursday",
-      "start_dt": "2026-03-25T19:30-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-03-26",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -117,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-03-26",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -131,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-03-26",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -145,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Friday",
+      "day": "Tomorrow",
       "date": "2026-03-27",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -159,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Friday",
+      "day": "Tomorrow",
       "date": "2026-03-27",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -173,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Friday",
+      "day": "Tomorrow",
       "date": "2026-03-27",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -324,106 +240,100 @@
       "cost": "FREE",
       "repeat": "Every Tuesday",
       "start_dt": "2026-03-31T20:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Wednesday",
+      "date": "2026-04-01",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Two Friends Improv Theater - a night of improv",
+      "url": "https://504comedy.com/event/919/two-friends-improv-theater--a-night-of-improv",
+      "venue": "The Actor’s Apothecary",
+      "type": "Improv",
+      "cost": "$8",
+      "repeat": "First Wednesday",
+      "start_dt": "2026-03-31T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Wednesday",
+      "date": "2026-04-01",
+      "time": "8:30pm",
+      "time_sort": 2030,
+      "title": "Open Gym Comedy Open Mic",
+      "url": "https://504comedy.com/event/1322/open-gym-comedy-open-mic",
+      "venue": "Sports Drink",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Wednesday",
+      "start_dt": "2026-04-08T20:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Wednesday",
+      "date": "2026-04-01",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Think You're Funny?",
+      "url": "https://504comedy.com/event/44/thinkyourefunny",
+      "venue": "Carrollton Station",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Wednesday",
+      "start_dt": "2026-04-01T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Wednesday",
+      "date": "2026-04-01",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Comedy night at Prytania Bar",
+      "url": "https://504comedy.com/event/928/comedy-night-at-prytania-bar",
+      "venue": "Prytania Bar",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Wednesday",
+      "start_dt": "2026-04-01T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Wednesday",
+      "date": "2026-04-01",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Humpday HiJenks",
+      "url": "https://504comedy.com/event/1297/humpday-hijenks",
+      "venue": "One More Pie",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Wednesday",
+      "start_dt": "2026-04-01T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Wednesday",
+      "date": "2026-04-01",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "One More Pie Comedy Open Mic",
+      "url": "https://504comedy.com/event/1316/one-more-pie-comedy-open-mic",
+      "venue": "Restaurant",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Wednesday",
+      "start_dt": "2026-04-01T21:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-03-25",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-25",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Stoned vs. Drunk vs. Sober",
-          "url": "https://504comedy.com/event/1128/stoned-vs-drunk-vs-sober",
-          "venue": "The Howlin' Wolf",
-          "type": "Stand-up",
-          "cost": "$10",
-          "repeat": "Fourth Wednesday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-25",
-          "time": "8:30pm",
-          "time_sort": 2030,
-          "title": "Open Gym Comedy Open Mic",
-          "url": "https://504comedy.com/event/1322/open-gym-comedy-open-mic",
-          "venue": "Sports Drink",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Wednesday",
-          "start_dt": "2026-04-29T20:30-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-25",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "Think You're Funny?",
-          "url": "https://504comedy.com/event/44/thinkyourefunny",
-          "venue": "Carrollton Station",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Wednesday",
-          "start_dt": "2026-03-25T21:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-25",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "Comedy night at Prytania Bar",
-          "url": "https://504comedy.com/event/928/comedy-night-at-prytania-bar",
-          "venue": "Prytania Bar",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Wednesday",
-          "start_dt": "2026-03-25T21:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-25",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "Humpday HiJenks",
-          "url": "https://504comedy.com/event/1297/humpday-hijenks",
-          "venue": "One More Pie",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Wednesday",
-          "start_dt": "2026-03-25T21:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-25",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "One More Pie Comedy Open Mic",
-          "url": "https://504comedy.com/event/1316/one-more-pie-comedy-open-mic",
-          "venue": "Restaurant",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Wednesday",
-          "start_dt": "2026-03-25T21:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-03-26",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-03-26",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -433,11 +343,11 @@
           "type": "Open Mic",
           "cost": "$5",
           "repeat": "Every Thursday",
-          "start_dt": "2026-03-25T19:30-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-03-26",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -451,7 +361,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-03-26",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -465,7 +375,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-03-26",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -480,12 +390,12 @@
       ]
     },
     {
-      "day": "Friday",
+      "day": "Tomorrow",
       "date": "2026-03-27",
       "events": [
         {
           "category": "comedy",
-          "day": "Friday",
+          "day": "Tomorrow",
           "date": "2026-03-27",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -499,7 +409,7 @@
         },
         {
           "category": "comedy",
-          "day": "Friday",
+          "day": "Tomorrow",
           "date": "2026-03-27",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -513,7 +423,7 @@
         },
         {
           "category": "comedy",
-          "day": "Friday",
+          "day": "Tomorrow",
           "date": "2026-03-27",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -688,6 +598,96 @@
           "cost": "FREE",
           "repeat": "Every Tuesday",
           "start_dt": "2026-03-31T20:30-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-04-01",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Wednesday",
+          "date": "2026-04-01",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Two Friends Improv Theater - a night of improv",
+          "url": "https://504comedy.com/event/919/two-friends-improv-theater--a-night-of-improv",
+          "venue": "The Actor’s Apothecary",
+          "type": "Improv",
+          "cost": "$8",
+          "repeat": "First Wednesday",
+          "start_dt": "2026-03-31T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Wednesday",
+          "date": "2026-04-01",
+          "time": "8:30pm",
+          "time_sort": 2030,
+          "title": "Open Gym Comedy Open Mic",
+          "url": "https://504comedy.com/event/1322/open-gym-comedy-open-mic",
+          "venue": "Sports Drink",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Wednesday",
+          "start_dt": "2026-04-08T20:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Wednesday",
+          "date": "2026-04-01",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Think You're Funny?",
+          "url": "https://504comedy.com/event/44/thinkyourefunny",
+          "venue": "Carrollton Station",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Wednesday",
+          "start_dt": "2026-04-01T21:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Wednesday",
+          "date": "2026-04-01",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Comedy night at Prytania Bar",
+          "url": "https://504comedy.com/event/928/comedy-night-at-prytania-bar",
+          "venue": "Prytania Bar",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Wednesday",
+          "start_dt": "2026-04-01T21:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Wednesday",
+          "date": "2026-04-01",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Humpday HiJenks",
+          "url": "https://504comedy.com/event/1297/humpday-hijenks",
+          "venue": "One More Pie",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Wednesday",
+          "start_dt": "2026-04-01T21:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Wednesday",
+          "date": "2026-04-01",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "One More Pie Comedy Open Mic",
+          "url": "https://504comedy.com/event/1316/one-more-pie-comedy-open-mic",
+          "venue": "Restaurant",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Wednesday",
+          "start_dt": "2026-04-01T21:00-05:00"
         }
       ]
     }
