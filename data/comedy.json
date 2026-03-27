@@ -1,67 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-03-26T23:05:06.323Z",
+  "updated": "2026-03-27T13:31:22.682Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-03-26",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "Comedy Gumbeaux",
-      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-      "venue": "Howlin' Wolf Den",
-      "type": "Open Mic",
-      "cost": "$5",
-      "repeat": "Every Thursday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-03-26",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Queers Of Comedy New Orleans",
-      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-      "venue": "Oz New Orleans",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-03-26T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-03-26",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Sit. Stay. Stand-Up!",
-      "url": "https://504comedy.com/event/1301/sit-stay-standup",
-      "venue": "The Dog House",
-      "type": "Stand-up",
-      "cost": "$10",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-03-26T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-03-26",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Punchlines & Pasties",
-      "url": "https://504comedy.com/event/1317/punchlines--pasties",
-      "venue": "The Original NiteCap",
-      "type": "Open Mic",
-      "cost": "$10",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-03-26T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-03-27",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -71,11 +15,11 @@
       "type": "Improv",
       "cost": "$10",
       "repeat": "Fourth Friday",
-      "start_dt": "2026-03-26T19:30-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-03-27",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -85,11 +29,11 @@
       "type": "Stand-up",
       "cost": "FREE",
       "repeat": "Every Friday",
-      "start_dt": "2026-03-27T20:00-05:00"
+      "start_dt": "2026-04-24T20:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-03-27",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-03-28",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -117,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-03-28",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -324,78 +268,100 @@
       "cost": "FREE",
       "repeat": "Every Wednesday",
       "start_dt": "2026-04-01T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-04-02",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Stand Up for Palestine",
+      "url": "https://504comedy.com/event/1331/stand-up-for-palestine",
+      "venue": "Okay Bar",
+      "type": "Stand-up",
+      "cost": "$10",
+      "repeat": "Thu Apr 02 2026",
+      "start_dt": "2026-04-01T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-04-02",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Cliff Cash",
+      "url": "https://504comedy.com/event/1332/cliff-cash",
+      "venue": "Toulouse Theatre",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Thu Apr 02 2026",
+      "start_dt": "2026-04-02T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-04-02",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Comedy Gumbeaux",
+      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+      "venue": "Howlin' Wolf Den",
+      "type": "Open Mic",
+      "cost": "$5",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-04-02T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-04-02",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Queers Of Comedy New Orleans",
+      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+      "venue": "Oz New Orleans",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-04-02T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-04-02",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Sit. Stay. Stand-Up!",
+      "url": "https://504comedy.com/event/1301/sit-stay-standup",
+      "venue": "The Dog House",
+      "type": "Stand-up",
+      "cost": "$10",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-04-02T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-04-02",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Punchlines & Pasties",
+      "url": "https://504comedy.com/event/1317/punchlines--pasties",
+      "venue": "The Original NiteCap",
+      "type": "Open Mic",
+      "cost": "$10",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-04-02T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-03-26",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-26",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "Comedy Gumbeaux",
-          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-          "venue": "Howlin' Wolf Den",
-          "type": "Open Mic",
-          "cost": "$5",
-          "repeat": "Every Thursday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-26",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Queers Of Comedy New Orleans",
-          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-          "venue": "Oz New Orleans",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-03-26T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-26",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Sit. Stay. Stand-Up!",
-          "url": "https://504comedy.com/event/1301/sit-stay-standup",
-          "venue": "The Dog House",
-          "type": "Stand-up",
-          "cost": "$10",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-03-26T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-26",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Punchlines & Pasties",
-          "url": "https://504comedy.com/event/1317/punchlines--pasties",
-          "venue": "The Original NiteCap",
-          "type": "Open Mic",
-          "cost": "$10",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-03-26T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-03-27",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-03-27",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -405,11 +371,11 @@
           "type": "Improv",
           "cost": "$10",
           "repeat": "Fourth Friday",
-          "start_dt": "2026-03-26T19:30-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-03-27",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -419,11 +385,11 @@
           "type": "Stand-up",
           "cost": "FREE",
           "repeat": "Every Friday",
-          "start_dt": "2026-03-27T20:00-05:00"
+          "start_dt": "2026-04-24T20:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-03-27",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -438,12 +404,12 @@
       ]
     },
     {
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-03-28",
       "events": [
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-03-28",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -457,7 +423,7 @@
         },
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-03-28",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -688,6 +654,96 @@
           "cost": "FREE",
           "repeat": "Every Wednesday",
           "start_dt": "2026-04-01T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Thursday",
+      "date": "2026-04-02",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-04-02",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Stand Up for Palestine",
+          "url": "https://504comedy.com/event/1331/stand-up-for-palestine",
+          "venue": "Okay Bar",
+          "type": "Stand-up",
+          "cost": "$10",
+          "repeat": "Thu Apr 02 2026",
+          "start_dt": "2026-04-01T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-04-02",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Cliff Cash",
+          "url": "https://504comedy.com/event/1332/cliff-cash",
+          "venue": "Toulouse Theatre",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Thu Apr 02 2026",
+          "start_dt": "2026-04-02T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-04-02",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Comedy Gumbeaux",
+          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+          "venue": "Howlin' Wolf Den",
+          "type": "Open Mic",
+          "cost": "$5",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-04-02T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-04-02",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Queers Of Comedy New Orleans",
+          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+          "venue": "Oz New Orleans",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-04-02T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-04-02",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Sit. Stay. Stand-Up!",
+          "url": "https://504comedy.com/event/1301/sit-stay-standup",
+          "venue": "The Dog House",
+          "type": "Stand-up",
+          "cost": "$10",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-04-02T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-04-02",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Punchlines & Pasties",
+          "url": "https://504comedy.com/event/1317/punchlines--pasties",
+          "venue": "The Original NiteCap",
+          "type": "Open Mic",
+          "cost": "$10",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-04-02T20:00-05:00"
         }
       ]
     }
