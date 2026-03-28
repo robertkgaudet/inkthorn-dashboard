@@ -1137,6 +1137,111 @@
     </div>
   </div>
 
+  <!-- ══ GEO SEARCH ══ -->
+  <section style="background:#f8f7ff;padding:56px 0 60px;border-bottom:1px solid #e5e0ff;" id="geo-search">
+    <div class="container" style="max-width:720px;">
+      <div style="text-align:center;margin-bottom:28px;">
+        <div style="display:inline-block;background:rgba(37,99,235,0.1);color:#2563eb;font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:5px 14px;border-radius:999px;margin-bottom:14px;">🔍 Is Your Business GEO Ready?</div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:#0f1f3d;margin-bottom:10px;">Search for Your Business</h2>
+        <p style="color:#6b7280;font-size:0.95rem;max-width:520px;margin:0 auto;">We may have already built you a free demo website. Search below — if we found you, you can claim it right now.</p>
+      </div>
+
+      <!-- Search Box -->
+      <div style="position:relative;margin-bottom:16px;">
+        <input id="geo-search-input" type="text" placeholder="Type your business name… (e.g. Mama's Kitchen, City Auto Repair)" autocomplete="off"
+          style="width:100%;padding:18px 56px 18px 20px;font-size:1rem;font-family:'Inter',sans-serif;border:2px solid #d1d5db;border-radius:12px;outline:none;background:#fff;color:#111827;transition:border-color 0.2s;"
+          onfocus="this.style.borderColor='#2563eb'" onblur="this.style.borderColor='#d1d5db'" />
+        <span style="position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:1.3rem;pointer-events:none;">🔍</span>
+      </div>
+
+      <!-- Results -->
+      <div id="geo-search-results" style="display:none;background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.08);max-height:400px;overflow-y:auto;"></div>
+      <div id="geo-search-none" style="display:none;text-align:center;padding:28px;background:#fff;border:1px solid #e5e7eb;border-radius:12px;color:#6b7280;font-size:0.9rem;">
+        <div style="font-size:2rem;margin-bottom:8px;">😅</div>
+        <strong style="color:#111827;display:block;margin-bottom:6px;">We haven't built your site yet — but we can.</strong>
+        We're expanding fast. <a href="https://calendly.com/inkthorn" target="_blank" style="color:#2563eb;font-weight:700;">Book a call</a> and we'll have your demo site ready within 48 hours.
+      </div>
+    </div>
+  </section>
+
+  <script>
+  (() => {
+    let searchIndex = null;
+    let searchLoaded = false;
+
+    async function loadIndex() {
+      if (searchLoaded) return;
+      searchLoaded = true;
+      try {
+        const data = await fetch('data/search-index.json?_=' + Date.now()).then(r => r.json());
+        searchIndex = data;
+      } catch(e) { console.warn('Search index failed to load:', e); }
+    }
+
+    function slugify(s) {
+      return String(s).toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').trim();
+    }
+
+    const input = document.getElementById('geo-search-input');
+    const resultsEl = document.getElementById('geo-search-results');
+    const noneEl = document.getElementById('geo-search-none');
+
+    input.addEventListener('focus', loadIndex);
+
+    let debounce = null;
+    input.addEventListener('input', () => {
+      clearTimeout(debounce);
+      debounce = setTimeout(doSearch, 180);
+    });
+
+    function doSearch() {
+      const q = input.value.trim().toLowerCase();
+      resultsEl.style.display = 'none';
+      noneEl.style.display = 'none';
+
+      if (q.length < 2) return;
+      if (!searchIndex) { loadIndex(); return; }
+
+      const matches = searchIndex.filter(e =>
+        e.n.toLowerCase().includes(q) ||
+        slugify(e.n).includes(slugify(q))
+      ).slice(0, 12);
+
+      if (!matches.length) {
+        noneEl.style.display = 'block';
+        return;
+      }
+
+      resultsEl.innerHTML = matches.map(e => {
+        const demoUrl = e.b + e.s + '/';
+        return \`<div style="padding:14px 18px;border-bottom:1px solid #f3f4f6;cursor:pointer;transition:background 0.15s;"
+          onmouseover="this.style.background='#f0f4ff'" onmouseout="this.style.background=''"
+          onclick="window.location.href='${window.location.origin}\${demoUrl}'">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div>
+              <div style="font-weight:700;color:#111827;font-size:0.95rem;">\${e.n}</div>
+              <div style="font-size:0.75rem;color:#6b7280;margin-top:2px;">\${e.t} · \${e.c || e.m}</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+              <span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:3px 10px;border-radius:999px;background:#dcfce7;color:#166534;">✓ DEMO READY</span>
+              <span style="font-size:0.75rem;font-weight:700;color:#2563eb;">View & Claim →</span>
+            </div>
+          </div>
+        </div>\`;
+      }).join('');
+
+      resultsEl.style.display = 'block';
+    }
+
+    // Close results when clicking outside
+    document.addEventListener('click', e => {
+      if (!e.target.closest('#geo-search')) {
+        resultsEl.style.display = 'none';
+      }
+    });
+  })();
+  </script>
+
   <!-- ══ HOW IT WORKS ══ -->
   <section class="section" id="how-it-works">
     <div class="container">
