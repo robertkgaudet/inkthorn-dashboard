@@ -54,10 +54,10 @@ jobs:
         env:
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
         run: |
-          # Inject real Supabase credentials before encrypting
-          sed "s|SUPABASE_URL_PLACEHOLDER|$SUPABASE_URL|g; s|SUPABASE_SERVICE_KEY_PLACEHOLDER|$SUPABASE_SERVICE_KEY|g" \
+          # Inject real Supabase credentials before encrypting (use publishable key - safe for browser)
+          sed "s|SUPABASE_URL_PLACEHOLDER|$SUPABASE_URL|g; s|SUPABASE_SERVICE_KEY_PLACEHOLDER|$SUPABASE_PUBLISHABLE_KEY|g" \
             crustacean/admin-source.html > /tmp/admin-injected.html
           yes | npx staticrypt /tmp/admin-injected.html -p "$ADMIN_PASSWORD" --short || true
           cp encrypted/admin-injected.html crustacean/admin.html
