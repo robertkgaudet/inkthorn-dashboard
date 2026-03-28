@@ -209,7 +209,7 @@
       <div class="topbar-subtitle">Partner Leads Dashboard · 6,597 total leads</div>
     </div>
     <button onclick="var n=document.getElementById('mnav');var o=n.style.display==='flex';n.style.display=o?'none':'flex';this.textContent=o?'☰':'✕';" style="background:none;border:none;color:#c4b5fd;font-size:1.4rem;cursor:pointer;padding:4px 8px;line-height:1;">☰</button>
-    <div class="topbar-nav-links" id="dash-nav-links" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;" id="mnav" style="display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(10,0,20,0.98);z-index:2000;padding:8px 0;border-bottom:1px solid rgba(168,85,247,0.3);box-shadow:0 8px 24px rgba(0,0,0,0.6);">
+    <div id="mnav" style="display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(10,0,20,0.98);z-index:2000;padding:8px 0;border-bottom:1px solid rgba(168,85,247,0.3);box-shadow:0 8px 24px rgba(0,0,0,0.6);">
       <a href="/crustacean/" style="font-size:0.75rem;color:#7878a8;text-decoration:none;font-weight:600;">Home</a>
       <a href="/crustacean/dashboard.html" style="font-size:0.75rem;color:#f0f0ff;text-decoration:none;font-weight:600;">🗂️ Leads Dashboard</a>
       <a href="/crustacean/scripts.html" style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.08em;padding:6px 14px;border-radius:999px;border:1px solid rgba(251,191,36,0.6);background:rgba(251,191,36,0.12);color:#fbbf24;text-decoration:none;">📞 Daily Scripts</a>
@@ -562,48 +562,56 @@
 
 
 
+
 <script>
 (function(){
   var nav = document.getElementById('mnav');
-  if(!nav) return;
-  // On desktop show inline
-  function checkWidth(){
+  var btn = document.querySelector('button[onclick*="mnav"]');
+  if(!nav || !btn) { console.warn('Nav or btn not found'); return; }
+
+  // Desktop: show inline
+  function apply(){
     if(window.innerWidth > 768){
       nav.style.display='flex';
-      nav.style.flexDirection='row';
       nav.style.position='static';
+      nav.style.flexDirection='row';
       nav.style.background='transparent';
       nav.style.boxShadow='none';
       nav.style.border='none';
       nav.style.padding='0';
       nav.style.gap='14px';
       nav.style.alignItems='center';
-      document.querySelector('button[onclick*="mnav"]').style.display='none';
+      nav.style.zIndex='auto';
+      btn.style.display='none';
     } else {
       nav.style.display='none';
-      nav.style.flexDirection='column';
       nav.style.position='absolute';
+      nav.style.flexDirection='column';
       nav.style.background='rgba(10,0,20,0.98)';
-      document.querySelector('button[onclick*="mnav"]').style.display='block';
+      nav.style.gap='0';
+      nav.style.padding='8px 0';
+      nav.style.zIndex='2000';
+      btn.style.display='block';
     }
   }
-  checkWidth();
-  window.addEventListener('resize', checkWidth);
-  // Close on outside click
+  apply();
+  window.addEventListener('resize', apply);
+
+  // Close on outside tap
   document.addEventListener('click', function(e){
-    if(window.innerWidth<=768 && nav.style.display==='flex' && !nav.contains(e.target) && !e.target.closest('button[onclick*="mnav"]')){
+    if(window.innerWidth > 768) return;
+    if(nav.style.display==='flex' && !nav.contains(e.target) && e.target !== btn && !btn.contains(e.target)){
       nav.style.display='none';
-      var btn=document.querySelector('button[onclick*="mnav"]');
-      if(btn) btn.textContent='☰';
+      btn.textContent='☰';
     }
   });
-  // Close on link click
+
+  // Close on link tap
   nav.querySelectorAll('a').forEach(function(a){
     a.addEventListener('click', function(){
-      if(window.innerWidth<=768){
+      if(window.innerWidth <= 768){
         nav.style.display='none';
-        var btn=document.querySelector('button[onclick*="mnav"]');
-        if(btn) btn.textContent='☰';
+        btn.textContent='☰';
       }
     });
   });
