@@ -25,9 +25,11 @@
       align-items: center;
       justify-content: space-between;
       position: sticky;
+      position: -webkit-sticky;
       top: 0;
       z-index: 100;
       backdrop-filter: blur(10px);
+      overflow: visible;
     }
     .topbar-logo {
       font-family: 'Orbitron', sans-serif;
@@ -558,51 +560,39 @@
     initMarket('nola');
   </script>
 
+
 <script>
 (function() {
-  function closeNav() {
-    document.querySelectorAll('.topbar-nav, .topbar-nav-links, #topbar-nav, #dash-nav-links, #scripts-nav-links').forEach(function(n) {
-      n.classList.remove('open');
-    });
-    document.querySelectorAll('.nav-hamburger').forEach(function(b) {
-      b.classList.remove('open');
-    });
-  }
+  var nav = document.getElementById('topbar-nav') || document.getElementById('dash-nav-links') || document.getElementById('scripts-nav-links');
+  var btn = document.querySelector('.nav-hamburger');
+  if (!nav || !btn) return;
 
-  function toggleNav() {
-    var isOpen = false;
-    document.querySelectorAll('.topbar-nav, .topbar-nav-links, #topbar-nav, #dash-nav-links, #scripts-nav-links').forEach(function(n) {
-      if (n.classList.contains('open')) isOpen = true;
-    });
-    if (isOpen) {
-      closeNav();
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var open = nav.classList.contains('open');
+    if (open) {
+      nav.classList.remove('open');
+      btn.classList.remove('open');
     } else {
-      document.querySelectorAll('.topbar-nav, .topbar-nav-links, #topbar-nav, #dash-nav-links, #scripts-nav-links').forEach(function(n) {
-        n.classList.add('open');
-      });
-      document.querySelectorAll('.nav-hamburger').forEach(function(b) {
-        b.classList.add('open');
-      });
+      nav.classList.add('open');
+      btn.classList.add('open');
     }
-  }
+  });
 
-  // Wire up all hamburger buttons
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.nav-hamburger').forEach(function(btn) {
-      btn.onclick = function(e) { e.stopPropagation(); toggleNav(); };
+  // Close on link tap
+  nav.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      nav.classList.remove('open');
+      btn.classList.remove('open');
     });
+  });
 
-    // Close when any nav link is tapped
-    document.querySelectorAll('.topbar-nav a, .topbar-nav-links a, #topbar-nav a, #dash-nav-links a, #scripts-nav-links a').forEach(function(a) {
-      a.addEventListener('click', function() { setTimeout(closeNav, 50); });
-    });
-
-    // Close on outside tap
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.nav-hamburger') && !e.target.closest('.topbar-nav') && !e.target.closest('.topbar-nav-links') && !e.target.closest('#topbar-nav') && !e.target.closest('#dash-nav-links') && !e.target.closest('#scripts-nav-links')) {
-        closeNav();
-      }
-    });
+  // Close on outside tap
+  document.addEventListener('click', function(e) {
+    if (!btn.contains(e.target) && !nav.contains(e.target)) {
+      nav.classList.remove('open');
+      btn.classList.remove('open');
+    }
   });
 })();
 </script>
