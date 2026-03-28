@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Spic'n Span Cleaners — Abbeville Laundry</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Spic'n Span Cleaners — Laundry in Abbeville. 802 S State St, Abbeville, LA 70510, USA. Call us: (337) 893-2120." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0f1f3d; --blue: #2563eb; --gold: #c9922a;
+      --cream: #faf8f4; --gray-50: #f9fafb; --gray-100: #f3f4f6;
+      --gray-300: #d1d5db; --gray-500: #6b7280; --gray-700: #374151;
+      --gray-900: #111827; --white: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; color: var(--gray-900); background: var(--white); line-height: 1.6; }
+    h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; line-height: 1.2; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* Demo banner */
+    .demo-banner {
+      background: var(--navy);
+      color: rgba(255,255,255,0.9);
+      text-align: center;
+      padding: 10px 24px;
+      font-size: 0.82rem;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .demo-banner a {
+      color: #f0b840;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+    .demo-banner a:hover { color: #fff; }
+
+    /* Nav */
+    nav { background: var(--white); border-bottom: 1px solid var(--gray-100); padding: 0 24px; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+    .biz-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: var(--navy); }
+    .biz-cat  { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+    .nav-phone { font-weight: 700; color: var(--blue); font-size: 1rem; text-decoration: none; }
+    .nav-phone:hover { text-decoration: underline; }
+    .nav-cta { background: var(--blue); color: #fff; padding: 10px 20px; border-radius: 6px; font-weight: 700; font-size: 0.88rem; text-decoration: none; white-space: nowrap; }
+    .nav-cta:hover { background: #1d4ed8; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg,#0f1f3d,#1a3460);
+      color: var(--white);
+      padding: 80px 0 72px;
+      text-align: center;
+    }
+    .hero-cat { display: inline-block; background: rgba(201,146,42,0.25); border: 1px solid rgba(240,184,64,0.4); color: #f0b840; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 16px; border-radius: 999px; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; margin-bottom: 16px; color: #fff; }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.8); max-width: 560px; margin: 0 auto 32px; }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-block; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; padding: 13px 28px; border-radius: 8px; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 4px 14px rgba(37,99,235,0.35); }
+    .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .btn-outline { border: 2px solid rgba(255,255,255,0.4); color: #fff; background: transparent; }
+    .btn-outline:hover { background: rgba(255,255,255,0.12); }
+
+    /* Info bar */
+    .info-bar { background: var(--gray-50); border-top: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100); padding: 20px 0; }
+    .info-bar-inner { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; align-items: center; }
+    .info-item { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--gray-700); }
+    .info-icon { font-size: 1.1rem; }
+
+    /* About + Services */
+    .section { padding: 72px 0; }
+    .section-alt { background: var(--gray-50); }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+    .section-title { font-size: clamp(1.7rem, 3.5vw, 2.4rem); color: var(--navy); margin-bottom: 14px; }
+    .section-body { font-size: 1rem; color: var(--gray-500); line-height: 1.75; max-width: 640px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .services-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+    .services-list li { display: flex; align-items: center; gap: 10px; font-size: 0.92rem; color: var(--gray-700); }
+    .services-list li::before { content: '✓'; color: var(--blue); font-weight: 700; font-size: 1rem; }
+
+    /* Rating */
+    .rating-card { background: var(--navy); color: var(--white); border-radius: 16px; padding: 36px; text-align: center; }
+    .rating-score { font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 900; color: #f0b840; line-height: 1; }
+    .rating-stars { font-size: 1.6rem; color: #f0b840; margin: 8px 0; }
+    .rating-count { font-size: 0.88rem; color: rgba(255,255,255,0.6); }
+    .rating-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 16px; }
+
+    /* Map */
+    .map-section { background: var(--gray-50); padding: 72px 0; }
+    .map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .map-embed { border-radius: 12px; overflow: hidden; border: 1px solid var(--gray-100); height: 320px; }
+    .map-embed iframe { width: 100%; height: 100%; border: none; }
+    .contact-list { list-style: none; }
+    .contact-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--gray-100); }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .contact-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 3px; }
+    .contact-value { font-size: 0.95rem; color: var(--gray-900); font-weight: 500; }
+    .contact-value a { color: var(--blue); text-decoration: none; }
+    .contact-value a:hover { text-decoration: underline; }
+
+    /* CTA */
+    .cta-section { background: var(--navy); color: var(--white); padding: 72px 0; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--white); margin-bottom: 14px; }
+    .cta-section p { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 480px; margin: 0 auto 28px; }
+
+    /* Footer */
+    footer { background: var(--gray-900); color: rgba(255,255,255,0.5); padding: 28px 0; text-align: center; font-size: 0.8rem; }
+    footer a { color: #f0b840; text-decoration: none; }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .two-col, .map-grid { grid-template-columns: 1fr; }
+      .services-list { grid-template-columns: 1fr; }
+      .hero { padding: 56px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Demo Banner -->
+  <div class="demo-banner">
+    🦞 This is a <strong>free demo website</strong> built for Spic'n Span Cleaners by InkThorn Crustacean.
+    Like what you see? <a href="../../index.html#pricing">Claim this site from $39/month →</a>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <div>
+        <div class="biz-name">Spic'n Span Cleaners</div>
+        <div class="biz-cat">Laundry</div>
+      </div>
+      <a href="tel:3378932120" class="nav-phone">📞 (337) 893-2120</a>
+      <a href="../../index.html#pricing" class="nav-cta">Claim This Site</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-cat">Laundry · Abbeville</div>
+      <h1>Spic'n Span Cleaners</h1>
+      <p class="hero-sub">Your Business. Online. Ready to Grow. — A professional website brings new customers to your door — day and night.</p>
+      <div class="hero-actions">
+        <a href="tel:3378932120" class="btn btn-primary">📞 Call Now</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Spic'n%20Span%20Cleaners%20802%20S%20State%20St%2C%20Abbeville%2C%20LA%2070510%2C%20USA" target="_blank" rel="noopener" class="btn btn-outline">📍 Get Directions</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Bar -->
+  <div class="info-bar">
+    <div class="container info-bar-inner">
+      <div class="info-item"><span class="info-icon">📞</span> <a href="tel:3378932120" style="color:inherit;font-weight:600;">(337) 893-2120</a></div>
+      <div class="info-item"><span class="info-icon">📍</span> 802 S State St</div>
+      <div class="info-item"><span class="info-icon">⭐</span> <strong>3.9</strong>&nbsp;(14 reviews)</div>
+      <div class="info-item"><span class="info-icon">🌐</span> Abbeville, Louisiana</div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section class="section">
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <div class="section-label">About Us</div>
+          <h2 class="section-title">Welcome to Spic'n Span Cleaners</h2>
+          <p class="section-body">
+            Spic'n Span Cleaners is a trusted laundry serving the Abbeville community.
+            Located at 802 S State St, Abbeville, LA 70510, USA, we're here to serve you.
+            With a 3.9-star rating from 14 Google reviews, our customers speak for themselves.
+          </p>
+          <ul class="services-list">
+            <li>Serving Abbeville</li>
+            <li>Locally Owned</li>
+            <li>Call or Text Us</li>
+            <li>Quality You Can Trust</li>
+            <li>3.9★ Rated</li>
+            <li>Community Focused</li>
+          </ul>
+        </div>
+        
+        <div class="rating-card">
+          <div class="rating-score">3.9</div>
+          <div class="rating-stars">★★★½☆</div>
+          <div class="rating-count">14 Google Reviews</div>
+          <div class="rating-label">Customer Rating</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map & Contact -->
+  <section class="map-section">
+    <div class="container">
+      <div class="map-grid">
+        <div>
+          <div class="section-label">Find Us</div>
+          <h2 class="section-title" style="margin-bottom:24px;">Location &amp; Contact</h2>
+          <ul class="contact-list">
+            <li class="contact-item">
+              <span class="contact-icon">📍</span>
+              <div>
+                <div class="contact-label">Address</div>
+                <div class="contact-value">802 S State St<br>Abbeville, LA 70510, USA</div>
+              </div>
+            </li>
+            
+            <li class="contact-item">
+              <span class="contact-icon">📞</span>
+              <div>
+                <div class="contact-label">Phone</div>
+                <div class="contact-value"><a href="tel:3378932120">(337) 893-2120</a></div>
+              </div>
+            </li>
+            <li class="contact-item">
+              <span class="contact-icon">🗺</span>
+              <div>
+                <div class="contact-label">Google Maps</div>
+                <div class="contact-value"><a href="https://www.google.com/maps/place/?q=place_id:ChIJhb9q9PpnI4YRXK1pQFZl9ok" target="_blank" rel="noopener">View on Google Maps</a></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="map-embed">
+          <iframe
+            src="https://maps.google.com/maps?q=Spic'n%20Span%20Cleaners%20802%20S%20State%20St%2C%20Abbeville%2C%20LA%2070510%2C%20USA&output=embed&z=15"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Spic'n Span Cleaners location map">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Spic'n Span Cleaners — Ready to Grow?</h2>
+      <p>This demo site was built for free by InkThorn Crustacean. Claim it, customize it, and start bringing in new customers today.</p>
+      <a href="../../index.html#pricing" class="btn btn-primary" style="font-size:1.05rem;padding:16px 36px;">Claim This Website — From $39/mo</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Demo website built by <a href="https://inkthorn.ai/crustacean">InkThorn Crustacean Web Development</a> for Spic'n Span Cleaners · <a href="../../index.html#pricing">Claim this site</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

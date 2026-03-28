@@ -1,0 +1,337 @@
+#!/usr/bin/env node
+/**
+ * scrape-lafayette-leads.js
+ *
+ * Uses Google Places API (New) to find Lafayette DMA businesses with no website.
+ * Exports results to data/lafayette-leads.json and data/lafayette-leads.csv
+ *
+ * Usage:
+ *   node scripts/scrape-lafayette-leads.js
+ *   node scripts/scrape-lafayette-leads.js --category "hair salon"
+ *   node scripts/scrape-lafayette-leads.js --max 200
+ *   node scripts/scrape-lafayette-leads.js --all   (runs all categories)
+ */
+
+const https = require('https');
+const fs    = require('fs');
+const path  = require('path');
+
+// ── Config ──────────────────────────────────────────────────────────────────
+const API_KEY   = 'AIzaSyAH8hrdixADjgcGPvDY8dPIshCGILs8Nzo';
+const OUT_DIR   = path.join(__dirname, '..', 'data');
+const LEADS_JSON = path.join(OUT_DIR, 'lafayette-leads.json');
+const LEADS_CSV  = path.join(OUT_DIR, 'lafayette-leads.csv');
+
+// Search grid: Lafayette DMA — covers all surrounding cities/parishes
+const SEARCH_ZONES = [
+  { name: 'Lafayette Downtown/CBD',         lat: 30.2241, lng: -92.0198, radius: 5000 },
+  { name: 'Lafayette North',                lat: 30.2600, lng: -92.0300, radius: 6000 },
+  { name: 'Lafayette South/Johnston St',    lat: 30.1900, lng: -92.0200, radius: 6000 },
+  { name: 'Lafayette East/Ambassador',      lat: 30.2100, lng: -91.9700, radius: 6000 },
+  { name: 'Lafayette West/Kaliste Saloom',  lat: 30.2000, lng: -92.0700, radius: 6000 },
+  { name: 'Carencro',                       lat: 30.3108, lng: -92.0482, radius: 5000 },
+  { name: 'Scott',                          lat: 30.2357, lng: -92.0957, radius: 5000 },
+  { name: 'Broussard',                      lat: 30.1413, lng: -91.9618, radius: 5000 },
+  { name: 'Youngsville',                    lat: 30.1024, lng: -91.9996, radius: 5000 },
+  { name: 'Duson',                          lat: 30.2363, lng: -92.1835, radius: 4000 },
+  { name: 'Breaux Bridge / St. Martin',     lat: 30.2724, lng: -91.8993, radius: 6000 },
+  { name: 'Opelousas / St. Landry',         lat: 30.5335, lng: -92.0815, radius: 7000 },
+  { name: 'New Iberia / Iberia Parish',     lat: 30.0035, lng: -91.8196, radius: 7000 },
+  { name: 'Abbeville / Vermilion',          lat: 29.9746, lng: -92.1343, radius: 6000 },
+  { name: 'Crowley / Acadia',               lat: 30.2141, lng: -92.3746, radius: 6000 },
+  { name: 'Eunice',                         lat: 30.4963, lng: -92.4168, radius: 5000 },
+  { name: 'Rayne',                          lat: 30.2346, lng: -92.2685, radius: 4000 },
+  { name: 'Maurice / Erath',                lat: 29.9488, lng: -92.0613, radius: 5000 },
+  { name: 'Sunset / Grand Coteau',          lat: 30.4088, lng: -92.0793, radius: 5000 },
+  { name: 'Ville Platte / Evangeline',      lat: 30.6874, lng: -92.2726, radius: 5000 },
+  { name: 'Morgan City / St. Mary Parish',  lat: 29.6994, lng: -91.2068, radius: 7000 },
+  { name: 'Franklin / St. Mary East',       lat: 29.7963, lng: -91.5018, radius: 6000 },
+  { name: 'Jennings / Jefferson Davis',     lat: 30.2224, lng: -92.6574, radius: 6000 },
+  { name: 'Kinder / Allen Parish',          lat: 30.4849, lng: -92.8518, radius: 5000 },
+  { name: 'Kaplan / South Vermilion',       lat: 29.9988, lng: -92.2843, radius: 5000 },
+  { name: 'St. Martinville / Iberia North', lat: 30.1274, lng: -91.8321, radius: 5000 },
+  { name: 'Jeanerette / Iberia South',      lat: 29.9099, lng: -91.6627, radius: 5000 },
+  { name: 'Oberlin / Allen East',           lat: 30.6249, lng: -92.7679, radius: 4000 },
+];
+
+// Business categories to sweep — these are Google Places "includedTypes"
+const ALL_CATEGORIES = [
+  'restaurant', 'cafe', 'bar', 'bakery', 'meal_delivery',
+  'hair_salon', 'beauty_salon', 'barber_shop', 'nail_salon', 'spa',
+  'car_repair', 'car_wash', 'auto_parts_store',
+  'electrician', 'plumber', 'roofing_contractor', 'painter', 'locksmith',
+  'laundry', 'dry_cleaning',
+  'florist', 'pet_store', 'pet_grooming',
+  'clothing_store', 'shoe_store', 'jewelry_store', 'gift_shop',
+  'gym', 'yoga_studio',
+  'insurance_agency', 'accounting', 'real_estate_agency', 'lawyer',
+  'dentist', 'doctor', 'physiotherapist', 'optician',
+  'moving_company', 'storage',
+  'catering_service', 'event_venue',
+  'photography_studio', 'printing',
+  'music_store', 'musical_instrument_store',
+  'tattoo_parlor',
+  'cleaning_service',
+  'landscaper', 'tree_service',
+];
+
+// ── Args ─────────────────────────────────────────────────────────────────────
+const args = process.argv.slice(2);
+let runAll = args.includes('--all');
+let maxResults = 500;
+let singleCategory = null;
+
+for (let i = 0; i < args.length; i++) {
+  if (args[i] === '--max' && args[i+1]) maxResults = parseInt(args[++i]);
+  if (args[i] === '--category' && args[i+1]) singleCategory = args[++i];
+}
+
+const categoriesToRun = singleCategory
+  ? [singleCategory]
+  : runAll
+  ? ALL_CATEGORIES
+  : ALL_CATEGORIES.slice(0, 8); // Default: first 8 categories (safe free tier)
+
+// ── HTTP helper ───────────────────────────────────────────────────────────────
+function httpGet(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, res => {
+      let buf = '';
+      res.on('data', c => buf += c);
+      res.on('end', () => {
+        try { resolve({ status: res.statusCode, body: JSON.parse(buf) }); }
+        catch (e) { reject(new Error('JSON parse error: ' + buf.slice(0, 200))); }
+      });
+    }).on('error', reject);
+  });
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ── Fetch one category across all zones (old Places API) ─────────────────────
+async function fetchCategory(type) {
+  const results = [];
+  const seenIds = new Set();
+
+  for (const zone of SEARCH_ZONES) {
+    let pageToken = null;
+
+    do {
+      let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json`
+        + `?location=${zone.lat},${zone.lng}`
+        + `&radius=${zone.radius}`
+        + `&type=${encodeURIComponent(type)}`
+        + `&key=${API_KEY}`;
+      if (pageToken) url += `&pagetoken=${encodeURIComponent(pageToken)}`;
+
+      const res = await httpGet(url);
+
+      if (res.status !== 200 || res.body.status === 'REQUEST_DENIED' || res.body.status === 'INVALID_REQUEST') {
+        process.stdout.write(`[${res.body.status||res.status}] `);
+        break;
+      }
+
+      // ZERO_RESULTS is fine — just no results in this zone for this type
+      if (res.body.status === 'ZERO_RESULTS') break;
+
+      const places = res.body.results || [];
+      for (const p of places) {
+        if (seenIds.has(p.place_id)) continue;
+        seenIds.add(p.place_id);
+
+        // Skip permanently closed
+        if (p.business_status === 'CLOSED_PERMANENTLY') continue;
+
+        // Key filter: no website field in basic response
+        if (!p.website) {
+          results.push({
+            id:          p.place_id || '',
+            name:        p.name || '',
+            address:     p.vicinity || '',
+            phone:       '', // populated in detail pass
+            website:     '',
+            rating:      p.rating || null,
+            reviewCount: p.user_ratings_total || 0,
+            types:       (p.types || []).join(', '),
+            category:    type,
+            zone:        zone.name,
+            mapsUrl:     `https://www.google.com/maps/place/?q=place_id:${p.place_id}`,
+            photoRef:    p.photos?.[0]?.photo_reference || '',
+            status:      p.business_status || 'OPERATIONAL',
+            scrapedAt:   new Date().toISOString(),
+          });
+        }
+      }
+
+      pageToken = res.body.next_page_token || null;
+      if (pageToken) await sleep(2000); // Google requires ~2s before next_page_token is valid
+    } while (pageToken && results.length < maxResults);
+
+    await sleep(150);
+  }
+
+  return results;
+}
+
+// ── Enrich a lead with phone via Place Details ────────────────────────────────
+async function enrichLeadPhone(lead) {
+  const url = `https://maps.googleapis.com/maps/api/place/details/json`
+    + `?place_id=${lead.id}`
+    + `&fields=formatted_phone_number,website,formatted_address`
+    + `&key=${API_KEY}`;
+  try {
+    const res = await httpGet(url);
+    if (res.body.status === 'OK') {
+      const r = res.body.result;
+      // If they actually have a website in details, remove from leads
+      if (r.website) return null;
+      lead.phone   = r.formatted_phone_number || '';
+      lead.address = r.formatted_address || lead.address;
+    }
+  } catch {}
+  return lead;
+}
+
+// ── Generate outreach copy ────────────────────────────────────────────────────
+function generateOutreach(lead) {
+  const ratingLine = lead.rating
+    ? `You have a ${lead.rating}⭐ rating with ${lead.reviewCount} reviews on Google — that's a real asset.`
+    : `You have reviews on Google that are bringing people in.`;
+
+  return [
+    `Hi there,`,
+    ``,
+    `I noticed that ${lead.name} doesn't have a website yet — so I went ahead and built one for you.`,
+    ``,
+    `It's live at: [DEMO_URL]`,
+    ``,
+    `${ratingLine} A website will help you convert that attention into more customers.`,
+    ``,
+    `We build and maintain professional websites for Lafayette area businesses starting at $39/month — and you can see exactly what you're getting before you pay anything.`,
+    ``,
+    `If you'd like to keep it, update it, or just chat — reply here or call/text anytime.`,
+    ``,
+    `— InkThorn Crustacean Web Development`,
+    `   hello@inkthorn.ai | inkthorn.ai/crustacean`,
+  ].join('\n');
+}
+
+// ── Export CSV ────────────────────────────────────────────────────────────────
+function toCSV(leads) {
+  const cols = ['name','address','phone','rating','reviewCount','category','mapsUrl','status','scrapedAt','outreach'];
+  const header = cols.join(',');
+  const rows = leads.map(l => {
+    const outreach = generateOutreach(l).replace(/"/g, '""');
+    return cols.map(c => {
+      const val = c === 'outreach' ? outreach : (l[c] ?? '');
+      const s = String(val);
+      return s.includes(',') || s.includes('"') || s.includes('\n') ? `"${s}"` : s;
+    }).join(',');
+  });
+  return [header, ...rows].join('\n');
+}
+
+// ── Main ──────────────────────────────────────────────────────────────────────
+async function main() {
+  console.log('\n⚜️  InkThorn Crustacean — Lafayette DMA Lead Scraper');
+  console.log(`📍 Coverage: ${SEARCH_ZONES.length} zones — Lafayette DMA + surrounding parishes`);
+  console.log(`📂 Categories: ${categoriesToRun.length} (${categoriesToRun.slice(0,4).join(', ')}${categoriesToRun.length > 4 ? '…' : ''})`);
+  console.log(`🎯 Filter: No website · Operational businesses only\n`);
+
+  // Load existing leads to deduplicate
+  let existingIds = new Set();
+  if (fs.existsSync(LEADS_JSON)) {
+    try {
+      const existing = JSON.parse(fs.readFileSync(LEADS_JSON, 'utf8'));
+      existingIds = new Set((existing.leads || []).map(l => l.id));
+      console.log(`📋 Existing leads loaded: ${existingIds.size}\n`);
+    } catch {}
+  }
+
+  const allLeads = [];
+  let totalFetched = 0;
+
+  for (const cat of categoriesToRun) {
+    process.stdout.write(`  Scanning: ${cat.padEnd(35)}`);
+    try {
+      const leads = await fetchCategory(cat);
+      const newLeads = leads.filter(l => !existingIds.has(l.id));
+      allLeads.push(...newLeads);
+      newLeads.forEach(l => existingIds.add(l.id));
+      totalFetched += leads.length;
+      console.log(`${leads.length} found · ${newLeads.length} new no-website leads`);
+    } catch(e) {
+      console.log(`❌ Error: ${e.message}`);
+    }
+    await sleep(300);
+  }
+
+  // ── Enrich with phone numbers via Place Details ──
+  if (allLeads.length > 0) {
+    console.log(`\n📞 Enriching ${allLeads.length} leads with phone numbers (Detail API)...`);
+    const enriched = [];
+    for (let i = 0; i < allLeads.length; i++) {
+      const lead = allLeads[i];
+      process.stdout.write(`\r   ${i+1}/${allLeads.length} — ${lead.name.slice(0,40).padEnd(40)}`);
+      const result = await enrichLeadPhone(lead);
+      if (result) enriched.push(result); // null = actually has website, discard
+      await sleep(100);
+    }
+    console.log(`\n   ✅ ${enriched.length} confirmed no-website leads after detail check`);
+    // Replace allLeads with enriched
+    allLeads.length = 0;
+    allLeads.push(...enriched);
+  }
+
+  console.log(`\n✅ Scan complete`);
+  console.log(`   Total places checked: ${totalFetched}`);
+  console.log(`   New leads (no website): ${allLeads.length}`);
+
+  if (!allLeads.length) {
+    console.log('\n⚠  No new leads found. Try --all to scan all categories.\n');
+    return;
+  }
+
+  // Load + merge with existing
+  let allData = { leads: [], generated: new Date().toISOString(), totalLeads: 0 };
+  if (fs.existsSync(LEADS_JSON)) {
+    try { allData = JSON.parse(fs.readFileSync(LEADS_JSON, 'utf8')); } catch {}
+  }
+  allData.leads = [...(allData.leads || []), ...allLeads];
+  allData.totalLeads = allData.leads.length;
+  allData.lastUpdated = new Date().toISOString();
+
+  // Save JSON
+  fs.writeFileSync(LEADS_JSON, JSON.stringify(allData, null, 2));
+  console.log(`\n💾 JSON saved: data/lafayette-leads.json (${allData.totalLeads} total leads)`);
+
+  // Save CSV
+  fs.writeFileSync(LEADS_CSV, toCSV(allData.leads));
+  console.log(`📊 CSV saved: data/lafayette-leads.csv`);
+
+  // Summary by category
+  const byCat = {};
+  allLeads.forEach(l => { byCat[l.category] = (byCat[l.category]||0)+1; });
+  console.log('\n📈 New leads by category:');
+  Object.entries(byCat)
+    .sort((a,b) => b[1]-a[1])
+    .forEach(([cat, n]) => console.log(`   ${n.toString().padStart(3)}  ${cat}`));
+
+  // Top leads by review count
+  const topLeads = [...allLeads]
+    .sort((a,b) => (b.reviewCount||0) - (a.reviewCount||0))
+    .slice(0, 5);
+
+  console.log('\n⭐ Top 5 highest-rated leads (best outreach targets):');
+  topLeads.forEach(l => {
+    console.log(`   ${l.name}`);
+    console.log(`   ${l.address}`);
+    console.log(`   📞 ${l.phone || 'no phone'} · ${l.rating || 'no rating'}⭐ (${l.reviewCount} reviews)`);
+    console.log(`   🗺  ${l.mapsUrl}`);
+    console.log('');
+  });
+
+  console.log(`\n🚀 Next step: Run generate-lafayette-demo-sites.js to build websites for these leads\n`);
+}
+
+main().catch(e => { console.error('\n❌ Fatal error:', e.message); process.exit(1); });
