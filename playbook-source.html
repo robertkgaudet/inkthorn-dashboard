@@ -737,9 +737,7 @@
       <button class="pb-tab" data-panel="schedule">⚙️ Schedule</button>
       <button class="pb-tab" data-panel="meals">🍽️ Meal Plan</button>
       <button class="pb-tab" data-panel="scripts">🎬 Daily Scripts</button>
-      <button class="pb-tab" data-panel="leads">🦞 Crustacean Leads</button>
-      <button class="pb-tab" data-panel="leads-br">🎯 BR Leads</button>
-      <button class="pb-tab" data-panel="leads-lafayette">⚜️ Lafayette Leads</button>
+      <button class="pb-tab" data-panel="leads-link">🦞 Leads Dashboard</button>
       <button class="pb-tab" data-panel="social">📣 Social Media Marketing</button>
     </nav>
 
@@ -853,8 +851,16 @@
     </div><!-- /#panel-scripts -->
 
     <!-- Crustacean Leads Panel -->
-    <div class="pb-panel" id="panel-leads">
+    <div class="pb-panel" id="panel-leads-link">
+      <div style="text-align:center;padding:64px 24px;">
+        <div style="font-size:2.5rem;margin-bottom:16px;">🦞</div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.15em;color:#4ade80;margin-bottom:12px;">LEADS DASHBOARD MOVED</div>
+        <p style="color:#7878a8;font-size:0.9rem;max-width:400px;margin:0 auto 28px;">The NOLA, Baton Rouge, and Lafayette lead lists now live in the Partner Dashboard — shareable with your team without exposing this playbook.</p>
+        <a href="https://inkthorn.ai/crustacean/dashboard.html" target="_blank" style="font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:14px 28px;border-radius:999px;border:1px solid rgba(74,222,128,0.5);background:rgba(74,222,128,0.1);color:#4ade80;text-decoration:none;display:inline-block;">Open Partner Dashboard →</a>
+      </div>
+    </div><!-- /#panel-leads-link -->
 
+    <div class="pb-panel" id="panel-leads" style="display:none!important;">
       <!-- MAP: Leaflet + OpenStreetMap (no API key) -->
       <div style="margin-bottom:28px;">
         <div class="pb-section-header" style="color:#4ade80;text-shadow:0 0 10px rgba(74,222,128,0.6);margin-bottom:12px;border:none;font-size:0.8rem;">
@@ -1437,12 +1443,7 @@ For each brand below, tell me: which platforms have active accounts, which are p
       btn.classList.add('active');
       document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
       if (btn.dataset.panel === 'scripts'  && !window._scriptsLoaded)  loadScripts();
-      if (btn.dataset.panel === 'leads'    && !window._leadsLoaded)   loadLeads();
-      if (btn.dataset.panel === 'leads-br' && !window._leadsLoadedBR) loadLeadsBR();
-      if (btn.dataset.panel === 'leads')           setTimeout(()=>{ if(window._nolaLeadsForMap)  window.initNOLAMap(window._nolaLeadsForMap); }, 300);
-      if (btn.dataset.panel === 'leads-br')        setTimeout(()=>{ if(window._brLeadsForMap)   window.initBRMap(window._brLeadsForMap); }, 300);
-      if (btn.dataset.panel === 'leads-lafayette' && !window._leadsLoadedLAF) loadLeadsLafayette();
-      if (btn.dataset.panel === 'leads-lafayette') setTimeout(()=>{ if(window._lafLeadsForMap) window.initLafayetteMap(window._lafLeadsForMap); }, 300);
+      // leads-link panel is static (redirect to partner dashboard — no JS needed)
 
     });
 
