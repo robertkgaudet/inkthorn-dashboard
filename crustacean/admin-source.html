@@ -174,7 +174,7 @@
     <!-- How referral links work -->
     <div class="link-explainer">
       <strong>How referral tracking works:</strong><br>
-      Each team member gets a unique referral link like <code>https://inkthorn.ai/crustacean/?ref=MARCUS01</code>.<br>
+      Each team member picks their own unique word (up to 6 characters) — like <code>JORDAN</code>, <code>MIKE</code>, or <code>SALES1</code>. Their referral link becomes <code>https://inkthorn.ai/crustacean/?ref=JORDAN</code>.<br>
       When a prospect visits using that link, the code is stored in their browser. Every sign-up form and "Claim Site" button on the site will automatically include <code>?ref=MARCUS01</code> in the URL — so you can track which member drove the conversion.<br><br>
       <strong>To close a sale manually:</strong> Have the team member direct the prospect to <code>inkthorn.ai/crustacean/?ref=THEIRCODE</code> — or share the link from the table below.
     </div>
@@ -195,9 +195,10 @@
           <input type="email" id="new-email" placeholder="marcus@gmail.com" />
         </div>
         <div class="form-field">
-          <label>Referral Code <span style="color:#7878a8;font-size:0.7em;">(auto-generated or custom)</span></label>
-          <input type="text" id="new-code" placeholder="e.g. MARCUS01" maxlength="12"
-            style="text-transform:uppercase;" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')" />
+          <label>Referral Code <span style="color:#7878a8;font-size:0.7em;">(their custom word, 6 chars max)</span></label>
+          <input type="text" id="new-code" placeholder="e.g. JORDAN" maxlength="6"
+            style="text-transform:uppercase;letter-spacing:0.15em;font-family:'Orbitron',sans-serif;font-size:0.85rem;"
+            oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6)" />
         </div>
         <button class="btn-add" onclick="addMember()">ADD MEMBER →</button>
       </div>
@@ -259,9 +260,10 @@
     }
 
     function generateCode(name) {
-      const base = name.toUpperCase().replace(/[^A-Z]/g,'').slice(0,6);
-      const num = String(Math.floor(Math.random() * 99) + 1).padStart(2,'0');
-      return base + num;
+      // Generate a clean 6-char code from the first name
+      const words = name.trim().split(/\s+/);
+      const first = words[0].toUpperCase().replace(/[^A-Z]/g,'').slice(0,6);
+      return first.padEnd(6, String(Math.floor(Math.random()*9)+1)).slice(0,6);
     }
 
     function makeId() {
@@ -310,6 +312,7 @@
 
       if (!name) { alert('Please enter a name.'); return; }
       if (!code) code = generateCode(name);
+      code = code.slice(0,6); // enforce 6-char max
 
       const team = loadTeam();
 
