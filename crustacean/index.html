@@ -2,12 +2,15 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="refresh" content="0; url=https://inkthorn.ai/" />
-  <link rel="canonical" href="https://inkthorn.ai/" />
   <title>Redirecting…</title>
+  <link rel="canonical" href="https://inkthorn.ai/" />
 </head>
 <body>
-  <script>window.location.replace('https://inkthorn.ai/');</script>
+  <script>
+    // Preserve query string (including ?ref=CODE) through the redirect
+    var qs = window.location.search;
+    window.location.replace('https://inkthorn.ai/' + qs);
+  </script>
   <p>Redirecting to <a href="https://inkthorn.ai/">inkthorn.ai</a>…</p>
 </body>
 </html>
