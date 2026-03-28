@@ -53,9 +53,14 @@ jobs:
       - name: Encrypt Admin Panel
         env:
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
-          yes | npx staticrypt crustacean/admin-source.html -p "$ADMIN_PASSWORD" --short || true
-          cp encrypted/admin-source.html crustacean/admin.html
+          # Inject real Supabase credentials before encrypting
+          sed "s|SUPABASE_URL_PLACEHOLDER|$SUPABASE_URL|g; s|SUPABASE_SERVICE_KEY_PLACEHOLDER|$SUPABASE_SERVICE_KEY|g" \
+            crustacean/admin-source.html > /tmp/admin-injected.html
+          yes | npx staticrypt /tmp/admin-injected.html -p "$ADMIN_PASSWORD" --short || true
+          cp encrypted/admin-injected.html crustacean/admin.html
 
       - name: Commit updated data
         run: |

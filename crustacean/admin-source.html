@@ -240,46 +240,68 @@
 
   <script>
     const BASE_URL = 'https://inkthorn.ai/crustacean/';
+    const SB_URL = 'SUPABASE_URL_PLACEHOLDER';
+    const SB_KEY = 'SUPABASE_SERVICE_KEY_PLACEHOLDER';
 
-    // ── Load & Save (localStorage as backend for static site) ──────────────
-    function loadTeam() {
-      try {
-        const stored = localStorage.getItem('inkthorn_team');
-        if (stored) return JSON.parse(stored);
-      } catch(e) {}
-      // Default seed data
-      return {
-        members: [
-          { id: 'rob001', name: 'Rob Gaudet', email: 'rgaudet2023@gmail.com', code: 'ROB001', role: 'admin', active: true, created: '2026-03-28', notes: 'Founder' }
-        ]
-      };
+    // ── Supabase helpers ──────────────────────────────────────────────────
+    async function sbGet(table, params) {
+      const url = SB_URL + '/rest/v1/' + table + (params ? '?' + params : '');
+      const res = await fetch(url, {
+        headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+      });
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
     }
 
-    function saveTeam(data) {
-      localStorage.setItem('inkthorn_team', JSON.stringify(data));
+    async function sbInsert(table, data) {
+      const res = await fetch(SB_URL + '/rest/v1/' + table, {
+        method: 'POST',
+        headers: {
+          'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY,
+          'Content-Type': 'application/json', 'Prefer': 'return=representation'
+        },
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
+    }
+
+    async function sbUpdate(table, id, data) {
+      const res = await fetch(SB_URL + '/rest/v1/' + table + '?id=eq.' + id, {
+        method: 'PATCH',
+        headers: {
+          'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY,
+          'Content-Type': 'application/json', 'Prefer': 'return=representation'
+        },
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error(await res.text());
+      return res.json();
     }
 
     function generateCode(name) {
-      // Generate a clean 6-char code from the first name
       const words = name.trim().split(/\s+/);
       const first = words[0].toUpperCase().replace(/[^A-Z]/g,'').slice(0,6);
       return first.padEnd(6, String(Math.floor(Math.random()*9)+1)).slice(0,6);
     }
 
-    function makeId() {
-      return 'mem' + Date.now().toString(36) + Math.random().toString(36).slice(2,5);
-    }
-
     // ── Render table ──────────────────────────────────────────────────────
-    function render() {
-      const team = loadTeam();
-      const members = team.members || [];
+    async function render() {
+      const tbody = document.getElementById('member-tbody');
+      tbody.innerHTML = '<tr><td colspan="9" style="padding:2rem;text-align:center;color:#7878a8;">Loading from database…</td></tr>';
+
+      let members;
+      try {
+        members = await sbGet('team_members', 'order=created_at.asc');
+      } catch(e) {
+        tbody.innerHTML = '<tr><td colspan="9" style="padding:2rem;text-align:center;color:#ff2d87;">Error: ' + e.message + '</td></tr>';
+        return;
+      }
 
       document.getElementById('stat-total').textContent = members.length;
       document.getElementById('stat-active').textContent = members.filter(m => m.active).length;
       document.getElementById('stat-inactive').textContent = members.filter(m => !m.active).length;
 
-      const tbody = document.getElementById('member-tbody');
       if (!members.length) {
         tbody.innerHTML = '<tr><td colspan="9" style="padding:2rem;text-align:center;color:#7878a8;">No members yet.</td></tr>';
         return;
@@ -288,6 +310,7 @@
       tbody.innerHTML = members.map(m => {
         const link = BASE_URL + '?ref=' + encodeURIComponent(m.code);
         const isAdmin = m.role === 'admin';
+        const created = m.created_at ? m.created_at.split('T')[0] : '—';
         return '<tr>' +
           '<td style="font-weight:700;color:#f0f0ff;">' + escHtml(m.name) + (isAdmin ? ' <span style="font-size:0.62rem;color:#ff2d87;">ADMIN</span>' : '') + '</td>' +
           '<td style="color:#7878a8;font-size:0.82rem;">' + escHtml(m.email || '—') + '</td>' +
@@ -295,58 +318,51 @@
           '<td class="link-cell"><a href="' + link + '" target="_blank" rel="noopener">' + link + '</a></td>' +
           '<td><button class="copy-btn" id="copybtn-' + m.id + '" onclick="copyLink(\'' + escHtml(m.code) + '\', \'' + m.id + '\')">COPY LINK</button></td>' +
           '<td>' + (m.active ? '<span class="status-active">● Active</span>' : '<span class="status-inactive">○ Inactive</span>') + '</td>' +
-          '<td style="color:#7878a8;font-size:0.8rem;white-space:nowrap;">' + escHtml(m.created || '—') + '</td>' +
+          '<td style="color:#7878a8;font-size:0.8rem;white-space:nowrap;">' + created + '</td>' +
           '<td style="color:#7878a8;font-size:0.8rem;">' + escHtml(m.notes || '') + '</td>' +
           '<td>' + (isAdmin ? '<span style="font-size:0.72rem;color:#7878a8;">—</span>' :
-            '<button class="toggle-btn ' + (m.active ? 'active' : 'inactive') + '" onclick="toggleMember(\'' + m.id + '\')">' +
+            '<button class="toggle-btn ' + (m.active ? 'active' : 'inactive') + '" onclick="toggleMember(\'' + m.id + '\', ' + m.active + ')">' +
             (m.active ? 'Deactivate' : 'Activate') + '</button>') + '</td>' +
           '</tr>';
       }).join('');
     }
 
     // ── Add member ────────────────────────────────────────────────────────
-    function addMember() {
+    async function addMember() {
       const name = document.getElementById('new-name').value.trim();
       const email = document.getElementById('new-email').value.trim();
-      let code = document.getElementById('new-code').value.trim().toUpperCase().replace(/[^A-Z0-9]/g,'');
+      let code = document.getElementById('new-code').value.trim().toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);
 
       if (!name) { alert('Please enter a name.'); return; }
       if (!code) code = generateCode(name);
-      code = code.slice(0,6); // enforce 6-char max
 
-      const team = loadTeam();
+      const btn = document.querySelector('.btn-add');
+      btn.textContent = 'ADDING…'; btn.disabled = true;
 
-      // Check code uniqueness
-      if (team.members.some(m => m.code === code)) {
-        code = code.slice(0,6) + String(Math.floor(Math.random()*90)+10);
+      try {
+        await sbInsert('team_members', { name, email, code, role: 'member', active: true, notes: '' });
+        document.getElementById('new-name').value = '';
+        document.getElementById('new-email').value = '';
+        document.getElementById('new-code').value = '';
+        await render();
+        showToast('✓ ' + name + ' added! Code: ' + code);
+      } catch(e) {
+        if (e.message.includes('unique')) {
+          alert('That code is already taken. Please choose a different one.');
+        } else {
+          alert('Error: ' + e.message);
+        }
+      } finally {
+        btn.textContent = 'ADD MEMBER →'; btn.disabled = false;
       }
-
-      team.members.push({
-        id: makeId(),
-        name,
-        email,
-        code,
-        role: 'member',
-        active: true,
-        created: new Date().toISOString().split('T')[0],
-        notes: ''
-      });
-
-      saveTeam(team);
-      document.getElementById('new-name').value = '';
-      document.getElementById('new-email').value = '';
-      document.getElementById('new-code').value = '';
-      render();
-      showToast('✓ ' + name + ' added! Code: ' + code);
     }
 
     // ── Toggle active ─────────────────────────────────────────────────────
-    function toggleMember(id) {
-      const team = loadTeam();
-      const m = team.members.find(m => m.id === id);
-      if (m) m.active = !m.active;
-      saveTeam(team);
-      render();
+    async function toggleMember(id, currentlyActive) {
+      try {
+        await sbUpdate('team_members', id, { active: !currentlyActive });
+        await render();
+      } catch(e) { alert('Error: ' + e.message); }
     }
 
     // ── Copy link ─────────────────────────────────────────────────────────
