@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>InkThorn Crustacean — Sales Training & Scripts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100vh; background: #06000f; color: #f0f0ff; font-family: 'Space Grotesk', sans-serif; }
+
+    .topbar {
+      background: rgba(10,0,20,0.95);
+      border-bottom: 1px solid rgba(168,85,247,0.2);
+      padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    .topbar-logo { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 900; color: #f0f0ff; }
+    .topbar-logo span { color: #a855f7; }
+    .topbar-nav { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .topbar-nav a { font-size: 0.78rem; color: #7878a8; text-decoration: none; font-weight: 600; }
+    .topbar-nav a:hover { color: #a855f7; }
+    .topbar-nav a.active { color: #f0f0ff; }
+
+    .hero {
+      background: linear-gradient(135deg, #0d001a 0%, #1a0035 50%, #0a0a1a 100%);
+      padding: 64px 28px 56px;
+      text-align: center;
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+    }
+    .hero-badge { display:inline-block;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.4);color:#c4b5fd;font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.2em;padding:6px 16px;border-radius:999px;margin-bottom:20px; }
+    .hero h1 { font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;margin-bottom:14px; }
+    .hero h1 span { color:#a855f7; }
+    .hero-sub { font-size:1.05rem;color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto; }
+
+    .content { max-width: 900px; margin: 0 auto; padding: 48px 28px 80px; }
+
+    .section-title { font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#a855f7;margin-bottom:8px; }
+    .section-heading { font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2rem);color:#f0f0ff;margin-bottom:8px; }
+    .section-sub { font-size:0.9rem;color:#7878a8;margin-bottom:32px;line-height:1.7; }
+
+    hr.divider { border:none;border-top:1px solid rgba(168,85,247,0.15);margin:48px 0; }
+
+    /* ── Steps ── */
+    .step {
+      display: flex; gap: 20px; align-items: flex-start;
+      background: rgba(22,12,45,0.8);
+      border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 16px; padding: 24px; margin-bottom: 16px;
+    }
+    .step-number {
+      flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(168,85,247,0.2); border: 2px solid rgba(168,85,247,0.5);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 900; color: #a855f7;
+    }
+    .step-content h3 { font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:#f0f0ff;margin-bottom:6px; }
+    .step-content p { font-size:0.88rem;color:#9898c0;line-height:1.7; }
+
+    /* ── Script boxes ── */
+    .script-box {
+      background: rgba(10,0,20,0.8);
+      border-left: 4px solid #a855f7;
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+      margin: 16px 0;
+      position: relative;
+    }
+    .script-label {
+      font-family: 'Orbitron', sans-serif; font-size: 0.45rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; color: #a855f7;
+      margin-bottom: 10px;
+    }
+    .script-text { font-size: 0.95rem; color: #e0e0ff; line-height: 1.8; font-style: italic; }
+    .script-text strong { color: #fbbf24; font-style: normal; }
+    .script-note { font-size: 0.78rem; color: #7878a8; margin-top: 10px; font-style: normal; }
+
+    .objection-box {
+      background: rgba(22,12,45,0.6);
+      border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 12px; padding: 20px 24px; margin-bottom: 12px;
+    }
+    .objection-q { font-weight: 700; color: #ff6b6b; font-size: 0.9rem; margin-bottom: 8px; }
+    .objection-a { font-size: 0.88rem; color: #c4b5fd; line-height: 1.7; }
+    .objection-a strong { color: #fbbf24; }
+
+    /* ── Key concepts ── */
+    .concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+    @media(max-width:600px){ .concept-grid { grid-template-columns:1fr; } }
+    .concept-card {
+      background: rgba(22,12,45,0.8); border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 12px; padding: 20px;
+    }
+    .concept-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .concept-title { font-weight: 700; color: #f0f0ff; font-size: 0.95rem; margin-bottom: 6px; }
+    .concept-desc { font-size: 0.82rem; color: #7878a8; line-height: 1.65; }
+
+    /* ── Tabs ── */
+    .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tab-btn {
+      font-family: 'Orbitron', sans-serif; font-size: 0.5rem; font-weight: 700;
+      letter-spacing: 0.1em; padding: 9px 16px; border-radius: 8px;
+      border: 1px solid rgba(168,85,247,0.3); background: transparent;
+      color: #7878a8; cursor: pointer; transition: all 0.2s;
+    }
+    .tab-btn:hover { color: #a855f7; border-color: rgba(168,85,247,0.6); }
+    .tab-btn.active { background: rgba(168,85,247,0.15); border-color: rgba(168,85,247,0.6); color: #f0f0ff; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Tips ── */
+    .tip { display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(168,85,247,0.1); }
+    .tip:last-child { border-bottom:none; }
+    .tip-icon { font-size:1.2rem;flex-shrink:0;margin-top:2px; }
+    .tip-text { font-size:0.88rem;color:#c4b5fd;line-height:1.65; }
+    .tip-text strong { color:#fbbf24; }
+
+    /* ── CTA ── */
+    .cta-banner { background:linear-gradient(135deg,rgba(45,12,80,0.9),rgba(10,0,20,0.9));border:1px solid rgba(168,85,247,0.4);border-radius:20px;padding:40px;text-align:center; }
+    .cta-banner h2 { font-family:'Playfair Display',serif;font-size:2rem;color:#fff;margin-bottom:10px; }
+    .cta-banner p { color:rgba(255,255,255,0.7);margin-bottom:24px;font-size:0.95rem; }
+    .btn-purple { display:inline-block;background:#a855f7;color:#fff;font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:14px 28px;border-radius:999px;text-decoration:none;transition:all 0.2s;margin:4px; }
+    .btn-purple:hover { background:#9333ea;transform:translateY(-2px); }
+    .btn-outline-purple { display:inline-block;border:2px solid rgba(168,85,247,0.5);color:#c4b5fd;font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:12px 24px;border-radius:999px;text-decoration:none;transition:all 0.2s;margin:4px; }
+    .btn-outline-purple:hover { background:rgba(168,85,247,0.1); }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <nav class="topbar">
+    <div class="topbar-logo">InkThorn <span>Crustacean</span></div>
+    <div class="topbar-nav">
+      <a href="/crustacean/">Home</a>
+      <a href="/crustacean/dashboard.html">Leads Dashboard</a>
+      <a href="/crustacean/earnings.html">💰 Earnings</a>
+      <a href="/crustacean/training.html" class="active">📋 Training</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">SALES TRAINING & SCRIPTS</div>
+    <h1>Learn It. <span>Say It. Close It.</span></h1>
+    <p class="hero-sub">Everything you need to explain InkThorn Crustacean in plain language, handle every objection, and get a "yes" on the first call.</p>
+  </div>
+
+  <div class="content">
+
+    <!-- What Is This? -->
+    <div class="section-title">Start Here</div>
+    <h2 class="section-heading">What Is InkThorn Crustacean? (In Plain English)</h2>
+    <p class="section-sub">Before you can sell it, you have to understand it. Read this until you can say it without thinking.</p>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <div class="concept-icon">🌐</div>
+        <div class="concept-title">The Problem We Solve</div>
+        <div class="concept-desc">Thousands of local businesses — restaurants, salons, auto shops, dentists — have NO website. When someone searches for them on Google or asks ChatGPT, they're invisible. We fix that.</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">🤖</div>
+        <div class="concept-title">What Is GEO?</div>
+        <div class="concept-desc">GEO stands for Generative Engine Optimization. It's like SEO, but for AI. When someone asks ChatGPT "best hair salon in Baton Rouge," GEO-optimized sites show up. Ours do that.</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">🎁</div>
+        <div class="concept-title">The Demo Site Advantage</div>
+        <div class="concept-desc">We've already built a FREE demo website for over 6,500 Louisiana businesses. When you call them, you're not selling something imaginary — you're showing them something real that already exists.</div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">💳</div>
+        <div class="concept-title">How They Pay</div>
+        <div class="concept-desc">$47/month (Starter), $95/month (Growth), or $179/month (Premium). Month-to-month. No contracts. No setup fees. They can see exactly what they're getting before they pay a dime.</div>
+      </div>
+    </div>
+
+    <div class="script-box" style="border-left-color:#4ade80;margin-bottom:32px;">
+      <div class="script-label" style="color:#4ade80;">🧠 THE ONE-SENTENCE PITCH — MEMORIZE THIS</div>
+      <div class="script-text">"We build professional websites for Louisiana businesses that make you show up on Google <strong>and</strong> when people ask ChatGPT — and we already built one for yours for free, so you can see it before you pay anything."</div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- The Process -->
+    <div class="section-title">The Process</div>
+    <h2 class="section-heading">5 Steps From Lead to Close</h2>
+    <p class="section-sub">Follow these steps every time. Don't skip steps. The demo site is your secret weapon — use it early.</p>
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3>Find Your Lead</h3>
+        <p>Open the <a href="/crustacean/dashboard.html" style="color:#a855f7;">Partner Dashboard</a>. Pick a business with a phone number. Look for ones with good ratings (4+ stars) — they care about their reputation and are more likely to want a professional online presence. Filter by city or category to work an area systematically.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3>Pull Up Their Demo Site First</h3>
+        <p>Before you call, click "View Demo Site" from the dashboard. Look at it. Know the business name, category, and address. This makes you sound informed and personal — not like you're reading from a list. The URL is <strong style="color:#fbbf24;">inkthorn.ai/crustacean/demos/[business-name]/</strong></p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3>Make the Call (Use the Script Below)</h3>
+        <p>Keep it short. Your only goal on the first call is to get them to look at their demo site. Don't try to close on the first call — just get them curious. The site does the selling.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3>Follow Up</h3>
+        <p>If they looked at the site, follow up within 24 hours. If they didn't answer, call back twice more on different days and different times. Most closes happen on the 2nd or 3rd contact. Don't give up after one attempt.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h3>Close & Submit</h3>
+        <p>When they say yes, direct them to <a href="https://inkthorn.ai" target="_blank" style="color:#a855f7;">inkthorn.ai</a> to sign up, or collect their info and submit on their behalf. Log your close so you get credit for your commission.</p>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Scripts -->
+    <div class="section-title">Word-for-Word Scripts</div>
+    <h2 class="section-heading">Exactly What to Say</h2>
+    <p class="section-sub">These scripts are tested. Use them. As you get comfortable, make them your own — but start here.</p>
+
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="showTab('cold-call')">📞 Cold Call</button>
+      <button class="tab-btn" onclick="showTab('voicemail')">📱 Voicemail</button>
+      <button class="tab-btn" onclick="showTab('followup')">🔁 Follow-Up</button>
+      <button class="tab-btn" onclick="showTab('text')">💬 Text / SMS</button>
+      <button class="tab-btn" onclick="showTab('close')">🤝 The Close</button>
+    </div>
+
+    <!-- Cold Call -->
+    <div class="tab-panel active" id="tab-cold-call">
+      <div class="script-box">
+        <div class="script-label">COLD CALL — OPENING (First 20 seconds)</div>
+        <div class="script-text">
+          "Hi, is this [Owner Name / the owner of <strong>[Business Name]</strong>]?<br><br>
+          Hey, my name is [Your Name] — I'm calling from InkThorn, we're a web company based here in Louisiana.<br><br>
+          Real quick — I noticed <strong>[Business Name]</strong> doesn't have a website, so we went ahead and built you a free demo. I just want to make sure you saw it before we take it down.<br><br>
+          It's live right now at <strong>inkthorn.ai</strong> — if you just type in your business name in the search bar, it'll pull up. Can you do that real quick while I have you?"
+        </div>
+        <div class="script-note">📌 KEY: Get them to the site while you're on the phone. Once they see it, the conversation changes completely.</div>
+      </div>
+
+      <div class="script-box" style="border-left-color:#4ade80;">
+        <div class="script-label" style="color:#4ade80;">IF THEY SAY "I'M LOOKING AT IT NOW"</div>
+        <div class="script-text">
+          "Great! So that's your business — we built that based on your Google listing. It's got your address, phone, hours, services, and it's already set up to show up when people search for [category] in [city].<br><br>
+          Right now that site is free — but <strong>if you want to keep it, update it, and make it fully yours</strong>, it's just <strong>$95 a month</strong>. No contracts, no setup fees. You can cancel anytime.<br><br>
+          The reason that matters is — right now, if someone asks ChatGPT or Google for a [category] in [city], <strong>you don't show up</strong>. With this site, you do.<br><br>
+          Want to go ahead and claim it?"
+        </div>
+      </div>
+
+      <div class="script-box" style="border-left-color:#fbbf24;">
+        <div class="script-label" style="color:#fbbf24;">IF THEY SAY "WHAT DOES IT COST?"</div>
+        <div class="script-text">
+          "We have three plans. The most popular is $95 a month — that's less than most people spend on lunch in a week, and it brings in customers around the clock.<br><br>
+          We also have a basic plan at $47, and a premium with online ordering at $179.<br><br>
+          But honestly — pull it up first, see what you think, and then we can talk about which one fits you best. The site is already done. You just have to decide if you want it."
+        </div>
+      </div>
+    </div>
+
+    <!-- Voicemail -->
+    <div class="tab-panel" id="tab-voicemail">
+      <div class="script-box">
+        <div class="script-label">VOICEMAIL SCRIPT (Under 30 seconds)</div>
+        <div class="script-text">
+          "Hey, this message is for the owner of <strong>[Business Name]</strong> — my name is [Your Name] with InkThorn.<br><br>
+          We built a free website for your business and I wanted to make sure you saw it before we pull it down. You can find it at <strong>inkthorn.ai</strong> — just search your business name.<br><br>
+          Give me a call back at [Your Number] when you get a chance. Thanks."
+        </div>
+        <div class="script-note">📌 Keep it under 30 seconds. Curiosity is the goal — not information. "Free website" and "before we pull it down" creates urgency.</div>
+      </div>
+    </div>
+
+    <!-- Follow-Up -->
+    <div class="tab-panel" id="tab-followup">
+      <div class="script-box">
+        <div class="script-label">FOLLOW-UP CALL — Day 2 or 3</div>
+        <div class="script-text">
+          "Hey [Name], this is [Your Name] again from InkThorn — I left you a message a couple days ago about the free website we built for <strong>[Business Name]</strong>.<br><br>
+          Did you get a chance to look at it? It's at inkthorn.ai — just type your business name in the search bar at the top.<br><br>
+          I just want to make sure you saw it before we close it out. Takes about 30 seconds to look."
+        </div>
+      </div>
+
+      <div class="script-box" style="border-left-color:#fbbf24;">
+        <div class="script-label" style="color:#fbbf24;">FOLLOW-UP CALL — If They Saw It But Didn't Commit</div>
+        <div class="script-text">
+          "Hey [Name], just checking back in — you mentioned you looked at the site last week. I wanted to see if you had any questions.<br><br>
+          A lot of business owners I talk to wonder if it's worth it. Here's how I think about it: <strong>if this site brings in even one new customer a month, it's paid for itself.</strong> Most see way more than that.<br><br>
+          Are you ready to go ahead and claim it, or is there something holding you back I can help with?"
+        </div>
+      </div>
+    </div>
+
+    <!-- Text / SMS -->
+    <div class="tab-panel" id="tab-text">
+      <div class="script-box">
+        <div class="script-label">SMS / TEXT MESSAGE — First Outreach</div>
+        <div class="script-text">
+          "Hi, this is [Name] with InkThorn. We built a free website for <strong>[Business Name]</strong> — you can see it at inkthorn.ai (search your business name). Let me know if you'd like to keep it. $95/mo, no contract. 🦞"
+        </div>
+        <div class="script-note">📌 Short, direct, has the URL. The emoji makes it feel human, not automated. Send during business hours (10am–4pm).</div>
+      </div>
+
+      <div class="script-box" style="border-left-color:#4ade80;">
+        <div class="script-label" style="color:#4ade80;">SMS FOLLOW-UP — If No Response After 3 Days</div>
+        <div class="script-text">
+          "Just following up on the free website we built for <strong>[Business Name]</strong>. Check it out at inkthorn.ai before we take it down. Happy to answer any questions!"
+        </div>
+      </div>
+    </div>
+
+    <!-- The Close -->
+    <div class="tab-panel" id="tab-close">
+      <div class="script-box" style="border-left-color:#4ade80;">
+        <div class="script-label" style="color:#4ade80;">THE CLOSE — When They're Ready</div>
+        <div class="script-text">
+          "Great! So to get started, I just need a couple things from you — your email address, and we'll set you up with the Growth plan at $95 a month. First month is all you need to try it out.<br><br>
+          I'll send you a link right now to complete the setup — should take about 2 minutes. Sound good?"
+        </div>
+        <div class="script-note">📌 Always ask a yes/no question at the end. Don't leave it open. Move forward, not sideways.</div>
+      </div>
+
+      <div class="script-box" style="border-left-color:#a855f7;">
+        <div class="script-label">UPSELL — When They Choose Starter ($47)</div>
+        <div class="script-text">
+          "The Starter plan is great — you'll be covered on search and AI. One thing to consider: the Growth plan for $95 adds a services page and booking integration, which is what really drives calls.<br><br>
+          Most of our restaurant and salon clients go with Growth. But Starter is a solid start — we can always upgrade later."
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Objections -->
+    <div class="section-title">Handling Objections</div>
+    <h2 class="section-heading">Every Pushback. Every Answer.</h2>
+    <p class="section-sub">These are the objections you WILL hear. Read them until the answers feel natural.</p>
+
+    <div class="objection-box">
+      <div class="objection-q">❓ "I already have a Facebook page, I don't need a website."</div>
+      <div class="objection-a">"Facebook is great for your existing customers — but when someone <strong>new</strong> to town opens ChatGPT and asks for a [salon/restaurant/auto shop] in [city], Facebook pages don't show up. A website does. You need both — and right now, you only have one."</div>
+    </div>
+
+    <div class="objection-box">
+      <div class="objection-q">❓ "I can't afford it right now."</div>
+      <div class="objection-a">"I completely understand. Think of it this way — <strong>$95 a month is $3.17 a day.</strong> If this site brings in one new customer this month, it's already paid for itself several times over. What does one new customer usually spend with you?"<br><br>
+      <em>(Let them answer — they'll close themselves.)</em></div>
+    </div>
+
+    <div class="objection-box">
+      <div class="objection-q">❓ "How do I know this is real? Sounds like a scam."</div>
+      <div class="objection-a">"That's a fair question — I'd be skeptical too. That's exactly why we built the demo first and aren't asking you for anything upfront. Just go to <strong>inkthorn.ai</strong> right now, type in your business name, and see it for yourself. If it's not there, hang up on me. But it is there."</div>
+    </div>
+
+    <div class="objection-box">
+      <div class="objection-q">❓ "I need to talk to my husband/wife/partner first."</div>
+      <div class="objection-a">"Of course — that makes total sense. Can I send you the link to the demo site so you can show them? And what's a good time to call back tomorrow after you've had a chance to look at it together?"</div>
+    </div>
+
+    <div class="objection-box">
+      <div class="objection-q">❓ "I already have a website."</div>
+      <div class="objection-a">"That's great! Quick question — does your current site show up when someone asks ChatGPT or Google Gemini for [category] in [city]? Most older sites don't. GEO optimization is new, and most sites built before 2024 don't have it. I'm happy to do a quick comparison if you'd like."</div>
+    </div>
+
+    <div class="objection-box">
+      <div class="objection-q">❓ "Can I just have the website without paying monthly?"</div>
+      <div class="objection-a">"The monthly fee covers hosting, updates, GEO optimization, and our support — it's not just the site, it's the ongoing management. Think of it like renting a storefront — the space doesn't run itself. That said, $95/month is less than most businesses spend on coffee supplies."</div>
+    </div>
+
+    <div class="objection-box">
+      <div class="objection-q">❓ "What if I want to cancel?"</div>
+      <div class="objection-a">"No problem at all — no contracts, cancel anytime. We'd rather you stay because it's working, not because you feel locked in. Most customers who try it for 60 days never want to leave."</div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Tips -->
+    <div class="section-title">Pro Tips</div>
+    <h2 class="section-heading">What Separates Good Closers From Great Ones</h2>
+
+    <div style="background:rgba(22,12,45,0.8);border:1px solid rgba(168,85,247,0.2);border-radius:16px;padding:24px;margin-bottom:32px;">
+      <div class="tip">
+        <div class="tip-icon">🎯</div>
+        <div class="tip-text"><strong>Call during business hours, not at opening or closing.</strong> 10am–12pm and 2pm–4pm are the sweet spots. Avoid Monday mornings and Friday afternoons.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">📊</div>
+        <div class="tip-text"><strong>Lead with ratings.</strong> If a business has 4.7 stars and 200 reviews, mention it: "You have a 4.7 rating with 200 reviews — that's impressive. We want to make sure new customers can find you online."</div>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">🗣️</div>
+        <div class="tip-text"><strong>Talk less. Ask more.</strong> Your job is to ask questions and listen. The more they talk, the more they sell themselves. "How do most of your new customers find you right now?" is gold.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">🔢</div>
+        <div class="tip-text"><strong>Work in batches of 20.</strong> Call 20 leads in a row before stopping. Your energy and delivery improve with repetition, and your close rate on calls 15–20 will be higher than on calls 1–5.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">📝</div>
+        <div class="tip-text"><strong>Log everything.</strong> Note whether they answered, heard the voicemail, saw the site, or said no. Follow-ups close more deals than first calls. Most "no's" become "yes" on contact 2 or 3.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">💬</div>
+        <div class="tip-text"><strong>Never argue.</strong> If they're not interested, thank them and move on. There are 6,500 leads. Spend your energy on the ones who are curious, not the ones who aren't.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">🦞</div>
+        <div class="tip-text"><strong>Believe in the product.</strong> This is real. The demo sites exist. The technology works. When you call knowing you have something genuinely valuable to offer, it comes through in your voice — and people say yes.</div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Quick Reference -->
+    <div class="section-title">Quick Reference Card</div>
+    <h2 class="section-heading">Print This. Keep It Next to You.</h2>
+
+    <div style="background:rgba(10,0,20,0.9);border:2px solid rgba(168,85,247,0.4);border-radius:16px;padding:28px;margin-bottom:48px;font-size:0.88rem;line-height:1.8;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div>
+          <div style="font-family:'Orbitron',sans-serif;font-size:0.55rem;letter-spacing:0.15em;color:#a855f7;margin-bottom:10px;">KEY FACTS</div>
+          <div style="color:#c4b5fd;">✦ 6,597 leads with demo sites built<br>
+          ✦ NOLA, Baton Rouge, Lafayette DMA<br>
+          ✦ Plans: $47 · $95 · $179/month<br>
+          ✦ No contracts, cancel anytime<br>
+          ✦ Your commission: <strong style="color:#fbbf24;">30% recurring</strong><br>
+          ✦ Demo sites live at inkthorn.ai</div>
+        </div>
+        <div>
+          <div style="font-family:'Orbitron',sans-serif;font-size:0.55rem;letter-spacing:0.15em;color:#a855f7;margin-bottom:10px;">YOUR NUMBERS (Growth Plan $95)</div>
+          <div style="color:#c4b5fd;">10 customers = <strong style="color:#4ade80;">$285/mo</strong> your cut<br>
+          25 customers = <strong style="color:#4ade80;">$712/mo</strong> your cut<br>
+          50 customers = <strong style="color:#fbbf24;">$1,425/mo</strong> your cut<br>
+          100 customers = <strong style="color:#fbbf24;">$2,850/mo</strong> your cut<br>
+          200 customers = <strong style="color:#ff2d87;">$5,700/mo</strong> your cut</div>
+        </div>
+      </div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(168,85,247,0.2);">
+        <div style="font-family:'Orbitron',sans-serif;font-size:0.55rem;letter-spacing:0.15em;color:#a855f7;margin-bottom:8px;">ONE-SENTENCE PITCH</div>
+        <div style="color:#fbbf24;font-style:italic;font-size:0.9rem;">"We already built your business a free website — search your name at inkthorn.ai and claim it for $95/month."</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-banner">
+      <h2>You're Ready. Start Closing.</h2>
+      <p>The dashboard has 6,597 leads with phone numbers. Open it up and make your first call today.</p>
+      <a href="/crustacean/dashboard.html" class="btn-purple">Open Leads Dashboard →</a>
+      <a href="/crustacean/earnings.html" class="btn-outline-purple">View Earnings Calculator</a>
+    </div>
+
+  </div>
+
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
