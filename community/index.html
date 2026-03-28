@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Orleans Community Events — InkThorn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <script>
+    // Set header height CSS var as early as possible and after fonts load
+    function updateHeaderHeight() {
+      const h = document.querySelector('.site-header');
+      if (h) document.documentElement.style.setProperty('--header-height', h.offsetHeight + 'px');
+    }
+    document.addEventListener('DOMContentLoaded', updateHeaderHeight);
+    document.fonts && document.fonts.ready && document.fonts.ready.then(updateHeaderHeight);
+    window.addEventListener('resize', updateHeaderHeight);
+  </script>
+</head>
+<body>
+
+  <div style="background:#0f1f3d;color:rgba(255,255,255,0.7);text-align:center;padding:8px;font-size:0.8rem;"><a href="/" style="color:#f0b840;font-weight:700;text-decoration:none;">← InkThorn Home</a> · 🎵 New Orleans Community Events</div>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-horizon" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top-row">
+        <img src="../assets/inkthorn-mascot.png" alt="InkThorn" class="mascot" />
+        <div class="logo-block">
+          <h1 class="logo">INKTHORN</h1>
+          <p class="subtitle">Intelligence Dashboard</p>
+        </div>
+        <img src="../assets/inkthorn-mascot.png" alt="" class="mascot mascot-flip" aria-hidden="true" />
+      </div>
+      <nav class="nav-bar" id="nav-bar" role="navigation" aria-label="Panel navigation">
+        <!-- tabs injected by app.js -->
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content" id="main-content">
+    <div class="loading-state" id="loading-state">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Connecting to agents…</p>
+    </div>
+    <!-- panels injected by app.js -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-updated" id="footer-updated">Last updated: —</span>
+      <span class="footer-divider">·</span>
+      <span class="footer-brand">Powered by <span class="brand-highlight">InkThorn Agents</span></span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,61 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>INKTHORN — Intelligence Dashboard</title>
+  <meta charset="utf-8" />
+  <title>InkThorn AI — Web Development & GEO Optimization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="InkThorn AI builds professional websites and GEO-optimized digital presence for Louisiana businesses. Be found by Google, ChatGPT, and AI search engines." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/style.css" />
-  <script>
-    // Set header height CSS var as early as possible and after fonts load
-    function updateHeaderHeight() {
-      const h = document.querySelector('.site-header');
-      if (h) document.documentElement.style.setProperty('--header-height', h.offsetHeight + 'px');
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { max-width: 100%; overflow-x: hidden; }
+    :root {
+      --navy: #0f1f3d; --blue: #2563eb; --gold: #c9922a;
+      --cream: #faf8f4; --gray-100: #f3f4f6; --gray-300: #d1d5db;
+      --gray-500: #6b7280; --gray-700: #374151; --gray-900: #111827; --white: #ffffff;
     }
-    document.addEventListener('DOMContentLoaded', updateHeaderHeight);
-    document.fonts && document.fonts.ready && document.fonts.ready.then(updateHeaderHeight);
-    window.addEventListener('resize', updateHeaderHeight);
-  </script>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; color: var(--gray-900); background: var(--white); line-height: 1.6; }
+    h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; line-height: 1.2; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .btn { display: inline-block; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.95rem; padding: 12px 24px; border-radius: 8px; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .btn-outline { border: 2px solid var(--navy); color: var(--navy); background: transparent; }
+    .btn-outline:hover { background: var(--navy); color: #fff; }
+
+    /* ── Community Events Banner ── */
+    .community-banner {
+      background: var(--navy);
+      color: rgba(255,255,255,0.9);
+      text-align: center;
+      padding: 10px 24px;
+      font-size: 0.85rem;
+    }
+    .community-banner a {
+      color: #f0b840;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .community-banner a:hover { text-decoration: underline; }
+
+    /* ── Nav ── */
+    nav { background: var(--white); border-bottom: 1px solid var(--gray-100); padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 36px; width: 36px; object-fit: contain; }
+    .nav-logo-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 900; color: var(--navy); }
+    .nav-logo-sub { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-500); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.88rem; font-weight: 500; color: var(--gray-700); }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta { font-size: 0.85rem; padding: 9px 20px; }
+    @media(max-width:700px){ .nav-links { display:none; } }
+
+    /* ── Hero ── */
+    .hero { background: linear-gradient(135deg, var(--navy), #1a3460); color: var(--white); padding: 80px 0 72px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(201,146,42,0.2); border: 1px solid rgba(240,184,64,0.4); color: #f0b840; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; margin-bottom: 16px; color: #fff; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero h1 span { color: #f0b840; }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 32px; }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-hero-outline { border: 2px solid rgba(255,255,255,0.4); color: #fff; background: transparent; }
+    .btn-hero-outline:hover { background: rgba(255,255,255,0.1); }
+
+    /* ── Services ── */
+    .section { padding: 72px 0; }
+    .section-alt { background: var(--gray-100); }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; }
+    .section-title { font-size: clamp(1.7rem, 3.5vw, 2.4rem); color: var(--navy); margin-bottom: 14px; }
+    .section-body { font-size: 1rem; color: var(--gray-500); line-height: 1.75; max-width: 600px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px; }
+    .service-card { background: var(--white); border-radius: 12px; padding: 28px; border: 1px solid var(--gray-300); transition: box-shadow 0.2s, transform 0.2s; }
+    .service-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.10); transform: translateY(-2px); }
+    .service-icon { font-size: 2rem; margin-bottom: 14px; }
+    .service-title { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .service-desc { font-size: 0.88rem; color: var(--gray-500); line-height: 1.65; }
+
+    /* ── About ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    @media(max-width:700px){ .about-grid { grid-template-columns: 1fr; } }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .stat { background: var(--white); border-radius: 10px; padding: 20px; text-align: center; border: 1px solid var(--gray-300); }
+    .stat-number { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--blue); }
+    .stat-label { font-size: 0.72rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+    /* ── CTA ── */
+    .cta-section { background: var(--navy); color: var(--white); padding: 72px 0; text-align: center; }
+    .cta-section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--white); margin-bottom: 14px; }
+    .cta-section p { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 480px; margin: 0 auto 28px; }
+
+    /* ── Products ── */
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 36px; }
+    .product-card { border-radius: 12px; padding: 28px; text-decoration: none; border: 2px solid; transition: all 0.2s; display: block; }
+    .product-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+    .product-name { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 800; margin-bottom: 6px; }
+    .product-desc { font-size: 0.85rem; line-height: 1.6; }
+    .product-link { font-size: 0.75rem; font-weight: 700; margin-top: 12px; display: block; }
+
+    /* ── Footer ── */
+    footer { background: var(--gray-900); color: rgba(255,255,255,0.5); padding: 32px 0; text-align: center; font-size: 0.8rem; }
+    footer a { color: #f0b840; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
 
-  <div class="bg-grid" aria-hidden="true"></div>
-  <div class="bg-horizon" aria-hidden="true"></div>
+  <!-- Community Events Banner -->
+  <div class="community-banner">
+    🎵 <strong>New Orleans:</strong> Live music, comedy &amp; weather tonight →
+    <a href="/community/">View Community Events</a>
+  </div>
 
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="header-top-row">
-        <img src="assets/inkthorn-mascot.png" alt="InkThorn" class="mascot" />
-        <div class="logo-block">
-          <h1 class="logo">INKTHORN</h1>
-          <p class="subtitle">Intelligence Dashboard</p>
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="assets/inkthorn-mascot.png" alt="InkThorn" />
+        <div>
+          <div class="nav-logo-title">InkThorn</div>
+          <div class="nav-logo-sub">AI · Web · GEO</div>
         </div>
-        <img src="assets/inkthorn-mascot.png" alt="" class="mascot mascot-flip" aria-hidden="true" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="/community/" style="color:#c9922a;">🎵 Events</a></li>
+      </ul>
+      <a href="/crustacean/" class="btn btn-primary nav-cta">Web Development →</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">🤖 AI-Powered · Louisiana Built</div>
+      <h1>Be Found Everywhere.<br><span>Google. ChatGPT. The Future.</span></h1>
+      <p class="hero-sub">InkThorn builds professional websites and GEO-optimized digital presence for Louisiana businesses — so customers find you on traditional search <em>and</em> AI search engines.</p>
+      <div class="hero-actions">
+        <a href="/crustacean/" class="btn btn-primary">🦞 Get Your Website →</a>
+        <a href="/crustacean/dashboard.html" class="btn btn-hero-outline">Partner Dashboard</a>
       </div>
-      <nav class="nav-bar" id="nav-bar" role="navigation" aria-label="Panel navigation">
-        <!-- tabs injected by app.js -->
-      </nav>
     </div>
-  </header>
+  </section>
 
-  <main class="main-content" id="main-content">
-    <div class="loading-state" id="loading-state">
-      <div class="loading-spinner"></div>
-      <p class="loading-text">Connecting to agents…</p>
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Built for the AI Search Era</h2>
+      <p class="section-body">Most businesses have no website — or one that AI can't read. We fix both problems.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🌐</div>
+          <div class="service-title">Professional Websites</div>
+          <div class="service-desc">Clean, fast, mobile-ready websites built in 48 hours. Optimized for Google search from day one.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🤖</div>
+          <div class="service-title">GEO Optimization</div>
+          <div class="service-desc">Generative Engine Optimization — structured so ChatGPT, Claude, and Gemini recommend your business.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🗺️</div>
+          <div class="service-title">Lead Generation</div>
+          <div class="service-desc">We identify local businesses without a web presence and build demo sites to show them what's possible.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📱</div>
+          <div class="service-title">Ongoing Management</div>
+          <div class="service-desc">Update hours, prices, photos, specials — just email us. No logins, no dashboards, no tech skills needed.</div>
+        </div>
+      </div>
     </div>
-    <!-- panels injected by app.js -->
-  </main>
+  </section>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <span class="footer-updated" id="footer-updated">Last updated: —</span>
-      <span class="footer-divider">·</span>
-      <span class="footer-brand">Powered by <span class="brand-highlight">InkThorn Agents</span></span>
+  <!-- Products -->
+  <section class="section section-alt" id="products">
+    <div class="container">
+      <div class="section-label">Our Products</div>
+      <h2 class="section-title">The InkThorn Family</h2>
+      <div class="products-grid">
+        <a href="/crustacean/" class="product-card" style="border-color:#2563eb;background:#eff6ff;color:#1e3a5f;">
+          <div class="product-name">🦞 InkThorn Crustacean</div>
+          <div class="product-desc">Web development for Louisiana small businesses. Live in 48 hours. Starting at $39/month.</div>
+          <span class="product-link" style="color:#2563eb;">Get my website →</span>
+        </a>
+        <a href="https://textOS.ai" target="_blank" rel="noopener" class="product-card" style="border-color:#7c3aed;background:#f5f3ff;color:#3b1c7a;">
+          <div class="product-name">💬 TextOS.ai</div>
+          <div class="product-desc">AI-powered business communications platform. Text smarter, convert faster.</div>
+          <span class="product-link" style="color:#7c3aed;">Learn more →</span>
+        </a>
+        <a href="https://reyla.ai" target="_blank" rel="noopener" class="product-card" style="border-color:#059669;background:#ecfdf5;color:#064e3b;">
+          <div class="product-name">🤖 Reyla.ai</div>
+          <div class="product-desc">AI agents for business. Automate outreach, follow-up, and lead qualification.</div>
+          <span class="product-link" style="color:#059669;">Learn more →</span>
+        </a>
+        <a href="/community/" class="product-card" style="border-color:#c9922a;background:#fffbeb;color:#78350f;">
+          <div class="product-name">🎵 NOLA Community</div>
+          <div class="product-desc">Live music, comedy events, and weather for New Orleans — updated daily by AI agents.</div>
+          <span class="product-link" style="color:#c9922a;">Tonight's events →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <div class="section-label">About InkThorn</div>
+          <h2 class="section-title">Louisiana Tech, Louisiana Heart</h2>
+          <p class="section-body">InkThorn is built by Rob Gaudet — 30-year software architect, founder of the Cajun Navy movement, and builder of AI tools that help real people in real communities.</p>
+          <p class="section-body" style="margin-top:14px;">We believe the AI age will empower local businesses — if they can be found. That's what InkThorn does.</p>
+          <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="/crustacean/" class="btn btn-primary">Get Started →</a>
+            <a href="https://calendly.com/inkthorn" target="_blank" rel="noopener" class="btn btn-outline">Book a Call</a>
+          </div>
+        </div>
+        <div>
+          <div class="about-stats">
+            <div class="stat"><div class="stat-number">6,597</div><div class="stat-label">Leads Identified</div></div>
+            <div class="stat"><div class="stat-number">6,574</div><div class="stat-label">Demo Sites Built</div></div>
+            <div class="stat"><div class="stat-number">3</div><div class="stat-label">Louisiana Markets</div></div>
+            <div class="stat"><div class="stat-number">48hr</div><div class="stat-label">Site Delivery</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Your Business Deserves to Be Found</h2>
+      <p>Don't let customers — or AI — pass you by. Let's get you online today.</p>
+      <a href="/crustacean/" class="btn btn-primary" style="font-size:1rem;padding:14px 32px;">🦞 Start with Crustacean →</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>
+        <strong style="color:rgba(255,255,255,0.8);">InkThorn AI</strong> · New Orleans, Louisiana ·
+        <a href="/crustacean/">Web Development</a> ·
+        <a href="/community/">Community Events</a> ·
+        <a href="mailto:admin@inkthorn.ai">admin@inkthorn.ai</a>
+      </p>
+      <p style="margin-top:8px;">EIN: 41-5073150 · <a href="https://calendly.com/inkthorn">Book a Call</a></p>
     </div>
   </footer>
 
-  <script src="assets/app.js"></script>
 </body>
 </html>
