@@ -149,17 +149,13 @@
     .btn-outline-purple { display:inline-block;border:2px solid rgba(168,85,247,0.5);color:#c4b5fd;font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:12px 24px;border-radius:999px;text-decoration:none;transition:all 0.2s;margin:4px; }
     .btn-outline-purple:hover { background:rgba(168,85,247,0.1); }
   
-    /* ── Mobile Nav ── */
-    #mnav { display:flex; flex-direction:row; gap:14px; align-items:center; flex-wrap:wrap; }
-    #nav-btn { display:none; }
+    
+    #nav-btn { display:none; background:none; border:none; color:#c4b5fd; font-size:1.5rem; cursor:pointer; padding:4px 10px; }
     @media(max-width:768px){
       #nav-btn { display:block; }
-      #mnav { display:none; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:rgba(10,0,20,0.98); z-index:2000; padding:8px 0; border-bottom:1px solid rgba(168,85,247,0.3); box-shadow:0 8px 24px rgba(0,0,0,0.6); gap:0; }
-      #mnav.nav-open { display:flex; }
-      #mnav a { padding:14px 24px; border-bottom:1px solid rgba(168,85,247,0.08); width:100%; font-size:0.9rem !important; display:block; }
-      #mnav a:last-child { border-bottom:none; }
-      #nav-btn.is-open::before { content:'✕'; }
-      #nav-btn:not(.is-open)::before { content:'☰'; }
+      #mnav { display:none; flex-direction:column; position:absolute; top:100%; left:0; right:0; width:100%; background:rgba(10,0,20,0.98); z-index:9999; padding:8px 0; border-bottom:1px solid rgba(168,85,247,0.3); box-shadow:0 8px 24px rgba(0,0,0,0.8); }
+      #mnav.open { display:flex !important; }
+      #mnav a { padding:14px 24px; border-bottom:1px solid rgba(168,85,247,0.08); width:100%; display:block; font-size:0.9rem; }
     }
   </style>
 </head>
@@ -168,7 +164,7 @@
   <!-- Top Bar -->
   <nav class="topbar">
     <div class="topbar-logo">InkThorn <span>Crustacean</span></div>
-    <button id="nav-btn" onclick="var n=document.getElementById('mnav');n.classList.toggle('nav-open');this.classList.toggle('is-open');" style="display:none;background:none;border:none;color:#c4b5fd;font-size:1.5rem;cursor:pointer;padding:4px 10px;line-height:1;z-index:3000;" aria-label="Menu">&#9776;</button>
+    <button id="nav-btn" onclick="var m=document.getElementById('mnav');m.classList.toggle('open');this.textContent=m.classList.contains('open')?'✕':'☰';">☰</button>
     <div id="mnav">
       <a href="/crustacean/">Home</a>
       <a href="/crustacean/dashboard.html">🗂️ Leads Dashboard</a>
@@ -736,20 +732,19 @@
 
 
 
+
 <script>
-document.querySelectorAll('#mnav a').forEach(function(a){
-  a.onclick=function(){
-    document.getElementById('mnav').classList.remove('nav-open');
-    var b=document.getElementById('nav-btn');
-    if(b)b.classList.remove('is-open');
-  };
+document.getElementById('mnav').querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click',function(){
+    document.getElementById('mnav').classList.remove('open');
+    document.getElementById('nav-btn').textContent='☰';
+  });
 });
 document.addEventListener('click',function(e){
-  var nav=document.getElementById('mnav');
-  var btn=document.getElementById('nav-btn');
-  if(nav&&btn&&nav.classList.contains('nav-open')&&!nav.contains(e.target)&&e.target!==btn&&!btn.contains(e.target)){
-    nav.classList.remove('nav-open');
-    btn.classList.remove('is-open');
+  var m=document.getElementById('mnav'),b=document.getElementById('nav-btn');
+  if(m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){
+    m.classList.remove('open');
+    b.textContent='☰';
   }
 });
 </script>
