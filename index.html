@@ -1202,32 +1202,30 @@
       if (q.length < 2) return;
       if (!searchIndex) { loadIndex(); return; }
 
-      const matches = searchIndex.filter(e =>
-        e.n.toLowerCase().includes(q) ||
-        slugify(e.n).includes(slugify(q))
-      ).slice(0, 12);
+      const matches = searchIndex.filter(function(e) {
+        return e.n.toLowerCase().includes(q) || slugify(e.n).includes(slugify(q));
+      }).slice(0, 12);
 
       if (!matches.length) {
         noneEl.style.display = 'block';
         return;
       }
 
-      resultsEl.innerHTML = matches.map(e => {
-        const demoUrl = e.b + e.s + '/';
-        return \`<div style="padding:14px 18px;border-bottom:1px solid #f3f4f6;cursor:pointer;transition:background 0.15s;"
-          onmouseover="this.style.background='#f0f4ff'" onmouseout="this.style.background=''"
-          onclick="window.location.href='${window.location.origin}\${demoUrl}'">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-            <div>
-              <div style="font-weight:700;color:#111827;font-size:0.95rem;">\${e.n}</div>
-              <div style="font-size:0.75rem;color:#6b7280;margin-top:2px;">\${e.t} · \${e.c || e.m}</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-              <span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:3px 10px;border-radius:999px;background:#dcfce7;color:#166534;">✓ DEMO READY</span>
-              <span style="font-size:0.75rem;font-weight:700;color:#2563eb;">View & Claim →</span>
-            </div>
-          </div>
-        </div>\`;
+      resultsEl.innerHTML = matches.map(function(e) {
+        var demoUrl = e.b + e.s + '/';
+        var html = '<div style="padding:14px 18px;border-bottom:1px solid #f3f4f6;cursor:pointer;transition:background 0.15s;" '
+          + 'onmouseover="this.style.background=\'#f0f4ff\'" onmouseout="this.style.background=\'\'" '
+          + 'onclick="window.location.href=\'' + demoUrl + '\'">'
+          + '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">'
+          + '<div>'
+          + '<div style="font-weight:700;color:#111827;font-size:0.95rem;">' + e.n + '</div>'
+          + '<div style="font-size:0.75rem;color:#6b7280;margin-top:2px;">' + e.t + ' &middot; ' + (e.c || e.m) + '</div>'
+          + '</div>'
+          + '<div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">'
+          + '<span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:3px 10px;border-radius:999px;background:#dcfce7;color:#166534;">&#10003; DEMO READY</span>'
+          + '<span style="font-size:0.75rem;font-weight:700;color:#2563eb;">View &amp; Claim &#8594;</span>'
+          + '</div></div></div>';
+        return html;
       }).join('');
 
       resultsEl.style.display = 'block';
