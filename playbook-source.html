@@ -900,6 +900,21 @@
     <!-- Baton Rouge Leads Panel -->
     <div class="pb-panel" id="panel-leads-br">
 
+      <!-- MAP: Leaflet + OpenStreetMap (no API key needed) -->
+      <div style="margin-bottom:28px;">
+        <div class="pb-section-header" style="color:#00f5ff;text-shadow:0 0 10px rgba(0,245,255,0.6);margin-bottom:12px;border:none;font-size:0.8rem;">
+          🗺️ Baton Rouge MSA — Lead Map
+        </div>
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+        <div id="br-leads-map" style="height:420px;border-radius:12px;border:1px solid rgba(0,245,255,0.25);overflow:hidden;background:#0a0a1a;"></div>
+        <div style="font-size:0.72rem;color:#7878a8;margin-top:6px;font-family:monospace;">
+          Click any pin to open the demo site. Clusters expand on click. Map: OpenStreetMap (free, no API key).
+        </div>
+      </div>
+
       <!-- Header + controls -->
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
         <div>
@@ -1352,6 +1367,7 @@ For each brand below, tell me: which platforms have active accounts, which are p
       if (btn.dataset.panel === 'scripts'  && !window._scriptsLoaded)  loadScripts();
       if (btn.dataset.panel === 'leads'    && !window._leadsLoaded)   loadLeads();
       if (btn.dataset.panel === 'leads-br' && !window._leadsLoadedBR) loadLeadsBR();
+      if (btn.dataset.panel === 'leads-br') setTimeout(()=>{ if(window._brLeadsForMap) window.initBRMap(window._brLeadsForMap); }, 300);
 
     });
 
@@ -2104,7 +2120,9 @@ For each brand below, tell me: which platforms have active accounts, which are p
             sel.appendChild(opt);
           });
 
+          window._brLeadsForMap = _allLeadsBR;
           renderLeadsBR();
+          window.initBRMap(_allLeadsBR);
 
           sel.addEventListener('change', () => { _catFilterBR = sel.value; renderLeadsBR(); });
           document.getElementById('leads-search-br').addEventListener('input', e => {
@@ -2186,6 +2204,101 @@ For each brand below, tell me: which platforms have active accounts, which are p
           </tr>`;
         }).join('');
       }
+    })();
+
+    // ── BR Leads Map (Leaflet + OpenStreetMap) ───────────────────────────────
+    (() => {
+      let _mapInitialized = false;
+
+      window.initBRMap = async function(leads) {
+        if (_mapInitialized) return;
+        _mapInitialized = true;
+
+        // Load Leaflet + MarkerCluster scripts dynamically
+        function loadScript(src) {
+          return new Promise((res, rej) => {
+            const s = document.createElement('script');
+            s.src = src; s.onload = res; s.onerror = rej;
+            document.head.appendChild(s);
+          });
+        }
+        await loadScript('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js');
+        await loadScript('https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js');
+
+        const map = L.map('br-leads-map', {
+          center: [30.45, -91.10],
+          zoom: 10,
+          zoomControl: true,
+        });
+
+        // Dark-ish OpenStreetMap tile (CartoDB dark)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+          subdomains: 'abcd',
+          maxZoom: 19,
+        }).addTo(map);
+
+        const CAT_COLORS_MAP = {
+          restaurant:'#ff2d87', cafe:'#fbbf24', bar:'#a855f7', bakery:'#f97316',
+          hair_salon:'#ec4899', beauty_salon:'#db2777', barber_shop:'#8b5cf6',
+          nail_salon:'#d946ef', spa:'#06b6d4', car_repair:'#f59e0b',
+          car_wash:'#3b82f6', electrician:'#eab308', plumber:'#6366f1',
+          roofing_contractor:'#ef4444', painter:'#10b981', florist:'#f43f5e',
+          gym:'#22c55e', dentist:'#0ea5e9', doctor:'#14b8a6', lawyer:'#8b5cf6',
+          cleaning_service:'#6ee7b7', clothing_store:'#f472b6', default:'#00f5ff'
+        };
+
+        function makeIcon(category) {
+          const color = CAT_COLORS_MAP[category] || CAT_COLORS_MAP.default;
+          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" fill="${color}" stroke="#0a0a1a" stroke-width="1.5"/></svg>`;
+          return L.divIcon({
+            html: svg,
+            className: '',
+            iconSize: [14, 14],
+            iconAnchor: [7, 7],
+            popupAnchor: [0, -8],
+          });
+        }
+
+        const markers = L.markerClusterGroup({
+          maxClusterRadius: 40,
+          spiderfyOnMaxZoom: true,
+          showCoverageOnHover: false,
+          zoomToBoundsOnClick: true,
+          iconCreateFunction: function(cluster) {
+            const count = cluster.getChildCount();
+            const size = count < 10 ? 32 : count < 50 ? 38 : count < 200 ? 44 : 50;
+            return L.divIcon({
+              html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:rgba(0,245,255,0.18);border:2px solid rgba(0,245,255,0.6);display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.7rem;font-weight:700;color:#00f5ff;">${count}</div>`,
+              className: '',
+              iconSize: [size, size],
+              iconAnchor: [size/2, size/2],
+            });
+          },
+        });
+
+        leads.forEach(lead => {
+          if (!lead.lat || !lead.lng) return;
+          const slug = String(lead.name).toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').trim();
+          const demoUrl = 'https://inkthorn.ai/crustacean/demos-br/' + slug + '/';
+          const catLabel = (lead.category||'').replace(/_/g,' ').replace(/\b\w/g,x=>x.toUpperCase());
+          const stars = lead.rating ? '★'.repeat(Math.floor(lead.rating)) : '';
+          const popup = `
+            <div style="font-family:'Space Grotesk',sans-serif;min-width:180px;">
+              <div style="font-weight:700;font-size:0.88rem;margin-bottom:4px;">${lead.name}</div>
+              <div style="font-size:0.72rem;color:#888;margin-bottom:4px;">${catLabel}</div>
+              ${lead.rating ? `<div style="font-size:0.75rem;color:#fbbf24;margin-bottom:4px;">${stars} ${lead.rating} (${lead.reviewCount||0})</div>` : ''}
+              ${lead.phone ? `<div style="font-size:0.75rem;margin-bottom:6px;">📞 ${lead.phone}</div>` : ''}
+              <a href="${demoUrl}" target="_blank" style="font-size:0.7rem;color:#00f5ff;font-weight:700;">View Demo Site →</a>
+            </div>`;
+
+          const m = L.marker([lead.lat, lead.lng], { icon: makeIcon(lead.category) });
+          m.bindPopup(popup, { maxWidth: 220 });
+          markers.addLayer(m);
+        });
+
+        map.addLayer(markers);
+      };
     })();
 
     // Category colors/icons for schedule
