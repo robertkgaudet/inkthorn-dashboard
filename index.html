@@ -2125,12 +2125,31 @@
     // Append ref to all "Get My Website" / pricing / checkout links
     var stored = sessionStorage.getItem('inkthorn_ref');
     if (stored) {
-      // Show a subtle banner so the prospect knows it came from their rep
+      // Show banner — look up rep name from Supabase
       var banner = document.createElement('div');
-      banner.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(168,85,247,0.9);color:#fff;font-size:0.75rem;font-weight:600;padding:8px 18px;border-radius:999px;z-index:999;pointer-events:none;box-shadow:0 4px 16px rgba(168,85,247,0.4);';
-      banner.textContent = '🦞 Referred by your InkThorn partner';
+      banner.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(168,85,247,0.9);color:#fff;font-size:0.75rem;font-weight:600;padding:8px 18px;border-radius:999px;z-index:999;pointer-events:none;box-shadow:0 4px 16px rgba(168,85,247,0.4);transition:opacity 0.5s;white-space:nowrap;';
+      banner.textContent = '🦞 Your InkThorn rep is connecting you...';
       document.body.appendChild(banner);
-      setTimeout(function() { banner.style.opacity='0'; banner.style.transition='opacity 0.5s'; setTimeout(function(){banner.remove();},500); }, 4000);
+
+      // Fetch rep name from Supabase
+      fetch('https://wwriucdzthdszsxjclfv.supabase.co/rest/v1/team_members?code=eq.' + encodeURIComponent(stored) + '&select=name&limit=1', {
+        headers: {
+          'apikey': 'sb_publishable_X6kQitNRTlPKpNJ01JvSLg_YThS_Zlf',
+          'Authorization': 'Bearer sb_publishable_X6kQitNRTlPKpNJ01JvSLg_YThS_Zlf'
+        }
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(data) {
+        var name = (data && data[0] && data[0].name) ? data[0].name.split(' ')[0] : null;
+        banner.textContent = name
+          ? '🦞 ' + name + ' is your InkThorn partner — ask them anything!'
+          : '🦞 Referred by your InkThorn partner';
+        setTimeout(function() { banner.style.opacity='0'; setTimeout(function(){banner.remove();},500); }, 5000);
+      })
+      .catch(function() {
+        banner.textContent = '🦞 Referred by your InkThorn partner';
+        setTimeout(function() { banner.style.opacity='0'; setTimeout(function(){banner.remove();},500); }, 4000);
+      });
 
       // Append ref param to all internal anchor/button links
       document.querySelectorAll('a[href*="#pricing"], a[href*="calendly"]').forEach(function(a) {
