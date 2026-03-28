@@ -2096,5 +2096,36 @@
     })();
   </script>
 
+  <!-- ══ REFERRAL TRACKING ══ -->
+  <script>
+  (function() {
+    // Capture ?ref=CODE from URL and store in sessionStorage
+    var params = new URLSearchParams(window.location.search);
+    var ref = params.get('ref');
+    if (ref) {
+      sessionStorage.setItem('inkthorn_ref', ref.toUpperCase().replace(/[^A-Z0-9]/g,''));
+    }
+
+    // Append ref to all "Get My Website" / pricing / checkout links
+    var stored = sessionStorage.getItem('inkthorn_ref');
+    if (stored) {
+      // Show a subtle banner so the prospect knows it came from their rep
+      var banner = document.createElement('div');
+      banner.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(168,85,247,0.9);color:#fff;font-size:0.75rem;font-weight:600;padding:8px 18px;border-radius:999px;z-index:999;pointer-events:none;box-shadow:0 4px 16px rgba(168,85,247,0.4);';
+      banner.textContent = '🦞 Referred by your InkThorn partner';
+      document.body.appendChild(banner);
+      setTimeout(function() { banner.style.opacity='0'; banner.style.transition='opacity 0.5s'; setTimeout(function(){banner.remove();},500); }, 4000);
+
+      // Append ref param to all internal anchor/button links
+      document.querySelectorAll('a[href*="#pricing"], a[href*="calendly"]').forEach(function(a) {
+        var href = a.getAttribute('href');
+        if (href && !href.includes('ref=')) {
+          a.setAttribute('href', href + (href.includes('?') ? '&' : '?') + 'ref=' + stored);
+        }
+      });
+    }
+  })();
+  </script>
+
 </body>
 </html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>InkThorn — Admin: Team Management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100vh; background: #04000c; color: #f0f0ff; font-family: 'Space Grotesk', sans-serif; }
+
+    /* ── Admin Header ── */
+    .admin-header {
+      background: rgba(10,0,20,0.98);
+      border-bottom: 2px solid rgba(255,45,135,0.3);
+      padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .admin-logo { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; font-weight: 900; color: #f0f0ff; }
+    .admin-logo span { color: #ff2d87; }
+    .admin-badge {
+      font-family: 'Orbitron', sans-serif; font-size: 0.45rem; font-weight: 700;
+      letter-spacing: 0.2em; padding: 5px 14px; border-radius: 999px;
+      border: 1px solid rgba(255,45,135,0.5); background: rgba(255,45,135,0.1); color: #ff2d87;
+    }
+    .admin-nav { display: flex; gap: 16px; align-items: center; }
+    .admin-nav a { font-size: 0.75rem; color: #7878a8; text-decoration: none; font-weight: 600; }
+    .admin-nav a:hover { color: #ff2d87; }
+
+    /* ── Page layout ── */
+    .admin-content { max-width: 1100px; margin: 0 auto; padding: 36px 28px 80px; }
+
+    /* ── Stats bar ── */
+    .stat-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+    .stat-box {
+      background: rgba(22,12,45,0.8); border: 1px solid rgba(255,45,135,0.2);
+      border-radius: 12px; padding: 18px 24px; min-width: 140px;
+    }
+    .stat-label { font-size: 0.62rem; color: #7878a8; font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+    .stat-val { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; margin-top: 4px; color: #ff2d87; }
+
+    /* ── Section ── */
+    .section-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+    }
+    .section-title { font-family: 'Orbitron', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #ff2d87; }
+
+    /* ── Add member form ── */
+    .add-form {
+      background: rgba(22,12,45,0.8); border: 1px solid rgba(255,45,135,0.2);
+      border-radius: 16px; padding: 24px 28px; margin-bottom: 32px;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 14px; align-items: end; }
+    @media(max-width:700px){ .form-grid { grid-template-columns: 1fr; } }
+    .form-field label { display: block; font-size: 0.65rem; color: #7878a8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+    .form-field input, .form-field select {
+      width: 100%; padding: 10px 14px;
+      background: rgba(10,0,20,0.7); border: 1px solid rgba(255,45,135,0.25);
+      border-radius: 8px; color: #f0f0ff; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem; outline: none;
+    }
+    .form-field input:focus, .form-field select:focus { border-color: #ff2d87; }
+    .btn-add {
+      background: #ff2d87; color: #fff; border: none; cursor: pointer;
+      font-family: 'Orbitron', sans-serif; font-size: 0.55rem; font-weight: 700;
+      letter-spacing: 0.1em; padding: 12px 22px; border-radius: 8px;
+      white-space: nowrap; transition: all 0.2s;
+    }
+    .btn-add:hover { background: #e01070; transform: translateY(-1px); }
+
+    /* ── Member table ── */
+    .member-table { width: 100%; border-collapse: collapse; }
+    .member-table thead tr { background: rgba(255,45,135,0.08); border-bottom: 2px solid rgba(255,45,135,0.2); }
+    .member-table th {
+      text-align: left; padding: 12px 16px;
+      font-family: 'Orbitron', sans-serif; font-size: 0.48rem; font-weight: 700;
+      letter-spacing: 0.15em; color: #ff2d87; white-space: nowrap;
+    }
+    .member-table tbody tr { border-bottom: 1px solid rgba(255,45,135,0.08); transition: background 0.15s; }
+    .member-table tbody tr:hover { background: rgba(255,45,135,0.04); }
+    .member-table td { padding: 14px 16px; font-size: 0.88rem; vertical-align: middle; }
+
+    .code-chip {
+      font-family: 'Orbitron', sans-serif; font-size: 0.55rem; font-weight: 700;
+      letter-spacing: 0.12em; padding: 4px 12px; border-radius: 999px;
+      background: rgba(255,45,135,0.12); border: 1px solid rgba(255,45,135,0.4);
+      color: #ff2d87; cursor: pointer; white-space: nowrap;
+    }
+    .code-chip:hover { background: rgba(255,45,135,0.2); }
+
+    .link-cell {
+      font-family: monospace; font-size: 0.78rem; color: #7878a8;
+      max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .link-cell a { color: #a855f7; text-decoration: none; }
+    .link-cell a:hover { text-decoration: underline; }
+
+    .copy-btn {
+      font-family: 'Orbitron', sans-serif; font-size: 0.42rem; font-weight: 700;
+      letter-spacing: 0.1em; padding: 5px 12px; border-radius: 6px;
+      border: 1px solid rgba(168,85,247,0.4); background: rgba(168,85,247,0.08);
+      color: #c4b5fd; cursor: pointer; white-space: nowrap; transition: all 0.2s;
+    }
+    .copy-btn:hover { background: rgba(168,85,247,0.2); }
+    .copy-btn.copied { background: rgba(74,222,128,0.15); border-color: rgba(74,222,128,0.4); color: #4ade80; }
+
+    .status-active { color: #4ade80; font-size: 0.72rem; font-weight: 700; }
+    .status-inactive { color: #7878a8; font-size: 0.72rem; }
+
+    .toggle-btn {
+      font-size: 0.7rem; cursor: pointer; padding: 4px 10px; border-radius: 6px;
+      border: 1px solid; transition: all 0.2s; font-weight: 600;
+    }
+    .toggle-btn.active { border-color: rgba(239,68,68,0.4); color: #ef4444; background: rgba(239,68,68,0.08); }
+    .toggle-btn.inactive { border-color: rgba(74,222,128,0.4); color: #4ade80; background: rgba(74,222,128,0.08); }
+    .toggle-btn:hover { transform: translateY(-1px); }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; bottom: 24px; right: 24px;
+      background: rgba(74,222,128,0.9); color: #000; font-weight: 700;
+      padding: 10px 20px; border-radius: 8px; font-size: 0.85rem;
+      opacity: 0; transform: translateY(8px); transition: all 0.3s;
+      pointer-events: none; z-index: 999;
+    }
+    #toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ── Link instructions ── */
+    .link-explainer {
+      background: rgba(22,12,45,0.6); border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 12px; padding: 20px 24px; margin-bottom: 32px;
+      font-size: 0.85rem; color: #9898c0; line-height: 1.8;
+    }
+    .link-explainer strong { color: #c4b5fd; }
+    .link-explainer code { background: rgba(168,85,247,0.15); padding: 2px 8px; border-radius: 4px; color: #fbbf24; font-size: 0.82rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Admin Header -->
+  <nav class="admin-header">
+    <div class="admin-logo">InkThorn <span>Admin</span></div>
+    <div class="admin-nav">
+      <a href="/crustacean/">← Crustacean Home</a>
+      <a href="/crustacean/dashboard.html">Leads Dashboard</a>
+    </div>
+    <div class="admin-badge">🔐 ADMIN ONLY</div>
+  </nav>
+
+  <div class="admin-content">
+
+    <!-- Stats -->
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-label">Total Members</div>
+        <div class="stat-val" id="stat-total">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Active</div>
+        <div class="stat-val" id="stat-active" style="color:#4ade80;">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Inactive</div>
+        <div class="stat-val" id="stat-inactive" style="color:#7878a8;">—</div>
+      </div>
+    </div>
+
+    <!-- How referral links work -->
+    <div class="link-explainer">
+      <strong>How referral tracking works:</strong><br>
+      Each team member gets a unique referral link like <code>https://inkthorn.ai/crustacean/?ref=MARCUS01</code>.<br>
+      When a prospect visits using that link, the code is stored in their browser. Every sign-up form and "Claim Site" button on the site will automatically include <code>?ref=MARCUS01</code> in the URL — so you can track which member drove the conversion.<br><br>
+      <strong>To close a sale manually:</strong> Have the team member direct the prospect to <code>inkthorn.ai/crustacean/?ref=THEIRCODE</code> — or share the link from the table below.
+    </div>
+
+    <!-- Add Member -->
+    <div class="section-head">
+      <div class="section-title">➕ Add Team Member</div>
+    </div>
+
+    <div class="add-form">
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Full Name</label>
+          <input type="text" id="new-name" placeholder="e.g. Marcus Johnson" />
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" id="new-email" placeholder="marcus@gmail.com" />
+        </div>
+        <div class="form-field">
+          <label>Referral Code <span style="color:#7878a8;font-size:0.7em;">(auto-generated or custom)</span></label>
+          <input type="text" id="new-code" placeholder="e.g. MARCUS01" maxlength="12"
+            style="text-transform:uppercase;" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')" />
+        </div>
+        <button class="btn-add" onclick="addMember()">ADD MEMBER →</button>
+      </div>
+      <div style="margin-top:10px;font-size:0.75rem;color:#7878a8;">
+        Leave the code blank to auto-generate one from the name. Members can use any device — no login required.
+      </div>
+    </div>
+
+    <!-- Members Table -->
+    <div class="section-head">
+      <div class="section-title">👥 Team Members</div>
+      <div style="font-size:0.75rem;color:#7878a8;">Click a code to copy the full referral link</div>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="member-table" id="member-table">
+        <thead>
+          <tr>
+            <th>NAME</th>
+            <th>EMAIL</th>
+            <th>CODE</th>
+            <th>REFERRAL LINK</th>
+            <th>COPY LINK</th>
+            <th>STATUS</th>
+            <th>JOINED</th>
+            <th>NOTES</th>
+            <th>ACTION</th>
+          </tr>
+        </thead>
+        <tbody id="member-tbody">
+          <tr><td colspan="9" style="padding:2rem;text-align:center;color:#7878a8;">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div id="toast">✓ Copied!</div>
+
+  <script>
+    const BASE_URL = 'https://inkthorn.ai/crustacean/';
+
+    // ── Load & Save (localStorage as backend for static site) ──────────────
+    function loadTeam() {
+      try {
+        const stored = localStorage.getItem('inkthorn_team');
+        if (stored) return JSON.parse(stored);
+      } catch(e) {}
+      // Default seed data
+      return {
+        members: [
+          { id: 'rob001', name: 'Rob Gaudet', email: 'rgaudet2023@gmail.com', code: 'ROB001', role: 'admin', active: true, created: '2026-03-28', notes: 'Founder' }
+        ]
+      };
+    }
+
+    function saveTeam(data) {
+      localStorage.setItem('inkthorn_team', JSON.stringify(data));
+    }
+
+    function generateCode(name) {
+      const base = name.toUpperCase().replace(/[^A-Z]/g,'').slice(0,6);
+      const num = String(Math.floor(Math.random() * 99) + 1).padStart(2,'0');
+      return base + num;
+    }
+
+    function makeId() {
+      return 'mem' + Date.now().toString(36) + Math.random().toString(36).slice(2,5);
+    }
+
+    // ── Render table ──────────────────────────────────────────────────────
+    function render() {
+      const team = loadTeam();
+      const members = team.members || [];
+
+      document.getElementById('stat-total').textContent = members.length;
+      document.getElementById('stat-active').textContent = members.filter(m => m.active).length;
+      document.getElementById('stat-inactive').textContent = members.filter(m => !m.active).length;
+
+      const tbody = document.getElementById('member-tbody');
+      if (!members.length) {
+        tbody.innerHTML = '<tr><td colspan="9" style="padding:2rem;text-align:center;color:#7878a8;">No members yet.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = members.map(m => {
+        const link = BASE_URL + '?ref=' + encodeURIComponent(m.code);
+        const isAdmin = m.role === 'admin';
+        return '<tr>' +
+          '<td style="font-weight:700;color:#f0f0ff;">' + escHtml(m.name) + (isAdmin ? ' <span style="font-size:0.62rem;color:#ff2d87;">ADMIN</span>' : '') + '</td>' +
+          '<td style="color:#7878a8;font-size:0.82rem;">' + escHtml(m.email || '—') + '</td>' +
+          '<td><span class="code-chip" onclick="copyLink(\'' + escHtml(m.code) + '\')" title="Click to copy link">' + escHtml(m.code) + '</span></td>' +
+          '<td class="link-cell"><a href="' + link + '" target="_blank" rel="noopener">' + link + '</a></td>' +
+          '<td><button class="copy-btn" id="copybtn-' + m.id + '" onclick="copyLink(\'' + escHtml(m.code) + '\', \'' + m.id + '\')">COPY LINK</button></td>' +
+          '<td>' + (m.active ? '<span class="status-active">● Active</span>' : '<span class="status-inactive">○ Inactive</span>') + '</td>' +
+          '<td style="color:#7878a8;font-size:0.8rem;white-space:nowrap;">' + escHtml(m.created || '—') + '</td>' +
+          '<td style="color:#7878a8;font-size:0.8rem;">' + escHtml(m.notes || '') + '</td>' +
+          '<td>' + (isAdmin ? '<span style="font-size:0.72rem;color:#7878a8;">—</span>' :
+            '<button class="toggle-btn ' + (m.active ? 'active' : 'inactive') + '" onclick="toggleMember(\'' + m.id + '\')">' +
+            (m.active ? 'Deactivate' : 'Activate') + '</button>') + '</td>' +
+          '</tr>';
+      }).join('');
+    }
+
+    // ── Add member ────────────────────────────────────────────────────────
+    function addMember() {
+      const name = document.getElementById('new-name').value.trim();
+      const email = document.getElementById('new-email').value.trim();
+      let code = document.getElementById('new-code').value.trim().toUpperCase().replace(/[^A-Z0-9]/g,'');
+
+      if (!name) { alert('Please enter a name.'); return; }
+      if (!code) code = generateCode(name);
+
+      const team = loadTeam();
+
+      // Check code uniqueness
+      if (team.members.some(m => m.code === code)) {
+        code = code.slice(0,6) + String(Math.floor(Math.random()*90)+10);
+      }
+
+      team.members.push({
+        id: makeId(),
+        name,
+        email,
+        code,
+        role: 'member',
+        active: true,
+        created: new Date().toISOString().split('T')[0],
+        notes: ''
+      });
+
+      saveTeam(team);
+      document.getElementById('new-name').value = '';
+      document.getElementById('new-email').value = '';
+      document.getElementById('new-code').value = '';
+      render();
+      showToast('✓ ' + name + ' added! Code: ' + code);
+    }
+
+    // ── Toggle active ─────────────────────────────────────────────────────
+    function toggleMember(id) {
+      const team = loadTeam();
+      const m = team.members.find(m => m.id === id);
+      if (m) m.active = !m.active;
+      saveTeam(team);
+      render();
+    }
+
+    // ── Copy link ─────────────────────────────────────────────────────────
+    function copyLink(code, btnId) {
+      const link = BASE_URL + '?ref=' + encodeURIComponent(code);
+      navigator.clipboard.writeText(link).then(() => {
+        showToast('✓ Link copied for ' + code);
+        if (btnId) {
+          const btn = document.getElementById('copybtn-' + btnId);
+          if (btn) {
+            btn.textContent = 'COPIED ✓';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = 'COPY LINK'; btn.classList.remove('copied'); }, 2000);
+          }
+        }
+      }).catch(() => {
+        prompt('Copy this link:', link);
+      });
+    }
+
+    // ── Toast ─────────────────────────────────────────────────────────────
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    // ── Escape HTML ───────────────────────────────────────────────────────
+    function escHtml(s) {
+      return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── Auto-generate code preview ────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      render();
+      document.getElementById('new-name').addEventListener('input', function() {
+        const codeField = document.getElementById('new-code');
+        if (!codeField.value) {
+          codeField.placeholder = generateCode(this.value) || 'e.g. MARCUS01';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
