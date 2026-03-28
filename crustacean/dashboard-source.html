@@ -206,7 +206,7 @@
       <div class="topbar-logo">InkThorn <span>Crustacean</span></div>
       <div class="topbar-subtitle">Partner Leads Dashboard · 6,597 total leads</div>
     </div>
-    <button class="nav-hamburger" id="nav-toggle-dash" id="hbtn-dash-nav-links" onclick="toggleNav('dash-nav-links','hbtn-dash-nav-links')" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="nav-hamburger" id="nav-toggle-dash" class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     <div class="topbar-nav-links" id="dash-nav-links" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
       <a href="/crustacean/" style="font-size:0.75rem;color:#7878a8;text-decoration:none;font-weight:600;">Home</a>
       <a href="/crustacean/dashboard.html" style="font-size:0.75rem;color:#f0f0ff;text-decoration:none;font-weight:600;">🗂️ Leads Dashboard</a>
@@ -557,5 +557,54 @@
     // Auto-load NOLA on page ready
     initMarket('nola');
   </script>
+
+<script>
+(function() {
+  function closeNav() {
+    document.querySelectorAll('.topbar-nav, .topbar-nav-links, #topbar-nav, #dash-nav-links, #scripts-nav-links').forEach(function(n) {
+      n.classList.remove('open');
+    });
+    document.querySelectorAll('.nav-hamburger').forEach(function(b) {
+      b.classList.remove('open');
+    });
+  }
+
+  function toggleNav() {
+    var isOpen = false;
+    document.querySelectorAll('.topbar-nav, .topbar-nav-links, #topbar-nav, #dash-nav-links, #scripts-nav-links').forEach(function(n) {
+      if (n.classList.contains('open')) isOpen = true;
+    });
+    if (isOpen) {
+      closeNav();
+    } else {
+      document.querySelectorAll('.topbar-nav, .topbar-nav-links, #topbar-nav, #dash-nav-links, #scripts-nav-links').forEach(function(n) {
+        n.classList.add('open');
+      });
+      document.querySelectorAll('.nav-hamburger').forEach(function(b) {
+        b.classList.add('open');
+      });
+    }
+  }
+
+  // Wire up all hamburger buttons
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.nav-hamburger').forEach(function(btn) {
+      btn.onclick = function(e) { e.stopPropagation(); toggleNav(); };
+    });
+
+    // Close when any nav link is tapped
+    document.querySelectorAll('.topbar-nav a, .topbar-nav-links a, #topbar-nav a, #dash-nav-links a, #scripts-nav-links a').forEach(function(a) {
+      a.addEventListener('click', function() { setTimeout(closeNav, 50); });
+    });
+
+    // Close on outside tap
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-hamburger') && !e.target.closest('.topbar-nav') && !e.target.closest('.topbar-nav-links') && !e.target.closest('#topbar-nav') && !e.target.closest('#dash-nav-links') && !e.target.closest('#scripts-nav-links')) {
+        closeNav();
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>

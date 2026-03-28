@@ -195,7 +195,7 @@
   <!-- Top Bar -->
   <nav class="topbar">
     <div class="topbar-logo">InkThorn <span>Crustacean</span></div>
-    <button class="nav-hamburger" id="nav-toggle" id="hbtn-topbar-nav" onclick="toggleNav('topbar-nav','hbtn-topbar-nav')" aria-label="Menu">
+    <button class="nav-hamburger" id="nav-toggle" class="nav-hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
     <div class="topbar-nav" id="topbar-nav">
@@ -548,5 +548,54 @@
     buildGrowth('growth-conservative', 5, 95);
     buildGrowth('growth-aggressive', 20, 95);
   </script>
+
+<script>
+(function() {
+  function closeNav() {
+    document.querySelectorAll('.topbar-nav, .topbar-nav-links, #topbar-nav, #dash-nav-links, #scripts-nav-links').forEach(function(n) {
+      n.classList.remove('open');
+    });
+    document.querySelectorAll('.nav-hamburger').forEach(function(b) {
+      b.classList.remove('open');
+    });
+  }
+
+  function toggleNav() {
+    var isOpen = false;
+    document.querySelectorAll('.topbar-nav, .topbar-nav-links, #topbar-nav, #dash-nav-links, #scripts-nav-links').forEach(function(n) {
+      if (n.classList.contains('open')) isOpen = true;
+    });
+    if (isOpen) {
+      closeNav();
+    } else {
+      document.querySelectorAll('.topbar-nav, .topbar-nav-links, #topbar-nav, #dash-nav-links, #scripts-nav-links').forEach(function(n) {
+        n.classList.add('open');
+      });
+      document.querySelectorAll('.nav-hamburger').forEach(function(b) {
+        b.classList.add('open');
+      });
+    }
+  }
+
+  // Wire up all hamburger buttons
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.nav-hamburger').forEach(function(btn) {
+      btn.onclick = function(e) { e.stopPropagation(); toggleNav(); };
+    });
+
+    // Close when any nav link is tapped
+    document.querySelectorAll('.topbar-nav a, .topbar-nav-links a, #topbar-nav a, #dash-nav-links a, #scripts-nav-links a').forEach(function(a) {
+      a.addEventListener('click', function() { setTimeout(closeNav, 50); });
+    });
+
+    // Close on outside tap
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-hamburger') && !e.target.closest('.topbar-nav') && !e.target.closest('.topbar-nav-links') && !e.target.closest('#topbar-nav') && !e.target.closest('#dash-nav-links') && !e.target.closest('#scripts-nav-links')) {
+        closeNav();
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
