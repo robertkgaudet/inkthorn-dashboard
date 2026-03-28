@@ -738,6 +738,7 @@
       <button class="pb-tab" data-panel="meals">🍽️ Meal Plan</button>
       <button class="pb-tab" data-panel="scripts">🎬 Daily Scripts</button>
       <button class="pb-tab" data-panel="leads">🦞 Crustacean Leads</button>
+      <button class="pb-tab" data-panel="leads-br">🎯 BR Leads</button>
       <button class="pb-tab" data-panel="social">📣 Social Media Marketing</button>
     </nav>
 
@@ -895,6 +896,49 @@
       </div>
 
     </div><!-- /#panel-leads -->
+
+    <!-- Baton Rouge Leads Panel -->
+    <div class="pb-panel" id="panel-leads-br">
+
+      <!-- Header + controls -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+        <div>
+          <div class="pb-section-header" style="color:#00f5ff;text-shadow:0 0 10px rgba(0,245,255,0.6);margin-bottom:4px;border:none;">
+            🎯 Demo Sites — Baton Rouge Leads
+          </div>
+          <div style="font-size:0.8rem;color:#7878a8;font-family:monospace;" id="leads-count-label-br">Loading…</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <select id="leads-cat-filter-br" style="font-family:'Space Grotesk',sans-serif;font-size:0.8rem;font-weight:600;padding:6px 12px;border-radius:8px;border:1px solid rgba(0,245,255,0.4);background:rgba(22,12,45,0.9);color:#00f5ff;cursor:pointer;outline:none;">
+            <option value="">All Categories</option>
+          </select>
+          <input id="leads-search-br" type="text" placeholder="Search businesses…" style="font-family:'Space Grotesk',sans-serif;font-size:0.85rem;padding:6px 14px;border-radius:8px;border:1px solid rgba(0,245,255,0.3);background:rgba(22,12,45,0.9);color:#f0f0ff;outline:none;width:200px;" />
+          <a href="data/baton-rouge-leads.csv" download style="font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.1em;padding:7px 16px;border-radius:999px;border:1px solid rgba(0,245,255,0.4);background:rgba(0,245,255,0.08);color:#00f5ff;text-decoration:none;white-space:nowrap;">⬇ CSV</a>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div style="overflow-x:auto;">
+        <table id="leads-table-br" style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+          <thead>
+            <tr style="background:rgba(0,245,255,0.08);border-bottom:2px solid rgba(0,245,255,0.3);">
+              <th style="text-align:left;padding:10px 14px;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.15em;color:#00f5ff;white-space:nowrap;">#</th>
+              <th style="text-align:left;padding:10px 14px;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.15em;color:#00f5ff;white-space:nowrap;">BUSINESS</th>
+              <th style="text-align:left;padding:10px 14px;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.15em;color:#00f5ff;white-space:nowrap;">CATEGORY</th>
+              <th style="text-align:left;padding:10px 14px;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.15em;color:#00f5ff;white-space:nowrap;">PHONE</th>
+              <th style="text-align:left;padding:10px 14px;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.15em;color:#00f5ff;white-space:nowrap;">RATING</th>
+              <th style="text-align:left;padding:10px 14px;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.15em;color:#00f5ff;white-space:nowrap;">DEMO SITE</th>
+            </tr>
+          </thead>
+          <tbody id="leads-tbody-br"></tbody>
+        </table>
+      </div>
+      <div id="leads-empty-br" style="display:none;text-align:center;padding:3rem;color:#7878a8;">
+        <div style="font-size:2rem;margin-bottom:8px;">🔍</div>
+        <p>No results match your search.</p>
+      </div>
+
+    </div><!-- /#panel-leads-br -->
 
     <!-- Social Media Marketing Panel -->
     <div class="pb-panel" id="panel-social">
@@ -1305,8 +1349,9 @@ For each brand below, tell me: which platforms have active accounts, which are p
       document.querySelectorAll('.pb-panel').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
-      if (btn.dataset.panel === 'scripts' && !window._scriptsLoaded) loadScripts();
-      if (btn.dataset.panel === 'leads'   && !window._leadsLoaded)   loadLeads();
+      if (btn.dataset.panel === 'scripts'  && !window._scriptsLoaded)  loadScripts();
+      if (btn.dataset.panel === 'leads'    && !window._leadsLoaded)   loadLeads();
+      if (btn.dataset.panel === 'leads-br' && !window._leadsLoadedBR) loadLeadsBR();
 
     });
 
@@ -2037,6 +2082,109 @@ For each brand below, tell me: which platforms have active accounts, which are p
 
       function slugifyLead(str) {
         return String(str).toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').trim();
+      }
+    })();
+
+    // ── Baton Rouge Leads ────────────────────────────────────────────────────
+    (() => {
+      let _allLeadsBR = [], _filteredLeadsBR = [], _catFilterBR = '', _searchQueryBR = '';
+
+      window.loadLeadsBR = async function() {
+        window._leadsLoadedBR = true;
+        try {
+          const data = await fetch('data/baton-rouge-leads.json?_='+Date.now()).then(r=>r.json());
+          _allLeadsBR = data.leads || [];
+
+          const cats = [...new Set(_allLeadsBR.map(l=>l.category))].sort();
+          const sel = document.getElementById('leads-cat-filter-br');
+          cats.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c;
+            opt.textContent = c.replace(/_/g,' ').replace(/\b\w/g,x=>x.toUpperCase());
+            sel.appendChild(opt);
+          });
+
+          renderLeadsBR();
+
+          sel.addEventListener('change', () => { _catFilterBR = sel.value; renderLeadsBR(); });
+          document.getElementById('leads-search-br').addEventListener('input', e => {
+            _searchQueryBR = e.target.value.toLowerCase();
+            renderLeadsBR();
+          });
+        } catch(e) {
+          document.getElementById('leads-tbody-br').innerHTML =
+            `<tr><td colspan="6" style="padding:2rem;color:#ff2d87;text-align:center;">Failed to load leads: ${e.message}</td></tr>`;
+        }
+      };
+
+      function renderLeadsBR() {
+        const q = _searchQueryBR;
+        _filteredLeadsBR = _allLeadsBR.filter(l => {
+          if (_catFilterBR && l.category !== _catFilterBR) return false;
+          if (q && !l.name.toLowerCase().includes(q) && !l.address.toLowerCase().includes(q) && !(l.phone||'').includes(q)) return false;
+          return true;
+        });
+
+        const label = document.getElementById('leads-count-label-br');
+        label.textContent = `${_filteredLeadsBR.length.toLocaleString()} of ${_allLeadsBR.length.toLocaleString()} leads · Click any row to open demo site`;
+
+        const tbody = document.getElementById('leads-tbody-br');
+        const empty = document.getElementById('leads-empty-br');
+
+        if (!_filteredLeadsBR.length) {
+          tbody.innerHTML = '';
+          empty.style.display = 'block';
+          return;
+        }
+        empty.style.display = 'none';
+
+        const demoBase = 'https://inkthorn.ai/crustacean/demos-br/';
+        const CAT_COLORS_BR = {
+          restaurant:'#ff2d87', cafe:'#fbbf24', bar:'#a855f7', bakery:'#f97316',
+          hair_salon:'#ec4899', beauty_salon:'#db2777', barber_shop:'#8b5cf6',
+          nail_salon:'#d946ef', spa:'#06b6d4', car_repair:'#f59e0b',
+          car_wash:'#3b82f6', electrician:'#eab308', plumber:'#6366f1',
+          roofing_contractor:'#ef4444', painter:'#10b981', florist:'#f43f5e',
+          gym:'#22c55e', dentist:'#0ea5e9', doctor:'#14b8a6', lawyer:'#8b5cf6',
+          cleaning_service:'#6ee7b7', clothing_store:'#f472b6', default:'#00f5ff'
+        };
+
+        tbody.innerHTML = _filteredLeadsBR.map((l, i) => {
+          const color = CAT_COLORS_BR[l.category] || CAT_COLORS_BR.default;
+          const catLabel = l.category.replace(/_/g,' ').replace(/\b\w/g,x=>x.toUpperCase());
+          const slug = String(l.name).toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').trim();
+          const demoUrl = demoBase + slug + '/';
+          const stars = l.rating ? '★'.repeat(Math.floor(l.rating)) + (l.rating%1>=0.5?'½':'') : '—';
+          const rowStyle = 'border-bottom:1px solid rgba(168,85,247,0.12);transition:background 0.15s;cursor:pointer;';
+          return `<tr style="${rowStyle}" onclick="window.open('${escHtml(demoUrl)}','_blank')"
+                      onmouseover="this.style.background='rgba(0,245,255,0.07)'"
+                      onmouseout="this.style.background=''"
+                      title="Open demo site for ${escHtml(l.name)}">
+            <td style="padding:10px 14px;color:#7878a8;font-family:monospace;font-size:0.75rem;white-space:nowrap;">${i+1}</td>
+            <td style="padding:10px 14px;">
+              <div style="font-weight:700;color:#f0f0ff;font-size:0.9rem;">${escHtml(l.name)}</div>
+              <div style="font-size:0.72rem;color:#7878a8;margin-top:2px;">${escHtml(l.address.split(',').slice(0,2).join(','))}</div>
+            </td>
+            <td style="padding:10px 14px;">
+              <span style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.1em;padding:3px 10px;border-radius:999px;border:1px solid ${color}60;color:${color};background:${color}12;white-space:nowrap;">${escHtml(catLabel)}</span>
+            </td>
+            <td style="padding:10px 14px;font-family:monospace;font-size:0.8rem;color:#00f5ff;white-space:nowrap;">
+              ${l.phone ? `<a href="tel:${l.phone.replace(/\D/g,'')}" onclick="event.stopPropagation()" style="color:#00f5ff;text-decoration:none;" title="Call">${escHtml(l.phone)}</a>` : '<span style="color:#7878a8">—</span>'}
+            </td>
+            <td style="padding:10px 14px;white-space:nowrap;">
+              ${l.rating
+                ? `<span style="color:#fbbf24;font-size:0.85rem;">${stars}</span>
+                   <span style="color:#7878a8;font-size:0.72rem;margin-left:4px;">${l.rating} (${(l.reviewCount||0).toLocaleString()})</span>`
+                : '<span style="color:#7878a8">—</span>'}
+            </td>
+            <td style="padding:10px 14px;">
+              <a href="${escHtml(demoUrl)}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
+                 style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.08em;padding:5px 12px;border-radius:999px;border:1px solid rgba(0,245,255,0.4);background:rgba(0,245,255,0.08);color:#00f5ff;text-decoration:none;white-space:nowrap;display:inline-block;">
+                VIEW SITE ↗
+              </a>
+            </td>
+          </tr>`;
+        }).join('');
       }
     })();
 
