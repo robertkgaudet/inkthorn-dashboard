@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>InkThorn Crustacean — Daily Call Scripts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100vh; background: #06000f; color: #f0f0ff; font-family: 'Space Grotesk', sans-serif; }
+
+    .topbar {
+      background: rgba(10,0,20,0.97);
+      border-bottom: 1px solid rgba(168,85,247,0.25);
+      padding: 12px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .topbar-logo { font-family:'Orbitron',sans-serif;font-size:0.95rem;font-weight:900;color:#f0f0ff; }
+    .topbar-logo span { color:#a855f7; }
+    .topbar-nav { display:flex;gap:14px;align-items:center;flex-wrap:wrap; }
+    .topbar-nav a { font-size:0.75rem;color:#7878a8;text-decoration:none;font-weight:600; }
+    .topbar-nav a:hover { color:#a855f7; }
+    .topbar-nav a.active { color:#f0f0ff; }
+
+    /* ── Daily Work Header ── */
+    .work-header {
+      background: linear-gradient(135deg, #0d001a, #160030);
+      border-bottom: 2px solid rgba(168,85,247,0.3);
+      padding: 28px 28px 24px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .work-header-left h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem; font-weight: 900; color: #f0f0ff; letter-spacing: 0.05em;
+    }
+    .work-header-left p { font-size: 0.82rem; color: #7878a8; margin-top: 4px; }
+    .pitch-card {
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.4);
+      border-radius: 10px; padding: 12px 20px;
+      font-size: 0.82rem; color: #c4b5fd; font-style: italic;
+      max-width: 500px; line-height: 1.6;
+    }
+    .pitch-card strong { color: #fbbf24; font-style: normal; }
+
+    /* ── Script tabs ── */
+    .script-tabs {
+      display: flex; gap: 0;
+      background: rgba(10,0,20,0.8);
+      border-bottom: 1px solid rgba(168,85,247,0.2);
+      overflow-x: auto;
+      padding: 0 24px;
+    }
+    .script-tab {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.52rem; font-weight: 700; letter-spacing: 0.1em;
+      padding: 14px 18px; border: none; background: transparent;
+      color: #7878a8; cursor: pointer; white-space: nowrap;
+      border-bottom: 3px solid transparent; transition: all 0.2s;
+    }
+    .script-tab:hover { color: #c4b5fd; }
+    .script-tab.active { color: #f0f0ff; border-bottom-color: #a855f7; }
+
+    /* ── Content ── */
+    .script-content { max-width: 860px; margin: 0 auto; padding: 32px 24px 80px; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ── Script boxes ── */
+    .situation-label {
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif; font-size: 0.45rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 999px; margin-bottom: 20px;
+    }
+
+    .script {
+      background: rgba(10,0,20,0.9);
+      border-left: 4px solid #a855f7;
+      border-radius: 0 12px 12px 0;
+      padding: 22px 26px;
+      margin-bottom: 20px;
+    }
+    .script-label {
+      font-family: 'Orbitron', sans-serif; font-size: 0.44rem; font-weight: 700;
+      letter-spacing: 0.18em; color: #a855f7; margin-bottom: 12px;
+    }
+    .script-text { font-size: 0.95rem; color: #e0e0ff; line-height: 1.9; }
+    .script-text strong { color: #fbbf24; }
+    .script-text em { color: #7878a8; font-style: normal; font-size:0.82rem; }
+    .script-note {
+      margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(168,85,247,0.15);
+      font-size: 0.78rem; color: #7878a8; line-height: 1.6;
+    }
+    .script-note strong { color: #c4b5fd; }
+
+    .response { background: rgba(22,12,45,0.7); border-left: 4px solid #4ade80; border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 12px 0; }
+    .response-label { font-family:'Orbitron',sans-serif;font-size:0.44rem;font-weight:700;letter-spacing:0.15em;color:#4ade80;margin-bottom:8px; }
+    .response-text { font-size:0.9rem;color:#c4b5fd;line-height:1.8; }
+    .response-text strong { color:#fbbf24; }
+
+    /* ── Objection mini-cards ── */
+    .obj { background:rgba(22,12,45,0.8);border:1px solid rgba(168,85,247,0.15);border-radius:10px;padding:16px 20px;margin-bottom:10px; }
+    .obj-q { font-weight:700;color:#ff6b6b;font-size:0.88rem;margin-bottom:6px; }
+    .obj-a { font-size:0.86rem;color:#c4b5fd;line-height:1.7; }
+    .obj-a strong { color:#fbbf24; }
+
+    /* ── Cheat sheet ── */
+    .cheat { background:rgba(10,0,20,0.95);border:2px solid rgba(168,85,247,0.4);border-radius:14px;padding:24px 28px; }
+    .cheat-row { display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid rgba(168,85,247,0.1);font-size:0.85rem; }
+    .cheat-row:last-child { border-bottom:none; }
+    .cheat-label { color:#7878a8; }
+    .cheat-val { color:#f0f0ff;font-weight:700;text-align:right; }
+    .cheat-val.green { color:#4ade80; }
+    .cheat-val.gold { color:#fbbf24; }
+    .cheat-val.purple { color:#c4b5fd; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="topbar">
+    <div class="topbar-logo">InkThorn <span>Crustacean</span></div>
+    <div class="topbar-nav">
+      <a href="/crustacean/">Home</a>
+      <a href="/crustacean/dashboard.html">Leads</a>
+      <a href="/crustacean/earnings.html">💰 Earnings</a>
+      <a href="/crustacean/team-training.html">📋 Training</a>
+      <a href="/crustacean/scripts.html" class="active" style="color:#fbbf24;">📞 DAILY SCRIPTS</a>
+    </div>
+  </nav>
+
+  <!-- Daily Work Header -->
+  <div class="work-header">
+    <div class="work-header-left">
+      <h1>📞 DAILY CALL SCRIPTS — YOUR WORK STARTS HERE</h1>
+      <p>Pick a script. Open the leads dashboard. Start dialing. This is the page you come back to every day.</p>
+    </div>
+    <div class="pitch-card">
+      <strong>The GEO Pitch in one sentence:</strong><br>
+      "If you're not showing up when people ask ChatGPT for a [business type] in [city] — you're invisible to a massive number of customers. We fix that, and we already built your site for free."
+    </div>
+  </div>
+
+  <!-- Script Tabs -->
+  <div class="script-tabs">
+    <button class="script-tab active" onclick="show('no-site')">📞 NO WEBSITE</button>
+    <button class="script-tab" onclick="show('has-site')">🌐 HAS A WEBSITE</button>
+    <button class="script-tab" onclick="show('voicemail')">📱 VOICEMAIL</button>
+    <button class="script-tab" onclick="show('sms')">💬 TEXT / SMS</button>
+    <button class="script-tab" onclick="show('followup')">🔁 FOLLOW-UP</button>
+    <button class="script-tab" onclick="show('close')">🤝 THE CLOSE</button>
+    <button class="script-tab" onclick="show('objections')">🛡️ OBJECTIONS</button>
+    <button class="script-tab" onclick="show('cheatsheet')">⚡ CHEAT SHEET</button>
+  </div>
+
+  <div class="script-content">
+
+    <!-- ══ NO WEBSITE ══ -->
+    <div class="panel active" id="panel-no-site">
+      <div class="situation-label" style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.4);color:#c4b5fd;">SITUATION: Business has NO website</div>
+
+      <div class="script" style="border-left-color:#a855f7;">
+        <div class="script-label">OPENING — LEAD WITH GEO</div>
+        <div class="script-text">
+          "Hi, is this the owner of <strong>[Business Name]</strong>?<br><br>
+          Hey, my name is [Your Name] — I'm with InkThorn, we're based here in Louisiana.<br><br>
+          Quick question — <strong>when someone opens ChatGPT or Google's AI and asks for a [salon / restaurant / auto shop] in [city] right now — does your business show up?</strong><br><br>
+          <em>[Pause. Let them answer.]</em><br><br>
+          That's exactly what I thought. AI search is sending customers to businesses every day — and without a GEO-optimized website, you're not in that conversation at all. Your competitors who have one are getting those customers instead of you.<br><br>
+          Here's the thing — we already went ahead and built you a <strong>free demo site</strong> that's GEO-ready. You can see it right now at <strong>inkthorn.ai</strong> — just type your business name in the search bar at the top.<br><br>
+          Can you pull that up real quick while I have you?"
+        </div>
+        <div class="script-note"><strong>Key:</strong> Lead with AI invisibility — not the free site. The demo is proof of the solution, not the pitch itself.</div>
+      </div>
+
+      <div class="response">
+        <div class="response-label">IF THEY SAY "I'M LOOKING AT IT NOW"</div>
+        <div class="response-text">
+          "That's your business — we built that from your Google listing. It's got your address, phone, services, and it's already structured so AI search engines can read it and recommend you.<br><br>
+          To keep it, update it, and make it fully yours — it's <strong>$95 a month</strong>. No contract, cancel anytime.<br><br>
+          Right now, if someone asks ChatGPT for a [business type] in [city] — <strong>you don't show up. With this, you do.</strong><br><br>
+          Want to go ahead and claim it?"
+        </div>
+      </div>
+
+      <div class="response" style="border-left-color:#fbbf24;">
+        <div class="response-label" style="color:#fbbf24;">IF THEY ASK "WHAT DOES IT COST?"</div>
+        <div class="response-text">
+          "We have three plans. Most businesses go with the Growth plan — <strong>$95 a month</strong>. There's also a Starter at $47, and a Premium with online ordering at $179.<br><br>
+          But pull it up first — see what we built for you — and then we can figure out which plan fits. The site is already done. You just have to decide if you want it."
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ HAS A WEBSITE ══ -->
+    <div class="panel" id="panel-has-site">
+      <div class="situation-label" style="background:rgba(0,245,255,0.1);border:1px solid rgba(0,245,255,0.3);color:#00f5ff;">SITUATION: Business already has a website</div>
+
+      <div class="script" style="border-left-color:#00f5ff;">
+        <div class="script-label" style="color:#00f5ff;">OPENING — GEO WEDGE</div>
+        <div class="script-text">
+          "Hi, is this the owner of <strong>[Business Name]</strong>?<br><br>
+          My name is [Your Name] with InkThorn. I know you already have a website — I actually looked at it. It looks good.<br><br>
+          My question is: <strong>does it show up when someone asks ChatGPT or Google's AI search for [business type] in [city]?</strong><br><br>
+          <em>[Pause. Let them answer.]</em><br><br>
+          Most websites built before 2024 don't — not because they're bad, but because GEO optimization barely existed yet. It's a completely new layer of search that most web developers don't even know about.<br><br>
+          We specialize in that. We call it GEO — Generative Engine Optimization. It's the difference between showing up when someone Googles you versus showing up when someone <em>asks AI</em> for what you do.<br><br>
+          Can I take 60 seconds to show you what the gap looks like?"
+        </div>
+        <div class="script-note"><strong>Key move:</strong> Offer to do a live ChatGPT search while on the phone. Ask them to open ChatGPT and type "[business type] in [city]." If they don't show up — that moment does all the selling for you.</div>
+      </div>
+
+      <div class="response">
+        <div class="response-label">IF THEY SAY "MY SITE IS FINE / JUST REDONE"</div>
+        <div class="response-text">
+          "That's great, and it's probably solid for traditional Google search. What I'm asking about is specifically <strong>AI search</strong> — ChatGPT, Gemini, Perplexity. Those launched in the last 2 years and they work completely differently.<br><br>
+          Even a brand-new website won't be GEO-ready unless whoever built it specifically added that structure. Most designers don't even know it exists yet.<br><br>
+          <strong>Want me to run a quick free check and tell you if your current site is AI-ready or not?</strong> Takes 5 minutes and costs you nothing."
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ VOICEMAIL ══ -->
+    <div class="panel" id="panel-voicemail">
+      <div class="situation-label" style="background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);color:#fbbf24;">SITUATION: No answer — leaving a voicemail</div>
+
+      <div class="script" style="border-left-color:#fbbf24;">
+        <div class="script-label" style="color:#fbbf24;">VOICEMAIL — UNDER 25 SECONDS</div>
+        <div class="script-text">
+          "Hey, this is [Your Name] with InkThorn — calling for the owner of <strong>[Business Name]</strong>.<br><br>
+          Quick question: does your business show up when someone asks ChatGPT for a [business type] in [city]? If not, we built you a free demo site that fixes that.<br><br>
+          Check it out at <strong>inkthorn.ai</strong> — search your business name. Call me back at [Your Number]. Thanks."
+        </div>
+        <div class="script-note"><strong>Why it works:</strong> "Does your business show up on ChatGPT" is a question they've never been asked. Curiosity will make them search. Keep it under 25 seconds — every extra second reduces callback rates.</div>
+      </div>
+    </div>
+
+    <!-- ══ SMS ══ -->
+    <div class="panel" id="panel-sms">
+      <div class="situation-label" style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);color:#4ade80;">SITUATION: Sending a text message</div>
+
+      <div class="script" style="border-left-color:#4ade80;">
+        <div class="script-label" style="color:#4ade80;">SMS — FIRST TEXT</div>
+        <div class="script-text">
+          "Hi, I'm [Name] with InkThorn. Does <strong>[Business Name]</strong> show up when someone asks ChatGPT for [business type] in [city]? We built you a free GEO-ready site to fix that — search your name at inkthorn.ai. $95/mo, no contract. 🦞"
+        </div>
+      </div>
+
+      <div class="script" style="border-left-color:#4ade80;">
+        <div class="script-label" style="color:#4ade80;">SMS — FOLLOW-UP (Day 3 if no response)</div>
+        <div class="script-text">
+          "Just following up — the free demo site we built for <strong>[Business Name]</strong> is live at inkthorn.ai. AI search is sending customers to businesses daily — make sure you're in the conversation before your competitors are."
+        </div>
+      </div>
+
+      <div class="script-note" style="margin-top:0;padding:14px 18px;background:rgba(22,12,45,0.6);border-radius:10px;">
+        <strong style="color:#c4b5fd;">SMS Rules:</strong> Send 10am–4pm only. One follow-up maximum. If no response after 2 texts, move on. Quality over volume — never mass-blast unsolicited.
+      </div>
+    </div>
+
+    <!-- ══ FOLLOW-UP ══ -->
+    <div class="panel" id="panel-followup">
+      <div class="situation-label" style="background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.3);color:#60a5fa;">SITUATION: Called before — following up</div>
+
+      <div class="script" style="border-left-color:#60a5fa;">
+        <div class="script-label" style="color:#60a5fa;">FOLLOW-UP CALL — DAY 2 OR 3</div>
+        <div class="script-text">
+          "Hey [Name], this is [Your Name] again from InkThorn — I left you a message a couple days ago about the AI search issue for <strong>[Business Name]</strong>.<br><br>
+          Did you get a chance to look up your business on inkthorn.ai?<br><br>
+          <em>[If yes:]</em> Great — what did you think? Any questions about claiming it?<br><br>
+          <em>[If no:]</em> No problem — pull it up real quick right now, just takes a second. Type inkthorn.ai and search your business name. I'll wait."
+        </div>
+      </div>
+
+      <div class="script" style="border-left-color:#60a5fa;">
+        <div class="script-label" style="color:#60a5fa;">FOLLOW-UP — THEY SAW IT BUT DIDN'T COMMIT</div>
+        <div class="script-text">
+          "Hey [Name], just checking back — you mentioned you saw the site last week. I wanted to see if anything was holding you back.<br><br>
+          Most owners I talk to wonder if it's worth $95 a month. Here's how I think about it: <strong>if this site brings in even one new customer a month, it's paid for itself multiple times over.</strong><br><br>
+          Are you ready to go ahead, or is there a specific question I can answer?"
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ THE CLOSE ══ -->
+    <div class="panel" id="panel-close">
+      <div class="situation-label" style="background:rgba(74,222,128,0.15);border:1px solid rgba(74,222,128,0.5);color:#4ade80;">SITUATION: They're interested — time to close</div>
+
+      <div class="script" style="border-left-color:#4ade80;">
+        <div class="script-label" style="color:#4ade80;">THE CLOSE</div>
+        <div class="script-text">
+          "To get started, I just need your email address and we'll get you set up on the Growth plan — <strong>$95 a month</strong>, first month to try it out, cancel anytime.<br><br>
+          I'll send you a link right now to complete the setup — takes about 2 minutes. What's the best email to use?"
+        </div>
+        <div class="script-note"><strong>Always end with a specific next step.</strong> Never leave it open. "What's your email?" moves forward. "Let me know if you're interested" dies.</div>
+      </div>
+
+      <div class="script" style="border-left-color:#fbbf24;">
+        <div class="script-label" style="color:#fbbf24;">UPSELL — IF THEY CHOOSE STARTER ($47)</div>
+        <div class="script-text">
+          "The Starter plan is solid — you'll be on the map for AI search from day one. One thing to consider: <strong>the Growth plan at $95 adds a services page and booking integration</strong>, which is what really drives inbound calls.<br><br>
+          Most restaurants and service businesses go Growth. But Starter is a great starting point — we can upgrade any time."
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ OBJECTIONS ══ -->
+    <div class="panel" id="panel-objections">
+      <div class="situation-label" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ff6b6b;">HANDLING PUSHBACK</div>
+
+      <div class="obj">
+        <div class="obj-q">❓ "I already have a Facebook page, I don't need a website."</div>
+        <div class="obj-a">"Facebook is great for existing customers. But when someone <strong>new opens ChatGPT and asks for a [business type] in [city]</strong>, Facebook pages don't show up — websites do. You need both. Right now, you only have one."</div>
+      </div>
+      <div class="obj">
+        <div class="obj-q">❓ "I can't afford $95 a month."</div>
+        <div class="obj-a">"That's $3.17 a day. What does one new customer usually spend with you? <em>[Let them answer.]</em> So if this brings in one customer this month, it's paid for itself how many times over?"</div>
+      </div>
+      <div class="obj">
+        <div class="obj-q">❓ "Sounds like a scam."</div>
+        <div class="obj-a">"Fair — I'd be skeptical too. That's exactly why we built the demo first and aren't asking for anything upfront. Just go to inkthorn.ai right now and search your business name. If it's not there, hang up on me. But it is there."</div>
+      </div>
+      <div class="obj">
+        <div class="obj-q">❓ "I need to talk to my partner first."</div>
+        <div class="obj-a">"Of course. Can I send you the link to the demo so you can show them? And what's a good time to call back tomorrow after you've looked at it together?"</div>
+      </div>
+      <div class="obj">
+        <div class="obj-q">❓ "I already have a website."</div>
+        <div class="obj-a">"Great — does it show up when someone asks ChatGPT for [business type] in [city]? Most sites built before 2024 don't. That's a completely new type of search, and almost nobody has it yet. Want me to check yours for free?"</div>
+      </div>
+      <div class="obj">
+        <div class="obj-q">❓ "What if I want to cancel?"</div>
+        <div class="obj-a">"No contracts, cancel anytime. We'd rather you stay because it's working — not because you're locked in."</div>
+      </div>
+    </div>
+
+    <!-- ══ CHEAT SHEET ══ -->
+    <div class="panel" id="panel-cheatsheet">
+      <div class="situation-label" style="background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.4);color:#a855f7;">QUICK REFERENCE — READ BEFORE EVERY SESSION</div>
+
+      <div class="cheat" style="margin-bottom:20px;">
+        <div style="font-family:'Orbitron',sans-serif;font-size:0.55rem;letter-spacing:0.15em;color:#a855f7;margin-bottom:16px;">THE GEO PITCH</div>
+        <div style="font-size:0.95rem;color:#fbbf24;font-style:italic;line-height:1.8;padding:16px;background:rgba(0,0,0,0.4);border-radius:8px;">
+          "If you're not showing up when people ask ChatGPT for your business in your city, you're invisible to a huge and growing number of customers. We fix that — and we already built your GEO-ready site for free."
+        </div>
+      </div>
+
+      <div class="cheat" style="margin-bottom:20px;">
+        <div style="font-family:'Orbitron',sans-serif;font-size:0.55rem;letter-spacing:0.15em;color:#a855f7;margin-bottom:12px;">PRICING</div>
+        <div class="cheat-row"><span class="cheat-label">Starter — Presence</span><span class="cheat-val purple">$47/mo · Your cut: $14.10</span></div>
+        <div class="cheat-row"><span class="cheat-label">Growth — Professional ⭐</span><span class="cheat-val gold">$95/mo · Your cut: $28.50</span></div>
+        <div class="cheat-row"><span class="cheat-label">Premium — Commerce</span><span class="cheat-val green">$179/mo · Your cut: $53.70</span></div>
+        <div class="cheat-row"><span class="cheat-label">Billing</span><span class="cheat-val">Monthly · No contracts · Cancel anytime</span></div>
+      </div>
+
+      <div class="cheat" style="margin-bottom:20px;">
+        <div style="font-family:'Orbitron',sans-serif;font-size:0.55rem;letter-spacing:0.15em;color:#a855f7;margin-bottom:12px;">YOUR COMMISSION AT SCALE</div>
+        <div class="cheat-row"><span class="cheat-label">10 customers (Growth)</span><span class="cheat-val green">$285/mo · $3,420/yr</span></div>
+        <div class="cheat-row"><span class="cheat-label">25 customers</span><span class="cheat-val green">$712/mo · $8,550/yr</span></div>
+        <div class="cheat-row"><span class="cheat-label">50 customers</span><span class="cheat-val gold">$1,425/mo · $17,100/yr</span></div>
+        <div class="cheat-row"><span class="cheat-label">100 customers</span><span class="cheat-val gold">$2,850/mo · $34,200/yr</span></div>
+      </div>
+
+      <div class="cheat">
+        <div style="font-family:'Orbitron',sans-serif;font-size:0.55rem;letter-spacing:0.15em;color:#a855f7;margin-bottom:12px;">DAILY RULES</div>
+        <div class="cheat-row"><span class="cheat-label">Best call times</span><span class="cheat-val">10am–12pm &amp; 2pm–4pm</span></div>
+        <div class="cheat-row"><span class="cheat-label">Work in batches</span><span class="cheat-val">20 calls minimum per session</span></div>
+        <div class="cheat-row"><span class="cheat-label">Check social first</span><span class="cheat-val green">Active Facebook/IG = early adopter ✓</span></div>
+        <div class="cheat-row"><span class="cheat-label">Skip laggards</span><span class="cheat-val" style="color:#ef4444;">No social + no reviews = move on</span></div>
+        <div class="cheat-row"><span class="cheat-label">Lead every call with</span><span class="cheat-val purple">"Does your business show up on ChatGPT?"</span></div>
+        <div class="cheat-row"><span class="cheat-label">Close every call with</span><span class="cheat-val gold">"What's the best email to use?"</span></div>
+      </div>
+
+      <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="/crustacean/dashboard.html" style="display:inline-block;background:#a855f7;color:#fff;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.1em;padding:12px 22px;border-radius:999px;text-decoration:none;">Open Leads Dashboard →</a>
+        <a href="/crustacean/earnings.html" style="display:inline-block;border:1px solid rgba(251,191,36,0.5);color:#fbbf24;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.1em;padding:12px 22px;border-radius:999px;text-decoration:none;">View Earnings Calculator</a>
+        <a href="/crustacean/team-training.html" style="display:inline-block;border:1px solid rgba(168,85,247,0.3);color:#c4b5fd;font-family:'Orbitron',sans-serif;font-size:0.55rem;font-weight:700;letter-spacing:0.1em;padding:12px 22px;border-radius:999px;text-decoration:none;">Full Training Guide</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function show(id) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.script-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('panel-' + id).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
