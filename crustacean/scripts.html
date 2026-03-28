@@ -120,6 +120,21 @@
     .cheat-val.green { color:#4ade80; }
     .cheat-val.gold { color:#fbbf24; }
     .cheat-val.purple { color:#c4b5fd; }
+  
+    .nav-hamburger { display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:transparent;border:none; }
+    .nav-hamburger span { display:block;width:22px;height:2px;background:#c4b5fd;border-radius:2px;transition:all 0.3s; }
+    .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-hamburger.open span:nth-child(2){opacity:0;}
+    .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    @media(max-width:768px){
+      #topbar-nav{display:none;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;background:rgba(10,0,20,0.98);border-bottom:1px solid rgba(168,85,247,0.3);padding:8px 0;box-shadow:0 8px 24px rgba(0,0,0,0.5);z-index:201;}
+      #topbar-nav.open{display:flex;}
+      #topbar-nav a{padding:12px 24px;border-bottom:1px solid rgba(168,85,247,0.08);width:100%;font-size:0.88rem !important;display:block;}
+      #topbar-nav a:last-child{border-bottom:none;}
+      .nav-hamburger{display:flex;}
+      .script-tabs{flex-wrap:wrap;}
+      .script-tab{font-size:0.5rem;padding:10px 12px;}
+    }
   </style>
 </head>
 <body>
@@ -127,7 +142,10 @@
   <!-- Top Nav -->
   <nav class="topbar">
     <div class="topbar-logo">InkThorn <span>Crustacean</span></div>
-    <div class="topbar-nav">
+    <button class="nav-hamburger" id="nav-toggle" onclick="document.getElementById('topbar-nav').classList.toggle('open');this.classList.toggle('open');" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="topbar-nav" id="topbar-nav">
       <a href="/crustacean/">Home</a>
       <a href="/crustacean/dashboard.html">🗂️ Leads Dashboard</a>
       <a href="/crustacean/scripts.html" style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.08em;padding:6px 14px;border-radius:999px;border:1px solid rgba(251,191,36,0.6);background:rgba(251,191,36,0.12);color:#fbbf24;text-decoration:none;border-color:rgba(251,191,36,0.9);background:rgba(251,191,36,0.25);">📞 Daily Scripts</a>

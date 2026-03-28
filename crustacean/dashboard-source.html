@@ -182,6 +182,20 @@
     /* ── Map ── */
     .map-container { height: 420px; border-radius: 12px; overflow: hidden; margin-bottom: 8px; }
     .map-note { font-size: 0.72rem; color: #7878a8; font-family: monospace; margin-bottom: 28px; }
+  
+    /* ── Mobile nav ── */
+    .nav-hamburger { display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;background:transparent;border:none; }
+    .nav-hamburger span { display:block;width:22px;height:2px;background:#c4b5fd;border-radius:2px;transition:all 0.3s; }
+    .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-hamburger.open span:nth-child(2){opacity:0;}
+    .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    @media(max-width:768px){
+      .topbar-nav-links{display:none;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;background:rgba(10,0,20,0.98);border-bottom:1px solid rgba(168,85,247,0.3);padding:8px 0;box-shadow:0 8px 24px rgba(0,0,0,0.5);z-index:201;}
+      .topbar-nav-links.open{display:flex;}
+      .topbar-nav-links a{padding:12px 24px;border-bottom:1px solid rgba(168,85,247,0.08);width:100%;font-size:0.88rem !important;display:block;}
+      .topbar-nav-links a:last-child{border-bottom:none;}
+      .nav-hamburger{display:flex;}
+    }
   </style>
 </head>
 <body>
@@ -192,7 +206,8 @@
       <div class="topbar-logo">InkThorn <span>Crustacean</span></div>
       <div class="topbar-subtitle">Partner Leads Dashboard · 6,597 total leads</div>
     </div>
-    <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+    <button class="nav-hamburger" id="nav-toggle-dash" onclick="document.getElementById('dash-nav-links').classList.toggle('open');this.classList.toggle('open');" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="topbar-nav-links" id="dash-nav-links" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
       <a href="/crustacean/" style="font-size:0.75rem;color:#7878a8;text-decoration:none;font-weight:600;">Home</a>
       <a href="/crustacean/dashboard.html" style="font-size:0.75rem;color:#f0f0ff;text-decoration:none;font-weight:600;">🗂️ Leads Dashboard</a>
       <a href="/crustacean/scripts.html" style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.08em;padding:6px 14px;border-radius:999px;border:1px solid rgba(251,191,36,0.6);background:rgba(251,191,36,0.12);color:#fbbf24;text-decoration:none;">📞 Daily Scripts</a>
