@@ -18,10 +18,8 @@
       border-bottom: 1px solid rgba(168,85,247,0.2);
       padding: 14px 28px;
       display: flex; align-items: center; justify-content: space-between;
-      position: sticky;
-      position: -webkit-sticky; top: 0; z-index: 1000; position: sticky;
+      position: sticky; top: 0; z-index: 100;
       backdrop-filter: blur(10px);
-      overflow: visible;
     }
     .topbar-logo { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 900; color: #f0f0ff; }
     .topbar-logo span { color: #a855f7; }
@@ -149,13 +147,13 @@
     .btn-outline-purple { display:inline-block;border:2px solid rgba(168,85,247,0.5);color:#c4b5fd;font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:12px 24px;border-radius:999px;text-decoration:none;transition:all 0.2s;margin:4px; }
     .btn-outline-purple:hover { background:rgba(168,85,247,0.1); }
   
-    
-    #nav-btn { display:none; background:none; border:none; color:#c4b5fd; font-size:1.5rem; cursor:pointer; padding:4px 10px; }
+    /* ── Mobile hamburger nav ── */
+    .hb-btn { display:none; background:none; border:none; color:#c4b5fd; font-size:1.4rem; cursor:pointer; padding:4px 10px; flex-shrink:0; }
     @media(max-width:768px){
-      #nav-btn { display:block; }
-      #mnav { display:none; flex-direction:column; position:absolute; top:100%; left:0; right:0; width:100%; background:rgba(10,0,20,0.98); z-index:9999; padding:8px 0; border-bottom:1px solid rgba(168,85,247,0.3); box-shadow:0 8px 24px rgba(0,0,0,0.8); }
-      #mnav.open { display:flex !important; }
-      #mnav a { padding:14px 24px; border-bottom:1px solid rgba(168,85,247,0.08); width:100%; display:block; font-size:0.9rem; }
+      .hb-btn { display:block; }
+      .hb-nav { display:none !important; flex-direction:column !important; position:absolute; top:100%; left:0; right:0; background:rgba(10,0,20,0.98); z-index:9999; padding:8px 0; border-bottom:1px solid rgba(168,85,247,0.3); box-shadow:0 8px 24px rgba(0,0,0,0.8); }
+      .hb-nav.hb-open { display:flex !important; }
+      .hb-nav a { padding:14px 24px !important; border-bottom:1px solid rgba(168,85,247,0.08); width:100%; display:block !important; }
     }
   </style>
 </head>
@@ -164,8 +162,11 @@
   <!-- Top Bar -->
   <nav class="topbar">
     <div class="topbar-logo">InkThorn <span>Crustacean</span></div>
-    <button id="nav-btn" onclick="var m=document.getElementById('mnav');m.classList.toggle('open');this.textContent=m.classList.contains('open')?'✕':'☰';">☰</button>
-    <div id="mnav">
+    <button class="nav-hamburger" id="nav-toggle" onclick="document.getElementById('topbar-nav').classList.toggle('open');this.classList.toggle('open');" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <button class="hb-btn" aria-label="Menu">☰</button>
+    <div class="hb-nav topbar-nav">
       <a href="/crustacean/">Home</a>
       <a href="/crustacean/dashboard.html">🗂️ Leads Dashboard</a>
       <a href="/crustacean/scripts.html" style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.08em;padding:6px 14px;border-radius:999px;border:1px solid rgba(251,191,36,0.6);background:rgba(251,191,36,0.12);color:#fbbf24;text-decoration:none;">📞 Daily Scripts</a>
@@ -302,24 +303,24 @@
 
     <div class="concept-grid">
       <div class="concept-card">
-        <div class="concept-icon">🔑</div>
-        <div class="concept-title">The Shift Nobody Sees Coming</div>
-        <div class="concept-desc">People are stopping going to websites. They're getting their answers from ChatGPT, Claude, and Google's AI. The website is no longer the destination — it's the <strong>source document AI reads</strong> to decide who to recommend.</div>
+        <div class="concept-icon">🚨</div>
+        <div class="concept-title">The Problem</div>
+        <div class="concept-desc">When someone opens ChatGPT and asks "best [salon / restaurant / auto shop] in [city]" — businesses without GEO-optimized websites don't get mentioned. Period. It doesn't matter how good they are or how long they've been open.</div>
       </div>
       <div class="concept-card">
-        <div class="concept-icon">🤖</div>
-        <div class="concept-title">AI Reads Structure, Not Design</div>
-        <div class="concept-desc">AI doesn't care how pretty a website is. It reads for dense, factual, structured content — who you are, what you do, where you are, why you're the best answer. A plain GEO-optimized site beats a beautiful unoptimized one every time.</div>
+        <div class="concept-icon">✅</div>
+        <div class="concept-title">The Solution</div>
+        <div class="concept-desc">We build websites structured specifically to be read and recommended by AI. GEO-optimized. From day one. So when someone asks ChatGPT, our clients show up — and their competitors without GEO don't.</div>
       </div>
       <div class="concept-card">
         <div class="concept-icon">🎁</div>
         <div class="concept-title">Why We Win the Call</div>
-        <div class="concept-desc">We already built a free GEO-optimized demo site for 6,500+ Louisiana businesses. You're not selling something imaginary — you're showing them a real site, built for AI, with their name on it, that already exists.</div>
+        <div class="concept-desc">We already built a free demo site for 6,500+ Louisiana businesses. You're not pitching something imaginary — you're calling to show them a real GEO-ready website with their name on it that already exists.</div>
       </div>
       <div class="concept-card">
         <div class="concept-icon">⏳</div>
-        <div class="concept-title">Why Right Now Is Everything</div>
-        <div class="concept-desc">Almost no small business in Louisiana is GEO-ready yet. The ones that move first own AI search in their category for years. This is the Google moment of 2005 — and most owners are still asleep.</div>
+        <div class="concept-title">Why Now Matters</div>
+        <div class="concept-desc">Right now, almost nobody in Louisiana has done this. The businesses that move first own the AI search results in their category. This is the Google moment of 2024 — and most people are still asleep.</div>
       </div>
     </div>
 
@@ -332,7 +333,7 @@
       <div class="script-label" style="color:#4ade80;">🔑 THE RULE — ALWAYS LEAD WITH GEO, NOT THE WEBSITE</div>
       <div class="script-text">❌ <strong style="color:#ff6b6b;font-style:normal;">Wrong:</strong> "We build websites for businesses."<br>
       ❌ <strong style="color:#ff6b6b;font-style:normal;">Wrong:</strong> "We make affordable websites starting at $47/month."<br><br>
-      ✅ <strong style="color:#4ade80;font-style:normal;">Right:</strong> "People aren't going to websites anymore — they're asking ChatGPT. And if you're not in that answer, you don't exist to them. We build the sites that AI recommends. And we already built yours for free."</div>
+      ✅ <strong style="color:#4ade80;font-style:normal;">Right:</strong> "When someone asks ChatGPT for a [business type] in [city] right now — are you showing up? Because if not, you're losing customers you don't even know about. We fix that."</div>
       <div class="script-note">📌 The website is the HOW. GEO invisibility is the WHY. Lead with the WHY every single time.</div>
     </div>
 
@@ -727,26 +728,29 @@
       event.target.classList.add('active');
     }
   </script>
-
-
-
-
-
-
 <script>
-document.getElementById('mnav').querySelectorAll('a').forEach(function(a){
-  a.addEventListener('click',function(){
-    document.getElementById('mnav').classList.remove('open');
-    document.getElementById('nav-btn').textContent='☰';
+(function(){
+  var btn = document.querySelector('.hb-btn');
+  var nav = document.querySelector('.hb-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    nav.classList.toggle('hb-open');
+    btn.textContent = nav.classList.contains('hb-open') ? '✕' : '☰';
   });
-});
-document.addEventListener('click',function(e){
-  var m=document.getElementById('mnav'),b=document.getElementById('nav-btn');
-  if(m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){
-    m.classList.remove('open');
-    b.textContent='☰';
-  }
-});
+  document.addEventListener('click', function(e){
+    if (nav.classList.contains('hb-open') && !nav.contains(e.target) && !btn.contains(e.target)){
+      nav.classList.remove('hb-open');
+      btn.textContent = '☰';
+    }
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('hb-open');
+      btn.textContent = '☰';
+    });
+  });
+})();
 </script>
 </body>
 </html>

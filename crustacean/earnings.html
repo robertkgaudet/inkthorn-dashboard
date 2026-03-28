@@ -20,10 +20,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      position: -webkit-sticky; top: 0; z-index: 1000; position: sticky;
+      position: sticky; top: 0; z-index: 100;
       backdrop-filter: blur(10px);
-      overflow: visible;
     }
     .topbar-logo { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 900; color: #f0f0ff; letter-spacing: 0.05em; }
     .topbar-logo span { color: #a855f7; }
@@ -191,13 +189,13 @@
 
     .divider { border: none; border-top: 1px solid rgba(168,85,247,0.15); margin: 48px 0; }
   
-    
-    #nav-btn { display:none; background:none; border:none; color:#c4b5fd; font-size:1.5rem; cursor:pointer; padding:4px 10px; }
+    /* ── Mobile hamburger nav ── */
+    .hb-btn { display:none; background:none; border:none; color:#c4b5fd; font-size:1.4rem; cursor:pointer; padding:4px 10px; flex-shrink:0; }
     @media(max-width:768px){
-      #nav-btn { display:block; }
-      #mnav { display:none; flex-direction:column; position:absolute; top:100%; left:0; right:0; width:100%; background:rgba(10,0,20,0.98); z-index:9999; padding:8px 0; border-bottom:1px solid rgba(168,85,247,0.3); box-shadow:0 8px 24px rgba(0,0,0,0.8); }
-      #mnav.open { display:flex !important; }
-      #mnav a { padding:14px 24px; border-bottom:1px solid rgba(168,85,247,0.08); width:100%; display:block; font-size:0.9rem; }
+      .hb-btn { display:block; }
+      .hb-nav { display:none !important; flex-direction:column !important; position:absolute; top:100%; left:0; right:0; background:rgba(10,0,20,0.98); z-index:9999; padding:8px 0; border-bottom:1px solid rgba(168,85,247,0.3); box-shadow:0 8px 24px rgba(0,0,0,0.8); }
+      .hb-nav.hb-open { display:flex !important; }
+      .hb-nav a { padding:14px 24px !important; border-bottom:1px solid rgba(168,85,247,0.08); width:100%; display:block !important; }
     }
   </style>
 </head>
@@ -206,8 +204,11 @@
   <!-- Top Bar -->
   <nav class="topbar">
     <div class="topbar-logo">InkThorn <span>Crustacean</span></div>
-    <button id="nav-btn" onclick="var m=document.getElementById('mnav');m.classList.toggle('open');this.textContent=m.classList.contains('open')?'✕':'☰';">☰</button>
-    <div id="mnav">
+    <button class="nav-hamburger" id="nav-toggle" onclick="document.getElementById('topbar-nav').classList.toggle('open');this.classList.toggle('open');" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <button class="hb-btn" aria-label="Menu">☰</button>
+    <div class="hb-nav topbar-nav">
       <a href="/crustacean/">Home</a>
       <a href="/crustacean/dashboard.html">🗂️ Leads Dashboard</a>
       <a href="/crustacean/scripts.html" style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.08em;padding:6px 14px;border-radius:999px;border:1px solid rgba(251,191,36,0.6);background:rgba(251,191,36,0.12);color:#fbbf24;text-decoration:none;">📞 Daily Scripts</a>
@@ -557,26 +558,29 @@
     buildGrowth('growth-conservative', 5, 95);
     buildGrowth('growth-aggressive', 20, 95);
   </script>
-
-
-
-
-
-
 <script>
-document.getElementById('mnav').querySelectorAll('a').forEach(function(a){
-  a.addEventListener('click',function(){
-    document.getElementById('mnav').classList.remove('open');
-    document.getElementById('nav-btn').textContent='☰';
+(function(){
+  var btn = document.querySelector('.hb-btn');
+  var nav = document.querySelector('.hb-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    nav.classList.toggle('hb-open');
+    btn.textContent = nav.classList.contains('hb-open') ? '✕' : '☰';
   });
-});
-document.addEventListener('click',function(e){
-  var m=document.getElementById('mnav'),b=document.getElementById('nav-btn');
-  if(m.classList.contains('open')&&!m.contains(e.target)&&!b.contains(e.target)){
-    m.classList.remove('open');
-    b.textContent='☰';
-  }
-});
+  document.addEventListener('click', function(e){
+    if (nav.classList.contains('hb-open') && !nav.contains(e.target) && !btn.contains(e.target)){
+      nav.classList.remove('hb-open');
+      btn.textContent = '☰';
+    }
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('hb-open');
+      btn.textContent = '☰';
+    });
+  });
+})();
 </script>
 </body>
 </html>
