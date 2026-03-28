@@ -2131,6 +2131,18 @@
       banner.textContent = '🦞 Your InkThorn rep is connecting you...';
       document.body.appendChild(banner);
 
+      // Log this page visit to referral_clicks table
+      fetch('https://wwriucdzthdszsxjclfv.supabase.co/rest/v1/referral_clicks', {
+        method: 'POST',
+        headers: {
+          'apikey': 'sb_publishable_X6kQitNRTlPKpNJ01JvSLg_YThS_Zlf',
+          'Authorization': 'Bearer sb_publishable_X6kQitNRTlPKpNJ01JvSLg_YThS_Zlf',
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ code: stored, page: window.location.pathname })
+      }).catch(function(){}); // fire and forget
+
       // Fetch rep name from Supabase
       fetch('https://wwriucdzthdszsxjclfv.supabase.co/rest/v1/team_members?code=eq.' + encodeURIComponent(stored) + '&select=name&limit=1', {
         headers: {
