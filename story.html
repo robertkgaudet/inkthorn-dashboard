@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Built in Two Weeks with AI — The InkThorn Story | InkThorn Crustacean</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="From zero to a full AI-powered business in two weeks. Rob Gaudet built InkThorn Crustacean using OpenClaw — an AI agent that scraped leads, built the site, created a team back-office, and launched a GEO services company." />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { max-width: 100%; overflow-x: hidden; }
+
+    :root {
+      --navy:      #0f1f3d;
+      --navy-mid:  #1a3460;
+      --blue:      #2563eb;
+      --blue-lt:   #3b82f6;
+      --gold:      #c9922a;
+      --gold-lt:   #f0b840;
+      --cream:     #faf8f4;
+      --gray-50:   #f9fafb;
+      --gray-100:  #f3f4f6;
+      --gray-300:  #d1d5db;
+      --gray-500:  #6b7280;
+      --gray-700:  #374151;
+      --gray-900:  #111827;
+      --white:     #ffffff;
+      --radius:    10px;
+      --shadow:    0 4px 20px rgba(0,0,0,0.10);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.14);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.15;
+    }
+
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-100);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 14px 0;
+    }
+    .nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--navy);
+    }
+    .nav-brand img { width: 30px; }
+    .nav-back {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-back:hover { color: var(--blue); text-decoration: none; }
+
+    /* ── HERO SLIDE ── */
+    .slide-hero {
+      background: linear-gradient(145deg, var(--navy) 0%, var(--navy-mid) 55%, #1e3a6e 100%);
+      color: var(--white);
+      padding: 80px 0 72px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 40%, rgba(201,146,42,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .slide-label {
+      display: inline-block;
+      background: rgba(201,146,42,0.18);
+      border: 1px solid rgba(201,146,42,0.4);
+      color: var(--gold-lt);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 999px;
+      margin-bottom: 28px;
+    }
+    .slide-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--white);
+      margin-bottom: 20px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .slide-hero h1 span { color: var(--gold-lt); }
+    .slide-hero-sub {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      text-align: center;
+    }
+    .hero-meta-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold-lt);
+      line-height: 1;
+    }
+    .hero-meta-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+    }
+    .hero-meta-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* ── SLIDES ── */
+    .slide {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .slide:nth-child(odd) { background: var(--white); }
+    .slide:nth-child(even) { background: var(--gray-50); }
+
+    .slide-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      font-family: 'Inter', sans-serif;
+    }
+    .slide-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .slide h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .slide-intro {
+      font-size: 1.05rem;
+      color: var(--gray-700);
+      max-width: 680px;
+      margin-bottom: 36px;
+      line-height: 1.75;
+    }
+
+    /* ── CARDS ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 12px;
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius);
+      padding: 24px 22px;
+      box-shadow: var(--shadow);
+    }
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .card h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      margin-top: 8px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--navy), var(--gold));
+      border-radius: 2px;
+    }
+    .tl-item {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .tl-dot {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      position: relative;
+      z-index: 1;
+    }
+    .tl-content h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .tl-content p {
+      font-size: 0.87rem;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+    .tl-date {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    /* ── STAT ROW ── */
+    .stat-row {
+      display: flex;
+      gap: 0;
+      background: var(--white);
+      border: 1px solid var(--gray-100);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      flex-wrap: wrap;
+    }
+    .stat-cell {
+      flex: 1;
+      min-width: 160px;
+      padding: 28px 24px;
+      text-align: center;
+      border-right: 1px solid var(--gray-100);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--gray-500);
+      margin-top: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── QUOTE ── */
+    .blockquote {
+      border-left: 4px solid var(--gold);
+      padding: 20px 28px;
+      background: linear-gradient(to right, rgba(201,146,42,0.05), transparent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 32px 0;
+    }
+    .blockquote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--navy);
+      line-height: 1.55;
+      font-style: italic;
+    }
+    .blockquote cite {
+      display: block;
+      margin-top: 12px;
+      font-size: 0.82rem;
+      color: var(--gray-500);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* ── TWO-COL ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 620px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    /* ── LIST ── */
+    .check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .check-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 0.92rem;
+      color: var(--gray-700);
+    }
+    .check-list li::before {
+      content: '✓';
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 800;
+      margin-top: 1px;
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight-box {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      margin-top: 32px;
+    }
+    .highlight-box h3 {
+      font-size: 1.4rem;
+      color: var(--gold-lt);
+      margin-bottom: 12px;
+    }
+    .highlight-box p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* ── CTA SLIDE ── */
+    .slide-cta {
+      background: linear-gradient(145deg, var(--navy) 0%, var(--navy-mid) 100%);
+      color: var(--white);
+      padding: 80px 0;
+      text-align: center;
+    }
+    .slide-cta h2 {
+      color: var(--white);
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      margin-bottom: 16px;
+    }
+    .slide-cta p {
+      color: rgba(255,255,255,0.72);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto 36px;
+    }
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 14px 30px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-lt); text-decoration: none; color: var(--navy); }
+    .btn-outline {
+      display: inline-block;
+      border: 2px solid rgba(255,255,255,0.3);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 12px 28px;
+      border-radius: 8px;
+      transition: border-color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--white); text-decoration: none; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--gray-900);
+      color: rgba(255,255,255,0.5);
+      padding: 36px 0 24px;
+      text-align: center;
+      font-size: 0.82rem;
+    }
+    footer a { color: rgba(255,255,255,0.5); }
+    footer a:hover { color: var(--white); text-decoration: none; }
+
+    /* ── PAGE PROGRESS ── */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--navy), var(--gold));
+      z-index: 200;
+      transition: width 0.1s linear;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero-meta-divider { display: none; }
+      .stat-cell { min-width: 120px; }
+      .highlight-box { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress indicator -->
+  <div class="progress-bar" id="progress"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <img src="/assets/inkthorn-mascot.png" alt="InkThorn" />
+        InkThorn Crustacean
+      </div>
+      <a href="/" class="nav-back">← Back to InkThorn.ai</a>
+    </div>
+  </nav>
+
+  <!-- SLIDE 1 — HERO -->
+  <section class="slide-hero">
+    <div class="container">
+      <div class="slide-label">The Story</div>
+      <h1>Built in Two Weeks<br>with an <span>AI Agent</span></h1>
+      <p class="slide-hero-sub">How Rob Gaudet went from zero to a fully-operating GEO services business — with 9,464 leads, a team back-office, and a live product — using OpenClaw and Claude.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="hero-meta-num">14</div>
+          <div class="hero-meta-label">Days to Build</div>
+        </div>
+        <div class="hero-meta-divider"></div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-num">9,464</div>
+          <div class="hero-meta-label">Leads Scraped</div>
+        </div>
+        <div class="hero-meta-divider"></div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-num">0</div>
+          <div class="hero-meta-label">Engineers Needed</div>
+        </div>
+        <div class="hero-meta-divider"></div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-num">1</div>
+          <div class="hero-meta-label">Poet with a Vision</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 — SETTING UP OPENCLAW -->
+  <section class="slide">
+    <div class="container">
+      <div class="slide-num">1</div>
+      <div class="slide-tag">Week One · Setup</div>
+      <h2>Installing the Agent — OpenClaw on Linux</h2>
+      <p class="slide-intro">
+        It started with a question: what if your AI assistant wasn't a chatbot, but a live agent running on your own machine — with access to your files, your terminal, and your tools? Rob installed OpenClaw on a Linux host and gave it a workspace.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon">🦞</span>
+          <h3>OpenClaw Agent</h3>
+          <p>An AI agent runtime that runs locally on your machine with persistent memory, file access, and the ability to execute shell commands.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🧠</span>
+          <h3>Persistent Memory</h3>
+          <p>The agent reads SOUL.md, USER.md, and daily memory files on every session — so it always knows who it is and who it's helping.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">⚡</span>
+          <h3>Powered by Claude</h3>
+          <p>Under the hood: Anthropic's Claude Sonnet. The agent doesn't just answer questions — it writes code, scrapes sites, and builds products.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">📁</span>
+          <h3>Workspace as Brain</h3>
+          <p>A single workspace directory becomes the agent's persistent home — docs, memory, playbooks, and project files all live here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 — TELEGRAM + AGENT IDENTITY -->
+  <section class="slide">
+    <div class="container">
+      <div class="slide-num">2</div>
+      <div class="slide-tag">Week One · Identity & Comms</div>
+      <h2>Building the Agent's Identity &amp; Telegram HQ</h2>
+      <p class="slide-intro">
+        Rob didn't just set up an AI — he gave it a soul. A SOUL.md file defines personality and values. A USER.md file describes Rob. Then he wired OpenClaw into Telegram, creating a private group with dedicated topic threads for different projects.
+      </p>
+      <div class="two-col">
+        <div>
+          <ul class="check-list">
+            <li>Created SOUL.md — the agent's personality, values, and operating principles</li>
+            <li>Created USER.md — who Rob is, how he thinks, what he's building</li>
+            <li>Connected OpenClaw to Telegram via bot integration</li>
+            <li>Set up <strong>InkThorn Agents</strong> group with topic-based threads</li>
+            <li>Each project gets its own thread — like Slack channels, but AI-native</li>
+            <li>Agent stays always-on, receiving every message, choosing when to reply</li>
+          </ul>
+        </div>
+        <div>
+          <div class="highlight-box">
+            <h3>"Be the assistant you'd actually want."</h3>
+            <p>The SOUL.md file told the agent to skip the corporate drone act. No "Great question!" No filler. Just get it done — concise when needed, thorough when it matters.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="blockquote" style="margin-top:36px;">
+        <p>"I'm actually a Silicon Valley engineer — but building with AI, I didn't use any of that. I was more of a poet."</p>
+        <cite>— Rob Gaudet</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 — WWOZ + PLAYBOOK -->
+  <section class="slide">
+    <div class="container">
+      <div class="slide-num">3</div>
+      <div class="slide-tag">Week One · Personal Tools</div>
+      <h2>The Personal Playbook — Music Listings, Menus &amp; More</h2>
+      <p class="slide-intro">
+        Before InkThorn became a business, it was a personal command center. Rob asked his agent to build him a private, password-protected dashboard — a "playbook" for his life. The first feature: scraping WWOZ.org for New Orleans live music listings.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon">🎵</span>
+          <h3>WWOZ Music Listings</h3>
+          <p>The agent scraped New Orleans' legendary WWOZ radio station for live music listings — a custom, always-fresh guide to what's happening in the city.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🍽️</span>
+          <h3>Weekly Menu Planner</h3>
+          <p>A 7-day no-takeout challenge with a full day-by-day menu, shopping list, and check-in schedule — all built and tracked by the agent.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🔐</span>
+          <h3>Password-Protected</h3>
+          <p>The playbook uses Staticrypt — it's a fully static HTML file with client-side encryption. No server needed. No login database. Just a password.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🎨</span>
+          <h3>Miami Synthwave Design</h3>
+          <p>Dark background, neon pink/cyan/purple gradients, Orbitron and Space Grotesk fonts. The agent designed the whole thing — no designer hired.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:32px; background:var(--gray-50); border:1px solid var(--gray-100); border-radius:var(--radius); padding:28px 32px;">
+        <p style="font-size:0.9rem; color:var(--gray-700); line-height:1.75;">
+          <strong style="color:var(--navy);">How it worked:</strong> Rob typed a request in Telegram. The agent wrote the code, built the HTML file, committed it to GitHub, and the page was live on inkthorn.ai within minutes. No FTP. No code editor. No deployment pipeline.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5 — LEAD SCRAPING + GEO BUSINESS -->
+  <section class="slide">
+    <div class="container">
+      <div class="slide-num">4</div>
+      <div class="slide-tag">Week Two · Commercial Launch</div>
+      <h2>9,464 Leads. Three Cities. One Agent.</h2>
+      <p class="slide-intro">
+        The pivot from personal tool to commercial business happened fast. Rob identified a massive market opportunity: Louisiana small businesses have no idea they're invisible to AI search. The agent scraped Google Maps data across New Orleans, Baton Rouge, and Lafayette — every restaurant, contractor, salon, and shop — and built a 9,464-entry lead database.
+      </p>
+
+      <div class="stat-row" style="margin-bottom:32px;">
+        <div class="stat-cell">
+          <div class="stat-num">9,464</div>
+          <div class="stat-label">Total leads scraped</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">543</div>
+          <div class="stat-label">With phone numbers</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Cities covered</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">$47</div>
+          <div class="stat-label">Starting monthly price</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <p style="font-size:0.9rem; font-weight:700; color:var(--navy); margin-bottom:14px; text-transform:uppercase; letter-spacing:0.06em;">The GEO Opportunity</p>
+          <ul class="check-list">
+            <li>Most small businesses don't appear when customers ask ChatGPT or Claude for recommendations</li>
+            <li>Traditional SEO optimizes for Google. GEO optimizes for AI — a completely new field</li>
+            <li>InkThorn pre-built personalized demo sites for each lead using their Google listing data</li>
+            <li>SMS campaign launched via SimpleTexting to (504) 238-4030 — targeting all 543 phone leads</li>
+            <li>Calendly, Stripe, and a full checkout flow built and live before a single human employee was hired</li>
+          </ul>
+        </div>
+        <div>
+          <div class="highlight-box">
+            <h3>GEO: The New SEO</h3>
+            <p>Generative Engine Optimization (GEO) is what happens when your website is structured so that ChatGPT, Claude, and Perplexity can actually understand, cite, and recommend your business. InkThorn is one of the first companies in Louisiana offering this as a service.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6 — BACK OFFICE / TEAM SYSTEM -->
+  <section class="slide">
+    <div class="container">
+      <div class="slide-num">5</div>
+      <div class="slide-tag">Week Two · Scale Infrastructure</div>
+      <h2>The Back Office — A Business Anyone Can Run</h2>
+      <p class="slide-intro">
+        Rob didn't just build a service — he built a machine for others to operate. The InkThorn back-office gives independent sales reps their own referral codes, a personal dashboard, and commission tracking. Anyone in Louisiana can earn money selling GEO services to local businesses.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon">🗂️</span>
+          <h3>Team Member Portal</h3>
+          <p>Reps sign in at /crustacean/dashboard.html to see their referral code, tracked clicks, and client statuses — all powered by Supabase.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🔐</span>
+          <h3>Admin Panel</h3>
+          <p>Full admin sign-in for managing the team, approving new reps, viewing all referral activity, and overseeing the client pipeline.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🔗</span>
+          <h3>Referral Links</h3>
+          <p>Every rep gets a unique ?ref=CODE URL. When a lead visits InkThorn via that link, their rep is recognized and credited automatically.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">💬</span>
+          <h3>Personalized Landing</h3>
+          <p>When a business clicks a referral link, the entire InkThorn homepage dynamically rewrites with their business name — "Your [Business] site is ready to claim."</p>
+        </div>
+      </div>
+
+      <div class="blockquote" style="margin-top:40px;">
+        <p>"Poets will be the best builders in the AI age. Words matter. How you describe things vividly matters. Silicon Valley engineers are going to disappear."</p>
+        <cite>— Rob Gaudet</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7 — WHAT THIS MEANS -->
+  <section class="slide">
+    <div class="container">
+      <div class="slide-num">6</div>
+      <div class="slide-tag">The Takeaway</div>
+      <h2>What Two Weeks of AI-Native Building Looks Like</h2>
+      <p class="slide-intro">
+        Rob didn't hire a team. He didn't write a business plan. He had conversations with an AI agent — and the agent built everything. The implication is hard to overstate.
+      </p>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot">🚀</div>
+          <div class="tl-content">
+            <div class="tl-date">March 20, 2026</div>
+            <h3>Day 1 — Agent Comes Online</h3>
+            <p>OpenClaw installed, workspace created, agent given identity. First session: Rob tells the agent who he is and what he's building.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">💬</div>
+          <div class="tl-content">
+            <div class="tl-date">March 21</div>
+            <h3>Telegram HQ Established</h3>
+            <p>InkThorn Agents group created with project-specific topic threads. Agent wired into every conversation, choosing when to contribute.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">🎵</div>
+          <div class="tl-content">
+            <div class="tl-date">March 22</div>
+            <h3>Playbook + WWOZ Live</h3>
+            <p>Password-protected personal dashboard launched. WWOZ music listings scraped and displayed. Miami Synthwave design system created.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">🦞</div>
+          <div class="tl-content">
+            <div class="tl-date">March 23–25</div>
+            <h3>InkThorn Crustacean Launched</h3>
+            <p>GEO services business born. Full marketing site built, EIN registered, Calendly and Stripe activated. Brand, copy, design — all done by the agent.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">📊</div>
+          <div class="tl-content">
+            <div class="tl-date">March 26–27</div>
+            <h3>9,464 Leads Scraped</h3>
+            <p>Agent scraped Google Maps data across New Orleans, Baton Rouge, and Lafayette. 543 leads enriched with phone numbers. SMS campaign queued.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">🏢</div>
+          <div class="tl-content">
+            <div class="tl-date">March 28–29</div>
+            <h3>Back Office &amp; Team System Live</h3>
+            <p>Rep referral system, admin panel, and Supabase-powered dashboard deployed. A complete business-in-a-box, ready to scale.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SLIDE -->
+  <section class="slide-cta">
+    <div class="container">
+      <h2>Ready to Do This for Your Business?</h2>
+      <p>If you're a Louisiana business owner and you want to be found when customers ask AI — InkThorn can help.</p>
+      <div class="btn-group">
+        <a href="/#pricing" class="btn-primary">See Pricing →</a>
+        <a href="https://calendly.com/inkthorn" class="btn-outline" target="_blank" rel="noopener">Book a Free Call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom:10px;">
+        <a href="/">InkThorn.ai</a> &nbsp;·&nbsp;
+        <a href="/terms.html">Terms</a> &nbsp;·&nbsp;
+        <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp;
+        <a href="mailto:hello@inkthorn.ai">hello@inkthorn.ai</a>
+      </p>
+      <p>© 2026 InkThorn Crustacean. New Orleans, Louisiana 🦞</p>
+    </div>
+  </footer>
+
+  <script>
+    // Reading progress bar
+    window.addEventListener('scroll', function() {
+      var doc = document.documentElement;
+      var scrolled = doc.scrollTop || document.body.scrollTop;
+      var total = doc.scrollHeight - doc.clientHeight;
+      var pct = total > 0 ? (scrolled / total) * 100 : 0;
+      document.getElementById('progress').style.width = pct + '%';
+    });
+  </script>
+</body>
+</html>
