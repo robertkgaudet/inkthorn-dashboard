@@ -1,39 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-03-28T23:06:00.368Z",
+  "updated": "2026-03-29T13:24:43.854Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-03-28",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Jokes on Oak",
-      "url": "https://504comedy.com/event/1116/jokes-on-oak",
-      "venue": "Oak St Brewery",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Saturday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-03-28",
-      "time": "8:30pm",
-      "time_sort": 2030,
-      "title": "Bing-Oh",
-      "url": "https://504comedy.com/event/943/bingoh",
-      "venue": "Twelve Mile Limit",
-      "type": "Improv",
-      "cost": "FREE",
-      "repeat": "Last Saturday",
-      "start_dt": "2026-03-28T20:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-03-29",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -43,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$15",
       "repeat": "Every Sunday",
-      "start_dt": "2026-03-28T20:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-03-29",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -61,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-03-30",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-03-30",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-03-30",
       "time": "9:30pm",
       "time_sort": 2130,
@@ -324,50 +296,30 @@
       "cost": "FREE",
       "repeat": "Every Friday",
       "start_dt": "2026-04-02T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-04-04",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Jokes on Oak",
+      "url": "https://504comedy.com/event/1116/jokes-on-oak",
+      "venue": "Oak St Brewery",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Saturday",
+      "start_dt": "2026-04-03T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-03-28",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-28",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Jokes on Oak",
-          "url": "https://504comedy.com/event/1116/jokes-on-oak",
-          "venue": "Oak St Brewery",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Saturday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-28",
-          "time": "8:30pm",
-          "time_sort": 2030,
-          "title": "Bing-Oh",
-          "url": "https://504comedy.com/event/943/bingoh",
-          "venue": "Twelve Mile Limit",
-          "type": "Improv",
-          "cost": "FREE",
-          "repeat": "Last Saturday",
-          "start_dt": "2026-03-28T20:30-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-03-29",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-03-29",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -377,11 +329,11 @@
           "type": "Stand-up",
           "cost": "$15",
           "repeat": "Every Sunday",
-          "start_dt": "2026-03-28T20:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-03-29",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -396,12 +348,12 @@
       ]
     },
     {
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-03-30",
       "events": [
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-03-30",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -415,7 +367,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-03-30",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -429,7 +381,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-03-30",
           "time": "9:30pm",
           "time_sort": 2130,
@@ -688,6 +640,26 @@
           "cost": "FREE",
           "repeat": "Every Friday",
           "start_dt": "2026-04-02T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Saturday",
+      "date": "2026-04-04",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-04-04",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Jokes on Oak",
+          "url": "https://504comedy.com/event/1116/jokes-on-oak",
+          "venue": "Oak St Brewery",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Saturday",
+          "start_dt": "2026-04-03T20:00-05:00"
         }
       ]
     }
