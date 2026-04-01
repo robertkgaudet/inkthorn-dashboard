@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-03-31T23:07:33.989Z",
+  "updated": "2026-04-01T13:33:38.213Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-03-31",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "Comedy Beast",
-      "url": "https://504comedy.com/event/41/comedybeast",
-      "venue": "The Howlin' Wolf",
-      "type": "Stand-up",
-      "cost": "$5",
-      "repeat": "Every Tuesday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-03-31",
-      "time": "8:30pm",
-      "time_sort": 2030,
-      "title": "Not the Original Open Mic",
-      "url": "https://504comedy.com/event/1320/not-the-original-open-mic",
-      "venue": "Original Nite Cap",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Tuesday",
-      "start_dt": "2026-03-31T20:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-03-31",
-      "time": "8:30pm",
-      "time_sort": 2030,
-      "title": "Open Gym Comedy Open Mic",
-      "url": "https://504comedy.com/event/1321/open-gym-comedy-open-mic",
-      "venue": "Sports Drink",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Tuesday",
-      "start_dt": "2026-03-31T20:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-04-01",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -57,11 +15,11 @@
       "type": "Improv",
       "cost": "$8",
       "repeat": "First Wednesday",
-      "start_dt": "2026-03-31T19:30-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-04-01",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -71,11 +29,11 @@
       "type": "Open Mic",
       "cost": "FREE",
       "repeat": "Every Wednesday",
-      "start_dt": "2026-05-06T20:30-05:00"
+      "start_dt": "2026-04-08T20:30-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-04-01",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -89,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-04-01",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -103,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-04-01",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -117,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-04-01",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -131,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-04-02",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -145,7 +103,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-04-02",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -159,7 +117,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-04-02",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -173,7 +131,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-04-02",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -187,7 +145,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-04-02",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -201,7 +159,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-04-02",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -267,7 +225,7 @@
       "type": "Stand-up",
       "cost": "$15",
       "repeat": "Every Sunday",
-      "start_dt": "2026-05-03T20:00-05:00"
+      "start_dt": "2026-04-05T20:00-05:00"
     },
     {
       "category": "comedy",
@@ -337,65 +295,59 @@
       "type": "Open Mic",
       "cost": "FREE",
       "repeat": "Every Monday",
-      "start_dt": "2026-05-04T21:30-05:00"
+      "start_dt": "2026-04-06T21:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Tuesday",
+      "date": "2026-04-07",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Comedy Beast",
+      "url": "https://504comedy.com/event/41/comedybeast",
+      "venue": "The Howlin' Wolf",
+      "type": "Stand-up",
+      "cost": "$5",
+      "repeat": "Every Tuesday",
+      "start_dt": "2026-04-06T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Tuesday",
+      "date": "2026-04-07",
+      "time": "8:30pm",
+      "time_sort": 2030,
+      "title": "Not the Original Open Mic",
+      "url": "https://504comedy.com/event/1320/not-the-original-open-mic",
+      "venue": "Original Nite Cap",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Tuesday",
+      "start_dt": "2026-04-07T20:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Tuesday",
+      "date": "2026-04-07",
+      "time": "8:30pm",
+      "time_sort": 2030,
+      "title": "Open Gym Comedy Open Mic",
+      "url": "https://504comedy.com/event/1321/open-gym-comedy-open-mic",
+      "venue": "Sports Drink",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Tuesday",
+      "start_dt": "2026-04-07T20:30-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-03-31",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-31",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "Comedy Beast",
-          "url": "https://504comedy.com/event/41/comedybeast",
-          "venue": "The Howlin' Wolf",
-          "type": "Stand-up",
-          "cost": "$5",
-          "repeat": "Every Tuesday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-31",
-          "time": "8:30pm",
-          "time_sort": 2030,
-          "title": "Not the Original Open Mic",
-          "url": "https://504comedy.com/event/1320/not-the-original-open-mic",
-          "venue": "Original Nite Cap",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Tuesday",
-          "start_dt": "2026-03-31T20:30-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-03-31",
-          "time": "8:30pm",
-          "time_sort": 2030,
-          "title": "Open Gym Comedy Open Mic",
-          "url": "https://504comedy.com/event/1321/open-gym-comedy-open-mic",
-          "venue": "Sports Drink",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Tuesday",
-          "start_dt": "2026-03-31T20:30-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-04-01",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-01",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -405,11 +357,11 @@
           "type": "Improv",
           "cost": "$8",
           "repeat": "First Wednesday",
-          "start_dt": "2026-03-31T19:30-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-01",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -419,11 +371,11 @@
           "type": "Open Mic",
           "cost": "FREE",
           "repeat": "Every Wednesday",
-          "start_dt": "2026-05-06T20:30-05:00"
+          "start_dt": "2026-04-08T20:30-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-01",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -437,7 +389,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-01",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -451,7 +403,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-01",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -465,7 +417,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-01",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -480,12 +432,12 @@
       ]
     },
     {
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-04-02",
       "events": [
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-04-02",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -499,7 +451,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-04-02",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -513,7 +465,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-04-02",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -527,7 +479,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-04-02",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -541,7 +493,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-04-02",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -555,7 +507,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-04-02",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -639,7 +591,7 @@
           "type": "Stand-up",
           "cost": "$15",
           "repeat": "Every Sunday",
-          "start_dt": "2026-05-03T20:00-05:00"
+          "start_dt": "2026-04-05T20:00-05:00"
         },
         {
           "category": "comedy",
@@ -715,7 +667,55 @@
           "type": "Open Mic",
           "cost": "FREE",
           "repeat": "Every Monday",
-          "start_dt": "2026-05-04T21:30-05:00"
+          "start_dt": "2026-04-06T21:30-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-04-07",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Tuesday",
+          "date": "2026-04-07",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Comedy Beast",
+          "url": "https://504comedy.com/event/41/comedybeast",
+          "venue": "The Howlin' Wolf",
+          "type": "Stand-up",
+          "cost": "$5",
+          "repeat": "Every Tuesday",
+          "start_dt": "2026-04-06T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Tuesday",
+          "date": "2026-04-07",
+          "time": "8:30pm",
+          "time_sort": 2030,
+          "title": "Not the Original Open Mic",
+          "url": "https://504comedy.com/event/1320/not-the-original-open-mic",
+          "venue": "Original Nite Cap",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Tuesday",
+          "start_dt": "2026-04-07T20:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Tuesday",
+          "date": "2026-04-07",
+          "time": "8:30pm",
+          "time_sort": 2030,
+          "title": "Open Gym Comedy Open Mic",
+          "url": "https://504comedy.com/event/1321/open-gym-comedy-open-mic",
+          "venue": "Sports Drink",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Tuesday",
+          "start_dt": "2026-04-07T20:30-05:00"
         }
       ]
     }

@@ -1,56 +1,56 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-03-31T23:07:35.446Z",
+  "updated": "2026-04-01T13:33:39.121Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 80,
-    "feels_like_f": 81,
-    "humidity": 67,
-    "description": "Partly cloudy",
-    "code": "116",
-    "emoji": "⛅",
-    "wind_mph": 11,
+    "temp_f": 69,
+    "feels_like_f": 69,
+    "humidity": 96,
+    "description": "Mist",
+    "code": "143",
+    "emoji": "🌫️",
+    "wind_mph": 7,
     "wind_dir": "SSE",
-    "visibility_miles": 16,
+    "visibility_miles": 11,
     "uv_index": 1
   },
   "forecast": [
     {
-      "date": "2026-03-31",
-      "label": "Tue, Mar 31",
-      "high_f": 89,
+      "date": "2026-04-01",
+      "label": "Wed, Apr 1",
+      "high_f": 84,
       "low_f": 67,
       "description": "Partly Cloudy",
       "emoji": "⛅",
-      "sunrise": "06:51 AM",
-      "sunset": "07:19 PM",
-      "avg_humidity": 78,
-      "chance_of_rain": 100
-    },
-    {
-      "date": "2026-04-01",
-      "label": "Wed, Apr 1",
-      "high_f": 81,
-      "low_f": 67,
-      "description": "Cloudy",
-      "emoji": "☁️",
       "sunrise": "06:49 AM",
       "sunset": "07:19 PM",
-      "avg_humidity": 87,
-      "chance_of_rain": 100
+      "avg_humidity": 82,
+      "chance_of_rain": 0
     },
     {
       "date": "2026-04-02",
       "label": "Thu, Apr 2",
-      "high_f": 75,
-      "low_f": 67,
-      "description": "Overcast",
-      "emoji": "☁️",
+      "high_f": 81,
+      "low_f": 69,
+      "description": "Partly Cloudy",
+      "emoji": "⛅",
       "sunrise": "06:48 AM",
       "sunset": "07:20 PM",
-      "avg_humidity": 90,
-      "chance_of_rain": 0
+      "avg_humidity": 80,
+      "chance_of_rain": 100
+    },
+    {
+      "date": "2026-04-03",
+      "label": "Fri, Apr 3",
+      "high_f": 77,
+      "low_f": 70,
+      "description": "Overcast",
+      "emoji": "☁️",
+      "sunrise": "06:47 AM",
+      "sunset": "07:21 PM",
+      "avg_humidity": 84,
+      "chance_of_rain": 100
     }
   ]
 }
