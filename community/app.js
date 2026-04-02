@@ -78,6 +78,20 @@ async function renderNolaEvents(data, el) {
     comedyData = await fetch('../data/comedy.json?_=' + Date.now()).then(r => r.json());
   } catch (e) { /* comedy optional */ }
 
+  // Load venue drinks data
+  if (!window.VENUE_DRINKS) {
+    try {
+      const vd = await fetch('../data/venue-drinks.json?_=' + Date.now()).then(r => r.json());
+      // Index by venue name for fast lookup
+      window.VENUE_DRINKS = {};
+      if (Array.isArray(vd)) {
+        for (const v of vd) {
+          if (v.venue) window.VENUE_DRINKS[v.venue] = v;
+        }
+      }
+    } catch (e) { /* drinks optional */ }
+  }
+
   // Build unified event list
   const allEvents = [];
 
@@ -258,8 +272,18 @@ async function renderNolaEvents(data, el) {
           ? `<span style="font-size:0.75rem;font-weight:700;color:${ev.cost === 'FREE' ? '#4ade80' : '#fbbf24'};white-space:nowrap;">${escHtml(ev.cost)}</span>`
           : '';
 
+        // Look up drink pairings for this venue
+        const drinkData = window.VENUE_DRINKS && window.VENUE_DRINKS[ev.venue];
+        let drinkHtml = '';
+        if (drinkData) {
+          drinkHtml = `<div class="drink-pairing">
+            <div class="drink-pairing-item"><span class="drink-pairing-label">🍺 Him</span><span class="drink-pairing-name">${escHtml(drinkData.drink_man.name)}</span></div>
+            <div class="drink-pairing-item"><span class="drink-pairing-label">🍸 Her</span><span class="drink-pairing-name">${escHtml(drinkData.drink_woman.name)}</span></div>
+          </div>`;
+        }
+
         groupsHtml += `${nowMarker}
-          <div class="card" style="border-color:${catBorder};background:${catBg};">
+          <div class="card" style="border-color:${catBorder};background:${catBg};padding-bottom:24px;">
             <div class="show-card">
               <div class="show-time" style="color:${catColor};">${escHtml(ev.time)}</div>
               <div class="show-artist">${titleHtml}</div>
@@ -268,6 +292,11 @@ async function renderNolaEvents(data, el) {
                 <span style="font-size:0.6rem;padding:2px 8px;border-radius:999px;border:1px solid ${catBorder};color:${catColor};font-family:'Orbitron',sans-serif;letter-spacing:0.08em;">${catIcon}</span>
                 ${costBadge}
               </div>
+              ${drinkHtml}
+            </div>
+            <div class="event-watermark">
+              <img class="event-watermark-icon" src="../assets/favicon.png" alt="" />
+              <span class="event-watermark-text">inkthorn.ai</span>
             </div>
           </div>`;
       }
