@@ -730,7 +730,9 @@ function getRenderer(type) {
 // ── Panel Builder ──────────────────────────────────────────────
 
 async function fetchJSON(url) {
-  const res = await fetch(url);
+  // Always bust cache so the page reflects the latest agent-published data
+  const bust = url.includes('?') ? `&_=${Date.now()}` : `?_=${Date.now()}`;
+  const res = await fetch(url + bust, { cache: 'no-store' });
   if (!res.ok) throw Object.assign(new Error(`HTTP ${res.status}`), { status: res.status });
   return res.json();
 }
