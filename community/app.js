@@ -222,7 +222,7 @@ async function renderNolaEvents(data, el) {
     ];
     const headerH = document.querySelector('.site-header')?.offsetHeight || 0;
     const filterBarHtml = `
-      <div class="events-filter-bar" style="position:sticky;top:${headerH}px;z-index:50;background:rgba(7,7,17,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;flex-wrap:wrap;gap:8px;padding:8px 0 10px;margin-bottom:8px;align-items:center;border-bottom:1px solid rgba(168,85,247,0.15);">
+      <div class="events-filter-bar" style="position:sticky;top:${headerH}px;z-index:50;background:#070711;display:flex;flex-wrap:wrap;gap:8px;padding:8px 0 10px;margin-bottom:8px;align-items:center;border-bottom:1px solid rgba(168,85,247,0.15);">
         ${filters.map(f => {
           const isActive = f.key === activeFilter;
           return `<button

@@ -1225,22 +1225,21 @@ a.nav-tab-external:hover {
   align-items: center;
   gap: 4px;
   pointer-events: none;
-  user-select: none;
-  opacity: 0.28;
+  opacity: 0.52;
   z-index: 2;
 }
 .event-watermark-icon {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   object-fit: cover;
-  filter: blur(0.8px) brightness(0.7);
+  filter: blur(0.6px) brightness(0.85);
 }
 .event-watermark-text {
   font-family: 'Orbitron', monospace;
-  font-size: 0.48rem;
-  letter-spacing: 0.06em;
-  color: #a0a0c8;
+  font-size: 0.5rem;
+  letter-spacing: 0.07em;
+  color: #c0c0e0;
   white-space: nowrap;
   text-transform: lowercase;
 }
