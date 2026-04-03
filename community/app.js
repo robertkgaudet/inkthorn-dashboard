@@ -411,10 +411,13 @@ async function renderNolaEvents(data, el) {
     const topSponsorHtml = `
       <div class="sponsor-card" style="margin-bottom:12px;">
         <div class="sponsor-card-header">
-          <span class="sponsor-card-badge">🤖 AI CONSULTING · NEW ORLEANS</span>
+          <a href="https://trustlight.ai" target="_blank" rel="noopener sponsored" style="display:inline-block;line-height:0;">
+            <img src="../assets/trustlight-logo.png" alt="TrustLight Advisory" style="height:22px;display:block;filter:brightness(0.92);" />
+          </a>
+          <span class="sponsor-card-badge" style="margin-left:4px;">AI CONSULTING · NEW ORLEANS</span>
         </div>
         <div class="sponsor-card-title">This page is powered by AI — so is TrustLight.</div>
-        <div class="sponsor-card-body">Rob Gaudet built this community events tracker using AI agents that refresh automatically every day. He helps New Orleans businesses deploy the same kind of practical AI — the kind that actually moves revenue. <strong style="color:#f0b840;">Workshop seats available.</strong></div>
+        <div class="sponsor-card-body">Rob Gaudet built this community events tracker using AI agents that refresh automatically every day. He helps New Orleans businesses deploy the same kind of practical AI — the kind that actually moves revenue. <strong style="color:#f0b840;">Workshop seats available now.</strong></div>
         <div class="sponsor-card-links">
           <a class="sponsor-card-link" href="https://trustlight.ai" target="_blank" rel="noopener sponsored">TrustLight.ai</a>
           <a class="sponsor-card-link" href="https://trustlight.ai/workshop.html" target="_blank" rel="noopener sponsored">Half-Day Workshop · $497</a>
@@ -425,7 +428,9 @@ async function renderNolaEvents(data, el) {
     const bottomSponsorHtml = `
       <div class="sponsor-card" style="margin-top:16px;">
         <div class="sponsor-card-header">
-          <span class="sponsor-card-badge">💡 BROUGHT TO YOU BY TRUSTLIGHT.AI</span>
+          <a href="https://trustlight.ai" target="_blank" rel="noopener sponsored" style="display:inline-block;line-height:0;">
+            <img src="../assets/trustlight-logo.png" alt="TrustLight Advisory" style="height:22px;display:block;filter:brightness(0.92);" />
+          </a>
         </div>
         <div class="sponsor-card-title">Enjoyed tonight's listings? Rob Gaudet built this — and he builds AI for businesses like yours.</div>
         <div class="sponsor-card-body">30 years in tech. 2 years of live AI deployments. New Orleans-based, no vendor agenda. Whether you're a restaurant owner, realtor, attorney, or founder — there's a version of AI that works for your operation right now.</div>
