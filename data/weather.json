@@ -1,28 +1,28 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-04-03T13:29:34.328Z",
+  "updated": "2026-04-03T23:07:26.872Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 71,
-    "feels_like_f": 71,
-    "humidity": 90,
+    "temp_f": 78,
+    "feels_like_f": 80,
+    "humidity": 71,
     "description": "Sunny",
     "code": "113",
     "emoji": "☀️",
-    "wind_mph": 8,
+    "wind_mph": 13,
     "wind_dir": "SE",
     "visibility_miles": 16,
-    "uv_index": 0
+    "uv_index": 1
   },
   "forecast": [
     {
       "date": "2026-04-03",
       "label": "Fri, Apr 3",
-      "high_f": 89,
+      "high_f": 86,
       "low_f": 67,
-      "description": "Clear",
-      "emoji": "☀️",
+      "description": "Partly Cloudy",
+      "emoji": "⛅",
       "sunrise": "06:47 AM",
       "sunset": "07:21 PM",
       "avg_humidity": 78,
@@ -31,25 +31,25 @@
     {
       "date": "2026-04-04",
       "label": "Sat, Apr 4",
-      "high_f": 79,
+      "high_f": 83,
       "low_f": 70,
-      "description": "Overcast",
-      "emoji": "☁️",
+      "description": "Partly Cloudy",
+      "emoji": "⛅",
       "sunrise": "06:46 AM",
       "sunset": "07:21 PM",
-      "avg_humidity": 84,
+      "avg_humidity": 80,
       "chance_of_rain": 0
     },
     {
       "date": "2026-04-05",
       "label": "Sun, Apr 5",
-      "high_f": 75,
+      "high_f": 74,
       "low_f": 64,
-      "description": "Heavy Rain",
-      "emoji": "🌧️",
+      "description": "Moderate Rain Shower",
+      "emoji": "🌨️",
       "sunrise": "06:45 AM",
       "sunset": "07:22 PM",
-      "avg_humidity": 91,
+      "avg_humidity": 89,
       "chance_of_rain": 100
     }
   ]
