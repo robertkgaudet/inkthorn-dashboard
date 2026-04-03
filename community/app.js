@@ -78,6 +78,12 @@ async function renderNolaEvents(data, el) {
     comedyData = await fetch('../data/comedy.json?_=' + Date.now()).then(r => r.json());
   } catch (e) { /* comedy optional */ }
 
+  // Load variety/burlesque data
+  let varietyData = null;
+  try {
+    varietyData = await fetch('../data/variety.json?_=' + Date.now()).then(r => r.json());
+  } catch (e) { /* variety optional */ }
+
   // Load venue drinks data
   if (!window.VENUE_DRINKS) {
     try {
@@ -137,6 +143,33 @@ async function renderNolaEvents(data, el) {
     }
   }
 
+  // Variety/Burlesque — from Eventbrite
+  if (varietyData && varietyData.shows) {
+    for (const s of varietyData.shows) {
+      // Determine day label
+      const today = new Date().toISOString().slice(0, 10);
+      const tomorrow = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
+      let day = s.dayLabel || s.isoDate || 'Upcoming';
+      if (s.isoDate === today)    day = 'Today';
+      if (s.isoDate === tomorrow) day = 'Tomorrow';
+      allEvents.push({
+        category:  'variety',
+        day,
+        date:      s.isoDate  || '',
+        time:      s.time     || 'See listing',
+        time_sort: s.time_sort || 2000,
+        title:     s.title    || '',
+        url:       s.url      || '',
+        venue:     s.venue    || '',
+        subtype:   s.subtype  || 'Variety',
+        neighborhood: '',
+        cost:      s.cost     || '',
+        repeat:    '',
+        description: s.description || '',
+      });
+    }
+  }
+
   if (!allEvents.length) {
     el.innerHTML = pendingCard('No event data found.', '🎭');
     return;
@@ -174,9 +207,10 @@ async function renderNolaEvents(data, el) {
     let nowMarkerInserted = false;
 
     // Stats
-    const totalMusic  = allEvents.filter(e => e.category === 'music').length;
-    const totalComedy = allEvents.filter(e => e.category === 'comedy').length;
-    const musicLeft   = musicShows.filter(s => {
+    const totalMusic   = allEvents.filter(e => e.category === 'music').length;
+    const totalComedy  = allEvents.filter(e => e.category === 'comedy').length;
+    const totalVariety = allEvents.filter(e => e.category === 'variety').length;
+    const musicLeft    = musicShows.filter(s => {
       const norm = s.time_sort < 600 ? s.time_sort + 2400 : s.time_sort;
       return norm >= normNow;
     }).length;
@@ -184,9 +218,10 @@ async function renderNolaEvents(data, el) {
       const norm = s.time_sort < 600 ? s.time_sort + 2400 : s.time_sort;
       return norm >= normNow;
     });
-    const todayComedy = allEvents.filter(e => e.category === 'comedy' && e.day === 'Today').length;
+    const todayComedy  = allEvents.filter(e => e.category === 'comedy'  && e.day === 'Today').length;
+    const todayVariety = allEvents.filter(e => e.category === 'variety' && e.day === 'Today').length;
 
-    const todayTotal = totalMusic + todayComedy;
+    const todayTotal = totalMusic + todayComedy + todayVariety;
     const todayDate = new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
     const statsHtml = `
       <div class="events-hero">
@@ -205,8 +240,8 @@ async function renderNolaEvents(data, el) {
           <div class="stat-label">🎤 Comedy Today</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value">${musicLeft}</div>
-          <div class="stat-label">🕐 Music Still On</div>
+          <div class="stat-value">${totalVariety}</div>
+          <div class="stat-label">🌹 Variety/Burlesque</div>
         </div>
         <div class="stat-card stat-card-highlight">
           <div class="stat-value stat-value-sm">${nextMusic ? escHtml(nextMusic.artist) : 'All done'}</div>
@@ -216,9 +251,10 @@ async function renderNolaEvents(data, el) {
 
     // Filter bar (sticky so it stays visible while scrolling)
     const filters = [
-      { key: 'all',    label: 'All Events',  color: '#00f5ff', bg: 'rgba(0,245,255,0.12)',   border: 'rgba(0,245,255,0.4)' },
-      { key: 'music',  label: '🎵 Music',    color: '#a855f7', bg: 'rgba(168,85,247,0.12)', border: 'rgba(168,85,247,0.4)' },
-      { key: 'comedy', label: '🎤 Comedy',   color: '#ff2d87', bg: 'rgba(255,45,135,0.12)', border: 'rgba(255,45,135,0.4)' },
+      { key: 'all',     label: 'All Events',  color: '#00f5ff', bg: 'rgba(0,245,255,0.12)',   border: 'rgba(0,245,255,0.4)' },
+      { key: 'music',   label: '🎵 Music',    color: '#a855f7', bg: 'rgba(168,85,247,0.12)',  border: 'rgba(168,85,247,0.4)' },
+      { key: 'comedy',  label: '🎤 Comedy',   color: '#ff2d87', bg: 'rgba(255,45,135,0.12)',  border: 'rgba(255,45,135,0.4)' },
+      { key: 'variety', label: '🌹 Variety',  color: '#f59e0b', bg: 'rgba(245,158,11,0.12)',  border: 'rgba(245,158,11,0.4)' },
     ];
     const headerH = document.querySelector('.site-header')?.offsetHeight || 0;
     const filterBarHtml = `
@@ -242,11 +278,12 @@ async function renderNolaEvents(data, el) {
       groupsHtml += `<h3 class="time-group-header">${escHtml(group.label)}<span class="time-group-count">${group.events.length} event${group.events.length !== 1 ? 's' : ''}</span></h3>`;
 
       for (const ev of group.events) {
-        const isMusic  = ev.category === 'music';
-        const catColor  = isMusic ? '#a855f7' : '#ff2d87';
-        const catBorder = isMusic ? 'rgba(168,85,247,0.2)' : 'rgba(255,45,135,0.2)';
-        const catBg     = isMusic ? 'rgba(168,85,247,0.05)' : 'rgba(255,45,135,0.05)';
-        const catIcon   = isMusic ? '🎵' : '🎤';
+        const isMusic   = ev.category === 'music';
+        const isVariety = ev.category === 'variety';
+        const catColor  = isMusic ? '#a855f7' : isVariety ? '#f59e0b' : '#ff2d87';
+        const catBorder = isMusic ? 'rgba(168,85,247,0.2)' : isVariety ? 'rgba(245,158,11,0.2)' : 'rgba(255,45,135,0.2)';
+        const catBg     = isMusic ? 'rgba(168,85,247,0.05)' : isVariety ? 'rgba(245,158,11,0.05)' : 'rgba(255,45,135,0.05)';
+        const catIcon   = isMusic ? '🎵' : isVariety ? '🌹' : '🎤';
 
         // NOW marker for music
         let nowMarker = '';
@@ -265,7 +302,7 @@ async function renderNolaEvents(data, el) {
         const meta = [];
         if (ev.venue)       meta.push(`📍 ${escHtml(ev.venue)}`);
         if (ev.neighborhood) meta.push(`<span style="color:#4a4a6a;">· ${escHtml(ev.neighborhood)}</span>`);
-        if (ev.subtype)     meta.push(`<span class="genre-badge ${isMusic ? (GENRE_CLASS_MAP[ev.subtype] || 'genre-other') : ''}" style="${isMusic ? '' : 'background:rgba(255,45,135,0.12);color:#ff2d87;border-color:rgba(255,45,135,0.3);'}">${escHtml(ev.subtype)}</span>`);
+        if (ev.subtype)     meta.push(`<span class="genre-badge ${isMusic ? (GENRE_CLASS_MAP[ev.subtype] || 'genre-other') : ''}" style="${isMusic ? '' : isVariety ? 'background:rgba(245,158,11,0.12);color:#f59e0b;border-color:rgba(245,158,11,0.3);' : 'background:rgba(255,45,135,0.12);color:#ff2d87;border-color:rgba(255,45,135,0.3);'}">${escHtml(ev.subtype)}</span>`);
         if (ev.repeat && !isMusic) meta.push(`<span style="color:#3a3a5a;font-style:italic;font-size:0.7rem;">${escHtml(ev.repeat)}</span>`);
 
         const costBadge = ev.cost
