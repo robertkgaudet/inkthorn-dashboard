@@ -75,6 +75,7 @@ const GENRE_CLASS_MAP = {
   'R&B':              'genre-rb',
   'Reggae':           'genre-reggae',
   'Singer-Songwriter':'genre-singer',
+  'Jazz Fest':        'genre-jazz',
   'Other':            'genre-other',
 };
 
@@ -230,11 +231,11 @@ async function renderNolaEvents(data, el) {
     }
   }
 
-  // Jazz Fest 2026 — from JazzFestGrids.com
+  // Jazz Fest 2026 — from JazzFestGrids.com (mixed into music feed)
   if (jazzfestData && jazzfestData.shows) {
     for (const s of jazzfestData.shows) {
       allEvents.push({
-        category:  'jazzfest',
+        category:  'music',
         day:       s.day      || s.date || 'Upcoming',
         date:      s.date     || '',
         time:      s.time     || 'TBD',
@@ -242,7 +243,7 @@ async function renderNolaEvents(data, el) {
         title:     s.title    || '',
         url:       s.url      || '',
         venue:     s.venue    || '',
-        subtype:   s.subtype  || 'Jazz Fest',
+        subtype:   'Jazz Fest',
         neighborhood: 'New Orleans',
         cost:      s.cost     || '',
         repeat:    s.repeat   || '',
@@ -287,10 +288,9 @@ async function renderNolaEvents(data, el) {
     let nowMarkerInserted = false;
 
     // Stats
-    const totalMusic    = allEvents.filter(e => e.category === 'music').length;
-    const totalComedy   = allEvents.filter(e => e.category === 'comedy').length;
-    const totalVariety  = allEvents.filter(e => e.category === 'variety').length;
-    const totalJazzFest = allEvents.filter(e => e.category === 'jazzfest').length;
+    const totalMusic   = allEvents.filter(e => e.category === 'music').length;
+    const totalComedy  = allEvents.filter(e => e.category === 'comedy').length;
+    const totalVariety = allEvents.filter(e => e.category === 'variety').length;
     const musicLeft    = musicShows.filter(s => {
       const norm = s.time_sort < 600 ? s.time_sort + 2400 : s.time_sort;
       return norm >= normNow;
@@ -324,10 +324,6 @@ async function renderNolaEvents(data, el) {
           <div class="stat-value">${totalVariety}</div>
           <div class="stat-label">🌹 Variety/Burlesque</div>
         </div>
-        ${totalJazzFest > 0 ? `<div class="stat-card" style="border-color:rgba(255,165,0,0.4);background:rgba(255,165,0,0.05);">
-          <div class="stat-value" style="color:#ffa500;">${totalJazzFest}</div>
-          <div class="stat-label">🎷 Jazz Fest Night Shows</div>
-        </div>` : ''}
         <div class="stat-card stat-card-highlight">
           <div class="stat-value stat-value-sm">${nextMusic ? escHtml(nextMusic.artist) : 'All done'}</div>
           <div class="stat-label">${nextMusic ? '▶ Up Next · ' + escHtml(nextMusic.time) : 'No more shows'}</div>
@@ -336,11 +332,10 @@ async function renderNolaEvents(data, el) {
 
     // Filter bar (sticky so it stays visible while scrolling)
     const filters = [
-      { key: 'all',      label: 'All Events',   color: '#00f5ff', bg: 'rgba(0,245,255,0.12)',   border: 'rgba(0,245,255,0.4)' },
-      { key: 'music',    label: '🎵 Music',     color: '#a855f7', bg: 'rgba(168,85,247,0.12)',  border: 'rgba(168,85,247,0.4)' },
-      { key: 'comedy',   label: '🎤 Comedy',    color: '#ff2d87', bg: 'rgba(255,45,135,0.12)',  border: 'rgba(255,45,135,0.4)' },
-      { key: 'variety',  label: '🌹 Variety',   color: '#f59e0b', bg: 'rgba(245,158,11,0.12)',  border: 'rgba(245,158,11,0.4)' },
-      ...(totalJazzFest > 0 ? [{ key: 'jazzfest', label: '🎷 Jazz Fest', color: '#ffa500', bg: 'rgba(255,165,0,0.12)', border: 'rgba(255,165,0,0.4)' }] : []),
+      { key: 'all',     label: 'All Events',  color: '#00f5ff', bg: 'rgba(0,245,255,0.12)',   border: 'rgba(0,245,255,0.4)' },
+      { key: 'music',   label: '🎵 Music',    color: '#a855f7', bg: 'rgba(168,85,247,0.12)',  border: 'rgba(168,85,247,0.4)' },
+      { key: 'comedy',  label: '🎤 Comedy',   color: '#ff2d87', bg: 'rgba(255,45,135,0.12)',  border: 'rgba(255,45,135,0.4)' },
+      { key: 'variety', label: '🌹 Variety',  color: '#f59e0b', bg: 'rgba(245,158,11,0.12)',  border: 'rgba(245,158,11,0.4)' },
     ];
     const headerH = document.querySelector('.site-header')?.offsetHeight || 0;
     const filterBarHtml = `
@@ -370,13 +365,12 @@ async function renderNolaEvents(data, el) {
       groupsHtml += `<h3 class="time-group-header">${escHtml(group.label)}<span class="time-group-count">${group.events.length} event${group.events.length !== 1 ? 's' : ''}</span></h3>`;
 
       for (const ev of group.events) {
-        const isMusic    = ev.category === 'music';
-        const isVariety  = ev.category === 'variety';
-        const isJazzFest = ev.category === 'jazzfest';
-        const catColor  = isMusic ? '#a855f7' : isVariety ? '#f59e0b' : isJazzFest ? '#ffa500' : '#ff2d87';
-        const catBorder = isMusic ? 'rgba(168,85,247,0.2)' : isVariety ? 'rgba(245,158,11,0.2)' : isJazzFest ? 'rgba(255,165,0,0.25)' : 'rgba(255,45,135,0.2)';
-        const catBg     = isMusic ? 'rgba(168,85,247,0.05)' : isVariety ? 'rgba(245,158,11,0.05)' : isJazzFest ? 'rgba(255,165,0,0.06)' : 'rgba(255,45,135,0.05)';
-        const catIcon   = isMusic ? '🎵' : isVariety ? '🌹' : isJazzFest ? '🎷' : '🎤';
+        const isMusic   = ev.category === 'music';
+        const isVariety = ev.category === 'variety';
+        const catColor  = isMusic ? '#a855f7' : isVariety ? '#f59e0b' : '#ff2d87';
+        const catBorder = isMusic ? 'rgba(168,85,247,0.2)' : isVariety ? 'rgba(245,158,11,0.2)' : 'rgba(255,45,135,0.2)';
+        const catBg     = isMusic ? 'rgba(168,85,247,0.05)' : isVariety ? 'rgba(245,158,11,0.05)' : 'rgba(255,45,135,0.05)';
+        const catIcon   = isMusic ? '🎵' : isVariety ? '🌹' : '🎤';
 
         // NOW marker for music
         let nowMarker = '';
@@ -395,7 +389,7 @@ async function renderNolaEvents(data, el) {
         const meta = [];
         if (ev.venue)       meta.push(`📍 ${escHtml(ev.venue)}`);
         if (ev.neighborhood) meta.push(`<span style="color:#4a4a6a;">· ${escHtml(ev.neighborhood)}</span>`);
-        if (ev.subtype)     meta.push(`<span class="genre-badge ${isMusic ? (GENRE_CLASS_MAP[ev.subtype] || 'genre-other') : ''}" style="${isMusic ? '' : isJazzFest ? 'background:rgba(255,165,0,0.12);color:#ffa500;border-color:rgba(255,165,0,0.3);' : isVariety ? 'background:rgba(245,158,11,0.12);color:#f59e0b;border-color:rgba(245,158,11,0.3);' : 'background:rgba(255,45,135,0.12);color:#ff2d87;border-color:rgba(255,45,135,0.3);'}">${escHtml(ev.subtype)}</span>`);
+        if (ev.subtype)     meta.push(`<span class="genre-badge ${isMusic ? (GENRE_CLASS_MAP[ev.subtype] || 'genre-other') : ''}" style="${isMusic ? '' : isVariety ? 'background:rgba(245,158,11,0.12);color:#f59e0b;border-color:rgba(245,158,11,0.3);' : 'background:rgba(255,45,135,0.12);color:#ff2d87;border-color:rgba(255,45,135,0.3);'}">${escHtml(ev.subtype)}</span>`);
         if (ev.repeat && !isMusic) meta.push(`<span style="color:#3a3a5a;font-style:italic;font-size:0.7rem;">${escHtml(ev.repeat)}</span>`);
 
         const costBadge = ev.cost
