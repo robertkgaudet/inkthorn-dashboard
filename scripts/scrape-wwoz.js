@@ -20,8 +20,9 @@ const url   = require('url');
 
 // ── Config ─────────────────────────────────────────────────────
 
-const OUTPUT_PATH = path.join(__dirname, '../data/live-music.json');
-const BASE_URL    = 'https://wwoz.org/calendar/livewire-music';
+const OUTPUT_PATH      = path.join(__dirname, '../data/live-music.json');
+const JAZZFEST_PATH    = path.join(__dirname, '../data/jazzfest.json');
+const BASE_URL         = 'https://wwoz.org/calendar/livewire-music';
 
 // ── CLI Args ───────────────────────────────────────────────────
 
@@ -430,9 +431,43 @@ async function main() {
     fs.mkdirSync(outDir, { recursive: true });
   }
 
+  // ── Inject Jazz Fest shows for today (if applicable) ──────────
+  let jazzfestCount = 0;
+  try {
+    if (fs.existsSync(JAZZFEST_PATH)) {
+      const jfData = JSON.parse(fs.readFileSync(JAZZFEST_PATH, 'utf8'));
+      const todayShows = (jfData.shows || []).filter(s => s.date === targetDate);
+      if (todayShows.length) {
+        for (const s of todayShows) {
+          shows.push({
+            time:      s.time || 'TBD',
+            time_sort: s.time_sort || 2000,
+            artist:    s.title || '',
+            url:       s.url || '',
+            venue:     s.venue || '',
+            genre:     'Jazz Fest',
+            neighborhood: 'New Orleans',
+          });
+        }
+        // Re-sort after adding Jazz Fest shows
+        shows.sort((a, b) => {
+          const norm = t => (t < 600 ? t + 2400 : t);
+          return norm(a.time_sort) - norm(b.time_sort);
+        });
+        jazzfestCount = todayShows.length;
+        console.log(`[WWOZ Scraper] 🎷 Injected ${jazzfestCount} Jazz Fest show(s) for ${targetDate}`);
+      }
+    }
+  } catch (e) {
+    console.warn(`[WWOZ Scraper] ⚠️  Jazz Fest inject skipped: ${e.message}`);
+  }
+
+  // Re-set shows on output after potential Jazz Fest injection
+  output.shows = shows;
+
   try {
     fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2) + '\n', 'utf8');
-    console.log(`[WWOZ Scraper] ✅ Wrote ${shows.length} shows to ${OUTPUT_PATH}`);
+    console.log(`[WWOZ Scraper] ✅ Wrote ${shows.length} shows (${shows.length - jazzfestCount} WWOZ + ${jazzfestCount} Jazz Fest) to ${OUTPUT_PATH}`);
   } catch (err) {
     console.error(`[WWOZ Scraper] ❌ Write failed: ${err.message}`);
     process.exit(1);
