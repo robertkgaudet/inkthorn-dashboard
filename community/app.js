@@ -5,6 +5,60 @@
 
 'use strict';
 
+// ── TrustLight Sponsor Cards ───────────────────────────────────
+
+const SPONSOR_CARDS = [
+  {
+    badge: '🤖 AI CONSULTING',
+    title: 'Is your business using AI yet — or just watching competitors pull ahead?',
+    body: 'Rob Gaudet is a New Orleans-based AI consultant with 30 years of real-world software experience and two years of live AI deployments. No vendor agenda. No 90-day discovery process. Just straight answers about what AI will actually do for your operation.',
+    links: [
+      { label: 'Learn More', url: 'https://trustlight.ai' },
+      { label: 'Book a Call', url: 'https://trustlight.ai/#contact' },
+    ]
+  },
+  {
+    badge: '📅 WORKSHOP · NEW ORLEANS',
+    title: 'The AI Advantage — Half-Day Workshop',
+    body: 'A working session for New Orleans business owners done watching from the sidelines. 15 seats max. Walk out with a personalized AI roadmap, a customer targeting framework, and clarity on exactly what to build first. $497 · 8:30 AM – 12:30 PM.',
+    links: [
+      { label: 'Reserve a Seat →', url: 'https://trustlight.ai/workshop.html' },
+    ]
+  },
+  {
+    badge: '💡 TRUSTLIGHT.AI',
+    title: 'AI built for real New Orleans businesses — not Silicon Valley startups.',
+    body: 'Hospitality, restaurants, law firms, real estate, healthcare — if you run a business in this city, Rob has worked in your world. This community events page is part of his commitment to the culture here. Check out what\'s possible for your operation.',
+    links: [
+      { label: 'See Services', url: 'https://trustlight.ai/#services' },
+      { label: 'AI Workshop', url: 'https://trustlight.ai/workshop.html' },
+    ]
+  },
+];
+
+let _sponsorCardIndex = 0;
+
+/**
+ * Build a TrustLight in-feed sponsor card HTML.
+ * Rotates through the card variants so they don't all look the same.
+ */
+function buildSponsorCardHtml() {
+  const card = SPONSOR_CARDS[_sponsorCardIndex % SPONSOR_CARDS.length];
+  _sponsorCardIndex++;
+  const linksHtml = card.links.map(l =>
+    `<a class="sponsor-card-link" href="${escHtml(l.url)}" target="_blank" rel="noopener sponsored">${escHtml(l.label)}</a>`
+  ).join('');
+  return `
+    <div class="sponsor-card">
+      <div class="sponsor-card-header">
+        <span class="sponsor-card-badge">${escHtml(card.badge)}</span>
+      </div>
+      <div class="sponsor-card-title">${escHtml(card.title)}</div>
+      <div class="sponsor-card-body">${escHtml(card.body)}</div>
+      <div class="sponsor-card-links">${linksHtml}</div>
+    </div>`;
+}
+
 // ── Genre Badge Helpers ────────────────────────────────────────
 
 const GENRE_CLASS_MAP = {
@@ -270,8 +324,14 @@ async function renderNolaEvents(data, el) {
         <span style="margin-left:auto;font-family:'Space Grotesk',sans-serif;font-size:0.7rem;color:#4a4a6a;">${filtered.length} events</span>
       </div>`;
 
+    // Reset sponsor card rotation for each render
+    _sponsorCardIndex = 0;
+
     // Day groups
     let groupsHtml = '';
+    let totalRendered = 0; // track events rendered for sponsor injection
+    const SPONSOR_INTERVAL = 25; // inject a sponsor card every N events
+
     for (const [, group] of dayMap) {
       const isToday = group.label === 'Today';
       groupsHtml += `<div class="time-group">`;
@@ -319,6 +379,12 @@ async function renderNolaEvents(data, el) {
           </div>`;
         }
 
+        // Inject sponsor card every SPONSOR_INTERVAL events
+        totalRendered++;
+        if (totalRendered > 0 && totalRendered % SPONSOR_INTERVAL === 0) {
+          groupsHtml += buildSponsorCardHtml();
+        }
+
         groupsHtml += `${nowMarker}
           <div class="card" style="border-color:${catBorder};background:${catBg};padding-bottom:24px;">
             <div class="show-card">
@@ -341,7 +407,36 @@ async function renderNolaEvents(data, el) {
       groupsHtml += `</div>`;
     }
 
-    contentEl.innerHTML = filterBarHtml + statsHtml + groupsHtml;
+    // Sponsor card at top (after stats, before filter bar) — workshop focused
+    const topSponsorHtml = `
+      <div class="sponsor-card" style="margin-bottom:12px;">
+        <div class="sponsor-card-header">
+          <span class="sponsor-card-badge">🤖 AI CONSULTING · NEW ORLEANS</span>
+        </div>
+        <div class="sponsor-card-title">This page is powered by AI — so is TrustLight.</div>
+        <div class="sponsor-card-body">Rob Gaudet built this community events tracker using AI agents that refresh automatically every day. He helps New Orleans businesses deploy the same kind of practical AI — the kind that actually moves revenue. <strong style="color:#f0b840;">Workshop seats available.</strong></div>
+        <div class="sponsor-card-links">
+          <a class="sponsor-card-link" href="https://trustlight.ai" target="_blank" rel="noopener sponsored">TrustLight.ai</a>
+          <a class="sponsor-card-link" href="https://trustlight.ai/workshop.html" target="_blank" rel="noopener sponsored">Half-Day Workshop · $497</a>
+        </div>
+      </div>`;
+
+    // Closing sponsor card at the end of all events
+    const bottomSponsorHtml = `
+      <div class="sponsor-card" style="margin-top:16px;">
+        <div class="sponsor-card-header">
+          <span class="sponsor-card-badge">💡 BROUGHT TO YOU BY TRUSTLIGHT.AI</span>
+        </div>
+        <div class="sponsor-card-title">Enjoyed tonight's listings? Rob Gaudet built this — and he builds AI for businesses like yours.</div>
+        <div class="sponsor-card-body">30 years in tech. 2 years of live AI deployments. New Orleans-based, no vendor agenda. Whether you're a restaurant owner, realtor, attorney, or founder — there's a version of AI that works for your operation right now.</div>
+        <div class="sponsor-card-links">
+          <a class="sponsor-card-link" href="https://trustlight.ai/#services" target="_blank" rel="noopener sponsored">See Services</a>
+          <a class="sponsor-card-link" href="https://trustlight.ai/workshop.html" target="_blank" rel="noopener sponsored">AI Workshop →</a>
+          <a class="sponsor-card-link" href="https://trustlight.ai/#contact" target="_blank" rel="noopener sponsored">Let's Talk</a>
+        </div>
+      </div>`;
+
+    contentEl.innerHTML = topSponsorHtml + filterBarHtml + statsHtml + groupsHtml + bottomSponsorHtml;
 
     // Wire filter buttons
     contentEl.querySelectorAll('.ev-cat-btn').forEach(btn => {
