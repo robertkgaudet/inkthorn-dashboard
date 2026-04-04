@@ -1,25 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-04-03T23:07:26.099Z",
+  "updated": "2026-04-04T13:24:34.578Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-04-03",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "The Comedy Lounge at Vino",
-      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-      "venue": "Vino: Fine Wine & Spirits",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Friday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-04-04",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -29,11 +15,11 @@
       "type": "Stand-up",
       "cost": "FREE",
       "repeat": "Every Saturday",
-      "start_dt": "2026-04-03T20:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-04-05",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -47,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-04-05",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -61,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-04-05",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -366,36 +352,58 @@
       "cost": "$10",
       "repeat": "Thu Apr 09 2026",
       "start_dt": "2026-04-09T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-04-10",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Greetings from Queer Mountain",
+      "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
+      "venue": "ALLways Lounge",
+      "type": "Storytelling",
+      "cost": "$10",
+      "repeat": "Second Friday",
+      "start_dt": "2026-04-09T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-04-10",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Comedy Lounge at Vino",
+      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+      "venue": "Vino: Fine Wine & Spirits",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Friday",
+      "start_dt": "2026-04-10T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-04-10",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Pour Decisions",
+      "url": "https://504comedy.com/event/1335/pour-decisions",
+      "venue": "Bourbon Daiquiris",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Fri Apr 10 2026",
+      "start_dt": "2026-04-10T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-04-03",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-03",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "The Comedy Lounge at Vino",
-          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-          "venue": "Vino: Fine Wine & Spirits",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Friday",
-          "start_dt": "#{start_dt}"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-04-04",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-04",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -405,17 +413,17 @@
           "type": "Stand-up",
           "cost": "FREE",
           "repeat": "Every Saturday",
-          "start_dt": "2026-04-03T20:00-05:00"
+          "start_dt": "#{start_dt}"
         }
       ]
     },
     {
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-04-05",
       "events": [
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-04-05",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -429,7 +437,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-04-05",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -443,7 +451,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-04-05",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -772,6 +780,54 @@
           "cost": "$10",
           "repeat": "Thu Apr 09 2026",
           "start_dt": "2026-04-09T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "date": "2026-04-10",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-04-10",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Greetings from Queer Mountain",
+          "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
+          "venue": "ALLways Lounge",
+          "type": "Storytelling",
+          "cost": "$10",
+          "repeat": "Second Friday",
+          "start_dt": "2026-04-09T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-04-10",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Comedy Lounge at Vino",
+          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+          "venue": "Vino: Fine Wine & Spirits",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Friday",
+          "start_dt": "2026-04-10T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-04-10",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Pour Decisions",
+          "url": "https://504comedy.com/event/1335/pour-decisions",
+          "venue": "Bourbon Daiquiris",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Fri Apr 10 2026",
+          "start_dt": "2026-04-10T20:00-05:00"
         }
       ]
     }
