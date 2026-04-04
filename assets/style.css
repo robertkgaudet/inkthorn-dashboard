@@ -1273,6 +1273,33 @@ a.nav-tab-external:hover {
   font-weight: 600;
 }
 
+/* ── Uber Deep Link Button ────────────────────────────────── */
+.uber-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #000;
+  background: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 3px 10px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background 0.15s, transform 0.1s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.uber-btn:hover {
+  background: #e2e2e2;
+  transform: scale(1.04);
+}
+.uber-btn-icon {
+  font-size: 0.8rem;
+}
+
 /* ── TrustLight Sponsor Cards ─────────────────────────────── */
 .sponsor-card {
   border: 1px solid rgba(240, 184, 64, 0.25);

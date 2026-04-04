@@ -59,6 +59,49 @@ function buildSponsorCardHtml() {
     </div>`;
 }
 
+// ── Uber Deep Link Helper ──────────────────────────────────────
+
+/**
+ * Builds an Uber deep link for a given venue.
+ * Opens the Uber app (or m.uber.com on mobile) with destination pre-loaded.
+ * Falls back gracefully if venue has no coords.
+ */
+let _venueCoords = null;
+
+async function loadVenueCoords() {
+  if (_venueCoords) return _venueCoords;
+  try {
+    const data = await fetch('../data/venue-coords.json?_=' + Date.now()).then(r => r.json());
+    _venueCoords = data.venues || {};
+  } catch (e) {
+    _venueCoords = {};
+  }
+  return _venueCoords;
+}
+
+function buildUberLink(venueName, coords, address) {
+  if (!coords) return null;
+  const params = new URLSearchParams({
+    action: 'setPickup',
+    pickup: 'my_location',
+    'dropoff[latitude]': coords.lat,
+    'dropoff[longitude]': coords.lon,
+    'dropoff[nickname]': venueName,
+    'dropoff[formatted_address]': address || venueName + ', New Orleans, LA',
+  });
+  return 'https://m.uber.com/ul/?' + params.toString();
+}
+
+function uberButtonHtml(venueName) {
+  const coords = _venueCoords && _venueCoords[venueName];
+  if (!coords) return '';
+  const link = buildUberLink(venueName, coords, coords.address);
+  if (!link) return '';
+  return `<a class="uber-btn" href="${escHtml(link)}" target="_blank" rel="noopener" title="Get an Uber to ${escHtml(venueName)}">
+    <span class="uber-btn-icon">🚗</span> Uber There
+  </a>`;
+}
+
 // ── Genre Badge Helpers ────────────────────────────────────────
 
 const GENRE_CLASS_MAP = {
@@ -144,6 +187,9 @@ async function renderNolaEvents(data, el) {
   try {
     jazzfestData = await fetch('../data/jazzfest.json?_=' + Date.now()).then(r => r.json());
   } catch (e) { /* jazzfest optional */ }
+
+  // Load venue coordinates for Uber links
+  await loadVenueCoords();
 
   // Load venue drinks data
   if (!window.VENUE_DRINKS) {
@@ -412,6 +458,8 @@ async function renderNolaEvents(data, el) {
           groupsHtml += buildSponsorCardHtml();
         }
 
+        const uberHtml = uberButtonHtml(ev.venue);
+
         groupsHtml += `${nowMarker}
           <div class="card" style="border-color:${catBorder};background:${catBg};padding-bottom:24px;">
             <div class="show-card">
@@ -421,6 +469,7 @@ async function renderNolaEvents(data, el) {
               <div class="show-venue-block" style="display:flex;align-items:center;gap:8px;">
                 <span style="font-size:0.6rem;padding:2px 8px;border-radius:999px;border:1px solid ${catBorder};color:${catColor};font-family:'Orbitron',sans-serif;letter-spacing:0.08em;">${catIcon}</span>
                 ${costBadge}
+                ${uberHtml}
               </div>
               ${drinkHtml}
             </div>
