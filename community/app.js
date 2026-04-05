@@ -206,7 +206,7 @@ async function renderNolaEvents(data, el) {
   }
 
   // Build unified event list
-  const allEvents = [];
+  let allEvents = [];
 
   // Music — today only from WWOZ
   const musicShows = (data.shows || []).slice().sort((a, b) => {
@@ -297,8 +297,14 @@ async function renderNolaEvents(data, el) {
     }
   }
 
+  // ── Today-only filter ──
+  // Strip any event that doesn't have today's date (or has no date at all).
+  // Music shows from WWOZ are always today; comedy/variety/jazzfest may span many days.
+  const todayIso = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+  allEvents = allEvents.filter(ev => ev.date === todayIso);
+
   if (!allEvents.length) {
-    el.innerHTML = pendingCard('No event data found.', '🎭');
+    el.innerHTML = pendingCard('No events today.', '🎭');
     return;
   }
 
