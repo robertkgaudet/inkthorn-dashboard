@@ -740,6 +740,7 @@
       <button class="pb-tab" data-panel="leads-link">🦞 Leads Dashboard</button>
       <button class="pb-tab" data-panel="social">📣 Social Media Marketing</button>
       <button class="pb-tab" data-panel="roadmap">🗺️ Product Roadmap</button>
+      <button class="pb-tab" data-panel="trustlight-blueprint">🎯 AI Blueprint</button>
     </nav>
 
     <!-- Notes Panel -->
@@ -1454,6 +1455,42 @@ For each brand below, tell me: which platforms have active accounts, which are p
         </p>
       </div>
     </div><!-- /#panel-roadmap -->
+
+    <!-- TrustLight AI Blueprint Panel -->
+    <div class="pb-panel" id="panel-trustlight-blueprint">
+      <div style="margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-family:'Orbitron',sans-serif;font-size:0.65rem;letter-spacing:0.2em;color:#00f5ff;text-transform:uppercase;margin-bottom:6px;">TrustLight Advisory</div>
+          <div style="font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:900;color:#ff2d87;">AI Integration Blueprint™</div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="/trustlight-blueprint/" target="_blank" style="font-family:'Orbitron',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;padding:8px 18px;border-radius:8px;border:1px solid rgba(168,85,247,0.4);background:rgba(168,85,247,0.1);color:#a855f7;text-decoration:none;">↗ GENERIC DECK</a>
+          <a href="/trustlight-blueprint/beaubox/" target="_blank" style="font-family:'Orbitron',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;padding:8px 18px;border-radius:8px;border:1px solid rgba(255,45,135,0.4);background:rgba(255,45,135,0.1);color:#ff2d87;text-decoration:none;">↗ BEAU BOX DECK</a>
+        </div>
+      </div>
+      <!-- Deck selector -->
+      <div style="display:flex;gap:10px;margin-bottom:16px;">
+        <button onclick="document.getElementById('blueprint-frame').src='/trustlight-blueprint/';this.style.background='rgba(168,85,247,0.2)';document.getElementById('bb-btn').style.background='rgba(0,0,0,0.3)';" id="generic-btn"
+          style="font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:7px 18px;border-radius:8px;border:1px solid rgba(168,85,247,0.4);background:rgba(168,85,247,0.2);color:#a855f7;cursor:pointer;">
+          🎯 Generic Blueprint
+        </button>
+        <button onclick="document.getElementById('blueprint-frame').src='/trustlight-blueprint/beaubox/';this.style.background='rgba(255,45,135,0.2)';document.getElementById('generic-btn').style.background='rgba(0,0,0,0.3)';" id="bb-btn"
+          style="font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;padding:7px 18px;border-radius:8px;border:1px solid rgba(255,45,135,0.4);background:rgba(0,0,0,0.3);color:#ff2d87;cursor:pointer;">
+          🏢 Beau Box — Cres Gardner
+        </button>
+      </div>
+      <!-- Embedded deck iframe -->
+      <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(168,85,247,0.25);box-shadow:0 0 30px rgba(168,85,247,0.08);">
+        <iframe id="blueprint-frame"
+          src="/trustlight-blueprint/"
+          style="width:100%;height:75vh;border:none;display:block;"
+          allow="fullscreen">
+        </iframe>
+      </div>
+      <div style="margin-top:10px;font-size:0.78rem;color:#7878a8;text-align:center;">
+        Use ◀ ▶ buttons or arrow keys to navigate · Swipe on mobile · <a href="/trustlight-blueprint/beaubox/" target="_blank" style="color:#00f5ff;">Open full screen</a>
+      </div>
+    </div><!-- /#panel-trustlight-blueprint -->
 
   </div>
 
