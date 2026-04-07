@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrustLight AI Blueprint™ — Beau Box Commercial Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+
+    :root {
+      --bg:       #070711;
+      --surface:  rgba(20,10,40,0.9);
+      --border:   rgba(168,85,247,0.2);
+      --pink:     #ff2d87;
+      --pink-g:   rgba(255,45,135,0.5);
+      --cyan:     #00f5ff;
+      --cyan-g:   rgba(0,245,255,0.45);
+      --purple:   #a855f7;
+      --purple-g: rgba(168,85,247,0.6);
+      --gold:     #f0b840;
+      --text:     #f0f0ff;
+      --muted:    #9090c0;
+      --fd:       'Orbitron', monospace;
+      --fb:       'Space Grotesk', sans-serif;
+    }
+
+    body { background: var(--bg); color: var(--text); font-family: var(--fb); position: relative; }
+
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(168,85,247,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168,85,247,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: grid-drift 40s linear infinite;
+    }
+    @keyframes grid-drift {
+      from { background-position: 0 0, 0 0; }
+      to   { background-position: 0 60px, 60px 0; }
+    }
+
+    #deck { position: relative; z-index: 1; width: 100vw; height: 100vh; overflow: hidden; }
+
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 60px 80px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: translateX(60px);
+      text-align: center;
+    }
+    .slide.active { opacity: 1; pointer-events: all; transform: translateX(0); }
+    .slide.exit-left { opacity: 0; transform: translateX(-60px); }
+    @media (max-width: 768px) { .slide { padding: 40px 24px; } }
+
+    /* Nav */
+    #nav-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px;
+      background: rgba(7,7,17,0.92); backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+    }
+    #nav-bar .brand { font-family: var(--fd); font-size: 0.7rem; font-weight: 900; color: var(--cyan); letter-spacing: 0.12em; }
+    #nav-bar .brand span { color: var(--pink); }
+    .nav-controls { display: flex; align-items: center; gap: 14px; }
+    .nav-btn {
+      background: none; border: 1px solid var(--border); color: var(--text); cursor: pointer;
+      width: 36px; height: 36px; border-radius: 8px; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .nav-btn:hover { border-color: var(--cyan); background: rgba(0,245,255,0.06); }
+    .nav-btn:disabled { opacity: 0.3; cursor: default; }
+    #slide-counter { font-family: var(--fd); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; min-width: 60px; text-align: center; }
+    #progress-dots { display: flex; gap: 7px; align-items: center; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(168,85,247,0.25); transition: background 0.3s, transform 0.3s; cursor: pointer; }
+    .dot.active { background: var(--pink); box-shadow: 0 0 6px var(--pink-g); transform: scale(1.4); }
+
+    /* Type */
+    .eyebrow { font-family: var(--fd); font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan); margin-bottom: 16px; }
+    h1.deck-title { font-family: var(--fd); font-size: clamp(1.8rem, 4.5vw, 3.4rem); font-weight: 900; line-height: 1.1; margin-bottom: 18px; }
+    h2.deck-h2 { font-family: var(--fd); font-size: clamp(1.2rem, 3.2vw, 2rem); font-weight: 900; line-height: 1.2; margin-bottom: 18px; }
+    .sub { font-size: clamp(0.9rem, 1.8vw, 1.1rem); color: var(--muted); max-width: 680px; line-height: 1.7; }
+    .hl-pink { color: var(--pink); } .hl-cyan { color: var(--cyan); }
+    .hl-purple { color: var(--purple); } .hl-gold { color: var(--gold); }
+
+    /* Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 22px; }
+    .tag { border-radius: 999px; padding: 5px 16px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; }
+    .tag-pink   { background: rgba(255,45,135,0.1); border: 1px solid rgba(255,45,135,0.35); color: var(--pink); }
+    .tag-cyan   { background: rgba(0,245,255,0.08); border: 1px solid rgba(0,245,255,0.3);   color: var(--cyan); }
+    .tag-purple { background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.3);  color: var(--purple); }
+    .tag-gold   { background: rgba(240,184,64,0.1); border: 1px solid rgba(240,184,64,0.3);  color: var(--gold); }
+
+    /* Person card on title */
+    .person-card {
+      display: flex; align-items: center; gap: 18px;
+      background: var(--surface); border: 1px solid rgba(0,245,255,0.25);
+      border-radius: 12px; padding: 16px 24px;
+      margin-top: 28px; text-align: left;
+      box-shadow: 0 0 20px rgba(0,245,255,0.06);
+    }
+    .person-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--fd); font-size: 1.1rem; font-weight: 900;
+      color: var(--bg); flex-shrink: 0;
+    }
+    .person-name { font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 3px; }
+    .person-title { font-size: 0.8rem; color: var(--cyan); margin-bottom: 2px; }
+    .person-co { font-size: 0.78rem; color: var(--muted); }
+
+    /* Stat row */
+    .stat-row { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin-top: 28px; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 28px; min-width: 130px; }
+    .stat-val { font-family: var(--fd); font-size: 1.8rem; font-weight: 900; margin-bottom: 5px; }
+    .stat-label { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
+
+    /* Phase overview */
+    .phase-overview { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; width: 100%; max-width: 900px; margin-top: 28px; }
+    @media (max-width: 768px) { .phase-overview { grid-template-columns: repeat(2,1fr); } }
+    .po-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 14px; position: relative; overflow: hidden; text-align: center; }
+    .po-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; }
+    .po-1::before { background:var(--pink); } .po-2::before { background:var(--cyan); }
+    .po-3::before { background:var(--purple); } .po-4::before { background:var(--gold); }
+    .po-num { font-family: var(--fd); font-size: 1.6rem; font-weight: 900; opacity: 0.2; margin-bottom: 6px; }
+    .po-1 .po-num { color:var(--pink); } .po-2 .po-num { color:var(--cyan); }
+    .po-3 .po-num { color:var(--purple); } .po-4 .po-num { color:var(--gold); }
+    .po-name { font-family: var(--fd); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 7px; }
+    .po-1 .po-name { color:var(--pink); } .po-2 .po-name { color:var(--cyan); }
+    .po-3 .po-name { color:var(--purple); } .po-4 .po-name { color:var(--gold); }
+    .po-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    /* Mind Map */
+    .mm-wrap { width: 100%; max-width: 920px; margin-top: 24px; }
+    .mm-center-bubble {
+      display: inline-block;
+      background: rgba(255,45,135,0.12); border: 2px solid rgba(255,45,135,0.5);
+      box-shadow: 0 0 24px var(--pink-g); border-radius: 12px; padding: 10px 26px;
+      font-family: var(--fd); font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em;
+      color: var(--pink); margin-bottom: 18px;
+    }
+    .mm-branches { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; }
+    @media (max-width: 900px) { .mm-branches { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width: 580px) { .mm-branches { grid-template-columns: repeat(2,1fr); } }
+    .mm-branch { background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 10px; padding: 13px; }
+    .mm-branch-title { font-family: var(--fd); font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin-bottom: 9px; }
+    .mm-status { display: flex; flex-direction: column; gap: 5px; text-align: left; }
+    .status-item { display: flex; align-items: center; gap: 7px; font-size: 0.74rem; color: var(--muted); }
+    .sdot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .d-none    { background: #333; }
+    .d-explore { background: var(--gold); box-shadow: 0 0 5px rgba(240,184,64,0.5); }
+    .d-deploy  { background: var(--cyan); box-shadow: 0 0 5px var(--cyan-g); }
+    .d-opt     { background: var(--pink); box-shadow: 0 0 5px var(--pink-g); }
+    .mm-legend { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 12px; font-size: 0.74rem; color: var(--muted); }
+    .leg-item { display: flex; align-items: center; gap: 7px; }
+
+    /* Use Cases */
+    .uc-grid { display: flex; flex-direction: column; gap: 11px; width: 100%; max-width: 860px; margin-top: 22px; }
+    .uc-row { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; display: grid; grid-template-columns: 110px 1fr 1fr; gap: 14px; align-items: center; text-align: left; }
+    @media (max-width: 640px) { .uc-row { grid-template-columns: 1fr; } }
+    .uc-actor { font-family: var(--fd); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; color: var(--pink); background: rgba(255,45,135,0.1); border: 1px solid rgba(255,45,135,0.3); border-radius: 7px; padding: 8px 8px; text-align: center; }
+    .uc-col-label { font-family: var(--fd); font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+    .uc-col-val { font-size: 0.86rem; font-weight: 600; }
+    .uc-col-sub { font-size: 0.76rem; color: var(--muted); margin-top: 3px; }
+
+    /* User Stories */
+    .stories-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 11px; width: 100%; max-width: 900px; margin-top: 22px; }
+    @media (max-width: 768px) { .stories-grid { grid-template-columns: repeat(2,1fr); } }
+    .story-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: left; }
+    .as-a { font-size: 0.68rem; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 7px; }
+    .s-text { font-size: 0.83rem; color: var(--text); margin-bottom: 7px; line-height: 1.5; }
+    .s-so { font-size: 0.76rem; color: var(--cyan); font-style: italic; margin-bottom: 9px; }
+    .ppill { display: inline-block; font-size: 0.63rem; font-weight: 700; border-radius: 999px; padding: 2px 10px; }
+    .p1 { background: rgba(255,45,135,0.12); color: var(--pink); border: 1px solid rgba(255,45,135,0.3); }
+    .p2 { background: rgba(240,184,64,0.1);  color: var(--gold);  border: 1px solid rgba(240,184,64,0.3); }
+    .p3 { background: rgba(168,85,247,0.1);  color: var(--purple);border: 1px solid rgba(168,85,247,0.3); }
+
+    /* Roadmap */
+    .roadmap { display: flex; flex-direction: column; gap: 9px; width: 100%; max-width: 860px; margin-top: 22px; }
+    .rm-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; display: grid; grid-template-columns: 90px 1fr auto; gap: 14px; align-items: center; text-align: left; }
+    @media (max-width: 600px) { .rm-item { grid-template-columns: 1fr; } }
+    .rm-wave { font-family: var(--fd); font-size: 0.63rem; font-weight: 700; letter-spacing: 0.08em; text-align: center; }
+    .w1 { color: var(--pink); } .w2 { color: var(--gold); } .w3 { color: var(--purple); }
+    .rm-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 3px; }
+    .rm-desc  { font-size: 0.76rem; color: var(--muted); }
+    .rm-score { text-align: center; white-space: nowrap; font-size: 0.68rem; color: var(--muted); }
+    .rm-score .sv { display: flex; gap: 8px; justify-content: center; margin-top: 3px; }
+    .se { color: var(--cyan); font-weight: 700; font-size: 0.7rem; }
+    .si { color: var(--pink); font-weight: 700; font-size: 0.7rem; }
+
+    /* Deliverables */
+    .deliverables { display: flex; flex-direction: column; gap: 11px; width: 100%; max-width: 700px; margin-top: 24px; }
+    .dlv-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 22px; display: flex; align-items: center; gap: 16px; text-align: left; }
+    .dlv-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .dlv-name { font-weight: 700; font-size: 0.92rem; margin-bottom: 3px; }
+    .dlv-desc { font-size: 0.8rem; color: var(--muted); }
+
+    /* Pricing */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; width: 100%; max-width: 820px; margin-top: 24px; }
+    @media (max-width: 640px) { .pricing-grid { grid-template-columns: 1fr; } }
+    .price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 26px 18px; text-align: center; }
+    .price-card.hl { border-color: rgba(255,45,135,0.4); box-shadow: 0 0 24px rgba(255,45,135,0.08); }
+    .price-icon { font-size: 1.7rem; margin-bottom: 10px; }
+    .price-name { font-family: var(--fd); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); margin-bottom: 9px; }
+    .price-amt  { font-size: 1.5rem; font-weight: 700; color: var(--pink); margin-bottom: 9px; }
+    .price-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
+    /* Quote / CTA */
+    .quote-block { max-width: 700px; margin: 24px auto 0; padding: 22px 28px; background: rgba(0,0,0,0.3); border-left: 3px solid var(--cyan); border-radius: 0 10px 10px 0; text-align: left; }
+    .quote-block blockquote { font-size: 1.05rem; color: var(--text); line-height: 1.7; font-style: italic; margin-bottom: 9px; }
+    .quote-block cite { font-size: 0.78rem; color: var(--cyan); font-style: normal; font-weight: 600; }
+    .cta-btn { display: inline-block; margin-top: 26px; background: linear-gradient(135deg, var(--pink), #c4006a); color: #fff; font-family: var(--fd); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 15px 34px; border-radius: 10px; text-decoration: none; box-shadow: 0 0 24px var(--pink-g); transition: opacity 0.2s; }
+    .cta-btn:hover { opacity: 0.82; }
+
+    /* Ahead-of-the-curve insight box */
+    .insight-box {
+      max-width: 720px; width: 100%;
+      background: rgba(0,245,255,0.05); border: 1px solid rgba(0,245,255,0.2);
+      border-radius: 12px; padding: 20px 26px; margin-top: 24px; text-align: left;
+    }
+    .insight-box .ib-label { font-family: var(--fd); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; }
+    .insight-box p { font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .insight-box strong { color: var(--cyan); }
+
+    /* Market badges */
+    .market-badges { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; margin-top: 20px; }
+    .mbadge { background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.3); color: var(--purple); font-size: 0.75rem; font-weight: 600; padding: 5px 14px; border-radius: 999px; }
+  </style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div id="deck">
+
+  <!-- ══ SLIDE 1: Title / Person ══ -->
+  <div class="slide active" id="s0">
+    <div class="eyebrow">TrustLight Advisory · Prepared for Beau Box Commercial Real Estate</div>
+    <h1 class="deck-title">
+      The <span class="hl-pink">AI Integration</span><br>
+      <span class="hl-cyan">Blueprint™</span>
+    </h1>
+    <div class="person-card">
+      <div class="person-avatar">CG</div>
+      <div>
+        <div class="person-name">Cres Gardner, CCIM, SIOR</div>
+        <div class="person-title">Vice President · Beau Box Commercial Real Estate</div>
+        <div class="person-co">Baton Rouge · New Orleans · Lafayette · Gulf South</div>
+      </div>
+    </div>
+    <div class="tags" style="margin-top:20px;">
+      <span class="tag tag-pink">Commercial RE</span>
+      <span class="tag tag-cyan">AI Roadmap</span>
+      <span class="tag tag-purple">25+ Years Experience</span>
+      <span class="tag tag-gold">CCIM · SIOR</span>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 2: You're Already Ahead ══ -->
+  <div class="slide" id="s1">
+    <div class="eyebrow">Context · Where Beau Box Stands</div>
+    <h2 class="deck-h2">You're Already <span class="hl-cyan">Ahead of the Market.</span><br>Now Let's <span class="hl-pink">Scale It.</span></h2>
+    <div class="insight-box">
+      <div class="ib-label">The Real Opportunity</div>
+      <p>
+        Most commercial brokerages are still debating whether AI is real.
+        Beau Box already has agents using <strong>agentic AI tools in production</strong> — that's a significant competitive lead.
+        <br><br>
+        The question isn't "should we adopt AI?" — it's
+        <strong>"how do we turn one agent's advantage into the entire firm's advantage?"</strong>
+        That's what the Blueprint answers.
+      </p>
+    </div>
+    <div class="market-badges">
+      <span class="mbadge">Baton Rouge</span>
+      <span class="mbadge">New Orleans</span>
+      <span class="mbadge">Lafayette</span>
+      <span class="mbadge">Lake Charles</span>
+      <span class="mbadge">Shreveport</span>
+      <span class="mbadge">Pensacola, FL</span>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 3: The Framework ══ -->
+  <div class="slide" id="s2">
+    <div class="eyebrow">The Framework</div>
+    <h2 class="deck-h2">Four Layers.<br><span class="hl-cyan">One Blueprint.</span></h2>
+    <p class="sub">Each layer builds on the last. You walk out with a complete, honest picture — and a decision-ready roadmap built for commercial real estate.</p>
+    <div class="phase-overview">
+      <div class="po-card po-1">
+        <div class="po-num">01</div>
+        <div class="po-name">Mind Map</div>
+        <div class="po-desc">Map where Beau Box stands. Score every business function honestly.</div>
+      </div>
+      <div class="po-card po-2">
+        <div class="po-num">02</div>
+        <div class="po-name">Use Cases</div>
+        <div class="po-desc">Define exactly what AI needs to do. Actor. System. Outcome.</div>
+      </div>
+      <div class="po-card po-3">
+        <div class="po-num">03</div>
+        <div class="po-name">User Stories</div>
+        <div class="po-desc">Goals in plain language. Shareable across leadership and staff.</div>
+      </div>
+      <div class="po-card po-4">
+        <div class="po-num">04</div>
+        <div class="po-name">Roadmap</div>
+        <div class="po-desc">Effort vs. impact. Wave 1 deploys in weeks, not months.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 4: Mind Map (Beau Box CRE version) ══ -->
+  <div class="slide" id="s3">
+    <div class="eyebrow">Layer 01 · Mind Map · Beau Box CRE</div>
+    <h2 class="deck-h2"><span class="hl-pink">Where Does Beau Box Stand</span><br>Across Every Business Function?</h2>
+    <div class="mm-wrap">
+      <div><div class="mm-center-bubble">BEAU BOX CRE — AI STATUS</div></div>
+      <div class="mm-branches">
+        <div class="mm-branch">
+          <div class="mm-branch-title">Deal Sourcing</div>
+          <div class="mm-status">
+            <div class="status-item"><div class="sdot d-none"></div>AI Prospect Targeting</div>
+            <div class="status-item"><div class="sdot d-explore"></div>Off-Market Intel</div>
+            <div class="status-item"><div class="sdot d-none"></div>Owner Outreach AI</div>
+            <div class="status-item"><div class="sdot d-none"></div>Predictive Availability</div>
+          </div>
+        </div>
+        <div class="mm-branch">
+          <div class="mm-branch-title">Tenant &amp; Buyer Rep</div>
+          <div class="mm-status">
+            <div class="status-item"><div class="sdot d-none"></div>AI Site Selection</div>
+            <div class="status-item"><div class="sdot d-explore"></div>Market Survey Gen</div>
+            <div class="status-item"><div class="sdot d-none"></div>LOI Draft Assist</div>
+            <div class="status-item"><div class="sdot d-deploy"></div>Client Comms AI</div>
+          </div>
+        </div>
+        <div class="mm-branch">
+          <div class="mm-branch-title">Marketing</div>
+          <div class="mm-status">
+            <div class="status-item"><div class="sdot d-opt"></div>Listing Copy AI</div>
+            <div class="status-item"><div class="sdot d-deploy"></div>Email Campaigns</div>
+            <div class="status-item"><div class="sdot d-explore"></div>Social Content</div>
+            <div class="status-item"><div class="sdot d-none"></div>Video/Virtual Tours</div>
+          </div>
+        </div>
+        <div class="mm-branch">
+          <div class="mm-branch-title">Market Intelligence</div>
+          <div class="mm-status">
+            <div class="status-item"><div class="sdot d-none"></div>AI Cap Rate Analysis</div>
+            <div class="status-item"><div class="sdot d-explore"></div>Absorption Reports</div>
+            <div class="status-item"><div class="sdot d-none"></div>Comp Auto-Tracking</div>
+            <div class="status-item"><div class="sdot d-none"></div>Pipeline Dashboard</div>
+          </div>
+        </div>
+        <div class="mm-branch">
+          <div class="mm-branch-title">Ops &amp; Admin</div>
+          <div class="mm-status">
+            <div class="status-item"><div class="sdot d-none"></div>Lease Abstract AI</div>
+            <div class="status-item"><div class="sdot d-none"></div>Document Automation</div>
+            <div class="status-item"><div class="sdot d-explore"></div>Commission Tracking</div>
+            <div class="status-item"><div class="sdot d-none"></div>Deal Checklist AI</div>
+          </div>
+        </div>
+      </div>
+      <div class="mm-legend">
+        <div class="leg-item"><div class="sdot d-none" style="display:inline-block"></div>Not Started</div>
+        <div class="leg-item"><div class="sdot d-explore" style="display:inline-block"></div>Exploring</div>
+        <div class="leg-item"><div class="sdot d-deploy" style="display:inline-block"></div>Deployed</div>
+        <div class="leg-item"><div class="sdot d-opt" style="display:inline-block"></div>Optimized</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 5: Use Cases ══ -->
+  <div class="slide" id="s4">
+    <div class="eyebrow">Layer 02 · UML Use Cases · Beau Box CRE</div>
+    <h2 class="deck-h2">Define <span class="hl-cyan">Exactly</span> What AI<br>Needs to Accomplish</h2>
+    <div class="uc-grid">
+      <div class="uc-row">
+        <div class="uc-actor">BROKER / AGENT</div>
+        <div>
+          <div class="uc-col-label">Use Case</div>
+          <div class="uc-col-val">AI-Generated Market Survey</div>
+          <div class="uc-col-sub">Agent inputs client criteria (property type, market, SF range, budget). AI compiles a formatted market survey with available options in under 5 minutes.</div>
+        </div>
+        <div>
+          <div class="uc-col-label">Success Outcome</div>
+          <div class="uc-col-val">Client-ready survey in &lt;5 min</div>
+          <div class="uc-col-sub">Precondition: CoStar/LoopNet data feed connected.</div>
+        </div>
+      </div>
+      <div class="uc-row">
+        <div class="uc-actor">TENANT REP</div>
+        <div>
+          <div class="uc-col-label">Use Case</div>
+          <div class="uc-col-val">Automated LOI First Draft</div>
+          <div class="uc-col-sub">Broker enters deal terms. AI generates a complete Letter of Intent draft using the firm's standard template and negotiated points — attorney-review ready.</div>
+        </div>
+        <div>
+          <div class="uc-col-label">Success Outcome</div>
+          <div class="uc-col-val">LOI draft in 3 minutes vs. 45 min</div>
+          <div class="uc-col-sub">Precondition: Standard LOI template + deal terms captured.</div>
+        </div>
+      </div>
+      <div class="uc-row">
+        <div class="uc-actor">BEAU BOX VP</div>
+        <div>
+          <div class="uc-col-label">Use Case</div>
+          <div class="uc-col-val">Multi-Market Pipeline Intelligence</div>
+          <div class="uc-col-sub">Leadership opens a dashboard showing deal velocity by market (BR, NOLA, Lafayette, etc.), aging pipeline, and which brokers need support — synthesized by AI weekly.</div>
+        </div>
+        <div>
+          <div class="uc-col-label">Success Outcome</div>
+          <div class="uc-col-val">Cross-market clarity in one view</div>
+          <div class="uc-col-sub">Precondition: CRM data integrated across all markets.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 6: User Stories ══ -->
+  <div class="slide" id="s5">
+    <div class="eyebrow">Layer 03 · Agile User Stories · Beau Box CRE</div>
+    <h2 class="deck-h2">Plain Language.<br><span class="hl-purple">Real Goals.</span></h2>
+    <div class="stories-grid">
+      <div class="story-card">
+        <div class="as-a">As a tenant rep broker</div>
+        <div class="s-text">I want AI to draft a complete LOI from deal terms in under 3 minutes</div>
+        <div class="s-so">so that I close faster and never lose deals to slow paperwork.</div>
+        <span class="ppill p1">P1 · Wave 1</span>
+      </div>
+      <div class="story-card">
+        <div class="as-a">As a buyer's rep broker</div>
+        <div class="s-text">I want AI to generate a market survey from client criteria automatically</div>
+        <div class="s-so">so that I deliver a professional options package the same day I take the call.</div>
+        <span class="ppill p1">P1 · Wave 1</span>
+      </div>
+      <div class="story-card">
+        <div class="as-a">As a listing agent</div>
+        <div class="s-text">I want AI to auto-generate property marketing content when a listing goes live</div>
+        <div class="s-so">so that every new listing hits all channels the same day — without me writing a word.</div>
+        <span class="ppill p1">P1 · Wave 1</span>
+      </div>
+      <div class="story-card">
+        <div class="as-a">As a Beau Box VP</div>
+        <div class="s-text">I want a weekly AI pipeline health report across all Gulf South markets</div>
+        <div class="s-so">so that I can manage a 6-market operation without being in 6 places at once.</div>
+        <span class="ppill p2">P2 · Wave 2</span>
+      </div>
+      <div class="story-card">
+        <div class="as-a">As a prospect owner</div>
+        <div class="s-text">I want AI to send me relevant market intel on my asset type before I even ask</div>
+        <div class="s-so">so that Beau Box stays top of mind as my trusted advisor, not just a transaction broker.</div>
+        <span class="ppill p2">P2 · Wave 2</span>
+      </div>
+      <div class="story-card">
+        <div class="as-a">As a transaction coordinator</div>
+        <div class="s-text">I want AI to extract key dates and obligations from lease abstracts automatically</div>
+        <div class="s-so">so that critical deadlines never get missed across a high-volume deal flow.</div>
+        <span class="ppill p3">P3 · Wave 3</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 7: Roadmap ══ -->
+  <div class="slide" id="s6">
+    <div class="eyebrow">Layer 04 · Sequenced Roadmap · Beau Box CRE</div>
+    <h2 class="deck-h2">Effort vs. Impact.<br><span class="hl-gold">What Beau Box Builds First.</span></h2>
+    <div class="roadmap">
+      <div class="rm-item">
+        <div class="rm-wave w1">WAVE 1<br><span style="font-size:0.55rem;opacity:0.7">NOW</span></div>
+        <div><div class="rm-title">AI LOI Draft Generator</div><div class="rm-desc">Enter deal terms → complete LOI first draft in 3 minutes. Uses firm's standard templates. Attorney-review ready.</div></div>
+        <div class="rm-score">Effort / Impact<div class="sv"><span class="se">LOW</span><span class="si">HIGH</span></div></div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-wave w1">WAVE 1<br><span style="font-size:0.55rem;opacity:0.7">NOW</span></div>
+        <div><div class="rm-title">Auto-Publish Listing Marketing Content</div><div class="rm-desc">Listing goes live → AI writes property description, social post, and email blast. Distributed same day, zero manual effort.</div></div>
+        <div class="rm-score">Effort / Impact<div class="sv"><span class="se">LOW</span><span class="si">HIGH</span></div></div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-wave w1">WAVE 1<br><span style="font-size:0.55rem;opacity:0.7">NOW</span></div>
+        <div><div class="rm-title">AI Market Survey Generator</div><div class="rm-desc">Client criteria in → formatted market survey with comps and available options out. CoStar/LoopNet data integration.</div></div>
+        <div class="rm-score">Effort / Impact<div class="sv"><span class="se">MED</span><span class="si">HIGH</span></div></div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-wave w2">WAVE 2<br><span style="font-size:0.55rem;opacity:0.7">90 DAYS</span></div>
+        <div><div class="rm-title">Multi-Market Pipeline Dashboard</div><div class="rm-desc">Weekly AI intelligence across BR, NOLA, Lafayette, and Gulf South — deal velocity, aging pipeline, broker coaching triggers.</div></div>
+        <div class="rm-score">Effort / Impact<div class="sv"><span class="se">MED</span><span class="si">HIGH</span></div></div>
+      </div>
+      <div class="rm-item">
+        <div class="rm-wave w3">WAVE 3<br><span style="font-size:0.55rem;opacity:0.7">6 MOS</span></div>
+        <div><div class="rm-title">Lease Abstract AI + Deadline Alerts</div><div class="rm-desc">AI extracts critical dates, obligations, and options from lease documents. Automated alerts before deadlines hit.</div></div>
+        <div class="rm-score">Effort / Impact<div class="sv"><span class="se">HIGH</span><span class="si">HIGH</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 8: Deliverables ══ -->
+  <div class="slide" id="s7">
+    <div class="eyebrow">The Deliverable</div>
+    <h2 class="deck-h2">You Walk Out With<br><span class="hl-cyan">a Real Document.</span></h2>
+    <p class="sub" style="margin-bottom:0">Not a deck full of questions. A Blueprint you can hand to your team and execute immediately.</p>
+    <div class="deliverables">
+      <div class="dlv-item">
+        <div class="dlv-icon">🗺️</div>
+        <div><div class="dlv-name">AI Maturity Mind Map</div><div class="dlv-desc">One-page visual of Beau Box's current AI state across all five CRE business functions — gaps visible at a glance.</div></div>
+      </div>
+      <div class="dlv-item">
+        <div class="dlv-icon">🎯</div>
+        <div><div class="dlv-name">Documented Use Cases</div><div class="dlv-desc">3–5 commercial-RE-specific use cases — precise, unambiguous, buildable by any developer or AI platform.</div></div>
+      </div>
+      <div class="dlv-item">
+        <div class="dlv-icon">📋</div>
+        <div><div class="dlv-name">Agile Feature Backlog</div><div class="dlv-desc">User stories in plain English, mapped to each use case and business function — shareable with brokers and leadership.</div></div>
+      </div>
+      <div class="dlv-item">
+        <div class="dlv-icon">🚀</div>
+        <div><div class="dlv-name">Sequenced AI Roadmap</div><div class="dlv-desc">Wave 1 / 2 / 3 with effort vs. impact scoring. Wave 1 items deploy in weeks across all Beau Box markets.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 9: Engagement / Pricing ══ -->
+  <div class="slide" id="s8">
+    <div class="eyebrow">TrustLight Advisory · How We Work</div>
+    <h2 class="deck-h2">Simple Structure.<br><span class="hl-pink">No Sales Cycle.</span></h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-icon">⚡</div>
+        <div class="price-name">Discovery Session</div>
+        <div class="price-amt">$275<span style="font-size:0.88rem;color:var(--muted)">/hr</span></div>
+        <div class="price-desc">Mind map only. 2-hour working session. Walk out knowing exactly where the gaps are and your top 3 CRE AI priorities.</div>
+      </div>
+      <div class="price-card hl">
+        <div class="price-icon">🎯</div>
+        <div class="price-name">Full Blueprint Day</div>
+        <div class="price-amt">$5K</div>
+        <div class="price-desc">All four layers in one working day with your leadership team. Walk out with a decision-ready Blueprint. Most requested.</div>
+      </div>
+      <div class="price-card">
+        <div class="price-icon">🔄</div>
+        <div class="price-name">Advisory Retainer</div>
+        <div class="price-amt">Custom</div>
+        <div class="price-desc">Blueprint plus ongoing implementation oversight — especially valuable during multi-market AI rollout across Gulf South offices.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 10: Close ══ -->
+  <div class="slide" id="s9">
+    <div class="eyebrow">TrustLight Advisory · Rob Gaudet · New Orleans, LA</div>
+    <h2 class="deck-h2" style="max-width:700px">
+      <span class="hl-cyan">Beau Box already has the lead.</span><br>
+      <span class="hl-pink">Let's make sure<br>the whole firm keeps it.</span>
+    </h2>
+    <div class="quote-block">
+      <blockquote>"I'm not reselling any platform. I don't have a preferred partner I'm steering you toward. My only incentive is that your AI investment actually pays off — across every market you operate in."</blockquote>
+      <cite>— Rob Gaudet, TrustLight Advisory</cite>
+    </div>
+    <a href="https://trustlight.ai/#contact" class="cta-btn">Let's Build the Blueprint →</a>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- Nav Bar -->
+<div id="nav-bar">
+  <div class="brand">TRUST<span>LIGHT</span></div>
+  <div class="nav-controls">
+    <button class="nav-btn" id="btn-prev" onclick="goSlide(-1)" disabled>◀</button>
+    <span id="slide-counter">1 / 10</span>
+    <button class="nav-btn" id="btn-next" onclick="goSlide(1)">▶</button>
+  </div>
+  <div id="progress-dots"></div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  const dotsEl = document.getElementById('progress-dots');
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    if (n < 0 || n >= total) return;
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit-left');
+    setTimeout(() => slides[current].classList.remove('exit-left'), 400);
+    current = n;
+    slides[current].classList.add('active');
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    document.getElementById('slide-counter').textContent = (current + 1) + ' / ' + total;
+    document.getElementById('btn-prev').disabled = current === 0;
+    document.getElementById('btn-next').disabled = current === total - 1;
+  }
+
+  function goSlide(dir) { goTo(current + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goSlide(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goSlide(-1);
+  });
+
+  let touchX = null;
+  document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) goSlide(dx < 0 ? 1 : -1);
+    touchX = null;
+  });
+</script>
+</body>
+</html>
