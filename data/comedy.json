@@ -1,67 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-04-06T23:09:26.660Z",
+  "updated": "2026-04-07T23:10:52.132Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-04-06",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Funny Mondays",
-      "url": "https://504comedy.com/event/1154/funny-mondays",
-      "venue": "New York Pizza",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Monday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-04-06",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Bear With Me Comedy Open Mic",
-      "url": "https://504comedy.com/event/35/bearwithme",
-      "venue": "Twelve Mile Limit",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Monday",
-      "start_dt": "2026-04-06T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-04-06",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "Damn That's Funny",
-      "url": "https://504comedy.com/event/931/damn-thats-funny",
-      "venue": "bar redux",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "First Monday",
-      "start_dt": "2026-04-06T21:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-04-06",
-      "time": "9:30pm",
-      "time_sort": 2130,
-      "title": "Gumbolaya All Acts Open Mic",
-      "url": "https://504comedy.com/event/944/gumbolaya-in-the-bayou-pride-edition",
-      "venue": "Poor Boys",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Monday",
-      "start_dt": "2026-05-04T21:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-04-07",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -71,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$5",
       "repeat": "Every Tuesday",
-      "start_dt": "2026-04-06T19:30-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-04-07",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -89,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-04-07",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -103,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-08",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -117,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-08",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -131,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-08",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -145,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-08",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -159,11 +103,11 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-08",
       "time": "9:00pm",
       "time_sort": 2100,
-      "title": "Comedy night at Prytania Bar",
+      "title": "Comedy night",
       "url": "https://504comedy.com/event/928/comedy-night-at-prytania-bar",
       "venue": "Prytania Bar",
       "type": "Stand-up",
@@ -173,7 +117,7 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-08",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -187,14 +131,14 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-08",
       "time": "9:00pm",
       "time_sort": 2100,
       "title": "One More Pie Comedy Open Mic",
       "url": "https://504comedy.com/event/1316/one-more-pie-comedy-open-mic",
-      "venue": "Restaurant",
-      "type": "Open Mic",
+      "venue": "One More Pie",
+      "type": "Stand-up",
       "cost": "FREE",
       "repeat": "Every Wednesday",
       "start_dt": "2026-04-08T21:00-05:00"
@@ -303,6 +247,20 @@
       "date": "2026-04-10",
       "time": "7:00pm",
       "time_sort": 1900,
+      "title": "Jake Cornell",
+      "url": "https://504comedy.com/event/1337/jake-cornell-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Fri Apr 10 2026",
+      "start_dt": "2026-04-10T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-04-10",
+      "time": "7:00pm",
+      "time_sort": 1900,
       "title": "Greetings from Queer Mountain",
       "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
       "venue": "ALLways Lounge",
@@ -317,7 +275,7 @@
       "date": "2026-04-10",
       "time": "8:00pm",
       "time_sort": 2000,
-      "title": "The Comedy Lounge at Vino",
+      "title": "The Comedy Lounge",
       "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
       "venue": "Vino: Fine Wine & Spirits",
       "type": "Stand-up",
@@ -408,78 +366,72 @@
       "cost": "FREE",
       "repeat": "Every Sunday",
       "start_dt": "2026-04-12T20:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Monday",
+      "date": "2026-04-13",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Bear With Me Comedy Open Mic",
+      "url": "https://504comedy.com/event/35/bearwithme",
+      "venue": "Twelve Mile Limit",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Monday",
+      "start_dt": "2026-04-12T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Monday",
+      "date": "2026-04-13",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Funny Mondays",
+      "url": "https://504comedy.com/event/1154/funny-mondays",
+      "venue": "New York Pizza",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Monday",
+      "start_dt": "2026-04-13T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Monday",
+      "date": "2026-04-13",
+      "time": "8:30pm",
+      "time_sort": 2030,
+      "title": "Bing-OH: Sexy Bingo",
+      "url": "https://504comedy.com/event/1338/bingoh-sexy-bingo-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Improv",
+      "cost": "FREE",
+      "repeat": "Every Monday",
+      "start_dt": "2026-04-13T20:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Monday",
+      "date": "2026-04-13",
+      "time": "9:30pm",
+      "time_sort": 2130,
+      "title": "Gumbolaya All Acts Open Mic",
+      "url": "https://504comedy.com/event/944/gumbolaya-in-the-bayou-pride-edition",
+      "venue": "Poor Boys",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Monday",
+      "start_dt": "2026-04-13T21:30-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-04-06",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-06",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Funny Mondays",
-          "url": "https://504comedy.com/event/1154/funny-mondays",
-          "venue": "New York Pizza",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Monday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-06",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Bear With Me Comedy Open Mic",
-          "url": "https://504comedy.com/event/35/bearwithme",
-          "venue": "Twelve Mile Limit",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Monday",
-          "start_dt": "2026-04-06T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-06",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "Damn That's Funny",
-          "url": "https://504comedy.com/event/931/damn-thats-funny",
-          "venue": "bar redux",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "First Monday",
-          "start_dt": "2026-04-06T21:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-06",
-          "time": "9:30pm",
-          "time_sort": 2130,
-          "title": "Gumbolaya All Acts Open Mic",
-          "url": "https://504comedy.com/event/944/gumbolaya-in-the-bayou-pride-edition",
-          "venue": "Poor Boys",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Monday",
-          "start_dt": "2026-05-04T21:30-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-04-07",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-07",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -489,11 +441,11 @@
           "type": "Stand-up",
           "cost": "$5",
           "repeat": "Every Tuesday",
-          "start_dt": "2026-04-06T19:30-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-07",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -507,7 +459,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-07",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -522,12 +474,12 @@
       ]
     },
     {
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-08",
       "events": [
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-08",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -541,7 +493,7 @@
         },
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-08",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -555,7 +507,7 @@
         },
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-08",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -569,7 +521,7 @@
         },
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-08",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -583,11 +535,11 @@
         },
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-08",
           "time": "9:00pm",
           "time_sort": 2100,
-          "title": "Comedy night at Prytania Bar",
+          "title": "Comedy night",
           "url": "https://504comedy.com/event/928/comedy-night-at-prytania-bar",
           "venue": "Prytania Bar",
           "type": "Stand-up",
@@ -597,7 +549,7 @@
         },
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-08",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -611,14 +563,14 @@
         },
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-08",
           "time": "9:00pm",
           "time_sort": 2100,
           "title": "One More Pie Comedy Open Mic",
           "url": "https://504comedy.com/event/1316/one-more-pie-comedy-open-mic",
-          "venue": "Restaurant",
-          "type": "Open Mic",
+          "venue": "One More Pie",
+          "type": "Stand-up",
           "cost": "FREE",
           "repeat": "Every Wednesday",
           "start_dt": "2026-04-08T21:00-05:00"
@@ -739,6 +691,20 @@
           "date": "2026-04-10",
           "time": "7:00pm",
           "time_sort": 1900,
+          "title": "Jake Cornell",
+          "url": "https://504comedy.com/event/1337/jake-cornell-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Fri Apr 10 2026",
+          "start_dt": "2026-04-10T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-04-10",
+          "time": "7:00pm",
+          "time_sort": 1900,
           "title": "Greetings from Queer Mountain",
           "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
           "venue": "ALLways Lounge",
@@ -753,7 +719,7 @@
           "date": "2026-04-10",
           "time": "8:00pm",
           "time_sort": 2000,
-          "title": "The Comedy Lounge at Vino",
+          "title": "The Comedy Lounge",
           "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
           "venue": "Vino: Fine Wine & Spirits",
           "type": "Stand-up",
@@ -856,6 +822,68 @@
           "cost": "FREE",
           "repeat": "Every Sunday",
           "start_dt": "2026-04-12T20:30-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Monday",
+      "date": "2026-04-13",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Monday",
+          "date": "2026-04-13",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Bear With Me Comedy Open Mic",
+          "url": "https://504comedy.com/event/35/bearwithme",
+          "venue": "Twelve Mile Limit",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Monday",
+          "start_dt": "2026-04-12T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Monday",
+          "date": "2026-04-13",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Funny Mondays",
+          "url": "https://504comedy.com/event/1154/funny-mondays",
+          "venue": "New York Pizza",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Monday",
+          "start_dt": "2026-04-13T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Monday",
+          "date": "2026-04-13",
+          "time": "8:30pm",
+          "time_sort": 2030,
+          "title": "Bing-OH: Sexy Bingo",
+          "url": "https://504comedy.com/event/1338/bingoh-sexy-bingo-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Improv",
+          "cost": "FREE",
+          "repeat": "Every Monday",
+          "start_dt": "2026-04-13T20:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Monday",
+          "date": "2026-04-13",
+          "time": "9:30pm",
+          "time_sort": 2130,
+          "title": "Gumbolaya All Acts Open Mic",
+          "url": "https://504comedy.com/event/944/gumbolaya-in-the-bayou-pride-edition",
+          "venue": "Poor Boys",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Monday",
+          "start_dt": "2026-04-13T21:30-05:00"
         }
       ]
     }
