@@ -739,6 +739,7 @@
       <button class="pb-tab" data-panel="scripts">🎬 Daily Scripts</button>
       <button class="pb-tab" data-panel="leads-link">🦞 Leads Dashboard</button>
       <button class="pb-tab" data-panel="social">📣 Social Media Marketing</button>
+      <button class="pb-tab" data-panel="roadmap">🗺️ Product Roadmap</button>
     </nav>
 
     <!-- Notes Panel -->
@@ -1425,9 +1426,289 @@ For each brand below, tell me: which platforms have active accounts, which are p
       </div><!-- /#social-content -->
     </div><!-- /#panel-social -->
 
+    <!-- PRODUCT ROADMAP PANEL -->
+    <div class="pb-panel" id="panel-roadmap">
+      <div style="padding: 24px 0 8px;">
+        <div class="pb-section-header" style="color:#ff2d87;text-shadow:0 0 10px rgba(255,45,135,0.6);margin-bottom:4px;">🗺️ Product Roadmap</div>
+        <p style="color:#94a3b8;font-size:0.9rem;margin:0 0 20px;">Click any node to collapse or expand. Scroll and drag to navigate.</p>
+
+        <!-- Roadmap selector tabs -->
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;" id="roadmap-selector">
+          <button onclick="loadRoadmap('finance')" class="roadmap-btn active" id="btn-finance"
+            style="padding:8px 16px;border-radius:8px;border:1px solid rgba(255,45,135,0.5);background:rgba(255,45,135,0.15);color:#ff2d87;font-family:'Space Grotesk',sans-serif;cursor:pointer;font-size:0.85rem;">
+            💳 TextOS Finance Agent
+          </button>
+          <button onclick="loadRoadmap('inkthorn')" class="roadmap-btn" id="btn-inkthorn"
+            style="padding:8px 16px;border-radius:8px;border:1px solid rgba(0,245,255,0.3);background:rgba(0,245,255,0.07);color:#00f5ff;font-family:'Space Grotesk',sans-serif;cursor:pointer;font-size:0.85rem;">
+            🦞 InkThorn Crustacean
+          </button>
+        </div>
+
+        <!-- Markmap container -->
+        <div style="background:rgba(15,8,40,0.8);border:1px solid rgba(255,45,135,0.2);border-radius:12px;overflow:hidden;">
+          <svg id="roadmap-svg" style="width:100%;height:680px;"></svg>
+        </div>
+
+        <p style="color:#475569;font-size:0.78rem;margin-top:10px;text-align:center;">
+          Rendered with <a href="https://markmap.js.org" target="_blank" style="color:#a855f7;">Markmap</a> · Last updated 2026-04-07
+        </p>
+      </div>
+    </div><!-- /#panel-roadmap -->
+
   </div>
 
+  <!-- Markmap CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@latest"></script>
   <script src="assets/app.js"></script>
+
+  <script>
+    // Roadmap data
+    const roadmaps = {
+      finance: `# TextOS Personal Finance Agent
+
+## Free Tier
+### Smart Transaction Log
+#### Paste or type transactions
+#### Auto-tagged income expense subscription
+#### Line-by-line ledger output
+### IRS Jar Calculator
+#### Enter any 1099 payment
+#### Instant set-aside calculation
+#### 28% default bracket adjustable
+### Subscription Audit
+#### Paste bank statement
+#### Clean subscription report
+#### Monthly bleed total revealed
+### Budget Template Generator
+#### Input income and expenses
+#### Personalized monthly output
+#### IRS set-aside line included
+### Credit Utilization Snapshot
+#### Enter balances and limits
+#### Per-card utilization percent
+#### Green Yellow Red health check
+### Free Limits
+#### Manual entry only
+#### Current month only
+#### No alerts or reminders
+#### Watermarked exports
+
+## Pro Tier $12-19 per month
+### Bank Account Sync
+#### Connect via Plaid
+#### Checking Savings Cards
+#### Auto-import and categorize
+### Cloud Drive Integration
+#### Google Drive or OneDrive
+#### Auto-create LastName Finances folder
+#### Subfolders by year
+#### Budget worksheets synced
+### Full 1099 Tax Dashboard
+#### Every payment tracked
+#### IRS set-aside auto-calculated
+#### Running IRS Jar balance
+#### Quarterly deadline reminders
+#### Year-end CPA summary
+### Subscription Intelligence
+#### Full registry with renewal dates
+#### Auto-detect from bank feed
+#### Flag auto-drafts on checking
+#### Monthly unused alert
+### Credit Monitor Layer
+#### Per-card and total utilization
+#### Alert at 30% threshold
+#### Payment due date reminders
+### Daily Tax Snapshot
+#### Income YTD
+#### Deductions YTD
+#### Net taxable income
+#### Balance owed updated daily
+### Bank Reconciliation
+#### Guided monthly flow
+#### Upload or paste statement
+#### Reconciled vs Unreconciled flags
+
+## Business Tier $39-59 per month
+### All Pro Features Included
+### Multiple Entities
+#### Personal
+#### LLC
+#### S-Corp
+### Profit and Loss Statements
+### Invoice Tracking
+#### Accounts receivable
+#### Paid and overdue status
+### Mileage Log
+#### IRS standard rate auto-applied
+### Home Office Deduction Calculator
+### Contractor Payment Tracking
+#### 1099-NEC prep for your workers
+### CPA-Ready Year-End Package
+#### One-click full export
+
+## Agent UX
+### Natural Language Commands
+#### Log a payment from client
+#### What do I owe the IRS
+#### Reconcile this month
+#### Show my subscriptions
+#### Build me a budget
+#### Tax snapshot
+### AI Hides All Complexity
+#### No spreadsheets needed
+#### No accounting knowledge required
+#### Just talk to it
+
+## Cloud Folder Structure
+### LastName Finances
+#### Bank Statements
+#### Business Expenses
+#### Income Records
+#### Tax Documents
+#### Subscriptions
+#### Credit Card Statements
+#### Receipts
+#### Insurance
+#### Investments and Retirement
+#### 1099 Tax Tracker
+
+## 1099 Tax Engine
+### Every payment logged
+### Set-Aside by Bracket
+#### Under 40K is 20 to 22%
+#### 40K to 85K is 25%
+#### 85K to 165K is 28%
+#### Over 165K is 32 to 35%
+### IRS Jar in Savings
+#### Running balance
+#### Do not spend this
+### Quarterly Deadlines
+#### Q1 April 15
+#### Q2 June 16
+#### Q3 September 15
+#### Q4 January 15
+
+## Subscription Strategy
+### Move all auto-drafts off checking
+### Dedicate one card for subs only
+### Charge fails instead of overdraft
+### Monthly Audit Checklist
+#### Did I use this
+#### Cheaper alternative
+#### Is it deductible
+
+## Go To Market
+### Hook 1 IRS Never Warns You We Do
+#### Targets 1099 and gig workers
+#### Free IRS Jar is door-opener
+### Hook 2 Subscription Bleed
+#### Show the monthly leak number
+#### High conversion to paid
+
+## Target Users
+### 1099 Freelancers
+### Gig Workers
+### Solo Business Owners
+### Anyone without a Bookkeeper
+### Millennials and Gen Z
+
+## Integrations
+### Plaid bank connectivity
+### Google Drive folder sync
+### OneDrive folder sync
+### IRS Direct Pay quarterly link
+### Stripe invoicing Business tier
+### QuickBooks optional export`,
+
+      inkthorn: `# InkThorn Crustacean
+
+## Core Product
+### GEO-Optimized Websites
+#### Built for AI search engines
+#### Structured data markup
+#### Schema.org implementation
+#### Conversational content layer
+### Web Design
+#### Mobile-first responsive
+#### Miami Synthwave brand option
+#### Local business focused
+#### 48-hour delivery
+
+## Lead Generation
+### 9464 Leads Scraped
+### 543 with Phone Numbers
+### SMS Campaign Ready
+#### SimpleTexting 504-238-4030
+#### sms-send-ready.csv
+### Calendly Booking
+#### calendly.com/inkthorn
+
+## Markets
+### New Orleans
+### Baton Rouge
+### Lafayette
+### Expansion Markets TBD
+
+## Revenue Model
+### One-Time Setup Fee
+### Monthly Maintenance
+### GEO Content Updates
+### Directory Listings Planned
+
+## Tech Stack
+### GitHub Pages Hosting
+### Staticrypt Password Protection
+### Miami Synthwave Design System
+### AI Content Generation
+
+## Operations
+### Email admin@inkthorn.ai
+### EIN 41-5073150
+### Stripe Payment Processing
+### Partner Dashboard Live`
+    };
+
+    let currentMap = null;
+
+    async function loadRoadmap(key) {
+      // Update button styles
+      document.querySelectorAll('.roadmap-btn').forEach(b => {
+        b.style.opacity = '0.5';
+      });
+      document.getElementById('btn-' + key).style.opacity = '1';
+
+      const svg = document.getElementById('roadmap-svg');
+      svg.innerHTML = '';
+
+      const { Transformer } = window.markmap;
+      const { root } = new Transformer().transform(roadmaps[key]);
+
+      const { Markmap, loadCSS, loadJS } = window.markmap;
+      if (currentMap) currentMap.destroy();
+      currentMap = Markmap.create(svg, {
+        color: ['#ff2d87', '#00f5ff', '#a855f7', '#4ade80', '#f0b840'],
+        duration: 400,
+        maxWidth: 280,
+        paddingX: 16,
+        autoFit: true,
+      }, root);
+    }
+
+    // Wait for markmap to load then render default
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (window.markmap) loadRoadmap('finance');
+      }, 800);
+    });
+
+    // Also trigger when roadmap tab is clicked
+    document.getElementById('pb-tabs').addEventListener('click', e => {
+      const btn = e.target.closest('.pb-tab');
+      if (btn && btn.dataset.panel === 'roadmap' && window.markmap) {
+        setTimeout(() => loadRoadmap('finance'), 100);
+      }
+    });
+  </script>
   <script>
     // Set today's date in header
     document.getElementById('pb-date').textContent = new Date().toLocaleDateString('en-US', {
