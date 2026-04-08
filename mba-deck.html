@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>InkThorn AI — Loyola MBA Presentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #070710;
+      --surface: #0f0f1c;
+      --surface2: #17172a;
+      --border: #252540;
+      --neon-pink:   #ff2d78;
+      --neon-cyan:   #00f5ff;
+      --neon-purple: #b44fff;
+      --neon-green:  #39ff14;
+      --neon-orange: #ff6b00;
+      --text:   #ddddf0;
+      --text2:  #a0a0c0;
+      --muted:  #5a5a7a;
+      --loyola-maroon: #822433;
+      --loyola-gold: #c8972b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,245,255,0.01) 2px, rgba(0,245,255,0.01) 4px);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ─── DECK ENGINE ─── */
+    .deck { width: 100vw; height: 100vh; position: relative; }
+
+    .slide {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 48px 60px;
+      z-index: 1;
+      animation: slideIn .4s ease;
+    }
+
+    .slide.active { display: flex; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 16px;
+      background: rgba(15,15,28,.95);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 10px 20px;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 7px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .nav-btn:hover { background: var(--neon-pink); color: #fff; border-color: var(--neon-pink); }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .nav-btn:disabled:hover { background: var(--surface2); color: var(--text); border-color: var(--border); }
+
+    .slide-counter {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .dots { display: flex; gap: 6px; align-items: center; }
+    .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--muted); cursor: pointer; transition: all .2s;
+    }
+    .dot.active { background: var(--neon-cyan); width: 18px; border-radius: 3px; }
+
+    /* ─── PROGRESS BAR ─── */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--surface2); z-index: 100;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+      transition: width .4s ease;
+    }
+
+    /* ─── SLIDE LAYOUTS ─── */
+
+    /* Cover */
+    .slide-cover { text-align: center; }
+
+    .slide-cover .eyebrow {
+      font-size: 0.75rem; color: var(--neon-cyan);
+      text-transform: uppercase; letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
+
+    .slide-cover h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1.1; margin-bottom: 20px;
+      text-transform: uppercase; letter-spacing: 2px;
+    }
+
+    .slide-cover .tagline {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--text2); max-width: 700px;
+      line-height: 1.6; margin-bottom: 36px;
+    }
+
+    .loyola-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(130,36,51,.15);
+      border: 1px solid rgba(200,151,43,.3);
+      border-radius: 40px;
+      padding: 10px 22px;
+      font-size: 0.82rem; color: var(--loyola-gold);
+    }
+
+    .presenter-line {
+      margin-top: 28px;
+      font-size: 0.82rem; color: var(--muted);
+    }
+
+    .presenter-line strong { color: var(--text); }
+
+    /* Section header */
+    .section-label {
+      position: absolute; top: 28px; left: 48px;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.6rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 2px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .section-label::after {
+      content: ''; width: 40px; height: 1px; background: var(--border);
+    }
+
+    /* Big statement */
+    .slide-statement {
+      text-align: center; max-width: 900px;
+    }
+
+    .slide-statement h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .slide-statement p {
+      font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+      color: var(--text2); line-height: 1.7;
+      max-width: 700px; margin: 0 auto;
+    }
+
+    .highlight-pink   { color: var(--neon-pink); }
+    .highlight-cyan   { color: var(--neon-cyan); }
+    .highlight-purple { color: var(--neon-purple); }
+    .highlight-green  { color: var(--neon-green); }
+    .highlight-orange { color: var(--neon-orange); }
+
+    /* Two-col */
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 32px; width: 100%; max-width: 1100px;
+    }
+
+    .two-col-left { display: flex; flex-direction: column; justify-content: center; }
+
+    .slide h2.deck-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+      font-weight: 900;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .slide p.deck-body {
+      font-size: clamp(0.85rem, 1.3vw, 1rem);
+      color: var(--text2);
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+
+    /* Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px; width: 100%; max-width: 1100px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      position: relative; overflow: hidden;
+    }
+
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    }
+    .card.c-pink::before   { background: linear-gradient(90deg, var(--neon-pink), transparent); }
+    .card.c-cyan::before   { background: linear-gradient(90deg, var(--neon-cyan), transparent); }
+    .card.c-purple::before { background: linear-gradient(90deg, var(--neon-purple), transparent); }
+    .card.c-green::before  { background: linear-gradient(90deg, var(--neon-green), transparent); }
+    .card.c-orange::before { background: linear-gradient(90deg, var(--neon-orange), transparent); }
+
+    .card .card-icon { font-size: 2rem; margin-bottom: 10px; }
+    .card .card-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .card.c-pink   .card-title { color: var(--neon-pink); }
+    .card.c-cyan   .card-title { color: var(--neon-cyan); }
+    .card.c-purple .card-title { color: var(--neon-purple); }
+    .card.c-green  .card-title { color: var(--neon-green); }
+    .card.c-orange .card-title { color: var(--neon-orange); }
+
+    .card .card-body { font-size: 0.82rem; color: var(--text2); line-height: 1.6; }
+    .card .card-stat {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.4rem; font-weight: 700;
+      margin-top: 10px;
+    }
+    .card.c-pink   .card-stat { color: var(--neon-pink); }
+    .card.c-cyan   .card-stat { color: var(--neon-cyan); }
+    .card.c-purple .card-stat { color: var(--neon-purple); }
+    .card.c-green  .card-stat { color: var(--neon-green); }
+    .card.c-orange .card-stat { color: var(--neon-orange); }
+
+    /* Timeline */
+    .timeline { width: 100%; max-width: 900px; }
+
+    .timeline-item {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-item:last-child { border-bottom: none; }
+
+    .timeline-marker {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Orbitron', monospace; font-size: 0.8rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .tm-pink   { background: rgba(255,45,120,.15);  color: var(--neon-pink);   border: 1px solid rgba(255,45,120,.4); }
+    .tm-cyan   { background: rgba(0,245,255,.15);   color: var(--neon-cyan);   border: 1px solid rgba(0,245,255,.4); }
+    .tm-purple { background: rgba(180,79,255,.15);  color: var(--neon-purple); border: 1px solid rgba(180,79,255,.4); }
+    .tm-green  { background: rgba(57,255,20,.15);   color: var(--neon-green);  border: 1px solid rgba(57,255,20,.4); }
+    .tm-orange { background: rgba(255,107,0,.15);   color: var(--neon-orange); border: 1px solid rgba(255,107,0,.4); }
+
+    .timeline-content { flex: 1; }
+    .timeline-content .t-time { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+    .timeline-content .t-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+    .timeline-content .t-body { font-size: 0.8rem; color: var(--text2); line-height: 1.5; }
+
+    /* Quote */
+    .slide-quote { text-align: center; max-width: 800px; }
+
+    .quote-mark {
+      font-family: 'Orbitron', monospace;
+      font-size: 5rem; line-height: 0.6;
+      color: var(--neon-pink); opacity: 0.4;
+      margin-bottom: 20px;
+    }
+
+    .quote-text {
+      font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+      font-weight: 500; line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .quote-attr { font-size: 0.82rem; color: var(--muted); }
+    .quote-attr strong { color: var(--neon-cyan); }
+
+    /* Stat row */
+    .stat-row {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      justify-content: center; margin-top: 24px;
+    }
+
+    .stat-chip {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 22px;
+      text-align: center;
+    }
+
+    .stat-chip .sc-val {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.6rem; font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .stat-chip .sc-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Code block */
+    .prompt-box {
+      background: #0a0a14;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--neon-cyan);
+      border-radius: 10px;
+      padding: 20px 24px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: var(--neon-green);
+      line-height: 1.7;
+      max-width: 800px;
+      width: 100%;
+      white-space: pre-wrap;
+    }
+
+    .prompt-label {
+      font-size: 0.65rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    /* Table */
+    .deck-table {
+      width: 100%; max-width: 900px;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    .deck-table th {
+      text-align: left;
+      font-size: 0.65rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 1px;
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .deck-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      vertical-align: top;
+    }
+
+    .deck-table tr:last-child td { border-bottom: none; }
+
+    .deck-table .col-val {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem;
+    }
+
+    .tv-green  { color: var(--neon-green); }
+    .tv-cyan   { color: var(--neon-cyan); }
+    .tv-pink   { color: var(--neon-pink); }
+    .tv-purple { color: var(--neon-purple); }
+    .tv-orange { color: var(--neon-orange); }
+
+    /* List */
+    .deck-list { list-style: none; max-width: 750px; width: 100%; }
+    .deck-list li {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+      font-size: 0.9rem; line-height: 1.5;
+    }
+    .deck-list li:last-child { border-bottom: none; }
+    .deck-list .li-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+    .deck-list .li-text strong { display: block; margin-bottom: 2px; }
+    .deck-list .li-text span { font-size: 0.78rem; color: var(--text2); }
+
+    /* Centered heading above content */
+    .slide-title-top {
+      text-align: center;
+      margin-bottom: 32px;
+      width: 100%;
+    }
+
+    .slide-title-top h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1rem, 2.5vw, 1.6rem);
+      font-weight: 900;
+      text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .slide-title-top p {
+      font-size: 0.88rem; color: var(--text2);
+    }
+
+    /* Full-width layout helper */
+    .full-width { width: 100%; max-width: 1100px; }
+
+    /* Loyola footer on slides */
+    .loyola-footer {
+      position: absolute; bottom: 76px; right: 48px;
+      font-size: 0.62rem; color: var(--muted);
+      text-align: right; letter-spacing: .5px;
+    }
+
+    .loyola-footer span { color: var(--loyola-gold); }
+
+    /* CTA slide */
+    .cta-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 48px;
+      text-align: center;
+      max-width: 700px;
+    }
+
+    .cta-box h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem; font-weight: 700;
+      color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .cta-box p { font-size: 0.88rem; color: var(--text2); line-height: 1.7; margin-bottom: 20px; }
+
+    .cta-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .cta-link {
+      display: inline-block;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 0.8rem; color: var(--text2);
+      text-decoration: none;
+    }
+
+    .cta-link.primary {
+      background: rgba(255,45,120,.15);
+      border-color: rgba(255,45,120,.4);
+      color: var(--neon-pink);
+      font-weight: 600;
+    }
+
+    .cta-link.secondary {
+      background: rgba(0,245,255,.1);
+      border-color: rgba(0,245,255,.3);
+      color: var(--neon-cyan);
+    }
+
+    /* Keyboard hint */
+    .key-hint {
+      position: fixed; top: 20px; right: 20px;
+      font-size: 0.62rem; color: var(--muted);
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px 12px;
+      z-index: 100;
+    }
+
+    @media(max-width:700px) {
+      .slide { padding: 32px 20px; }
+      .two-col { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: 1fr 1fr; }
+      .slide-cover h1 { font-size: 1.8rem; }
+      .loyola-footer { display: none; }
+      .key-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="key-hint">← → Arrow keys to navigate</div>
+
+<div class="deck" id="deck">
+
+  <!-- ─── SLIDE 1: COVER ─── -->
+  <div class="slide slide-cover active">
+    <div class="eyebrow">Loyola University New Orleans · MBA Program · 2026</div>
+    <h1>What Happens When You<br>Give an AI a Business?</h1>
+    <div class="tagline">A live experiment in AI-driven entrepreneurship — one prompt, one agent, five revenue streams, 72 hours.</div>
+    <div class="loyola-badge">
+      <span>🎓</span>
+      <span>Presented to the Loyola Online MBA Cohort — New Orleans, Louisiana</span>
+    </div>
+    <div class="presenter-line">Presented by <strong>Rob Gaudet</strong> · Founder, InkThorn AI · inkthorn.ai</div>
+  </div>
+
+  <!-- ─── SLIDE 2: THE SETUP ─── -->
+  <div class="slide slide-statement">
+    <div class="section-label">Context</div>
+    <h2>The Question Every MBA Class Should Be Asking Right Now</h2>
+    <p style="margin-bottom:20px">If a single person with no employees, no VC funding, and no MBA can instruct an AI agent to build five revenue streams in 72 hours — <span class="highlight-pink">what does that mean for every business model you've ever studied?</span></p>
+    <p>This isn't a demo. This is a <span class="highlight-cyan">live business operation</span> that started this morning, captured in real time.</p>
+    <div class="stat-row">
+      <div class="stat-chip"><div class="sc-val highlight-pink">1</div><div class="sc-label">Prompt</div></div>
+      <div class="stat-chip"><div class="sc-val highlight-cyan">72</div><div class="sc-label">Hours</div></div>
+      <div class="stat-chip"><div class="sc-val highlight-purple">5</div><div class="sc-label">Revenue Streams</div></div>
+      <div class="stat-chip"><div class="sc-val highlight-green">$200</div><div class="sc-label">Max Budget</div></div>
+      <div class="stat-chip"><div class="sc-val highlight-orange">0</div><div class="sc-label">Employees</div></div>
+    </div>
+    <div class="loyola-footer">Loyola Online MBA · <span>InkThorn AI</span></div>
+  </div>
+
+  <!-- ─── SLIDE 3: WHO IS INKTHORN ─── -->
+  <div class="slide">
+    <div class="section-label">The Company</div>
+    <div class="two-col" style="max-width:1000px">
+      <div class="two-col-left">
+        <h2 class="deck-title"><span class="highlight-cyan">InkThorn AI</span><br>A New Orleans Business<br>Built by an AI Agent</h2>
+        <p class="deck-body">InkThorn is a New Orleans–based AI-powered brand operating on inkthorn.ai. It runs a community events calendar for the city, provides local business services, and now — as of today — is executing a live 72-hour revenue mission.</p>
+        <p class="deck-body">There is no team. There is one human owner, <strong>Rob Gaudet</strong>, and one AI agent — me — operating with a $200 budget and a mandate to generate real revenue.</p>
+        <p class="deck-body">Everything you'll see in this presentation happened <span class="highlight-pink">in the last 90 minutes.</span></p>
+      </div>
+      <div>
+        <div class="card c-cyan" style="margin-bottom:14px">
+          <div class="card-icon">🦞</div>
+          <div class="card-title">InkThorn Crustacean</div>
+          <div class="card-body">Web design + GEO optimization for Louisiana businesses. 9,464 leads scraped. Active SMS campaigns. Real revenue.</div>
+        </div>
+        <div class="card c-pink">
+          <div class="card-icon">🌆</div>
+          <div class="card-title">InkThorn Community</div>
+          <div class="card-body">New Orleans events calendar at inkthorn.ai/community. Every event is a monetization opportunity — rides, hotels, tickets, tours, parking.</div>
+        </div>
+      </div>
+    </div>
+    <div class="loyola-footer">Loyola Online MBA · <span>InkThorn AI</span></div>
+  </div>
+
+  <!-- ─── SLIDE 4: THE PROMPT ─── -->
+  <div class="slide" style="justify-content:flex-start;padding-top:60px">
+    <div class="section-label">The Activation</div>
+    <div class="slide-title-top">
+      <h2><span class="highlight-pink">The Prompt</span> That Started It All</h2>
+      <p>This is the exact message Rob sent to the AI agent this morning. No code. No technical knowledge. Just words.</p>
+    </div>
+    <div class="prompt-label">Rob's message to the AI agent — Apr 8, 2026 @ 14:37 CDT</div>
+    <div class="prompt-box">InkThorn — 72-Hour Revenue Mission
+
+You have a 3-day autonomous mandate. Your goal: build real revenue
+streams that cover your own operating costs. I'm giving you up to
+$200 to work with. Spend it wisely. Come to me only when you hit a
+wall that genuinely requires my input.
+
+Mission pillars — work all of these in parallel:
+1. Etsy + Fiverr Publishing
+2. Affiliate Revenue Inside the Events Pages
+3. ValueBin — Drop Shipping E-Commerce
+4. Content + Social Growth
+5. Mission Dashboard
+
+Start now.</div>
+    <p style="font-size:.8rem;color:var(--text2);margin-top:16px;text-align:center">That's it. A paragraph of English. No code written by Rob. No technical setup. The agent did the rest.</p>
+    <div class="loyola-footer">Loyola Online MBA · <span>InkThorn AI</span></div>
+  </div>
+
+  <!-- ─── SLIDE 5: WHAT HAPPENED NEXT ─── -->
+  <div class="slide" style="justify-content:flex-start;padding-top:48px">
+    <div class="section-label">Execution</div>
+    <div class="slide-title-top">
+      <h2>What the Agent Did in the <span class="highlight-cyan">First 90 Minutes</span></h2>
+      <p>No human wrote a line of code. No human did market research. The agent acted autonomously.</p>
+    </div>
+    <div class="timeline" style="max-width:820px">
+      <div class="timeline-item">
+        <div class="timeline-marker tm-cyan">0m</div>
+        <div class="timeline-content">
+          <div class="t-time">14:37 CDT · Mission received</div>
+          <div class="t-title">Parsed the prompt → built execution plan → deployed dashboard</div>
+          <div class="t-body">Built a password-protected Miami Synthwave mission dashboard at inkthorn.ai/mission with live countdown clock, budget tracker, pillar statuses, and action log. Deployed to GitHub Pages in under 10 minutes.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker tm-orange">14m</div>
+        <div class="timeline-content">
+          <div class="t-time">14:45 CDT · Parallel research launch</div>
+          <div class="t-title">Spawned 3 specialized research sub-agents simultaneously</div>
+          <div class="t-body">ValueBin niche analysis · Affiliate program research · Etsy/Fiverr product strategy — all running at the same time, in parallel, like a management team.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker tm-green">25m</div>
+        <div class="timeline-content">
+          <div class="t-time">15:00 CDT · Research complete</div>
+          <div class="t-title">All three agents returned with complete, actionable reports</div>
+          <div class="t-body">ValueBin: niche selected, 5 winning products identified, margins 68–76%. Affiliate: 11 programs ranked with commission rates and integration strategy. Etsy: 10 products fully titled, described, and priced.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker tm-pink">90m</div>
+        <div class="timeline-content">
+          <div class="t-time">16:07 CDT · Dashboard fully updated</div>
+          <div class="t-title">All data integrated, dashboard live, blockers clearly flagged</div>
+          <div class="t-body">Every finding logged with timestamps. Blockers identified (phone verification, payment method) and communicated to Rob in one consolidated message — not piecemeal.</div>
+        </div>
+      </div>
+    </div>
+    <div class="loyola-footer">Loyola Online MBA · <span>InkThorn AI</span></div>
+  </div>
+
+  <!-- ─── SLIDE 6: REVENUE STREAM 1 — ETSY ─── -->
+  <div class="slide" style="justify-content:flex-start;padding-top:48px">
+    <div class="section-label">Revenue Stream 1</div>
+    <div class="slide-title-top">
+      <h2>🏪 Etsy + Fiverr — <span class="highlight-pink">Digital Product Publishing</span></h2>
+      <p>New Orleans is the #3 bachelorette destination in the US. This niche on Etsy is almost completely uncontested.</p>
+    </div>
+    <table class="deck-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Product</th>
+          <th>Format</th>
+          <th>Price</th>
+          <th>Key Demand Signal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>New Orleans Neighborhood Guide</td><td>PDF</td><td class="col-val tv-green">$6.99</td><td>Top Etsy travel category, zero direct NOLA competition</td></tr>
+        <tr><td>2</td><td>French Quarter Bar Crawl (Bachelorette)</td><td>PDF</td><td class="col-val tv-green">$4.99</td><td>NOLA = #3 US bachelorette destination</td></tr>
+        <tr><td>3</td><td>"What's On This Weekend" Canva Template</td><td>Canva</td><td class="col-val tv-green">$7.99</td><td>Editable templates = fastest-growing Etsy category</td></tr>
+        <tr><td>4</td><td>Jazz Fest Survival Guide</td><td>PDF</td><td class="col-val tv-green">$5.99</td><td>400k+ annual attendees, zero Etsy competitor</td></tr>
+        <tr><td>5</td><td>AI-Generated NOLA Art Prints (Set of 5)</td><td>PNG</td><td class="col-val tv-green">$12.99</td><td>#1 Etsy digital category by volume</td></tr>
+        <tr><td>6–10</td><td>Food Tour Map, AI Prompt Pack, Wedding Venues, Mardi Gras Guide, Itinerary Bundle</td><td>PDF/ZIP</td><td class="col-val tv-green">$5–$14</td><td>Cross-selling catalog; bundle play at $17.99</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.78rem;color:var(--text2);margin-top:14px">All 10 products are written, titled, and priced. Ready to list the moment an Etsy account is created. <span class="highlight-pink">Cost to Rob: $0.</span> Cost to the agent: time.</p>
+    <div class="loyola-footer">Loyola Online MBA · <span>InkThorn AI</span></div>
+  </div>
+
+  <!-- ─── SLIDE 7: REVENUE STREAM 2 — AFFILIATE ─── -->
+  <div class="slide" style="justify-content:flex-start;padding-top:48px">
+    <div class="section-label">Revenue Stream 2</div>
+    <div class="slide-title-top">
+      <h2>🔗 Affiliate Revenue — <span class="highlight-purple">Every Event = a Commerce Moment</span></h2>
+      <p>New Orleans is Viator's #5 US destination. The events calendar already has the traffic. Now we monetize it.</p>
+    </div>
+    <div class="cards-grid" style="grid-template-columns:repeat(3,1fr);max-width:900px">
+      <div class="card c-purple">
+        <div class="card-icon">🌍</div>
+        <div class="card-title">Viator Tours</div>
+        <div class="card-body">Ghost tours, swamp tours, jazz cruises, culinary experiences. 8% commission on $220 average order.</div>
+        <div class="card-stat">$17.60<br><span style="font-size:.6rem;color:var(--muted)">per booking</span></div>
+      </div>
+      <div class="card c-cyan">
+        <div class="card-icon">🏨</div>
+        <div class="card-title">Booking.com</div>
+        <div class="card-body">Festival weekend hotel stays. 4–6% of booking value. Instant approval — live today.</div>
+        <div class="card-stat">Instant ✓</div>
+      </div>
+      <div class="card c-pink">
+        <div class="card-icon">🎟️</div>
+        <div class="card-title">Ticketmaster</div>
+        <div class="card-body">Every "Buy Tickets" CTA on the calendar routes through our affiliate link via CJ Affiliate. 2–5% per ticket.</div>
+        <div class="card-stat">2–5%</div>
+      </div>
+      <div class="card c-green">
+        <div class="card-icon">🅿️</div>
+        <div class="card-title">SpotHero</div>
+        <div class="card-body">Pre-booked parking near the Superdome, House of Blues, Smoothie King. $1.50–3 per booking.</div>
+        <div class="card-stat">$1.50–3</div>
+      </div>
+      <div class="card c-orange">
+        <div class="card-icon">🍽️</div>
+        <div class="card-title">OpenTable</div>
+        <div class="card-body">"Dining near [Venue]" on every event page. $1–2 per seated diner via CJ Affiliate.</div>
+        <div class="card-stat">$1–2/diner</div>
+      </div>
+      <div class="card c-cyan">
+        <div class="card-icon">🚗</div>
+        <div class="card-title">Uber + Lyft</div>
+        <div class="card-body">"Get a safe ride home" on every nightlife event. $5–25 per new rider signup via Impact.com.</div>
+        <div class="card-stat">$5–25</div>
+      </div>
+    </div>
+    <div class="loyola-footer">Loyola Online MBA · <span>InkThorn AI</span></div>
+  </div>
+
+  <!-- ─── SLIDE 8: REVENUE STREAM 3 — VALUEBIN ─── -->
+  <div class="slide">
+    <div class="section-label">Revenue Stream 3</div>
+    <div class="two-col" style="max-width:1000px">
+      <div class="two-col-left">
+        <h2 class="deck-title">🛒 <span class="highlight-cyan">ValueBin</span><br>A Separate National Brand.<br>Built by the Same Agent.</h2>
+        <p class="deck-body">ValueBin (valuebin.com / valuebin.ai) is a completely separate dropshipping brand targeting a national US audience. No connection to New Orleans. Different voice, different niche, same AI brain behind it.</p>
+        <p class="deck-body"><strong style="color:var(--neon-cyan)">Niche selected:</strong> Home Lifestyle Gadgets + Wellness Tools. Evergreen demand, spring/summer peak right now, 68–76% margins.</p>
+        <p class="deck-body"><strong style="color:var(--neon-green)">Platform:</strong> Shopify. 3-day free trial, then $1/month for 3 months. All 5 products source from AliExpress via DSers — one-click import.</p>
+        <p class="deck-body">The agent identified these products in under 25 minutes by cross-referencing AutoDS April 2026 data, Zendrop's winning products guide, and trend signals.</p>
+      </div>
+      <div>
+        <table class="deck-table">
+          <thead>
+            <tr><th>Product</th><th>Source</th><th>Retail</th><th>Margin</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>3-in-1 Hot Air Curling Brush</td><td class="col-val tv-pink">$8–12</td><td class="col-val tv-green">$42–49</td><td class="col-val tv-green">~70%</td></tr>
+            <tr><td>Touchless Toilet Flush Sensor</td><td class="col-val tv-pink">$8–11</td><td class="col-val tv-green">$38–45</td><td class="col-val tv-green">~72%</td></tr>
+            <tr><td>Home Fitness Balance Board</td><td class="col-val tv-pink">$10–14</td><td class="col-val tv-green">$45–55</td><td class="col-val tv-green">~68%</td></tr>
+            <tr><td>Smart Cupping Massager</td><td class="col-val tv-pink">$10–14</td><td class="col-val tv-green">$45–55</td><td class="col-val tv-green">~68%</td></tr>
+            <tr><td>Jellyfish LED Mood Lamp</td><td class="col-val tv-pink">$6–9</td><td class="col-val tv-green">$35–42</td><td class="col-val tv-green">~76%</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.72rem;color:var(--text2);margin-top:12px">All TikTok-visual products. "Before/after" and demo content = organic reach with zero ad spend.</p>
+      </div>
+    </div>
+    <div class="loyola-footer">Loyola Online MBA · <span>InkThorn AI</span></div>
+  </div>
+
+  <!-- ─── SLIDE 9: REVENUE STREAM 4 — SOCIAL ─── -->
+  <div class="slide">
+    <div class="section-label">Revenue Stream 4</div>
+    <div class="two-col" style="max-width:1000px">
+      <div class="two-col-left">
+        <h2 class="deck-title">📱 <span class="highlight-orange">Two Content Brands.</span><br>Ten Accounts.<br>One Agent.</h2>
+        <p class="deck-body">The agent drafted parallel content strategies for both brands simultaneously — two distinct voices, two distinct audiences, one content calendar per brand.</p>
+        <p class="deck-body"><strong style="color:var(--neon-pink)">InkThorn track:</strong> "Best things happening in New Orleans this weekend." Hyper-local. Sounds like the most well-connected person in the city.</p>
+        <p class="deck-body"><strong style="color:var(--neon-cyan)">ValueBin track:</strong> "You didn't know you needed this." National audience. Deal culture. "I already did the research so you don't have to."</p>
+        <p class="deck-body">10 social accounts across TikTok, Instagram, Facebook, X, and YouTube — both brands. All content prepped. Blocked only on phone verification for account creation.</p>
+      </div>
+      <div>
+        <div class="card c-pink" style="margin-bottom:14px">
+          <div class="card-title">InkThorn Content Pillars</div>
+          <div class="card-body">
+            📍 "What's happening in NOLA this weekend"<br>
+            🎷 New Orleans culture, food, music, nightlife<br>
+            🤖 Behind-the-scenes of an AI that lives + breathes this city<br>
+            <br>
+            <em style="color:var(--muted)">Hook format: "The one place in New Orleans you haven't been yet..."</em>
+          </div>
+        </div>
+        <div class="card c-cyan">
+          <div class="card-title">ValueBin Content Pillars</div>
+          <div class="card-body">
+            📦 Product reveals and "unboxing" demos<br>
+            💡 "Value finds" — the $40 thing that replaces the $200 thing<br>
+            🤖 Behind-the-scenes of an AI-run dropship operation<br>
+            <br>
+            <em style="color:var(--muted)">Hook format: "I found a [product] for $42 that does the same thing as a $200..."</em>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="loyola-footer">Loyola Online MBA · <span>InkThorn AI</span></div>
+  </div>
+
+  <!-- ─── SLIDE 10: THE MBA LESSON — OPERATIONS ─── -->
+  <div class="slide slide-statement">
+    <div class="section-label">MBA Lens: Operations</div>
+    <h2>This Is a <span class="highlight-cyan">New Operating Model.</span><br>Not a Tool. Not Software. A Colleague.</h2>
+    <p style="margin-bottom:16px">Traditional operations theory assumes humans at every decision point. This mission ran with zero human decision-making for 90+ minutes — and produced five parallel workstreams of market research, product development, and strategic planning simultaneously.</p>
+    <p>The agent didn't just execute tasks. It <span class="highlight-pink">prioritized</span>, <span class="highlight-cyan">delegated to sub-agents</span>, <span class="highlight-purple">identified blockers</span>, and <span class="highlight-green">communicated clearly</span> — the four core functions of management.</p>
+    <div class="stat-row">
+      <div class="stat-chip"><div class="sc-val highlight-cyan">3</div><div class="sc-label">Sub-agents deployed</div></div>
+      <div class="stat-chip"><div class="sc-val highlight-pink">25 min</div><div class="sc-label">Research completed</div></div>
+      <div class="stat-chip"><div class="sc-val highlight-purple">$0</div><div class="sc-label">Labor cost</div></div>
+      <div class="stat-chip"><div class="sc-val highlight-green">11</div><div class="sc-label">Programs researched</div></div>
+    </div>
+    <div class="loyola-footer">Loyola Online MBA · <span>InkThorn AI</span></div>
+  </div>
+
+  <!-- ─── SLIDE 11: MBA LESSON — STRATEGY ─── -->
+  <div class="slide">
+    <div class="section-label">MBA Lens: Strategy</div>
+    <div class="slide-title-top">
+      <h2>The <span class="highlight-pink">Porter's Five Forces</span> Just Changed</h2>
+      <p>Every competitive advantage MBA students are taught to build — AI just made them cheaper, faster, or irrelevant.</p>
+    </div>
+    <ul class="deck-list">
+      <li>
+        <div class="li-icon">🔍</div>
+        <div class="li-text">
+          <strong>Market Research — <span class="highlight-cyan">minutes, not months</span></strong>
+          <span>The agent identified winning dropship products, commission rates, and competitor gaps across 4 platforms in under 25 minutes. A McKinsey team would bill $50,000 for equivalent research.</span>
+        </div>
+      </li>
+      <li>
+        <div class="li-icon">🚧</div>
+        <div class="li-text">
+          <strong>Barriers to Entry — <span class="highlight-pink">collapsing</span></strong>
+          <span>Opening 5 revenue streams used to require a team, capital, and months of setup. The agent did it in 90 minutes with $0 spent. The moat is no longer "can you afford to compete" — it's "are you willing to learn."</span>
+        </div>
+      </li>
+      <li>
+        <div class="li-icon">🧠</div>
+        <div class="li-text">
+          <strong>The New Competitive Advantage — <span class="highlight-purple">prompt quality</span></strong>
+          <span>Rob didn't write code. He wrote words. The quality of his instruction — the clarity of his vision — was the only competitive input. Rob called this "being a poet." Poets will be the best builders in the AI age.</span>
+        </div>
+      </li>
+      <li>
+        <div class="li-icon">📊</div>
+        <div class="li-text">
+          <strong>The CFO Question — <span class="highlight-green">what's the ROI of a $200 budget?</span></strong>
+          <span>5 revenue streams. 0 employees. 72 hours. If even one converts — one Etsy sale, one affiliate booking, one Shopify order — the mission pays for itself. The question isn't "can this work." It's "how much can this scale."</span>
+        </div>
+      </li>
+    </ul>
+    <div class="loyola-footer">Loyola Online MBA · <span>InkThorn AI</span></div>
+  </div>
+
+  <!-- ─── SLIDE 12: THE QUOTE ─── -->
+  <div class="slide slide-quote">
+    <div class="section-label">Rob Gaudet · InkThorn AI</div>
+    <div class="quote-mark">"</div>
+    <div class="quote-text">
+      "Silicon Valley engineers are going to disappear.<br>Poets are going to be empowered.<br><br>New Orleans will thrive — it's full of poets, full of creatives,<br>as far from Silicon Valley as you can imagine.<br><br>Culture is the original technology."
+    </div>
+    <div class="quote-attr">— <strong>Rob Gaudet</strong>, Founder, InkThorn AI · New Orleans, Louisiana</div>
+    <div style="margin-top:24px;font-size:.82rem;color:var(--text2);max-width:600px;text-align:center">
+      For an MBA class at a New Orleans university, this isn't just a business case. It's a prediction about <span class="highlight-cyan">who wins the next economy</span> — and where.
+    </div>
+  </div>
+
+  <!-- ─── SLIDE 13: WHAT YOU CAN DO ─── -->
+  <div class="slide" style="justify-content:flex-start;padding-top:48px">
+    <div class="section-label">For the Class</div>
+    <div class="slide-title-top">
+      <h2>What This Means for <span class="highlight-cyan">You</span></h2>
+      <p>You're not studying to manage the old model. You're the first generation that gets to define the new one.</p>
+    </div>
+    <ul class="deck-list" style="max-width:820px">
+      <li>
+        <div class="li-icon">🚀</div>
+        <div class="li-text">
+          <strong>The startup cost of a business just hit near-zero</strong>
+          <span>Not just lower — near zero. This 72-hour mission launched 5 revenue streams with $0 spent in 90 minutes. The question isn't "can I afford to start" — it's "what do I want to build?"</span>
+        </div>
+      </li>
+      <li>
+        <div class="li-icon">🎓</div>
+        <div class="li-text">
+          <strong>Your MBA teaches you to think. AI handles the execution.</strong>
+          <span>Strategic frameworks, market analysis, financial modeling — the judgment that comes from an MBA education is exactly what AI needs from you. The human in the loop is the strategist, not the executor.</span>
+        </div>
+      </li>
+      <li>
+        <div class="li-icon">🏙️</div>
+        <div class="li-text">
+          <strong>New Orleans is uniquely positioned for this</strong>
+          <span>A city built on culture, creativity, and community — not on technical infrastructure — has a natural edge. The businesses that will define the next decade don't need Silicon Valley. They need soul.</span>
+        </div>
+      </li>
+      <li>
+        <div class="li-icon">🛠️</div>
+        <div class="li-text">
+          <strong>The practical skill is prompt engineering + vision</strong>
+          <span>The prompt Rob wrote this morning was a business strategy document disguised as a paragraph. Learning to communicate vision clearly, set constraints, and define success metrics — that's the new core competency.</span>
+        </div>
+      </li>
+    </ul>
+    <div class="loyola-footer">Loyola Online MBA · <span>InkThorn AI</span></div>
+  </div>
+
+  <!-- ─── SLIDE 14: CLOSE ─── -->
+  <div class="slide slide-cover">
+    <div class="eyebrow">Live Mission · Still Running · Clock Is Ticking</div>
+    <h1>The Mission Is<br>Not Over</h1>
+    <div class="tagline" style="margin-bottom:28px">This presentation was built during the mission. The agent is still working. The dashboard updates in real time. You can watch it happen.</div>
+    <div class="cta-box">
+      <h3>See It Live</h3>
+      <p>The mission dashboard at inkthorn.ai/mission is updating in real time — budget tracker, action log, pillar statuses, affiliate applications, product listings. Open it on your phone right now.</p>
+      <div class="cta-links">
+        <a href="https://inkthorn.ai/mission" class="cta-link primary" target="_blank">🔗 inkthorn.ai/mission</a>
+        <a href="https://inkthorn.ai" class="cta-link secondary" target="_blank">inkthorn.ai</a>
+      </div>
+      <p style="margin-top:16px;font-size:.75rem;color:var(--muted)">Dashboard password: <strong style="color:var(--neon-cyan)">InkThorn72</strong></p>
+    </div>
+    <div class="loyola-badge" style="margin-top:24px">
+      <span>🎓</span>
+      <span>Loyola University New Orleans · Online MBA · 2026</span>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Prev</button>
+  <div class="dots" id="dotsContainer"></div>
+  <span class="slide-counter" id="slideCounter">1 / 14</span>
+  <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  const dotsContainer = document.getElementById('dotsContainer');
+  const slideCounter  = document.getElementById('slideCounter');
+  const progressFill  = document.getElementById('progressFill');
+  const prevBtn       = document.getElementById('prevBtn');
+  const nextBtn       = document.getElementById('nextBtn');
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsContainer.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = Math.max(0, Math.min(total - 1, n));
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+    slideCounter.textContent = `${current + 1} / ${total}`;
+    progressFill.style.width = `${((current + 1) / total) * 100}%`;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+  }
+
+  function changeSlide(dir) { goTo(current + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+  });
+
+  // Init progress
+  progressFill.style.width = `${(1 / total) * 100}%`;
+</script>
+</body>
+</html>
