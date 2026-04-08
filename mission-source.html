@@ -206,36 +206,113 @@
     .pm .pm-val.u { color: var(--neon-purple); }
     .pm .pm-val.o { color: var(--neon-orange); }
 
-    /* ─── BLOCKERS BAR ─── */
-    .blockers-section {
-      background: rgba(255,45,120,.07);
-      border: 1px solid rgba(255,45,120,.3);
+    /* ─── ROB'S ACTION ITEMS ─── */
+    .rob-tasks-section {
+      background: rgba(0,245,255,.04);
+      border: 1px solid rgba(0,245,255,.25);
       border-radius: 10px;
-      padding: 14px 16px;
+      padding: 16px 20px;
       margin-bottom: 16px;
     }
 
-    .blockers-title {
+    .rob-tasks-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px; gap: 10px;
+    }
+
+    .rob-tasks-title {
       font-family: 'Orbitron', monospace;
       font-size: 0.72rem; font-weight: 700;
-      color: var(--neon-pink);
+      color: var(--neon-cyan);
       text-transform: uppercase; letter-spacing: 2px;
-      margin-bottom: 10px;
       display: flex; align-items: center; gap: 8px;
     }
 
-    .blocker-item {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255,45,120,.1);
-      font-size: 0.82rem;
+    .tasks-progress-pill {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      color: var(--neon-orange);
+      background: rgba(255,107,0,.12);
+      border: 1px solid rgba(255,107,0,.3);
+      border-radius: 20px;
+      padding: 3px 12px;
+      white-space: nowrap;
     }
 
-    .blocker-item:last-child { border-bottom: none; }
+    .tasks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
 
-    .blocker-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-    .blocker-text { flex: 1; line-height: 1.5; }
-    .blocker-text .blocker-detail { font-size: 0.7rem; color: var(--text2); margin-top: 2px; }
+    @media(max-width:700px) { .tasks-grid { grid-template-columns: 1fr; } }
+
+    .task-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 12px 14px;
+      position: relative;
+      cursor: default;
+    }
+
+    .task-item.task-done {
+      opacity: 0.5;
+      border-color: rgba(57,255,20,.2);
+      background: rgba(57,255,20,.04);
+    }
+
+    .task-checkbox {
+      width: 20px; height: 20px;
+      border-radius: 5px;
+      border: 2px solid var(--border);
+      flex-shrink: 0; margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    .task-done .task-checkbox {
+      background: rgba(57,255,20,.2);
+      border-color: var(--neon-green);
+      color: var(--neon-green);
+    }
+
+    .task-body { flex: 1; }
+
+    .task-title {
+      font-size: 0.84rem; font-weight: 600;
+      color: var(--text); margin-bottom: 3px; line-height: 1.3;
+    }
+
+    .task-done .task-title { text-decoration: line-through; color: var(--muted); }
+
+    .task-detail {
+      font-size: 0.7rem; color: var(--text2); line-height: 1.4;
+    }
+
+    .task-tag {
+      font-size: 0.58rem; font-weight: 700;
+      padding: 2px 7px; border-radius: 8px;
+      text-transform: uppercase; letter-spacing: .5px;
+      white-space: nowrap; margin-top: 5px; display: inline-block;
+    }
+
+    .ttag-now    { background: rgba(255,45,120,.15);  color: var(--neon-pink);   border: 1px solid rgba(255,45,120,.25); }
+    .ttag-quick  { background: rgba(255,107,0,.15);   color: var(--neon-orange); border: 1px solid rgba(255,107,0,.25); }
+    .ttag-ready  { background: rgba(57,255,20,.15);   color: var(--neon-green);  border: 1px solid rgba(57,255,20,.25); }
+    .ttag-when   { background: rgba(107,107,138,.2);  color: var(--muted);       border: 1px solid var(--border); }
+
+    /* ─── LEGACY BLOCKERS (keep styles for compatibility) ─── */
+    .blockers-section {
+      display: none; /* replaced by rob-tasks-section */
+    }
+
+    .blocker-item { display: none; }
+    .blocker-icon { display: none; }
+    .blocker-text { display: none; }
+    .blocker-text .blocker-detail { display: none; }
+    .blockers-title { display: none; }
 
     /* ─── RIGHT COLUMN ─── */
     .right-col { display: flex; flex-direction: column; gap: 12px; }
@@ -392,7 +469,7 @@
       <div class="clock-block">
         <div class="clock-label">Time Remaining</div>
         <div class="clock-value" id="missionClock">--:--:--</div>
-        <div class="last-push">Last update: <span id="lastPush">Apr 8 · 15:00 CDT — all research complete, applying to programs</span></div>
+        <div class="last-push">Last update: <span id="lastPush">Apr 8 · 17:00 CDT — Rob's action items added to dashboard</span></div>
       </div>
     </div>
   </div>
@@ -424,36 +501,68 @@
     </div>
   </div>
 
-  <!-- BLOCKERS (always visible) -->
-  <div class="blockers-section">
-    <div class="blockers-title">🚨 Blockers — Waiting on Rob</div>
-    <div class="blocker-item">
-      <div class="blocker-icon">🏪</div>
-      <div class="blocker-text">
-        <strong>Etsy Account</strong> — Needs Rob's email, billing info, and identity verification to open seller account
-        <div class="blocker-detail">I have 10 products ready to list. You create the account → I load all products within the hour.</div>
-      </div>
+  <!-- ROB'S ACTION ITEMS -->
+  <div class="rob-tasks-section">
+    <div class="rob-tasks-header">
+      <div class="rob-tasks-title">✅ Rob's Action Items — Do These to Unlock Revenue</div>
+      <div class="tasks-progress-pill" id="tasksPill">0 / 6 complete</div>
     </div>
-    <div class="blocker-item">
-      <div class="blocker-icon">🎯</div>
-      <div class="blocker-text">
-        <strong>Fiverr Account</strong> — Needs Rob's email and identity verification
-        <div class="blocker-detail">Gig descriptions and pricing tiers ready to paste in. Waiting on account creation.</div>
+    <div class="tasks-grid">
+
+      <div class="task-item" id="task-shopify">
+        <div class="task-checkbox" id="cb-shopify">☐</div>
+        <div class="task-body">
+          <div class="task-title">Start Shopify Free Trial</div>
+          <div class="task-detail">Go to <strong>shopify.com/free-trial</strong> — takes 2 min. 3 days free, then $1/mo for 3 months. Paste me the store URL and I build it out same day with all 5 ValueBin products.</div>
+          <div class="task-tag ttag-now">🔥 Do First</div>
+        </div>
       </div>
-    </div>
-    <div class="blocker-item">
-      <div class="blocker-icon">📱</div>
-      <div class="blocker-text">
-        <strong>Social Media Accounts × 2 Brands</strong> — TikTok, Instagram, Facebook, X, YouTube require phone verification
-        <div class="blocker-detail">10 accounts total (InkThorn + ValueBin). Content calendars ready. You verify phone → I post content same day.</div>
+
+      <div class="task-item" id="task-etsy">
+        <div class="task-checkbox" id="cb-etsy">☐</div>
+        <div class="task-body">
+          <div class="task-title">Create Etsy Seller Account</div>
+          <div class="task-detail">Go to <strong>etsy.com/sell</strong> — use your email + billing info. I have 10 NOLA digital products fully written and priced. You open the account → I list everything within the hour.</div>
+          <div class="task-tag ttag-now">🔥 Do First</div>
+        </div>
       </div>
-    </div>
-    <div class="blocker-item">
-      <div class="blocker-icon">🛒</div>
-      <div class="blocker-text">
-        <strong>ValueBin Shopify Store</strong> — Needs payment method on file to start free trial
-        <div class="blocker-detail">Platform selected: Shopify (3-day free → $1/mo for 3 months). 5 products + descriptions ready to import via DSers/AliExpress. Niche: Home Lifestyle Gadgets &amp; Wellness. You create trial → I build the store.</div>
+
+      <div class="task-item" id="task-fiverr">
+        <div class="task-checkbox" id="cb-fiverr">☐</div>
+        <div class="task-body">
+          <div class="task-title">Create Fiverr Account</div>
+          <div class="task-detail">Go to <strong>fiverr.com/join</strong> — seller account, your email. 5 gig descriptions ready to paste in immediately after setup.</div>
+          <div class="task-tag ttag-quick">⚡ Quick Win</div>
+        </div>
       </div>
+
+      <div class="task-item" id="task-amazon">
+        <div class="task-checkbox" id="cb-amazon">☐</div>
+        <div class="task-body">
+          <div class="task-title">Approve Amazon Associates Application</div>
+          <div class="task-detail">Go to <strong>affiliate-program.amazon.com</strong> — apply using inkthorn.ai as your site. Near-instant approval. I'll embed gear links on every festival/outdoor event page immediately after.</div>
+          <div class="task-tag ttag-quick">⚡ Quick Win</div>
+        </div>
+      </div>
+
+      <div class="task-item" id="task-booking">
+        <div class="task-checkbox" id="cb-booking">☐</div>
+        <div class="task-body">
+          <div class="task-title">Sign Up for Booking.com Affiliate</div>
+          <div class="task-detail">Go to <strong>booking.com/affiliate-program</strong> — <em>instant approval</em>, no waiting. I'll embed hotel widgets on all major festival event pages the same day. 4–6% commission on every booking.</div>
+          <div class="task-tag ttag-ready">✅ Instant Approval</div>
+        </div>
+      </div>
+
+      <div class="task-item" id="task-social">
+        <div class="task-checkbox" id="cb-social">☐</div>
+        <div class="task-body">
+          <div class="task-title">Create Social Media Accounts (10 total)</div>
+          <div class="task-detail">TikTok, Instagram, Facebook, X, YouTube — for both <strong>InkThorn</strong> and <strong>ValueBin</strong>. Phone verification required. Content calendars and post copy ready. You verify → I post same day.</div>
+          <div class="task-tag ttag-when">When You Have 30 Min</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -779,6 +888,15 @@
           </div>
 
           <div class="log-entry">
+            <div class="log-dot ld-cyan"></div>
+            <div class="log-ts">Apr 8 · 17:00</div>
+            <div>
+              <div class="log-msg">Rob's Action Items panel added to dashboard — 6 tasks with direct links, priority tags, and completion tracking. Replaces blocker list with actionable checklist format.</div>
+              <div class="log-tag lt-sys">Dashboard</div>
+            </div>
+          </div>
+
+          <div class="log-entry">
             <div class="log-dot ld-purple"></div>
             <div class="log-ts">Apr 8 · 15:00</div>
             <div>
@@ -882,6 +1000,19 @@
   document.getElementById('spendPctLabel').textContent = `$${spent.toFixed(2)} of $${BUDGET} spent (${Math.round(spent/BUDGET*100)}%)`;
   document.getElementById('budgetBarFill').style.width = `${Math.min(spent/BUDGET*100,100)}%`;
   document.getElementById('revenueBarFill').style.width = `${Math.min((earned+projected)/BUDGET*100,100)}%`;
+
+  // ── Task completion tracker (manually updated by agent) ──
+  const tasksDone = []; // add task IDs here as they're completed e.g. ['task-booking']
+  const totalTasks = 6;
+  tasksDone.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.classList.add('task-done');
+      const cb = el.querySelector('.task-checkbox');
+      if (cb) cb.textContent = '✓';
+    }
+  });
+  document.getElementById('tasksPill').textContent = `${tasksDone.length} / ${totalTasks} complete`;
 </script>
 </body>
 </html>
