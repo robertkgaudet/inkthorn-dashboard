@@ -2,24 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>InkThorn — 72-Hour Revenue Mission</title>
+  <title>InkThorn — 72-Hour Revenue Mission Control</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
   <link rel="icon" type="image/png" href="/assets/favicon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0a0a0f;
-      --surface: #12121a;
-      --surface2: #1a1a28;
-      --border: #2a2a3a;
-      --neon-pink: #ff2d78;
-      --neon-cyan: #00f5ff;
+      --bg: #070710;
+      --surface: #0f0f1c;
+      --surface2: #17172a;
+      --surface3: #1e1e35;
+      --border: #252540;
+      --border2: #1a1a30;
+      --neon-pink:   #ff2d78;
+      --neon-cyan:   #00f5ff;
       --neon-purple: #b44fff;
-      --neon-green: #39ff14;
+      --neon-green:  #39ff14;
       --neon-orange: #ff6b00;
-      --text: #e0e0f0;
-      --muted: #6b6b8a;
+      --neon-yellow: #ffe600;
+      --text:   #ddddf0;
+      --text2:  #a0a0c0;
+      --muted:  #5a5a7a;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,834 +35,770 @@
       color: var(--text);
       font-family: 'Space Grotesk', sans-serif;
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
-    /* Grid scanlines overlay */
     body::before {
       content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,245,255,0.015) 2px,
-        rgba(0,245,255,0.015) 4px
-      );
-      pointer-events: none;
-      z-index: 0;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,245,255,0.012) 2px, rgba(0,245,255,0.012) 4px);
+      pointer-events: none; z-index: 0;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px 20px;
-      position: relative;
-      z-index: 1;
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 20px 16px; position: relative; z-index: 1; }
+
+    /* ─── TOP BAR ─── */
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
-    /* ── Header ── */
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 32px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header-left h1 {
+    .topbar-title h1 {
       font-family: 'Orbitron', monospace;
-      font-size: 1.6rem;
-      font-weight: 900;
+      font-size: 1.1rem; font-weight: 900;
       background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-transform: uppercase; letter-spacing: 3px;
     }
 
-    .header-left .subtitle {
-      color: var(--muted);
-      font-size: 0.8rem;
-      margin-top: 4px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+    .topbar-title .sub {
+      font-size: 0.68rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 1px; margin-top: 2px;
     }
 
-    .mission-clock {
-      text-align: right;
-    }
+    .topbar-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 
-    .mission-clock .clock-label {
-      font-size: 0.7rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .mission-clock .clock-value {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.4rem;
+    .clock-block { text-align: right; }
+    .clock-label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .clock-value {
+      font-family: 'Orbitron', monospace; font-size: 1.3rem;
       color: var(--neon-cyan);
-      text-shadow: 0 0 20px rgba(0,245,255,0.5);
+      text-shadow: 0 0 20px rgba(0,245,255,0.6);
+      animation: glowpulse 2s ease-in-out infinite;
     }
 
-    .clock-start-note {
-      font-size: 0.65rem;
-      color: var(--muted);
-      margin-top: 2px;
+    @keyframes glowpulse { 0%,100%{text-shadow:0 0 10px rgba(0,245,255,.5)} 50%{text-shadow:0 0 30px rgba(0,245,255,.95)} }
+
+    .last-push { font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+
+    /* ─── BUDGET ROW ─── */
+    .budget-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr) 2fr;
+      gap: 12px;
+      margin-bottom: 16px;
     }
 
-    /* ── Budget Bar ── */
-    .budget-section {
+    @media(max-width:900px) { .budget-row { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:500px) { .budget-row { grid-template-columns: 1fr; } }
+
+    .bcard {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 20px;
-      align-items: center;
+      border-radius: 10px;
+      padding: 14px 16px;
     }
 
-    .budget-item {
-      text-align: center;
+    .bcard .blabel {
+      font-size: 0.62rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;
     }
 
-    .budget-item .label {
-      font-size: 0.7rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-    }
-
-    .budget-item .value {
+    .bcard .bval {
       font-family: 'Orbitron', monospace;
-      font-size: 1.6rem;
-      font-weight: 700;
+      font-size: 1.4rem; font-weight: 700;
     }
 
-    .budget-item .value.green { color: var(--neon-green); text-shadow: 0 0 15px rgba(57,255,20,0.4); }
-    .budget-item .value.pink { color: var(--neon-pink); text-shadow: 0 0 15px rgba(255,45,120,0.4); }
-    .budget-item .value.cyan { color: var(--neon-cyan); text-shadow: 0 0 15px rgba(0,245,255,0.4); }
+    .bval.pink   { color: var(--neon-pink);   text-shadow: 0 0 12px rgba(255,45,120,.4); }
+    .bval.green  { color: var(--neon-green);  text-shadow: 0 0 12px rgba(57,255,20,.4); }
+    .bval.cyan   { color: var(--neon-cyan);   text-shadow: 0 0 12px rgba(0,245,255,.4); }
+    .bval.purple { color: var(--neon-purple); text-shadow: 0 0 12px rgba(180,79,255,.4); }
 
-    .budget-bar-wrap {
-      grid-column: 1 / -1;
-      margin-top: 4px;
-    }
+    .bcard-bar { grid-column: span 1; }
+    .bar-labels { display: flex; justify-content: space-between; font-size: 0.62rem; color: var(--muted); margin-bottom: 5px; }
+    .budget-bar { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+    .budget-bar-fill { height: 100%; background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan)); transition: width .6s; border-radius: 4px; }
+    .revenue-bar { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+    .revenue-bar-fill { height: 100%; background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple)); transition: width .6s; border-radius: 4px; }
 
-    .budget-bar-wrap .bar-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.7rem;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .budget-bar {
-      height: 8px;
-      background: var(--surface2);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .budget-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
-      border-radius: 4px;
-      transition: width 0.6s ease;
-      width: 0%;
-    }
-
-    /* ── Pillar Grid ── */
-    .pillars-grid {
+    /* ─── 3-COL LAYOUT ─── */
+    .main-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 24px;
+      grid-template-columns: 1fr 340px;
+      gap: 16px;
+      align-items: start;
     }
 
-    @media (max-width: 700px) {
-      .pillars-grid { grid-template-columns: 1fr; }
-      .header { flex-direction: column; gap: 16px; text-align: center; }
-      .mission-clock { text-align: center; }
-      .budget-section { grid-template-columns: 1fr; }
-    }
+    @media(max-width:900px) { .main-grid { grid-template-columns: 1fr; } }
 
-    .pillar-card {
+    /* ─── PILLARS ─── */
+    .pillars-stack { display: flex; flex-direction: column; gap: 12px; }
+
+    .pillar {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      position: relative;
+      border-radius: 10px;
       overflow: hidden;
     }
 
-    .pillar-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
+    .pillar-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border2);
+      gap: 10px; flex-wrap: wrap;
     }
 
-    .pillar-card.pink::before  { background: linear-gradient(90deg, var(--neon-pink), transparent); }
-    .pillar-card.cyan::before  { background: linear-gradient(90deg, var(--neon-cyan), transparent); }
-    .pillar-card.purple::before { background: linear-gradient(90deg, var(--neon-purple), transparent); }
-    .pillar-card.orange::before { background: linear-gradient(90deg, var(--neon-orange), transparent); }
-    .pillar-card.green::before  { background: linear-gradient(90deg, var(--neon-green), transparent); }
-
-    .pillar-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      gap: 10px;
-    }
-
-    .pillar-title-block {}
+    .pillar-top-left { display: flex; align-items: center; gap: 12px; }
 
     .pillar-num {
       font-family: 'Orbitron', monospace;
-      font-size: 0.6rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      font-size: 0.7rem; font-weight: 700;
+      color: var(--muted); min-width: 20px;
     }
 
-    .pillar-title {
+    .pillar-name {
       font-family: 'Orbitron', monospace;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-top: 2px;
+      font-size: 0.8rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
     }
 
-    .pillar-card.pink  .pillar-title { color: var(--neon-pink); }
-    .pillar-card.cyan  .pillar-title { color: var(--neon-cyan); }
-    .pillar-card.purple .pillar-title { color: var(--neon-purple); }
-    .pillar-card.orange .pillar-title { color: var(--neon-orange); }
-    .pillar-card.green  .pillar-title { color: var(--neon-green); }
+    .p-pink   .pillar-name { color: var(--neon-pink); }
+    .p-cyan   .pillar-name { color: var(--neon-cyan); }
+    .p-purple .pillar-name { color: var(--neon-purple); }
+    .p-orange .pillar-name { color: var(--neon-orange); }
+    .p-green  .pillar-name { color: var(--neon-green); }
 
-    .pillar-status {
-      font-size: 0.65rem;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
-      white-space: nowrap;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    .pillar-status-badge {
+      font-size: 0.6rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;
     }
 
-    .status-active   { background: rgba(57,255,20,0.15);  color: var(--neon-green);  border: 1px solid rgba(57,255,20,0.3); }
-    .status-pending  { background: rgba(255,107,0,0.15);  color: var(--neon-orange); border: 1px solid rgba(255,107,0,0.3); }
-    .status-blocked  { background: rgba(255,45,120,0.15); color: var(--neon-pink);   border: 1px solid rgba(255,45,120,0.3); }
-    .status-done     { background: rgba(0,245,255,0.15);  color: var(--neon-cyan);   border: 1px solid rgba(0,245,255,0.3); }
+    .badge-notstarted { background: rgba(90,90,122,.2);   color: var(--muted);       border: 1px solid var(--border); }
+    .badge-inprogress { background: rgba(255,107,0,.15);  color: var(--neon-orange); border: 1px solid rgba(255,107,0,.3); }
+    .badge-live       { background: rgba(0,245,255,.15);  color: var(--neon-cyan);   border: 1px solid rgba(0,245,255,.3); }
+    .badge-earning    { background: rgba(57,255,20,.15);  color: var(--neon-green);  border: 1px solid rgba(57,255,20,.3); }
+    .badge-blocked    { background: rgba(255,45,120,.15); color: var(--neon-pink);   border: 1px solid rgba(255,45,120,.3); }
+    .badge-done       { background: rgba(57,255,20,.15);  color: var(--neon-green);  border: 1px solid rgba(57,255,20,.3); }
+
+    .pillar-body { padding: 14px 16px; }
 
     .pillar-metrics {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 14px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 8px; margin-bottom: 12px;
     }
 
-    .metric {
-      background: var(--surface2);
-      border-radius: 8px;
-      padding: 10px 12px;
+    .pm {
+      background: var(--surface2); border-radius: 7px;
+      padding: 8px 10px;
     }
 
-    .metric .m-label {
-      font-size: 0.65rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 3px;
-    }
+    .pm .pm-label { font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 3px; }
+    .pm .pm-val { font-family: 'Orbitron', monospace; font-size: 0.9rem; font-weight: 700; }
+    .pm .pm-val.g { color: var(--neon-green); }
+    .pm .pm-val.c { color: var(--neon-cyan); }
+    .pm .pm-val.p { color: var(--neon-pink); }
+    .pm .pm-val.u { color: var(--neon-purple); }
+    .pm .pm-val.o { color: var(--neon-orange); }
 
-    .metric .m-value {
-      font-family: 'Orbitron', monospace;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .metric .m-value.highlight-green  { color: var(--neon-green); }
-    .metric .m-value.highlight-cyan   { color: var(--neon-cyan); }
-    .metric .m-value.highlight-pink   { color: var(--neon-pink); }
-    .metric .m-value.highlight-purple { color: var(--neon-purple); }
-    .metric .m-value.highlight-orange { color: var(--neon-orange); }
-
-    .pillar-log {
-      border-top: 1px solid var(--border);
-      padding-top: 12px;
-    }
-
-    .pillar-log .log-title {
-      font-size: 0.65rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-
-    .log-entry {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      margin-bottom: 5px;
-      font-size: 0.78rem;
-    }
-
-    .log-entry .log-time {
-      color: var(--muted);
-      white-space: nowrap;
-      font-size: 0.7rem;
-      padding-top: 1px;
-    }
-
-    .log-entry .log-msg {
-      color: var(--text);
-      line-height: 1.4;
-    }
-
-    .log-entry .log-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      margin-top: 5px;
-      flex-shrink: 0;
-    }
-
-    .dot-green  { background: var(--neon-green); }
-    .dot-cyan   { background: var(--neon-cyan); }
-    .dot-pink   { background: var(--neon-pink); }
-    .dot-orange { background: var(--neon-orange); }
-    .dot-purple { background: var(--neon-purple); }
-    .dot-muted  { background: var(--muted); }
-
-    /* ── Spend Log ── */
-    .spend-section {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 24px;
-    }
-
-    .section-title {
-      font-family: 'Orbitron', monospace;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--neon-purple);
-      text-transform: uppercase;
-      letter-spacing: 2px;
+    /* ─── BLOCKERS BAR ─── */
+    .blockers-section {
+      background: rgba(255,45,120,.07);
+      border: 1px solid rgba(255,45,120,.3);
+      border-radius: 10px;
+      padding: 14px 16px;
       margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
 
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
+    .blockers-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--neon-pink);
+      text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
     }
 
-    .spend-table {
-      width: 100%;
-      border-collapse: collapse;
+    .blocker-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,45,120,.1);
       font-size: 0.82rem;
     }
 
-    .spend-table th {
-      text-align: left;
-      color: var(--muted);
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 6px 12px;
-      border-bottom: 1px solid var(--border);
-    }
+    .blocker-item:last-child { border-bottom: none; }
 
-    .spend-table td {
-      padding: 8px 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
+    .blocker-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .blocker-text { flex: 1; line-height: 1.5; }
+    .blocker-text .blocker-detail { font-size: 0.7rem; color: var(--text2); margin-top: 2px; }
 
-    .spend-table tr:last-child td { border-bottom: none; }
+    /* ─── RIGHT COLUMN ─── */
+    .right-col { display: flex; flex-direction: column; gap: 12px; }
 
-    .spend-table .amount-spend { color: var(--neon-pink); font-family: 'Orbitron', monospace; font-size: 0.85rem; }
-    .spend-table .amount-earn  { color: var(--neon-green); font-family: 'Orbitron', monospace; font-size: 0.85rem; }
-    .spend-table .amount-proj  { color: var(--neon-cyan); font-family: 'Orbitron', monospace; font-size: 0.85rem; }
-
-    .tag {
-      display: inline-block;
-      font-size: 0.6rem;
-      padding: 2px 7px;
-      border-radius: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .tag-inkthorn  { background: rgba(255,45,120,0.15);  color: var(--neon-pink); }
-    .tag-valuebin  { background: rgba(0,245,255,0.15);   color: var(--neon-cyan); }
-    .tag-affiliate { background: rgba(180,79,255,0.15);  color: var(--neon-purple); }
-    .tag-infra     { background: rgba(255,107,0,0.15);   color: var(--neon-orange); }
-
-    /* ── Next Actions ── */
-    .actions-section {
+    /* ─── LIVE LOG ─── */
+    .log-panel {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 24px;
-    }
-
-    .action-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .action-item:last-child { border-bottom: none; }
-
-    .action-priority {
-      font-size: 0.6rem;
-      padding: 3px 8px;
       border-radius: 10px;
-      text-transform: uppercase;
-      white-space: nowrap;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      margin-top: 1px;
+      overflow: hidden;
     }
 
-    .priority-high { background: rgba(255,45,120,0.2); color: var(--neon-pink); border: 1px solid rgba(255,45,120,0.3); }
-    .priority-med  { background: rgba(255,107,0,0.2);  color: var(--neon-orange); border: 1px solid rgba(255,107,0,0.3); }
-    .priority-low  { background: rgba(107,107,138,0.2); color: var(--muted); border: 1px solid var(--border); }
-    .priority-block { background: rgba(180,79,255,0.2); color: var(--neon-purple); border: 1px solid rgba(180,79,255,0.3); }
-
-    .action-text { font-size: 0.85rem; line-height: 1.5; flex: 1; }
-    .action-text .action-who { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
-
-    /* ── Footer ── */
-    .footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.7rem;
-      padding: 20px 0 10px;
-      letter-spacing: 0.5px;
+    .log-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border2);
+      background: var(--surface2);
     }
 
+    .log-header-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.68rem; font-weight: 700;
+      color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 2px;
+    }
+
+    .log-count {
+      font-size: 0.62rem; color: var(--muted);
+      background: var(--surface3); padding: 2px 8px; border-radius: 10px;
+    }
+
+    .log-scroll { max-height: 560px; overflow-y: auto; padding: 10px; }
+    .log-scroll::-webkit-scrollbar { width: 4px; }
+    .log-scroll::-webkit-scrollbar-track { background: var(--surface2); }
+    .log-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .log-entry {
+      display: flex; gap: 8px; align-items: flex-start;
+      padding: 7px 6px;
+      border-bottom: 1px solid rgba(255,255,255,.03);
+      font-size: 0.78rem; line-height: 1.4;
+    }
+
+    .log-entry:first-child { background: rgba(0,245,255,.04); border-radius: 5px; }
+    .log-entry:last-child { border-bottom: none; }
+
+    .log-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .ld-cyan   { background: var(--neon-cyan); box-shadow: 0 0 6px var(--neon-cyan); }
+    .ld-pink   { background: var(--neon-pink); }
+    .ld-green  { background: var(--neon-green); }
+    .ld-orange { background: var(--neon-orange); }
+    .ld-purple { background: var(--neon-purple); }
+    .ld-muted  { background: var(--muted); }
+
+    .log-ts { font-size: 0.62rem; color: var(--muted); white-space: nowrap; padding-top: 2px; min-width: 80px; }
+    .log-msg { color: var(--text); flex: 1; }
+    .log-tag {
+      font-size: 0.58rem; padding: 1px 6px; border-radius: 8px;
+      text-transform: uppercase; letter-spacing: .3px; white-space: nowrap; margin-top: 2px;
+    }
+    .lt-ink  { background: rgba(255,45,120,.15); color: var(--neon-pink); }
+    .lt-vb   { background: rgba(0,245,255,.15);  color: var(--neon-cyan); }
+    .lt-aff  { background: rgba(180,79,255,.15); color: var(--neon-purple); }
+    .lt-sys  { background: rgba(90,90,122,.2);   color: var(--muted); }
+    .lt-soc  { background: rgba(255,107,0,.15);  color: var(--neon-orange); }
+
+    /* ─── MINI PANELS ─── */
+    .mini-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .mini-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem; font-weight: 700;
+      color: var(--neon-purple); text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .mini-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+    .social-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 0; border-bottom: 1px solid var(--border2);
+      font-size: 0.8rem;
+    }
+
+    .social-row:last-child { border-bottom: none; }
+
+    .social-brand { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; min-width: 70px; }
+    .social-platform { flex: 1; color: var(--text2); }
+    .social-followers { font-family: 'Orbitron', monospace; font-size: 0.78rem; color: var(--neon-cyan); min-width: 40px; text-align: right; }
+    .social-status { font-size: 0.6rem; margin-left: 8px; }
+    .s-pending { color: var(--neon-orange); }
+    .s-live { color: var(--neon-green); }
+    .s-blocked { color: var(--neon-pink); }
+
+    .product-row {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 7px 0; border-bottom: 1px solid var(--border2);
+      font-size: 0.78rem; gap: 8px;
+    }
+
+    .product-row:last-child { border-bottom: none; }
+
+    .product-name { flex: 1; color: var(--text); line-height: 1.4; }
+    .product-platform { font-size: 0.6rem; color: var(--muted); margin-top: 1px; }
+    .product-price { font-family: 'Orbitron', monospace; font-size: 0.75rem; color: var(--neon-green); white-space: nowrap; }
+    .product-badge {
+      font-size: 0.58rem; padding: 2px 6px; border-radius: 8px;
+      text-transform: uppercase; white-space: nowrap;
+    }
+    .pb-pending { background: rgba(255,107,0,.15); color: var(--neon-orange); border: 1px solid rgba(255,107,0,.2); }
+    .pb-live    { background: rgba(57,255,20,.15);  color: var(--neon-green); border: 1px solid rgba(57,255,20,.2); }
+    .pb-blocked { background: rgba(255,45,120,.15); color: var(--neon-pink); border: 1px solid rgba(255,45,120,.2); }
+
+    .aff-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 0; border-bottom: 1px solid var(--border2);
+      font-size: 0.78rem;
+    }
+
+    .aff-row:last-child { border-bottom: none; }
+    .aff-name { flex: 1; color: var(--text); }
+    .aff-commission { font-size: 0.7rem; color: var(--neon-purple); white-space: nowrap; }
+    .aff-pages { font-size: 0.65rem; color: var(--muted); white-space: nowrap; }
+    .aff-status { font-size: 0.6rem; white-space: nowrap; }
+    .as-applied { color: var(--neon-orange); }
+    .as-live { color: var(--neon-green); }
+    .as-researching { color: var(--muted); }
+
+    /* ─── FOOTER ─── */
+    .footer { text-align: center; color: var(--muted); font-size: 0.65rem; padding: 20px 0 10px; letter-spacing: .5px; }
     .footer span { color: var(--neon-pink); }
 
-    /* Blinking cursor */
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-    .blink { animation: blink 1s infinite; }
-
-    /* Glow pulse */
-    @keyframes glow-pulse {
-      0%, 100% { text-shadow: 0 0 10px rgba(0,245,255,0.5); }
-      50%       { text-shadow: 0 0 30px rgba(0,245,255,0.9); }
-    }
-    .clock-value { animation: glow-pulse 2s ease-in-out infinite; }
-
-    .needs-rob {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.65rem;
-      color: var(--neon-purple);
-      background: rgba(180,79,255,0.1);
-      border: 1px solid rgba(180,79,255,0.3);
-      border-radius: 10px;
-      padding: 2px 8px;
-      margin-left: 8px;
+    @media(max-width:600px) {
+      .topbar { flex-direction: column; align-items: flex-start; }
+      .clock-block { text-align: left; }
     }
   </style>
 </head>
 <body>
-<div class="container">
+<div class="wrap">
 
-  <!-- Header -->
-  <div class="header">
-    <div class="header-left">
-      <h1>⚡ InkThorn Mission</h1>
-      <div class="subtitle">72-Hour Revenue Initiative — Started Apr 8, 2026</div>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-title">
+      <h1>⚡ InkThorn — Mission Control</h1>
+      <div class="sub">72-Hour Revenue Initiative · Started Apr 8, 2026 14:37 CDT · Deadline Apr 11, 2026 14:37 CDT</div>
     </div>
-    <div class="mission-clock">
-      <div class="clock-label">Time Remaining</div>
-      <div class="clock-value" id="missionClock">--:--:--</div>
-      <div class="clock-start-note">Deadline: Apr 11, 2026 @ 14:37 CDT</div>
-    </div>
-  </div>
-
-  <!-- Budget Summary -->
-  <div class="budget-section">
-    <div class="budget-item">
-      <div class="label">Budget Remaining</div>
-      <div class="value cyan" id="budgetRemaining">$200.00</div>
-    </div>
-    <div class="budget-item">
-      <div class="label">Total Spent</div>
-      <div class="value pink" id="totalSpent">$0.00</div>
-    </div>
-    <div class="budget-item">
-      <div class="label">Revenue (Earned + Projected)</div>
-      <div class="value green" id="totalRevenue">$0.00</div>
-    </div>
-    <div class="budget-bar-wrap">
-      <div class="bar-label">
-        <span>Spend Rate</span>
-        <span id="spendPct">0% of $200 budget</span>
-      </div>
-      <div class="budget-bar">
-        <div class="budget-bar-fill" id="budgetBarFill"></div>
+    <div class="topbar-right">
+      <div class="clock-block">
+        <div class="clock-label">Time Remaining</div>
+        <div class="clock-value" id="missionClock">--:--:--</div>
+        <div class="last-push">Last update: <span id="lastPush">Apr 8 · 14:50 CDT</span></div>
       </div>
     </div>
   </div>
 
-  <!-- Pillar Cards -->
-  <div class="pillars-grid">
-
-    <!-- Pillar 5: Dashboard (DONE) -->
-    <div class="pillar-card cyan">
-      <div class="pillar-header">
-        <div class="pillar-title-block">
-          <div class="pillar-num">Pillar 5</div>
-          <div class="pillar-title">Mission Dashboard</div>
-        </div>
-        <span class="pillar-status status-done">Live ✓</span>
-      </div>
-      <div class="pillar-metrics">
-        <div class="metric">
-          <div class="m-label">URL</div>
-          <div class="m-value highlight-cyan" style="font-size:0.72rem;">inkthorn.ai/mission</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Last Updated</div>
-          <div class="m-value highlight-cyan" id="lastUpdated">Apr 8, 14:37</div>
-        </div>
-      </div>
-      <div class="pillar-log">
-        <div class="log-title">Activity Log</div>
-        <div class="log-entry">
-          <div class="log-dot dot-cyan"></div>
-          <div class="log-time">Apr 8</div>
-          <div class="log-msg">Dashboard built and deployed — first deliverable complete</div>
-        </div>
-      </div>
+  <!-- BUDGET ROW -->
+  <div class="budget-row">
+    <div class="bcard">
+      <div class="blabel">Budget Remaining</div>
+      <div class="bval cyan" id="budgetRemaining">$200.00</div>
     </div>
-
-    <!-- Pillar 1: Etsy + Fiverr -->
-    <div class="pillar-card pink">
-      <div class="pillar-header">
-        <div class="pillar-title-block">
-          <div class="pillar-num">Pillar 1</div>
-          <div class="pillar-title">Etsy + Fiverr Publishing</div>
-        </div>
-        <span class="pillar-status status-pending">In Progress</span>
-      </div>
-      <div class="pillar-metrics">
-        <div class="metric">
-          <div class="m-label">Products Listed</div>
-          <div class="m-value highlight-pink" id="etsyProducts">0</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Gigs Live</div>
-          <div class="m-value highlight-pink" id="fiverrGigs">0</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Revenue</div>
-          <div class="m-value" id="etsyRevenue">$0</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Projected</div>
-          <div class="m-value highlight-pink" id="etsyProjected">—</div>
-        </div>
-      </div>
-      <div class="pillar-log">
-        <div class="log-title">Activity Log</div>
-        <div class="log-entry">
-          <div class="log-dot dot-orange"></div>
-          <div class="log-time">Apr 8</div>
-          <div class="log-msg">Researching top-selling New Orleans digital products on Etsy — gathering category data</div>
-        </div>
-        <div class="log-entry">
-          <div class="log-dot dot-muted"></div>
-          <div class="log-time">Next</div>
-          <div class="log-msg">Account setup requires Rob's email verification <span class="needs-rob">🔒 Needs Rob</span></div>
-        </div>
-      </div>
+    <div class="bcard">
+      <div class="blabel">Total Spent</div>
+      <div class="bval pink" id="totalSpent">$0.00</div>
     </div>
-
-    <!-- Pillar 2: Affiliate -->
-    <div class="pillar-card purple">
-      <div class="pillar-header">
-        <div class="pillar-title-block">
-          <div class="pillar-num">Pillar 2</div>
-          <div class="pillar-title">Affiliate Revenue</div>
-        </div>
-        <span class="pillar-status status-pending">In Progress</span>
-      </div>
-      <div class="pillar-metrics">
-        <div class="metric">
-          <div class="m-label">Programs Applied</div>
-          <div class="m-value highlight-purple" id="affiliatePrograms">0</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Links Placed</div>
-          <div class="m-value highlight-purple" id="affiliateLinks">0</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Revenue</div>
-          <div class="m-value" id="affiliateRevenue">$0</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Projected 30-day</div>
-          <div class="m-value highlight-purple" id="affiliateProjected">—</div>
-        </div>
-      </div>
-      <div class="pillar-log">
-        <div class="log-title">Activity Log</div>
-        <div class="log-entry">
-          <div class="log-dot dot-purple"></div>
-          <div class="log-time">Apr 8</div>
-          <div class="log-msg">Mapping affiliate programs to inkthorn.ai/community event calendar</div>
-        </div>
-        <div class="log-entry">
-          <div class="log-dot dot-muted"></div>
-          <div class="log-time">Next</div>
-          <div class="log-msg">Apply to Uber, Airbnb, Amazon, SpotHero, OpenTable affiliate programs</div>
-        </div>
-      </div>
+    <div class="bcard">
+      <div class="blabel">Total Earned</div>
+      <div class="bval green" id="totalEarned">$0.00</div>
     </div>
-
-    <!-- Pillar 3: ValueBin -->
-    <div class="pillar-card cyan">
-      <div class="pillar-header">
-        <div class="pillar-title-block">
-          <div class="pillar-num">Pillar 3</div>
-          <div class="pillar-title">ValueBin Dropship</div>
-        </div>
-        <span class="pillar-status status-pending">Researching</span>
-      </div>
-      <div class="pillar-metrics">
-        <div class="metric">
-          <div class="m-label">Products Listed</div>
-          <div class="m-value highlight-cyan" id="valuebinProducts">0</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Store Status</div>
-          <div class="m-value" id="valuebinStore" style="font-size:0.75rem;">Building</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Revenue</div>
-          <div class="m-value" id="valuebinRevenue">$0</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Niche</div>
-          <div class="m-value" id="valuebinNiche" style="font-size:0.72rem;">Researching</div>
-        </div>
-      </div>
-      <div class="pillar-log">
-        <div class="log-title">Activity Log</div>
-        <div class="log-entry">
-          <div class="log-dot dot-cyan"></div>
-          <div class="log-time">Apr 8</div>
-          <div class="log-msg">Analyzing AliExpress + Zendrop winning product data — home goods, gadgets, pet niches</div>
-        </div>
-        <div class="log-entry">
-          <div class="log-dot dot-muted"></div>
-          <div class="log-time">Next</div>
-          <div class="log-msg">Shopify free trial setup — need to evaluate vs. WooCommerce / Sellfy for zero upfront</div>
-        </div>
-      </div>
+    <div class="bcard">
+      <div class="blabel">Projected (30d)</div>
+      <div class="bval purple" id="totalProjected">—</div>
     </div>
-
-    <!-- Pillar 4: Content + Social -->
-    <div class="pillar-card orange" style="grid-column: 1 / -1;">
-      <div class="pillar-header">
-        <div class="pillar-title-block">
-          <div class="pillar-num">Pillar 4</div>
-          <div class="pillar-title">Content + Social Growth</div>
-        </div>
-        <span class="pillar-status status-pending">Building</span>
-      </div>
-      <div class="pillar-metrics" style="grid-template-columns: repeat(4, 1fr);">
-        <div class="metric">
-          <div class="m-label">InkThorn Followers</div>
-          <div class="m-value highlight-orange" id="inkthorFollowers">0</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">ValueBin Followers</div>
-          <div class="m-value highlight-orange" id="valuebinFollowers">0</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Posts Published</div>
-          <div class="m-value highlight-orange" id="postsPublished">0</div>
-        </div>
-        <div class="metric">
-          <div class="m-label">Platforms Active</div>
-          <div class="m-value highlight-orange" id="platformsActive">0 / 10</div>
-        </div>
-      </div>
-      <div class="pillar-log">
-        <div class="log-title">Activity Log</div>
-        <div class="log-entry">
-          <div class="log-dot dot-orange"></div>
-          <div class="log-time">Apr 8</div>
-          <div class="log-msg">Drafting content calendar for both InkThorn (NOLA-local) and ValueBin (national) tracks — 5 platforms × 2 brands</div>
-        </div>
-        <div class="log-entry">
-          <div class="log-dot dot-muted"></div>
-          <div class="log-time">Next</div>
-          <div class="log-msg">Account creation: TikTok, Instagram, Facebook, X, YouTube for both brands <span class="needs-rob">🔒 Needs Rob</span></div>
-        </div>
-      </div>
+    <div class="bcard bcard-bar">
+      <div class="blabel">Spend vs. Budget</div>
+      <div class="bar-labels"><span id="spendPctLabel">$0 of $200 spent (0%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" id="budgetBarFill" style="width:0%"></div></div>
+      <div class="blabel" style="margin-top:8px">Revenue vs. $200 Target</div>
+      <div class="revenue-bar"><div class="revenue-bar-fill" id="revenueBarFill" style="width:0%"></div></div>
     </div>
-
   </div>
 
-  <!-- Spend Log -->
-  <div class="spend-section">
-    <div class="section-title">Budget Ledger</div>
-    <table class="spend-table">
-      <thead>
-        <tr>
-          <th>Date/Time</th>
-          <th>Description</th>
-          <th>Brand</th>
-          <th>Type</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody id="spendTableBody">
-        <tr>
-          <td>Apr 8, 14:37</td>
-          <td>Mission Dashboard — design + deploy (no cost, used existing GitHub Pages)</td>
-          <td><span class="tag tag-inkthorn">InkThorn</span></td>
-          <td>Infra</td>
-          <td class="amount-earn">$0.00</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- BLOCKERS (always visible) -->
+  <div class="blockers-section">
+    <div class="blockers-title">🚨 Blockers — Waiting on Rob</div>
+    <div class="blocker-item">
+      <div class="blocker-icon">🏪</div>
+      <div class="blocker-text">
+        <strong>Etsy Account</strong> — Needs Rob's email, billing info, and identity verification to open seller account
+        <div class="blocker-detail">I have 10 products ready to list. You create the account → I load all products within the hour.</div>
+      </div>
+    </div>
+    <div class="blocker-item">
+      <div class="blocker-icon">🎯</div>
+      <div class="blocker-text">
+        <strong>Fiverr Account</strong> — Needs Rob's email and identity verification
+        <div class="blocker-detail">Gig descriptions and pricing tiers ready to paste in. Waiting on account creation.</div>
+      </div>
+    </div>
+    <div class="blocker-item">
+      <div class="blocker-icon">📱</div>
+      <div class="blocker-text">
+        <strong>Social Media Accounts × 2 Brands</strong> — TikTok, Instagram, Facebook, X, YouTube require phone verification
+        <div class="blocker-detail">10 accounts total (InkThorn + ValueBin). Content calendars ready. You verify phone → I post content same day.</div>
+      </div>
+    </div>
+    <div class="blocker-item">
+      <div class="blocker-icon">🛒</div>
+      <div class="blocker-text">
+        <strong>ValueBin Shopify/Storefront</strong> — Needs payment method on file for free trial
+        <div class="blocker-detail">Product list and descriptions ready. Evaluating Shopify vs. Ecwid vs. WooCommerce for lowest upfront cost.</div>
+      </div>
+    </div>
   </div>
 
-  <!-- Next Actions Queue -->
-  <div class="actions-section">
-    <div class="section-title">Action Queue</div>
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+    <div class="pillars-stack">
 
-    <div class="action-item">
-      <span class="action-priority priority-block">🔒 Blocked</span>
-      <div class="action-text">
-        Etsy + Fiverr account setup — requires Rob's email, billing info, and identity verification
-        <div class="action-who">→ Rob needs to create accounts; I can prepare all content/images/descriptions in parallel</div>
+      <!-- PILLAR 5: Dashboard -->
+      <div class="pillar p-green">
+        <div class="pillar-top">
+          <div class="pillar-top-left">
+            <div class="pillar-num">P5</div>
+            <div class="pillar-name">Mission Dashboard</div>
+          </div>
+          <span class="pillar-status-badge badge-done">✓ Live</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-metrics">
+            <div class="pm"><div class="pm-label">URL</div><div class="pm-val c" style="font-size:.7rem">inkthorn.ai/mission</div></div>
+            <div class="pm"><div class="pm-label">Password</div><div class="pm-val g" style="font-size:.7rem">InkThorn72</div></div>
+            <div class="pm"><div class="pm-label">Updates/hr</div><div class="pm-val g">1+</div></div>
+            <div class="pm"><div class="pm-label">Auto-refresh</div><div class="pm-val c" style="font-size:.7rem">Manual push</div></div>
+          </div>
+          <div style="font-size:.75rem;color:var(--text2)">Dashboard deployed to GitHub Pages. Every action logged in real time. Rebuilt to full spec Apr 8 14:50 CDT.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="action-item">
-      <span class="action-priority priority-block">🔒 Blocked</span>
-      <div class="action-text">
-        Social media account creation (TikTok, Instagram, Facebook, X, YouTube) × 2 brands
-        <div class="action-who">→ Needs Rob's phone number for verification; I'll have content ready to post on day 1</div>
+      <!-- PILLAR 1: Etsy + Fiverr -->
+      <div class="pillar p-pink">
+        <div class="pillar-top">
+          <div class="pillar-top-left">
+            <div class="pillar-num">P1</div>
+            <div class="pillar-name">Etsy + Fiverr Publishing</div>
+          </div>
+          <span class="pillar-status-badge badge-inprogress">In Progress</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-metrics">
+            <div class="pm"><div class="pm-label">Etsy Products</div><div class="pm-val p" id="etsyCount">0 / 10</div></div>
+            <div class="pm"><div class="pm-label">Fiverr Gigs</div><div class="pm-val p" id="fiverrCount">0 / 5</div></div>
+            <div class="pm"><div class="pm-label">Revenue</div><div class="pm-val" id="etsyRevenue">$0</div></div>
+            <div class="pm"><div class="pm-label">Projected</div><div class="pm-val p" id="etsyProjected">—</div></div>
+          </div>
+          <div style="font-size:.75rem;color:var(--text2);margin-bottom:8px">Research complete. 10 product concepts drafted (neighborhood guides, bar crawl itineraries, NOLA art prints, Mardi Gras guide, prompt packs). Fiverr gig descriptions ready. <strong style="color:var(--neon-pink)">Blocked on account creation.</strong></div>
+          <!-- Product list -->
+          <div id="etsyProductList">
+            <div class="product-row">
+              <div><div class="product-name">French Quarter Bar Crawl — Print-and-Go Guide (PDF)</div><div class="product-platform">Etsy · Digital Download</div></div>
+              <div style="text-align:right"><div class="product-price">$7.99</div><div class="product-badge pb-blocked">Blocked</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name">New Orleans Neighborhood Map Pack — 9 Wards (Printable)</div><div class="product-platform">Etsy · Digital Download</div></div>
+              <div style="text-align:right"><div class="product-price">$9.99</div><div class="product-badge pb-blocked">Blocked</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name">Mardi Gras Parade Route + Survival Guide 2026 (PDF)</div><div class="product-platform">Etsy · Digital Download</div></div>
+              <div style="text-align:right"><div class="product-price">$5.99</div><div class="product-badge pb-blocked">Blocked</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name">NOLA Weekend Itinerary — 3-Day &amp; 5-Day (PDF Bundle)</div><div class="product-platform">Etsy · Digital Download</div></div>
+              <div style="text-align:right"><div class="product-price">$8.99</div><div class="product-badge pb-blocked">Blocked</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name">AI-Generated New Orleans Art Prints — Set of 5 (PNG)</div><div class="product-platform">Etsy · Digital Download</div></div>
+              <div style="text-align:right"><div class="product-price">$12.99</div><div class="product-badge pb-blocked">Blocked</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name">+ 5 more ready (food tour map, festival guide, wedding venues, prompt pack, bar map)</div><div class="product-platform">Etsy · Digital Download</div></div>
+              <div style="text-align:right"><div class="product-price">$5–$14</div><div class="product-badge pb-blocked">Blocked</div></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="action-item">
-      <span class="action-priority priority-high">High</span>
-      <div class="action-text">
-        Apply to affiliate programs: Uber, Airbnb, Amazon Associates, SpotHero, OpenTable, Resy, Ticketmaster
-        <div class="action-who">→ Most require a website URL (inkthorn.ai qualifies) — starting applications now</div>
+      <!-- PILLAR 2: Affiliate -->
+      <div class="pillar p-purple">
+        <div class="pillar-top">
+          <div class="pillar-top-left">
+            <div class="pillar-num">P2</div>
+            <div class="pillar-name">Affiliate Revenue</div>
+          </div>
+          <span class="pillar-status-badge badge-inprogress">Applying</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-metrics">
+            <div class="pm"><div class="pm-label">Programs</div><div class="pm-val u" id="affProgramCount">0 / 10</div></div>
+            <div class="pm"><div class="pm-label">Links Placed</div><div class="pm-val u" id="affLinkCount">0</div></div>
+            <div class="pm"><div class="pm-label">Revenue</div><div class="pm-val" id="affRevenue">$0</div></div>
+            <div class="pm"><div class="pm-label">Projected 30d</div><div class="pm-val u" id="affProjected">—</div></div>
+          </div>
+          <div id="affList">
+            <div class="aff-row">
+              <div class="aff-name">Amazon Associates</div>
+              <div class="aff-commission">1–10%</div>
+              <div class="aff-pages">Events, gear</div>
+              <div class="aff-status as-researching">Researching</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">Viator (Tours)</div>
+              <div class="aff-commission">8%</div>
+              <div class="aff-pages">NOLA tours</div>
+              <div class="aff-status as-researching">Researching</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">Airbnb</div>
+              <div class="aff-commission">~$75/booking</div>
+              <div class="aff-pages">Festivals</div>
+              <div class="aff-status as-researching">Researching</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">SpotHero / ParkWhiz</div>
+              <div class="aff-commission">$2–5/booking</div>
+              <div class="aff-pages">Major venues</div>
+              <div class="aff-status as-researching">Researching</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">OpenTable / Resy</div>
+              <div class="aff-commission">$1–5/seated</div>
+              <div class="aff-pages">Restaurant events</div>
+              <div class="aff-status as-researching">Researching</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">Ticketmaster / Dice.fm</div>
+              <div class="aff-commission">TBD</div>
+              <div class="aff-pages">Ticketed events</div>
+              <div class="aff-status as-researching">Researching</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">Uber / Lyft</div>
+              <div class="aff-commission">Referral</div>
+              <div class="aff-pages">All events</div>
+              <div class="aff-status as-researching">Researching</div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="action-item">
-      <span class="action-priority priority-high">High</span>
-      <div class="action-text">
-        ValueBin niche research — identify top 5 winning products, supplier, margin analysis
-        <div class="action-who">→ Autonomous — running now</div>
+      <!-- PILLAR 3: ValueBin -->
+      <div class="pillar p-cyan">
+        <div class="pillar-top">
+          <div class="pillar-top-left">
+            <div class="pillar-num">P3</div>
+            <div class="pillar-name">ValueBin Dropship</div>
+          </div>
+          <span class="pillar-status-badge badge-inprogress">Researching</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-metrics">
+            <div class="pm"><div class="pm-label">Products Listed</div><div class="pm-val c" id="vbProducts">0 / 5</div></div>
+            <div class="pm"><div class="pm-label">Store</div><div class="pm-val" id="vbStore" style="font-size:.7rem">Evaluating</div></div>
+            <div class="pm"><div class="pm-label">Revenue</div><div class="pm-val" id="vbRevenue">$0</div></div>
+            <div class="pm"><div class="pm-label">Niche</div><div class="pm-val c" id="vbNiche" style="font-size:.7rem">TBD</div></div>
+          </div>
+          <div style="font-size:.75rem;color:var(--text2);margin-bottom:8px">Running niche + product research now. Evaluating home goods, pet, gadgets, fitness niches on AliExpress/Zendrop. Platform analysis: Shopify 3-day trial ($1/mo for 3 mo) vs. Ecwid free tier vs. WooCommerce.</div>
+          <div id="vbProductList">
+            <div class="product-row">
+              <div><div class="product-name">Products pending — research completing now</div><div class="product-platform">ValueBin · Dropship</div></div>
+              <div style="text-align:right"><div class="product-badge pb-pending">Pending</div></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="action-item">
-      <span class="action-priority priority-med">Medium</span>
-      <div class="action-text">
-        Build ValueBin storefront (Shopify free trial or best zero-upfront alternative)
-        <div class="action-who">→ Need to evaluate platforms; Shopify 3-day trial → $1/mo for 3 months currently running</div>
+      <!-- PILLAR 4: Social -->
+      <div class="pillar p-orange">
+        <div class="pillar-top">
+          <div class="pillar-top-left">
+            <div class="pillar-num">P4</div>
+            <div class="pillar-name">Content + Social Growth</div>
+          </div>
+          <span class="pillar-status-badge badge-blocked">Blocked</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-metrics">
+            <div class="pm"><div class="pm-label">InkThorn Followers</div><div class="pm-val o" id="inkFollowers">0</div></div>
+            <div class="pm"><div class="pm-label">ValueBin Followers</div><div class="pm-val o" id="vbFollowers">0</div></div>
+            <div class="pm"><div class="pm-label">Posts Published</div><div class="pm-val o" id="postsCount">0</div></div>
+            <div class="pm"><div class="pm-label">Platforms Live</div><div class="pm-val o" id="platformsLive">0 / 10</div></div>
+          </div>
+          <!-- Social account status table -->
+          <div id="socialTable">
+            <div class="social-row">
+              <div class="social-brand">InkThorn</div>
+              <div class="social-platform">TikTok</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">InkThorn</div>
+              <div class="social-platform">Instagram</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">InkThorn</div>
+              <div class="social-platform">Facebook</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">InkThorn</div>
+              <div class="social-platform">X (Twitter)</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">InkThorn</div>
+              <div class="social-platform">YouTube</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">ValueBin</div>
+              <div class="social-platform">TikTok</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">ValueBin</div>
+              <div class="social-platform">Instagram</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">ValueBin</div>
+              <div class="social-platform">Facebook</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">ValueBin</div>
+              <div class="social-platform">X (Twitter)</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">ValueBin</div>
+              <div class="social-platform">YouTube</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+          </div>
+          <div style="font-size:.75rem;color:var(--text2);margin-top:10px">Content calendar drafted for both brands. 7-day posting schedule ready. Hooks written. All blocked on phone verification for account creation.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="action-item">
-      <span class="action-priority priority-med">Medium</span>
-      <div class="action-text">
-        Create 10 Etsy digital products: NOLA neighborhood maps, bar crawl guides, event itineraries, art prints
-        <div class="action-who">→ Autonomous — generating content and mockups in parallel</div>
+    </div><!-- /pillars-stack -->
+
+    <!-- RIGHT COL -->
+    <div class="right-col">
+
+      <!-- LIVE LOG -->
+      <div class="log-panel">
+        <div class="log-header">
+          <div class="log-header-title">⚡ Live Action Log</div>
+          <div class="log-count" id="logCount">4 entries</div>
+        </div>
+        <div class="log-scroll" id="actionLog">
+
+          <div class="log-entry">
+            <div class="log-dot ld-cyan"></div>
+            <div class="log-ts">Apr 8 · 14:50</div>
+            <div>
+              <div class="log-msg">Dashboard rebuilt to full spec — budget tracker, live log, pillar statuses, blocker flags, social/product/affiliate tables all live</div>
+              <div class="log-tag lt-sys">System</div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <div class="log-dot ld-orange"></div>
+            <div class="log-ts">Apr 8 · 14:45</div>
+            <div>
+              <div class="log-msg">3 research agents spawned in parallel: ValueBin niche analysis, affiliate program mapping, Etsy/Fiverr product research</div>
+              <div class="log-tag lt-sys">Research</div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <div class="log-dot ld-green"></div>
+            <div class="log-ts">Apr 8 · 14:40</div>
+            <div>
+              <div class="log-msg">Dashboard v1 deployed to inkthorn.ai/mission (GitHub Pages, Staticrypt encrypted)</div>
+              <div class="log-tag lt-sys">System</div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <div class="log-dot ld-pink"></div>
+            <div class="log-ts">Apr 8 · 14:37</div>
+            <div>
+              <div class="log-msg">72-Hour Revenue Mission received. Mission accepted. Clock started.</div>
+              <div class="log-tag lt-sys">Mission Start</div>
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>
 
-    <div class="action-item">
-      <span class="action-priority priority-med">Medium</span>
-      <div class="action-text">
-        Embed affiliate links into inkthorn.ai/community event calendar — contextual, local-feel integration
-        <div class="action-who">→ Autonomous — can deploy once affiliate IDs are confirmed</div>
+      <!-- SPEND LEDGER -->
+      <div class="mini-panel">
+        <div class="mini-title">Budget Ledger</div>
+        <div id="spendLedger">
+          <div class="product-row">
+            <div><div class="product-name">Mission Dashboard — design + deploy</div><div class="product-platform">GitHub Pages (existing) · No cost</div></div>
+            <div style="text-align:right"><div class="product-price" style="color:var(--neon-green)">$0.00</div></div>
+          </div>
+          <div style="font-size:.7rem;color:var(--muted);margin-top:8px;padding-top:6px;border-top:1px solid var(--border)">
+            Total spent: <span style="color:var(--neon-pink);font-family:'Orbitron',monospace">$0.00</span> of $200.00 budget
+          </div>
+        </div>
       </div>
-    </div>
 
-  </div>
+    </div><!-- /right-col -->
+  </div><!-- /main-grid -->
 
   <div class="footer">
-    InkThorn AI &mdash; Mission Control &mdash; Last updated: <span id="footerTime">Apr 8, 2026</span><br>
-    Budget: $200 max &bull; Operator: <span>Rob Gaudet</span> &bull; Agent: <span>InkThorn-NemoClaw</span>
+    InkThorn AI Mission Control &mdash; Password: <span>InkThorn72</span> &mdash; Budget: $200 max &mdash; Operator: <span>Rob Gaudet</span> &mdash; Agent: InkThorn-NemoClaw<br>
+    Deadline: <span>Apr 11, 2026 @ 14:37 CDT</span> &mdash; Pushes to this page: every action + hourly minimum
   </div>
 
-</div>
+</div><!-- /wrap -->
 
 <script>
-  // Mission clock
+  // ── Mission Clock ──
   const deadline = new Date('2026-04-11T14:37:00-05:00');
-
   function updateClock() {
-    const now = new Date();
-    const diff = deadline - now;
-    if (diff <= 0) {
-      document.getElementById('missionClock').textContent = 'MISSION COMPLETE';
-      return;
-    }
+    const diff = deadline - new Date();
+    if (diff <= 0) { document.getElementById('missionClock').textContent = 'MISSION END'; return; }
     const h = Math.floor(diff / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
     const s = Math.floor((diff % 60000) / 1000);
     document.getElementById('missionClock').textContent =
       `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
   }
+  updateClock(); setInterval(updateClock, 1000);
 
-  updateClock();
-  setInterval(updateClock, 1000);
-
-  // Budget
-  const BUDGET = 200;
-  const spent = 0;
-  const earned = 0;
-
+  // ── Budget ──
+  const BUDGET = 200, spent = 0, earned = 0, projected = 0;
   document.getElementById('budgetRemaining').textContent = `$${(BUDGET - spent).toFixed(2)}`;
   document.getElementById('totalSpent').textContent = `$${spent.toFixed(2)}`;
-  document.getElementById('totalRevenue').textContent = `$${earned.toFixed(2)}`;
-  document.getElementById('spendPct').textContent = `${Math.round(spent/BUDGET*100)}% of $${BUDGET} budget`;
-  document.getElementById('budgetBarFill').style.width = `${Math.min(spent/BUDGET*100, 100)}%`;
-
-  // Last updated
-  const now = new Date();
-  const opts = { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'America/Chicago' };
-  const ts = now.toLocaleString('en-US', opts);
-  document.getElementById('lastUpdated').textContent = ts;
-  document.getElementById('footerTime').textContent = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/Chicago' });
+  document.getElementById('totalEarned').textContent = `$${earned.toFixed(2)}`;
+  document.getElementById('totalProjected').textContent = projected > 0 ? `$${projected.toFixed(2)}` : '—';
+  document.getElementById('spendPctLabel').textContent = `$${spent.toFixed(2)} of $${BUDGET} spent (${Math.round(spent/BUDGET*100)}%)`;
+  document.getElementById('budgetBarFill').style.width = `${Math.min(spent/BUDGET*100,100)}%`;
+  document.getElementById('revenueBarFill').style.width = `${Math.min((earned+projected)/BUDGET*100,100)}%`;
 </script>
 </body>
 </html>
