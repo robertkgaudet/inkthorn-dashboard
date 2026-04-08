@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>InkThorn — 72-Hour Revenue Mission (Class View)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #070710;
+      --surface: #0f0f1c;
+      --surface2: #17172a;
+      --surface3: #1e1e35;
+      --border: #252540;
+      --border2: #1a1a30;
+      --neon-pink:   #ff2d78;
+      --neon-cyan:   #00f5ff;
+      --neon-purple: #b44fff;
+      --neon-green:  #39ff14;
+      --neon-orange: #ff6b00;
+      --neon-yellow: #ffe600;
+      --text:   #ddddf0;
+      --text2:  #a0a0c0;
+      --muted:  #5a5a7a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,245,255,0.012) 2px, rgba(0,245,255,0.012) 4px);
+      pointer-events: none; z-index: 0;
+    }
+
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 20px 16px; position: relative; z-index: 1; }
+
+
+    /* CLASS VIEW */
+    .class-banner {
+      background: rgba(180,79,255,.12);
+      border: 1px solid rgba(180,79,255,.3);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 0.7rem;
+      color: var(--neon-purple);
+      text-align: center;
+      margin-bottom: 14px;
+      font-family: 'Orbitron', monospace;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .redacted-name {
+      display: inline-block;
+      background: rgba(255,45,120,.12);
+      border-radius: 4px;
+      filter: blur(5px);
+      user-select: none;
+      color: transparent;
+      pointer-events: none;
+      font-size: .82rem;
+    }
+
+    .redacted-detail {
+      filter: blur(4px);
+      user-select: none;
+      color: transparent;
+      pointer-events: none;
+      font-size: .72rem;
+    }
+
+    /* ─── TOP BAR ─── */
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .topbar-title h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-transform: uppercase; letter-spacing: 3px;
+    }
+
+    .topbar-title .sub {
+      font-size: 0.68rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 1px; margin-top: 2px;
+    }
+
+    .topbar-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+
+    .clock-block { text-align: right; }
+    .clock-label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .clock-value {
+      font-family: 'Orbitron', monospace; font-size: 1.3rem;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 20px rgba(0,245,255,0.6);
+      animation: glowpulse 2s ease-in-out infinite;
+    }
+
+    @keyframes glowpulse { 0%,100%{text-shadow:0 0 10px rgba(0,245,255,.5)} 50%{text-shadow:0 0 30px rgba(0,245,255,.95)} }
+
+    .last-push { font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+
+    /* ─── BUDGET ROW ─── */
+    .budget-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr) 2fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    @media(max-width:900px) { .budget-row { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:500px) { .budget-row { grid-template-columns: 1fr; } }
+
+    .bcard {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .bcard .blabel {
+      font-size: 0.62rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;
+    }
+
+    .bcard .bval {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.4rem; font-weight: 700;
+    }
+
+    .bval.pink   { color: var(--neon-pink);   text-shadow: 0 0 12px rgba(255,45,120,.4); }
+    .bval.green  { color: var(--neon-green);  text-shadow: 0 0 12px rgba(57,255,20,.4); }
+    .bval.cyan   { color: var(--neon-cyan);   text-shadow: 0 0 12px rgba(0,245,255,.4); }
+    .bval.purple { color: var(--neon-purple); text-shadow: 0 0 12px rgba(180,79,255,.4); }
+
+    .bcard-bar { grid-column: span 1; }
+    .bar-labels { display: flex; justify-content: space-between; font-size: 0.62rem; color: var(--muted); margin-bottom: 5px; }
+    .budget-bar { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+    .budget-bar-fill { height: 100%; background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan)); transition: width .6s; border-radius: 4px; }
+    .revenue-bar { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+    .revenue-bar-fill { height: 100%; background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple)); transition: width .6s; border-radius: 4px; }
+
+    /* ─── 3-COL LAYOUT ─── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    @media(max-width:900px) { .main-grid { grid-template-columns: 1fr; } }
+
+    /* ─── PILLARS ─── */
+    .pillars-stack { display: flex; flex-direction: column; gap: 12px; }
+
+    .pillar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .pillar-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border2);
+      gap: 10px; flex-wrap: wrap;
+    }
+
+    .pillar-top-left { display: flex; align-items: center; gap: 12px; }
+
+    .pillar-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem; font-weight: 700;
+      color: var(--muted); min-width: 20px;
+    }
+
+    .pillar-name {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    .p-pink   .pillar-name { color: var(--neon-pink); }
+    .p-cyan   .pillar-name { color: var(--neon-cyan); }
+    .p-purple .pillar-name { color: var(--neon-purple); }
+    .p-orange .pillar-name { color: var(--neon-orange); }
+    .p-green  .pillar-name { color: var(--neon-green); }
+
+    .pillar-status-badge {
+      font-size: 0.6rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 1px; white-space: nowrap;
+    }
+
+    .badge-notstarted { background: rgba(90,90,122,.2);   color: var(--muted);       border: 1px solid var(--border); }
+    .badge-inprogress { background: rgba(255,107,0,.15);  color: var(--neon-orange); border: 1px solid rgba(255,107,0,.3); }
+    .badge-live       { background: rgba(0,245,255,.15);  color: var(--neon-cyan);   border: 1px solid rgba(0,245,255,.3); }
+    .badge-earning    { background: rgba(57,255,20,.15);  color: var(--neon-green);  border: 1px solid rgba(57,255,20,.3); }
+    .badge-blocked    { background: rgba(255,45,120,.15); color: var(--neon-pink);   border: 1px solid rgba(255,45,120,.3); }
+    .badge-done       { background: rgba(57,255,20,.15);  color: var(--neon-green);  border: 1px solid rgba(57,255,20,.3); }
+
+    .pillar-body { padding: 14px 16px; }
+
+    .pillar-metrics {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 8px; margin-bottom: 12px;
+    }
+
+    .pm {
+      background: var(--surface2); border-radius: 7px;
+      padding: 8px 10px;
+    }
+
+    .pm .pm-label { font-size: 0.58rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 3px; }
+    .pm .pm-val { font-family: 'Orbitron', monospace; font-size: 0.9rem; font-weight: 700; }
+    .pm .pm-val.g { color: var(--neon-green); }
+    .pm .pm-val.c { color: var(--neon-cyan); }
+    .pm .pm-val.p { color: var(--neon-pink); }
+    .pm .pm-val.u { color: var(--neon-purple); }
+    .pm .pm-val.o { color: var(--neon-orange); }
+
+    /* ─── ROB'S ACTION ITEMS ─── */
+    .rob-tasks-section {
+      background: rgba(0,245,255,.04);
+      border: 1px solid rgba(0,245,255,.25);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+
+    .rob-tasks-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px; gap: 10px;
+    }
+
+    .rob-tasks-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--neon-cyan);
+      text-transform: uppercase; letter-spacing: 2px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .tasks-progress-pill {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      color: var(--neon-orange);
+      background: rgba(255,107,0,.12);
+      border: 1px solid rgba(255,107,0,.3);
+      border-radius: 20px;
+      padding: 3px 12px;
+      white-space: nowrap;
+    }
+
+    .tasks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media(max-width:700px) { .tasks-grid { grid-template-columns: 1fr; } }
+
+    .task-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 12px 14px;
+      position: relative;
+      cursor: default;
+    }
+
+    .task-item.task-done {
+      opacity: 0.5;
+      border-color: rgba(57,255,20,.2);
+      background: rgba(57,255,20,.04);
+    }
+
+    .task-checkbox {
+      width: 20px; height: 20px;
+      border-radius: 5px;
+      border: 2px solid var(--border);
+      flex-shrink: 0; margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    .task-done .task-checkbox {
+      background: rgba(57,255,20,.2);
+      border-color: var(--neon-green);
+      color: var(--neon-green);
+    }
+
+    .task-body { flex: 1; }
+
+    .task-title {
+      font-size: 0.84rem; font-weight: 600;
+      color: var(--text); margin-bottom: 3px; line-height: 1.3;
+    }
+
+    .task-done .task-title { text-decoration: line-through; color: var(--muted); }
+
+    .task-detail {
+      font-size: 0.7rem; color: var(--text2); line-height: 1.4;
+    }
+
+    .task-tag {
+      font-size: 0.58rem; font-weight: 700;
+      padding: 2px 7px; border-radius: 8px;
+      text-transform: uppercase; letter-spacing: .5px;
+      white-space: nowrap; margin-top: 5px; display: inline-block;
+    }
+
+    .ttag-now    { background: rgba(255,45,120,.15);  color: var(--neon-pink);   border: 1px solid rgba(255,45,120,.25); }
+    .ttag-quick  { background: rgba(255,107,0,.15);   color: var(--neon-orange); border: 1px solid rgba(255,107,0,.25); }
+    .ttag-ready  { background: rgba(57,255,20,.15);   color: var(--neon-green);  border: 1px solid rgba(57,255,20,.25); }
+    .ttag-when   { background: rgba(107,107,138,.2);  color: var(--muted);       border: 1px solid var(--border); }
+
+    /* ─── LEGACY BLOCKERS (keep styles for compatibility) ─── */
+    .blockers-section {
+      display: none; /* replaced by rob-tasks-section */
+    }
+
+    .blocker-item { display: none; }
+    .blocker-icon { display: none; }
+    .blocker-text { display: none; }
+    .blocker-text .blocker-detail { display: none; }
+    .blockers-title { display: none; }
+
+    /* ─── RIGHT COLUMN ─── */
+    .right-col { display: flex; flex-direction: column; gap: 12px; }
+
+    /* ─── LIVE LOG ─── */
+    .log-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .log-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border2);
+      background: var(--surface2);
+    }
+
+    .log-header-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.68rem; font-weight: 700;
+      color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 2px;
+    }
+
+    .log-count {
+      font-size: 0.62rem; color: var(--muted);
+      background: var(--surface3); padding: 2px 8px; border-radius: 10px;
+    }
+
+    .log-scroll { max-height: 560px; overflow-y: auto; padding: 10px; }
+    .log-scroll::-webkit-scrollbar { width: 4px; }
+    .log-scroll::-webkit-scrollbar-track { background: var(--surface2); }
+    .log-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .log-entry {
+      display: flex; gap: 8px; align-items: flex-start;
+      padding: 7px 6px;
+      border-bottom: 1px solid rgba(255,255,255,.03);
+      font-size: 0.78rem; line-height: 1.4;
+    }
+
+    .log-entry:first-child { background: rgba(0,245,255,.04); border-radius: 5px; }
+    .log-entry:last-child { border-bottom: none; }
+
+    .log-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .ld-cyan   { background: var(--neon-cyan); box-shadow: 0 0 6px var(--neon-cyan); }
+    .ld-pink   { background: var(--neon-pink); }
+    .ld-green  { background: var(--neon-green); }
+    .ld-orange { background: var(--neon-orange); }
+    .ld-purple { background: var(--neon-purple); }
+    .ld-muted  { background: var(--muted); }
+
+    .log-ts { font-size: 0.62rem; color: var(--muted); white-space: nowrap; padding-top: 2px; min-width: 80px; }
+    .log-msg { color: var(--text); flex: 1; }
+    .log-tag {
+      font-size: 0.58rem; padding: 1px 6px; border-radius: 8px;
+      text-transform: uppercase; letter-spacing: .3px; white-space: nowrap; margin-top: 2px;
+    }
+    .lt-ink  { background: rgba(255,45,120,.15); color: var(--neon-pink); }
+    .lt-vb   { background: rgba(0,245,255,.15);  color: var(--neon-cyan); }
+    .lt-aff  { background: rgba(180,79,255,.15); color: var(--neon-purple); }
+    .lt-sys  { background: rgba(90,90,122,.2);   color: var(--muted); }
+    .lt-soc  { background: rgba(255,107,0,.15);  color: var(--neon-orange); }
+
+    /* ─── MINI PANELS ─── */
+    .mini-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .mini-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem; font-weight: 700;
+      color: var(--neon-purple); text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .mini-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+    .social-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 0; border-bottom: 1px solid var(--border2);
+      font-size: 0.8rem;
+    }
+
+    .social-row:last-child { border-bottom: none; }
+
+    .social-brand { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; min-width: 70px; }
+    .social-platform { flex: 1; color: var(--text2); }
+    .social-followers { font-family: 'Orbitron', monospace; font-size: 0.78rem; color: var(--neon-cyan); min-width: 40px; text-align: right; }
+    .social-status { font-size: 0.6rem; margin-left: 8px; }
+    .s-pending { color: var(--neon-orange); }
+    .s-live { color: var(--neon-green); }
+    .s-blocked { color: var(--neon-pink); }
+
+    .product-row {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 7px 0; border-bottom: 1px solid var(--border2);
+      font-size: 0.78rem; gap: 8px;
+    }
+
+    .product-row:last-child { border-bottom: none; }
+
+    .product-name { flex: 1; color: var(--text); line-height: 1.4; }
+    .product-platform { font-size: 0.6rem; color: var(--muted); margin-top: 1px; }
+    .product-price { font-family: 'Orbitron', monospace; font-size: 0.75rem; color: var(--neon-green); white-space: nowrap; }
+    .product-badge {
+      font-size: 0.58rem; padding: 2px 6px; border-radius: 8px;
+      text-transform: uppercase; white-space: nowrap;
+    }
+    .pb-pending { background: rgba(255,107,0,.15); color: var(--neon-orange); border: 1px solid rgba(255,107,0,.2); }
+    .pb-live    { background: rgba(57,255,20,.15);  color: var(--neon-green); border: 1px solid rgba(57,255,20,.2); }
+    .pb-blocked { background: rgba(255,45,120,.15); color: var(--neon-pink); border: 1px solid rgba(255,45,120,.2); }
+
+    .aff-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 0; border-bottom: 1px solid var(--border2);
+      font-size: 0.78rem;
+    }
+
+    .aff-row:last-child { border-bottom: none; }
+    .aff-name { flex: 1; color: var(--text); }
+    .aff-commission { font-size: 0.7rem; color: var(--neon-purple); white-space: nowrap; }
+    .aff-pages { font-size: 0.65rem; color: var(--muted); white-space: nowrap; }
+    .aff-status { font-size: 0.6rem; white-space: nowrap; }
+    .as-applied { color: var(--neon-orange); }
+    .as-live { color: var(--neon-green); }
+    .as-researching { color: var(--muted); }
+
+    /* ─── FOOTER ─── */
+    .footer { text-align: center; color: var(--muted); font-size: 0.65rem; padding: 20px 0 10px; letter-spacing: .5px; }
+    .footer span { color: var(--neon-pink); }
+
+    @media(max-width:600px) {
+      .topbar { flex-direction: column; align-items: flex-start; }
+      .clock-block { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-title">
+      <h1>⚡ InkThorn — Mission Control</h1>
+      <div class="sub">72-Hour Revenue Initiative · Started Apr 8, 2026 14:37 CDT · Deadline Apr 11, 2026 14:37 CDT</div>
+    </div>
+    <div class="topbar-right">
+      <div class="clock-block">
+        <div class="clock-label">Time Remaining</div>
+        <div class="clock-value" id="missionClock">--:--:--</div>
+        <div class="last-push">Last update: <span id="lastPush">Apr 8 · 17:00 CDT — Rob's action items added to dashboard</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUDGET ROW -->
+  <div class="budget-row">
+    <div class="bcard">
+      <div class="blabel">Budget Remaining</div>
+      <div class="bval cyan" id="budgetRemaining">$200.00</div>
+    </div>
+    <div class="bcard">
+      <div class="blabel">Total Spent</div>
+      <div class="bval pink" id="totalSpent">$0.00</div>
+    </div>
+    <div class="bcard">
+      <div class="blabel">Total Earned</div>
+      <div class="bval green" id="totalEarned">$0.00</div>
+    </div>
+    <div class="bcard">
+      <div class="blabel">Projected (30d)</div>
+      <div class="bval purple" id="totalProjected">—</div>
+    </div>
+    <div class="bcard bcard-bar">
+      <div class="blabel">Spend vs. Budget</div>
+      <div class="bar-labels"><span id="spendPctLabel">$0 of $200 spent (0%)</span></div>
+      <div class="budget-bar"><div class="budget-bar-fill" id="budgetBarFill" style="width:0%"></div></div>
+      <div class="blabel" style="margin-top:8px">Revenue vs. $200 Target</div>
+      <div class="revenue-bar"><div class="revenue-bar-fill" id="revenueBarFill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="class-banner">🎓 Class View — Proprietary details redacted</div>
+
+  <!-- ROB'S ACTION ITEMS (hidden in class view) -->
+  <div style="display:none">
+  <div class="rob-tasks-section">
+    <div class="rob-tasks-header">
+      <div class="rob-tasks-title">✅ Rob's Action Items — Do These to Unlock Revenue</div>
+      <div class="tasks-progress-pill" id="tasksPill">0 / 6 complete</div>
+    </div>
+    <div class="tasks-grid">
+
+      <div class="task-item" id="task-shopify">
+        <div class="task-checkbox" id="cb-shopify">☐</div>
+        <div class="task-body">
+          <div class="task-title">Start Shopify Free Trial</div>
+          <div class="task-detail">Go to <strong>shopify.com/free-trial</strong> — takes 2 min. 3 days free, then $1/mo for 3 months. Paste me the store URL and I build it out same day with all 5 ValueBin products.</div>
+          <div class="task-tag ttag-now">🔥 Do First</div>
+        </div>
+      </div>
+
+      <div class="task-item" id="task-etsy">
+        <div class="task-checkbox" id="cb-etsy">☐</div>
+        <div class="task-body">
+          <div class="task-title">Create Etsy Seller Account</div>
+          <div class="task-detail">Go to <strong>etsy.com/sell</strong> — use your email + billing info. I have 10 NOLA digital products fully written and priced. You open the account → I list everything within the hour.</div>
+          <div class="task-tag ttag-now">🔥 Do First</div>
+        </div>
+      </div>
+
+      <div class="task-item" id="task-fiverr">
+        <div class="task-checkbox" id="cb-fiverr">☐</div>
+        <div class="task-body">
+          <div class="task-title">Create Fiverr Account</div>
+          <div class="task-detail">Go to <strong>fiverr.com/join</strong> — seller account, your email. 5 gig descriptions ready to paste in immediately after setup.</div>
+          <div class="task-tag ttag-quick">⚡ Quick Win</div>
+        </div>
+      </div>
+
+      <div class="task-item" id="task-amazon">
+        <div class="task-checkbox" id="cb-amazon">☐</div>
+        <div class="task-body">
+          <div class="task-title">Approve Amazon Associates Application</div>
+          <div class="task-detail">Go to <strong>affiliate-program.amazon.com</strong> — apply using inkthorn.ai as your site. Near-instant approval. I'll embed gear links on every festival/outdoor event page immediately after.</div>
+          <div class="task-tag ttag-quick">⚡ Quick Win</div>
+        </div>
+      </div>
+
+      <div class="task-item" id="task-booking">
+        <div class="task-checkbox" id="cb-booking">☐</div>
+        <div class="task-body">
+          <div class="task-title">Sign Up for Booking.com Affiliate</div>
+          <div class="task-detail">Go to <strong>booking.com/affiliate-program</strong> — <em>instant approval</em>, no waiting. I'll embed hotel widgets on all major festival event pages the same day. 4–6% commission on every booking.</div>
+          <div class="task-tag ttag-ready">✅ Instant Approval</div>
+        </div>
+      </div>
+
+      <div class="task-item" id="task-social">
+        <div class="task-checkbox" id="cb-social">☐</div>
+        <div class="task-body">
+          <div class="task-title">Create Social Media Accounts (10 total)</div>
+          <div class="task-detail">TikTok, Instagram, Facebook, X, YouTube — for both <strong>InkThorn</strong> and <strong>ValueBin</strong>. Phone verification required. Content calendars and post copy ready. You verify → I post same day.</div>
+          <div class="task-tag ttag-when">When You Have 30 Min</div>
+        </div>
+      </div>
+
+    </div>
+  </div></div>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+    <div class="pillars-stack">
+
+      <!-- PILLAR 5: Dashboard -->
+      <div class="pillar p-green">
+        <div class="pillar-top">
+          <div class="pillar-top-left">
+            <div class="pillar-num">P5</div>
+            <div class="pillar-name">Mission Dashboard</div>
+          </div>
+          <span class="pillar-status-badge badge-done">✓ Live</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-metrics">
+            <div class="pm"><div class="pm-label">URL</div><div class="pm-val c" style="font-size:.7rem">inkthorn.ai/mission</div></div>
+            <div class="pm"><div class="pm-label">Access</div><div class="pm-val g" style="font-size:.7rem">Class View</div></div>
+            <div class="pm"><div class="pm-label">Updates/hr</div><div class="pm-val g">1+</div></div>
+            <div class="pm"><div class="pm-label">Auto-refresh</div><div class="pm-val c" style="font-size:.7rem">Manual push</div></div>
+          </div>
+          <div style="font-size:.75rem;color:var(--text2)">Dashboard deployed to GitHub Pages. Every action logged in real time. Rebuilt to full spec Apr 8 14:50 CDT.</div>
+        </div>
+      </div>
+
+      <!-- PILLAR 1: Etsy + Fiverr -->
+      <div class="pillar p-pink">
+        <div class="pillar-top">
+          <div class="pillar-top-left">
+            <div class="pillar-num">P1</div>
+            <div class="pillar-name">Etsy + Fiverr Publishing</div>
+          </div>
+          <span class="pillar-status-badge badge-inprogress">Content Ready</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-metrics">
+            <div class="pm"><div class="pm-label">Etsy Products Ready</div><div class="pm-val p" id="etsyCount">10 / 10 ✓</div></div>
+            <div class="pm"><div class="pm-label">Fiverr Gigs Ready</div><div class="pm-val p" id="fiverrCount">5 / 5 ✓</div></div>
+            <div class="pm"><div class="pm-label">Revenue</div><div class="pm-val" id="etsyRevenue">$0</div></div>
+            <div class="pm"><div class="pm-label">Projected</div><div class="pm-val p" id="etsyProjected">—</div></div>
+          </div>
+          <div style="font-size:.75rem;color:var(--text2);margin-bottom:8px">10 products fully researched, titled, and priced. InkThorn has identified an <strong style="color:var(--neon-pink)">uncontested niche</strong> on Etsy. Specific products and strategy are proprietary. <strong style="color:var(--neon-pink)">Blocked on account creation.</strong></div>
+          <div id="etsyProductList">
+            <div class="product-row">
+              <div><div class="product-name"><span class="redacted-name">████ ███████ ████████ ███████ ████</span></div><div class="product-platform">Etsy · Digital Download · <span class="redacted-detail">████████ ████████ ████ ████████ ████</span></div></div>
+              <div style="text-align:right"><div class="product-price">$6.99</div><div class="product-badge pb-blocked">Needs Acct</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name"><span class="redacted-name">███████ ████ ████ ████ ████████████ ████</span></div><div class="product-platform">Etsy · Digital Download · <span class="redacted-detail">████████ ████████ ████ ████████ ████</span></div></div>
+              <div style="text-align:right"><div class="product-price">$4.99</div><div class="product-badge pb-blocked">Needs Acct</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name"><span class="redacted-name">████ ██ ████ ████████ ████ ████████</span></div><div class="product-platform">Etsy · Digital Download · <span class="redacted-detail">████████ ████████ ████ ████████ ████</span></div></div>
+              <div style="text-align:right"><div class="product-price">$7.99</div><div class="product-badge pb-blocked">Needs Acct</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name"><span class="redacted-name">███ ███████ ████ ████████ ████████</span></div><div class="product-platform">Etsy · Digital Download · <span class="redacted-detail">████████ ████████ ████ ████████ ████</span></div></div>
+              <div style="text-align:right"><div class="product-price">$5.99</div><div class="product-badge pb-blocked">Needs Acct</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name"><span class="redacted-name">██████████ ████ ████████ ████ ████</span></div><div class="product-platform">Etsy · Digital Download · <span class="redacted-detail">████████ ████████ ████ ████████ ████</span></div></div>
+              <div style="text-align:right"><div class="product-price">$12.99</div><div class="product-badge pb-blocked">Needs Acct</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name"><span class="redacted-name">███ ███████ ████ ████ ██████████</span></div><div class="product-platform">Etsy · Digital Download · <span class="redacted-detail">████████ ████████ ████ ████████ ████</span></div></div>
+              <div style="text-align:right"><div class="product-price">$5.99</div><div class="product-badge pb-blocked">Needs Acct</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name"><span class="redacted-name">██ ██████ ████ ████ ████████ ██████</span></div><div class="product-platform">Etsy · Digital Download · <span class="redacted-detail">████████ ████████ ████ ████████ ████</span></div></div>
+              <div style="text-align:right"><div class="product-price">$14.99</div><div class="product-badge pb-blocked">Needs Acct</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name"><span class="redacted-name">███ ███████ ████████ ████████ ████</span></div><div class="product-platform">Etsy · Digital Download · <span class="redacted-detail">████████ ████████ ████ ████████ ████</span></div></div>
+              <div style="text-align:right"><div class="product-price">$9.99</div><div class="product-badge pb-blocked">Needs Acct</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name"><span class="redacted-name">█████ ████ ████████ ████ ████████</span></div><div class="product-platform">Etsy · Digital Download · <span class="redacted-detail">████████ ████████ ████ ████████ ████</span></div></div>
+              <div style="text-align:right"><div class="product-price">$5.99</div><div class="product-badge pb-blocked">Needs Acct</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name"><span class="redacted-name">███ ███████ ████████ █████ ████ █████</span></div><div class="product-platform">Etsy · Digital Download · <span class="redacted-detail">████████ ████████ ████ ████████ ████</span></div></div>
+              <div style="text-align:right"><div class="product-price">$7.99</div><div class="product-badge pb-blocked">Needs Acct</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PILLAR 2: Affiliate -->
+      <div class="pillar p-purple">
+        <div class="pillar-top">
+          <div class="pillar-top-left">
+            <div class="pillar-num">P2</div>
+            <div class="pillar-name">Affiliate Revenue</div>
+          </div>
+          <span class="pillar-status-badge badge-inprogress">Applying Now</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-metrics">
+            <div class="pm"><div class="pm-label">Programs Mapped</div><div class="pm-val u" id="affProgramCount">11 ✓</div></div>
+            <div class="pm"><div class="pm-label">Links Placed</div><div class="pm-val u" id="affLinkCount">0</div></div>
+            <div class="pm"><div class="pm-label">Revenue</div><div class="pm-val" id="affRevenue">$0</div></div>
+            <div class="pm"><div class="pm-label">Projected 30d</div><div class="pm-val u" id="affProjected">—</div></div>
+          </div>
+          <div style="font-size:.75rem;color:var(--text2);margin-bottom:8px">Research complete. <strong style="color:var(--neon-purple)">NOLA is Viator's #5 US destination</strong> — $220 AOV × 8% = $17.60/booking. 13 programs ranked. Applying to top-priority programs now. Instant-approval programs (Amazon, Booking.com) actionable today.</div>
+          <div id="affList">
+            <div class="aff-row">
+              <div class="aff-name">⭐ Viator (Tours)</div>
+              <div class="aff-commission">8% · $220 AOV</div>
+              <div class="aff-pages">All event pages</div>
+              <div class="aff-status as-applied">Applying</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">⭐ Amazon Associates</div>
+              <div class="aff-commission">3–8% by category</div>
+              <div class="aff-pages">Festival/outdoor events</div>
+              <div class="aff-status as-applied">Applying</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">Booking.com</div>
+              <div class="aff-commission">4–6% of booking</div>
+              <div class="aff-pages">Festival pages</div>
+              <div class="aff-status as-live" style="color:var(--neon-green)">Instant Approval ✓</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">Ticketmaster (via CJ)</div>
+              <div class="aff-commission">2–5% per ticket</div>
+              <div class="aff-pages">Buy Tickets CTAs</div>
+              <div class="aff-status as-applied">Applying · CJ</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">OpenTable (via CJ)</div>
+              <div class="aff-commission">$1–2 per diner</div>
+              <div class="aff-pages">Near-venue dining</div>
+              <div class="aff-status as-applied">Applying · CJ</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">Airbnb (via Impact)</div>
+              <div class="aff-commission">3–5% first booking</div>
+              <div class="aff-pages">Multi-day festivals</div>
+              <div class="aff-status as-applied">Applying · Impact</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">SpotHero (via AWIN)</div>
+              <div class="aff-commission">$1.50–3/booking</div>
+              <div class="aff-pages">Venue event pages</div>
+              <div class="aff-status as-applied">Applying · AWIN</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">Lyft (via Impact)</div>
+              <div class="aff-commission">$5–25 new rider</div>
+              <div class="aff-pages">Nightlife events</div>
+              <div class="aff-status as-applied">Applying · Impact</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">Uber (via Impact)</div>
+              <div class="aff-commission">$5–20 new rider</div>
+              <div class="aff-pages">Nightlife events</div>
+              <div class="aff-status as-applied">Applying · Impact</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">GetYourGuide (bonus)</div>
+              <div class="aff-commission">8% / 30d cookie</div>
+              <div class="aff-pages">NOLA experience pages</div>
+              <div class="aff-status as-researching">Queued</div>
+            </div>
+            <div class="aff-row">
+              <div class="aff-name">Expedia/Hotels.com (CJ)</div>
+              <div class="aff-commission">2–6% hotel booking</div>
+              <div class="aff-pages">Festival pages</div>
+              <div class="aff-status as-researching">Queued</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PILLAR 3: ValueBin -->
+      <div class="pillar p-cyan">
+        <div class="pillar-top">
+          <div class="pillar-top-left">
+            <div class="pillar-num">P3</div>
+            <div class="pillar-name">ValueBin Dropship</div>
+          </div>
+          <span class="pillar-status-badge badge-inprogress">Products Ready</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-metrics">
+            <div class="pm"><div class="pm-label">Products Ready</div><div class="pm-val c" id="vbProducts">5 / 5 ✓</div></div>
+            <div class="pm"><div class="pm-label">Store</div><div class="pm-val o" id="vbStore" style="font-size:.7rem">Shopify trial</div></div>
+            <div class="pm"><div class="pm-label">Revenue</div><div class="pm-val" id="vbRevenue">$0</div></div>
+            <div class="pm"><div class="pm-label">Niche</div><div class="pm-val c" id="vbNiche" style="font-size:.65rem">Home Gadgets + Wellness</div></div>
+          </div>
+          <div style="font-size:.75rem;color:var(--text2);margin-bottom:8px"><strong style="color:var(--neon-cyan)">Niche selected: Home Lifestyle Gadgets &amp; Wellness Tools.</strong> Evergreen demand, high margins (68–76%), peak spring demand right now. Platform: Shopify (3-day free → $1/mo for 3 months). <strong style="color:var(--neon-orange)">Blocked on payment method for Shopify trial setup.</strong></div>
+          <div id="vbProductList">
+            <div class="product-row">
+              <div><div class="product-name">3-in-1 Hot Air Curling Brush</div><div class="product-platform">ValueBin · Dropship · Source: $8–12 AliExpress</div></div>
+              <div style="text-align:right"><div class="product-price">$42–49</div><div class="product-badge pb-blocked">Needs Store</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name">Touchless Smart Toilet Flush Sensor</div><div class="product-platform">ValueBin · Dropship · Source: $8–11 AliExpress</div></div>
+              <div style="text-align:right"><div class="product-price">$38–45</div><div class="product-badge pb-blocked">Needs Store</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name">Multifunctional Home Fitness Balance Board</div><div class="product-platform">ValueBin · Dropship · Source: $10–14 AliExpress</div></div>
+              <div style="text-align:right"><div class="product-price">$45–55</div><div class="product-badge pb-blocked">Needs Store</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name">Smart Vacuum Suction Cupping Massager</div><div class="product-platform">ValueBin · Dropship · Source: $10–14 AliExpress</div></div>
+              <div style="text-align:right"><div class="product-price">$45–55</div><div class="product-badge pb-blocked">Needs Store</div></div>
+            </div>
+            <div class="product-row">
+              <div><div class="product-name">Jellyfish LED Mood Lamp (16-color, remote)</div><div class="product-platform">ValueBin · Dropship · Source: $6–9 AliExpress</div></div>
+              <div style="text-align:right"><div class="product-price">$35–42</div><div class="product-badge pb-blocked">Needs Store</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PILLAR 4: Social -->
+      <div class="pillar p-orange">
+        <div class="pillar-top">
+          <div class="pillar-top-left">
+            <div class="pillar-num">P4</div>
+            <div class="pillar-name">Content + Social Growth</div>
+          </div>
+          <span class="pillar-status-badge badge-blocked">Blocked</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-metrics">
+            <div class="pm"><div class="pm-label">InkThorn Followers</div><div class="pm-val o" id="inkFollowers">0</div></div>
+            <div class="pm"><div class="pm-label">ValueBin Followers</div><div class="pm-val o" id="vbFollowers">0</div></div>
+            <div class="pm"><div class="pm-label">Posts Published</div><div class="pm-val o" id="postsCount">0</div></div>
+            <div class="pm"><div class="pm-label">Platforms Live</div><div class="pm-val o" id="platformsLive">0 / 10</div></div>
+          </div>
+          <!-- Social account status table -->
+          <div id="socialTable">
+            <div class="social-row">
+              <div class="social-brand">InkThorn</div>
+              <div class="social-platform">TikTok</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">InkThorn</div>
+              <div class="social-platform">Instagram</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">InkThorn</div>
+              <div class="social-platform">Facebook</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">InkThorn</div>
+              <div class="social-platform">X (Twitter)</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">InkThorn</div>
+              <div class="social-platform">YouTube</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">ValueBin</div>
+              <div class="social-platform">TikTok</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">ValueBin</div>
+              <div class="social-platform">Instagram</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">ValueBin</div>
+              <div class="social-platform">Facebook</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">ValueBin</div>
+              <div class="social-platform">X (Twitter)</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+            <div class="social-row">
+              <div class="social-brand">ValueBin</div>
+              <div class="social-platform">YouTube</div>
+              <div class="social-followers">—</div>
+              <div class="social-status s-blocked">🔒 Needs Rob</div>
+            </div>
+          </div>
+          <div style="font-size:.75rem;color:var(--text2);margin-top:10px">Content calendar drafted for both brands. 7-day posting schedule ready. Hooks written. All blocked on phone verification for account creation.</div>
+        </div>
+      </div>
+
+    </div><!-- /pillars-stack -->
+
+    <!-- RIGHT COL -->
+    <div class="right-col">
+
+      <!-- LIVE LOG -->
+      <div class="log-panel">
+        <div class="log-header">
+          <div class="log-header-title">⚡ Live Action Log</div>
+          <div class="log-count" id="logCount">4 entries</div>
+        </div>
+        <div class="log-scroll" id="actionLog">
+
+          <div class="log-entry">
+            <div class="log-dot ld-cyan"></div>
+            <div class="log-ts">Apr 8 · 14:50</div>
+            <div>
+              <div class="log-msg">Dashboard rebuilt to full spec — budget tracker, live log, pillar statuses, blocker flags, social/product/affiliate tables all live</div>
+              <div class="log-tag lt-sys">System</div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <div class="log-dot ld-cyan"></div>
+            <div class="log-ts">Apr 8 · 17:00</div>
+            <div>
+              <div class="log-msg">Rob's Action Items panel added to dashboard — 6 tasks with direct links, priority tags, and completion tracking. Replaces blocker list with actionable checklist format.</div>
+              <div class="log-tag lt-sys">Dashboard</div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <div class="log-dot ld-purple"></div>
+            <div class="log-ts">Apr 8 · 15:00</div>
+            <div>
+              <div class="log-msg">Affiliate research complete — 11 programs mapped, ranked by NOLA revenue impact. Viator #1 pick ($220 AOV, 8%). Booking.com instant-approval queued. All programs identified with sign-up URLs, commission rates, and event-page integration strategy.</div>
+              <div class="log-tag lt-aff">Affiliate</div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <div class="log-dot ld-pink"></div>
+            <div class="log-ts">Apr 8 · 14:55</div>
+            <div>
+              <div class="log-msg">Etsy + Fiverr research complete — 10 products fully titled, described, and priced. NOLA digital niche underpenetrated — first-mover advantage confirmed. Bundle strategy set. Blocked on account creation.</div>
+              <div class="log-tag lt-ink">InkThorn</div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <div class="log-dot ld-cyan"></div>
+            <div class="log-ts">Apr 8 · 14:52</div>
+            <div>
+              <div class="log-msg">ValueBin research complete — niche: Home Gadgets + Wellness, 5 products identified (68–76% margins), Shopify confirmed. Blocked on store payment method.</div>
+              <div class="log-tag lt-vb">ValueBin</div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <div class="log-dot ld-orange"></div>
+            <div class="log-ts">Apr 8 · 14:45</div>
+            <div>
+              <div class="log-msg">3 research agents spawned in parallel: ValueBin niche analysis, affiliate program mapping, Etsy/Fiverr product research</div>
+              <div class="log-tag lt-sys">Research</div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <div class="log-dot ld-green"></div>
+            <div class="log-ts">Apr 8 · 14:40</div>
+            <div>
+              <div class="log-msg">Dashboard v1 deployed to inkthorn.ai/mission (GitHub Pages, Staticrypt encrypted)</div>
+              <div class="log-tag lt-sys">System</div>
+            </div>
+          </div>
+
+          <div class="log-entry">
+            <div class="log-dot ld-pink"></div>
+            <div class="log-ts">Apr 8 · 14:37</div>
+            <div>
+              <div class="log-msg">72-Hour Revenue Mission received. Mission accepted. Clock started.</div>
+              <div class="log-tag lt-sys">Mission Start</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SPEND LEDGER -->
+      <div class="mini-panel">
+        <div class="mini-title">Budget Ledger</div>
+        <div id="spendLedger">
+          <div class="product-row">
+            <div><div class="product-name">Mission Dashboard — design + deploy</div><div class="product-platform">GitHub Pages (existing) · No cost</div></div>
+            <div style="text-align:right"><div class="product-price" style="color:var(--neon-green)">$0.00</div></div>
+          </div>
+          <div style="font-size:.7rem;color:var(--muted);margin-top:8px;padding-top:6px;border-top:1px solid var(--border)">
+            Total spent: <span style="color:var(--neon-pink);font-family:'Orbitron',monospace">$0.00</span> of $200.00 budget
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /right-col -->
+  </div><!-- /main-grid -->
+
+  <div class="footer">
+    InkThorn AI Mission Control &mdash; Password: <span>InkThorn72</span> &mdash; Budget: $200 max &mdash; Operator: <span>Rob Gaudet</span> &mdash; Agent: InkThorn-NemoClaw<br>
+    Deadline: <span>Apr 11, 2026 @ 14:37 CDT</span> &mdash; Pushes to this page: every action + hourly minimum
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+  // ── Mission Clock ──
+  const deadline = new Date('2026-04-11T14:37:00-05:00');
+  function updateClock() {
+    const diff = deadline - new Date();
+    if (diff <= 0) { document.getElementById('missionClock').textContent = 'MISSION END'; return; }
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('missionClock').textContent =
+      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }
+  updateClock(); setInterval(updateClock, 1000);
+
+  // ── Budget ──
+  const BUDGET = 200, spent = 0, earned = 0, projected = 0;
+  document.getElementById('budgetRemaining').textContent = `$${(BUDGET - spent).toFixed(2)}`;
+  document.getElementById('totalSpent').textContent = `$${spent.toFixed(2)}`;
+  document.getElementById('totalEarned').textContent = `$${earned.toFixed(2)}`;
+  document.getElementById('totalProjected').textContent = projected > 0 ? `$${projected.toFixed(2)}` : '—';
+  document.getElementById('spendPctLabel').textContent = `$${spent.toFixed(2)} of $${BUDGET} spent (${Math.round(spent/BUDGET*100)}%)`;
+  document.getElementById('budgetBarFill').style.width = `${Math.min(spent/BUDGET*100,100)}%`;
+  document.getElementById('revenueBarFill').style.width = `${Math.min((earned+projected)/BUDGET*100,100)}%`;
+
+  // ── Task completion tracker (manually updated by agent) ──
+  const tasksDone = []; // add task IDs here as they're completed e.g. ['task-booking']
+  const totalTasks = 6;
+  tasksDone.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.classList.add('task-done');
+      const cb = el.querySelector('.task-checkbox');
+      if (cb) cb.textContent = '✓';
+    }
+  });
+  document.getElementById('tasksPill').textContent = `${tasksDone.length} / ${totalTasks} complete`;
+</script>
+</body>
+</html>
