@@ -452,7 +452,7 @@
       </div>
     </div>
   </div>
-  <p class="instructions">Right-click the logo → "Save image as" OR take a screenshot · Use on dark backgrounds</p>
+  <br><button class="dl-btn" onclick="downloadAsset('logo-canvas','valuebin-logo-dark.png',3)">⬇ Download Logo (Dark)</button>
 
   <!-- ── LOGO LIGHT ── -->
   <h2>Logo — Light Background (for invoices, emails)</h2>
@@ -467,7 +467,7 @@
       </div>
     </div>
   </div>
-  <p class="instructions">Right-click → "Save image as" · Use on white/light backgrounds</p>
+  <br><button class="dl-btn" onclick="downloadAsset('logo-canvas-white','valuebin-logo-light.png',3)">⬇ Download Logo (Light)</button>
 
   <!-- ── FAVICON ── -->
   <h2>Favicon / App Icon (128×128)</h2>
@@ -476,7 +476,7 @@
       <div class="favicon-text">VB</div>
     </div>
   </div>
-  <p class="instructions">Screenshot and upload to Shopify admin → Online Store → Themes → Customize → Favicon</p>
+  <br><button class="dl-btn" onclick="downloadAsset('favicon-canvas','valuebin-favicon.png',3)">⬇ Download Favicon</button>
 
   <!-- ── HERO BANNER ── -->
   <h2>Hero Banner (1200×500 — for Shopify homepage)</h2>
@@ -543,15 +543,41 @@
       </div>
     </div>
   </div>
-  <p class="instructions">
-    To save the full 1200×500 banner:<br>
-    1. Open this page in Chrome<br>
-    2. Right-click on the banner → Inspect<br>
-    3. Find the #banner-canvas element → right-click → "Capture node screenshot"<br>
-    OR take a screenshot and crop · Upload to Shopify → Online Store → Themes → Customize → Hero Image
-  </p>
+  <br><button class="dl-btn" onclick="downloadAsset('banner-canvas','valuebin-hero-banner.png',1)">⬇ Download Hero Banner (1200×500)</button>
 
   <br><br>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  function downloadAsset(elementId, filename, scale) {
+    const el = document.getElementById(elementId);
+    html2canvas(el, { scale: scale || 2, useCORS: true, backgroundColor: null }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  }
+</script>
+
+<style>
+  .dl-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #00c9ff, #0072ff);
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    margin-top: 10px;
+  }
+  .dl-btn:hover { opacity: 0.85; }
+</style>
 
 </body>
 </html>
