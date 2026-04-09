@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOLA Bachelorette Prompts — NolaCultureCo</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a12;
+    --card: #12121e;
+    --border: #2a2a3e;
+    --neon-pink: #ff2d78;
+    --neon-cyan: #00f5ff;
+    --neon-purple: #b44fff;
+    --text: #e8e8f0;
+    --text2: #9090a8;
+    --green: #00ff88;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  header h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: var(--neon-pink);
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 20px rgba(255,45,120,0.5);
+  }
+  header p {
+    color: var(--text2);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .prompt-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 1rem 1.25rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .card-header .emoji { font-size: 1.4rem; }
+  .card-header .meta { flex: 1; }
+  .card-header .tier {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .card-header .subtitle {
+    font-size: 0.75rem;
+    color: var(--text2);
+  }
+  .tier-wild { color: var(--neon-pink); }
+  .tier-festive { color: var(--neon-cyan); }
+  .tier-elegant { color: var(--neon-purple); }
+
+  .prompt-text {
+    padding: 1.25rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text);
+    background: rgba(255,255,255,0.02);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .copy-bar {
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .copy-btn {
+    background: transparent;
+    border: 1px solid var(--neon-pink);
+    color: var(--neon-pink);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    letter-spacing: 0.03em;
+  }
+  .copy-btn:hover {
+    background: var(--neon-pink);
+    color: #fff;
+  }
+  .copy-btn.festive { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+  .copy-btn.festive:hover { background: var(--neon-cyan); color: #000; }
+  .copy-btn.elegant { border-color: var(--neon-purple); color: var(--neon-purple); }
+  .copy-btn.elegant:hover { background: var(--neon-purple); color: #fff; }
+
+  .copy-confirm {
+    font-size: 0.78rem;
+    color: var(--green);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .copy-confirm.show { opacity: 1; }
+
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--text2);
+    font-size: 0.75rem;
+  }
+  footer span { color: var(--neon-pink); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>NOLA BACHELORETTE PROMPTS</h1>
+  <p>NolaCultureCo · Grok Image Generation · Three Tiers</p>
+</header>
+
+<div class="container">
+
+  <!-- TIER 1: WILD -->
+  <div class="prompt-card">
+    <div class="card-header">
+      <div class="emoji">🎉</div>
+      <div class="meta">
+        <div class="tier tier-wild">Tier 1 — Wild &amp; Crazy</div>
+        <div class="subtitle">Bar crawl guides · Scavenger hunts · Games bundles</div>
+      </div>
+    </div>
+    <div class="prompt-text" id="prompt1">A wild bachelorette party group on Bourbon Street, New Orleans at night. Women in matching neon pink crop tops and tutus with glitter, feather boas, and sparkly sashes reading "Bride" and "Bride Tribe." They're holding go-cups and beads, laughing under neon bar signs. Confetti in the air. One woman wears a veil with a giant plastic flamingo attached. The street is packed and festive. Vibrant, chaotic energy. Photorealistic.</div>
+    <div class="copy-bar">
+      <button class="copy-btn" onclick="copyPrompt('prompt1', this)">📋 Copy Prompt</button>
+      <span class="copy-confirm" id="confirm1">✓ Copied!</span>
+    </div>
+  </div>
+
+  <!-- TIER 2: FESTIVE -->
+  <div class="prompt-card">
+    <div class="card-header">
+      <div class="emoji">🥂</div>
+      <div class="meta">
+        <div class="tier tier-festive">Tier 2 — Fun &amp; Festive</div>
+        <div class="subtitle">Second line guides · Weekend itineraries · Activity planners</div>
+      </div>
+    </div>
+    <div class="prompt-text" id="prompt2">A bachelorette party second line parade in New Orleans. A group of women in coordinated blush pink and gold outfits — sundresses, wide-brimmed hats, and silk sashes — dancing through the French Quarter carrying white handkerchiefs and parasols behind a brass band. The bride wears a flowing white midi dress and veil, champagne flute in hand. Golden afternoon light filters through oak trees. Joyful, movement-filled, authentic New Orleans energy. Photorealistic.</div>
+    <div class="copy-bar">
+      <button class="copy-btn festive" onclick="copyPrompt('prompt2', this)">📋 Copy Prompt</button>
+      <span class="copy-confirm" id="confirm2">✓ Copied!</span>
+    </div>
+  </div>
+
+  <!-- TIER 3: ELEGANT -->
+  <div class="prompt-card">
+    <div class="card-header">
+      <div class="emoji">🌹</div>
+      <div class="meta">
+        <div class="tier tier-elegant">Tier 3 — Elegant &amp; Traditional</div>
+        <div class="subtitle">Venue guides · Upscale itineraries · Wedding weekend planning</div>
+      </div>
+    </div>
+    <div class="prompt-text" id="prompt3">An elegant bachelorette brunch at a historic New Orleans Garden District mansion. Women in refined pastel cocktail dresses and pearl accessories seated around a long table on a wraparound porch draped in Spanish moss and magnolia blooms. The bride in a white silk wrap dress with a delicate veil. Silver champagne bucket, white roses, personalized menus. Warm morning light. Sophisticated, timeless, Southern elegance. Photorealistic, editorial photography style.</div>
+    <div class="copy-bar">
+      <button class="copy-btn elegant" onclick="copyPrompt('prompt3', this)">📋 Copy Prompt</button>
+      <span class="copy-confirm" id="confirm3">✓ Copied!</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>NolaCultureCo</span> · InkThorn · NOLA is the #3 US bachelorette destination
+</footer>
+
+<script>
+function copyPrompt(id, btn) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const num = id.replace('prompt','');
+    const confirm = document.getElementById('confirm' + num);
+    confirm.classList.add('show');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => {
+      confirm.classList.remove('show');
+      btn.textContent = '📋 Copy Prompt';
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
