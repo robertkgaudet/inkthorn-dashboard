@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ValueBin Brand Assets</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #111; font-family: 'Inter', sans-serif; padding: 40px; }
+
+    h2 {
+      color: #666; font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 3px; margin-bottom: 16px; margin-top: 40px;
+    }
+
+    .download-btn {
+      display: inline-block;
+      background: #00c9ff;
+      color: #000;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 8px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      margin-top: 12px;
+      text-decoration: none;
+    }
+
+    .asset-wrap {
+      display: inline-block;
+      border: 1px solid #333;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .instructions {
+      color: #555;
+      font-size: 0.75rem;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    /* ── LOGO ── */
+    #logo-canvas {
+      width: 400px;
+      height: 120px;
+      background: #0a0a14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 32px;
+    }
+
+    .logo-inner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-icon {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, #00c9ff, #0072ff);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-icon span {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: white;
+      letter-spacing: -1px;
+    }
+
+    .logo-text-block {}
+
+    .logo-wordmark {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+
+    .logo-wordmark span {
+      color: #00c9ff;
+    }
+
+    .logo-tagline {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 0.62rem;
+      color: #5a7a8a;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      margin-top: 3px;
+    }
+
+    /* Logo on white */
+    #logo-canvas-white {
+      width: 400px;
+      height: 120px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 32px;
+    }
+
+    #logo-canvas-white .logo-wordmark { color: #0a0a14; }
+    #logo-canvas-white .logo-wordmark span { color: #0072ff; }
+    #logo-canvas-white .logo-tagline { color: #8899aa; }
+
+    /* ── BANNER ── */
+    #banner-canvas {
+      width: 1200px;
+      height: 500px;
+      background: #0a0a18;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Background gradient */
+    #banner-canvas::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,114,255,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    #banner-canvas::after {
+      content: '';
+      position: absolute;
+      bottom: -50px; right: 250px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,201,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Grid lines */
+    .banner-grid {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(rgba(0,201,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,201,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .banner-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 80px;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      align-items: center;
+      width: 100%;
+      gap: 40px;
+    }
+
+    .banner-left {}
+
+    .banner-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      color: #00c9ff;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .banner-eyebrow::before {
+      content: '';
+      width: 30px; height: 2px;
+      background: #00c9ff;
+    }
+
+    .banner-headline {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 3.2rem;
+      color: #ffffff;
+      line-height: 1.05;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .banner-headline .accent { color: #00c9ff; }
+
+    .banner-sub {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #7090a0;
+      line-height: 1.6;
+      max-width: 440px;
+      margin-bottom: 32px;
+    }
+
+    .banner-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #00c9ff, #0072ff);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 16px 32px;
+      border-radius: 8px;
+    }
+
+    .banner-cta-arrow { font-size: 1.1rem; }
+
+    .banner-trust {
+      display: flex;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: #445566;
+    }
+
+    .trust-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #00c9ff;
+      opacity: 0.6;
+    }
+
+    .banner-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Product showcase cards */
+    .product-showcase {
+      position: relative;
+      width: 380px;
+      height: 380px;
+    }
+
+    .showcase-card {
+      position: absolute;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,201,255,0.15);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .sc-main {
+      width: 220px; height: 220px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,201,255,0.06);
+      border-color: rgba(0,201,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sc-emoji { font-size: 4rem; }
+
+    .sc-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      color: #fff;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .sc-price {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #00c9ff;
+    }
+
+    .sc-was {
+      font-size: 0.62rem;
+      color: #445;
+      text-decoration: line-through;
+    }
+
+    .sc-top-left {
+      width: 110px; height: 100px;
+      top: 10px; left: 10px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 4px;
+    }
+
+    .sc-top-right {
+      width: 110px; height: 100px;
+      top: 10px; right: 10px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 4px;
+    }
+
+    .sc-bottom-left {
+      width: 110px; height: 100px;
+      bottom: 10px; left: 10px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 4px;
+    }
+
+    .sc-bottom-right {
+      width: 110px; height: 100px;
+      bottom: 10px; right: 10px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 4px;
+    }
+
+    .sc-sm-emoji { font-size: 1.8rem; }
+    .sc-sm-name { font-size: 0.58rem; color: #607080; text-align: center; line-height: 1.3; }
+
+    /* Floating badge */
+    .floating-badge {
+      position: absolute;
+      top: 0; right: -20px;
+      background: linear-gradient(135deg, #00c9ff, #0072ff);
+      border-radius: 50%;
+      width: 72px; height: 72px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      color: #fff;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.3;
+      z-index: 3;
+    }
+
+    .floating-badge .badge-num {
+      font-size: 1.3rem;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    /* Banner logo in top left */
+    .banner-logo-top {
+      position: absolute;
+      top: 28px; left: 48px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .blt-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, #00c9ff, #0072ff);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 0.8rem;
+      color: white;
+    }
+
+    .blt-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .blt-name span { color: #00c9ff; }
+
+    /* Scale down banner for display */
+    .banner-scaler {
+      transform-origin: top left;
+      transform: scale(0.6);
+      width: 1200px;
+      height: 500px;
+    }
+
+    .banner-outer {
+      width: 720px;
+      height: 300px;
+      overflow: hidden;
+    }
+
+    /* ── FAVICON ── */
+    #favicon-canvas {
+      width: 128px;
+      height: 128px;
+      background: linear-gradient(135deg, #0072ff, #00c9ff);
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .favicon-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2.8rem;
+      color: white;
+      letter-spacing: -2px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── LOGO DARK ── -->
+  <h2>Logo — Dark Background (for Shopify header, social profiles)</h2>
+  <div class="asset-wrap" id="logo-dark-wrap">
+    <div id="logo-canvas">
+      <div class="logo-inner">
+        <div class="logo-icon"><span>VB</span></div>
+        <div class="logo-text-block">
+          <div class="logo-wordmark">Value<span>Bin</span></div>
+          <div class="logo-tagline">Smart Finds · Real Value</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="instructions">Right-click the logo → "Save image as" OR take a screenshot · Use on dark backgrounds</p>
+
+  <!-- ── LOGO LIGHT ── -->
+  <h2>Logo — Light Background (for invoices, emails)</h2>
+  <div class="asset-wrap">
+    <div id="logo-canvas-white">
+      <div class="logo-inner">
+        <div class="logo-icon"><span>VB</span></div>
+        <div class="logo-text-block">
+          <div class="logo-wordmark">Value<span>Bin</span></div>
+          <div class="logo-tagline">Smart Finds · Real Value</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="instructions">Right-click → "Save image as" · Use on white/light backgrounds</p>
+
+  <!-- ── FAVICON ── -->
+  <h2>Favicon / App Icon (128×128)</h2>
+  <div class="asset-wrap">
+    <div id="favicon-canvas">
+      <div class="favicon-text">VB</div>
+    </div>
+  </div>
+  <p class="instructions">Screenshot and upload to Shopify admin → Online Store → Themes → Customize → Favicon</p>
+
+  <!-- ── HERO BANNER ── -->
+  <h2>Hero Banner (1200×500 — for Shopify homepage)</h2>
+  <div class="asset-wrap banner-outer">
+    <div class="banner-scaler">
+      <div id="banner-canvas">
+        <div class="banner-grid"></div>
+
+        <!-- Logo top left -->
+        <div class="banner-logo-top">
+          <div class="blt-icon">VB</div>
+          <div class="blt-name">Value<span>Bin</span></div>
+        </div>
+
+        <div class="banner-content">
+          <div class="banner-left">
+            <div class="banner-eyebrow">New Arrivals — Spring 2026</div>
+            <div class="banner-headline">
+              Smart Finds.<br><span class="accent">Real Value.</span>
+            </div>
+            <div class="banner-sub">
+              Home upgrades, wellness tools, and lifestyle gadgets — all under $55. We did the research so you don't have to.
+            </div>
+            <div class="banner-cta">
+              Shop Now <span class="banner-cta-arrow">→</span>
+            </div>
+            <div class="banner-trust">
+              <div class="trust-item"><div class="trust-dot"></div>Free shipping available</div>
+              <div class="trust-item"><div class="trust-dot"></div>30-day returns</div>
+              <div class="trust-item"><div class="trust-dot"></div>5 curated products</div>
+            </div>
+          </div>
+
+          <div class="banner-right">
+            <div class="product-showcase">
+              <div class="showcase-card sc-top-left">
+                <div class="sc-sm-emoji">💇‍♀️</div>
+                <div class="sc-sm-name">Hot Air Brush</div>
+              </div>
+              <div class="showcase-card sc-top-right">
+                <div class="sc-sm-emoji">🚽</div>
+                <div class="sc-sm-name">Auto Flush Sensor</div>
+              </div>
+              <div class="showcase-card sc-main">
+                <div class="sc-emoji">🪼</div>
+                <div class="sc-name">Jellyfish LED<br>Mood Lamp</div>
+                <div class="sc-price">$38.99</div>
+                <div class="sc-was">was $69.99</div>
+              </div>
+              <div class="showcase-card sc-bottom-left">
+                <div class="sc-sm-emoji">💪</div>
+                <div class="sc-sm-name">Balance Board</div>
+              </div>
+              <div class="showcase-card sc-bottom-right">
+                <div class="sc-sm-emoji">🌿</div>
+                <div class="sc-sm-name">Body Massager</div>
+              </div>
+              <div class="floating-badge">
+                <div class="badge-num">50%</div>off select items
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="instructions">
+    To save the full 1200×500 banner:<br>
+    1. Open this page in Chrome<br>
+    2. Right-click on the banner → Inspect<br>
+    3. Find the #banner-canvas element → right-click → "Capture node screenshot"<br>
+    OR take a screenshot and crop · Upload to Shopify → Online Store → Themes → Customize → Hero Image
+  </p>
+
+  <br><br>
+
+</body>
+</html>
