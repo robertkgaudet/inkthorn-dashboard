@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOLA Bachelorette Prompts — NolaCultureCo</title>
+<title>NOLA Prompts — NolaCultureCo</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -41,6 +41,24 @@
     font-size: 0.85rem;
     margin-top: 0.5rem;
   }
+  .section-divider {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--neon-purple);
+    text-shadow: 0 0 12px rgba(180,79,255,0.5);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #2a2a3e;
+  }
+  .tier-gold { color: #ffd700; }
+  .copy-btn.gold { border-color: #ffd700; color: #ffd700; }
+  .copy-btn.gold:hover { background: #ffd700; color: #000; }
+  .copy-btn.navy { border-color: #7ec8e3; color: #7ec8e3; }
+  .copy-btn.navy:hover { background: #7ec8e3; color: #000; }
+  .copy-btn.green-btn { border-color: #4ade80; color: #4ade80; }
+  .copy-btn.green-btn:hover { background: #4ade80; color: #000; }
   .container {
     max-width: 820px;
     margin: 0 auto;
@@ -136,11 +154,13 @@
 <body>
 
 <header>
-  <h1>NOLA BACHELORETTE PROMPTS</h1>
-  <p>NolaCultureCo · Grok Image Generation · Three Tiers</p>
+  <h1>NOLA GROK PROMPTS</h1>
+  <p>NolaCultureCo · Grok Image Generation · Copy &amp; Paste Ready</p>
 </header>
 
 <div class="container">
+
+  <div class="section-divider">🎉 Bachelorette Party</div>
 
   <!-- TIER 1: WILD -->
   <div class="prompt-card">
@@ -190,6 +210,57 @@
     </div>
   </div>
 
+
+  <div class="section-divider">🎨 NolaCultureCo Logo</div>
+
+  <!-- LOGO 1: FLEUR-DE-LIS + MODERN -->
+  <div class="prompt-card">
+    <div class="card-header">
+      <div class="emoji">⚜️</div>
+      <div class="meta">
+        <div class="tier tier-gold">Option 1 — Fleur-de-lis + Modern</div>
+        <div class="subtitle">Bold · Geometric · Instantly NOLA</div>
+      </div>
+    </div>
+    <div class="prompt-text" id="prompt4">Flat vector logo for "NolaCultureCo." A bold stylized fleur-de-lis merged with a subtle skyline or jazz note. Deep navy background, gold and coral accent colors. Geometric, clean, no gradients, no shadows, no text. Modern but unmistakably New Orleans. Iconic enough to work as a favicon.</div>
+    <div class="copy-bar">
+      <button class="copy-btn gold" onclick="copyPrompt('prompt4', this)">📋 Copy Prompt</button>
+      <span class="copy-confirm" id="confirm4">✓ Copied!</span>
+    </div>
+  </div>
+
+  <!-- LOGO 2: JAZZ + STREET -->
+  <div class="prompt-card">
+    <div class="card-header">
+      <div class="emoji">🎺</div>
+      <div class="meta">
+        <div class="tier tier-cyan">Option 2 — Jazz &amp; Street Energy</div>
+        <div class="subtitle">Bold · High Contrast · Street-Poster Energy</div>
+      </div>
+    </div>
+    <div class="prompt-text" id="prompt5">Flat vector logo icon for "NolaCultureCo." A minimalist trumpet or saxophone silhouette with Mardi Gras beads woven through it. Bold flat style, purple, gold, and green on black. No text, no gradients, no drop shadows. Clean shapes, high contrast, street-poster energy.</div>
+    <div class="copy-bar">
+      <button class="copy-btn navy" onclick="copyPrompt('prompt5', this)">📋 Copy Prompt</button>
+      <span class="copy-confirm" id="confirm5">✓ Copied!</span>
+    </div>
+  </div>
+
+  <!-- LOGO 3: ELEGANT -->
+  <div class="prompt-card">
+    <div class="card-header">
+      <div class="emoji">🌸</div>
+      <div class="meta">
+        <div class="tier" style="color:#4ade80">Option 3 — Elegant &amp; Timeless</div>
+        <div class="subtitle">Art Deco · Southern · Refined</div>
+      </div>
+    </div>
+    <div class="prompt-text" id="prompt6">Flat vector logo mark for "NolaCultureCo." A magnolia bloom with a single fleur-de-lis at its center, framed in a circular badge shape. Ivory and gold on deep forest green. Art deco-inspired geometry, minimal detail, no text. Refined, Southern, iconic.</div>
+    <div class="copy-bar">
+      <button class="copy-btn green-btn" onclick="copyPrompt('prompt6', this)">📋 Copy Prompt</button>
+      <span class="copy-confirm" id="confirm6">✓ Copied!</span>
+    </div>
+  </div>
+
 </div>
 
 <footer>
@@ -201,11 +272,12 @@ function copyPrompt(id, btn) {
   const text = document.getElementById(id).innerText;
   navigator.clipboard.writeText(text).then(() => {
     const num = id.replace('prompt','');
-    const confirm = document.getElementById('confirm' + num);
-    confirm.classList.add('show');
+    const confirmEl = document.getElementById('confirm' + num);
+    if (confirmEl) { confirmEl.classList.add('show'); }
+    const orig = btn.textContent;
     btn.textContent = '✓ Copied!';
     setTimeout(() => {
-      confirm.classList.remove('show');
+      if (confirmEl) confirmEl.classList.remove('show');
       btn.textContent = '📋 Copy Prompt';
     }, 2000);
   });
