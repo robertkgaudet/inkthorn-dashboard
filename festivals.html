@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="New Orleans Festival Season 2026 — French Quarter Fest, Jazz Fest, and all the after parties. Full schedule with filters by day and event type." />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <title>New Orleans Festival Season 2026 — FQF, Jazz Fest & After Parties | InkThorn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #070d1a;
+      --bg2: #0d1730;
+      --bg3: #111f3a;
+      --pink: #ff2d78;
+      --cyan: #00e5ff;
+      --purple: #a855f7;
+      --amber: #f0b840;
+      --green: #00e676;
+      --text: #e8eaf6;
+      --muted: rgba(232,234,246,0.55);
+      --border: rgba(0,229,255,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── grid bg ── */
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .bg-horizon {
+      position: fixed; bottom: 0; left: 0; right: 0; height: 40vh; z-index: 0; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 120%, rgba(168,85,247,0.18) 0%, transparent 70%);
+    }
+
+    /* ── layout ── */
+    .page { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; padding: 0 16px 80px; }
+
+    /* ── top bar ── */
+    .top-bar {
+      background: #0f1f3d; color: rgba(255,255,255,0.7);
+      text-align: center; padding: 8px; font-size: 0.8rem;
+    }
+    .top-bar a { color: var(--amber); font-weight: 700; text-decoration: none; }
+
+    /* ── hero ── */
+    .hero {
+      text-align: center;
+      padding: 48px 16px 32px;
+    }
+    .hero-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--pink) 60%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.15; margin-bottom: 12px;
+    }
+    .hero-sub {
+      color: var(--muted); font-size: 0.95rem; max-width: 560px; margin: 0 auto 24px;
+    }
+    .hero-dates {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    }
+    .hero-date-chip {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .hero-date-chip .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .dot-fqf { background: var(--amber); }
+    .dot-jf { background: var(--pink); }
+    .dot-ap { background: var(--cyan); }
+
+    /* ── filter bar ── */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center;
+      padding: 0 0 28px;
+      position: sticky; top: 0; z-index: 50;
+      background: linear-gradient(to bottom, var(--bg) 80%, transparent);
+      padding-top: 12px;
+    }
+    .filter-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 7px 18px;
+      border-radius: 20px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--bg2);
+      color: var(--muted);
+      border-color: var(--border);
+    }
+    .filter-btn:hover { color: var(--text); border-color: rgba(0,229,255,0.4); }
+    .filter-btn.active-all { background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #fff; border-color: transparent; }
+    .filter-btn.active-fqf { background: var(--amber); color: #000; border-color: transparent; }
+    .filter-btn.active-jf { background: var(--pink); color: #fff; border-color: transparent; }
+    .filter-btn.active-ap { background: linear-gradient(135deg, var(--cyan), #0088aa); color: #fff; border-color: transparent; }
+
+    /* ── day tabs ── */
+    .day-nav {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 28px; justify-content: center;
+    }
+    .day-btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem; font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--bg2);
+      color: var(--muted);
+      text-align: center;
+    }
+    .day-btn .count {
+      display: inline-block;
+      background: rgba(0,229,255,0.15);
+      border-radius: 10px;
+      padding: 1px 6px;
+      font-size: 0.65rem;
+      margin-left: 4px;
+      color: var(--cyan);
+    }
+    .day-btn.active, .day-btn:hover {
+      background: var(--bg3);
+      border-color: var(--cyan);
+      color: var(--text);
+    }
+    .day-btn.active { box-shadow: 0 0 10px rgba(0,229,255,0.25); }
+
+    /* ── section headers ── */
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      margin: 36px 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-header .icon { font-size: 1.2rem; }
+    .section-header h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--cyan);
+    }
+    .section-header .count-badge {
+      background: rgba(0,229,255,0.1);
+      border: 1px solid rgba(0,229,255,0.3);
+      border-radius: 12px;
+      padding: 2px 10px;
+      font-size: 0.7rem;
+      color: var(--cyan);
+    }
+
+    /* ── event cards ── */
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .event-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      transition: all 0.2s;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .event-card:hover {
+      border-color: rgba(0,229,255,0.35);
+      box-shadow: 0 4px 20px rgba(0,229,255,0.08);
+      transform: translateY(-1px);
+    }
+    .event-card.card-fqf { border-left: 3px solid var(--amber); }
+    .event-card.card-jf { border-left: 3px solid var(--pink); }
+    .event-card.card-ap { border-left: 3px solid var(--cyan); }
+
+    .card-badge {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+      padding: 2px 8px; border-radius: 4px;
+      display: inline-block; width: fit-content;
+      text-transform: uppercase;
+    }
+    .badge-fqf { background: rgba(240,184,64,0.15); color: var(--amber); border: 1px solid rgba(240,184,64,0.3); }
+    .badge-jf { background: rgba(255,45,120,0.15); color: var(--pink); border: 1px solid rgba(255,45,120,0.3); }
+    .badge-ap { background: rgba(0,229,255,0.1); color: var(--cyan); border: 1px solid rgba(0,229,255,0.25); }
+
+    .card-artist {
+      font-weight: 700; font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .card-detail {
+      font-size: 0.78rem; color: var(--muted);
+      display: flex; align-items: center; gap: 4px;
+    }
+    .card-meta {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .card-time {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.72rem; color: var(--cyan);
+      background: rgba(0,229,255,0.08);
+      padding: 2px 8px; border-radius: 4px;
+    }
+    .card-price {
+      font-size: 0.72rem;
+      color: var(--green);
+      background: rgba(0,230,118,0.08);
+      padding: 2px 8px; border-radius: 4px;
+    }
+    .card-price.free { color: var(--amber); background: rgba(240,184,64,0.08); }
+    .card-link {
+      font-size: 0.72rem; font-weight: 600;
+      color: var(--purple);
+      text-decoration: none;
+      margin-top: auto;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .card-link:hover { color: var(--cyan); }
+
+    .card-note {
+      font-size: 0.72rem; color: var(--muted); font-style: italic;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 6px; margin-top: 2px;
+    }
+
+    /* ── FQF callout ── */
+    .fqf-callout {
+      background: linear-gradient(135deg, rgba(240,184,64,0.08), rgba(240,184,64,0.04));
+      border: 1px solid rgba(240,184,64,0.25);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+    .fqf-callout h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--amber); margin-bottom: 8px;
+    }
+    .fqf-callout p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+    .fqf-callout a { color: var(--amber); font-weight: 600; }
+    .stages-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .stage-chip {
+      background: rgba(240,184,64,0.1);
+      border: 1px solid rgba(240,184,64,0.2);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 0.72rem; color: var(--amber);
+    }
+
+    /* ── empty state ── */
+    .empty-state {
+      text-align: center; padding: 48px 24px;
+      color: var(--muted); font-size: 0.9rem;
+    }
+
+    /* ── footer ── */
+    footer {
+      text-align: center; padding: 32px 16px;
+      color: var(--muted); font-size: 0.78rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    /* ── responsive ── */
+    @media (max-width: 600px) {
+      .event-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.5rem; }
+    }
+
+    /* hide/show */
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-horizon" aria-hidden="true"></div>
+
+<div class="top-bar">
+  <a href="/community/">← Community Events</a> · 🎷 New Orleans Festival Season 2026
+</div>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-label">New Orleans · 2026</p>
+    <h1>Festival Season<br>Guide</h1>
+    <p class="hero-sub">French Quarter Fest, Jazz Fest, and all the nights in between. Every stage. Every show. Day by day.</p>
+    <div class="hero-dates">
+      <div class="hero-date-chip"><span class="dot dot-fqf"></span> FQF · Apr 10–13</div>
+      <div class="hero-date-chip"><span class="dot dot-jf"></span> Jazz Fest · Apr 23–26 & Apr 30–May 3</div>
+      <div class="hero-date-chip"><span class="dot dot-ap"></span> After Parties · All 8 nights</div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active-all" data-filter="all" onclick="setFilter('all', this)">🎵 All Events</button>
+    <button class="filter-btn" data-filter="fqf" onclick="setFilter('fqf', this)">🎺 French Quarter Fest</button>
+    <button class="filter-btn" data-filter="jf" onclick="setFilter('jf', this)">🎷 Jazz Fest Main</button>
+    <button class="filter-btn" data-filter="ap" onclick="setFilter('ap', this)">🌙 After Parties</button>
+  </div>
+
+  <!-- CONTENT -->
+  <div id="content-area"></div>
+
+</div>
+
+<footer>
+  Data sourced from <a href="https://frenchquarterfest.org/music/" target="_blank">frenchquarterfest.org</a>,
+  <a href="http://www.jazzfestgrids.com/" target="_blank">jazzfestgrids.com</a>, and
+  <a href="https://www.nojazzfest.com/music-schedule/" target="_blank">nojazzfest.com</a>.
+  Curated by <a href="https://inkthorn.ai">InkThorn AI</a>. Updated April 2026.
+</footer>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════════════ */
+
+// Types: 'fqf' | 'jf' | 'ap'
+// fqf = French Quarter Fest
+// jf  = Jazz Fest (Fairgrounds / major ticketed shows)
+// ap  = After parties / off-site shows
+
+const EVENTS = [
+
+  /* ─── FRENCH QUARTER FEST ─── */
+  /* FQF is fully free, in the French Quarter. Artist names are JS-rendered
+     on the official site — see note card below. */
+
+  /* ─── JAZZ FEST WEEKEND 1 ─── */
+
+  // THU APR 23
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'jf',
+    artist: 'Trombone Shorty 40th Birthday: Treme Threauxdown X', venue: 'Saenger Theatre',
+    time: '8:00 PM', price: 'SOLD OUT',
+    note: 'Leon Bridges, Eric Church, Joan Jett, Branford Marsalis, Grace Potter, Jill Scott, Mavis Staples, Irma Thomas + more' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'STS9 — Human Dream Tour', venue: 'The Joy Theater',
+    time: '10:00 PM', price: '$65',
+    ticket: 'https://www.ticketmaster.com/sts9-human-dream-tour-new-orleans-louisiana-04-23-2026/event/1B00638CB67D9C15' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'The Nevilles — Bayou By Bus (Jamaican Celebration)', venue: 'Civic Theatre',
+    time: '10:00 PM', price: '$56+',
+    note: 'Cyril, Ivan & Ian Neville + The Nth Power, Dave Malone, Mark Mullins, The Levee Horns',
+    ticket: 'https://www.ticketmaster.com/the-nevilles-present-bayou-by-bus-new-orleans-louisiana-04-23-2026/event/1B00647AAE4612DA' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'Gillian Welch & David Rawlings — Grateful Dead Acoustic Reckoning', venue: 'Saenger Theatre',
+    time: '9:00 PM', price: '$60+',
+    ticket: 'https://us.atgtickets.com/events/gillian-welch-david-rawlings/saenger-theatre/' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'The Rumble Plays P-FUNK', venue: 'Republic New Orleans',
+    time: '10:00 PM', price: '$45',
+    note: 'w/ Christone "Kingfish" Ingram, Jennifer Hartswick, Robert "Sput" Searight',
+    ticket: 'https://www.nolafunk.com/' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'Donald Harrison\'s Hornucopia — 3 Shows', venue: 'New Orleans Jazz & Blues Market',
+    time: '7 PM / 9 PM / 11 PM', price: '$25 each',
+    note: 'Acoustic Jazz Lovers (7pm) · Soul & Smooth Jazz Lovers (9pm) · New Jam Band Initiative (11pm)' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'Eddie Roberts Birthday Bash', venue: 'Blue Nile',
+    time: '11:00 PM', price: '$33/$35',
+    note: 'w/ Stanton Moore, Robert Walter, Nick Etwell, Jason Mingledorff, Shelby Kemp + more',
+    ticket: 'https://www.showpass.com/eddie-roberts-birthday-bash-blue-nile-bbjfs/' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'Cimafunk & La Tribu', venue: 'The Broadside',
+    time: '8:00 PM', price: '$38+',
+    ticket: 'https://www.simpletix.com/e/cimafunk-la-tribu-tickets-257847' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'Threadhead Thursday (J & The Causeways / Dave Jordan Almost Acoustic)', venue: 'The Broadside',
+    time: '7:00 PM', price: 'FREE',
+    ticket: 'https://www.simpletix.com/e/16th-annual-threadhead-thursday-at-the-bro-tickets-258324' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'Samantha Fish', venue: 'House of Blues',
+    time: '9:00 PM', price: '$36+',
+    ticket: 'https://www.ticketmaster.com/event/1B00643BD6F3C284' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'Kevn Kinney and Friends', venue: 'Chickie Wah Wah',
+    time: '8:00 PM', price: '$32' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'Wild Tchoupitoulas 50th Anniversary (feat. Cyril Neville)', venue: 'Chickie Wah Wah',
+    time: '10:30 PM', price: '$39' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'Rosie Ledet + Chubby Carrier', venue: 'Rock \'n\' Bowl',
+    time: '8:00 PM', price: '$22' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: '007', venue: 'Maple Leaf',
+    time: '8:00 PM', price: '$24' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'Johnny Vidacovich / George Porter Jr. / Luther Dickinson', venue: 'Maple Leaf',
+    time: '10:00 PM', price: '$29' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'CRYPTIC feat. Peter Harris, Ricardo Pascal, Peter Varnado', venue: 'Bayou Bar',
+    time: '8:00 PM & 10:00 PM', price: 'TBA' },
+  { day: '2026-04-23', label: 'Thu Apr 23', type: 'ap',
+    artist: 'Butcher Brown Big Band feat. Nigel Hall', venue: 'Café Istanbul',
+    time: '9:00 PM', price: '$40/$50',
+    ticket: 'https://www.cafeistanbulnola.com/' },
+
+  // FRI APR 24
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'The Meters + Dumpstaphunk', venue: 'Fillmore New Orleans',
+    time: '8:00 PM', price: '$120+',
+    ticket: 'https://www.ticketmaster.com/live-nation-dayglo-present-the-meters-new-orleans-louisiana-04-24-2026/event/1B00643840FF2C4C' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'STS9 — Human Dream Tour Night 2', venue: 'The Joy Theater',
+    time: '10:00 PM', price: '$65',
+    ticket: 'https://www.ticketmaster.com/sts9-human-dream-tour-new-orleans-louisiana-04-24-2026/event/1B00638CB67F9C2F' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Kermit Ruffins & the BBQ Swingers', venue: 'Blue Nile',
+    time: '10:30 PM', price: '$30/$35',
+    ticket: 'https://www.bluenilelive.com/calendar-tickets-/kermit-april-24-2026-bbjfs' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Charley Crockett feat. Lee Fields', venue: 'Saenger Theatre',
+    time: '8:00 PM', price: '$60+',
+    ticket: 'https://www.saengernola.com/events/charley-crockett/' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Louisiana Calling: Sonny Landreth & The Iguanas', venue: 'Chickie Wah Wah',
+    time: '8:00 PM', price: '$57' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Lost Bayou Ramblers', venue: 'Chickie Wah Wah',
+    time: '11:00 PM', price: '$45' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Jon Cleary & The Absolute Monster Gentlemen feat. John Boutte', venue: 'The Broadside (Pavillion)',
+    time: '8:00 PM', price: '$38+',
+    ticket: 'https://www.simpletix.com/e/jon-cleary-the-absolute-monster-gentlemen-tickets-258325' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Axial Tilt — Grateful Dead Celebration Night 1', venue: 'Café Istanbul',
+    time: '10:00 PM', price: '$70+',
+    note: 'Stu Allen, Rob Eaton, Mitch Stein, Jay Lane, Wally Ingram — 5 hrs, no songs repeated between nights',
+    ticket: 'https://www.purplepass.com/events/343820-axial-tilt---a-grateful-dead-celebration-in-new-or-apr-24th-2026' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Dirty Dozen Brass Band', venue: 'd.b.a.',
+    time: '10:00 PM', price: '$37',
+    ticket: 'https://www.eventbrite.com/e/festin-on-frenchmen-the-dirty-dozen-brass-band-tickets-1985416930485' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Nicholas Payton & Butcher Brown: Celebrate Miles & Trane feat. Karl Denson', venue: 'New Orleans Jazz & Blues Market',
+    time: '8:00 PM & 10:00 PM', price: '$39 each' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Big Freedia\'s Shakedown', venue: 'The Rabbit Hole',
+    time: '8:00 PM', price: '$37/$50',
+    ticket: 'https://www.ticketfairy.com/event/big-freedia-s-shakedown-the-rabbit-hole-24apr2026' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'BoomBassador / BoomBox / The Polish Ambassador', venue: 'Republic New Orleans',
+    time: '11:00 PM', price: '$25+' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'BADBADNOTGOOD feat. Cleo Reed', venue: 'Civic Theatre',
+    time: '9:00 PM', price: '$59+',
+    ticket: 'https://www.ticketmaster.com/event/1B006429DF7DD4C3' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Mac McAnally', venue: 'House of Blues',
+    time: '9:00 PM', price: '$51+' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Compulsion Trio (Stanton Moore / Skerik / Brian Haas)', venue: 'Maple Leaf',
+    time: '8:00 PM', price: '$24' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'New Orleans Suspects feat. Jennifer Hartswick & Luther Dickinson — LEAFOPOTAMUS', venue: 'Maple Leaf',
+    time: '10:00 PM', price: '$29' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Cowboy Mouth feat. Boogie Long', venue: 'Rock \'n\' Bowl',
+    time: '8:30 PM', price: '$30' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Mt. Joy', venue: 'Champions Square',
+    time: '8:00 PM', price: '$54+' },
+  { day: '2026-04-24', label: 'Fri Apr 24', type: 'ap',
+    artist: 'Adam Deitch\'s 50th Birthday — feat. Oteil Burbridge, Ivan Neville, Marcus Machado, DJ Harrison', venue: 'The Broadside (Pavillion)',
+    time: '8:00 PM', price: '$34',
+    ticket: 'https://theticketing.co/e/deitch50' },
+
+  // SAT APR 25
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Better Than Ezra / Eve 6 / Big Sam\'s Funky Nation', venue: 'Fillmore New Orleans',
+    time: '9:00 PM', price: '$65',
+    ticket: 'https://www.ticketmaster.com/better-than-ezra-new-orleans-louisiana-04-25-2026/event/1B00643E9BF3B38A' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'BADBADNOTGOOD', venue: 'Civic Theatre',
+    time: '9:00 PM', price: '$59+' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Voodoo Dead', venue: 'Republic New Orleans',
+    time: '10:00 PM', price: '$64',
+    note: 'Steve Kimock, George Porter Jr., Jackie Greene, Ivan Neville, Robert Walter, John Kimock + Papa Mali',
+    ticket: 'https://www.ticketweb.com/event/voodoo-dead-featuring-steve-kimock-republic-nola-tickets/14109804' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Axial Tilt — Grateful Dead Celebration Night 2', venue: 'Café Istanbul',
+    time: '10:00 PM', price: '$70+',
+    note: 'No songs repeated from Night 1' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'The Rumble Ft. Chief Joseph Boudreaux Jr.', venue: 'Blue Nile',
+    time: '10:30 PM', price: '$22/$25' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Darrell Scott', venue: 'Chickie Wah Wah',
+    time: '8:00 PM', price: '$39' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Durand Jones', venue: 'Chickie Wah Wah',
+    time: '10:30 PM', price: '$54' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'The Soul Rebels', venue: 'd.b.a.',
+    time: '10:00 PM', price: '$49' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Morning 40 Federation', venue: 'The Rabbit Hole',
+    time: '8:00 PM', price: '$24+' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Honey Island Swamp Band feat. Springsteen Plays', venue: 'NOLA Brewing Company',
+    time: '8:30 PM', price: '$25/$30' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Bonerama feat. River Eckert', venue: 'Rock \'n\' Bowl',
+    time: '8:30 PM', price: '$25' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Desert Nudes', venue: 'Maple Leaf',
+    time: '8:00 PM', price: '$24' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Honey Island Swamp Band', venue: 'Maple Leaf',
+    time: '10:00 PM', price: '$29' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Judith Owen with The Callers, J.O. Big Band & More', venue: 'New Orleans Jazz & Blues Market',
+    time: '7:30 PM', price: '$44+' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Andrew Duhon Trio — Bite-Sized Breakfest', venue: 'The Broadside (Indoor)',
+    time: '9:30 AM', price: '$27',
+    note: 'Morning show! Doors 8:30am' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'King Tuff feat. Morgan Nagler', venue: 'Gasa Gasa',
+    time: '8:00 PM', price: '$23' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Mike Dillon\'s New Orleans Percussion Consortium feat. Nikki Glaspie & Kris Myers', venue: 'Gasa Gasa',
+    time: '10:00 PM', price: '$22' },
+  { day: '2026-04-25', label: 'Sat Apr 25', type: 'ap',
+    artist: 'Filthy Six All-Stars (Nick Etwell, Eddie Roberts, Joe Ashlar, Brad Walker)', venue: 'NOLA Brewing Company',
+    time: '9:30 PM', price: '$25/$30' },
+
+  // SUN APR 26
+  { day: '2026-04-26', label: 'Sun Apr 26', type: 'ap',
+    artist: 'Take Me To The River All-Stars', venue: 'The Joy Theater',
+    time: '8:00 PM', price: '$59+',
+    note: 'Irma Thomas, Cyril Neville, Carla Thomas, Ian Neville, Big Chief Bo Dollis Jr. + more',
+    ticket: 'https://www.ticketmaster.com/take-me-to-the-river-allstars-new-orleans-louisiana-04-26-2026/event/1B0064311B822F7D' },
+  { day: '2026-04-26', label: 'Sun Apr 26', type: 'ap',
+    artist: 'Zachary Richard', venue: 'Chickie Wah Wah',
+    time: '8:00 PM', price: '$64' },
+  { day: '2026-04-26', label: 'Sun Apr 26', type: 'ap',
+    artist: 'The Heavy Heavy feat. Lou Hazel', venue: 'Chickie Wah Wah',
+    time: '10:30 PM', price: '$32' },
+  { day: '2026-04-26', label: 'Sun Apr 26', type: 'ap',
+    artist: 'Once A Dozen — Past & Current Dirty Dozen Brass Band Members', venue: 'Blue Nile',
+    time: '11:00 PM', price: '$20/$25',
+    note: 'Roger Lewis, Julius McKee, Big Sam, Jake Eckert, Andrew Baham, Orlando Gilbert, Julian Addison' },
+  { day: '2026-04-26', label: 'Sun Apr 26', type: 'ap',
+    artist: 'Jon Cleary & The Absolute Monster Gentlemen', venue: 'New Orleans Jazz & Blues Market',
+    time: '8:30 PM', price: '$39+' },
+  { day: '2026-04-26', label: 'Sun Apr 26', type: 'ap',
+    artist: 'Mountain Grass Unit feat. TBC Brass Band', venue: 'Republic New Orleans',
+    time: '9:00 PM', price: '$32' },
+  { day: '2026-04-26', label: 'Sun Apr 26', type: 'ap',
+    artist: 'Petty Krewe — Tribute to Tom Petty', venue: 'Rock \'n\' Bowl',
+    time: '8:00 PM', price: '$22' },
+  { day: '2026-04-26', label: 'Sun Apr 26', type: 'ap',
+    artist: 'Keiko Komaki / June Yamagishi / Donald MaGee', venue: 'Maple Leaf',
+    time: '8:00 PM', price: '$24' },
+  { day: '2026-04-26', label: 'Sun Apr 26', type: 'ap',
+    artist: 'MLB All Stars', venue: 'Maple Leaf',
+    time: '10:00 PM', price: '$34' },
+  { day: '2026-04-26', label: 'Sun Apr 26', type: 'ap',
+    artist: 'YYRP feat. Peter Harris, John Michael Bradford, David Torkanowsky', venue: 'Bayou Bar',
+    time: '8:00 PM & 10:00 PM', price: 'TBA' },
+
+  /* ─── JAZZ FEST WEEKEND 2 ─── */
+
+  // THU APR 30
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Lettuce — RAGE!FEST', venue: 'The Joy Theater',
+    time: '10:00 PM', price: '$59+',
+    ticket: 'https://www.ticketmaster.com/lettuce-ragefest-new-orleans-louisiana-04-30-2026/event/1B00642A258A74A9' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Karl Denson\'s Tiny Universe: Celebration of Jimmy Cliff feat. Bernard Fowler', venue: 'Fillmore New Orleans',
+    time: '8:00 PM', price: '$51+',
+    ticket: 'https://www.ticketmaster.com/karl-densons-tiny-universe-new-orleans-louisiana-04-30-2026/event/1B00642CD6F5C7AD' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Daniel Donato\'s Cosmic NOLA feat. George Porter Jr., Al Schnier, Kanika Moore', venue: 'Civic Theatre',
+    time: '10:00 PM', price: '$48+',
+    ticket: 'https://www.ticketmaster.com/event/1B006388B7A7C487' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Dead Feat', venue: 'Republic New Orleans',
+    time: '10:00 PM', price: '$63',
+    note: 'Anders Osborne, Bill Payne, Fred Tackett, Kenny Gradney, Jackie Greene, Chad Cromwell + more',
+    ticket: 'https://www.ticketweb.com/event/dead-feat-ft-anders-osborne-republic-nola-tickets/13981424' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Help On The Way — feat. Eric Krasno, Oteil Burbridge, Grahame Lesh, Ivan Neville, Nikki Glaspie', venue: 'Howlin\' Wolf',
+    time: '9:00 PM', price: '$47+',
+    note: 'Celebrating Grateful Dead + New Orleans funk cultures',
+    ticket: 'https://theticketing.co/e/helpontheway' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Jon Cleary & The Absolute Monster Gentlemen', venue: 'Chickie Wah Wah',
+    time: '8:00 PM', price: 'SOLD OUT' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Deadtronica: Aron Magner (The Disco Biscuits) & Cloudchord', venue: 'Chickie Wah Wah',
+    time: '10:30 PM', price: '$17' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Flow Tribe', venue: 'Blue Nile',
+    time: '10:30 PM', price: '$22',
+    ticket: 'https://www.showpass.com/flow-tribe-blue-nile-april-30-bbjfs/' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Sue Foley', venue: 'New Orleans Jazz & Blues Market',
+    time: '7:30 PM', price: '$36+' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Geno Delafose + Terrance Simien', venue: 'Rock \'n\' Bowl',
+    time: '8:00 PM', price: '$22' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Bayou Rendezvous (24th Annual) — DJ Logic, Big Chief Juan Pardo & Jojo Herman, THE RUMBLE Ft. Chief Joseph Boudreaux', venue: 'The Broadside',
+    time: '6:30 PM – 6:00 AM', price: '$49/$60',
+    note: 'Two stages: Outdoor + Indoor. Goes ALL NIGHT.',
+    ticket: 'https://www.simpletix.com/e/24th-annual-bayou-rendezvous-tickets-258598' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Booker & Beyond Piano Series feat. Kyle Roussel', venue: 'Maple Leaf',
+    time: '6:00 PM', price: '$12' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Coma Cinema feat. Trace Mountains', venue: 'Gasa Gasa',
+    time: '9:00 PM', price: '$22' },
+  { day: '2026-04-30', label: 'Thu Apr 30', type: 'ap',
+    artist: 'Warren Haynes Band Dreams & Songs w/ Louisiana Philharmonic', venue: 'Orpheum Theatre',
+    time: '9:00 PM', price: '$50+',
+    ticket: 'https://www.ticketmaster.com/event/1B006438D25EBFA5' },
+
+  // FRI MAY 1
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Samantha Fish / Tab Benoit / Judith Hill / Texas Headhunters', venue: 'Fillmore New Orleans',
+    time: '8:00 PM', price: '$59+',
+    ticket: 'https://www.ticketmaster.com/samantha-fish-tab-benoit-new-orleans-louisiana-05-01-2026/event/1B006445972FBE46' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'The Heavyweights: Cory Henry, Eric Krasno, Sput Searight feat. Oteil Burbridge', venue: 'The Joy Theater',
+    time: '9:00 PM', price: '$53+',
+    ticket: 'https://www.ticketmaster.com/the-heavyweights-with-special-guest-oteil-new-orleans-louisiana-05-01-2026/event/1B00643CA79FAF9E' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Kermit Ruffins & The BBQ Swingers', venue: 'Blue Nile',
+    time: '10:30 PM', price: '$30/$35',
+    ticket: 'https://www.bluenilelive.com/calendar-tickets-/kermit-may1-2026-bbjfs' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Dan Penn & Spooner Oldham', venue: 'Chickie Wah Wah',
+    time: '8:00 PM', price: '$57' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Ravi Coltrane', venue: 'Chickie Wah Wah',
+    time: '10:30 PM', price: '$51' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Robert Cray Band', venue: 'House of Blues',
+    time: '9:00 PM', price: '$36+' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Nth Power: Earth Wind & Power', venue: 'Republic New Orleans',
+    time: '10:00 PM', price: '$59',
+    note: 'Mark Lettieri, Skerik, Kanika Moore, Shira Elias + more',
+    ticket: 'https://www.nolafunk.com/' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Melvin Seals & JGB feat. Donald Harrison', venue: 'Café Istanbul',
+    time: '9:30 PM', price: '$65+',
+    ticket: 'https://www.purplepass.com/events/343818-melvin-seals--jgb--plus--special-guest-donald-harrison-may-1st-2026' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Hot 8 Brass Band', venue: 'Howlin\' Wolf',
+    time: '10:30 PM', price: '$25' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Sonny Landreth + Dale Gaspard', venue: 'Rock \'n\' Bowl',
+    time: '8:30 PM', price: '$30' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Lost Bayou Ramblers', venue: 'The Rabbit Hole',
+    time: '8:00 PM', price: '$31/$37' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'WBeez: Will Blades / Will Bernard / Otis McDonald', venue: 'Blue Nile (Balcony)',
+    time: '11:00 PM', price: '$22' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Funk Monkey feat. Arsene DeLay', venue: 'Maple Leaf',
+    time: '8:00 PM', price: '$24' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'James Brown Tribute feat. Tony Hall and Friends', venue: 'Maple Leaf',
+    time: '10:00 PM', price: '$34' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Scott Sharrard\'s Endless Road Live', venue: 'New Orleans Jazz & Blues Market',
+    time: '8:00 PM', price: '$41+' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Eric Lindell', venue: 'Gasa Gasa',
+    time: '9:00 PM', price: '$44' },
+  { day: '2026-05-01', label: 'Fri May 1', type: 'ap',
+    artist: 'Dark Side of the Swamp: Honey Island Swamp Band Plays Pink Floyd', venue: 'The Broadside',
+    time: '9:00 PM', price: '$27',
+    ticket: 'https://www.simpletix.com/e/dark-side-of-the-swamp-honey-island-swamp-tickets-261060' },
+
+  // SAT MAY 2
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Joe Russo\'s Almost Dead', venue: 'Fillmore New Orleans',
+    time: '9:00 PM', price: '$81+',
+    ticket: 'https://www.ticketmaster.com/joe-russos-almost-dead-new-orleans-louisiana-05-02-2026/event/1B006332C2F85D47' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Tank and the Bangas / Big Freedia / Dawn Richard', venue: 'The Joy Theater',
+    time: '10:00 PM', price: '$64+',
+    ticket: 'https://www.ticketmaster.com/tank-and-the-bangas-big-freedia-new-orleans-louisiana-05-02-2026/event/1B00644AC5F8CE27' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Gov\'t Mule', venue: 'Orpheum Theatre',
+    time: '9:00 PM', price: '$61+',
+    ticket: 'https://www.ticketmaster.com/event/1B006438CEB7BD87' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'The Meters: Zigaboo, George Porter Jr., Leo Nocentelli, Cyril & Ivan Neville + The Heavyweights', venue: 'Saenger Theatre',
+    time: '8:00 PM', price: 'SOLD OUT' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Anders Osborne Birthday Bash feat. Dave Malone, Jackie Greene, Stanton Moore, Eddie 9V + Rebirth Brass Band', venue: 'Civic Theatre',
+    time: '9:00 PM', price: '$55+',
+    ticket: 'https://www.ticketmaster.com/event/1B006389C04ACF97' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Gramatik', venue: 'House of Blues',
+    time: '9:00 PM', price: '$42+' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Terence Blanchard & Special Guests', venue: 'Chickie Wah Wah',
+    time: '8:00 PM', price: '$64' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Durand Jones & Friends', venue: 'Chickie Wah Wah',
+    time: '10:30 PM', price: '$54' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Melvin Seals & JGB feat. Robert Randolph', venue: 'Café Istanbul',
+    time: '9:00 PM', price: '$65+',
+    ticket: 'https://www.purplepass.com/events/343819-melvin-seals--jgb--plus--special-guest-robert-randolph-may-2nd-2026' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Nth Power: Steely DaNth feat. Cory Henry, Mark Lettieri, Kanika Moore, Shira Elias', venue: 'Republic New Orleans',
+    time: '10:00 PM', price: '$49',
+    ticket: 'https://www.ticketweb.com/event/nth-power-presents-steely-danth-republic-nola-tickets/13981524' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Big Sam\'s Funky Nation', venue: 'Blue Nile',
+    time: '10:30 PM', price: '$25/$30' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'MONONEON', venue: 'Blue Nile',
+    time: '1:00 AM', price: '$30/$35',
+    note: 'Late show — technically early Sunday May 3' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'The Soul Rebels', venue: 'The Rabbit Hole',
+    time: '8:00 PM', price: '$30' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Cowboy Mouth feat. Few Blue', venue: 'Rock \'n\' Bowl',
+    time: '8:30 PM', price: '$30' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Eric Johanson', venue: 'Maple Leaf',
+    time: '8:00 PM', price: '$24' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Jon Cleary & The Absolute Monster Gentlemen', venue: 'Maple Leaf',
+    time: '10:00 PM', price: '$44' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Kenny Garrett — Two Shows', venue: 'New Orleans Jazz & Blues Market',
+    time: '7:00 PM & 9:30 PM', price: '$25 each' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Bayou Rendezvous Indoor: Eddie Roberts, Eric Krasno, Stanton Moore, Robert Walter + Polyrhythmics', venue: 'The Broadside',
+    time: '11:30 PM – 6:00 AM', price: 'Incl. w/ Bayou Rendezvous' },
+  { day: '2026-05-02', label: 'Sat May 2', type: 'ap',
+    artist: 'Stooges Brass Band', venue: 'Blue Nile (Balcony)',
+    time: '11:00 PM', price: '$22' },
+
+  // SUN MAY 3
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'Ari Lennox — The Vacancy Tour', venue: 'Fillmore New Orleans',
+    time: '9:00 PM', price: '$75+',
+    ticket: 'https://www.ticketmaster.com/ari-lennox-the-vacancy-tour-new-orleans-louisiana-05-03-2026/event/1B00643CC68FD062' },
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'The Triumvirate: Robert Glasper / Christian McBride / Nicholas Payton feat. DJ Soul Sister', venue: 'New Orleans Jazz & Blues Market',
+    time: '6:00 PM', price: '$65+',
+    ticket: 'https://www.ticketmaster.com/the-triumvirate-robert-glasper-christian-mcbride-new-orleans-louisiana-05-03-2026/event/1B00647889DE9072' },
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'Marcus King Band + Chaparelle', venue: 'Orpheum Theatre',
+    time: '9:00 PM', price: '$55+',
+    ticket: 'https://www.ticketmaster.com/event/1B00643BAF069DF1' },
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'Stanton Moore\'s Festival Finale: Stanton Moore Trio + Frequinauts', venue: 'The Broadside',
+    time: '9:00 PM', price: '$43+',
+    note: 'w/ Robert Walter, Will Bernard, Big Chief Donald Harrison Jr., Rob Mercurio',
+    ticket: 'https://www.simpletix.com/e/new-suit-presents-stanton-moore-s-festival-tickets-256419' },
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'Corey Henry & The Treme Funktet', venue: 'Blue Nile',
+    time: '10:30 PM', price: '$22',
+    ticket: 'https://www.showpass.com/corey-henry-treme-funk-blue-nile-2026-bbjfs/' },
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'Eric Lindell', venue: 'Chickie Wah Wah',
+    time: '8:00 PM', price: '$45' },
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'Papa Mali Birthday Bash feat. Wally Ingram — Celebrating Music of David Lindley', venue: 'Chickie Wah Wah',
+    time: '10:30 PM', price: '$45' },
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'Herlin Riley Quartet feat. Weedie Braimah — Two Shows', venue: 'Snug Harbor',
+    time: '8:00 PM & 10:00 PM', price: '$58',
+    ticket: 'https://www.ticketweb.com/event/herlin-riley-quartet-with-weedie-snug-harbor-jazz-bistro-tickets/14837393' },
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'GARAJ MAHAL feat. Kai Eckhardt, Fareed Haque', venue: 'Café Istanbul',
+    time: '9:00 PM', price: '$40/$50' },
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'J & The Causeways', venue: 'Maple Leaf',
+    time: '10:00 PM', price: '$29' },
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'Tribute to Eric Clapton & Phil Collins', venue: 'Rock \'n\' Bowl',
+    time: '8:00 PM', price: '$22' },
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'George Porter Jr & Runnin Pardners feat. Joe Marcinek Band', venue: 'Music Box Village',
+    time: '7:00 PM', price: '$33+' },
+  { day: '2026-05-03', label: 'Sun May 3', type: 'ap',
+    artist: 'The Triumvirate — Late Show (Robert Glasper, Christian McBride, Nicholas Payton)', venue: 'New Orleans Jazz & Blues Market',
+    time: '10:00 PM', price: '$67+' },
+
+];
+
+/* ═══════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════ */
+
+let activeFilter = 'all';
+let activeDay = 'all';
+
+const DAYS_W1 = [
+  { key: 'all', label: 'All Days' },
+  { key: 'fqf', label: '🎺 FQF Apr 10–13' },
+  { key: '2026-04-23', label: 'Thu Apr 23' },
+  { key: '2026-04-24', label: 'Fri Apr 24' },
+  { key: '2026-04-25', label: 'Sat Apr 25' },
+  { key: '2026-04-26', label: 'Sun Apr 26' },
+  { key: '2026-04-30', label: 'Thu Apr 30' },
+  { key: '2026-05-01', label: 'Fri May 1' },
+  { key: '2026-05-02', label: 'Sat May 2' },
+  { key: '2026-05-03', label: 'Sun May 3' },
+];
+
+/* ═══════════════════════════════════════════════════
+   RENDER
+═══════════════════════════════════════════════════ */
+
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.remove('active-all','active-fqf','active-jf','active-ap');
+  });
+  btn.classList.add('active-' + f);
+  render();
+}
+
+function setDay(d) {
+  activeDay = d;
+  document.querySelectorAll('.day-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.day === d);
+  });
+  render();
+}
+
+function countForDay(dayKey, filter) {
+  if (dayKey === 'all') return EVENTS.filter(e => filter === 'all' || e.type === filter).length;
+  if (dayKey === 'fqf') return filter === 'jf' ? 0 : (filter === 'ap' ? 0 : 5); // FQF note
+  return EVENTS.filter(e =>
+    e.day === dayKey && (filter === 'all' || e.type === filter)
+  ).length;
+}
+
+function buildDayNav() {
+  return DAYS_W1.map(d => {
+    const cnt = countForDay(d.key, activeFilter);
+    if (cnt === 0 && d.key !== 'all' && d.key !== 'fqf') return '';
+    return `<button class="day-btn${activeDay === d.key ? ' active' : ''}" data-day="${d.key}" onclick="setDay('${d.key}')">${d.label}<span class="count">${d.key === 'fqf' ? '20+' : cnt}</span></button>`;
+  }).join('');
+}
+
+function buildCard(e) {
+  const typeClass = 'card-' + e.type;
+  const badgeClass = 'badge-' + e.type;
+  const badgeLabel = e.type === 'fqf' ? 'French Quarter Fest' : e.type === 'jf' ? 'Jazz Fest' : 'After Party';
+  const priceClass = (e.price && (e.price.startsWith('FREE') || e.price === 'Free')) ? 'card-price free' : 'card-price';
+  const priceTxt = e.price === 'SOLD OUT' ? '🔴 SOLD OUT' : e.price || '';
+
+  return `
+  <div class="event-card ${typeClass}">
+    <div class="card-badge ${badgeClass}">${badgeLabel}</div>
+    <div class="card-artist">${e.artist}</div>
+    <div class="card-detail">📍 ${e.venue}</div>
+    <div class="card-meta">
+      ${e.time ? `<span class="card-time">⏱ ${e.time}</span>` : ''}
+      ${priceTxt ? `<span class="${priceClass}">${priceTxt}</span>` : ''}
+    </div>
+    ${e.note ? `<div class="card-note">${e.note}</div>` : ''}
+    ${e.ticket ? `<a class="card-link" href="${e.ticket}" target="_blank" rel="noopener">🎟 Tickets →</a>` : ''}
+  </div>`;
+}
+
+function buildFQFSection() {
+  return `
+  <div class="fqf-callout">
+    <h3>🎺 French Quarter Festival — April 10–13, 2026</h3>
+    <p><strong>Free admission.</strong> 20+ stages throughout the French Quarter. 400+ local musicians. Thursday through Sunday, 11 AM to 9:30 PM daily. Louisiana food from 60+ restaurants.</p>
+    <p>The full performer lineup is published on the official site. Artist names are dynamically loaded and couldn't be automatically scraped — click below for the complete schedule by day.</p>
+    <a href="https://frenchquarterfest.org/music/" target="_blank" rel="noopener" style="display:inline-block;background:rgba(240,184,64,0.15);border:1px solid rgba(240,184,64,0.4);border-radius:8px;padding:8px 18px;font-size:0.82rem;font-weight:700;color:#f0b840;text-decoration:none;margin-bottom:14px;">View Full FQF Schedule →</a>
+    <div>
+      <p style="font-size:0.78rem;color:var(--muted);margin-bottom:8px;">Key stages include:</p>
+      <div class="stages-grid">
+        <span class="stage-chip">Entergy Stage @ Jackson Square</span>
+        <span class="stage-chip">KREWE Eyewear Stage</span>
+        <span class="stage-chip">Hancock Whitney Stage</span>
+        <span class="stage-chip">House of Blues Stage</span>
+        <span class="stage-chip">Royal Sonesta Stage</span>
+        <span class="stage-chip">Loyola University Stage</span>
+        <span class="stage-chip">Café Beignet Stage</span>
+        <span class="stage-chip">Airbnb Stage</span>
+        <span class="stage-chip">French Market Corporation Stage</span>
+        <span class="stage-chip">New Orleans Jazz Historical Park Stage</span>
+        <span class="stage-chip">Collins C. Diboll Foundation Stage</span>
+        <span class="stage-chip">Demo Diva Stage</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function render() {
+  const area = document.getElementById('content-area');
+  const showFQF = activeFilter === 'all' || activeFilter === 'fqf';
+  const showFQFDay = activeDay === 'all' || activeDay === 'fqf';
+  const showFQFSection = showFQF && showFQFDay;
+
+  // Filter events
+  let filtered = EVENTS.filter(e => {
+    if (activeFilter !== 'all' && e.type !== activeFilter) return false;
+    if (activeDay !== 'all' && activeDay !== 'fqf' && e.day !== activeDay) return false;
+    if (activeDay === 'fqf') return false; // FQF is a callout, not in main data
+    return true;
+  });
+
+  // Group by day
+  const groups = {};
+  const dayOrder = [];
+  filtered.forEach(e => {
+    if (!groups[e.day]) { groups[e.day] = []; dayOrder.push(e.day); }
+    groups[e.day].push(e);
+  });
+
+  let html = '';
+
+  // Day nav
+  html += `<div class="day-nav" id="day-nav">${buildDayNav()}</div>`;
+
+  // FQF callout
+  if (showFQFSection) {
+    html += buildFQFSection();
+  }
+
+  // JF Weekend labels
+  const w1Days = ['2026-04-23','2026-04-24','2026-04-25','2026-04-26'];
+  const w2Days = ['2026-04-30','2026-05-01','2026-05-02','2026-05-03'];
+
+  let showedW1 = false, showedW2 = false;
+
+  if (dayOrder.length === 0 && !showFQFSection) {
+    html += '<div class="empty-state">No events match this filter.</div>';
+  } else {
+    // Unique ordered days
+    const seenDays = [];
+    dayOrder.forEach(d => { if (!seenDays.includes(d)) seenDays.push(d); });
+
+    seenDays.forEach(day => {
+      const evts = groups[day];
+      if (!evts || evts.length === 0) return;
+
+      // Weekend headers
+      if (w1Days.includes(day) && !showedW1) {
+        showedW1 = true;
+        html += `<div class="section-header">
+          <span class="icon">🎷</span>
+          <h2>Jazz Fest Weekend 1 · Apr 23–26</h2>
+          <span class="count-badge">${filtered.filter(e=>w1Days.includes(e.day)).length} shows</span>
+        </div>`;
+      }
+      if (w2Days.includes(day) && !showedW2) {
+        showedW2 = true;
+        html += `<div class="section-header">
+          <span class="icon">🎷</span>
+          <h2>Jazz Fest Weekend 2 · Apr 30–May 3</h2>
+          <span class="count-badge">${filtered.filter(e=>w2Days.includes(e.day)).length} shows</span>
+        </div>`;
+      }
+
+      // Day header
+      html += `<div style="display:flex;align-items:center;gap:10px;margin:20px 0 10px;">
+        <span style="font-family:'Orbitron',monospace;font-size:0.78rem;color:var(--purple);letter-spacing:0.08em;">${evts[0].label}</span>
+        <span style="font-size:0.72rem;color:var(--muted);background:rgba(168,85,247,0.1);border-radius:10px;padding:2px 8px;">${evts.length} shows</span>
+      </div>`;
+
+      html += `<div class="event-grid">`;
+      evts.forEach(e => { html += buildCard(e); });
+      html += `</div>`;
+    });
+  }
+
+  area.innerHTML = html;
+
+  // Re-bind day buttons
+  document.querySelectorAll('.day-btn').forEach(b => {
+    b.addEventListener('click', () => setDay(b.dataset.day));
+  });
+}
+
+// Init
+render();
+</script>
+</body>
+</html>
