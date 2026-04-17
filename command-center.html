@@ -1575,8 +1575,71 @@
 .bv-time { font-size: 0.62rem; color: #c8832a; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.2rem; }
 .bv-label { font-size: 0.8rem; font-weight: 600; color: #f2ede6; margin-bottom: 0.4rem; line-height: 1.25; }
 .bv-tips { font-size: 0.68rem; line-height: 1.55; }
-.bv-tips .t1 { color: #555; }
-.bv-tips .t2 { color: rgba(0,212,255,0.6); margin-top: 0.15rem; display: block; }
+.bv-tips .t1 { color: rgba(255,255,255,0.72); }
+.bv-tips .t2 { color: rgba(0,212,255,0.9); margin-top: 0.15rem; display: block; }
+
+/* ── OVERVIEW SENSITIVE BLUR ── */
+.overview-sensitive {
+  position: relative;
+  filter: blur(7px) !important;
+  user-select: none !important;
+  pointer-events: none !important;
+  transition: filter 0.4s;
+}
+.overview-sensitive.revealed { filter: none !important; pointer-events: auto !important; user-select: auto !important; }
+.overview-sensitive-block {
+  position: relative;
+  filter: blur(7px) !important;
+  user-select: none !important;
+  transition: filter 0.4s;
+}
+.overview-sensitive-block.revealed { filter: none !important; }
+.overview-unlock-bar {
+  text-align: center;
+  margin: 0.5rem 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+.overview-unlock-bar input {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(200,131,42,0.4);
+  color: #f2ede6;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  width: 160px;
+  outline: none;
+}
+.overview-unlock-bar button {
+  background: rgba(200,131,42,0.15);
+  border: 1px solid rgba(200,131,42,0.5);
+  color: #c8832a;
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.overview-unlock-bar button:hover { background: rgba(200,131,42,0.25); }
+.overview-unlock-err { color: #ff4444; font-size: 0.65rem; letter-spacing: 0.08em; display:none; }
+
+/* ── NEIGHBORHOOD DISCOVERY BAR ── */
+#neighborhood-scroll::-webkit-scrollbar { display: none; }
+.nbhd-spot {
+  flex: 0 0 140px;
+  padding: 0.7rem 0.85rem;
+  border-right: 1px solid rgba(200,131,42,0.1);
+  cursor: default;
+  transition: background 0.2s;
+}
+.nbhd-spot:hover { background: rgba(200,131,42,0.06); }
+.nbhd-icon { font-size: 1.3rem; margin-bottom: 0.3rem; }
+.nbhd-name { font-size: 0.72rem; font-weight: 700; color: #f2ede6; line-height: 1.2; margin-bottom: 0.15rem; }
+.nbhd-dist { font-size: 0.58rem; color: #c8832a; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.25rem; }
+.nbhd-desc { font-size: 0.62rem; color: rgba(255,255,255,0.5); line-height: 1.45; }
 .now-badge {
   display: inline-block;
   font-size: 0.58rem;
@@ -2147,6 +2210,85 @@
   white-space: pre-wrap;
 }
 
+  /* ─── LOCKED SECTION OVERLAY ─── */
+  .locked-section-wrap {
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+  }
+  .locked-tab-overlay {
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(8px);
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  .locked-tab-overlay.unlocking {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .locked-overlay-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+  .locked-overlay-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+    color: var(--amber2);
+    text-shadow: var(--glow-amber);
+    margin-bottom: 6px;
+  }
+  .locked-overlay-sub {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .locked-pw-wrap {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 260px;
+  }
+  .locked-pw-wrap.visible { display: flex; }
+  .locked-pw-input {
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(200,131,42,0.5);
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 4px;
+    text-align: center;
+    outline: none;
+  }
+  .locked-pw-input:focus {
+    border-color: var(--amber2);
+    box-shadow: var(--glow-amber);
+  }
+  .locked-pw-error {
+    color: var(--red);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    height: 18px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .locked-pw-error.show { opacity: 1; }
+
 </style>
 <script>
 // ── GOOGLE FIT EARLY BOOT ──
@@ -2214,9 +2356,12 @@ window._gfitConnect = function() {
       <button class="nav-tab" onclick="showTab('journal',this)">Journal</button>
       <button class="nav-tab" onclick="showTab('timeline',this)">Timeline</button>
     </div>
-    <button class="hamburger" id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div style="display:flex;align-items:center;gap:0.5rem;">
+      <a href="dashboard-settings.html" title="Settings & Activity Log" style="font-size:1.1rem;opacity:0.45;text-decoration:none;padding:4px 8px;border-radius:6px;transition:opacity 0.2s;line-height:1;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.45'">⚙</a>
+      <button class="hamburger" id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
   <!-- Mobile Nav Drawer -->
@@ -2246,14 +2391,103 @@ window._gfitConnect = function() {
           <div class="day-cycle-title">⚡ DAY CYCLE</div>
           <div class="day-cycle-now" id="dc-now-label">Loading...</div>
         </div>
-        <div class="day-type-btns">
-          <button class="day-type-btn active" onclick="setDayType('weekday',this)">Weekday</button>
+        <div class="day-type-btns" id="day-type-btns">
+          <button class="day-type-btn" id="btn-concierge" onclick="setDayConcierge(this)" style="display:none;">✦ Concierge</button>
+          <button class="day-type-btn" onclick="setDayType('weekday',this)">Weekday</button>
           <button class="day-type-btn" onclick="setDayType('weekend',this)">Weekend</button>
           <button class="day-type-btn" onclick="setDayType('vacation',this)">Vacation</button>
         </div>
       </div>
       <div class="day-cycle-scroll" id="dc-scroll">
         <div id="dc-track"></div>
+      </div>
+      <!-- Static below-scroll panels: anchor + private. Never scrolls. -->
+      <div id="dc-below-panels" style="display:none;padding:0 1rem 0.5rem;"></div>
+    </div>
+
+    <!-- ══════════ NEIGHBORHOOD DISCOVERY BAR ══════════ -->
+    <div style="margin: 1.2rem 0 1.5rem; border-radius: 12px; border: 1px solid rgba(200,131,42,0.2); background: rgba(255,255,255,0.02); overflow:hidden; display:flex;">
+
+      <!-- LEFT: Map -->
+      <div style="flex-shrink:0; width:200px; min-height:130px; position:relative; overflow:hidden;">
+        <iframe
+          src="https://www.google.com/maps?q=Napoleon+Ave+%26+Magazine+St,+New+Orleans,+LA+70115&output=embed&z=15"
+          width="200" height="160" style="border:0;display:block;filter:saturate(0.6) brightness(0.7);margin-top:-15px;"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:5px 8px;background:linear-gradient(transparent,rgba(0,0,0,0.8));font-size:0.58rem;color:#c8832a;font-weight:700;letter-spacing:0.08em;">
+          📍 NAPOLEON & MAGAZINE
+        </div>
+      </div>
+
+      <!-- RIGHT: Scrollable discovery spots -->
+      <div style="flex:1; overflow:hidden; border-left: 1px solid rgba(200,131,42,0.15);">
+        <div style="padding: 0.45rem 0.85rem 0.3rem; border-bottom: 1px solid rgba(200,131,42,0.1); display:flex; align-items:center; justify-content:space-between;">
+          <span style="font-size:0.58rem;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;">Discover the Neighborhood</span>
+          <span style="font-size:0.58rem;color:rgba(0,212,255,0.6);">🚋 5 blocks to St. Charles Streetcar →</span>
+        </div>
+        <div style="display:flex; overflow-x:auto; gap:0; scrollbar-width:none; -ms-overflow-style:none;" id="neighborhood-scroll">
+          <div class="nbhd-spot">
+            <div class="nbhd-icon">🎵</div>
+            <div class="nbhd-name">Tipitina's</div>
+            <div class="nbhd-dist">0.4 mi</div>
+            <div class="nbhd-desc">Legendary music venue. Check tonight's lineup.</div>
+          </div>
+          <div class="nbhd-spot">
+            <div class="nbhd-icon">☕</div>
+            <div class="nbhd-name">Congregation Coffee</div>
+            <div class="nbhd-dist">4 blocks</div>
+            <div class="nbhd-desc">Best specialty pour-overs in Uptown.</div>
+          </div>
+          <div class="nbhd-spot">
+            <div class="nbhd-icon">🌿</div>
+            <div class="nbhd-name">Audubon Park</div>
+            <div class="nbhd-dist">0.6 mi</div>
+            <div class="nbhd-desc">Morning run, Sunday stroll, oaks and open sky.</div>
+          </div>
+          <div class="nbhd-spot">
+            <div class="nbhd-icon">🍸</div>
+            <div class="nbhd-name">Cure</div>
+            <div class="nbhd-dist">Freret St</div>
+            <div class="nbhd-desc">James Beard bar. Best cocktails in the city.</div>
+          </div>
+          <div class="nbhd-spot">
+            <div class="nbhd-icon">🧇</div>
+            <div class="nbhd-name">Company Burger</div>
+            <div class="nbhd-dist">Freret St</div>
+            <div class="nbhd-desc">Best burger in New Orleans. Simple. Perfect.</div>
+          </div>
+          <div class="nbhd-spot">
+            <div class="nbhd-icon">🍦</div>
+            <div class="nbhd-name">Hansen's Sno-Bliz</div>
+            <div class="nbhd-dist">Tchoupitoulas</div>
+            <div class="nbhd-desc">Since 1939. The only sno-ball that matters.</div>
+          </div>
+          <div class="nbhd-spot">
+            <div class="nbhd-icon">📚</div>
+            <div class="nbhd-name">Octavia Books</div>
+            <div class="nbhd-dist">Octavia St</div>
+            <div class="nbhd-desc">Independent bookshop. Worth an hour any day.</div>
+          </div>
+          <div class="nbhd-spot">
+            <div class="nbhd-icon">🥩</div>
+            <div class="nbhd-name">Clancy's</div>
+            <div class="nbhd-dist">Annunciation</div>
+            <div class="nbhd-desc">Classic Uptown. White tablecloth, local crowd.</div>
+          </div>
+          <div class="nbhd-spot">
+            <div class="nbhd-icon">🍺</div>
+            <div class="nbhd-name">Barrel Proof</div>
+            <div class="nbhd-dist">Magazine St</div>
+            <div class="nbhd-desc">500+ whiskeys. No pretense. Good bourbon.</div>
+          </div>
+          <div class="nbhd-spot">
+            <div class="nbhd-icon">🌺</div>
+            <div class="nbhd-name">Tulane Campus</div>
+            <div class="nbhd-dist">0.8 mi</div>
+            <div class="nbhd-desc">Beautiful walk. Quiet on weekends.</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -2294,33 +2528,15 @@ window._gfitConnect = function() {
         <div class="kpi-sub">In progress</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-trend">🔥</div>
-        <div class="kpi-label">Monthly Burn</div>
-        <div class="kpi-value" data-count="7400" data-prefix="$">$0</div>
-        <div class="kpi-sub">+/mo operating cost</div>
-      </div>
-      <div class="kpi-card cyan-accent">
-        <div class="kpi-trend">⚖️</div>
-        <div class="kpi-label">IRS Balance</div>
-        <div class="kpi-value">$200K+</div>
-        <div class="kpi-sub">Resolution active</div>
-      </div>
-      <div class="kpi-card">
         <div class="kpi-trend">📊</div>
         <div class="kpi-label">Leads Pipeline</div>
         <div class="kpi-value" data-count="9464" data-prefix="">0</div>
         <div class="kpi-sub">InkThorn — scraped</div>
       </div>
-      <div class="kpi-card cyan-accent">
-        <div class="kpi-trend">📈</div>
-        <div class="kpi-label">Net Worth Trend</div>
-        <div class="kpi-value">↑</div>
-        <div class="kpi-sub">Rebuilding</div>
-      </div>
     </div>
 
-    <!-- Two Column: Health Matrix + Activity Feed -->
-    <div class="two-col">
+    <!-- Two Column: Health Matrix + Activity Feed — moved to business dashboard -->
+    <div class="two-col overview-sensitive-block" style="display:none;">
       <div class="glass-card">
         <div class="card-title"><div class="dot"></div> BUSINESS HEALTH MATRIX</div>
         <div class="health-matrix">
@@ -2422,6 +2638,16 @@ window._gfitConnect = function() {
 
   <!-- ═══ BUSINESSES ═══ -->
   <section class="section" id="tab-businesses">
+  <div class="locked-section-wrap" id="biz-section-wrap">
+    <div class="locked-tab-overlay" id="overlay-businesses" onclick="rgOverlayClick(this)">
+      <div class="locked-overlay-icon">🔒</div>
+      <div class="locked-overlay-label">RESTRICTED</div>
+      <div class="locked-overlay-sub">Click to unlock</div>
+      <div class="locked-pw-wrap" id="pw-wrap-businesses">
+        <input class="locked-pw-input" type="password" placeholder="Password" id="pw-input-businesses" onclick="event.stopPropagation()" onkeydown="rgPwKeydown(event,'businesses')">
+        <div class="locked-pw-error" id="pw-err-businesses">ACCESS DENIED</div>
+      </div>
+    </div>
     <div class="section-header">
       <div class="section-title">BUSINESSES</div>
       <div class="section-subtitle">5 Active Ventures</div>
@@ -2608,10 +2834,21 @@ window._gfitConnect = function() {
       </div>
 
     </div>
+  </div><!-- end locked-section-wrap businesses -->
   </section>
 
   <!-- ═══ FINANCE ═══ -->
   <section class="section" id="tab-finance">
+  <div class="locked-section-wrap" id="finance-section-wrap">
+    <div class="locked-tab-overlay" id="overlay-finance" onclick="rgOverlayClick(this)">
+      <div class="locked-overlay-icon">🔒</div>
+      <div class="locked-overlay-label">RESTRICTED</div>
+      <div class="locked-overlay-sub">Click to unlock</div>
+      <div class="locked-pw-wrap" id="pw-wrap-finance">
+        <input class="locked-pw-input" type="password" placeholder="Password" id="pw-input-finance" onclick="event.stopPropagation()" onkeydown="rgPwKeydown(event,'finance')">
+        <div class="locked-pw-error" id="pw-err-finance">ACCESS DENIED</div>
+      </div>
+    </div>
     <div class="section-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
       <div>
         <div class="section-title">FINANCE</div>
@@ -2745,6 +2982,7 @@ window._gfitConnect = function() {
     <div class="mt-md" style="text-align:center;">
       <a href="/budget.html" class="irs-link" style="background:rgba(200,131,42,0.15);color:var(--amber2);border:1px solid var(--amber);">→ FULL BUDGET DASHBOARD</a>
     </div>
+  </div><!-- end locked-section-wrap finance -->
   </section>
 
   <!-- ═══ PERSONAL ═══ -->
@@ -3054,9 +3292,38 @@ document.getElementById('login-pw').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
 });
 
+// ═══ ACTIVITY LOG ═══
+function rgLogActivity(entry) {
+  try {
+    var log = JSON.parse(localStorage.getItem('rg_activity_log') || '[]');
+    log.unshift(entry);
+    if (log.length > 200) log = log.slice(0, 200);
+    localStorage.setItem('rg_activity_log', JSON.stringify(log));
+  } catch(e) {}
+}
+
+function rgGetIPAndLog(entry) {
+  // Fetch IP + geo from ipapi.co (free, no key needed)
+  fetch('https://ipapi.co/json/')
+    .then(function(r) { return r.json(); })
+    .then(function(geo) {
+      entry.ip = geo.ip || 'unknown';
+      entry.location = [geo.city, geo.region, geo.country_name].filter(Boolean).join(', ') || 'unknown';
+      entry.org = geo.org || '';
+      rgLogActivity(entry);
+    })
+    .catch(function() {
+      entry.ip = 'lookup failed';
+      entry.location = 'unknown';
+      rgLogActivity(entry);
+    });
+}
+
 function doLogin() {
   const pw = document.getElementById('login-pw').value;
+  const ts = new Date().toISOString();
   if (pw === PASS) {
+    rgGetIPAndLog({ ts, type: 'login_success', actor: 'user', description: 'Successful login', pw_tried: '***correct***' });
     const overlay = document.getElementById('login-overlay');
     overlay.classList.add('fade-out');
     setTimeout(() => {
@@ -3066,6 +3333,7 @@ function doLogin() {
       initDashboard();
     }, 600);
   } else {
+    rgGetIPAndLog({ ts, type: 'login_failed', actor: 'unknown', description: 'Failed login attempt', pw_tried: pw });
     const err = document.getElementById('login-error');
     err.classList.add('show');
     document.getElementById('login-pw').value = '';
@@ -3312,7 +3580,7 @@ function renderJournalEntries() {
       (function(eid) {
         card.addEventListener('click', function() { openJournalEntry(eid); });
       })(entry.id);
-      list.insertBefore(card, list.firstChild);
+      list.appendChild(card);
     });
   } else {
     list.querySelectorAll('[data-id^="placeholder"]').forEach(el => el.style.display = '');
@@ -3475,13 +3743,164 @@ var DAY_DATA = {
   ]
 };
 
-var currentDayType = 'weekday';
+// Auto-detect weekday vs weekend based on current day
+var _dow = new Date().getDay(); // 0=Sun, 6=Sat
+var currentDayType = (_dow === 0 || _dow === 6) ? 'weekend' : 'weekday';
+
+// ═══ CONCIERGE DAY CYCLE (today-cycle.json) ═══
+var _conciergeBlocks = null;
+var _conciergeAnchor = null;
+var _conciergePrivate = null;
+
+function fetchConciergeCycle() {
+  fetch('https://trustlight.ai/today-cycle.json?v=' + Date.now())
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(data) {
+      if (!data || !data.blocks) return;
+      // Only use if it's from today
+      var today = new Date().toISOString().slice(0, 10);
+      if (data.date !== today) return;
+      _conciergeBlocks = data.blocks;
+      _conciergeAnchor = data.concierge || null;
+      _conciergePrivate = data.private || null;
+      renderConciergeCycle();
+    })
+    .catch(function() {});
+}
+
+function renderConciergeCycle() {
+  if (!_conciergeBlocks) return;
+  var track = document.getElementById('dc-track');
+  if (!track) return;
+
+  function renderBlock(b) {
+    if (b._private) return ''; // Private blocks never render in visible card list
+    var status = getBlockStatus(b.time);
+    var nowBadge = status === 'current' ? '<span class="now-badge">● NOW</span>' : '';
+    var recHtml = '';
+    if (b.recommendation) {
+      var rec = b.recommendation;
+      var moreLink = '';
+      // Extract URL from note if present, otherwise build a Google Maps search link
+      var urlMatch = rec.note && rec.note.match(/https?:\/\/[^\s]+/);
+      if (urlMatch) {
+        moreLink = urlMatch[0];
+      } else if (rec.address) {
+        moreLink = 'https://www.google.com/search?q=' + encodeURIComponent(rec.name + ' ' + rec.address);
+      }
+      var noteClean = rec.note ? rec.note.replace(/https?:\/\/[^\s]+/g, '').trim() : '';
+      recHtml = '<div style="margin-top:6px;font-size:10px;color:#c8832a;border-top:1px solid rgba(200,131,42,0.2);padding-top:4px;">' +
+        '📍 <strong>' + rec.name + '</strong><br>' +
+        '<span style="color:rgba(255,255,255,0.5)">' + noteClean + '</span>' +
+        (moreLink ? '<br><a href="' + moreLink + '" target="_blank" rel="noopener" style="color:#00d4ff;font-size:9px;letter-spacing:0.06em;text-decoration:none;">More info →</a>' : '') +
+        '</div>';
+    }
+    return '<div class="day-block-v ' + status + '">' +
+      '<div class="bv-icon">' + b.icon + '</div>' +
+      '<div class="bv-time">' + b.time + nowBadge + '</div>' +
+      '<div class="bv-label">' + b.label + '</div>' +
+      '<div class="bv-tips">' +
+        '<div class="t1">' + b.tips[0] + '</div>' +
+        '<div class="t2">' + b.tips[1] + '</div>' +
+      '</div>' +
+      recHtml +
+    '</div>';
+  }
+
+  // Cards only go in the scrolling track
+  track.innerHTML = '<div class="day-track-wrap"><div class="day-cards-row">' +
+    _conciergeBlocks.map(renderBlock).join('') + '</div></div>';
+
+  // ── Below-scroll static panels (anchor + private) ──────────────────────────
+  var below = document.getElementById('dc-below-panels');
+  if (below) {
+    var belowHtml = '';
+
+    // Anchor: "Set the Week" priority notes
+    if (_conciergeAnchor && _conciergeAnchor.notes && _conciergeAnchor.notes.length) {
+      var notesHtml = _conciergeAnchor.notes.map(function(n) {
+        return '<div style="padding:3px 0;font-size:11px;color:rgba(242,237,230,0.85);line-height:1.6;">' + n + '</div>';
+      }).join('');
+      belowHtml +=
+        '<div style="margin:12px 0 10px;padding:10px 14px;border-radius:10px;background:rgba(200,131,42,0.07);border:1px solid rgba(200,131,42,0.25);">' +
+          '<div style="font-size:9px;font-weight:700;letter-spacing:0.12em;color:#c8832a;text-transform:uppercase;margin-bottom:6px;">✦ ' + (_conciergeAnchor.title || 'Today') + '</div>' +
+          notesHtml +
+        '</div>';
+    }
+
+    // Private: blur-redacted, tap to reveal 15s, auto-reblur
+    if (_conciergePrivate && _conciergePrivate.length) {
+      var privateId = 'prv-' + Math.random().toString(36).slice(2, 8);
+      var privateNotesHtml = _conciergePrivate.map(function(n) {
+        return '<div style="padding:4px 0;font-size:11.5px;line-height:1.7;color:rgba(255,182,193,0.92);">' + n + '</div>';
+      }).join('');
+      belowHtml +=
+        '<div data-private-block="true" style="margin:0 0 4px;border-radius:10px;border:1px solid rgba(255,105,180,0.18);background:rgba(255,20,147,0.04);overflow:hidden;">' +
+          '<div style="padding:8px 14px 6px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;" onclick="togglePrivate(\'' + privateId + '\')" title="Private — tap to reveal">' +
+            '<span style="font-size:9px;font-weight:700;letter-spacing:0.12em;color:rgba(255,105,180,0.65);text-transform:uppercase;">🔒 Private</span>' +
+            '<span id="' + privateId + '-icon" style="font-size:9px;color:rgba(255,105,180,0.4);letter-spacing:0.08em;font-style:italic;">tap to reveal</span>' +
+          '</div>' +
+          '<div id="' + privateId + '" data-private-content="true" style="padding:2px 14px 12px;filter:blur(8px);transition:filter 0.4s ease;cursor:pointer;" onclick="togglePrivate(\'' + privateId + '\')">' +
+            privateNotesHtml +
+          '</div>' +
+        '</div>';
+    }
+
+    below.innerHTML = belowHtml;
+    below.style.display = belowHtml ? '' : 'none';
+  }
+
+  // Auto-scroll to current block
+  requestAnimationFrame(function() {
+    var scroll = document.getElementById('dc-scroll');
+    var current = track.querySelector('.day-block-v.current');
+    if (scroll && current) {
+      scroll.scrollLeft = current.offsetLeft - (scroll.clientWidth / 2) + (current.offsetWidth / 2);
+    }
+  });
+
+  // Activate the Concierge button, deactivate others
+  document.querySelectorAll('.day-type-btn').forEach(function(b) { b.classList.remove('active'); });
+  var conciergeBtn = document.getElementById('btn-concierge');
+  if (conciergeBtn) { conciergeBtn.style.display = ''; conciergeBtn.classList.add('active'); }
+}
+
+function setDayConcierge(btn) {
+  if (!_conciergeBlocks) return;
+  document.querySelectorAll('.day-type-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderConciergeCycle();
+}
+
+function togglePrivate(id) {
+  var el = document.getElementById(id);
+  var icon = document.getElementById(id + '-icon');
+  if (!el) return;
+  var isBlurred = el.style.filter !== 'none' && el.style.filter !== '';
+  if (isBlurred) {
+    el.style.filter = 'none';
+    if (icon) { icon.textContent = 'tap to hide'; icon.style.color = 'rgba(255,105,180,0.7)'; }
+    // Auto-reblur after 15 seconds
+    if (window._prvTimer) clearTimeout(window._prvTimer);
+    window._prvTimer = setTimeout(function() {
+      el.style.filter = 'blur(8px)';
+      if (icon) { icon.textContent = 'tap to reveal'; icon.style.color = 'rgba(255,105,180,0.4)'; }
+    }, 15000);
+  } else {
+    el.style.filter = 'blur(8px)';
+    if (icon) { icon.textContent = 'tap to reveal'; icon.style.color = 'rgba(255,105,180,0.4)'; }
+    if (window._prvTimer) clearTimeout(window._prvTimer);
+  }
+}
 
 function setDayType(type, btn) {
   currentDayType = type;
   document.querySelectorAll('.day-type-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  renderDayCycle();
+  // Clear below panels when leaving concierge mode
+  var below = document.getElementById('dc-below-panels');
+  if (below) { below.innerHTML = ''; below.style.display = 'none'; }
+  renderDayCycle(); // renders standard base cycle, not concierge
 }
 
 function getBlockStatus(timeStr) {
@@ -3543,7 +3962,14 @@ function updateDayCycleTime() {
     label.textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }) 
       + ' CDT · ' + now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
   }
-  renderDayCycle();
+  // Only re-render base cycle if concierge is NOT active
+  var conciergeBtn = document.getElementById('btn-concierge');
+  var conciergeActive = conciergeBtn && conciergeBtn.classList.contains('active');
+  if (conciergeActive) {
+    renderConciergeCycle(); // refresh NOW indicator within concierge view
+  } else {
+    renderDayCycle();
+  }
 }
 
 function initDashboard() {
@@ -3552,7 +3978,16 @@ function initDashboard() {
   try { initActivityTracker(); } catch(e) { console.error('initActivityTracker:', e); }
   try { initBizCharts(); } catch(e) { console.error('initBizCharts:', e); }
   setTimeout(initGoogleFit, 800);
-  // Init Day Cycle
+  // Fetch concierge cycle — overrides default if today's file exists
+  try { fetchConciergeCycle(); } catch(e) { console.error('ConciergeCycle:', e); }
+  // Init Day Cycle — auto-select weekday/weekend button
+  try {
+    var btns = document.querySelectorAll('.day-type-btn');
+    btns.forEach(function(b) {
+      b.classList.remove('active');
+      if (b.textContent.toLowerCase() === currentDayType) b.classList.add('active');
+    });
+  } catch(e) { console.error('DayCycle btn init:', e); }
   try { 
     updateDayCycleTime(); 
     setInterval(updateDayCycleTime, 60000);
@@ -3565,6 +4000,31 @@ function initDashboard() {
     } catch(e2) { console.error('Direct render failed:', e2); }
   }
 }
+
+// ═══ OVERVIEW FINANCIAL BLUR ═══
+function ovReveal() {
+  var pw = document.getElementById('overview-unlock-pw').value;
+  var err = document.getElementById('overview-unlock-err');
+  if (pw === PASS) {
+    document.querySelectorAll('.overview-sensitive').forEach(function(el) { el.classList.add('revealed'); });
+    document.querySelectorAll('.overview-sensitive-block').forEach(function(el) { el.classList.add('revealed'); });
+    var bar = document.getElementById('overview-unlock-bar');
+    if (bar) bar.style.display = 'none';
+    sessionStorage.setItem('rg_ov_unlocked', '1');
+  } else {
+    err.style.display = 'inline';
+    setTimeout(function() { err.style.display = 'none'; }, 2000);
+  }
+}
+// Only auto-reveal if the overview was explicitly unlocked this session
+document.addEventListener('DOMContentLoaded', function() {
+  if (sessionStorage.getItem('rg_ov_unlocked') === '1') {
+    document.querySelectorAll('.overview-sensitive').forEach(function(el) { el.classList.add('revealed'); });
+    document.querySelectorAll('.overview-sensitive-block').forEach(function(el) { el.classList.add('revealed'); });
+    var bar = document.getElementById('overview-unlock-bar');
+    if (bar) bar.style.display = 'none';
+  }
+});
 
 // ══════════ MOBILE NAV ══════════
 // Check if already logged in via session
@@ -4032,6 +4492,66 @@ document.getElementById('journal-read-modal').addEventListener('click', function
     </div>
   </div>
 </div>
+
+<!-- ══ LOCKED SECTION OVERLAY LOGIC ══ -->
+<script>
+(function() {
+  var RG_PW = 'AAww33!!';
+  var SESSION_KEY = 'rg_biz_unlocked';
+
+  function unlockOverlay(sectionId) {
+    var overlay = document.getElementById('overlay-' + sectionId);
+    if (!overlay) return;
+    overlay.classList.add('unlocking');
+    setTimeout(function() {
+      overlay.parentNode.removeChild(overlay);
+    }, 350);
+  }
+
+  function checkSessionUnlock() {
+    if (sessionStorage.getItem(SESSION_KEY) === '1') {
+      unlockOverlay('businesses');
+      unlockOverlay('finance');
+    }
+  }
+
+  window.rgOverlayClick = function(overlay) {
+    var sectionId = overlay.id.replace('overlay-', '');
+    var pwWrap = document.getElementById('pw-wrap-' + sectionId);
+    if (!pwWrap) return;
+    if (!pwWrap.classList.contains('visible')) {
+      pwWrap.classList.add('visible');
+      var input = document.getElementById('pw-input-' + sectionId);
+      if (input) setTimeout(function() { input.focus(); }, 50);
+    }
+  };
+
+  window.rgPwKeydown = function(e, sectionId) {
+    if (e.key !== 'Enter') return;
+    var input = document.getElementById('pw-input-' + sectionId);
+    var errEl = document.getElementById('pw-err-' + sectionId);
+    if (!input) return;
+    if (input.value === RG_PW) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      unlockOverlay('businesses');
+      unlockOverlay('finance');
+    } else {
+      input.value = '';
+      if (errEl) {
+        errEl.classList.add('show');
+        setTimeout(function() { errEl.classList.remove('show'); }, 2000);
+      }
+    }
+  };
+
+  // Run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkSessionUnlock);
+  } else {
+    checkSessionUnlock();
+  }
+})();
+</script>
 
 <!-- ══ JOURNAL READ MODAL ══ -->
 <div class="journal-read-modal" id="journal-read-modal">
