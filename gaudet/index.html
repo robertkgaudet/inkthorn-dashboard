@@ -153,15 +153,19 @@
     align-items: start;
   }
 
+  /* Silhouette placeholder keeps a fixed ratio; real photos size naturally */
+  .portrait-frame:has(.portrait-silhouette) {
+    aspect-ratio: 3/4;
+  }
+
   @media (max-width: 700px) {
     .card-inner {
       grid-template-columns: 1fr;
     }
     .portrait-frame {
       width: 100%;
-      max-width: 280px;
+      max-width: 300px;
       margin: 0 auto;
-      aspect-ratio: 3/4;
     }
     .ancestor-card {
       padding: 20px 16px;
@@ -187,19 +191,19 @@
 
   @media (max-width: 400px) {
     .ancestor-card { padding: 14px 12px; }
-    .portrait-frame { max-width: 240px; }
+    .portrait-frame { max-width: 260px; }
   }
 
   .portrait-frame {
-    aspect-ratio: 3/4;
     background: #2a1f10;
     border: 2px solid var(--border);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     position: relative;
     overflow: hidden;
     flex-shrink: 0;
+    width: 200px;
   }
 
   .portrait-frame::before {
@@ -224,9 +228,7 @@
 
   .portrait-photo {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
+    height: auto;
     display: block;
   }
 
