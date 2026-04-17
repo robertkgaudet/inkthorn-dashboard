@@ -102,7 +102,7 @@
     --rust: #8b3a1a;
     --gold: #c8922a;
     --dark-bg: #100d08;
-    --card-bg: #fdf6e8;
+    --card-bg: #1e1408;
     --border: #c8a96e;
   }
 
@@ -211,13 +211,13 @@
 
   .ancestor-card {
     background: var(--card-bg);
-    border: 1px solid var(--border);
+    border: 1px solid var(--gold);
     border-radius: 2px;
     padding: 28px;
     margin-bottom: 32px;
     position: relative;
     z-index: 2;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 0 40px rgba(200,169,110,0.05);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.6), inset 0 0 40px rgba(200,146,42,0.06);
     animation: fadeUp 0.6s ease both;
   }
 
@@ -350,7 +350,7 @@
   .ancestor-name {
     font-family: 'Playfair Display', serif;
     font-size: clamp(18px, 3vw, 26px);
-    color: var(--ink);
+    color: #f5ead6;
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 4px;
@@ -360,7 +360,7 @@
     font-family: 'IM Fell English', serif;
     font-style: italic;
     font-size: 21px;
-    color: var(--sepia);
+    color: #c8a96e;
     margin-bottom: 14px;
     letter-spacing: 0.02em;
   }
@@ -417,7 +417,7 @@
 
   .ancestor-notes {
     font-size: 21px;
-    color: #4a3520;
+    color: #d4c4a0;
     line-height: 1.8;
     margin-bottom: 18px;
     font-weight: 400;
@@ -591,12 +591,12 @@
     font-family: 'IM Fell English', serif;
     font-style: italic;
     font-size: 21px;
-    color: var(--sepia);
+    color: #b89a6a;
     line-height: 1.8;
     margin-bottom: 16px;
     padding: 12px 16px;
-    border-left: 2px solid var(--border);
-    background: rgba(200,169,110,0.05);
+    border-left: 2px solid var(--gold);
+    background: rgba(200,146,42,0.07);
   }
 
   .ancestor-card.patriarch .era-blurb {
@@ -610,7 +610,7 @@
     font-family: 'IM Fell English', serif;
     font-style: italic;
     font-size: 19px;
-    color: var(--sepia);
+    color: var(--gold);
     margin-top: 10px;
     letter-spacing: 0.04em;
     line-height: 1.5;
