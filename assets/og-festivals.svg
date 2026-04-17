@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#070d1a"/>
+      <stop offset="100%" style="stop-color:#0d1730"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Top amber bar -->
+  <rect width="1200" height="8" fill="#f0b840"/>
+
+  <!-- Decorative circles -->
+  <circle cx="980" cy="180" r="280" fill="none" stroke="#f0b840" stroke-width="1" opacity="0.12"/>
+  <circle cx="980" cy="180" r="220" fill="none" stroke="#f0b840" stroke-width="1" opacity="0.1"/>
+  <circle cx="980" cy="180" r="160" fill="none" stroke="#00e5ff" stroke-width="1" opacity="0.08"/>
+  <circle cx="150" cy="520" r="160" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.1"/>
+
+  <!-- Label chip -->
+  <rect x="80" y="70" width="220" height="36" rx="18" fill="#f0b84020" stroke="#f0b840" stroke-width="1.5"/>
+  <text x="190" y="94" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#f0b840" text-anchor="middle">🎷 NEW ORLEANS 2026</text>
+
+  <!-- Main headline -->
+  <text x="80" y="185" font-family="Arial Black, Arial, sans-serif" font-size="74" font-weight="900" fill="#ffffff" letter-spacing="-1">Festival Season</text>
+
+  <!-- Sub headline -->
+  <text x="80" y="248" font-family="Arial, sans-serif" font-size="34" font-weight="600" fill="#00e5ff">French Quarter Fest · Jazz Fest · After Parties</text>
+
+  <!-- Date chips -->
+  <rect x="80" y="285" width="260" height="48" rx="24" fill="#f0b84018" stroke="#f0b840" stroke-width="1.5"/>
+  <text x="210" y="315" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#f0b840" text-anchor="middle">FQF · Apr 17–20</text>
+
+  <rect x="358" y="285" width="370" height="48" rx="24" fill="#00e5ff10" stroke="#00e5ff" stroke-width="1.5"/>
+  <text x="543" y="315" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#00e5ff" text-anchor="middle">Jazz Fest · Apr 23 – May 3</text>
+
+  <rect x="746" y="285" width="220" height="48" rx="24" fill="#a855f710" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="856" y="315" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#a855f7" text-anchor="middle">After Parties</text>
+
+  <!-- Details row -->
+  <text x="80" y="400" font-family="Arial, sans-serif" font-size="26" fill="#e8eaf6" opacity="0.9">20+ stages · 75+ food vendors · Full lineup &amp; schedule</text>
+  <text x="80" y="446" font-family="Arial, sans-serif" font-size="22" fill="#e8eaf6" opacity="0.55">Free admission · French Quarter &amp; Riverfront · 11 AM – 9:30 PM daily</text>
+
+  <!-- Divider line -->
+  <line x1="80" y1="490" x2="1120" y2="490" stroke="#f0b840" stroke-width="1" opacity="0.2"/>
+
+  <!-- Branding -->
+  <text x="80" y="540" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#f0b840">inkthorn.ai</text>
+  <text x="200" y="540" font-family="Arial, sans-serif" font-size="22" fill="#e8eaf6" opacity="0.4">/festivals.html</text>
+
+  <!-- Bottom amber bar -->
+  <rect y="622" width="1200" height="8" fill="#f0b840"/>
+</svg>
