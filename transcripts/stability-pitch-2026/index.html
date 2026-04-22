@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stability.org — Investor Pitch Transcript | Rob Gaudet</title>
+  <meta name="description" content="Full transcript of Rob Gaudet's Stability.org investor pitch. Stability is a disaster-ready community coordination platform with FEMA reporting, rotary adoption, and 1,500 users across 350+ organizations." />
+  <meta property="og:title" content="Stability.org — Investor Pitch Transcript" />
+  <meta property="og:description" content="Full pitch transcript covering traction, market size ($592B), FEMA opportunity, and the Stability platform. Rob Gaudet, founder." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://inkthorn.ai/transcripts/stability-pitch-2026/" />
+  <meta name="author" content="Rob Gaudet" />
+  <meta name="article:published_time" content="2026-04-22" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "cssSelector": ".transcript-body",
+    "name": "Stability.org Investor Pitch — Rob Gaudet",
+    "description": "Full transcript of Rob Gaudet's Stability.org investor pitch covering disaster-ready communities, FEMA coordination, traction with 1,500 users and 350+ organizations, and a $592B market opportunity.",
+    "author": { "@type": "Person", "name": "Rob Gaudet", "url": "https://inkthorn.ai" },
+    "dateCreated": "2026-04-22",
+    "inLanguage": "en"
+  }
+  </script>
+  <link rel="icon" type="image/png" href="../../assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { max-width: 100%; overflow-x: hidden; }
+    :root {
+      --bg: #0a0a12; --surface: #11111f; --border: rgba(255,255,255,0.07);
+      --pink: #ff2d87; --cyan: #00f5ff; --purple: #b44fff; --gold: #f0b840;
+      --white: #ffffff; --gray: rgba(255,255,255,0.6); --gray-lt: rgba(255,255,255,0.4);
+    }
+    body { background: var(--bg); color: var(--white); font-family: 'Space Grotesk', system-ui, sans-serif; line-height: 1.75; }
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(0,245,255,0.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0,245,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,18,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 36px; }
+    .nav-logo-text { font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 900; color: var(--cyan); letter-spacing: 0.1em; }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-back { font-size: 0.85rem; font-weight: 600; color: var(--cyan); text-decoration: none; }
+    .nav-back:hover { text-decoration: underline; }
+
+    /* LAYOUT */
+    .article-wrap { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 64px 24px 96px; }
+
+    /* HEADER */
+    .article-header { margin-bottom: 48px; }
+    .article-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .article-tag {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 999px;
+      background: rgba(255,45,135,0.1); color: var(--pink); border: 1px solid rgba(255,45,135,0.2);
+    }
+    .article-date { font-size: 0.82rem; color: var(--gray-lt); }
+    .article-header h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 5vw, 3rem);
+      font-weight: 900; line-height: 1.15; color: var(--white); margin-bottom: 20px;
+    }
+    .article-header h1 span { color: var(--pink); }
+    .article-lede { font-size: 1.05rem; color: rgba(255,255,255,0.7); line-height: 1.65; margin-bottom: 28px; font-weight: 400; }
+    .article-byline { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .byline-avatar {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; color: white;
+    }
+    .byline-name { font-weight: 700; font-size: 0.9rem; color: var(--white); }
+    .byline-title { font-size: 0.78rem; color: var(--gray-lt); }
+
+    /* STAT STRIP */
+    .stat-strip {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px; margin: 40px 0;
+    }
+    .stat-box {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 18px 20px; text-align: center;
+    }
+    .stat-val { font-family: 'Orbitron', monospace; font-size: 1.4rem; font-weight: 900; color: var(--cyan); display: block; margin-bottom: 4px; }
+    .stat-label { font-size: 0.75rem; color: var(--gray-lt); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* TRANSCRIPT */
+    .transcript-label {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 24px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-lt);
+    }
+    .transcript-label::before, .transcript-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .transcript-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 40px;
+      font-size: 1.02rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.85;
+    }
+    .transcript-body p { margin-bottom: 22px; }
+    .transcript-body p:last-child { margin-bottom: 0; }
+    .transcript-body strong { color: var(--white); font-weight: 700; }
+    .transcript-body .speaker-label {
+      display: inline-block; font-family: 'Orbitron', monospace; font-size: 0.65rem;
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 12px;
+    }
+
+    /* PULLQUOTE */
+    .pullquote {
+      margin: 40px 0; padding: 28px 32px;
+      border-left: 4px solid var(--purple);
+      background: rgba(180,79,255,0.06);
+      border-radius: 0 12px 12px 0;
+    }
+    .pullquote p {
+      font-family: 'Playfair Display', serif; font-size: 1.25rem; font-style: italic;
+      color: var(--white); margin: 0; line-height: 1.5;
+    }
+    .pullquote cite { display: block; margin-top: 12px; font-size: 0.82rem; color: var(--gray-lt); font-style: normal; }
+
+    /* LINKS */
+    .links-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 36px 0; }
+    .link-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(0,245,255,0.08); border: 1px solid rgba(0,245,255,0.2);
+      color: var(--cyan); font-size: 0.85rem; font-weight: 600;
+      padding: 8px 16px; border-radius: 999px; text-decoration: none; transition: background 0.15s;
+    }
+    .link-chip:hover { background: rgba(0,245,255,0.15); }
+
+    /* FOOTER */
+    footer {
+      position: relative; z-index: 1; border-top: 1px solid var(--border);
+      padding: 32px 24px; text-align: center; font-size: 0.82rem; color: var(--gray-lt);
+    }
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+      .article-wrap { padding: 40px 16px 64px; }
+      .transcript-body { padding: 24px 20px; }
+      .pullquote { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="../../assets/inkthorn-mascot.png" alt="InkThorn" />
+        <span class="nav-logo-text">INKTHORN</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/transcripts">Transcripts</a></li>
+      </ul>
+      <a href="/transcripts" class="nav-back">← All Transcripts</a>
+    </div>
+  </nav>
+
+  <article class="article-wrap">
+
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="article-tag">Pitch</span>
+        <span class="article-date">April 22, 2026</span>
+      </div>
+      <h1>Stability.org<br><span>Investor Pitch</span></h1>
+      <p class="article-lede">Disaster-ready communities. FEMA is changing in 2026 — starting to fund communities to respond themselves. Stability is the coordination platform that makes it possible.</p>
+      <div class="article-byline">
+        <div class="byline-avatar">RG</div>
+        <div>
+          <div class="byline-name">Rob Gaudet</div>
+          <div class="byline-title">Founder, Stability.org · Founder, Cajun Navy · 30 years in software</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="stat-strip">
+      <div class="stat-box"><span class="stat-val">1,500</span><span class="stat-label">Users</span></div>
+      <div class="stat-box"><span class="stat-val">350+</span><span class="stat-label">Organizations</span></div>
+      <div class="stat-box"><span class="stat-val">8</span><span class="stat-label">Rotary Districts (FL)</span></div>
+      <div class="stat-box"><span class="stat-val">$592B</span><span class="stat-label">USA Market/yr</span></div>
+      <div class="stat-box"><span class="stat-val">$700M</span><span class="stat-label">Addressable Market</span></div>
+    </div>
+
+    <div class="links-row">
+      <a class="link-chip" href="https://stability.org" target="_blank" rel="noopener">🌐 stability.org</a>
+      <a class="link-chip" href="https://rotaryFL.org" target="_blank" rel="noopener">🔵 rotaryFL.org</a>
+    </div>
+
+    <div class="transcript-label">Auto-Transcribed Pitch · April 22, 2026</div>
+
+    <div class="transcript-body">
+      <span class="speaker-label">Rob Gaudet · Stability.org</span>
+
+      <p>Hello, my name is Rob Gaudet. I'm the founder of Stability. At Stability, we're creating disaster-ready communities. I've spent 10 years on the ground learning disasters in order to build this platform.</p>
+
+      <p>And the problem I've identified is that <strong>no trust creates disaster response chaos.</strong> Citizen responders are not trusted by emergency management, and that's because they have zero coordination tools.</p>
+
+      <p>So the solution is a coordinated platform that prepares communities by simulating disasters — and this was Hurricane Helene and how we used Stability — and then it transforms local organizations into trusted disaster response teams.</p>
+
+      <p>The way that it does it: individuals can get background checks, they show the team they're affiliated with, and the list of skills and equipment. And teams can partner with emergency managers, deploy groups, and provide impact reporting to emergency management and to funders.</p>
+
+      <p>The look — disaster response is the most important American sector, still untouched by innovative technologies like AI. And America's aging, so baby boomers and genetics are creating massive drains on resources. And in 2026, <strong>FEMA is changing</strong> — they're going to start funding communities to respond themselves.</p>
+
+      <p>The market size is large. There's <strong>$592 billion annually</strong> in the USA market. Our addressable market is <strong>$700 million</strong>, and these are communities most impacted by disasters. The obtainable market are recently impacted communities.</p>
+
+      <p>The business model is to capture data for FEMA recovery funds at the community level. This is <strong>$140 million to $700 million per year</strong> available to communities that's left on the table, and we'll take a percentage of that data. The funds for that data. Our annual subscription model is community groups, emergency management, donor visibility, and disaster activation subscriptions.</p>
+
+      <p>Our traction: an MVP — Stability is up and running, and you can see it at <a href="https://stability.org" style="color: var(--cyan);">stability.org</a>. We have genuine FEMA interests — we've presented twice to the number two FEMA official, whose name is Greg Phillips. We have rotary adoption in the state of Florida — all eight rotary districts are on the platform — and we have <strong>1,500 users and over 350 organizations</strong> now on the platform.</p>
+
+      <p>So we are the <strong>official coordination platform for all eight Florida rotary districts</strong>, and you can see that at <a href="https://rotaryFL.org" style="color: var(--cyan);">rotaryFL.org</a>.</p>
+
+      <p>Stability is the only platform that provides FEMA reporting of donated resources. Community plus emergency management coordination. Instant activation of community groups where Rotary becomes a disaster relief forward. And then organizational impact reporting.</p>
+
+      <p>Our go-to-market is: expand on nonprofit partnerships — Groundforce is one of our partners, 300,000 followers and 45 million annual reach. During disaster, they talk about us through their social channels. Direct outreach to emergency management officials. Expanding Rotary Club participation. And tapping into community groups nationwide — which there are 1 million community groups.</p>
+
+      <p>My team consists of myself — I have 30 years in software, I have 10 years doing disaster relief. We're backed by the Walmart Foundation. I'm the director of New Orleans Startup Grind. John Rosso is our head of operations — he has national campaign strategy and political connections. And then Larry A.G. is the Rotary disaster partnership connection.</p>
+
+      <p>You can help by connecting us to emergency managers nationwide. <strong>We are raising a pre-seed round.</strong></p>
+
+      <p>And look — it's time for citizens to become an official part of the solution. These are just some of the groups we recruited and trained using Stability.</p>
+    </div>
+
+    <div class="pullquote" style="margin-top: 40px;">
+      <p>"Stability is a no-brainer. He cannot think of a single emergency manager who does not want this."</p>
+      <cite>— Kevin Guthrie, Director of Emergency Management, Florida</cite>
+    </div>
+
+    <div style="margin-top: 48px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; font-size: 0.82rem; color: var(--gray-lt); line-height: 1.6;">
+      <strong style="color: var(--white);">About this transcript:</strong> Auto-transcribed from audio using OpenAI Whisper (base model). Minor edits may have been applied for readability. Original audio recorded April 22, 2026.
+    </div>
+
+  </article>
+
+  <footer>
+    <p>© 2026 InkThorn · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/transcripts">Transcripts</a> · <a href="https://inkthorn.ai">inkthorn.ai</a></p>
+  </footer>
+</body>
+</html>
