@@ -11,6 +11,25 @@
   <meta property="og:url" content="https://inkthorn.ai/transcripts/stability-pitch-2026/" />
   <meta name="author" content="Rob Gaudet" />
   <meta name="article:published_time" content="2026-04-22" />
+  <!-- No caching — always fresh -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <!-- Cache bust: force reload if browser has stale version -->
+  <script>
+    (function() {
+      var key = 'page-version-stability-pitch-2026';
+      var current = '20260422-2';
+      if (sessionStorage.getItem(key) !== current) {
+        sessionStorage.setItem(key, current);
+        if (performance && performance.navigation && performance.navigation.type !== 1) {
+          // Not a manual reload — force one to get fresh content
+          var url = location.href.split('?')[0] + '?v=' + current;
+          if (location.href !== url) location.replace(url);
+        }
+      }
+    })();
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
