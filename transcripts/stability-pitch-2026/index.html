@@ -101,13 +101,49 @@
     .stat-val { font-family: 'Orbitron', monospace; font-size: 1.4rem; font-weight: 900; color: var(--cyan); display: block; margin-bottom: 4px; }
     .stat-label { font-size: 0.75rem; color: var(--gray-lt); text-transform: uppercase; letter-spacing: 0.06em; }
 
-    /* TRANSCRIPT */
+    /* TRANSCRIPT LABEL */
     .transcript-label {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 24px;
+      display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-lt);
     }
     .transcript-label::before, .transcript-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
+    /* EDIT TOOLBAR */
+    .edit-toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .edit-toolbar-left { display: flex; align-items: center; gap: 10px; }
+    .btn-edit {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.82rem; font-weight: 700;
+      padding: 7px 16px; border-radius: 999px; border: 1.5px solid;
+      cursor: pointer; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .btn-edit.off {
+      background: rgba(0,245,255,0.08); color: var(--cyan); border-color: rgba(0,245,255,0.3);
+    }
+    .btn-edit.off:hover { background: rgba(0,245,255,0.16); }
+    .btn-edit.on {
+      background: var(--cyan); color: #0a0a12; border-color: var(--cyan);
+    }
+    .btn-edit.on:hover { opacity: 0.88; }
+    .btn-reset {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.78rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 999px; border: 1.5px solid rgba(255,45,135,0.3);
+      background: rgba(255,45,135,0.07); color: var(--pink);
+      cursor: pointer; transition: all 0.15s; display: none;
+    }
+    .btn-reset:hover { background: rgba(255,45,135,0.15); }
+    .save-status {
+      font-size: 0.75rem; color: var(--gray-lt); transition: color 0.3s;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .save-status.saved { color: #4ade80; }
+    .save-status.saving { color: var(--gold); }
+
+    /* TRANSCRIPT BODY */
     .transcript-body {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -116,6 +152,8 @@
       font-size: 1.02rem;
       color: rgba(255,255,255,0.82);
       line-height: 1.85;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
     }
     .transcript-body p { margin-bottom: 22px; }
     .transcript-body p:last-child { margin-bottom: 0; }
@@ -125,6 +163,24 @@
       font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--cyan); margin-bottom: 12px;
     }
+    .transcript-body[contenteditable="true"] {
+      border-color: rgba(0,245,255,0.35);
+      box-shadow: 0 0 0 3px rgba(0,245,255,0.08);
+      cursor: text;
+    }
+    .transcript-body[contenteditable="true"]:focus {
+      border-color: rgba(0,245,255,0.6);
+      box-shadow: 0 0 0 4px rgba(0,245,255,0.12);
+    }
+
+    /* edit mode hint banner */
+    .edit-hint {
+      display: none; align-items: center; gap: 8px;
+      background: rgba(0,245,255,0.06); border: 1px solid rgba(0,245,255,0.15);
+      border-radius: 10px; padding: 10px 16px; margin-bottom: 12px;
+      font-size: 0.8rem; color: var(--cyan);
+    }
+    .edit-hint.visible { display: flex; }
 
     /* PULLQUOTE */
     .pullquote {
@@ -215,7 +271,26 @@
 
     <div class="transcript-label">Auto-Transcribed Pitch · April 22, 2026</div>
 
-    <div class="transcript-body">
+    <div class="edit-toolbar">
+      <div class="edit-toolbar-left">
+        <button class="btn-edit off" id="editToggle" onclick="toggleEdit()">
+          ✏️ Edit Transcript
+        </button>
+        <button class="btn-reset" id="resetBtn" onclick="resetTranscript()">
+          ↺ Reset to Original
+        </button>
+      </div>
+      <div class="save-status" id="saveStatus">
+        <span id="saveIcon">💾</span>
+        <span id="saveText">Auto-saves to this browser</span>
+      </div>
+    </div>
+
+    <div class="edit-hint" id="editHint">
+      ✏️ Edit mode on — click anywhere in the transcript to start editing. Changes save automatically.
+    </div>
+
+    <div class="transcript-body" id="transcriptBody">
       <span class="speaker-label">Rob Gaudet · Stability.org</span>
 
       <p>Hello, my name is Rob Gaudet. I'm the founder of Stability. At Stability, we're creating disaster-ready communities. I've spent 10 years on the ground learning disasters in order to build this platform.</p>
@@ -253,7 +328,7 @@
     </div>
 
     <div style="margin-top: 48px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; font-size: 0.82rem; color: var(--gray-lt); line-height: 1.6;">
-      <strong style="color: var(--white);">About this transcript:</strong> Auto-transcribed from audio using OpenAI Whisper (base model). Minor edits may have been applied for readability. Original audio recorded April 22, 2026.
+      <strong style="color: var(--white);">About this transcript:</strong> Auto-transcribed from audio using OpenAI Whisper (base model). Edits saved locally in this browser. Original audio recorded April 22, 2026.
     </div>
 
   </article>
@@ -261,5 +336,88 @@
   <footer>
     <p>© 2026 InkThorn · <a href="/">Home</a> · <a href="/blog">Blog</a> · <a href="/transcripts">Transcripts</a> · <a href="https://inkthorn.ai">inkthorn.ai</a></p>
   </footer>
+
+  <script>
+    const STORAGE_KEY = 'transcript-stability-pitch-2026';
+    const body = document.getElementById('transcriptBody');
+    const editToggle = document.getElementById('editToggle');
+    const resetBtn = document.getElementById('resetBtn');
+    const editHint = document.getElementById('editHint');
+    const saveStatus = document.getElementById('saveStatus');
+    const saveIcon = document.getElementById('saveIcon');
+    const saveText = document.getElementById('saveText');
+
+    // Store original HTML from the page source as the reset target
+    const ORIGINAL_HTML = body.innerHTML;
+
+    let saveTimer = null;
+    let isEditing = false;
+
+    // On load: restore saved version if it exists
+    (function init() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        body.innerHTML = saved;
+        setSaveStatus('saved', '✅', 'Loaded from your saved edits');
+        setTimeout(() => setSaveStatus('idle', '💾', 'Auto-saves to this browser'), 2500);
+        resetBtn.style.display = 'inline-flex';
+      }
+    })();
+
+    function toggleEdit() {
+      isEditing = !isEditing;
+
+      if (isEditing) {
+        body.setAttribute('contenteditable', 'true');
+        body.focus();
+        editToggle.textContent = '✓ Done Editing';
+        editToggle.className = 'btn-edit on';
+        editHint.classList.add('visible');
+        resetBtn.style.display = 'inline-flex';
+      } else {
+        body.setAttribute('contenteditable', 'false');
+        editToggle.textContent = '✏️ Edit Transcript';
+        editToggle.className = 'btn-edit off';
+        editHint.classList.remove('visible');
+        // Save immediately on exit
+        saveNow();
+      }
+    }
+
+    function setSaveStatus(state, icon, text) {
+      saveIcon.textContent = icon;
+      saveText.textContent = text;
+      saveStatus.className = 'save-status' + (state === 'saved' ? ' saved' : state === 'saving' ? ' saving' : '');
+    }
+
+    function saveNow() {
+      localStorage.setItem(STORAGE_KEY, body.innerHTML);
+      setSaveStatus('saved', '✅', 'Saved');
+      setTimeout(() => setSaveStatus('idle', '💾', 'Auto-saves to this browser'), 2000);
+    }
+
+    // Auto-save while typing (debounced 1.5s)
+    body.addEventListener('input', () => {
+      setSaveStatus('saving', '⏳', 'Saving…');
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveNow, 1500);
+    });
+
+    // Prevent accidental link navigation while editing
+    body.addEventListener('click', (e) => {
+      if (isEditing && e.target.tagName === 'A') {
+        e.preventDefault();
+      }
+    });
+
+    function resetTranscript() {
+      if (!confirm('Reset to the original Whisper transcript? Your edits will be lost.')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      body.innerHTML = ORIGINAL_HTML;
+      resetBtn.style.display = 'none';
+      setSaveStatus('idle', '💾', 'Reset to original');
+      setTimeout(() => setSaveStatus('idle', '💾', 'Auto-saves to this browser'), 2000);
+    }
+  </script>
 </body>
 </html>
