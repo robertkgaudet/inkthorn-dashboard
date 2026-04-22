@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I Sent My AI a Voice Note. It Built Me a Pitch Practice Page. — Rob Gaudet</title>
+  <meta name="description" content="I'm pitching at Innovate South. I sent a voice recording to my AI agent InkThorn. Ten minutes later I had a live, editable pitch transcript page. Here's exactly what happened." />
+  <meta property="og:title" content="I Sent My AI a Voice Note. It Built Me a Pitch Practice Page." />
+  <meta property="og:description" content="Pitching at Innovate South. One voice note to my AI agent. Ten minutes later: a live, editable transcript page. The future of pitch prep is already here." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://inkthorn.ai/blog/inkthorn-pitch-practice/" />
+  <meta name="author" content="Rob Gaudet" />
+  <meta name="article:published_time" content="2026-04-22" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "I Sent My AI a Voice Note. It Built Me a Pitch Practice Page.",
+    "description": "Rob Gaudet describes how his AI agent InkThorn transcribed his Stability.org investor pitch from a voice note and built a live, editable transcript page in minutes — in preparation for Innovate South.",
+    "author": { "@type": "Person", "name": "Rob Gaudet", "url": "https://inkthorn.ai" },
+    "datePublished": "2026-04-22",
+    "publisher": { "@type": "Organization", "name": "InkThorn", "url": "https://inkthorn.ai" },
+    "mainEntityOfPage": "https://inkthorn.ai/blog/inkthorn-pitch-practice/",
+    "keywords": ["AI agent", "OpenClaw", "InkThorn", "pitch deck", "Stability.org", "Innovate South", "disaster response", "FEMA", "AI tools", "New Orleans"]
+  }
+  </script>
+
+  <link rel="icon" type="image/png" href="../../assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { max-width: 100%; overflow-x: hidden; }
+    :root {
+      --bg: #0a0a12; --surface: #11111f; --border: rgba(255,255,255,0.07);
+      --pink: #ff2d87; --cyan: #00f5ff; --purple: #b44fff; --gold: #f0b840;
+      --white: #ffffff; --gray: rgba(255,255,255,0.6); --gray-lt: rgba(255,255,255,0.4);
+    }
+    body { background: var(--bg); color: var(--white); font-family: 'Space Grotesk', system-ui, sans-serif; line-height: 1.75; }
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(0,245,255,0.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0,245,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,18,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 36px; }
+    .nav-logo-text { font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 900; color: var(--cyan); letter-spacing: 0.1em; }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-back { font-size: 0.85rem; font-weight: 600; color: var(--cyan); text-decoration: none; }
+    .nav-back:hover { text-decoration: underline; }
+
+    /* ARTICLE */
+    .article-wrap { position: relative; z-index: 1; max-width: 740px; margin: 0 auto; padding: 64px 24px 96px; }
+
+    /* HEADER */
+    .article-header { margin-bottom: 48px; }
+    .article-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .article-tag {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 999px;
+      background: rgba(0,245,255,0.1); color: var(--cyan); border: 1px solid rgba(0,245,255,0.2);
+    }
+    .article-date { font-size: 0.82rem; color: var(--gray-lt); }
+    .article-header h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900; line-height: 1.15; color: var(--white); margin-bottom: 20px;
+    }
+    .article-header h1 span { color: var(--cyan); }
+    .article-lede { font-size: 1.15rem; color: rgba(255,255,255,0.75); line-height: 1.65; margin-bottom: 28px; font-weight: 400; }
+    .article-byline { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .byline-avatar {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; color: white;
+    }
+    .byline-name { font-weight: 700; font-size: 0.9rem; color: var(--white); }
+    .byline-title { font-size: 0.78rem; color: var(--gray-lt); }
+
+    /* BODY */
+    .article-body { margin-top: 48px; }
+    .article-body h2 {
+      font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 900;
+      color: var(--white); margin: 56px 0 16px; line-height: 1.2;
+    }
+    .article-body p { font-size: 1.02rem; color: rgba(255,255,255,0.8); margin-bottom: 22px; line-height: 1.75; }
+    .article-body p strong { color: var(--white); font-weight: 700; }
+    .article-body p em { color: var(--cyan); font-style: italic; }
+    .article-body a { color: var(--cyan); text-decoration: none; border-bottom: 1px solid rgba(0,245,255,0.3); transition: border-color 0.15s; }
+    .article-body a:hover { border-color: var(--cyan); }
+    .article-body ul { margin: 0 0 24px 24px; }
+    .article-body ul li { color: rgba(255,255,255,0.75); margin-bottom: 10px; font-size: 1.02rem; line-height: 1.65; }
+
+    /* STEP BOX */
+    .step-box {
+      margin: 32px 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .step-box-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+    }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Orbitron', monospace; font-size: 0.75rem; font-weight: 900; color: #0a0a12;
+    }
+    .step-box-header span { font-weight: 700; color: var(--white); font-size: 0.95rem; }
+    .step-box-body { padding: 20px 24px; font-size: 0.95rem; color: var(--gray); line-height: 1.7; }
+    .step-box-body strong { color: var(--white); }
+
+    /* PULLQUOTE */
+    .pullquote {
+      margin: 40px 0; padding: 28px 32px;
+      border-left: 4px solid var(--pink);
+      background: rgba(255,45,135,0.06);
+      border-radius: 0 12px 12px 0;
+    }
+    .pullquote p {
+      font-family: 'Playfair Display', serif; font-size: 1.35rem; font-style: italic;
+      color: var(--white); margin: 0; line-height: 1.5;
+    }
+    .pullquote cite { display: block; margin-top: 12px; font-size: 0.82rem; color: var(--gray-lt); font-style: normal; }
+
+    /* CTA BOX */
+    .cta-box {
+      margin: 56px 0 0;
+      background: var(--surface);
+      border: 1px solid rgba(0,245,255,0.2);
+      border-radius: 16px;
+      padding: 32px 36px;
+      text-align: center;
+    }
+    .cta-box h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--white); margin-bottom: 12px; }
+    .cta-box p { font-size: 0.92rem; color: var(--gray); margin-bottom: 24px; line-height: 1.6; }
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-cyan { background: var(--cyan); color: #0a0a12; padding: 12px 28px; border-radius: 999px; font-weight: 700; font-size: 0.9rem; text-decoration: none; border: none; transition: opacity 0.15s; }
+    .btn-cyan:hover { opacity: 0.85; }
+    .btn-outline-pink { background: transparent; color: var(--pink); border: 1.5px solid var(--pink); padding: 12px 28px; border-radius: 999px; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: all 0.15s; }
+    .btn-outline-pink:hover { background: rgba(255,45,135,0.1); }
+
+    /* FOOTER */
+    footer {
+      position: relative; z-index: 1; border-top: 1px solid var(--border);
+      padding: 32px 24px; text-align: center; font-size: 0.82rem; color: var(--gray-lt);
+    }
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+      .article-wrap { padding: 40px 16px 64px; }
+      .pullquote { padding: 20px 20px; }
+      .cta-box { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="../../assets/inkthorn-mascot.png" alt="InkThorn" />
+        <span class="nav-logo-text">INKTHORN</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/crustacean">Crustacean</a></li>
+      </ul>
+      <a href="/blog" class="nav-back">← All Posts</a>
+    </div>
+  </nav>
+
+  <article class="article-wrap">
+
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="article-tag">AI Agent</span>
+        <span class="article-date">April 22, 2026</span>
+      </div>
+      <h1>I Sent My AI a Voice Note.<br><span>It Built Me a Pitch Practice Page.</span></h1>
+      <p class="article-lede">I'm pitching Stability.org at Innovate South. I sent a voice note to my AI agent, InkThorn. Ten minutes later, I had a live, editable transcript page on my website. I didn't write a line of code.</p>
+      <div class="article-byline">
+        <div class="byline-avatar">RG</div>
+        <div>
+          <div class="byline-name">Rob Gaudet</div>
+          <div class="byline-title">Founder, Stability.org · Founder, Cajun Navy · 30 years in technology</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="article-body">
+
+      <p>I have a pitch coming up. <strong>Innovate South</strong> — one of the bigger innovation conferences in our region. I'm presenting Stability.org, the disaster coordination platform I've spent the last decade building on the ground in places like Baton Rouge, Florida, and the aftermath of Hurricane Helene.</p>
+
+      <p>Pitching is a craft. You don't just know your company — you have to perform your company. The right words in the right order at the right pace, over and over until it's muscle memory. Most people prepare by reading from notes, by recording themselves on their phone, by rehearsing in the mirror. All of that is fine.</p>
+
+      <p>I did something different. And it worked better than anything I've tried before.</p>
+
+      <h2>What InkThorn Is</h2>
+
+      <p>For the last several months I've been running an AI agent on my own hardware called <strong>InkThorn</strong> — built on <a href="https://openclaw.ai" target="_blank" rel="noopener">OpenClaw</a>, which connects Claude AI directly to my phone via Telegram. No dashboard. No app to learn. I just text it, like I'd text a person. And it does things.</p>
+
+      <p>Not like a chatbot that answers questions. Like an assistant that actually has access to my files, my website, my tools — and builds things autonomously. I've used it to scrape leads, build dashboards, write code, push live websites, and manage projects. All through text messages.</p>
+
+      <p>This morning I decided to use it for pitch prep.</p>
+
+      <h2>Here's Exactly What I Did</h2>
+
+      <p>I recorded a voice note on my phone — just me, walking through the Stability pitch the way I'd deliver it on stage. Market, problem, solution, traction, team, ask. Unscripted, natural, the way I actually talk. Then I sent it to InkThorn with one message:</p>
+
+      <div class="pullquote">
+        <p>"Can you find a skill to transcribe this audio file and create a page on inkthorn.ai that has the transcript on it... I will load more transcripts once I have them."</p>
+        <cite>— My actual message to InkThorn</cite>
+      </div>
+
+      <p>That was the whole instruction. One sentence.</p>
+
+      <p>Here's what happened next — and I'm sharing this because I want you to understand what "AI agent" actually means in practice, versus the vague marketing version of it.</p>
+
+      <div class="step-box">
+        <div class="step-box-header"><div class="step-num">1</div><span>InkThorn diagnosed the environment</span></div>
+        <div class="step-box-body">It checked what transcription tools were available. Whisper wasn't installed. pip wasn't installed. ffmpeg wasn't installed. Rather than stopping to ask me what to do, it bootstrapped pip from scratch, downloaded a static ffmpeg binary, installed OpenAI Whisper — and ran all of this locally, on my machine, with no external API key required.</div>
+      </div>
+
+      <div class="step-box">
+        <div class="step-box-header"><div class="step-num">2</div><span>It transcribed the audio</span></div>
+        <div class="step-box-body">Whisper processed the 3GPP voice note — the raw format Telegram uses — and produced a full transcript. <strong>It caught almost everything.</strong> A few proper nouns were slightly off (it heard "Rock Goethe" for my name, which is exactly the kind of thing you'd fix in editing). But the substance was clean and accurate.</div>
+      </div>
+
+      <div class="step-box">
+        <div class="step-box-header"><div class="step-num">3</div><span>It built and published a full page</span></div>
+        <div class="step-box-body">It looked at the existing design of my site — the Miami Synthwave aesthetic, the fonts, the card styles, the color palette — and built a matching transcript page from scratch. It added a stat strip with the key numbers from my pitch ($592B market, 1,500 users, 350+ organizations, 8 Florida Rotary districts). It pulled Kevin Guthrie's quote. It linked to stability.org and rotaryFL.org. Then it created a /transcripts section with an index page, pushed everything to GitHub, and it was live.</div>
+      </div>
+
+      <div class="step-box">
+        <div class="step-box-header"><div class="step-num">4</div><span>It made the transcript editable</span></div>
+        <div class="step-box-body">I asked for inline editing with autosave. It built that too — no backend required. Click "Edit Transcript," make changes directly on the page, and your edits save automatically to your browser's localStorage. Reload the page: your version is still there. There's even a "Reset to Original" button if you want to start fresh. <strong>Every word of that was written in a conversation. Not a single line of code came from me.</strong></div>
+      </div>
+
+      <h2>Why This Actually Matters for Pitch Prep</h2>
+
+      <p>Here's the thing about having your pitch in a live, editable web page: it changes how you practice.</p>
+
+      <p>When your transcript lives in a Google Doc, it's a document. Static. Passive. You read it, you edit it, maybe you share it. When it lives on your website — branded, public, structured — it becomes something you're accountable to. You can pull it up anywhere. You can share it with your team and say "this is the pitch, right here." You can annotate it in real time after a run-through while the session is still fresh. And because it's indexed on a public URL, it's findable. AI search engines will find it. Investors Googling you before a meeting will find it.</p>
+
+      <p>That last part isn't an accident. It's GEO — generative engine optimization. Everything I build with InkThorn is designed to be discoverable by AI, not just humans.</p>
+
+      <div class="pullquote">
+        <p>The pitch page isn't just for practice. It's part of the pitch itself.</p>
+      </div>
+
+      <h2>What I'm Using It For</h2>
+
+      <p>The plan is simple. Every time I run through the pitch — in the car, in my office, before a meeting — I record a voice note and send it to InkThorn. Each one becomes a new transcript. I can see how the language is evolving. Where I'm tightening. Where I'm wandering. What phrases are sticking and what's getting cut.</p>
+
+      <p>It's a pitch journal, built automatically, from my own voice.</p>
+
+      <p>If you want to see what this looks like in practice, the first transcript — from this morning's run-through — is live right now:</p>
+
+      <p><a href="https://inkthorn.ai/transcripts/stability-pitch-2026/">inkthorn.ai/transcripts/stability-pitch-2026/</a></p>
+
+      <p>It's the real thing. Unpolished. That's the point.</p>
+
+      <h2>The Bigger Picture</h2>
+
+      <p>I've said it before and I'll keep saying it: <strong>the poets are going to win the AI age.</strong> Not because the technology is easy — it isn't, even when it looks like it — but because the people who can describe what they want with clarity and texture are the ones getting things built.</p>
+
+      <p>I sent one sentence. My agent built an entire workflow.</p>
+
+      <p>That's not a demo. That's a Tuesday morning in 2026.</p>
+
+    </div>
+
+    <div class="cta-box">
+      <h3>See the Stability Pitch Transcript</h3>
+      <p>The live, editable transcript from this morning's run-through — built entirely by InkThorn from a voice note. See the platform, see the pitch, see what's possible.</p>
+      <div class="cta-buttons">
+        <a href="https://inkthorn.ai/transcripts/stability-pitch-2026/" class="btn-cyan">Read the Transcript →</a>
+        <a href="https://stability.org" target="_blank" rel="noopener" class="btn-outline-pink">Visit Stability.org</a>
+      </div>
+    </div>
+
+  </article>
+
+  <footer>
+    <p>© 2026 Rob Gaudet · <a href="/">InkThorn</a> · <a href="/blog">Blog</a> · <a href="https://stability.org" target="_blank">stability.org</a></p>
+  </footer>
+</body>
+</html>
