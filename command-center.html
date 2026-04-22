@@ -13,34 +13,37 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Command Center">
-  <link rel="apple-touch-icon" href="https://trustlight.ai/rob-profile.jpg">
-  <link rel="manifest" href="https://trustlight.ai/dashboard-manifest.json">
-<title>ROB GAUDET // COMMAND CENTER</title>
+  <link rel="apple-touch-icon" href="https://inkthorn.ai/assets/inkthorn-mascot.png">
+  <link rel="manifest" href="https://inkthorn.ai/manifest.json">
+<title>InkThorn — Command Center</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #0a0a0a;
-    --bg2: #111114;
-    --bg3: #16161a;
-    --amber: #c8832a;
-    --amber2: #e09a40;
-    --amber3: #f5b855;
-    --cyan: #00d4ff;
-    --cyan2: #00aacc;
-    --text: #f2ede6;
-    --text2: #b8b0a5;
-    --text3: #6e6760;
+    --bg: #070711;
+    --bg2: #0f0f1e;
+    --bg3: #14142a;
+    --amber: #f0b840;
+    --amber2: #f5c855;
+    --amber3: #fada70;
+    --cyan: #00f5ff;
+    --cyan2: #00ccdd;
+    --pink: #ff2d87;
+    --purple: #a855f7;
+    --text: #f0f0ff;
+    --text2: #b0b0d8;
+    --text3: #7878a8;
     --red: #ff4444;
-    --yellow: #ffcc00;
-    --green: #00ff88;
-    --glass-bg: rgba(22, 22, 26, 0.7);
-    --glass-border: rgba(200, 131, 42, 0.2);
-    --glow-amber: 0 0 20px rgba(200, 131, 42, 0.4), 0 0 40px rgba(200, 131, 42, 0.15);
-    --glow-cyan: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 40px rgba(0, 212, 255, 0.15);
-    --glow-amber-strong: 0 0 30px rgba(224, 154, 64, 0.6), 0 0 60px rgba(200, 131, 42, 0.3);
+    --yellow: #ffe600;
+    --green: #39ff14;
+    --glass-bg: rgba(14, 14, 30, 0.8);
+    --glass-border: rgba(255, 45, 135, 0.25);
+    --glow-amber: 0 0 20px rgba(240, 184, 64, 0.4), 0 0 40px rgba(240, 184, 64, 0.15);
+    --glow-cyan: 0 0 20px rgba(0, 245, 255, 0.4), 0 0 40px rgba(0, 245, 255, 0.15);
+    --glow-amber-strong: 0 0 30px rgba(240, 184, 64, 0.6), 0 0 60px rgba(240, 184, 64, 0.3);
+    --glow-pink: 0 0 20px rgba(255, 45, 135, 0.5), 0 0 40px rgba(255, 45, 135, 0.2);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -117,7 +120,7 @@
   }
 
   .login-logo {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 2.2rem;
     letter-spacing: 4px;
     color: var(--amber2);
@@ -160,7 +163,7 @@
     border-radius: 6px;
     padding: 14px;
     color: #0a0a0a;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.2rem;
     letter-spacing: 3px;
     cursor: pointer;
@@ -205,7 +208,7 @@
   }
 
   .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 4px;
     color: var(--amber2);
@@ -230,7 +233,7 @@
   .nav-tabs::-webkit-scrollbar { display: none; }
 
   .nav-tab {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 0.95rem;
     letter-spacing: 3px;
     color: var(--text3);
@@ -299,7 +302,7 @@
     margin-bottom: 32px;
   }
   .section-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 2.8rem;
     letter-spacing: 4px;
     color: var(--amber2);
@@ -382,7 +385,7 @@
     margin-bottom: 10px;
   }
   .kpi-value {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 2.6rem;
     letter-spacing: 2px;
     color: var(--amber2);
@@ -417,7 +420,7 @@
 
   /* ─── CARD TITLES ─── */
   .card-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.3rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -462,7 +465,7 @@
     flex-shrink: 0;
   }
   .health-pct {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.4rem;
     color: var(--amber2);
     text-shadow: var(--glow-amber);
@@ -544,7 +547,7 @@
   }
   .focus-item:last-child { border-bottom: none; }
   .focus-num {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.2rem;
     color: var(--amber);
     width: 24px;
@@ -596,7 +599,7 @@
     margin-bottom: 20px;
   }
   .biz-name {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.8rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -722,7 +725,7 @@
     margin-bottom: 16px;
   }
   .burn-number {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 5rem;
     color: var(--amber2);
     text-shadow: var(--glow-amber-strong);
@@ -790,7 +793,7 @@
     box-shadow: 0 0 20px rgba(200,131,42,0.15);
   }
   .debt-name {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.1rem;
     letter-spacing: 2px;
     color: var(--text);
@@ -837,7 +840,7 @@
     box-shadow: var(--glow-amber);
   }
   .irs-banner-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 2rem;
     letter-spacing: 6px;
     color: var(--amber2);
@@ -866,7 +869,7 @@
     margin-bottom: 8px;
   }
   .irs-fact-value {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 2px;
     color: var(--amber2);
@@ -896,7 +899,7 @@
     box-shadow: var(--glow-amber);
   }
   .strategy-name {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.5rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -916,7 +919,7 @@
     text-decoration: none;
     padding: 12px 28px;
     border-radius: 6px;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1rem;
     letter-spacing: 3px;
     transition: all 0.3s;
@@ -998,7 +1001,7 @@
     text-align: center;
   }
   .profile-stat-val {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 2px;
     color: var(--amber2);
@@ -1129,7 +1132,7 @@
     border-radius: 6px;
     padding: 10px 24px;
     color: #0a0a0a;
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1rem;
     letter-spacing: 2px;
     cursor: pointer;
@@ -1166,7 +1169,7 @@
     margin-bottom: 6px;
   }
   .entry-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.3rem;
     letter-spacing: 2px;
     color: var(--text);
@@ -1276,7 +1279,7 @@
     box-shadow: var(--glow-amber);
   }
   .timeline-year {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.6rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -1316,7 +1319,7 @@
     box-shadow: var(--glow-amber-strong);
   }
   .modal-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.6rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -1351,7 +1354,7 @@
     border-radius: 6px;
     padding: 10px 20px;
     color: var(--text2);
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 0.95rem;
     letter-spacing: 2px;
     cursor: pointer;
@@ -1435,7 +1438,7 @@
   position: relative;
 }
 .day-cycle-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-size: 1.2rem;
   letter-spacing: 0.14em;
   color: #00d4ff;
@@ -1671,7 +1674,7 @@
 }
 .nav-left { flex-shrink: 0; }
 .nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-size: 1.1rem;
   letter-spacing: 0.08em;
   color: #c8832a;
@@ -1756,7 +1759,7 @@
 }
 .mobile-nav-close:hover { border-color: #c8832a; color: #c8832a; }
 .mobile-nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-size: 1.3rem;
   letter-spacing: 0.1em;
   color: #c8832a;
@@ -1899,7 +1902,7 @@
   z-index: 1;
 }
 .ring-value {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-size: 1.15rem;
   letter-spacing: 0.04em;
   line-height: 1;
@@ -1967,7 +1970,7 @@
   box-shadow: 0 0 60px rgba(200,131,42,0.15);
 }
 .activity-modal h3 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-size: 1.4rem;
   letter-spacing: 0.08em;
   color: #c8832a;
@@ -2196,7 +2199,7 @@
   margin-bottom: 0.5rem;
 }
 .journal-read-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   font-size: 1.8rem;
   letter-spacing: 0.06em;
   color: #f2ede6;
@@ -2238,7 +2241,7 @@
     margin-bottom: 12px;
   }
   .locked-overlay-label {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 4px;
     color: var(--amber2);
@@ -2312,7 +2315,7 @@ window._gfitConnect = function() {
   var CLIENT_ID = '1085063330986-r202kk8tuqkdjfutc30k84pb2dovnm5t.apps.googleusercontent.com';
   var SCOPES = 'https://www.googleapis.com/auth/fitness.activity.read%20https://www.googleapis.com/auth/fitness.body.read%20https://www.googleapis.com/auth/fitness.location.read';
   sessionStorage.setItem('rg_auth', '1');
-  var redirectUri = encodeURIComponent('https://trustlight.ai/dashboard.html');
+  var redirectUri = encodeURIComponent('https://inkthorn.ai/command-center.html');
   var authUrl = 'https://accounts.google.com/o/oauth2/v2/auth' +
     '?client_id=' + CLIENT_ID +
     '&redirect_uri=' + redirectUri +
@@ -2322,7 +2325,7 @@ window._gfitConnect = function() {
   window.location.href = authUrl;
 };
 </script>
-<link rel="icon" type="image/jpeg" href="https://trustlight.ai/rob-profile.jpg">
+<link rel="icon" type="image/jpeg" href="https://inkthorn.ai/assets/inkthorn-mascot.png">
 </head>
 <body>
 
@@ -2344,8 +2347,8 @@ window._gfitConnect = function() {
   <nav id="main-nav">
     <div class="nav-left">
       <div style="display:flex;align-items:center;gap:0.65rem;">
-      <img src="https://trustlight.ai/rob-profile.jpg" alt="Rob" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(200,131,42,0.5);box-shadow:0 0 8px rgba(200,131,42,0.3);">
-      <span class="nav-logo">ROB GAUDET <span style="color:rgba(200,131,42,0.5)">//</span> COMMAND CENTER</span>
+      <img src="https://inkthorn.ai/assets/inkthorn-mascot.png" alt="Rob" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(200,131,42,0.5);box-shadow:0 0 8px rgba(200,131,42,0.3);">
+      <span class="nav-logo">INKTHORN <span style="color:rgba(200,131,42,0.5)">//</span> COMMAND CENTER</span>
     </div>
     </div>
     <div class="nav-tabs" id="nav-tabs">
@@ -2392,7 +2395,7 @@ window._gfitConnect = function() {
           <div class="day-cycle-now" id="dc-now-label">Loading...</div>
         </div>
         <div class="day-type-btns" id="day-type-btns">
-          <button class="day-type-btn" id="btn-concierge" onclick="setDayConcierge(this)" style="display:none;">✦ Concierge</button>
+          <button class="day-type-btn active" id="btn-concierge" onclick="setDayConcierge(this)">✦ Concierge</button>
           <button class="day-type-btn" onclick="setDayType('weekday',this)">Weekday</button>
           <button class="day-type-btn" onclick="setDayType('weekend',this)">Weekend</button>
           <button class="day-type-btn" onclick="setDayType('vacation',this)">Vacation</button>
@@ -3753,8 +3756,8 @@ var _conciergeAnchor = null;
 var _conciergePrivate = null;
 
 function fetchConciergeCycle() {
-  // Inline data injected at build time — no cross-origin fetch needed
-  var _INLINE_CYCLE = {"date": "2026-04-17", "generated": "2026-04-17T14:47:52Z", "location": "Napoleon & Magazine, Uptown New Orleans, 70115", "mode": "custom", "concierge": {"title": "Friday \u2014 Finish Strong", "notes": ["\ud83c\udfc6 RISE Challenge (Virginia) \u2014 Stability accepted! Complete the application", "\ud83c\udfa4 InnovateSouth deck \u2014 finish it, time the pitch (must be under 4 min), upload to Claude for evaluation & improvements", "\u2705 Ship something before 3pm \u2014 don't drift", "\ud83e\uddfe Review week finances: income, expenses, IRS set-aside", "\ud83d\udcf1 TextOS: any user feedback or product notes to capture", "\ud83c\udf7a End of week beer is earned \u2014 Barrel Proof or Cure", "\ud83d\udcd3 Journal: 3 wins from this week", "\ud83c\udfa7 Steve Aoki DJ @ Metropolitan tonight \u2014 don't miss it"]}, "private": ["\ud83c\udf39 Date night with Camille tonight \u2014 make it count", "\ud83d\udccd Reservation idea: Clancy's \u2014 call ahead", "\ud83d\udc8c She loves when you just handle the reservation without being asked", "\ud83d\udc8c Dress up a little \u2014 she notices"], "blocks": [{"time": "7:30 AM", "icon": "\ud83c\udfc1", "label": "Friday \u2014 Finish Line", "tips": ["Ship something before 3pm. Don't drift into the weekend.", "One real deliverable. Then you're free."], "recommendation": null}, {"time": "9:00 AM", "icon": "\ud83d\udcbb", "label": "Final Build Push", "tips": ["Last hard coding block of the week", "Leave Reyla in a clean state for Monday"], "recommendation": null}, {"time": "11:30 AM", "icon": "\ud83e\uddfe", "label": "Finance Review", "tips": ["Weekly check: income logged, expenses noted, IRS set-aside?", "Check the trailer title transfer status if pending"], "recommendation": null}, {"time": "1:00 PM", "icon": "\ud83e\udd57", "label": "Lunch", "tips": ["Friday lunch is a small reward \u2014 make it good", "No-takeout if still in challenge window"], "recommendation": null}, {"time": "3:00 PM", "icon": "\u2705", "label": "Week Close", "tips": ["Write your 3 wins. Commit and push any open code.", "What moves to Monday? Write it down now."], "recommendation": null}, {"time": "5:30 PM", "icon": "\ud83c\udf7a", "label": "Friday Wind-Down Drink", "tips": ["You earned it. Barrel Proof or Cure.", "Friday on Magazine Street has its own energy."], "recommendation": {"name": "Barrel Proof", "address": "1201 Magazine St, New Orleans", "note": "Best whiskey bar in the South. 5 minutes from home."}}, {"time": "6:00 PM", "icon": "\ud83c\udfb5", "label": "Michael Watson & The Alchemy", "tips": ["d.b.a. \u00b7 Marigny", "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"], "recommendation": {"name": "Michael Watson & The Alchemy", "address": "d.b.a.", "note": "Tonight at 6:00 PM. More info: https://wwoz.org/events/1327376"}}, {"time": "7:00 PM", "icon": "\ud83c\udf39", "label": "Date Night with Camille", "tips": ["Clancy's \u2014 Uptown white tablecloth, classic New Orleans", "She loves when you just handle the reservation without being asked"], "recommendation": {"name": "Clancy's", "address": "6100 Annunciation St, New Orleans", "note": "Uptown white tablecloth, classic New Orleans"}, "_private": true}, {"time": "7:00 PM", "icon": "\ud83c\udfb5", "label": "Willie Green III", "tips": ["Bacchanal (OUTDOORS) \u00b7 Bywater", "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"], "recommendation": {"name": "Willie Green III", "address": "Bacchanal (OUTDOORS)", "note": "Tonight at 7:00 PM. More info: https://wwoz.org/events/1324506"}}, {"time": "8:00 PM", "icon": "\ud83c\udfb6", "label": "Frenchmen Street", "tips": ["Friday night on Frenchmen is an institution", "Walk the street, pick a spot, let New Orleans do its thing"], "recommendation": {"name": "Frenchmen Street", "address": "Frenchmen St, Marigny, New Orleans", "note": "Snug Harbor, d.b.a., The Spotted Cat \u2014 all within 100 feet."}}]};
+  // Inline data injected at build time
+  var _INLINE_CYCLE = {"date": "2026-04-17", "generated": "2026-04-17T14:47:52Z", "location": "Napoleon & Magazine, Uptown New Orleans, 70115", "mode": "custom", "concierge": {"title": "Friday \u2014 Finish Strong", "notes": ["\ud83c\udfc6 RISE Challenge (Virginia) \u2014 Stability accepted! Complete the application", "\ud83c\udfa4 InnovateSouth deck \u2014 finish it, time the pitch (must be under 4 min), upload to Claude for evaluation & improvements", "\u2705 Ship something before 3pm \u2014 don't drift", "\ud83e\uddfe Review week finances: income, expenses, IRS set-aside", "\ud83d\udcf1 TextOS: any user feedback or product notes to capture", "\ud83c\udf7a End of week beer is earned \u2014 Barrel Proof or Cure", "\ud83d\udcd3 Journal: 3 wins from this week"]}, "private": ["\ud83c\udf39 Date night with Camille tonight \u2014 make it count", "\ud83d\udccd Reservation idea: Clancy's \u2014 call ahead", "\ud83d\udc8c She loves when you just handle the reservation without being asked", "\ud83d\udc8c Dress up a little \u2014 she notices"], "blocks": [{"time": "7:30 AM", "icon": "\ud83c\udfc1", "label": "Friday \u2014 Finish Line", "tips": ["Ship something before 3pm. Don't drift into the weekend.", "One real deliverable. Then you're free."], "recommendation": null}, {"time": "8:00 AM", "icon": "\ud83c\udfc6", "label": "RISE Challenge Application", "tips": ["Stability accepted into RISE Challenge (Virginia)", "Complete and submit the application today"], "recommendation": null}, {"time": "9:00 AM", "icon": "\ud83d\udcbb", "label": "Final Build Push", "tips": ["Last hard coding block of the week", "Leave Reyla in a clean state for Monday"], "recommendation": null}, {"time": "10:00 AM", "icon": "\ud83c\udfa4", "label": "InnovateSouth Pitch Deck", "tips": ["Finish the deck, time the pitch \u2014 must be under 4 min", "Upload to Claude for evaluation & improvements"], "recommendation": null}, {"time": "11:30 AM", "icon": "\ud83e\uddfe", "label": "Finance Review", "tips": ["Weekly check: income logged, expenses noted, IRS set-aside?", "Check the trailer title transfer status if pending"], "recommendation": null}, {"time": "1:00 PM", "icon": "\ud83e\udd57", "label": "Lunch", "tips": ["Friday lunch is a small reward \u2014 make it good", "No-takeout if still in challenge window"], "recommendation": null}, {"time": "2:00 PM", "icon": "\ud83d\udcf1", "label": "TextOS Product Notes", "tips": ["Capture any user feedback or product ideas", "Log before the week closes \u2014 don't lose it"], "recommendation": null}, {"time": "3:00 PM", "icon": "\u2705", "label": "Week Close", "tips": ["Write your 3 wins. Commit and push any open code.", "What moves to Monday? Write it down now."], "recommendation": null}, {"time": "5:30 PM", "icon": "\ud83c\udf7a", "label": "Friday Wind-Down Drink", "tips": ["You earned it. Barrel Proof or Cure.", "Friday on Magazine Street has its own energy."], "recommendation": {"name": "Barrel Proof", "address": "1201 Magazine St, New Orleans", "note": "Best whiskey bar in the South. 5 minutes from home."}}, {"time": "6:00 PM", "icon": "\ud83c\udfb5", "label": "Michael Watson & The Alchemy", "tips": ["d.b.a. \u00b7 Marigny", "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"], "recommendation": {"name": "Michael Watson & The Alchemy", "address": "d.b.a.", "note": "Tonight at 6:00 PM. More info: https://wwoz.org/events/1327376"}}, {"time": "7:00 PM", "icon": "\ud83c\udf39", "label": "Date Night with Camille", "tips": ["Clancy's \u2014 Uptown white tablecloth, classic New Orleans", "She loves when you just handle the reservation without being asked"], "recommendation": {"name": "Clancy's", "address": "6100 Annunciation St, New Orleans", "note": "Uptown white tablecloth, classic New Orleans"}, "_private": true}, {"time": "7:00 PM", "icon": "\ud83c\udfb5", "label": "Willie Green III", "tips": ["Bacchanal (OUTDOORS) \u00b7 Bywater", "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"], "recommendation": {"name": "Willie Green III", "address": "Bacchanal (OUTDOORS)", "note": "Tonight at 7:00 PM. More info: https://wwoz.org/events/1324506"}}, {"time": "8:00 PM", "icon": "\ud83c\udfb6", "label": "Frenchmen Street", "tips": ["Friday night on Frenchmen is an institution", "Walk the street, pick a spot, let New Orleans do its thing"], "recommendation": {"name": "Frenchmen Street", "address": "Frenchmen St, Marigny, New Orleans", "note": "Snug Harbor, d.b.a., The Spotted Cat \u2014 all within 100 feet."}}, {"time": "9:00 PM", "icon": "\ud83d\udcd3", "label": "Journal \u2014 3 Wins This Week", "tips": ["Write down 3 wins from this week before heading out", "Before Steve Aoki \u2014 10 minutes, that's all it takes"], "recommendation": null}, {"time": "10:00 PM", "icon": "\ud83c\udfa7", "label": "Steve Aoki @ Metropolitan", "tips": ["Doors open \u2014 get there early for a good spot", "Metropolitan New Orleans \u2014 live DJ set"], "recommendation": {"name": "Metropolitan", "address": "310 Andrew Higgins Blvd, New Orleans, LA", "note": "One of NOLA's best live music venues"}}]};
   var today = new Date().toISOString().slice(0, 10);
   if (_INLINE_CYCLE && _INLINE_CYCLE.blocks && _INLINE_CYCLE.date === today) {
     _conciergeBlocks = _INLINE_CYCLE.blocks;
@@ -3763,8 +3766,7 @@ function fetchConciergeCycle() {
     renderConciergeCycle();
     return;
   }
-  // Fallback: try cross-origin fetch (may fail due to CORS)
-  fetch('https://trustlight.ai/today-cycle.json?v=' + Date.now())
+  fetch('today-cycle.json?v=' + Date.now())
     .then(function(r) { return r.ok ? r.json() : null; })
     .then(function(data) {
       if (!data || !data.blocks) return;
@@ -3987,27 +3989,21 @@ function initDashboard() {
   try { initActivityTracker(); } catch(e) { console.error('initActivityTracker:', e); }
   try { initBizCharts(); } catch(e) { console.error('initBizCharts:', e); }
   setTimeout(initGoogleFit, 800);
-  // Fetch concierge cycle — overrides default if today's file exists
-  try { fetchConciergeCycle(); } catch(e) { console.error('ConciergeCycle:', e); }
-  // Init Day Cycle — auto-select weekday/weekend button
+  // Init Day Cycle time label first (no render yet)
   try {
-    var btns = document.querySelectorAll('.day-type-btn');
-    btns.forEach(function(b) {
-      b.classList.remove('active');
-      if (b.textContent.toLowerCase() === currentDayType) b.classList.add('active');
-    });
-  } catch(e) { console.error('DayCycle btn init:', e); }
-  try { 
-    updateDayCycleTime(); 
+    const now = new Date();
+    const label = document.getElementById('dc-now-label');
+    if (label) {
+      label.textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
+        + ' CDT · ' + now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+    }
+  } catch(e) {}
+  // Fetch + render concierge — always the default view
+  try { fetchConciergeCycle(); } catch(e) { console.error('ConciergeCycle:', e); }
+  // Start the clock interval (updateDayCycleTime won't overwrite concierge since btn is now active)
+  try {
     setInterval(updateDayCycleTime, 60000);
-  } catch(e) { 
-    console.error('DayCycle init error:', e);
-    // Force render directly
-    try {
-      var track = document.getElementById('dc-track');
-      if (track && typeof renderDayCycle === 'function') renderDayCycle();
-    } catch(e2) { console.error('Direct render failed:', e2); }
-  }
+  } catch(e) { console.error('DayCycle init error:', e); }
 }
 
 // ═══ OVERVIEW FINANCIAL BLUR ═══
@@ -4251,7 +4247,7 @@ function initGoogleFit() {
 function connectGoogleFit() {
   // Save current auth state so we restore it after redirect
   sessionStorage.setItem('rg_auth', '1');
-  const redirectUri = encodeURIComponent('https://trustlight.ai/dashboard.html');
+  const redirectUri = encodeURIComponent('https://inkthorn.ai/command-center.html');
   const authUrl = 'https://accounts.google.com/o/oauth2/v2/auth' +
     '?client_id=' + GFIT_CLIENT_ID +
     '&redirect_uri=' + redirectUri +
