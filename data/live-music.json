@@ -1,14 +1,14 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-04-22T23:15:26.114Z",
+  "updated": "2026-04-23T13:34:24.927Z",
   "source": "WWOZ Livewire",
-  "date": "Wednesday, April 22, 2026",
+  "date": "Thursday, April 23, 2026",
   "shows": [
     {
       "time": "10:00am",
       "time_sort": 1000,
       "artist": "Bob Macy",
-      "url": "https://wwoz.org/events/1292011",
+      "url": "https://wwoz.org/events/1292016",
       "venue": "Café Beignet on Decatur",
       "genre": "Other",
       "neighborhood": null
@@ -17,16 +17,25 @@
       "time": "11:00am",
       "time_sort": 1100,
       "artist": "Steamboat Stompers",
-      "url": "https://wwoz.org/events/1320106",
+      "url": "https://wwoz.org/events/1320126",
       "venue": "Steamboat Natchez",
       "genre": "Other",
       "neighborhood": null
     },
     {
+      "time": "11:30am",
+      "time_sort": 1130,
+      "artist": "Kid Merv & All That Jazz",
+      "url": "https://wwoz.org/events/1331821",
+      "venue": "Hideout Bar",
+      "genre": "Jazz",
+      "neighborhood": null
+    },
+    {
       "time": "12:00pm",
       "time_sort": 1200,
-      "artist": "Jacky Blaire & The Hot Biscuits",
-      "url": "https://wwoz.org/events/1326936",
+      "artist": "JJ & The A-Ok's",
+      "url": "https://wwoz.org/events/1327121",
       "venue": "Bamboula's",
       "genre": "Other",
       "neighborhood": "French Quarter"
@@ -34,17 +43,8 @@
     {
       "time": "12:00pm",
       "time_sort": 1200,
-      "artist": "Kid Merv & All That Jazz",
-      "url": "https://wwoz.org/events/1331841",
-      "venue": "Tipsy Trumpet",
-      "genre": "Jazz",
-      "neighborhood": null
-    },
-    {
-      "time": "1:00pm",
-      "time_sort": 1300,
       "artist": "Richard \"Piano\" Scott",
-      "url": "https://wwoz.org/events/1326176",
+      "url": "https://wwoz.org/events/1326206",
       "venue": "Fritzel's Jazz Club",
       "genre": "Jazz",
       "neighborhood": "French Quarter"
@@ -52,17 +52,17 @@
     {
       "time": "2:00pm",
       "time_sort": 1400,
-      "artist": "Speakeasies to Symphonies with Scott E. Brown & John Royen",
-      "url": "https://wwoz.org/events/1331911",
-      "venue": "New Orleans Jazz Museum",
+      "artist": "Doyle Cooper Band",
+      "url": "https://wwoz.org/events/1326386",
+      "venue": "Fritzel's Jazz Club",
       "genre": "Jazz",
-      "neighborhood": null
+      "neighborhood": "French Quarter"
     },
     {
       "time": "2:00pm",
       "time_sort": 1400,
       "artist": "Chris Christy Band",
-      "url": "https://wwoz.org/events/1328981",
+      "url": "https://wwoz.org/events/1329006",
       "venue": "Spotted Cat",
       "genre": "Other",
       "neighborhood": null
@@ -71,7 +71,7 @@
       "time": "2:00pm",
       "time_sort": 1400,
       "artist": "Steamboat Stompers",
-      "url": "https://wwoz.org/events/1320241",
+      "url": "https://wwoz.org/events/1320261",
       "venue": "Steamboat Natchez",
       "genre": "Other",
       "neighborhood": null
@@ -88,8 +88,17 @@
     {
       "time": "3:00pm",
       "time_sort": 1500,
-      "artist": "Joe Kennedy",
-      "url": "https://wwoz.org/events/1322276",
+      "artist": "Big Joe Kennedy",
+      "url": "https://wwoz.org/events/1328726",
+      "venue": "21st Amendment",
+      "genre": "Other",
+      "neighborhood": "Central Business District"
+    },
+    {
+      "time": "3:00pm",
+      "time_sort": 1500,
+      "artist": "Naomie April Duo",
+      "url": "https://wwoz.org/events/1322281",
       "venue": "New Orleans Jazz National Historical Park",
       "genre": "Jazz",
       "neighborhood": null
@@ -97,26 +106,53 @@
     {
       "time": "4:00pm",
       "time_sort": 1600,
-      "artist": "Victoria Amato, Ben Michaels, Jim Lockwood & Sydney McMath",
-      "url": "https://wwoz.org/events/1331676",
+      "artist": "Victoria Amato, Sydney McMath, Ben Michaels & Jim Lockwood",
+      "url": "https://wwoz.org/events/1331681",
       "venue": "Pat O'Brien's",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "4:00pm",
+      "time_sort": 1600,
+      "artist": "Sean Riley & The Water",
+      "url": "https://wwoz.org/events/1333466",
+      "venue": "Saint John",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "4:30pm",
       "time_sort": 1630,
-      "artist": "Swingin' with John Saavedra",
-      "url": "https://wwoz.org/events/1326946",
+      "artist": "Cristina Kaminis & The Mix",
+      "url": "https://wwoz.org/events/1327116",
       "venue": "Bamboula's",
       "genre": "Other",
       "neighborhood": "French Quarter"
     },
     {
+      "time": "4:30pm",
+      "time_sort": 1630,
+      "artist": "Dane Harter",
+      "url": "https://wwoz.org/events/1332401",
+      "venue": "Maison, The",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
       "time": "5:00pm",
       "time_sort": 1700,
-      "artist": "Ron Hotstream & Dean Zucchero",
-      "url": "https://wwoz.org/events/1330771",
+      "artist": "Aileis",
+      "url": "https://wwoz.org/events/1333826",
+      "venue": "BMC",
+      "genre": "Other",
+      "neighborhood": "Uptown"
+    },
+    {
+      "time": "5:00pm",
+      "time_sort": 1700,
+      "artist": "Giselle Anguizola & Kala Chandra",
+      "url": "https://wwoz.org/events/1330776",
       "venue": "Bratz Y'all",
       "genre": "Other",
       "neighborhood": "Bywater"
@@ -124,17 +160,8 @@
     {
       "time": "5:00pm",
       "time_sort": 1700,
-      "artist": "Jam-ilton",
-      "url": "https://wwoz.org/events/1332206",
-      "venue": "Café Negril",
-      "genre": "Other",
-      "neighborhood": "Marigny"
-    },
-    {
-      "time": "5:00pm",
-      "time_sort": 1700,
-      "artist": "Bourbon Street Stars",
-      "url": "https://wwoz.org/events/1326481",
+      "artist": "John Saavedra Band",
+      "url": "https://wwoz.org/events/1326441",
       "venue": "Fritzel's Jazz Club",
       "genre": "Jazz",
       "neighborhood": "French Quarter"
@@ -142,26 +169,8 @@
     {
       "time": "5:00pm",
       "time_sort": 1700,
-      "artist": "YLC's Wednesday at the Square with Dwayne Dopsie & The Zydeco Hellraisers + Kings of Brass",
-      "url": "https://wwoz.org/events/1317836",
-      "venue": "Lafayette Square (OUTDOORS)",
-      "genre": "Brass",
-      "neighborhood": null
-    },
-    {
-      "time": "5:00pm",
-      "time_sort": 1700,
-      "artist": "Mikayla Braun",
-      "url": "https://wwoz.org/events/1294026",
-      "venue": "Picnic Provisions & Whiskey (OUTDOORS)",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "5:00pm",
-      "time_sort": 1700,
-      "artist": "Preservation All-Stars ft. Branden Lewis",
-      "url": "https://wwoz.org/events/1323416",
+      "artist": "The Preservation All-Stars ft. Wendell Brunious",
+      "url": "https://wwoz.org/events/1323641",
       "venue": "Preservation Hall",
       "genre": "Other",
       "neighborhood": null
@@ -169,44 +178,26 @@
     {
       "time": "5:00pm",
       "time_sort": 1700,
-      "artist": "Surf Rock Night with DJ Schwaminator",
-      "url": "https://wwoz.org/events/1335371",
-      "venue": "Saturn Bar",
-      "genre": "Electronic",
-      "neighborhood": null
-    },
-    {
-      "time": "5:00pm",
-      "time_sort": 1700,
-      "artist": "Jill Butler's Joyride",
-      "url": "https://wwoz.org/events/1330091",
-      "venue": "Snug Harbor",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "5:00pm",
-      "time_sort": 1700,
-      "artist": "Becky Lynn Blanca",
-      "url": "https://wwoz.org/events/1336646",
-      "venue": "Three Muses",
+      "artist": "Mark Barrett & The First Calls",
+      "url": "https://wwoz.org/events/1330951",
+      "venue": "Tropical Isle Bourbon",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "5:30pm",
       "time_sort": 1730,
-      "artist": "Paul Sanchez Happy Hour Special",
-      "url": "https://wwoz.org/events/1331301",
-      "venue": "Carrollton Station",
+      "artist": "Leslie Martin",
+      "url": "https://wwoz.org/events/1335036",
+      "venue": "Carousel Bar & Lounge at Hotel Monteleone",
       "genre": "Other",
-      "neighborhood": "Carrollton"
+      "neighborhood": "French Quarter"
     },
     {
       "time": "5:30pm",
       "time_sort": 1730,
       "artist": "Jeremy Davenport",
-      "url": "https://wwoz.org/events/1303901",
+      "url": "https://wwoz.org/events/1303911",
       "venue": "Davenport Lounge at The Ritz-Carlton",
       "genre": "Other",
       "neighborhood": "French Quarter"
@@ -214,17 +205,17 @@
     {
       "time": "5:30pm",
       "time_sort": 1730,
-      "artist": "Twilight Concert Series ft. Bogue Chitto",
-      "url": "https://wwoz.org/events/1309686",
-      "venue": "Longue Vue House and Gardens (OUTDOORS)",
-      "genre": "Other",
+      "artist": "Tom Leggett",
+      "url": "https://wwoz.org/events/1336006",
+      "venue": "House of Blues - Voodoo Garden (OUTDOORS)",
+      "genre": "Blues",
       "neighborhood": null
     },
     {
       "time": "5:30pm",
       "time_sort": 1730,
-      "artist": "David Boeddinghaus",
-      "url": "https://wwoz.org/events/1300731",
+      "artist": "John Royen",
+      "url": "https://wwoz.org/events/1301046",
       "venue": "Polo Club at The Windsor Court, The",
       "genre": "Other",
       "neighborhood": null
@@ -232,8 +223,8 @@
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Mother Ruckus",
-      "url": "https://wwoz.org/events/1332791",
+      "artist": "Dapper Dandies",
+      "url": "https://wwoz.org/events/1332746",
       "venue": "30/90",
       "genre": "Other",
       "neighborhood": "Mid-City"
@@ -241,8 +232,17 @@
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Jesse Morrow",
-      "url": "https://wwoz.org/events/1324446",
+      "artist": "Bubbles Brown",
+      "url": "https://wwoz.org/events/1316526",
+      "venue": "Apple Barrel",
+      "genre": "Other",
+      "neighborhood": "Marigny"
+    },
+    {
+      "time": "6:00pm",
+      "time_sort": 1800,
+      "artist": "Raphael Bas",
+      "url": "https://wwoz.org/events/1324471",
       "venue": "Bacchanal (OUTDOORS)",
       "genre": "Other",
       "neighborhood": "Bywater"
@@ -250,8 +250,8 @@
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Johnny Mastro",
-      "url": "https://wwoz.org/events/1326096",
+      "artist": "Leroy Marshall Band",
+      "url": "https://wwoz.org/events/1326081",
       "venue": "BMC",
       "genre": "Other",
       "neighborhood": "Uptown"
@@ -259,44 +259,26 @@
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Gizinti Trio",
-      "url": "https://wwoz.org/events/1299751",
-      "venue": "Café Degas",
-      "genre": "Jazz",
-      "neighborhood": null
+      "artist": "Paradise Brass Band",
+      "url": "https://wwoz.org/events/1335731",
+      "venue": "Café Negril",
+      "genre": "Brass",
+      "neighborhood": "Marigny"
     },
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Leaux Fye Tribe",
-      "url": "https://wwoz.org/events/1333926",
-      "venue": "Commons Club at Virgin Hotels New Orleans",
+      "artist": "Thursdays at Twilight ft. Music for Musicians – Arpa",
+      "url": "https://wwoz.org/events/1322386",
+      "venue": "City Park - Pavilion of the Two Sisters",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "River Eckert",
-      "url": "https://wwoz.org/events/1330236",
-      "venue": "Constantinople Stage (OUTDOORS)",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "6:00pm",
-      "time_sort": 1800,
-      "artist": "Mid City Mutual Aid Fund Benefit with The Band Called Fuse ft. Manny Faces",
-      "url": "https://wwoz.org/events/1334916",
-      "venue": "Courtyard Brewery (OUTDOORS)",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "6:00pm",
-      "time_sort": 1800,
-      "artist": "Stephen Walker N'em",
-      "url": "https://wwoz.org/events/1327301",
+      "artist": "Palmetto Bug Stompers",
+      "url": "https://wwoz.org/events/1327341",
       "venue": "d.b.a.",
       "genre": "Other",
       "neighborhood": "Marigny"
@@ -305,7 +287,7 @@
       "time": "6:00pm",
       "time_sort": 1800,
       "artist": "Monty Banks",
-      "url": "https://wwoz.org/events/1302026",
+      "url": "https://wwoz.org/events/1302031",
       "venue": "Irene's",
       "genre": "Other",
       "neighborhood": null
@@ -313,8 +295,8 @@
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Paul Longstreth",
-      "url": "https://wwoz.org/events/1328086",
+      "artist": "The New Orleans Catahoulas",
+      "url": "https://wwoz.org/events/1328151",
       "venue": "Mahogany Jazz Hall",
       "genre": "Jazz",
       "neighborhood": null
@@ -322,44 +304,26 @@
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Gene's Music Machine",
-      "url": "https://wwoz.org/events/1332346",
-      "venue": "Maison, The",
+      "artist": "Atom Cat",
+      "url": "https://wwoz.org/events/1336411",
+      "venue": "Paulie's Delicatessen",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Irvin Mayfield ft. Kermit Ruffins",
-      "url": "https://wwoz.org/events/1300576",
-      "venue": "Mayfield's 208 Bourbon presented by Felix's",
-      "genre": "Jazz",
-      "neighborhood": null
-    },
-    {
-      "time": "6:00pm",
-      "time_sort": 1800,
-      "artist": "Wednesdays on the Point ft. The Crescent City Big Band",
-      "url": "https://wwoz.org/events/1333896",
-      "venue": "McDonogh Memorial Park (OUTDOORS) - Algiers",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "6:00pm",
-      "time_sort": 1800,
-      "artist": "Shotgun Jazz Band",
-      "url": "https://wwoz.org/events/1329091",
+      "artist": "Miss Sophie Lee",
+      "url": "https://wwoz.org/events/1329266",
       "venue": "Spotted Cat",
-      "genre": "Jazz",
+      "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "6:00pm",
       "time_sort": 1800,
       "artist": "Dukes of Dixieland",
-      "url": "https://wwoz.org/events/1319681",
+      "url": "https://wwoz.org/events/1319686",
       "venue": "Steamboat Natchez",
       "genre": "Other",
       "neighborhood": null
@@ -367,7 +331,7 @@
     {
       "time": "6 pm",
       "time_sort": 1800,
-      "artist": "Mother Ruckus",
+      "artist": "The Dapper Dandies",
       "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
       "venue": "Bacchanal",
       "genre": "Jazz Fest",
@@ -376,7 +340,7 @@
     {
       "time": "6 pm",
       "time_sort": 1800,
-      "artist": "Jesse Morrow",
+      "artist": "Raphael Bas",
       "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
       "venue": "Bacchanal",
       "genre": "Jazz Fest",
@@ -385,7 +349,7 @@
     {
       "time": "6 pm",
       "time_sort": 1800,
-      "artist": "Stephen Walker N’em",
+      "artist": "Palmetto Bug Stompers",
       "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
       "venue": "Bacchanal",
       "genre": "Jazz Fest",
@@ -394,7 +358,7 @@
     {
       "time": "6 pm",
       "time_sort": 1800,
-      "artist": "Shotgun Jazz Band",
+      "artist": "Miss Sophie Lee",
       "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
       "venue": "Bacchanal",
       "genre": "Jazz Fest",
@@ -403,53 +367,80 @@
     {
       "time": "6:15pm",
       "time_sort": 1815,
-      "artist": "Preservation All-Stars ft. Branden Lewis",
-      "url": "https://wwoz.org/events/1323481",
+      "artist": "The Preservation All-Stars ft. Wendell Brunious",
+      "url": "https://wwoz.org/events/1323661",
       "venue": "Preservation Hall",
       "genre": "Other",
       "neighborhood": null
     },
     {
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "artist": "Gregg Hill",
-      "url": "https://wwoz.org/events/1322901",
-      "venue": "Banks Street Bar",
+      "time": "6:30pm",
+      "time_sort": 1830,
+      "artist": "Sean Riley",
+      "url": "https://wwoz.org/events/1335616",
+      "venue": "4141 NOLA",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "6:30pm",
+      "time_sort": 1830,
+      "artist": "Maude Caillat Trio",
+      "url": "https://wwoz.org/events/1336626",
+      "venue": "Celestine, The",
+      "genre": "Jazz",
+      "neighborhood": null
+    },
+    {
+      "time": "6:30pm",
+      "time_sort": 1830,
+      "artist": "KreweDeBauchery",
+      "url": "https://wwoz.org/events/1333221",
+      "venue": "Chloe, The (OUTDOORS)",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "6:30pm",
+      "time_sort": 1830,
+      "artist": "Candlelight Music Series with Delachaise Ensemble : Neo-Soul Favorites",
+      "url": "https://wwoz.org/events/1336311",
+      "venue": "Church at Hotel Peter & Paul, The",
+      "genre": "Soul",
+      "neighborhood": null
+    },
+    {
+      "time": "6:30pm",
+      "time_sort": 1830,
+      "artist": "Robin Rapuzzi, Solo Mandolino",
+      "url": "https://wwoz.org/events/1331091",
+      "venue": "Fausto's Italian Bistro",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "7:00pm",
       "time_sort": 1900,
-      "artist": "2026 Jazz & Heritage Gala ft. The Wailers with Julian Marley, Big Sam’s Funky Nation, The Don “Moose” Jamison Heritage School of Music All-Stars ft. Deacon John + More!",
-      "url": "https://wwoz.org/events/1331926",
-      "venue": "Generations Hall",
-      "genre": "Funk",
-      "neighborhood": null
+      "artist": "16th Annual Threadhead Thursday with J and The Causeways + Dave Jordan's Almost Acoustic",
+      "url": "https://wwoz.org/events/1325131",
+      "venue": "Broadside (Outdoor Stage)",
+      "genre": "Singer-Songwriter",
+      "neighborhood": "Mid-City"
     },
     {
       "time": "7:00pm",
       "time_sort": 1900,
-      "artist": "Wednesdays After the Square ft. DJ Spin Griffey",
-      "url": "https://wwoz.org/events/1324291",
-      "venue": "Lobby at The Barnett",
-      "genre": "Electronic",
-      "neighborhood": null
+      "artist": "Tom McDermott & Aurora Nealand",
+      "url": "https://wwoz.org/events/1317901",
+      "venue": "Buffa's",
+      "genre": "Other",
+      "neighborhood": "Marigny"
     },
     {
       "time": "7:00pm",
       "time_sort": 1900,
-      "artist": "Legacy Jazz Band",
-      "url": "https://wwoz.org/events/1297616",
-      "venue": "Marigny Brasserie",
-      "genre": "Jazz",
-      "neighborhood": null
-    },
-    {
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "artist": "Lynn Drury",
-      "url": "https://wwoz.org/events/1328626",
+      "artist": "Micah McKee",
+      "url": "https://wwoz.org/events/1328651",
       "venue": "MRB",
       "genre": "Other",
       "neighborhood": null
@@ -457,16 +448,43 @@
     {
       "time": "7:00pm",
       "time_sort": 1900,
-      "artist": "Jazz at the Sandbar Concert Series ft. Brian Seeger Faculty Showcase",
-      "url": "https://wwoz.org/events/1308576",
-      "venue": "University of New Orleans - The 410 Lounge",
-      "genre": "Jazz",
+      "artist": "People Museum Album Release with Sabine McCalla and Special Guests Ocean Boyfriend & Laura Fischer",
+      "url": "https://wwoz.org/events/1310761",
+      "venue": "Music Box Village (OUTDOORS)",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "artist": "Donald Harrison’s Acoustic Jazz with Chief Adjuah",
+      "url": "https://wwoz.org/events/1330296",
+      "venue": "New Orleans Jazz & Blues Market",
+      "genre": "Blues",
+      "neighborhood": null
+    },
+    {
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "artist": "Sam Dickey & Read the Sands",
+      "url": "https://wwoz.org/events/1324331",
+      "venue": "Salon Salon",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "artist": "The Van Ella Bordella: A Storyville Burlesque Musical",
+      "url": "https://wwoz.org/events/1334931",
+      "venue": "Twilight Room at The Allways Lounge",
+      "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "7 pm",
       "time_sort": 1900,
-      "artist": "Tyler Bond",
+      "artist": "Tom McDermott & Aurora Nealand",
       "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
       "venue": "Bacchanal",
       "genre": "Jazz Fest",
@@ -475,26 +493,17 @@
     {
       "time": "7:30pm",
       "time_sort": 1930,
-      "artist": "The Desert Nudes",
-      "url": "https://wwoz.org/events/1312721",
-      "venue": "Chickie Wah Wah",
-      "genre": "Other",
-      "neighborhood": "Mid-City"
-    },
-    {
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "artist": "Chucky C & Friends",
-      "url": "https://wwoz.org/events/1335106",
+      "artist": "Brass-A-Holics",
+      "url": "https://wwoz.org/events/1335211",
       "venue": "Jazz Playhouse",
-      "genre": "Jazz",
+      "genre": "Brass",
       "neighborhood": null
     },
     {
       "time": "7:30pm",
       "time_sort": 1930,
-      "artist": "Preservation All-Stars ft. Branden Lewis",
-      "url": "https://wwoz.org/events/1323546",
+      "artist": "The Preservation All-Stars ft. Wendell Brunious",
+      "url": "https://wwoz.org/events/1323676",
       "venue": "Preservation Hall",
       "genre": "Other",
       "neighborhood": null
@@ -502,26 +511,35 @@
     {
       "time": "7:30pm",
       "time_sort": 1930,
-      "artist": "The Uptown Jazz Orchestra with Jarrel Allen",
-      "url": "https://wwoz.org/events/1330101",
-      "venue": "Snug Harbor",
-      "genre": "Jazz",
+      "artist": "James Singleton presents MALABAR",
+      "url": "https://wwoz.org/events/1336381",
+      "venue": "Zeitgeist Multi-Disciplinary Arts Center",
+      "genre": "Other",
       "neighborhood": null
+    },
+    {
+      "time": "7:30 pm",
+      "time_sort": 1930,
+      "artist": "James Singleton",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
     },
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Big Mike & The R&B Kings",
-      "url": "https://wwoz.org/events/1328851",
+      "artist": "Marty Peters & The Party Meters",
+      "url": "https://wwoz.org/events/1328751",
       "venue": "21st Amendment",
-      "genre": "R&B",
+      "genre": "Other",
       "neighborhood": "Central Business District"
     },
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Firm Roots ft. Peter Harris, The Groovemaster, Dwight Fitch Jr. & More!",
-      "url": "https://wwoz.org/events/1315036",
+      "artist": "Cryptic ft. Peter Harris, Ricardo Pascal & Peter Varnado",
+      "url": "https://wwoz.org/events/1314846",
       "venue": "Bayou Bar at the Pontchartrain",
       "genre": "Other",
       "neighborhood": "Garden District"
@@ -529,44 +547,35 @@
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Tyler Bond",
-      "url": "https://wwoz.org/events/1325301",
-      "venue": "Buffa's",
+      "artist": "Jeff Fest ft. Paul Faith & The Barstool Prophets + Loose Cattle + Beach Angel",
+      "url": "https://wwoz.org/events/1324801",
+      "venue": "Carrollton Station",
       "genre": "Other",
-      "neighborhood": "Marigny"
+      "neighborhood": "Carrollton"
     },
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "James Martin Band",
-      "url": "https://wwoz.org/events/1335086",
-      "venue": "Carousel Bar & Lounge at Hotel Monteleone",
-      "genre": "Other",
-      "neighborhood": "French Quarter"
-    },
-    {
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "artist": "Miss Amerikan Vampyre + Blood Lovely",
-      "url": "https://wwoz.org/events/1333196",
-      "venue": "Crypt, The",
-      "genre": "Other",
-      "neighborhood": "French Quarter"
-    },
-    {
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "artist": "The Drop Inn Jam Session Hosted by DC Paul",
-      "url": "https://wwoz.org/events/1317471",
-      "venue": "Dew Drop Inn Hotel & Lounge",
+      "artist": "Mt. Joy",
+      "url": "https://wwoz.org/events/1274856",
+      "venue": "Champions Square (OUTDOORS)",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "8:00pm",
       "time_sort": 2000,
+      "artist": "Kevn Kinney (of Drivin n Cryin) & Friends",
+      "url": "https://wwoz.org/events/1322606",
+      "venue": "Chickie Wah Wah",
+      "genre": "Other",
+      "neighborhood": "Mid-City"
+    },
+    {
+      "time": "8:00pm",
+      "time_sort": 2000,
       "artist": "Fritzel's All Star Band with Kevin Ray Clark & Gunhild Carling",
-      "url": "https://wwoz.org/events/1326516",
+      "url": "https://wwoz.org/events/1326456",
       "venue": "Fritzel's Jazz Club",
       "genre": "Jazz",
       "neighborhood": "French Quarter"
@@ -574,17 +583,17 @@
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Lukas Nelson + Sabine McCalla",
-      "url": "https://wwoz.org/events/1321866",
-      "venue": "Joy Theater",
+      "artist": "James Martin Band",
+      "url": "https://wwoz.org/events/1331531",
+      "venue": "Good Measure at The Barnett",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Mahogany Hall All Stars ft. Tom Fischer",
-      "url": "https://wwoz.org/events/1328136",
+      "artist": "Jamil Sharif & His New Orleans Extravaganza",
+      "url": "https://wwoz.org/events/1328241",
       "venue": "Mahogany Jazz Hall",
       "genre": "Jazz",
       "neighborhood": null
@@ -592,8 +601,8 @@
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "The Leroy Marshall Band",
-      "url": "https://wwoz.org/events/1309286",
+      "artist": "Danny Rubio & The Catahoula Music Company ft. Jack Pritchett",
+      "url": "https://wwoz.org/events/1309151",
       "venue": "Maison Bourbon Jazz Club",
       "genre": "Jazz",
       "neighborhood": null
@@ -601,8 +610,17 @@
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Happy Organ Hour with Joe Ashlar, Stanton Moore & Eddie Roberts",
-      "url": "https://wwoz.org/events/1333081",
+      "artist": "Swing Night with The Jazz Vipers",
+      "url": "https://wwoz.org/events/1331391",
+      "venue": "Maison Dupuy",
+      "genre": "Jazz",
+      "neighborhood": null
+    },
+    {
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "artist": "007",
+      "url": "https://wwoz.org/events/1334481",
       "venue": "Maple Leaf",
       "genre": "Other",
       "neighborhood": null
@@ -610,133 +628,52 @@
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Mahmoud Chouki ft. Radio Bird Quartet + Special Guests",
-      "url": "https://wwoz.org/events/1335966",
-      "venue": "New Marigny Theatre",
+      "artist": "Rosie Ledet + Chubby Carrier",
+      "url": "https://wwoz.org/events/1313886",
+      "venue": "Mid-City Lanes Rock 'n' Bowl",
+      "genre": "Rock",
+      "neighborhood": null
+    },
+    {
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "artist": "The RiverBenders + The Sweet Lillies",
+      "url": "https://wwoz.org/events/1331206",
+      "venue": "NOLA Brewing",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "artist": "Azad Safavi + Silver Liner Serenaders + Sunset Jazz Band",
+      "url": "https://wwoz.org/events/1334326",
+      "venue": "Okay Bar",
       "genre": "Jazz",
       "neighborhood": null
     },
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Trumpet Mafia",
-      "url": "https://wwoz.org/events/1330286",
-      "venue": "New Orleans Jazz & Blues Market",
-      "genre": "Blues",
+      "artist": "David Navarro & Horacio \"El Negro\" Jazz Cubano",
+      "url": "https://wwoz.org/events/1330186",
+      "venue": "Snug Harbor",
+      "genre": "Jazz",
       "neighborhood": null
     },
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "(Cancelled) Pups Open Jam",
-      "url": "https://wwoz.org/events/1334801",
-      "venue": "Old Point Bar",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "artist": "Goose (Night 2)",
-      "url": "https://wwoz.org/events/1274836",
-      "venue": "Saenger Theatre",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "artist": "Trombone Charlotte",
-      "url": "https://wwoz.org/events/1336651",
+      "artist": "Jenavieve Cooke",
+      "url": "https://wwoz.org/events/1336696",
       "venue": "Three Muses",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "artist": "North Mississippi Allstars with Special Guest Cedric Burnside",
-      "url": "https://wwoz.org/events/1320676",
-      "venue": "Tipitina's",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "TBD",
       "time_sort": 2000,
-      "artist": "FIRM ROOTS",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Show: 9 pm",
-      "time_sort": 2000,
-      "artist": "New Breed Brass Band",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Show: 8 pm",
-      "time_sort": 2000,
-      "artist": "The Desert Nudes",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Doors: 7 pm",
-      "time_sort": 2000,
-      "artist": "Band of Heathens",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Show: 6 pm",
-      "time_sort": 2000,
-      "artist": "River Eckert",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "8 pm",
-      "time_sort": 2000,
-      "artist": "Joey Peebles",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Show: 8 pm",
-      "time_sort": 2000,
-      "artist": "Lukas Nelson",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Show: 7 pm",
-      "time_sort": 2000,
-      "artist": "Joe Ashlar",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Doors: 6 pm",
-      "time_sort": 2000,
-      "artist": "Stanton Moore",
+      "artist": "CRYPTIC",
       "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
       "venue": "Bacchanal",
       "genre": "Jazz Fest",
@@ -754,132 +691,6 @@
     {
       "time": "Doors: 10 pm",
       "time_sort": 2000,
-      "artist": "The Tanglers",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Show: 8 pm",
-      "time_sort": 2000,
-      "artist": "Very Cherry",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "TBD",
-      "time_sort": 2000,
-      "artist": "The Preservation All-Stars",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "TBD",
-      "time_sort": 2000,
-      "artist": "Branden Lewis",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Show: 8 pm",
-      "time_sort": 2000,
-      "artist": "GOOSE",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Show: 5 pm",
-      "time_sort": 2000,
-      "artist": "Jill Butler's Joyride",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Doors: 4:30 pm",
-      "time_sort": 2000,
-      "artist": "The Uptown Jazz Orchestra",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Show: 7:30 pm",
-      "time_sort": 2000,
-      "artist": "Jarrel Allen",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Doors: 7 pm",
-      "time_sort": 2000,
-      "artist": "The Uptown Jazz Orchestra",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Show: 9:30 pm",
-      "time_sort": 2000,
-      "artist": "Jarrel Allen",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Show: 8 pm",
-      "time_sort": 2000,
-      "artist": "North Mississippi Allstars",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Doors: 7 pm",
-      "time_sort": 2000,
-      "artist": "Cedric Burnside",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Show: 12 am",
-      "time_sort": 2000,
-      "artist": "The Breaks",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "Doors: 11 pm",
-      "time_sort": 2000,
-      "artist": "Eddie Roberts & Friends",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
-    },
-    {
-      "time": "TBD",
-      "time_sort": 2000,
       "artist": "Stanton Moore",
       "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
       "venue": "Bacchanal",
@@ -896,9 +707,9 @@
       "neighborhood": "New Orleans"
     },
     {
-      "time": "Show: 5 pm",
+      "time": "TBD",
       "time_sort": 2000,
-      "artist": "Dwayne Dopsie & the Zydeco Hellraisers",
+      "artist": "Nick Etwell",
       "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
       "venue": "Bacchanal",
       "genre": "Jazz Fest",
@@ -907,7 +718,493 @@
     {
       "time": "TBD",
       "time_sort": 2000,
-      "artist": "Kings of Brass",
+      "artist": "Jason Mingledorff",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Shelby Kemp",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 11 pm",
+      "time_sort": 2000,
+      "artist": "DJ T Roy",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 7 pm",
+      "time_sort": 2000,
+      "artist": "J & The Causeways",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Dave Jordan Almost Acoustic",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 9 pm",
+      "time_sort": 2000,
+      "artist": "Butcher Brown Big Band",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Doors: 8:30 pm",
+      "time_sort": 2000,
+      "artist": "Nigel Hall",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Armani Smith and Soul Ties",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 8 pm",
+      "time_sort": 2000,
+      "artist": "Paul Faith & The Barstool Prophets",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Loose Cattle",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "beach angel",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 8 pm",
+      "time_sort": 2000,
+      "artist": "Mt. Joy",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 8 pm",
+      "time_sort": 2000,
+      "artist": "Kevn Kinney and Friends",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Doors: 7 pm",
+      "time_sort": 2000,
+      "artist": "Cyril Neville",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 10:30 pm",
+      "time_sort": 2000,
+      "artist": "DJ Alex Wasily",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 10 pm",
+      "time_sort": 2000,
+      "artist": "Cyril Neville",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Doors: 9 pm",
+      "time_sort": 2000,
+      "artist": "Ivan Neville",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Ian Neville",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "The Nth Power",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Dave Malone",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Mark Mullins",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "The Levee Horns",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Papa Mali's Shantytown",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 9 pm",
+      "time_sort": 2000,
+      "artist": "Los Güiros & The Animeros",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Doors: 8 pm",
+      "time_sort": 2000,
+      "artist": "Hive Mind",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 1 am",
+      "time_sort": 2000,
+      "artist": "Allen Aucoin",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Doors: 12:30 am",
+      "time_sort": 2000,
+      "artist": "McNice",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 10 pm",
+      "time_sort": 2000,
+      "artist": "STS9",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 8 pm",
+      "time_sort": 2000,
+      "artist": "007",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Doors: 7 pm",
+      "time_sort": 2000,
+      "artist": "Johnny Vidacovich",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 10 pm",
+      "time_sort": 2000,
+      "artist": "George Porter Jr.",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Doors: 9 pm",
+      "time_sort": 2000,
+      "artist": "Luther Dickinson",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 1 am",
+      "time_sort": 2000,
+      "artist": "Pocket Chocolate",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 8 pm",
+      "time_sort": 2000,
+      "artist": "People Museum",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Doors: 7 pm",
+      "time_sort": 2000,
+      "artist": "Sabine McCalla",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 10 pm",
+      "time_sort": 2000,
+      "artist": "Parrotfish",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Doors: 9 pm",
+      "time_sort": 2000,
+      "artist": "Beach Face",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 8 pm",
+      "time_sort": 2000,
+      "artist": "The Riverbenders",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "The Sweet Lillies",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 11 pm",
+      "time_sort": 2000,
+      "artist": "The Preservation All-Stars",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Wendell Brunious",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 10 pm",
+      "time_sort": 2000,
+      "artist": "The Rumble",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Doors: 9 pm",
+      "time_sort": 2000,
+      "artist": "Christone \"Kingfish\" Ingram",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Jennifer Hartswick",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Greg Thomas",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Anjelika \"Jelly\" Joseph",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Robert \"Sput\" Searight",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 8 pm",
+      "time_sort": 2000,
+      "artist": "Rosie Ledet",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "TBD",
+      "time_sort": 2000,
+      "artist": "Chubby Carrier",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 9 pm",
+      "time_sort": 2000,
+      "artist": "Gillian Welch & David Rawlings",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 8 pm",
+      "time_sort": 2000,
+      "artist": "David Navarro & Horacio \"El Negro\" Jazz Cubano",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Doors: 7:30 pm",
+      "time_sort": 2000,
+      "artist": "David Navarro & Horacio \"El Negro\" Jazz Cubano",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 7:30 pm",
+      "time_sort": 2000,
+      "artist": "Brass-A-Holics",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 9 pm",
+      "time_sort": 2000,
+      "artist": "Greensky Bluegrass",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "Show: 9 pm",
+      "time_sort": 2000,
+      "artist": "Givers",
       "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
       "venue": "Bacchanal",
       "genre": "Jazz Fest",
@@ -916,8 +1213,8 @@
     {
       "time": "8:30pm",
       "time_sort": 2030,
-      "artist": "Gloria Turini",
-      "url": "https://wwoz.org/events/1329591",
+      "artist": "The Bryce Eastwood Band",
+      "url": "https://wwoz.org/events/1332596",
       "venue": "Dos Jefes",
       "genre": "Other",
       "neighborhood": "Uptown"
@@ -925,26 +1222,53 @@
     {
       "time": "8:30pm",
       "time_sort": 2030,
-      "artist": "Robin Rapuzzi's Glo Worm Trio",
-      "url": "https://wwoz.org/events/1331081",
-      "venue": "Vaughan's Lounge",
+      "artist": "The Tail-Gators",
+      "url": "https://wwoz.org/events/1334716",
+      "venue": "Gretna Tavern",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "8:30pm",
+      "time_sort": 2030,
+      "artist": "Single Malt Please",
+      "url": "https://wwoz.org/events/1332421",
+      "venue": "Maison, The",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "8:30pm",
+      "time_sort": 2030,
+      "artist": "Gizinti Trio",
+      "url": "https://wwoz.org/events/1323351",
+      "venue": "May Baily's Place",
       "genre": "Jazz",
       "neighborhood": null
     },
     {
-      "time": "8:45pm",
-      "time_sort": 2045,
-      "artist": "Preservation All-Stars ft. Branden Lewis",
-      "url": "https://wwoz.org/events/1323611",
-      "venue": "Preservation Hall",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "artist": "COUCHES presents Cassie Watson Francillon with Special Guests",
+      "url": "https://wwoz.org/events/1333611",
+      "venue": "3 One One 6",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "9:00pm",
       "time_sort": 2100,
-      "artist": "The Budz",
-      "url": "https://wwoz.org/events/1332906",
+      "artist": "Caitie B. & The Hand Me Downs Duo",
+      "url": "https://wwoz.org/events/1331251",
+      "venue": "13 on Frenchmen",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "artist": "Kim In The Wind",
+      "url": "https://wwoz.org/events/1332886",
       "venue": "30/90",
       "genre": "Other",
       "neighborhood": "Mid-City"
@@ -952,8 +1276,8 @@
     {
       "time": "9:00pm",
       "time_sort": 2100,
-      "artist": "Jelly Roll Stompers",
-      "url": "https://wwoz.org/events/1326981",
+      "artist": "Pennsylvania Wolfe Johns Wolfe Pack",
+      "url": "https://wwoz.org/events/1327076",
       "venue": "Bamboula's",
       "genre": "Other",
       "neighborhood": "French Quarter"
@@ -961,8 +1285,17 @@
     {
       "time": "9:00pm",
       "time_sort": 2100,
-      "artist": "007",
-      "url": "https://wwoz.org/events/1330566",
+      "artist": "Hobo Gadget Junk Band",
+      "url": "https://wwoz.org/events/1334431",
+      "venue": "Bar Redux",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "artist": "Sally Baby's Silver Dollars",
+      "url": "https://wwoz.org/events/1330511",
       "venue": "BJ's Lounge",
       "genre": "Other",
       "neighborhood": "Bywater"
@@ -970,17 +1303,8 @@
     {
       "time": "9:00pm",
       "time_sort": 2100,
-      "artist": "New Breed Brass Band",
-      "url": "https://wwoz.org/events/1327981",
-      "venue": "Blue Nile",
-      "genre": "Brass",
-      "neighborhood": "Marigny"
-    },
-    {
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "artist": "Under the Covers",
-      "url": "https://wwoz.org/events/1325976",
+      "artist": "Kat Kiley Experience",
+      "url": "https://wwoz.org/events/1326011",
       "venue": "BMC",
       "genre": "Other",
       "neighborhood": "Uptown"
@@ -988,8 +1312,35 @@
     {
       "time": "9:00pm",
       "time_sort": 2100,
-      "artist": "Joey Peebles",
-      "url": "https://wwoz.org/events/1323246",
+      "artist": "Butcher Brown Big Band with Special Guest Nigel Hall",
+      "url": "https://wwoz.org/events/1336076",
+      "venue": "Café Istanbul",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "artist": "Lena Prima & Her Band",
+      "url": "https://wwoz.org/events/1335051",
+      "venue": "Carousel Bar & Lounge at Hotel Monteleone",
+      "genre": "Other",
+      "neighborhood": "French Quarter"
+    },
+    {
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "artist": "Shawan Rice",
+      "url": "https://wwoz.org/events/1321736",
+      "venue": "Double Dealer at Orpheum Theater",
+      "genre": "Other",
+      "neighborhood": "Central Business District"
+    },
+    {
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "artist": "Los Güiros & The Animeros: Psychedelic Cumbia Night",
+      "url": "https://wwoz.org/events/1336756",
       "venue": "Gasa Gasa",
       "genre": "Other",
       "neighborhood": "Uptown"
@@ -997,43 +1348,79 @@
     {
       "time": "9:00pm",
       "time_sort": 2100,
-      "artist": "Very Cherry",
-      "url": "https://wwoz.org/events/1322996",
-      "venue": "No Dice",
+      "artist": "Don Wayne & The Banana Creems",
+      "url": "https://wwoz.org/events/1329826",
+      "venue": "Holy Diver",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "9:00pm",
       "time_sort": 2100,
-      "artist": "Johnny Dawson + Andrew Jobin & The Thick Smoke + Beau Cheval",
-      "url": "https://wwoz.org/events/1336211",
-      "venue": "Saturn Bar",
+      "artist": "Lisbon Girls + Mango",
+      "url": "https://wwoz.org/events/1335881",
+      "venue": "Howlin' Wolf - The Den",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "9:00pm",
       "time_sort": 2100,
-      "artist": "Ken Mujo + Bullshit Machine + Static Staic + Dummy Plus",
-      "url": "https://wwoz.org/events/1334016",
-      "venue": "Siberia",
+      "artist": "Donald Harrison’s Smooth Jazz with Chief Adjuah & Deezle",
+      "url": "https://wwoz.org/events/1330301",
+      "venue": "New Orleans Jazz & Blues Market",
+      "genre": "Blues",
+      "neighborhood": null
+    },
+    {
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "artist": "Sam Price & The True Believers",
+      "url": "https://wwoz.org/events/1334831",
+      "venue": "Old Point Bar",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "9:00pm",
       "time_sort": 2100,
-      "artist": "James McClaskey & the Rythm Band",
-      "url": "https://wwoz.org/events/1327606",
-      "venue": "St. Roch Tavern",
+      "artist": "Gillian Welch & David Rawlings Play Grateful Dead Acoustic Reckoning",
+      "url": "https://wwoz.org/events/1317361",
+      "venue": "Saenger Theatre",
+      "genre": "Singer-Songwriter",
+      "neighborhood": null
+    },
+    {
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "artist": "Greensky Bluegrass",
+      "url": "https://wwoz.org/events/1274256",
+      "venue": "Tipitina's",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "artist": "Givers",
+      "url": "https://wwoz.org/events/1320601",
+      "venue": "Toulouse Theatre",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "artist": "Tyler Bond",
+      "url": "https://wwoz.org/events/1334306",
+      "venue": "True South",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "9 pm",
       "time_sort": 2100,
-      "artist": "The Budz",
+      "artist": "Kim In The Wind",
       "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
       "venue": "Bacchanal",
       "genre": "Jazz Fest",
@@ -1042,44 +1429,17 @@
     {
       "time": "9:30pm",
       "time_sort": 2130,
-      "artist": "Mother Ruckus",
-      "url": "https://wwoz.org/events/1335726",
+      "artist": "Armani Smith & Soul Ties",
+      "url": "https://wwoz.org/events/1332216",
       "venue": "Café Negril",
-      "genre": "Other",
+      "genre": "Soul",
       "neighborhood": "Marigny"
-    },
-    {
-      "time": "9:30pm",
-      "time_sort": 2130,
-      "artist": "The Uptown Jazz Orchestra with Jarrel Allen",
-      "url": "https://wwoz.org/events/1330096",
-      "venue": "Snug Harbor",
-      "genre": "Jazz",
-      "neighborhood": null
-    },
-    {
-      "time": "9:30pm",
-      "time_sort": 2130,
-      "artist": "Marty Peters & The Party Meters",
-      "url": "https://wwoz.org/events/1329106",
-      "venue": "Spotted Cat",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "9:30 pm",
-      "time_sort": 2130,
-      "artist": "Marty Peters & The Party Meters",
-      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
-      "venue": "Bacchanal",
-      "genre": "Jazz Fest",
-      "neighborhood": "New Orleans"
     },
     {
       "time": "10:00pm",
       "time_sort": 2200,
-      "artist": "Firm Roots ft. Peter Harris, The Groovemaster, Dwight Fitch Jr. & More!",
-      "url": "https://wwoz.org/events/1314776",
+      "artist": "Cryptic ft. Peter Harris, Ricardo Pascal & Peter Varnado",
+      "url": "https://wwoz.org/events/1314851",
       "venue": "Bayou Bar at the Pontchartrain",
       "genre": "Other",
       "neighborhood": "Garden District"
@@ -1087,8 +1447,17 @@
     {
       "time": "10:00pm",
       "time_sort": 2200,
-      "artist": "The Next Level Band ft. HaSizzle & Hotboy Ronald",
-      "url": "https://wwoz.org/events/1327306",
+      "artist": "Bayou by Bus: A Neville & Marley Joint ft. Cyril Neville, The Nth Power, Ivan Neville & More!",
+      "url": "https://wwoz.org/events/1330191",
+      "venue": "Civic Theatre",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "10:00pm",
+      "time_sort": 2200,
+      "artist": "Vegas Cola Band",
+      "url": "https://wwoz.org/events/1327226",
       "venue": "d.b.a.",
       "genre": "Other",
       "neighborhood": "Marigny"
@@ -1096,25 +1465,79 @@
     {
       "time": "10:00pm",
       "time_sort": 2200,
-      "artist": "Cardboard Cowboy",
-      "url": "https://wwoz.org/events/1330806",
-      "venue": "Le Bon Temps Roulé",
+      "artist": "STS9 (Night 1)",
+      "url": "https://wwoz.org/events/1300621",
+      "venue": "Joy Theater",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "10:00pm",
       "time_sort": 2200,
-      "artist": "Chambre Noir with Paco",
-      "url": "https://wwoz.org/events/1329621",
-      "venue": "Santos Bar",
+      "artist": "Johnny Vidacovich, George Porter Jr. & Luther Dickinson",
+      "url": "https://wwoz.org/events/1334486",
+      "venue": "Maple Leaf",
       "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "10:00pm",
+      "time_sort": 2200,
+      "artist": "Parrotfish + Beach Face",
+      "url": "https://wwoz.org/events/1323001",
+      "venue": "No Dice",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "10:00pm",
+      "time_sort": 2200,
+      "artist": "The Rumble Plays P Funk with Special Guests Christone Kingfish, Jennifer Hartswick, Kanika Moore & More!",
+      "url": "https://wwoz.org/events/1330251",
+      "venue": "Republic New Orleans",
+      "genre": "Funk",
+      "neighborhood": null
+    },
+    {
+      "time": "10:00pm",
+      "time_sort": 2200,
+      "artist": "Tainted Love 80’s Night with DJ Shane Love",
+      "url": "https://wwoz.org/events/1329676",
+      "venue": "Santos Bar",
+      "genre": "Electronic",
+      "neighborhood": null
+    },
+    {
+      "time": "10:00pm",
+      "time_sort": 2200,
+      "artist": "David Navarro & Horacio \"El Negro\" Jazz Cubano",
+      "url": "https://wwoz.org/events/1330106",
+      "venue": "Snug Harbor",
+      "genre": "Jazz",
+      "neighborhood": null
+    },
+    {
+      "time": "10:00pm",
+      "time_sort": 2200,
+      "artist": "Jumbo Shrimp Jazz Band",
+      "url": "https://wwoz.org/events/1329136",
+      "venue": "Spotted Cat",
+      "genre": "Jazz",
       "neighborhood": null
     },
     {
       "time": "10 pm",
       "time_sort": 2200,
-      "artist": "The Next Level Band",
+      "artist": "Vegas Cola Band",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
+    },
+    {
+      "time": "10 pm",
+      "time_sort": 2200,
+      "artist": "Jumbo Shrimp Jazz Band",
       "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
       "venue": "Bacchanal",
       "genre": "Jazz Fest",
@@ -1123,17 +1546,107 @@
     {
       "time": "10:30pm",
       "time_sort": 2230,
-      "artist": "The Band of Heathens",
-      "url": "https://wwoz.org/events/1276791",
+      "artist": "Johnny Mastro & Blue Midnight",
+      "url": "https://wwoz.org/events/1325716",
+      "venue": "Apple Barrel",
+      "genre": "Other",
+      "neighborhood": "Marigny"
+    },
+    {
+      "time": "10:30pm",
+      "time_sort": 2230,
+      "artist": "The Wild Tchoupitoulas 50th Anniversary ft. The Uptown Ruler Cyril Neville",
+      "url": "https://wwoz.org/events/1322611",
       "venue": "Chickie Wah Wah",
       "genre": "Other",
       "neighborhood": "Mid-City"
     },
     {
+      "time": "10:30pm",
+      "time_sort": 2230,
+      "artist": "Corey Henry & The Treme Funktet",
+      "url": "https://wwoz.org/events/1291406",
+      "venue": "Vaughan's Lounge",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
       "time": "11:00pm",
       "time_sort": 2300,
-      "artist": "Tanglers Bluegrass",
-      "url": "https://wwoz.org/events/1334476",
+      "artist": "Steve Kelly",
+      "url": "https://wwoz.org/events/1335916",
+      "venue": "Avenue Pub",
+      "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "11:00pm",
+      "time_sort": 2300,
+      "artist": "Eddie Roberts Birthday Bash ft. Eddie Roberts, Stanton Moore, Robert Walter & More!",
+      "url": "https://wwoz.org/events/1325171",
+      "venue": "Blue Nile",
+      "genre": "Other",
+      "neighborhood": "Marigny"
+    },
+    {
+      "time": "11:00pm",
+      "time_sort": 2300,
+      "artist": "Reggae Night with DJ T-Roy",
+      "url": "https://wwoz.org/events/1327846",
+      "venue": "Blue Nile - Balcony Room",
+      "genre": "Electronic",
+      "neighborhood": "Marigny"
+    },
+    {
+      "time": "11:00pm",
+      "time_sort": 2300,
+      "artist": "The Soul Rebels",
+      "url": "https://wwoz.org/events/1330811",
+      "venue": "Le Bon Temps Roulé",
+      "genre": "Soul",
+      "neighborhood": null
+    },
+    {
+      "time": "11:00pm",
+      "time_sort": 2300,
+      "artist": "Donald Harrison’s Jam Band with Deezle & BlaqNmilD",
+      "url": "https://wwoz.org/events/1330306",
+      "venue": "New Orleans Jazz & Blues Market",
+      "genre": "Blues",
+      "neighborhood": null
+    },
+    {
+      "time": "11:45pm",
+      "time_sort": 2345,
+      "artist": "(1am) First Annual Boca Phil After Party with DJ Alex Wasily",
+      "url": "https://wwoz.org/events/1334141",
+      "venue": "Chickie Wah Wah",
+      "genre": "Electronic",
+      "neighborhood": "Mid-City"
+    },
+    {
+      "time": "11:45pm",
+      "time_sort": 2345,
+      "artist": "(1am) Khris Royal Presents: Funk Noire",
+      "url": "https://wwoz.org/events/1327276",
+      "venue": "d.b.a.",
+      "genre": "Funk",
+      "neighborhood": "Marigny"
+    },
+    {
+      "time": "11:45pm",
+      "time_sort": 2345,
+      "artist": "(1am) Hive Mind with Allen Aucoin & McNice",
+      "url": "https://wwoz.org/events/1336761",
+      "venue": "Gasa Gasa",
+      "genre": "Other",
+      "neighborhood": "Uptown"
+    },
+    {
+      "time": "11:45pm",
+      "time_sort": 2345,
+      "artist": "(1am) Pocket Chocolate",
+      "url": "https://wwoz.org/events/1334491",
       "venue": "Maple Leaf",
       "genre": "Other",
       "neighborhood": null
@@ -1141,11 +1654,20 @@
     {
       "time": "11:45pm",
       "time_sort": 2345,
-      "artist": "(12am) The Breaks ft. Eddie Roberts, Stanton Moore & Robert Walter (Official Goose Afterparty)",
-      "url": "https://wwoz.org/events/1320596",
+      "artist": "(2am) Goldfish presents Disco Fish",
+      "url": "https://wwoz.org/events/1336041",
       "venue": "Toulouse Theatre",
       "genre": "Other",
       "neighborhood": null
+    },
+    {
+      "time": "1 am",
+      "time_sort": 100,
+      "artist": "Khris Royal",
+      "url": "http://www.jazzfestgrids.com/venue/Bacchanal/",
+      "venue": "Bacchanal",
+      "genre": "Jazz Fest",
+      "neighborhood": "New Orleans"
     }
   ]
 }
