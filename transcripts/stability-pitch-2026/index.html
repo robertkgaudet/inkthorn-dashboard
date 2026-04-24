@@ -15,21 +15,6 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <!-- Cache bust: force reload if browser has stale version -->
-  <script>
-    (function() {
-      var key = 'page-version-stability-pitch-2026';
-      var current = '20260422-2';
-      if (sessionStorage.getItem(key) !== current) {
-        sessionStorage.setItem(key, current);
-        if (performance && performance.navigation && performance.navigation.type !== 1) {
-          // Not a manual reload — force one to get fresh content
-          var url = location.href.split('?')[0] + '?v=' + current;
-          if (location.href !== url) location.replace(url);
-        }
-      }
-    })();
-  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -316,7 +301,7 @@
         </button>
         <div class="save-status" id="saveStatus">
           <span id="saveIcon">💾</span>
-          <span id="saveText">Auto-saves to this browser</span>
+          <span id="saveText">Edit, then push to go live</span>
         </div>
       </div>
     </div>
@@ -373,35 +358,26 @@
   </footer>
 
   <script>
-    const STORAGE_KEY = 'transcript-stability-pitch-2026';
-    const body = document.getElementById('transcriptBody');
+    const body       = document.getElementById('transcriptBody');
     const editToggle = document.getElementById('editToggle');
-    const resetBtn = document.getElementById('resetBtn');
-    const editHint = document.getElementById('editHint');
+    const resetBtn   = document.getElementById('resetBtn');
+    const editHint   = document.getElementById('editHint');
     const saveStatus = document.getElementById('saveStatus');
-    const saveIcon = document.getElementById('saveIcon');
-    const saveText = document.getElementById('saveText');
+    const saveIcon   = document.getElementById('saveIcon');
+    const saveText   = document.getElementById('saveText');
+    const pushBtn    = document.getElementById('pushBtn');
 
-    // Store original HTML from the page source as the reset target
     const ORIGINAL_HTML = body.innerHTML;
-
-    let saveTimer = null;
     let isEditing = false;
 
-    // On load: restore saved version if it exists
-    (function init() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        body.innerHTML = saved;
-        setSaveStatus('saved', '✅', 'Loaded from your saved edits');
-        setTimeout(() => setSaveStatus('idle', '💾', 'Auto-saves to this browser'), 2500);
-        resetBtn.style.display = 'inline-flex';
-      }
-    })();
+    function setStatus(state, icon, text) {
+      saveIcon.textContent = icon;
+      saveText.textContent = text;
+      saveStatus.className = 'save-status' + (state === 'saved' ? ' saved' : state === 'saving' ? ' saving' : '');
+    }
 
     function toggleEdit() {
       isEditing = !isEditing;
-
       if (isEditing) {
         body.setAttribute('contenteditable', 'true');
         body.focus();
@@ -409,145 +385,121 @@
         editToggle.className = 'btn-edit on';
         editHint.classList.add('visible');
         resetBtn.style.display = 'inline-flex';
+        setStatus('idle', '✏️', 'Editing — push when ready');
       } else {
         body.setAttribute('contenteditable', 'false');
         editToggle.textContent = '✏️ Edit Transcript';
         editToggle.className = 'btn-edit off';
         editHint.classList.remove('visible');
-        // Save immediately on exit
-        saveNow();
+        setStatus('idle', '💾', 'Ready to push');
       }
     }
 
-    function setSaveStatus(state, icon, text) {
-      saveIcon.textContent = icon;
-      saveText.textContent = text;
-      saveStatus.className = 'save-status' + (state === 'saved' ? ' saved' : state === 'saving' ? ' saving' : '');
-    }
-
-    function saveNow() {
-      localStorage.setItem(STORAGE_KEY, body.innerHTML);
-      setSaveStatus('saved', '✅', 'Saved');
-      setTimeout(() => setSaveStatus('idle', '💾', 'Auto-saves to this browser'), 2000);
-    }
-
-    // Auto-save while typing (debounced 1.5s)
-    body.addEventListener('input', () => {
-      setSaveStatus('saving', '⏳', 'Saving…');
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(saveNow, 1500);
-    });
-
-    // Prevent accidental link navigation while editing
     body.addEventListener('click', (e) => {
-      if (isEditing && e.target.tagName === 'A') {
-        e.preventDefault();
-      }
+      if (isEditing && e.target.tagName === 'A') e.preventDefault();
     });
 
     function resetTranscript() {
-      if (!confirm('Reset to the original Whisper transcript? Your edits will be lost.')) return;
-      localStorage.removeItem(STORAGE_KEY);
+      if (!confirm('Reset to the original transcript? Unsaved edits will be lost.')) return;
       body.innerHTML = ORIGINAL_HTML;
       resetBtn.style.display = 'none';
-      setSaveStatus('idle', '💾', 'Reset to original');
-      setTimeout(() => setSaveStatus('idle', '💾', 'Auto-saves to this browser'), 2000);
+      setStatus('idle', '💾', 'Reset to original');
     }
 
     // ── Push to Live ────────────────────────────────────────────────────────
-    // Fetches canonical source from GitHub raw, patches only the transcript
-    // div, pushes back. Never touches the live DOM — no corruption risk.
+    // GET from GitHub API (returns SHA + base64 content) → patch transcript
+    // div in the decoded source → PUT back. Single round-trip, no DOM junk.
 
     const PAT_KEY = 'gh_pat_inkthorn';
 
     function resetPushBtn() {
-      const b = document.getElementById('pushBtn');
-      b.textContent = '\ud83d\ude80 Push to Live';
-      b.className = 'btn-push';
-      b.disabled = false;
-    }
-
-    async function timedFetch(url, opts, ms) {
-      const ctrl = new AbortController();
-      const t = setTimeout(() => ctrl.abort(), ms);
-      try {
-        const r = await fetch(url, { ...opts, signal: ctrl.signal });
-        clearTimeout(t); return r;
-      } catch(e) { clearTimeout(t); throw e.name==='AbortError' ? new Error('Timed out ('+ms/1000+'s)') : e; }
+      pushBtn.textContent = '🚀 Push to Live';
+      pushBtn.className = 'btn-push';
+      pushBtn.disabled = false;
     }
 
     async function pushToLive() {
-      const pushBtn = document.getElementById('pushBtn');
       if (pushBtn.disabled) return;
 
       let TOKEN = localStorage.getItem(PAT_KEY);
       if (!TOKEN) {
-        TOKEN = prompt('Enter your GitHub PAT (saved locally \u2014 only asked once):');
+        TOKEN = prompt('GitHub PAT (saved once — never asked again):');
         if (!TOKEN) return;
         localStorage.setItem(PAT_KEY, TOKEN.trim());
       }
       TOKEN = TOKEN.trim();
 
-      saveNow();
       pushBtn.disabled = true;
-      pushBtn.textContent = '\u23f3 Fetching\u2026';
+      pushBtn.textContent = '⏳ Step 1/3…';
       pushBtn.className = 'btn-push';
-      setSaveStatus('saving', '\u23f3', 'Connecting to GitHub\u2026');
+      setStatus('saving', '⏳', 'Getting file from GitHub…');
 
+      const OWNER = 'robertkgaudet';
+      const REPO  = 'inkthorn-dashboard';
+      const PATH  = 'transcripts/stability-pitch-2026/index.html';
+      const API   = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + PATH;
+      const HDRS  = { 'Authorization': 'token ' + TOKEN, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' };
+
+      let sha, source;
+
+      // Step 1: GET — SHA + base64 source (no second fetch needed)
       try {
-        const OWNER = 'robertkgaudet';
-        const REPO  = 'inkthorn-dashboard';
-        const PATH  = 'transcripts/stability-pitch-2026/index.html';
-        const API   = 'https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+PATH;
-        const HDRS  = { Authorization: 'token '+TOKEN, Accept: 'application/vnd.github.v3+json' };
-
-        // Step 1: get SHA
-        setSaveStatus('saving', '\u23f3', 'Reading file SHA\u2026');
-        const metaResp = await timedFetch(API, { headers: HDRS }, 12000);
-        if (metaResp.status === 401) { localStorage.removeItem(PAT_KEY); throw new Error('Token rejected \u2014 cleared. Tap again.'); }
-        if (!metaResp.ok) throw new Error('GitHub GET ' + metaResp.status);
-        const meta = await metaResp.json();
-        const sha  = meta.sha;
-
-        // Step 2: get raw source file (not the DOM)
-        setSaveStatus('saving', '\u23f3', 'Fetching source\u2026');
-        const rawURL = 'https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+PATH+'?nc='+Date.now();
-        const rawResp = await timedFetch(rawURL, {}, 12000);
-        if (!rawResp.ok) throw new Error('Raw fetch ' + rawResp.status);
-        const source = await rawResp.text();
-
-        // Step 3: patch only the transcript div
-        setSaveStatus('saving', '\u23f3', 'Patching\u2026');
-        const newInner = document.getElementById('transcriptBody').innerHTML;
-        const marker   = 'id="transcriptBody">';
-        const closeDiv = '</div>\n\n    <div class="pullquote"';
-        const si = source.indexOf(marker);
-        const ei = source.indexOf(closeDiv, si);
-        if (si < 0 || ei < 0) throw new Error('Patch markers not found');
-        const patched = source.slice(0, si + marker.length) + '\n' + newInner + '\n    ' + source.slice(ei);
-
-        // Step 4: encode and commit
-        setSaveStatus('saving', '\u23f3', 'Committing\u2026');
-        const encoded = btoa(unescape(encodeURIComponent(patched)));
-        const putResp = await timedFetch(API, {
-          method: 'PUT',
-          headers: { ...HDRS, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: 'Transcript: inline edit push from browser', content: encoded, sha: sha })
-        }, 15000);
-        if (!putResp.ok) { const e = await putResp.json().catch(()=>({})); throw new Error(e.message||'PUT '+putResp.status); }
-
-        pushBtn.textContent = '\u2705 Live in ~60s';
-        pushBtn.className = 'btn-push success';
-        setSaveStatus('saved', '\u2705', 'Pushed \u2014 deploying\u2026');
-        setTimeout(resetPushBtn, 5000);
-
-      } catch(err) {
-        console.error('Push failed:', err);
-        pushBtn.textContent = '\u274c ' + err.message;
+        const ctrl = new AbortController();
+        setTimeout(() => ctrl.abort(), 12000);
+        const r = await fetch(API, { headers: HDRS, signal: ctrl.signal });
+        if (r.status === 401) { localStorage.removeItem(PAT_KEY); throw new Error('Bad token — cleared, tap again'); }
+        if (!r.ok) throw new Error('GET failed: ' + r.status);
+        const data = await r.json();
+        sha    = data.sha;
+        source = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+      } catch (e) {
+        setStatus('idle', '❌', e.message);
+        pushBtn.textContent = '❌ ' + e.message;
         pushBtn.className = 'btn-push error';
-        setSaveStatus('idle', '\u26a0\ufe0f', err.message);
         setTimeout(resetPushBtn, 5000);
+        return;
       }
+
+      // Step 2: patch transcript div in clean source
+      pushBtn.textContent = '⏳ Step 2/3…';
+      setStatus('saving', '⏳', 'Patching transcript…');
+      const openTag  = 'id="transcriptBody">';
+      const closeTag = '</div>\n\n    <div class="pullquote"';
+      const si = source.indexOf(openTag);
+      const ei = source.indexOf(closeTag, si);
+      if (si < 0 || ei < 0) {
+        setStatus('idle', '❌', 'Patch markers missing — contact InkThorn');
+        resetPushBtn(); return;
+      }
+      const newContent = body.innerHTML;
+      const patched    = source.slice(0, si + openTag.length) + '\n' + newContent + '\n    ' + source.slice(ei);
+
+      // Step 3: PUT — commit patched source
+      pushBtn.textContent = '⏳ Step 3/3…';
+      setStatus('saving', '⏳', 'Committing to GitHub…');
+      try {
+        const encoded = btoa(unescape(encodeURIComponent(patched)));
+        const ctrl2   = new AbortController();
+        setTimeout(() => ctrl2.abort(), 15000);
+        const r2 = await fetch(API, {
+          method: 'PUT',
+          headers: HDRS,
+          body: JSON.stringify({ message: 'Transcript: push from browser editor', content: encoded, sha: sha }),
+          signal: ctrl2.signal
+        });
+        if (!r2.ok) { const e = await r2.json().catch(() => ({})); throw new Error(e.message || 'PUT failed: ' + r2.status); }
+      } catch (e) {
+        setStatus('idle', '❌', e.message);
+        pushBtn.textContent = '❌ ' + e.message;
+        pushBtn.className = 'btn-push error';
+        setTimeout(resetPushBtn, 5000);
+        return;
+      }
+
+      pushBtn.textContent = '✅ Live in ~60s';
+      pushBtn.className = 'btn-push success';
+      setStatus('saved', '✅', 'Committed — GitHub Pages deploying…');
+      setTimeout(resetPushBtn, 6000);
     }
   </script>
 </body>
