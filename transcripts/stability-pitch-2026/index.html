@@ -155,6 +155,17 @@
       cursor: pointer; transition: all 0.15s; display: none;
     }
     .btn-reset:hover { background: rgba(255,45,135,0.15); }
+    .btn-push {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.82rem; font-weight: 700;
+      padding: 7px 16px; border-radius: 999px; border: 1.5px solid rgba(180,79,255,0.35);
+      background: rgba(180,79,255,0.1); color: var(--purple);
+      cursor: pointer; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .btn-push:hover:not(:disabled) { background: rgba(180,79,255,0.22); }
+    .btn-push:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-push.success { background: rgba(74,222,128,0.1); color: #4ade80; border-color: rgba(74,222,128,0.35); }
+    .btn-push.error { background: rgba(255,45,135,0.1); color: var(--pink); border-color: rgba(255,45,135,0.35); }
     .save-status {
       font-size: 0.75rem; color: var(--gray-lt); transition: color 0.3s;
       display: flex; align-items: center; gap: 5px;
@@ -299,9 +310,14 @@
           ↺ Reset to Original
         </button>
       </div>
-      <div class="save-status" id="saveStatus">
-        <span id="saveIcon">💾</span>
-        <span id="saveText">Auto-saves to this browser</span>
+      <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+        <button class="btn-push" id="pushBtn" onclick="pushToLive()">
+          🚀 Push to Live
+        </button>
+        <div class="save-status" id="saveStatus">
+          <span id="saveIcon">💾</span>
+          <span id="saveText">Auto-saves to this browser</span>
+        </div>
       </div>
     </div>
 
@@ -436,6 +452,84 @@
       resetBtn.style.display = 'none';
       setSaveStatus('idle', '💾', 'Reset to original');
       setTimeout(() => setSaveStatus('idle', '💾', 'Auto-saves to this browser'), 2000);
+    }
+
+    // ── Push to Live ────────────────────────────────────────────────────────
+    // Commits current transcript HTML to GitHub, triggering a GitHub Pages deploy.
+    // The token has repo-scoped write access to robertkgaudet/inkthorn-dashboard.
+    async function pushToLive() {
+      const pushBtn = document.getElementById('pushBtn');
+
+      // Save locally first so we have latest
+      saveNow();
+
+      pushBtn.disabled = true;
+      pushBtn.textContent = '⏳ Pushing…';
+      pushBtn.className = 'btn-push';
+
+      try {
+        const OWNER = 'robertkgaudet';
+        const REPO  = 'inkthorn-dashboard';
+        const PATH  = 'transcripts/stability-pitch-2026/index.html';
+        // Token stored in sessionStorage only — never in source code
+        let TOKEN = sessionStorage.getItem('gh_pat');
+        if (!TOKEN) {
+          TOKEN = prompt('Enter your GitHub Personal Access Token to push:');
+          if (!TOKEN) { pushBtn.disabled = false; pushBtn.textContent = '🚀 Push to Live'; return; }
+          sessionStorage.setItem('gh_pat', TOKEN);
+        }
+        const API   = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
+
+        // 1. Get current file SHA (required for update)
+        const getResp = await fetch(API, {
+          headers: { Authorization: `token ${TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+        });
+        if (!getResp.ok) throw new Error(`GitHub GET failed: ${getResp.status}`);
+        const fileData = await getResp.json();
+        const sha = fileData.sha;
+
+        // 2. Build the full page HTML from current DOM
+        const fullHTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        const encoded  = btoa(unescape(encodeURIComponent(fullHTML)));
+
+        // 3. Commit the update
+        const putResp = await fetch(API, {
+          method: 'PUT',
+          headers: {
+            Authorization: `token ${TOKEN}`,
+            Accept: 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: 'Transcript: inline edit push from browser',
+            content: encoded,
+            sha: sha
+          })
+        });
+        if (!putResp.ok) {
+          const err = await putResp.json();
+          throw new Error(err.message || `GitHub PUT failed: ${putResp.status}`);
+        }
+
+        pushBtn.textContent = '✅ Live! (~60s to deploy)';
+        pushBtn.className = 'btn-push success';
+        setTimeout(() => {
+          pushBtn.textContent = '🚀 Push to Live';
+          pushBtn.className = 'btn-push';
+          pushBtn.disabled = false;
+        }, 5000);
+
+      } catch (err) {
+        console.error('Push to Live failed:', err);
+        pushBtn.textContent = '❌ Push Failed';
+        pushBtn.className = 'btn-push error';
+        pushBtn.title = err.message;
+        setTimeout(() => {
+          pushBtn.textContent = '🚀 Push to Live';
+          pushBtn.className = 'btn-push';
+          pushBtn.disabled = false;
+        }, 4000);
+      }
     }
   </script>
 </body>
