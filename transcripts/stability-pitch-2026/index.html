@@ -1196,8 +1196,23 @@
       pushBtn.disabled = false;
     }
 
+    async function fetchWithTimeout(url, options, ms) {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), ms);
+      try {
+        const r = await fetch(url, { ...options, signal: ctrl.signal });
+        clearTimeout(timer);
+        return r;
+      } catch (e) {
+        clearTimeout(timer);
+        if (e.name === 'AbortError') throw new Error('Request timed out after ' + (ms/1000) + 's');
+        throw e;
+      }
+    }
+
     async function pushToLive() {
       const pushBtn = document.getElementById('pushBtn');
+      if (pushBtn.disabled) return;
 
       // PAT stored in localStorage — persists forever, enter once
       let TOKEN = localStorage.getItem(PAT_KEY);
@@ -1214,72 +1229,68 @@
       pushBtn.disabled = true;
       pushBtn.textContent = '⏳ Pushing…';
       pushBtn.className = 'btn-push';
-
-      // Hard safety timeout — button always resets after 20s no matter what
-      const safetyTimer = setTimeout(() => {
-        resetPushBtn();
-        setSaveStatus('idle', '⚠️', 'Push timed out — try again');
-      }, 20000);
+      setSaveStatus('saving', '⏳', 'Pushing to GitHub…');
 
       try {
         const OWNER = 'robertkgaudet';
         const REPO  = 'inkthorn-dashboard';
         const PATH  = 'transcripts/stability-pitch-2026/index.html';
         const API   = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
+        const HDRS  = {
+          Authorization: `token ${TOKEN}`,
+          Accept: 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        };
 
-        // 1. Get current file SHA
-        const getResp = await fetch(API, {
-          headers: { Authorization: `token ${TOKEN}`, Accept: 'application/vnd.github.v3+json' }
-        });
+        // 1. Get current file SHA (10s timeout)
+        setSaveStatus('saving', '⏳', 'Getting file SHA…');
+        const getResp = await fetchWithTimeout(API, { headers: HDRS }, 10000);
         if (getResp.status === 401) {
-          // Bad token — clear it so user is prompted next time
           localStorage.removeItem(PAT_KEY);
-          throw new Error('Invalid token — cleared. Try again.');
+          throw new Error('Invalid token — cleared. Tap again to re-enter.');
         }
-        if (!getResp.ok) throw new Error(`GitHub GET failed: ${getResp.status}`);
-        const fileData = await getResp.json();
-        const sha = fileData.sha;
+        if (!getResp.ok) throw new Error(`GitHub GET ${getResp.status}`);
+        const { sha } = await getResp.json();
 
-        // 2. Encode current page HTML
+        // 2. Encode — only the transcript body content to keep payload small
+        //    We save the innerHTML and patch it into the source file server-side via the agent.
+        //    For the browser push we encode the full live HTML.
+        setSaveStatus('saving', '⏳', 'Encoding…');
         const fullHTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-        const encoded  = btoa(unescape(encodeURIComponent(fullHTML)));
+        // Safe base64 for any Unicode
+        const bytes = new TextEncoder().encode(fullHTML);
+        let binary = '';
+        bytes.forEach(b => binary += String.fromCharCode(b));
+        const encoded = btoa(binary);
 
-        // 3. Commit
-        const putResp = await fetch(API, {
+        // 3. Commit (15s timeout — PUT can be slower)
+        setSaveStatus('saving', '⏳', 'Committing…');
+        const putResp = await fetchWithTimeout(API, {
           method: 'PUT',
-          headers: {
-            Authorization: `token ${TOKEN}`,
-            Accept: 'application/vnd.github.v3+json',
-            'Content-Type': 'application/json'
-          },
+          headers: HDRS,
           body: JSON.stringify({
             message: 'Transcript: inline edit push from browser',
             content: encoded,
             sha: sha
           })
-        });
+        }, 15000);
+
         if (!putResp.ok) {
-          const err = await putResp.json();
-          throw new Error(err.message || `GitHub PUT failed: ${putResp.status}`);
+          const e = await putResp.json().catch(() => ({}));
+          throw new Error(e.message || `GitHub PUT ${putResp.status}`);
         }
 
-        clearTimeout(safetyTimer);
         pushBtn.textContent = '✅ Live! (~60s to deploy)';
         pushBtn.className = 'btn-push success';
-        setTimeout(() => {
-          pushBtn.textContent = '🚀 Push to Live';
-          pushBtn.className = 'btn-push';
-          pushBtn.disabled = false;
-        }, 5000);
+        setSaveStatus('saved', '✅', 'Pushed to GitHub — deploying…');
+        setTimeout(resetPushBtn, 5000);
 
       } catch (err) {
-        clearTimeout(safetyTimer);
-        console.error('Push to Live failed:', err);
-        setSaveStatus('idle', '⚠️', err.message);
-        pushBtn.textContent = '❌ Failed — tap to retry';
+        console.error('Push failed:', err);
+        pushBtn.textContent = '❌ ' + err.message;
         pushBtn.className = 'btn-push error';
-        pushBtn.title = err.message;
-        setTimeout(resetPushBtn, 4000);
+        setSaveStatus('idle', '⚠️', err.message);
+        setTimeout(resetPushBtn, 5000);
       }
     }
   </script>
