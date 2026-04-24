@@ -1187,44 +1187,64 @@
     }
 
     // ── Push to Live ────────────────────────────────────────────────────────
-    // Commits current transcript HTML to GitHub, triggering a GitHub Pages deploy.
-    // The token has repo-scoped write access to robertkgaudet/inkthorn-dashboard.
+    const PAT_KEY = 'gh_pat_inkthorn';
+
+    function resetPushBtn() {
+      const pushBtn = document.getElementById('pushBtn');
+      pushBtn.textContent = '🚀 Push to Live';
+      pushBtn.className = 'btn-push';
+      pushBtn.disabled = false;
+    }
+
     async function pushToLive() {
       const pushBtn = document.getElementById('pushBtn');
 
-      // Save locally first so we have latest
+      // PAT stored in localStorage — persists forever, enter once
+      let TOKEN = localStorage.getItem(PAT_KEY);
+      if (!TOKEN) {
+        TOKEN = prompt('Enter your GitHub PAT (stored locally — asked once only):');
+        if (!TOKEN) return;
+        localStorage.setItem(PAT_KEY, TOKEN.trim());
+      }
+      TOKEN = TOKEN.trim();
+
+      // Save locally first
       saveNow();
 
       pushBtn.disabled = true;
       pushBtn.textContent = '⏳ Pushing…';
       pushBtn.className = 'btn-push';
 
+      // Hard safety timeout — button always resets after 20s no matter what
+      const safetyTimer = setTimeout(() => {
+        resetPushBtn();
+        setSaveStatus('idle', '⚠️', 'Push timed out — try again');
+      }, 20000);
+
       try {
         const OWNER = 'robertkgaudet';
         const REPO  = 'inkthorn-dashboard';
         const PATH  = 'transcripts/stability-pitch-2026/index.html';
-        // Token stored in sessionStorage only — never in source code
-        let TOKEN = sessionStorage.getItem('gh_pat');
-        if (!TOKEN) {
-          TOKEN = prompt('Enter your GitHub Personal Access Token to push:');
-          if (!TOKEN) { pushBtn.disabled = false; pushBtn.textContent = '🚀 Push to Live'; return; }
-          sessionStorage.setItem('gh_pat', TOKEN);
-        }
         const API   = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
 
-        // 1. Get current file SHA (required for update)
+        // 1. Get current file SHA
         const getResp = await fetch(API, {
           headers: { Authorization: `token ${TOKEN}`, Accept: 'application/vnd.github.v3+json' }
         });
+        if (getResp.status === 401) {
+          // Bad token — clear it so user is prompted next time
+          localStorage.removeItem(PAT_KEY);
+          throw new Error('Invalid token — cleared. Try again.');
+        }
         if (!getResp.ok) throw new Error(`GitHub GET failed: ${getResp.status}`);
         const fileData = await getResp.json();
         const sha = fileData.sha;
 
-        // 2. Build the full page HTML from current DOM
+        // 2. Encode current page HTML
         const fullHTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
         const encoded  = btoa(unescape(encodeURIComponent(fullHTML)));
 
-        // 3. Commit the update
+        // 3. Commit
         const putResp = await fetch(API, {
           method: 'PUT',
           headers: {
@@ -1243,6 +1263,7 @@
           throw new Error(err.message || `GitHub PUT failed: ${putResp.status}`);
         }
 
+        clearTimeout(safetyTimer);
         pushBtn.textContent = '✅ Live! (~60s to deploy)';
         pushBtn.className = 'btn-push success';
         setTimeout(() => {
@@ -1252,15 +1273,13 @@
         }, 5000);
 
       } catch (err) {
+        clearTimeout(safetyTimer);
         console.error('Push to Live failed:', err);
-        pushBtn.textContent = '❌ Push Failed';
+        setSaveStatus('idle', '⚠️', err.message);
+        pushBtn.textContent = '❌ Failed — tap to retry';
         pushBtn.className = 'btn-push error';
         pushBtn.title = err.message;
-        setTimeout(() => {
-          pushBtn.textContent = '🚀 Push to Live';
-          pushBtn.className = 'btn-push';
-          pushBtn.disabled = false;
-        }, 4000);
+        setTimeout(resetPushBtn, 4000);
       }
     }
   </script>
