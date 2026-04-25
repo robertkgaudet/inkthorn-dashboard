@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-04-24T23:12:34.639Z",
+  "updated": "2026-04-25T13:29:46.084Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-04-24",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Emil Wakim",
-      "url": "https://504comedy.com/event/1345/emil-wakim-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Fri Apr 24 2026",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-04-24",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "You're Invited!",
-      "url": "https://504comedy.com/event/1109/youre-invited-at-big-couch-nola",
-      "venue": "Big Couch New Orleans",
-      "type": "Improv",
-      "cost": "$10",
-      "repeat": "Fourth Friday",
-      "start_dt": "2026-04-24T19:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-04-24",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "The Comedy Lounge",
-      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-      "venue": "Vino: Fine Wine & Spirits",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Friday",
-      "start_dt": "2026-05-29T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-04-25",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -57,11 +15,11 @@
       "type": "Stand-up",
       "cost": "FREE",
       "repeat": "Every Saturday",
-      "start_dt": "2026-04-24T20:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-04-25",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -75,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-04-26",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -89,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-04-26",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-04-26",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -394,64 +352,58 @@
       "cost": "$10",
       "repeat": "Every Thursday",
       "start_dt": "2026-04-30T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-05-01",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Alec Flynn",
+      "url": "https://504comedy.com/event/1351/alec-flynn-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Fri May 01 2026",
+      "start_dt": "2026-04-30T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-05-01",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "The Oldest Profession - Solo Comedy Show",
+      "url": "https://504comedy.com/event/1365/the-oldest-profession--solo-comedy-show-at-actors-apothecary-may-1st-2nd",
+      "venue": "The Actor’s Apothecary",
+      "type": "Stand-up",
+      "cost": "$40",
+      "repeat": "Fri May 01 2026",
+      "start_dt": "2026-05-01T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-05-01",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Comedy Lounge",
+      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+      "venue": "Vino: Fine Wine & Spirits",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Friday",
+      "start_dt": "2026-05-01T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-04-24",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-24",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Emil Wakim",
-          "url": "https://504comedy.com/event/1345/emil-wakim-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Fri Apr 24 2026",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-24",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "You're Invited!",
-          "url": "https://504comedy.com/event/1109/youre-invited-at-big-couch-nola",
-          "venue": "Big Couch New Orleans",
-          "type": "Improv",
-          "cost": "$10",
-          "repeat": "Fourth Friday",
-          "start_dt": "2026-04-24T19:30-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-24",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "The Comedy Lounge",
-          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-          "venue": "Vino: Fine Wine & Spirits",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Friday",
-          "start_dt": "2026-05-29T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-04-25",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-25",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -461,11 +413,11 @@
           "type": "Stand-up",
           "cost": "FREE",
           "repeat": "Every Saturday",
-          "start_dt": "2026-04-24T20:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-25",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -480,12 +432,12 @@
       ]
     },
     {
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-04-26",
       "events": [
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-04-26",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -499,7 +451,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-04-26",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -513,7 +465,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-04-26",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -828,6 +780,54 @@
           "cost": "$10",
           "repeat": "Every Thursday",
           "start_dt": "2026-04-30T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "date": "2026-05-01",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-05-01",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Alec Flynn",
+          "url": "https://504comedy.com/event/1351/alec-flynn-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Fri May 01 2026",
+          "start_dt": "2026-04-30T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-05-01",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "The Oldest Profession - Solo Comedy Show",
+          "url": "https://504comedy.com/event/1365/the-oldest-profession--solo-comedy-show-at-actors-apothecary-may-1st-2nd",
+          "venue": "The Actor’s Apothecary",
+          "type": "Stand-up",
+          "cost": "$40",
+          "repeat": "Fri May 01 2026",
+          "start_dt": "2026-05-01T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-05-01",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Comedy Lounge",
+          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+          "venue": "Vino: Fine Wine & Spirits",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Friday",
+          "start_dt": "2026-05-01T20:00-05:00"
         }
       ]
     }
