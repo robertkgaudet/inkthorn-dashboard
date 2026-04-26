@@ -157,13 +157,8 @@
     .form-card .sub { color:var(--gray); font-size:0.88rem; margin-bottom:28px; line-height:1.6; }
     .form-card .sub strong { color:var(--white); }
     .form-group { margin-bottom:14px; }
-    /* form-label defined above */
-    .form-input { width:100%; background:#1a2a45; border:2px solid rgba(0,229,255,0.6); border-radius:8px; padding:14px 16px; color:#ffffff; font-family:'Space Grotesk',sans-serif; font-size:1rem; outline:none; transition:border-color 0.2s,box-shadow 0.2s; }
-    .form-input:focus { border-color:var(--cyan); box-shadow:0 0 0 4px rgba(0,229,255,0.18); }
-    .form-input::placeholder { color:rgba(200,220,255,0.55); }
-    .form-select { width:100%; background:#1a2a45; border:2px solid rgba(0,229,255,0.6); border-radius:8px; padding:14px 16px; color:#ffffff; font-family:'Space Grotesk',sans-serif; font-size:1rem; outline:none; appearance:none; cursor:pointer; transition:border-color 0.2s; }
-    .form-select:focus { border-color:var(--cyan); box-shadow:0 0 0 4px rgba(0,229,255,0.18); }
-    .form-select option { background:#1a2a45; color:#ffffff; }
+
+
     .form-label { display:block; font-family:'Orbitron',monospace; font-size:0.62rem; letter-spacing:0.1em; color:#a0c4ff; text-transform:uppercase; margin-bottom:8px; font-weight:600; }
     .handle-preview { background:rgba(0,229,255,0.05); border:1px solid rgba(0,229,255,0.15); border-radius:7px; padding:10px 14px; margin-top:7px; font-family:'Orbitron',monospace; font-size:0.8rem; color:var(--cyan); }
     .handle-preview span { color:var(--gray); }
@@ -531,48 +526,7 @@
 
       <p class="sub">Once all 1,000 founding member spots are claimed, this offer is gone permanently. <strong>Founding members lock in their name, their slot number, and their rate — forever.</strong></p>
 
-      <form action="https://formspree.io/f/xgorbvdg" method="POST" id="waitlist-form">
-        <input type="hidden" name="_subject" value="TextOS Founding Member Signup" />
-
-        <div class="form-group">
-          <label class="form-label" for="name">Your Name</label>
-          <input class="form-input" type="text" id="name" name="name" placeholder="Rob Gaudet" required />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="phone">📱 Phone Number — Your TextOS Identity</label>
-          <input class="form-input" type="tel" id="phone" name="phone" placeholder="+1 (504) 555-0100" required />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="handle">Claim Your Name (yourname.textos.ai)</label>
-          <input class="form-input" type="text" id="handle" name="handle" placeholder="rob" maxlength="30" />
-          <div class="handle-preview" id="handle-preview"><span>Your address → </span>yourname.textos.ai</div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="email">Email (backup contact)</label>
-          <input class="form-input" type="email" id="email" name="email" placeholder="rob@example.com" />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="use_case">What would you use TextOS for first?</label>
-          <select class="form-select" id="use_case" name="use_case">
-            <option value="">Select one...</option>
-            <option value="business">Build a business website</option>
-            <option value="identity">My personal identity / brand</option>
-            <option value="blog">Publishing a blog</option>
-            <option value="notes">Capture notes & ideas</option>
-            <option value="agenda">Daily agenda & productivity</option>
-            <option value="social">Social media content</option>
-            <option value="restaurant">Restaurant or food truck</option>
-            <option value="event">Event page</option>
-            <option value="nonprofit">Nonprofit or cause</option>
-            <option value="other">Something else</option>
-          </select>
-        </div>
-
-        <div class="offer-box">
+      <div class="offer-box">
           <div class="ob-label">⚡ Founding Member Waitlist — 1,000 Slots Only</div>
           <div class="ob-pricing">
             <div class="ob-price">$49</div>
@@ -584,10 +538,11 @@
           </div>
         </div>
 
-        <button type="submit" class="btn-claim" id="submit-btn">🔒 Reserve My Spot → Pay $49</button>
-      </form>
+        <a href="https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00" class="btn-claim" style="display:block;text-align:center;text-decoration:none;">
+          🔒 Reserve My Founding Member Spot → Pay $49
+        </a>
 
-      <p class="form-fine">Secure payment via Stripe · No app to install · No account to create<br>
+      <p class="form-fine">Secure payment via Stripe · We collect your phone number and TextOS name at checkout<br>
       <span style="color:rgba(200,200,200,0.5);">$49 now · then $29/mo locked for life after your 3 months</span></p>
     </div>
   </div>
@@ -599,42 +554,7 @@
 </footer>
 
 <script>
-  // Live handle preview
-  const handleInput = document.getElementById('handle');
-  const nameInput = document.getElementById('name');
-  const preview = document.getElementById('handle-preview');
-  function updatePreview() {
-    const h = handleInput.value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'') ||
-              nameInput.value.trim().toLowerCase().replace(/\s+/g,'').replace(/[^a-z0-9-]/g,'') ||
-              'yourname';
-    preview.innerHTML = `<span>Your address → </span>${h}.textos.ai`;
-  }
-  handleInput.addEventListener('input', updatePreview);
-  nameInput.addEventListener('input', updatePreview);
-
-  // Submit to Formspree via AJAX then redirect to Stripe
-  document.getElementById('waitlist-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    btn.textContent = 'Saving your info...';
-    btn.disabled = true;
-
-    const data = new FormData(this);
-
-    fetch('https://formspree.io/f/xgorbvdg', {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(function(res) {
-      // Redirect to Stripe whether or not Formspree succeeded
-      window.location.href = 'https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00';
-    })
-    .catch(function() {
-      // Still redirect on error — don't block payment
-      window.location.href = 'https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00';
-    });
-  });
+  // Stripe handles all collection at checkout
 </script>
 
 </body>
