@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>TextOS — What Happens Next</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#080e1a; --bg2:#0d1626; --cyan:#00e5ff; --pink:#ff2d78; --amber:#f59e0b; --white:#f0f6ff; --gray:#8899bb; --border:rgba(0,229,255,0.12); --glow-cyan:0 0 32px rgba(0,229,255,0.35); }
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; background: var(--bg); color: var(--white); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .card { max-width: 600px; width: 100%; }
+
+    /* HERO BADGE */
+    .hero-badge { text-align:center; margin-bottom: 32px; }
+    .trophy { font-size: 4rem; display: block; margin-bottom: 16px; }
+    .fm-badge { display:inline-block; background:rgba(0,229,255,0.1); border:1px solid rgba(0,229,255,0.35); color:var(--cyan); font-family:'Orbitron',monospace; font-size:0.72rem; letter-spacing:0.1em; padding:8px 20px; border-radius:20px; margin-bottom: 20px; }
+    h1 { font-family:'Orbitron',monospace; font-size:clamp(2rem,6vw,2.8rem); font-weight:900; color:var(--cyan); text-shadow:var(--glow-cyan); line-height:1.1; margin-bottom:8px; text-align:center; }
+    .tagline { color:var(--gray); font-size:1rem; text-align:center; margin-bottom:32px; }
+
+    /* LAUNCH DATE */
+    .launch-block { background:linear-gradient(135deg,rgba(0,229,255,0.07),rgba(168,85,247,0.04)); border:1px solid rgba(0,229,255,0.25); border-radius:14px; padding:28px 32px; text-align:center; margin-bottom:20px; }
+    .launch-label { font-family:'Orbitron',monospace; font-size:0.62rem; color:var(--cyan); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:10px; }
+    .launch-date { font-family:'Orbitron',monospace; font-size:clamp(1.6rem,5vw,2.4rem); font-weight:900; color:var(--white); margin-bottom:8px; }
+    .launch-note { color:var(--gray); font-size:0.88rem; line-height:1.6; }
+    .launch-note strong { color:var(--white); }
+
+    /* WHAT THIS MEANS */
+    .clarity-block { background:rgba(245,158,11,0.07); border:1px solid rgba(245,158,11,0.25); border-radius:12px; padding:20px 24px; margin-bottom:20px; }
+    .clarity-label { font-family:'Orbitron',monospace; font-size:0.6rem; color:var(--amber); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:12px; }
+    .clarity-list { list-style:none; }
+    .clarity-list li { color:var(--gray); font-size:0.88rem; padding:7px 0; border-bottom:1px solid rgba(245,158,11,0.1); display:flex; gap:10px; line-height:1.5; }
+    .clarity-list li:last-child { border-bottom:none; }
+    .clarity-list li .icon { flex-shrink:0; }
+
+    /* WHAT YOU GET */
+    .perks-block { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:20px 24px; margin-bottom:20px; }
+    .perks-label { font-family:'Orbitron',monospace; font-size:0.6rem; color:var(--cyan); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:12px; }
+    .perk-row { display:flex; gap:10px; align-items:flex-start; padding:7px 0; border-bottom:1px solid var(--border); }
+    .perk-row:last-child { border-bottom:none; }
+    .perk-row .check { color:var(--cyan); flex-shrink:0; font-weight:700; }
+    .perk-row .txt { color:var(--gray); font-size:0.88rem; line-height:1.5; }
+    .perk-row .txt strong { color:var(--white); }
+
+    /* SHARE */
+    .share-block { background:rgba(255,45,120,0.06); border:1px solid rgba(255,45,120,0.2); border-radius:12px; padding:20px 24px; margin-bottom:20px; text-align:center; }
+    .share-label { font-family:'Orbitron',monospace; font-size:0.6rem; color:var(--pink); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:10px; }
+    .share-text { color:var(--gray); font-size:0.88rem; line-height:1.6; margin-bottom:16px; }
+    .share-text strong { color:var(--white); }
+    .share-url { font-family:'Orbitron',monospace; font-size:0.85rem; color:var(--cyan); background:rgba(0,229,255,0.06); border:1px solid rgba(0,229,255,0.2); border-radius:8px; padding:10px 16px; display:block; margin-bottom:12px; }
+    .copy-btn { background:var(--pink); color:var(--white); font-family:'Orbitron',monospace; font-size:0.72rem; letter-spacing:0.06em; padding:10px 20px; border:none; border-radius:6px; cursor:pointer; font-weight:700; transition:opacity 0.2s; }
+    .copy-btn:hover { opacity:0.85; }
+
+    .home-link { display:block; text-align:center; color:var(--gray); text-decoration:none; font-size:0.82rem; margin-top:8px; }
+    .home-link:hover { color:var(--cyan); }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <div class="hero-badge">
+      <span class="trophy">🏆</span>
+      <div class="fm-badge">Founding Member — Confirmed ✓</div>
+      <h1>You're In.<br><span style="color:var(--cyan);font-size:0.65em;">Here's What Happens Next.</span></h1>
+      <p class="tagline">Welcome to the first 1,000 people to ever be part of TextOS.</p>
+    </div>
+
+    <!-- LAUNCH DATE -->
+    <div class="launch-block">
+      <div class="launch-label">🚀 Target Launch Date</div>
+      <div class="launch-date">June 1, 2026</div>
+      <div class="launch-note">
+        <strong>TextOS is not live yet</strong> — you've reserved your founding member spot ahead of launch.
+        We'll text you directly on launch day with everything you need to activate your account.
+        You won't need to do anything else until then.
+      </div>
+    </div>
+
+    <!-- WHAT THIS MEANS CLEARLY -->
+    <div class="clarity-block">
+      <div class="clarity-label">📋 What You've Signed Up For — Clearly</div>
+      <ul class="clarity-list">
+        <li><span class="icon">✅</span> You've paid $49 to reserve a founding member spot on the waitlist</li>
+        <li><span class="icon">✅</span> That $49 covers your first 3 months of TextOS Pro at launch</li>
+        <li><span class="icon">✅</span> After 3 months, your subscription continues at $29/mo for the Pro base plan — your founding rate, never increases</li>
+        <li><span class="icon">⏳</span> TextOS launches June 1, 2026 — you'll be notified by text when it's live</li>
+        <li><span class="icon">🔒</span> Your name, slot number, and founding rate for the Pro base plan are locked as of right now</li>
+      </ul>
+    </div>
+
+    <!-- WHAT YOU GET -->
+    <div class="perks-block">
+      <div class="perks-label">🎁 What You Get as a Founding Member</div>
+      <div class="perk-row"><div class="check">→</div><div class="txt"><strong>Your name reserved at yourname.textos.ai</strong> — nobody else can claim it</div></div>
+      <div class="perk-row"><div class="check">→</div><div class="txt"><strong>Founding Member badge</strong> — permanent, visible on your profile, never available after launch</div></div>
+      <div class="perk-row"><div class="check">→</div><div class="txt"><strong>$29/mo for TextOS Pro (base plan) — your founding rate</strong> — as new premium tiers are added, you keep this rate for the base plan for as long as you stay subscribed</div></div>
+      <div class="perk-row"><div class="check">→</div><div class="txt"><strong>First access to every new feature</strong> — before the public sees it</div></div>
+      <div class="perk-row"><div class="check">→</div><div class="txt"><strong>Direct line to the builder</strong> — your feedback shapes what gets built next</div></div>
+      <div class="perk-row"><div class="check">→</div><div class="txt"><strong>No passwords. Ever.</strong> — your phone number is your identity from day one</div></div>
+    </div>
+
+
+
+    <!-- THE POET LINE -->
+    <div style="background:var(--bg2);border:1px solid rgba(0,229,255,0.15);border-radius:12px;padding:24px 28px;margin-bottom:20px;text-align:center;">
+      <div style="font-size:clamp(1rem,2.5vw,1.3rem);font-weight:700;color:var(--white);line-height:1.6;margin-bottom:10px;">
+        You no longer need to be an <span style="color:var(--gray);text-decoration:line-through;">engineer</span> to publish on the web.<br>
+        <span style="color:var(--cyan);">You need to be a poet.</span>
+      </div>
+      <p style="color:var(--gray);font-size:0.85rem;line-height:1.7;max-width:480px;margin:0 auto;">Welcome to the age of building with words. You just proved it by being here.</p>
+    </div>
+
+    <!-- REFERRAL PROGRAM -->
+    <div style="background:linear-gradient(135deg,rgba(0,229,255,0.06),rgba(168,85,247,0.04));border:1px solid rgba(0,229,255,0.25);border-radius:14px;padding:28px 24px;margin-bottom:20px;">
+      <div style="font-family:'Orbitron',monospace;font-size:0.6rem;color:var(--cyan);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:14px;">🎁 Refer a Friend — Earn Free Months</div>
+      <p style="color:var(--white);font-weight:700;font-size:1rem;margin-bottom:8px;">For every person who joins through your link, you get <span style="color:var(--cyan);">1 free month</span> of TextOS Pro.</p>
+      <p style="color:var(--gray);font-size:0.85rem;line-height:1.65;margin-bottom:20px;">Share your unique referral link below. When someone signs up and pays using your link, we track it back to you automatically — no codes to remember, no forms to fill out.</p>
+
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:16px 18px;margin-bottom:16px;">
+        <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--gray);letter-spacing:0.1em;margin-bottom:8px;">YOUR REFERRAL LINK</div>
+        <div id="referral-url" style="color:var(--cyan);font-family:'Orbitron',monospace;font-size:0.82rem;word-break:break-all;line-height:1.5;">Loading your link...</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+        <button onclick="copyReferral()" style="background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.3);color:var(--cyan);font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.05em;padding:10px 14px;border-radius:7px;cursor:pointer;font-weight:700;" id="copy-ref-btn">📋 Copy Link</button>
+        <a id="sms-ref-btn" href="#" style="display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:#10b981;font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.05em;padding:10px 14px;border-radius:7px;text-decoration:none;font-weight:700;">📱 Text a Friend</a>
+        <a id="twitter-ref-btn" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);color:var(--white);font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.05em;padding:10px 14px;border-radius:7px;text-decoration:none;font-weight:700;">𝕏 Post on X</a>
+        <a id="fb-ref-btn" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);color:#60a5fa;font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.05em;padding:10px 14px;border-radius:7px;text-decoration:none;font-weight:700;">📘 Facebook</a>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.25);border-radius:8px;padding:12px 16px;">
+        <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--gray);letter-spacing:0.1em;margin-bottom:6px;">SUGGESTED MESSAGE:</div>
+        <div style="color:var(--white);font-size:0.82rem;line-height:1.6;font-style:italic;">"I just joined TextOS — it lets you build websites, publish content, and manage your entire digital life just by texting. No app, no password, ever. Only 1,000 founding spots at launch price. Check it out: [your link]"</div>
+      </div>
+    </div>
+
+    <!-- SHARE -->
+    <div class="share-block">
+      <div class="share-label">📣 Share With People Who Need This</div>
+      <p class="share-text">Only <strong>1,000 founding spots exist</strong> — and they're going fast. If you know someone who's tired of passwords, juggling platforms, or just wants a better way to manage their digital life, send them here before the spots are gone.</p>
+
+      <!-- SHARE BUTTONS -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+
+        <a href="sms:?body=I%20just%20joined%20TextOS%20%E2%80%94%20it%27s%20a%20new%20platform%20where%20you%20run%20your%20entire%20online%20life%20by%20text%20message.%20No%20app.%20No%20password.%20Ever.%20Only%201%2C000%20founding%20member%20spots%3A%20https%3A%2F%2Ftextos.ai"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#1a3a1a;border:1px solid rgba(16,185,129,0.4);color:#10b981;font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.05em;padding:12px 16px;border-radius:8px;text-decoration:none;font-weight:700;transition:opacity 0.2s;">
+          📱 Text a Friend
+        </a>
+
+        <a href="https://twitter.com/intent/tweet?text=I%20just%20joined%20TextOS%20as%20a%20founding%20member%20%E2%80%94%20a%20platform%20where%20you%20build%20websites%2C%20publish%20content%2C%20and%20run%20your%20life%20by%20text%20message.%20No%20app.%20No%20password.%20Ever.%20Only%201%2C000%20founding%20spots%3A&url=https%3A%2F%2Ftextos.ai" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#1a1a2e;border:1px solid rgba(255,255,255,0.2);color:var(--white);font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.05em;padding:12px 16px;border-radius:8px;text-decoration:none;font-weight:700;">
+          𝕏 Post on X
+        </a>
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftextos.ai&quote=I%20just%20joined%20TextOS%20as%20a%20founding%20member%20%E2%80%94%20no%20more%20passwords%2C%20no%20more%20juggling%20platforms.%20Just%20text." target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#1a2040;border:1px solid rgba(59,130,246,0.4);color:#60a5fa;font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.05em;padding:12px 16px;border-radius:8px;text-decoration:none;font-weight:700;">
+          📘 Share on Facebook
+        </a>
+
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Ftextos.ai&title=TextOS%20%E2%80%94%20The%20End%20of%20Passwords&summary=A%20new%20platform%20where%20you%20build%20websites%2C%20publish%20content%2C%20and%20manage%20your%20digital%20life%20entirely%20by%20text%20message.%20No%20app.%20No%20password.%20Ever." target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#1a2535;border:1px solid rgba(10,102,194,0.4);color:#60a5fa;font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.05em;padding:12px 16px;border-radius:8px;text-decoration:none;font-weight:700;">
+          💼 Share on LinkedIn
+        </a>
+
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:center;">
+        <div class="share-url" style="flex:1;margin-bottom:0;text-align:left;font-size:0.78rem;">textos.ai</div>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('https://textos.ai').then(()=>{this.textContent='✓ Copied!';setTimeout(()=>{this.textContent='Copy Link'},2000)})">Copy Link</button>
+      </div>
+
+      <!-- SUGGESTED TEXT MESSAGE -->
+      <div style="margin-top:16px;background:rgba(0,0,0,0.3);border-radius:8px;padding:14px 16px;text-align:left;">
+        <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--gray);letter-spacing:0.1em;margin-bottom:8px;">SUGGESTED TEXT TO SEND A FRIEND:</div>
+        <div style="color:var(--white);font-size:0.85rem;line-height:1.65;font-style:italic;">"Hey — I just signed up for this new thing called TextOS. It lets you build a website, publish content, and manage your whole online life just by sending text messages. No app, no password, ever. They only have 1,000 founding spots at a discount before they launch June 1st. textos.ai"</div>
+      </div>
+    </div>
+
+    <!-- THE PROBLEMS WE SOLVE -->
+    <div style="margin-bottom:20px;">
+      <div style="font-family:'Orbitron',monospace;font-size:0.62rem;color:var(--pink);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;text-align:center;">Why TextOS Exists — Share This With Anyone Who Gets It</div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+
+        <div style="background:var(--bg2);border:1px solid rgba(255,45,120,0.15);border-left:3px solid var(--pink);border-radius:0 10px 10px 0;padding:16px 20px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--pink);letter-spacing:0.1em;margin-bottom:6px;">PROBLEM 01</div>
+          <div style="font-weight:700;color:var(--white);font-size:0.9rem;margin-bottom:5px;">300 Passwords. One Breach Away From Losing Everything.</div>
+          <div style="color:var(--gray);font-size:0.82rem;line-height:1.6;">The average person manages 300+ passwords, reuses them constantly, and lives one data breach away from losing access to their entire digital life. The web was never designed with real identity in mind — and it shows.</div>
+        </div>
+
+        <div style="background:var(--bg2);border:1px solid rgba(255,45,120,0.15);border-left:3px solid var(--pink);border-radius:0 10px 10px 0;padding:16px 20px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--pink);letter-spacing:0.1em;margin-bottom:6px;">PROBLEM 02</div>
+          <div style="font-weight:700;color:var(--white);font-size:0.9rem;margin-bottom:5px;">12 Platforms. $273/Month. Using Maybe 2 of Them.</div>
+          <div style="color:var(--gray);font-size:0.82rem;line-height:1.6;">Website builder. Email tool. Social scheduler. Design app. Note-taker. Scheduling tool. Each with its own login, learning curve, and monthly bill. The average household spends $273/month on subscriptions and can't name half of them.</div>
+        </div>
+
+        <div style="background:var(--bg2);border:1px solid rgba(255,45,120,0.15);border-left:3px solid var(--pink);border-radius:0 10px 10px 0;padding:16px 20px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--pink);letter-spacing:0.1em;margin-bottom:6px;">PROBLEM 03</div>
+          <div style="font-weight:700;color:var(--white);font-size:0.9rem;margin-bottom:5px;">Publishing One Blog Post Takes Six Apps and 45 Minutes.</div>
+          <div style="color:var(--gray);font-size:0.82rem;line-height:1.6;">Write in Google Docs. Copy to WordPress. Design in Canva. Upload the image. Add SEO. Schedule in Buffer. Share in Hootsuite. The infrastructure has become more work than the content itself.</div>
+        </div>
+
+        <div style="background:var(--bg2);border:1px solid rgba(255,45,120,0.15);border-left:3px solid var(--pink);border-radius:0 10px 10px 0;padding:16px 20px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--pink);letter-spacing:0.1em;margin-bottom:6px;">PROBLEM 04</div>
+          <div style="font-weight:700;color:var(--white);font-size:0.9rem;margin-bottom:5px;">Your Ideas Disappear Before You Can Do Anything With Them.</div>
+          <div style="color:var(--gray);font-size:0.82rem;line-height:1.6;">Voice memos nobody transcribes. Notes in apps you forgot you had. Emails to yourself. The friction between having a thought and capturing it is just high enough that most great ideas never make it anywhere.</div>
+        </div>
+
+        <div style="background:var(--bg2);border:1px solid rgba(255,45,120,0.15);border-left:3px solid var(--pink);border-radius:0 10px 10px 0;padding:16px 20px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--pink);letter-spacing:0.1em;margin-bottom:6px;">PROBLEM 05</div>
+          <div style="font-weight:700;color:var(--white);font-size:0.9rem;margin-bottom:5px;">A Website Still Requires Money, Time, or a Nephew Who "Knows Computers."</div>
+          <div style="color:var(--gray);font-size:0.82rem;line-height:1.6;">30 years into the internet and having a web presence still requires hiring a designer, learning a platform, or calling in a favor. Most small businesses and individuals either have no website or have one that embarrasses them. This is a tool problem, not a skill problem.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <a href="/" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;margin-top:8px;">
+      <img src="/textos-logo.png" alt="TextOS" style="width:28px;height:28px;border-radius:5px;" />
+      <span style="font-family:'Orbitron',monospace;font-size:0.8rem;color:var(--cyan);">← textos.ai</span>
+    </a>
+
+  </div>
+</body>
+</html>
