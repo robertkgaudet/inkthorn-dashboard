@@ -202,7 +202,7 @@
 <body>
 
 <nav>
-  <a class="nav-logo" href="#" style="display:flex;align-items:center;gap:0;"><img src="https://textos.ai/textos-logo.png" alt="TextOS" style="width:36px;height:36px;border-radius:6px;object-fit:cover;margin-right:10px;flex-shrink:0;" />Text<span style="color:#00e5ff;text-shadow:0 0 16px rgba(0,229,255,0.5);">OS</span></a>
+  <a class="nav-logo" href="#" style="display:flex;align-items:center;gap:10px;"><img src="https://textos.ai/textos-logo.png" alt="TextOS" style="width:36px;height:36px;border-radius:6px;object-fit:cover;" /><span style="letter-spacing:0;white-space:nowrap;">Text<span style="color:#00e5ff;text-shadow:0 0 16px rgba(0,229,255,0.5);">OS</span></span></a>
   <span class="nav-tag">Founding Members — Limited Spots</span>
 </nav>
 
@@ -496,7 +496,7 @@
   <div class="scarcity-strip">
     <div class="sc-pill2"><span class="sc-num" style="color:var(--pink);">1,000</span><div class="sc-label">Total founding slots — ever</div></div>
     <div class="sc-pill2"><span class="sc-num">Forever</span><div class="sc-label">Your name + number locked in</div></div>
-    <div class="sc-pill2"><span class="sc-num">$29/mo</span><div class="sc-label">Your rate, locked for life</div></div>
+    <div class="sc-pill2"><span class="sc-num">$29/mo</span><div class="sc-label">Your rate, founding rate — never increases for the base plan</div></div>
     <div class="sc-pill2"><span class="sc-num">0</span><div class="sc-label">Passwords. Ever.</div></div>
   </div>
 
@@ -530,7 +530,7 @@
             <div class="ob-detail">
               Reserves your founding member spot<br>
               <strong>Covers your first 3 months of Pro at launch (June 1)</strong><br>
-              <span style="font-size:0.78rem;">Then $29/mo locked for life · Public rate after launch: $29/mo</span>
+              <span style="font-size:0.78rem;">Then $29/mo for TextOS Pro base plan — your founding rate, never increases · Public rate after launch: $29/mo</span>
             </div>
           </div>
         </div>
@@ -540,7 +540,7 @@
         </a>
 
       <p class="form-fine">Secure payment via Stripe · We collect your phone number and TextOS name at checkout<br>
-      <span style="color:rgba(200,200,200,0.5);">$49 now · then $29/mo locked for life after your 3 months</span></p>
+      <span style="color:rgba(200,200,200,0.5);">$49 now · then $29/mo for TextOS Pro base plan — your founding rate, never increases after your 3 months</span></p>
     </div>
   </div>
 </div>
@@ -551,7 +551,22 @@
 </footer>
 
 <script>
-  // Stripe handles all collection at checkout
+
+  // Pass referral param to Stripe via client_reference_id if possible
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref');
+    if (ref) {
+      // Store for use after payment
+      sessionStorage.setItem('textos_ref', ref);
+      // Update Stripe link to include ref in success URL
+      const stripeLinks = document.querySelectorAll('a[href*="buy.stripe.com"]');
+      stripeLinks.forEach(function(link) {
+        link.href = link.href + '?client_reference_id=' + encodeURIComponent(ref);
+      });
+    }
+  })();
+
 </script>
 
 </body>
