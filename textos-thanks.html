@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>TextOS — You're In. Founding Member Confirmed.</title>
+  <title>TextOS — You're In. Founding Member #??? Confirmed.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -10,26 +10,108 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg:#080e1a; --cyan:#00e5ff; --pink:#ff2d78; --white:#f0f6ff; --gray:#8899bb; --border:rgba(0,229,255,0.12); --glow-cyan:0 0 32px rgba(0,229,255,0.35); }
-    body { font-family: 'Space Grotesk', system-ui, sans-serif; background: var(--bg); color: var(--white); min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; }
-    .card { max-width: 560px; background: rgba(13,22,38,0.8); border: 1px solid rgba(0,229,255,0.2); border-radius: 20px; padding: 64px 48px; box-shadow: var(--glow-cyan); }
-    .icon { font-size: 4rem; margin-bottom: 24px; }
-    h1 { font-family: 'Orbitron', monospace; font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 900; margin-bottom: 16px; color: var(--cyan); text-shadow: var(--glow-cyan); }
-    p { color: var(--gray); font-size: 1rem; line-height: 1.7; margin-bottom: 16px; }
-    p strong { color: var(--white); }
-    .badge { display: inline-block; background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.3); color: var(--cyan); font-family: 'Orbitron', monospace; font-size: 0.7rem; letter-spacing: 0.1em; padding: 6px 16px; border-radius: 20px; margin-bottom: 28px; }
-    a { color: var(--cyan); text-decoration: none; font-family: 'Orbitron', monospace; font-size: 0.8rem; }
-    a:hover { text-decoration: underline; }
+    :root { --bg:#080e1a; --bg2:#0d1626; --cyan:#00e5ff; --pink:#ff2d78; --amber:#f59e0b; --white:#f0f6ff; --gray:#8899bb; --border:rgba(0,229,255,0.12); --glow-cyan:0 0 32px rgba(0,229,255,0.35); }
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; background: var(--bg); color: var(--white); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .card { max-width: 600px; width: 100%; }
+
+    /* HERO BADGE */
+    .hero-badge { text-align:center; margin-bottom: 32px; }
+    .trophy { font-size: 4rem; display: block; margin-bottom: 16px; }
+    .fm-badge { display:inline-block; background:rgba(0,229,255,0.1); border:1px solid rgba(0,229,255,0.35); color:var(--cyan); font-family:'Orbitron',monospace; font-size:0.72rem; letter-spacing:0.1em; padding:8px 20px; border-radius:20px; margin-bottom: 20px; }
+    h1 { font-family:'Orbitron',monospace; font-size:clamp(2rem,6vw,2.8rem); font-weight:900; color:var(--cyan); text-shadow:var(--glow-cyan); line-height:1.1; margin-bottom:8px; text-align:center; }
+    .tagline { color:var(--gray); font-size:1rem; text-align:center; margin-bottom:32px; }
+
+    /* LAUNCH DATE */
+    .launch-block { background:linear-gradient(135deg,rgba(0,229,255,0.07),rgba(168,85,247,0.04)); border:1px solid rgba(0,229,255,0.25); border-radius:14px; padding:28px 32px; text-align:center; margin-bottom:20px; }
+    .launch-label { font-family:'Orbitron',monospace; font-size:0.62rem; color:var(--cyan); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:10px; }
+    .launch-date { font-family:'Orbitron',monospace; font-size:clamp(1.6rem,5vw,2.4rem); font-weight:900; color:var(--white); margin-bottom:8px; }
+    .launch-note { color:var(--gray); font-size:0.88rem; line-height:1.6; }
+    .launch-note strong { color:var(--white); }
+
+    /* WHAT THIS MEANS */
+    .clarity-block { background:rgba(245,158,11,0.07); border:1px solid rgba(245,158,11,0.25); border-radius:12px; padding:20px 24px; margin-bottom:20px; }
+    .clarity-label { font-family:'Orbitron',monospace; font-size:0.6rem; color:var(--amber); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:12px; }
+    .clarity-list { list-style:none; }
+    .clarity-list li { color:var(--gray); font-size:0.88rem; padding:7px 0; border-bottom:1px solid rgba(245,158,11,0.1); display:flex; gap:10px; line-height:1.5; }
+    .clarity-list li:last-child { border-bottom:none; }
+    .clarity-list li .icon { flex-shrink:0; }
+
+    /* WHAT YOU GET */
+    .perks-block { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:20px 24px; margin-bottom:20px; }
+    .perks-label { font-family:'Orbitron',monospace; font-size:0.6rem; color:var(--cyan); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:12px; }
+    .perk-row { display:flex; gap:10px; align-items:flex-start; padding:7px 0; border-bottom:1px solid var(--border); }
+    .perk-row:last-child { border-bottom:none; }
+    .perk-row .check { color:var(--cyan); flex-shrink:0; font-weight:700; }
+    .perk-row .txt { color:var(--gray); font-size:0.88rem; line-height:1.5; }
+    .perk-row .txt strong { color:var(--white); }
+
+    /* SHARE */
+    .share-block { background:rgba(255,45,120,0.06); border:1px solid rgba(255,45,120,0.2); border-radius:12px; padding:20px 24px; margin-bottom:20px; text-align:center; }
+    .share-label { font-family:'Orbitron',monospace; font-size:0.6rem; color:var(--pink); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:10px; }
+    .share-text { color:var(--gray); font-size:0.88rem; line-height:1.6; margin-bottom:16px; }
+    .share-text strong { color:var(--white); }
+    .share-url { font-family:'Orbitron',monospace; font-size:0.85rem; color:var(--cyan); background:rgba(0,229,255,0.06); border:1px solid rgba(0,229,255,0.2); border-radius:8px; padding:10px 16px; display:block; margin-bottom:12px; }
+    .copy-btn { background:var(--pink); color:var(--white); font-family:'Orbitron',monospace; font-size:0.72rem; letter-spacing:0.06em; padding:10px 20px; border:none; border-radius:6px; cursor:pointer; font-weight:700; transition:opacity 0.2s; }
+    .copy-btn:hover { opacity:0.85; }
+
+    .home-link { display:block; text-align:center; color:var(--gray); text-decoration:none; font-size:0.82rem; margin-top:8px; }
+    .home-link:hover { color:var(--cyan); }
   </style>
 </head>
 <body>
   <div class="card">
-    <div class="icon">🏆</div>
-    <div class="badge">Founding Member — Confirmed</div>
-    <h1>You're In.</h1>
-    <p><strong>Your spot is reserved.</strong> We'll text you when TextOS launches with everything you need to activate your identity and claim your address.</p>
-    <p>You're among the first 1,000. That status is permanent, visible, and can never be purchased by anyone who comes after you.</p>
-    <p style="margin-top: 24px; font-size: 0.85rem;">→ <a href="/textos.html">Read the full TextOS vision</a></p>
+
+    <div class="hero-badge">
+      <span class="trophy">🏆</span>
+      <div class="fm-badge">Founding Member — Payment Confirmed</div>
+      <h1>You're In.</h1>
+      <p class="tagline">Welcome to the first 1,000 people to ever be part of TextOS.</p>
+    </div>
+
+    <!-- LAUNCH DATE -->
+    <div class="launch-block">
+      <div class="launch-label">🚀 Target Launch Date</div>
+      <div class="launch-date">June 1, 2026</div>
+      <div class="launch-note">
+        <strong>TextOS is not live yet</strong> — you've reserved your founding member spot ahead of launch.
+        We'll text you directly on launch day with everything you need to activate your account.
+        You won't need to do anything else until then.
+      </div>
+    </div>
+
+    <!-- WHAT THIS MEANS CLEARLY -->
+    <div class="clarity-block">
+      <div class="clarity-label">📋 What You've Signed Up For — Clearly</div>
+      <ul class="clarity-list">
+        <li><span class="icon">✅</span> You've paid $49 to reserve a founding member spot on the waitlist</li>
+        <li><span class="icon">✅</span> That $49 covers your first 3 months of TextOS Pro at launch</li>
+        <li><span class="icon">✅</span> After 3 months, your subscription continues at $29/mo — locked forever</li>
+        <li><span class="icon">⏳</span> TextOS launches June 1, 2026 — you'll be notified by text when it's live</li>
+        <li><span class="icon">🔒</span> Your name, slot number, and rate are permanently locked as of right now</li>
+      </ul>
+    </div>
+
+    <!-- WHAT YOU GET -->
+    <div class="perks-block">
+      <div class="perks-label">🎁 What You Get as a Founding Member</div>
+      <div class="perk-row"><div class="check">→</div><div class="txt"><strong>Your name reserved at yourname.textos.ai</strong> — nobody else can claim it</div></div>
+      <div class="perk-row"><div class="check">→</div><div class="txt"><strong>Founding Member badge</strong> — permanent, visible on your profile, never available after launch</div></div>
+      <div class="perk-row"><div class="check">→</div><div class="txt"><strong>$29/mo Pro rate locked for life</strong> — never increases as long as you stay subscribed</div></div>
+      <div class="perk-row"><div class="check">→</div><div class="txt"><strong>First access to every new feature</strong> — before the public sees it</div></div>
+      <div class="perk-row"><div class="check">→</div><div class="txt"><strong>Direct line to the builder</strong> — your feedback shapes what gets built next</div></div>
+      <div class="perk-row"><div class="check">→</div><div class="txt"><strong>No passwords. Ever.</strong> — your phone number is your identity from day one</div></div>
+    </div>
+
+    <!-- SHARE -->
+    <div class="share-block">
+      <div class="share-label">📣 Know Someone Who Should Be In?</div>
+      <p class="share-text">Only <strong>1,000 founding spots exist</strong> — and every one you share is one less for someone who waits. Send them here before they miss it.</p>
+      <div class="share-url">textos.ai</div>
+      <button class="copy-btn" onclick="navigator.clipboard.writeText('https://textos.ai').then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy Link'},2000)})">Copy Link</button>
+    </div>
+
+    <a class="home-link" href="/">← Back to textos.ai</a>
+
   </div>
 </body>
 </html>
