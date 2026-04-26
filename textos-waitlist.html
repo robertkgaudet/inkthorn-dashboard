@@ -159,8 +159,8 @@
     .push-flow-bubble { display:flex; gap:16px; align-items:flex-start; }
     .push-caps { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
 
-    @media (max-width:768px) {
-      .two-col { grid-template-columns:1fr; gap:28px; }
+    @media (max-width:860px) {
+      .two-col { grid-template-columns:1fr !important; gap:28px; }
       .two-col-stats { grid-template-columns:1fr 1fr; }
     }
     @media (max-width:640px) {
@@ -170,9 +170,12 @@
       .form-card { padding:32px 24px; }
       .use-strip { gap:8px; }
       .use-pill { font-size:0.78rem; padding:8px 14px; }
+      .two-col { grid-template-columns:1fr !important; gap:24px; }
       .two-col-stats { grid-template-columns:1fr 1fr; }
-      .push-flow-bubble { gap:10px; }
-      .push-flow-bubble > div:first-child { font-size:0.6rem; padding:6px 10px; }
+      .push-flow-bubble { flex-direction:column; gap:8px; }
+      .push-flow-bubble > div:first-child { font-size:0.6rem; padding:6px 10px; align-self:flex-start; }
+      .section { padding-left:16px; padding-right:16px; }
+      .problem-card { padding:20px; }
     }
   </style>
 </head>
@@ -371,7 +374,7 @@
 <hr class="divider" />
 
 <!-- FOUNDER CREDIBILITY -->
-<div class="section" style="padding-top:64px;padding-bottom:48px;">
+<div class="section" style="padding-top:64px;padding-bottom:48px;overflow:hidden;">
   <div class="two-col">
 
     <!-- LEFT: WHO I AM -->
