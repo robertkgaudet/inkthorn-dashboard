@@ -500,7 +500,7 @@
 
       <form action="https://formspree.io/f/xgorbvdg" method="POST" id="waitlist-form">
         <input type="hidden" name="_subject" value="TextOS Founding Member Signup" />
-        <input type="hidden" name="_next" value="https://inkthorn.ai/textos-thanks.html" />
+        <input type="hidden" name="_next" value="https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00" />
 
         <div class="form-group">
           <label class="form-label" for="name">Your Name</label>
@@ -552,15 +552,8 @@
           </div>
         </div>
 
-        <button type="submit" class="btn-claim" id="submit-btn">Save My Info & Continue to Payment →</button>
+        <button type="submit" class="btn-claim">🔒 Reserve My Spot → Pay $49</button>
       </form>
-
-      <div style="margin-top:16px;">
-        <a href="https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00" id="stripe-btn"
-          style="display:none;width:100%;background:linear-gradient(135deg,var(--cyan),#0090b8);color:#080e1a;font-family:'Orbitron',monospace;font-weight:700;font-size:0.88rem;letter-spacing:0.06em;padding:16px 24px;border-radius:8px;text-align:center;text-decoration:none;box-shadow:var(--glow-cyan);display:block;transition:transform 0.2s;">
-          🔒 Pay $49 — Lock In My Founding Member Spot →
-        </a>
-      </div>
 
       <p class="form-fine">Secure payment via Stripe · No app to install · No account to create<br>
       <span style="color:rgba(200,200,200,0.5);">$49 now · then $29/mo locked for life after your 3 months</span></p>
@@ -587,25 +580,7 @@
   handleInput.addEventListener('input', updatePreview);
   nameInput.addEventListener('input', updatePreview);
 
-  // On form submit — save to Formspree then redirect to Stripe
-  document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    btn.textContent = 'Saving your info...';
-    btn.disabled = true;
-
-    try {
-      const formData = new FormData(this);
-      await fetch(this.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-    } catch(err) { /* continue to Stripe even if Formspree fails */ }
-
-    // Redirect to Stripe payment
-    window.location.href = 'https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00';
-  });
+  // Formspree handles redirect to Stripe via _next field
 </script>
 
 </body>
