@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>TextOS — Executive Summary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --bg: #080e1a; --bg2: #0d1626; --bg3: #111f35;
+      --cyan: #00e5ff; --pink: #ff2d78; --purple: #a855f7;
+      --amber: #f59e0b; --green: #10b981; --white: #f0f6ff;
+      --gray: #8899bb; --border: rgba(0,229,255,0.12);
+      --glow-cyan: 0 0 24px rgba(0,229,255,0.3);
+    }
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; background: var(--bg); color: var(--white); line-height: 1.6; font-size: 16px; overflow-x: hidden; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; border-bottom: 1px solid var(--border); background: rgba(8,14,26,0.95); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+    .nav-logo { font-family: 'Orbitron', monospace; font-weight: 700; font-size: 1.3rem; color: var(--cyan); text-shadow: var(--glow-cyan); text-decoration: none; }
+    .nav-logo span { color: var(--white); }
+    .nav-badge { background: rgba(255,45,120,0.15); border: 1px solid rgba(255,45,120,0.3); color: var(--pink); font-family: 'Orbitron', monospace; font-size: 0.65rem; letter-spacing: 0.1em; padding: 5px 12px; border-radius: 20px; }
+    .nav-back { color: var(--gray); text-decoration: none; font-size: 0.85rem; }
+    .nav-back:hover { color: var(--cyan); }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 64px 24px 80px; }
+    .doc-header { text-align: center; margin-bottom: 64px; }
+    .doc-eyebrow { font-family: 'Orbitron', monospace; font-size: 0.65rem; letter-spacing: 0.18em; color: var(--pink); text-transform: uppercase; margin-bottom: 16px; }
+    .doc-title { font-family: 'Orbitron', monospace; font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 12px; }
+    .doc-subtitle { color: var(--gray); font-size: 1rem; }
+    .doc-meta { display: flex; gap: 24px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+    .meta-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 20px; text-align: center; }
+    .meta-label { font-family: 'Orbitron', monospace; font-size: 0.6rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .meta-value { font-family: 'Orbitron', monospace; font-size: 0.95rem; font-weight: 700; color: var(--cyan); }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+    .section { margin-bottom: 48px; }
+    .section-label { font-family: 'Orbitron', monospace; font-size: 0.62rem; letter-spacing: 0.18em; color: var(--cyan); text-transform: uppercase; margin-bottom: 10px; }
+    h2 { font-family: 'Orbitron', monospace; font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; color: var(--white); }
+    p { color: var(--gray); font-size: 0.95rem; line-height: 1.8; margin-bottom: 14px; }
+    p strong { color: var(--white); }
+    p em { color: var(--cyan); font-style: normal; }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(168,85,247,0.04));
+      border: 1px solid rgba(0,229,255,0.2);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .highlight-box p { margin: 0; color: var(--white); font-size: 1rem; font-style: italic; line-height: 1.7; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+    .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; }
+    .stat-num { font-family: 'Orbitron', monospace; font-size: 1.8rem; font-weight: 900; color: var(--cyan); display: block; margin-bottom: 4px; }
+    .stat-num.pink { color: var(--pink); }
+    .stat-num.amber { color: var(--amber); }
+    .stat-label { color: var(--gray); font-size: 0.83rem; line-height: 1.4; }
+
+    .problem-list { list-style: none; margin-top: 16px; }
+    .problem-list li { color: var(--gray); font-size: 0.92rem; padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; line-height: 1.5; }
+    .problem-list li:last-child { border-bottom: none; }
+    .problem-list li::before { content: '✗'; color: var(--pink); flex-shrink: 0; font-weight: 700; margin-top: 1px; }
+
+    .solution-list { list-style: none; margin-top: 16px; }
+    .solution-list li { color: var(--gray); font-size: 0.92rem; padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; line-height: 1.5; }
+    .solution-list li:last-child { border-bottom: none; }
+    .solution-list li::before { content: '→'; color: var(--cyan); flex-shrink: 0; font-weight: 700; margin-top: 1px; }
+    .solution-list li strong { color: var(--white); }
+
+    .tier-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+    .tier-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; }
+    .tier-box.featured { border-color: var(--cyan); }
+    .tier-name-sm { font-family: 'Orbitron', monospace; font-size: 0.65rem; color: var(--gray); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .tier-price-sm { font-family: 'Orbitron', monospace; font-size: 1.4rem; font-weight: 900; color: var(--white); }
+    .tier-price-sm span { font-size: 0.75rem; color: var(--gray); font-weight: 400; }
+    .tier-url-sm { color: var(--cyan); font-size: 0.75rem; margin-top: 4px; font-family: 'Orbitron', monospace; }
+
+    .use-of-funds { margin-top: 20px; }
+    .fund-row { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+    .fund-label { color: var(--white); font-size: 0.88rem; font-weight: 600; width: 200px; flex-shrink: 0; }
+    .fund-bar-wrap { flex: 1; height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
+    .fund-bar { height: 100%; border-radius: 4px; }
+    .fund-pct { font-family: 'Orbitron', monospace; font-size: 0.75rem; color: var(--gray); width: 45px; text-align: right; flex-shrink: 0; }
+    .fund-amount { font-family: 'Orbitron', monospace; font-size: 0.75rem; color: var(--amber); width: 60px; text-align: right; flex-shrink: 0; }
+
+    .founder-block { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 32px; margin-top: 20px; }
+    .founder-name { font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .founder-title { color: var(--cyan); font-size: 0.85rem; margin-bottom: 20px; }
+    .founder-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-top: 20px; }
+    .founder-stat { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; text-align: center; }
+    .founder-stat-num { font-family: 'Orbitron', monospace; font-size: 1.1rem; font-weight: 700; color: var(--cyan); display: block; margin-bottom: 4px; }
+    .founder-stat-label { color: var(--gray); font-size: 0.72rem; line-height: 1.3; }
+
+    .ask-block { background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(168,85,247,0.04)); border: 1px solid rgba(0,229,255,0.2); border-radius: 14px; padding: 40px; text-align: center; margin-top: 20px; }
+    .ask-amount { font-family: 'Orbitron', monospace; font-size: 3.5rem; font-weight: 900; color: var(--cyan); display: block; line-height: 1; margin-bottom: 8px; text-shadow: var(--glow-cyan); }
+    .ask-desc { color: var(--gray); font-size: 0.92rem; line-height: 1.7; max-width: 560px; margin: 0 auto; }
+    .ask-desc strong { color: var(--white); }
+
+    footer { text-align: center; padding: 40px 24px; color: var(--gray); font-size: 0.82rem; border-top: 1px solid var(--border); }
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .two-col { grid-template-columns: 1fr; }
+      .tier-row { grid-template-columns: 1fr; }
+      .fund-label { width: 130px; font-size: 0.8rem; }
+      .founder-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/textos.html">Text<span>OS</span></a>
+  <span class="nav-badge">🔒 Confidential</span>
+  <a class="nav-back" href="/textos-investor.html">← Data Room</a>
+</nav>
+
+<div class="container">
+
+  <div class="doc-header">
+    <div class="doc-eyebrow">Confidential — For Investor Review Only</div>
+    <div class="doc-title">TextOS<br><span style="color:var(--cyan);">Executive Summary</span></div>
+    <div class="doc-subtitle">Pre-Seed Round · April 2026</div>
+    <div class="doc-meta">
+      <div class="meta-item"><div class="meta-label">Raise</div><div class="meta-value">$500K</div></div>
+      <div class="meta-item"><div class="meta-label">Stage</div><div class="meta-value">Pre-Seed</div></div>
+      <div class="meta-item"><div class="meta-label">MVP</div><div class="meta-value">2 Weeks</div></div>
+      <div class="meta-item"><div class="meta-label">Founder</div><div class="meta-value">Rob Gaudet</div></div>
+      <div class="meta-item"><div class="meta-label">HQ</div><div class="meta-value">New Orleans, LA</div></div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- THE INSIGHT -->
+  <div class="section">
+    <div class="section-label">The Insight</div>
+    <h2>The Internet Was Built Without Identity. AI Is Fixing That. TextOS Is the Entry Point.</h2>
+    <p>For thirty years, the internet has asked people to maintain hundreds of passwords, juggle dozens of platforms, and scatter their identity across silos that don't talk to each other. This isn't a feature — it's a structural failure baked into the original architecture of the web.</p>
+    <p>The AI internet is being built now — and it solves identity at the infrastructure level. <strong>Your phone number is globally unique. Carrier-verified. Tied to a physical device in your hand.</strong> That's not a new idea — it's the entire reason two-factor authentication works. TextOS simply removes the first factor. You don't receive a code to prove who you are. You text us — which already proves it.</p>
+    <div class="highlight-box">
+      <p>"The reason 2FA works is that your phone number is your identity. TextOS is what happens when you build an entire platform on that truth — instead of treating it as an edge case."</p>
+    </div>
+    <p>The result: <em>no usernames, no passwords, no app to install, no account to create</em>. The most frictionless onboarding in the history of consumer software — because the interface is one everyone on earth already knows how to use.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- THE PROBLEM -->
+  <div class="section">
+    <div class="section-label">The Problem</div>
+    <h2>The Internet Has Been Failing Most People Since Day One.</h2>
+    <p>The web was built by engineers for engineers and handed to the rest of the world with a shrug. The result is a category of problems so normalized that most people have stopped noticing them — even as they cost billions of people billions of hours every year.</p>
+    <ul class="problem-list">
+      <li>The average person manages 300+ passwords. They reuse them. Breaches happen weekly.</li>
+      <li>The average household pays $273/month in subscriptions — and can't name half of them.</li>
+      <li>Publishing a blog post requires six different apps and forty-five minutes of infrastructure work.</li>
+      <li>Every person has 11+ fragmented, outdated identities spread across platforms that don't sync.</li>
+      <li>Building a website still requires either money, time, or a nephew who "knows computers."</li>
+      <li>Every new tool punishes users with onboarding before delivering any value.</li>
+      <li>Every major social platform is drowning in bots and fake profiles — because they were built without real identity.</li>
+    </ul>
+    <p>These aren't edge cases. They are the daily experience of the <strong>early majority</strong> — the 34% of the market that represents the real prize, sitting just past the innovator/early adopter chasm that most technology never crosses.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- THE SOLUTION -->
+  <div class="section">
+    <div class="section-label">The Solution</div>
+    <h2>One Number. One Identity. One Platform. Built by Text.</h2>
+    <p>TextOS is an AI operating system delivered entirely through SMS. No app. No login. No platform to learn. Users text in what they need — and TextOS builds it, publishes it, and maintains it on their behalf.</p>
+    <ul class="solution-list">
+      <li><strong>Identity first.</strong> Text in your bio, photo, links, and contact info. It's live at yourname.textos.ai instantly. One canonical identity — always current, always yours.</li>
+      <li><strong>Instant publishing.</strong> Text to build a website, publish a blog post, generate a logo, update a menu, create an event page. AI generates copy, imagery, and SEO optimization automatically.</li>
+      <li><strong>Unidirectional push.</strong> TextOS publishes to wherever your audience lives — social platforms, podcast directories, e-commerce platforms — without requiring users to visit each one manually.</li>
+      <li><strong>GEO-optimized by default.</strong> Every TextOS site is structured for AI search engines (ChatGPT, Claude, Perplexity) out of the box. Users get found in the AI internet without understanding what that means.</li>
+      <li><strong>Fake-profile resistant.</strong> Phone-number identity means a fake profile requires a second phone. TextOS communities are structurally more authentic than any platform built on email/password auth.</li>
+      <li><strong>No network effect required for V1.</strong> Every user gets immediate, standalone value from day one — no critical mass needed to deliver the core product.</li>
+    </ul>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- MARKET -->
+  <div class="section">
+    <div class="section-label">Market Opportunity</div>
+    <h2>The Unassisted — Everyone Without an IT Department.</h2>
+    <p>The addressable market is not a niche. It is the majority of the internet-connected world: small business owners, freelancers, creators, community leaders, artists, educators, organizers, and individuals who have something worth publishing and no practical path to doing so.</p>
+
+    <div class="two-col">
+      <div class="stat-card">
+        <span class="stat-num">4.9B</span>
+        <div class="stat-label">Internet users globally. Most without a professional web presence.</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">$273</span>
+        <div class="stat-label">Average monthly subscription spend per US household. TextOS replaces the category.</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num pink">33M</span>
+        <div class="stat-label">Small businesses in the US alone — most with inadequate or nonexistent web presence.</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num amber">$29</span>
+        <div class="stat-label">Pro tier monthly. At 10,000 users = $3.5M ARR. At 100,000 = $35M ARR.</div>
+      </div>
+    </div>
+
+    <p style="margin-top: 24px;">The diffusion of innovation framework is central to our go-to-market. We are not building for innovators — they build their own tools. We are building for the <strong>early majority</strong>: pragmatic, outcome-oriented people who will adopt technology when it demonstrably solves a real problem with no friction. TextOS is the first tool built from the ground up for this cohort.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- BUSINESS MODEL -->
+  <div class="section">
+    <div class="section-label">Business Model</div>
+    <h2>Subscription SaaS. Upgrade Path Baked Into the Product.</h2>
+    <p>Three tiers. Natural upgrade pressure at each transition. The subdomain-to-custom-domain conversion mirrors the proven Squarespace/Carrd model — users get invested before they pay, then pay to make it real.</p>
+
+    <div class="tier-row">
+      <div class="tier-box">
+        <div class="tier-name-sm">Starter</div>
+        <div class="tier-price-sm">Free</div>
+        <div class="tier-url-sm">name.textos.ai</div>
+      </div>
+      <div class="tier-box featured">
+        <div class="tier-name-sm">Pro</div>
+        <div class="tier-price-sm">$29 <span>/mo</span></div>
+        <div class="tier-url-sm">yourdomain.com</div>
+      </div>
+      <div class="tier-box">
+        <div class="tier-name-sm">Business</div>
+        <div class="tier-price-sm">$79 <span>/mo</span></div>
+        <div class="tier-url-sm">Multi-site + team</div>
+      </div>
+    </div>
+
+    <p style="margin-top: 24px;"><strong>Founding member pre-sale:</strong> $49 for first 3 months, then $29/month locked for life. This generates early revenue, validates willingness to pay, and creates a committed launch cohort before the MVP ships.</p>
+    <p>Every TextOS site is also a billboard — the subdomain itself markets the product to everyone who visits a user's page. Word-of-mouth is structurally built into the product.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- TRACTION -->
+  <div class="section">
+    <div class="section-label">Traction &amp; Distribution</div>
+    <h2>An Audience Ready to Activate Before the MVP Ships.</h2>
+    <p>TextOS has a distribution advantage that most pre-seed companies spend their entire raise trying to build. The founder brings a proven, engaged audience and a demonstrated ability to mobilize communities at scale.</p>
+
+    <div class="two-col">
+      <div class="stat-card">
+        <span class="stat-num">500K+</span>
+        <div class="stat-label">Engaged followers across platforms — owned audience, not rented.</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">20,000+</span>
+        <div class="stat-label">Personal social media posts published. The founder is a practitioner, not a theorist.</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num pink">1,000+</span>
+        <div class="stat-label">Live broadcasts. Demonstrated ability to hold attention at scale.</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num amber">$7M</span>
+        <div class="stat-label">Raised via community mobilization and storytelling. The system that raised it informs how TextOS acquires users.</div>
+      </div>
+    </div>
+
+    <p style="margin-top: 24px;">The waitlist is live. Founding member pre-sales are open. The distribution engine — the founder's audience — is already pointed at the product. This is not a growth problem. This is a build problem, and the build timeline is two weeks to a working MVP.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- THE FOUNDER -->
+  <div class="section">
+    <div class="section-label">The Founder</div>
+    <h2>Built for This Moment.</h2>
+    <p>The ideal founder for TextOS is someone who has spent decades building things that work under pressure, in high-trust environments, for people who can't afford for technology to fail them. That is the exact profile of this founder — and it is not common.</p>
+
+    <div class="founder-block">
+      <div class="founder-name">Rob Gaudet</div>
+      <div class="founder-title">Founder & CEO · TextOS.ai · New Orleans, Louisiana</div>
+      <p style="margin-bottom: 0; font-size: 0.92rem;">Rob is a senior software and systems architect with 30 years of experience building production systems at scale. He is a recognized subject matter expert in high-stakes, high-trust environments — the kind where systems must work the first time, under pressure, for people who depend on them. He has built and mobilized large communities, raised $7M through storytelling and systems, and has published over 20,000 pieces of social content across platforms with 500K+ engaged followers. He has been live more than 1,000 times. He is a serial entrepreneur with multiple exits. He is, by every measurable definition, a practitioner — someone who has personally done the things TextOS is being built to make easier for everyone else.</p>
+
+      <div class="founder-stats">
+        <div class="founder-stat"><span class="founder-stat-num">30yr</span><div class="founder-stat-label">Senior systems architecture</div></div>
+        <div class="founder-stat"><span class="founder-stat-num">500K+</span><div class="founder-stat-label">Engaged social following</div></div>
+        <div class="founder-stat"><span class="founder-stat-num">$7M</span><div class="founder-stat-label">Raised via community systems</div></div>
+        <div class="founder-stat"><span class="founder-stat-num">20K+</span><div class="founder-stat-label">Posts published personally</div></div>
+        <div class="founder-stat"><span class="founder-stat-num">1K+</span><div class="founder-stat-label">Live broadcasts</div></div>
+        <div class="founder-stat"><span class="founder-stat-num">Multiple</span><div class="founder-stat-label">Prior exits</div></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- USE OF FUNDS -->
+  <div class="section">
+    <div class="section-label">Use of Funds</div>
+    <h2>$500K. 12-Month Runway to Product-Market Fit.</h2>
+    <p>The raise funds the build-out from working MVP to a scalable, revenue-generating platform with a meaningful waitlist converted to paying subscribers.</p>
+
+    <div class="use-of-funds">
+      <div class="fund-row">
+        <div class="fund-label">Product & Engineering</div>
+        <div class="fund-bar-wrap"><div class="fund-bar" style="width:45%;background:linear-gradient(90deg,var(--cyan),#0090b8);"></div></div>
+        <div class="fund-pct">45%</div>
+        <div class="fund-amount">$225K</div>
+      </div>
+      <div class="fund-row">
+        <div class="fund-label">Growth & Distribution</div>
+        <div class="fund-bar-wrap"><div class="fund-bar" style="width:25%;background:linear-gradient(90deg,var(--pink),#c0185a);"></div></div>
+        <div class="fund-pct">25%</div>
+        <div class="fund-amount">$125K</div>
+      </div>
+      <div class="fund-row">
+        <div class="fund-label">Infrastructure & APIs</div>
+        <div class="fund-bar-wrap"><div class="fund-bar" style="width:15%;background:linear-gradient(90deg,var(--purple),#7c3aed);"></div></div>
+        <div class="fund-pct">15%</div>
+        <div class="fund-amount">$75K</div>
+      </div>
+      <div class="fund-row">
+        <div class="fund-label">Legal & IP</div>
+        <div class="fund-bar-wrap"><div class="fund-bar" style="width:8%;background:linear-gradient(90deg,var(--amber),#d97706);"></div></div>
+        <div class="fund-pct">8%</div>
+        <div class="fund-amount">$40K</div>
+      </div>
+      <div class="fund-row">
+        <div class="fund-label">Operations & Reserve</div>
+        <div class="fund-bar-wrap"><div class="fund-bar" style="width:7%;background:linear-gradient(90deg,var(--green),#059669);"></div></div>
+        <div class="fund-pct">7%</div>
+        <div class="fund-amount">$35K</div>
+      </div>
+    </div>
+
+    <p style="margin-top: 24px;"><strong>Milestones this raise funds:</strong> MVP live → waitlist converted to paying subscribers → first 1,000 active users → platform push integrations for top 5 destinations → Series A readiness with revenue, retention, and unit economics.</p>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- THE ASK -->
+  <div class="section">
+    <div class="section-label">The Ask</div>
+    <h2>Pre-Seed Round</h2>
+
+    <div class="ask-block">
+      <span class="ask-amount">$500K</span>
+      <p class="ask-desc">Pre-Seed · Terms TBD · New Orleans, LA<br><br>
+      We are raising $500K to take TextOS from a working MVP to a revenue-generating platform with proven retention and unit economics — the foundation for a Series A. <strong>The distribution is already built. The audience is already engaged. The build timeline is two weeks.</strong> We are not asking investors to bet on a dream. We are asking them to scale something that works.</p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- CONTACT -->
+  <div class="section" style="text-align: center;">
+    <div class="section-label">Contact</div>
+    <h2>Rob Gaudet</h2>
+    <p>Founder & CEO · TextOS.ai<br>New Orleans, Louisiana</p>
+    <p style="margin-top: 16px; font-size: 0.88rem;">
+      <a href="https://textos.ai" target="_blank" style="color: var(--cyan); text-decoration: none; font-family: 'Orbitron', monospace; font-size: 0.8rem;">TextOS.ai ↗</a>
+      &nbsp;·&nbsp;
+      <a href="/textos-investor.html" style="color: var(--cyan); text-decoration: none; font-family: 'Orbitron', monospace; font-size: 0.8rem;">Full Data Room →</a>
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  <p>TextOS.ai — Confidential Executive Summary · Pre-Seed 2026 · <a href="/textos-investor.html">← Data Room</a></p>
+  <p style="margin-top: 8px; font-size: 0.75rem;">Confidential and proprietary. Not for distribution without written consent of Rob Gaudet.</p>
+</footer>
+
+</body>
+</html>
