@@ -104,10 +104,83 @@
 
     <!-- SHARE -->
     <div class="share-block">
-      <div class="share-label">📣 Know Someone Who Should Be In?</div>
-      <p class="share-text">Only <strong>1,000 founding spots exist</strong> — and every one you share is one less for someone who waits. Send them here before they miss it.</p>
-      <div class="share-url">textos.ai</div>
-      <button class="copy-btn" onclick="navigator.clipboard.writeText('https://textos.ai').then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy Link'},2000)})">Copy Link</button>
+      <div class="share-label">📣 Share With People Who Need This</div>
+      <p class="share-text">Only <strong>1,000 founding spots exist</strong> — and they're going fast. If you know someone who's tired of passwords, juggling platforms, or just wants a better way to manage their digital life, send them here before the spots are gone.</p>
+
+      <!-- SHARE BUTTONS -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+
+        <a href="sms:?body=I%20just%20joined%20TextOS%20%E2%80%94%20it%27s%20a%20new%20platform%20where%20you%20run%20your%20entire%20online%20life%20by%20text%20message.%20No%20app.%20No%20password.%20Ever.%20Only%201%2C000%20founding%20member%20spots%3A%20https%3A%2F%2Ftextos.ai"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#1a3a1a;border:1px solid rgba(16,185,129,0.4);color:#10b981;font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.05em;padding:12px 16px;border-radius:8px;text-decoration:none;font-weight:700;transition:opacity 0.2s;">
+          📱 Text a Friend
+        </a>
+
+        <a href="https://twitter.com/intent/tweet?text=I%20just%20joined%20TextOS%20as%20a%20founding%20member%20%E2%80%94%20a%20platform%20where%20you%20build%20websites%2C%20publish%20content%2C%20and%20run%20your%20life%20by%20text%20message.%20No%20app.%20No%20password.%20Ever.%20Only%201%2C000%20founding%20spots%3A&url=https%3A%2F%2Ftextos.ai" target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#1a1a2e;border:1px solid rgba(255,255,255,0.2);color:var(--white);font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.05em;padding:12px 16px;border-radius:8px;text-decoration:none;font-weight:700;">
+          𝕏 Post on X
+        </a>
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftextos.ai&quote=I%20just%20joined%20TextOS%20as%20a%20founding%20member%20%E2%80%94%20no%20more%20passwords%2C%20no%20more%20juggling%20platforms.%20Just%20text." target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#1a2040;border:1px solid rgba(59,130,246,0.4);color:#60a5fa;font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.05em;padding:12px 16px;border-radius:8px;text-decoration:none;font-weight:700;">
+          📘 Share on Facebook
+        </a>
+
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Ftextos.ai&title=TextOS%20%E2%80%94%20The%20End%20of%20Passwords&summary=A%20new%20platform%20where%20you%20build%20websites%2C%20publish%20content%2C%20and%20manage%20your%20digital%20life%20entirely%20by%20text%20message.%20No%20app.%20No%20password.%20Ever." target="_blank"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;background:#1a2535;border:1px solid rgba(10,102,194,0.4);color:#60a5fa;font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:0.05em;padding:12px 16px;border-radius:8px;text-decoration:none;font-weight:700;">
+          💼 Share on LinkedIn
+        </a>
+
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:center;">
+        <div class="share-url" style="flex:1;margin-bottom:0;text-align:left;font-size:0.78rem;">textos.ai</div>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('https://textos.ai').then(()=>{this.textContent='✓ Copied!';setTimeout(()=>{this.textContent='Copy Link'},2000)})">Copy Link</button>
+      </div>
+
+      <!-- SUGGESTED TEXT MESSAGE -->
+      <div style="margin-top:16px;background:rgba(0,0,0,0.3);border-radius:8px;padding:14px 16px;text-align:left;">
+        <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--gray);letter-spacing:0.1em;margin-bottom:8px;">SUGGESTED TEXT TO SEND A FRIEND:</div>
+        <div style="color:var(--white);font-size:0.85rem;line-height:1.65;font-style:italic;">"Hey — I just signed up for this new thing called TextOS. It lets you build a website, publish content, and manage your whole online life just by sending text messages. No app, no password, ever. They only have 1,000 founding spots at a discount before they launch June 1st. textos.ai"</div>
+      </div>
+    </div>
+
+    <!-- THE PROBLEMS WE SOLVE -->
+    <div style="margin-bottom:20px;">
+      <div style="font-family:'Orbitron',monospace;font-size:0.62rem;color:var(--pink);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;text-align:center;">Why TextOS Exists — Share This With Anyone Who Gets It</div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+
+        <div style="background:var(--bg2);border:1px solid rgba(255,45,120,0.15);border-left:3px solid var(--pink);border-radius:0 10px 10px 0;padding:16px 20px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--pink);letter-spacing:0.1em;margin-bottom:6px;">PROBLEM 01</div>
+          <div style="font-weight:700;color:var(--white);font-size:0.9rem;margin-bottom:5px;">300 Passwords. One Breach Away From Losing Everything.</div>
+          <div style="color:var(--gray);font-size:0.82rem;line-height:1.6;">The average person manages 300+ passwords, reuses them constantly, and lives one data breach away from losing access to their entire digital life. The web was never designed with real identity in mind — and it shows.</div>
+        </div>
+
+        <div style="background:var(--bg2);border:1px solid rgba(255,45,120,0.15);border-left:3px solid var(--pink);border-radius:0 10px 10px 0;padding:16px 20px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--pink);letter-spacing:0.1em;margin-bottom:6px;">PROBLEM 02</div>
+          <div style="font-weight:700;color:var(--white);font-size:0.9rem;margin-bottom:5px;">12 Platforms. $273/Month. Using Maybe 2 of Them.</div>
+          <div style="color:var(--gray);font-size:0.82rem;line-height:1.6;">Website builder. Email tool. Social scheduler. Design app. Note-taker. Scheduling tool. Each with its own login, learning curve, and monthly bill. The average household spends $273/month on subscriptions and can't name half of them.</div>
+        </div>
+
+        <div style="background:var(--bg2);border:1px solid rgba(255,45,120,0.15);border-left:3px solid var(--pink);border-radius:0 10px 10px 0;padding:16px 20px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--pink);letter-spacing:0.1em;margin-bottom:6px;">PROBLEM 03</div>
+          <div style="font-weight:700;color:var(--white);font-size:0.9rem;margin-bottom:5px;">Publishing One Blog Post Takes Six Apps and 45 Minutes.</div>
+          <div style="color:var(--gray);font-size:0.82rem;line-height:1.6;">Write in Google Docs. Copy to WordPress. Design in Canva. Upload the image. Add SEO. Schedule in Buffer. Share in Hootsuite. The infrastructure has become more work than the content itself.</div>
+        </div>
+
+        <div style="background:var(--bg2);border:1px solid rgba(255,45,120,0.15);border-left:3px solid var(--pink);border-radius:0 10px 10px 0;padding:16px 20px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--pink);letter-spacing:0.1em;margin-bottom:6px;">PROBLEM 04</div>
+          <div style="font-weight:700;color:var(--white);font-size:0.9rem;margin-bottom:5px;">Your Ideas Disappear Before You Can Do Anything With Them.</div>
+          <div style="color:var(--gray);font-size:0.82rem;line-height:1.6;">Voice memos nobody transcribes. Notes in apps you forgot you had. Emails to yourself. The friction between having a thought and capturing it is just high enough that most great ideas never make it anywhere.</div>
+        </div>
+
+        <div style="background:var(--bg2);border:1px solid rgba(255,45,120,0.15);border-left:3px solid var(--pink);border-radius:0 10px 10px 0;padding:16px 20px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.58rem;color:var(--pink);letter-spacing:0.1em;margin-bottom:6px;">PROBLEM 05</div>
+          <div style="font-weight:700;color:var(--white);font-size:0.9rem;margin-bottom:5px;">A Website Still Requires Money, Time, or a Nephew Who "Knows Computers."</div>
+          <div style="color:var(--gray);font-size:0.82rem;line-height:1.6;">30 years into the internet and having a web presence still requires hiring a designer, learning a platform, or calling in a favor. Most small businesses and individuals either have no website or have one that embarrasses them. This is a tool problem, not a skill problem.</div>
+        </div>
+
+      </div>
     </div>
 
     <a class="home-link" href="/">← Back to textos.ai</a>
