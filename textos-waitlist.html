@@ -510,7 +510,6 @@
 
       <form action="https://formspree.io/f/xgorbvdg" method="POST" id="waitlist-form">
         <input type="hidden" name="_subject" value="TextOS Founding Member Signup" />
-        <input type="hidden" name="_next" value="https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00" />
 
         <div class="form-group">
           <label class="form-label" for="name">Your Name</label>
@@ -562,7 +561,7 @@
           </div>
         </div>
 
-        <button type="submit" class="btn-claim">🔒 Reserve My Spot → Pay $49</button>
+        <button type="submit" class="btn-claim" id="submit-btn">🔒 Reserve My Spot → Pay $49</button>
       </form>
 
       <p class="form-fine">Secure payment via Stripe · No app to install · No account to create<br>
@@ -590,7 +589,29 @@
   handleInput.addEventListener('input', updatePreview);
   nameInput.addEventListener('input', updatePreview);
 
-  // Formspree handles redirect to Stripe via _next field
+  // Submit to Formspree via AJAX then redirect to Stripe
+  document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Saving your info...';
+    btn.disabled = true;
+
+    const data = new FormData(this);
+
+    fetch('https://formspree.io/f/xgorbvdg', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(res) {
+      // Redirect to Stripe whether or not Formspree succeeded
+      window.location.href = 'https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00';
+    })
+    .catch(function() {
+      // Still redirect on error — don't block payment
+      window.location.href = 'https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00';
+    });
+  });
 </script>
 
 </body>
