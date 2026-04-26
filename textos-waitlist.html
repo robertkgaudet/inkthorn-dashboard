@@ -2,16 +2,572 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>TextOS — Redirecting...</title>
-  <meta http-equiv="refresh" content="0;url=https://textos.ai/" />
-  <link rel="canonical" href="https://textos.ai/" />
+  <title>TextOS Waitlist — Run Your Life by Text</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Build a business. Publish a website. Capture your ideas. Run your day. All by texting. No app. No password. No login. TextOS is coming — join the founding member waitlist." />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="build business with AI, publish website by text, AI assistant text message, no password internet, TextOS, text to website, AI productivity SMS" />
+  <meta name="author" content="TextOS" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="TextOS" />
+  <meta property="og:title" content="TextOS Waitlist — Run Your Life by Text" />
+  <meta property="og:description" content="Build a business. Publish a website. Capture your ideas. Run your day. All by texting. No app. No password. Ever." />
+  <meta property="og:image" content="https://textos.ai/textos-og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="TextOS — Claim Your Identity on the AI Internet" />
+  <meta property="og:url" content="https://textos.ai" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@textosai" />
+  <meta name="twitter:title" content="TextOS Waitlist — Run Your Life by Text" />
+  <meta name="twitter:description" content="Build a business. Publish a website. Capture your ideas. Run your day. All by texting. No app. No password. Ever." />
+  <meta name="twitter:image" content="https://textos.ai/textos-og.png" />
+  <meta name="twitter:image:alt" content="TextOS — Claim Your Identity on the AI Internet" />
+
+  <!-- GEO / AI Search Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "TextOS",
+    "description": "TextOS is an AI operating system that lets you build a business, publish websites, capture notes, manage your day, and run your entire digital life — all by sending a text message. No app. No password. No login. Ever.",
+    "url": "https://textos.ai",
+    "brand": { "@type": "Brand", "name": "TextOS" },
+    "offers": {
+      "@type": "AggregateOffer",
+      "lowPrice": "9",
+      "highPrice": "79",
+      "priceCurrency": "USD",
+      "offerCount": "3"
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Small business owners, entrepreneurs, creators, individuals"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "TextOS",
+    "url": "https://textos.ai",
+    "description": "Build a business, publish a website, capture ideas, and manage your digital life — all by text message. No app. No password. Ever."
+  }
+  </script>
+
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
-    body { background:#080e1a; color:#f0f6ff; font-family:sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; text-align:center; }
-    a { color:#00e5ff; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --bg:     #080e1a; --bg2: #0d1626; --bg3: #111f35;
+      --cyan:   #00e5ff; --pink: #ff2d78; --purple: #a855f7;
+      --amber:  #f59e0b; --green: #10b981;
+      --white:  #f0f6ff; --gray:  #8899bb;
+      --border: rgba(0,229,255,0.12);
+      --glow-cyan: 0 0 40px rgba(0,229,255,0.4);
+      --glow-pink: 0 0 40px rgba(255,45,120,0.4);
+    }
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; background: var(--bg); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+
+    /* NAV */
+    nav { display:flex; align-items:center; justify-content:space-between; padding:18px 40px; border-bottom:1px solid var(--border); background:rgba(8,14,26,0.95); position:sticky; top:0; z-index:100; backdrop-filter:blur(10px); }
+    .nav-logo { font-family:'Orbitron',monospace; font-weight:900; font-size:1.4rem; color:var(--white); text-decoration:none; letter-spacing:0; }
+    .nav-logo span { color:#00e5ff; text-shadow: 0 0 16px rgba(0,229,255,0.5); }
+    .nav-tag { background:rgba(255,45,120,0.1); border:1px solid rgba(255,45,120,0.3); color:var(--pink); font-family:'Orbitron',monospace; font-size:0.62rem; letter-spacing:0.05em; padding:5px 12px; border-radius:20px; white-space:nowrap; }
+    @media (max-width:480px) { .nav-tag { font-size:0.55rem; padding:4px 10px; letter-spacing:0; } }
+
+    /* HERO */
+    .hero { text-align:center; padding:90px 24px 60px; position:relative; overflow:hidden; }
+    .hero::before { content:''; position:absolute; top:-200px; left:50%; transform:translateX(-50%); width:1000px; height:700px; background:radial-gradient(ellipse,rgba(0,229,255,0.07) 0%,transparent 65%); pointer-events:none; }
+    .live-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(255,45,120,0.08); border:1px solid rgba(255,45,120,0.25); color:var(--pink); font-family:'Orbitron',monospace; font-size:0.65rem; letter-spacing:0.1em; padding:7px 18px; border-radius:30px; margin-bottom:36px; }
+    .pulse-dot { width:7px; height:7px; border-radius:50%; background:var(--pink); animation:pulse 1.6s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.7)} }
+    h1 { font-family:'Orbitron',monospace; font-size:clamp(2.2rem,6.5vw,4.6rem); font-weight:900; line-height:1.06; margin-bottom:28px; }
+    .cyan { color:var(--cyan); text-shadow:var(--glow-cyan); }
+    .pink { color:var(--pink); }
+    .hero-sub { font-size:clamp(1rem,2.3vw,1.25rem); color:var(--gray); max-width:600px; margin:0 auto 48px; line-height:1.75; }
+    .hero-sub strong { color:var(--white); }
+
+    /* TICKER / USE CASES */
+    .use-strip { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:64px; padding:0 24px; }
+    .use-pill { background:var(--bg2); border:1px solid var(--border); border-radius:30px; padding:10px 20px; font-size:0.85rem; color:var(--gray); display:flex; align-items:center; gap:8px; white-space:nowrap; transition:border-color 0.2s, color 0.2s; }
+    .use-pill:hover { border-color:rgba(0,229,255,0.3); color:var(--white); }
+    .use-pill .icon { font-size:1rem; }
+
+    /* SECTION */
+    .section { max-width:960px; margin:0 auto; padding:0 24px 64px; }
+    .section-label { font-family:'Orbitron',monospace; font-size:0.62rem; letter-spacing:0.18em; color:var(--cyan); text-transform:uppercase; margin-bottom:12px; }
+    .section h2 { font-family:'Orbitron',monospace; font-size:clamp(1.5rem,3.5vw,2.2rem); font-weight:700; margin-bottom:16px; line-height:1.2; }
+    .section-intro { color:var(--gray); font-size:1rem; max-width:640px; margin-bottom:40px; line-height:1.75; }
+    .section-intro strong { color:var(--white); }
+    .divider { border:none; border-top:1px solid var(--border); margin:0; }
+
+    /* SCENARIO CARDS */
+    .scenario-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-bottom:48px; }
+    .scenario-card { background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:28px; position:relative; overflow:hidden; transition:border-color 0.25s,transform 0.25s; }
+    .scenario-card:hover { transform:translateY(-3px); }
+    .scenario-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--card-color,var(--cyan)); opacity:0.6; }
+    .scenario-card.pink-accent { --card-color:var(--pink); }
+    .scenario-card.purple-accent { --card-color:var(--purple); }
+    .scenario-card.amber-accent { --card-color:var(--amber); }
+    .scenario-card.green-accent { --card-color:var(--green); }
+    .sc-icon { font-size:2rem; margin-bottom:14px; }
+    .sc-title { font-weight:700; color:var(--white); font-size:0.97rem; margin-bottom:10px; line-height:1.3; }
+    .sc-body { color:var(--gray); font-size:0.85rem; line-height:1.65; }
+    .sc-example { margin-top:14px; background:var(--bg3); border-radius:8px; padding:12px 14px; font-size:0.8rem; color:var(--gray); border-left:2px solid var(--card-color,var(--cyan)); }
+    .sc-example strong { color:var(--white); display:block; margin-bottom:4px; font-size:0.75rem; font-family:'Orbitron',monospace; letter-spacing:0.05em; }
+
+    /* PROBLEMS */
+    .problem-list { display:flex; flex-direction:column; gap:16px; }
+    .problem-card { background:var(--bg2); border:1px solid rgba(255,45,120,0.15); border-radius:12px; padding:26px 30px; position:relative; overflow:hidden; }
+    .problem-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--pink),transparent); }
+    .prob-num { font-family:'Orbitron',monospace; font-size:0.6rem; color:var(--pink); letter-spacing:0.12em; margin-bottom:8px; }
+    .prob-title { font-weight:700; color:var(--white); margin-bottom:8px; font-size:0.97rem; line-height:1.3; }
+    .prob-body { color:var(--gray); font-size:0.87rem; line-height:1.65; }
+
+    /* HINT */
+    .hint-block { background:linear-gradient(135deg,rgba(0,229,255,0.05),rgba(0,229,255,0.02)); border:1px solid rgba(0,229,255,0.2); border-radius:16px; padding:40px 48px; text-align:center; margin-bottom:48px; }
+    .hint-eyebrow { font-family:'Orbitron',monospace; font-size:0.62rem; letter-spacing:0.15em; color:var(--cyan); text-transform:uppercase; margin-bottom:14px; }
+    .hint-text { font-size:clamp(1.1rem,2.5vw,1.5rem); font-weight:600; color:var(--white); line-height:1.55; max-width:660px; margin:0 auto; }
+    .hint-text em { color:var(--cyan); font-style:normal; }
+
+    /* SCARCITY */
+    .scarcity-strip { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:40px; }
+    .sc-pill2 { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:14px 20px; text-align:center; flex:1; min-width:130px; }
+    .sc-num { font-family:'Orbitron',monospace; font-size:1.3rem; font-weight:900; color:var(--cyan); display:block; margin-bottom:3px; }
+    .sc-label { color:var(--gray); font-size:0.75rem; line-height:1.3; }
+
+    /* FORM */
+    .form-wrap { max-width:520px; margin:0 auto; }
+    .form-card { background:#060d1a; border:1px solid rgba(0,229,255,0.25); border-radius:20px; padding:44px 40px; position:relative; overflow:hidden; box-shadow:var(--glow-cyan); }
+    .form-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--cyan),var(--pink)); }
+    .form-eyebrow { font-family:'Orbitron',monospace; font-size:0.62rem; letter-spacing:0.12em; color:var(--pink); text-transform:uppercase; margin-bottom:14px; }
+    .form-card h2 { font-family:'Orbitron',monospace; font-size:1.3rem; font-weight:700; margin-bottom:8px; }
+    .form-card .sub { color:var(--gray); font-size:0.88rem; margin-bottom:28px; line-height:1.6; }
+    .form-card .sub strong { color:var(--white); }
+    .form-group { margin-bottom:14px; }
+
+
+    .form-label { display:block; font-family:'Orbitron',monospace; font-size:0.62rem; letter-spacing:0.1em; color:#a0c4ff; text-transform:uppercase; margin-bottom:8px; font-weight:600; }
+    .handle-preview { background:rgba(0,229,255,0.05); border:1px solid rgba(0,229,255,0.15); border-radius:7px; padding:10px 14px; margin-top:7px; font-family:'Orbitron',monospace; font-size:0.8rem; color:var(--cyan); }
+    .handle-preview span { color:var(--gray); }
+    .offer-box { background:rgba(255,45,120,0.06); border:1px solid rgba(255,45,120,0.2); border-radius:10px; padding:18px 20px; margin:20px 0; }
+    .ob-label { font-family:'Orbitron',monospace; font-size:0.6rem; color:var(--pink); letter-spacing:0.1em; margin-bottom:10px; }
+    .ob-pricing { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
+    .ob-price { font-family:'Orbitron',monospace; font-size:2rem; font-weight:900; color:var(--white); }
+    .ob-detail { color:var(--gray); font-size:0.85rem; line-height:1.5; }
+    .ob-detail strong { color:var(--amber); }
+    .btn-claim { width:100%; background:linear-gradient(135deg,var(--cyan),#0090b8); color:#080e1a; font-family:'Orbitron',monospace; font-weight:700; font-size:0.88rem; letter-spacing:0.06em; padding:16px 24px; border:none; border-radius:8px; cursor:pointer; box-shadow:var(--glow-cyan); transition:transform 0.2s,box-shadow 0.2s; }
+    .btn-claim:hover { transform:translateY(-2px); box-shadow:0 0 56px rgba(0,229,255,0.55); }
+    .form-fine { text-align:center; color:var(--gray); font-size:0.75rem; margin-top:14px; line-height:1.5; }
+
+    footer { text-align:center; padding:32px 24px; color:var(--gray); font-size:0.78rem; border-top:1px solid var(--border); }
+
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+    .two-col-stats { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .push-flow-bubble { display:flex; gap:16px; align-items:flex-start; }
+    .push-caps { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+
+    @media (max-width:860px) {
+      .two-col { grid-template-columns:1fr !important; gap:28px; }
+      .two-col-stats { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:640px) {
+      nav { padding:14px 20px; }
+      .hero { padding:72px 20px 48px; }
+      .hint-block { padding:28px 24px; }
+      .form-card { padding:32px 24px; }
+      .use-strip { gap:8px; }
+      .use-pill { font-size:0.78rem; padding:8px 14px; }
+      .two-col { grid-template-columns:1fr !important; gap:24px; }
+      .two-col-stats { grid-template-columns:1fr 1fr; }
+      .push-flow-bubble { flex-direction:column; gap:8px; }
+      .push-flow-bubble > div:first-child { font-size:0.6rem; padding:6px 10px; align-self:flex-start; }
+      .section { padding-left:16px; padding-right:16px; }
+      .problem-card { padding:20px; }
+    }
   </style>
 </head>
 <body>
-  <p>Taking you to TextOS...<br><br><a href="https://textos.ai/">Click here if you're not redirected</a></p>
-  <script>window.location.replace('https://textos.ai/');</script>
+
+<nav>
+  <a class="nav-logo" href="#" style="display:flex;align-items:center;gap:10px;"><img src="https://textos.ai/textos-logo.png" alt="TextOS" style="width:36px;height:36px;border-radius:6px;object-fit:cover;" /><span style="letter-spacing:0;white-space:nowrap;">Text<span style="color:#00e5ff;text-shadow:0 0 16px rgba(0,229,255,0.5);">OS</span></span></a>
+  <span class="nav-tag">Founding Members — Limited Spots</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="live-badge">
+    <div class="pulse-dot"></div>
+    Early Access Waitlist — Now Open
+  </div>
+
+  <h1>
+    Everything You Need to Do<br>
+    on the Internet —<br>
+    <span class="cyan">Done by Text.</span>
+  </h1>
+
+  <p class="hero-sub">
+    Build a business. Publish a website. Capture your ideas.
+    Run your day. Share your story.
+    <strong>No app. No login. No password. Just text.</strong>
+  </p>
+
+  <!-- USE CASE PILLS -->
+  <div class="use-strip">
+    <div class="use-pill"><span class="icon">🏗️</span> Build a business website</div>
+    <div class="use-pill"><span class="icon">📝</span> Publish a blog post</div>
+    <div class="use-pill"><span class="icon">📋</span> Capture notes & ideas</div>
+    <div class="use-pill"><span class="icon">📅</span> Track your daily agenda</div>
+    <div class="use-pill"><span class="icon">🎨</span> Generate a logo & brand</div>
+    <div class="use-pill"><span class="icon">🍽️</span> Update a menu or hours</div>
+    <div class="use-pill"><span class="icon">📣</span> Publish social content</div>
+    <div class="use-pill"><span class="icon">🎤</span> Create a speaker page</div>
+    <div class="use-pill"><span class="icon">🔑</span> No more passwords</div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- WHAT YOU CAN DO -->
+<div class="section" style="padding-top:64px;">
+  <div class="section-label">What TextOS Does</div>
+  <h2>Imagine if Your Phone's Text App<br><span class="cyan">Was Your Entire Internet.</span></h2>
+  <p class="section-intro">TextOS is a new kind of platform. You text it what you need — and it makes it happen. A website. A published post. A saved idea. A day's agenda. No learning curve. No app to install. No account to remember.</p>
+
+  <div class="scenario-grid">
+
+    <div class="scenario-card">
+      <div class="sc-icon">🏗️</div>
+      <div class="sc-title">Build a Business by Texting</div>
+      <div class="sc-body">Launch a professional website, generate a logo, write your business description, and publish your services — all from a single text conversation. Most businesses wait months to get online. TextOS gets you there in minutes.</div>
+      <div class="sc-example"><strong>You text:</strong> "I run a dog grooming business in New Orleans called Paws & Polish"<br>→ Your site is live. Your logo is ready. Your brand exists.</div>
+    </div>
+
+    <div class="scenario-card pink-accent">
+      <div class="sc-icon">📝</div>
+      <div class="sc-title">Publish a Website With a Text Message</div>
+      <div class="sc-body">No web designer. No WordPress. No templates to wrestle with. You describe what you want — and TextOS builds it, styles it, SEO-optimizes it, and puts it live on the internet. Update any part of it by texting "change my headline" or "add a photo."</div>
+      <div class="sc-example"><strong>You text:</strong> "I want a simple one-page site for my photography portfolio"<br>→ Done. Your gallery is live at yourname.textos.ai</div>
+    </div>
+
+    <div class="scenario-card purple-accent">
+      <div class="sc-icon">📋</div>
+      <div class="sc-title">Capture Notes & Ideas Instantly</div>
+      <div class="sc-body">Text a thought the moment you have it. TextOS stores it, organizes it, and makes it retrievable. No more ideas lost in voice memos, buried in email drafts, or forgotten before you could open an app. Your ideas go somewhere that actually works.</div>
+      <div class="sc-example"><strong>You text:</strong> "Note: call the landlord about the leak, and the idea I had about the menu change"<br>→ Captured, categorized, retrievable anytime.</div>
+    </div>
+
+    <div class="scenario-card amber-accent">
+      <div class="sc-icon">📅</div>
+      <div class="sc-title">Run Your Daily Agenda by Text</div>
+      <div class="sc-body">Text your priorities for the day. Ask what's on your schedule. Log what you completed. TextOS keeps a running picture of your day, your week, and your goals — and surfaces what matters when you need it. No productivity app required.</div>
+      <div class="sc-example"><strong>You text:</strong> "What do I need to do today?"<br>→ Your priorities, your schedule, your open loops — in one reply.</div>
+    </div>
+
+    <div class="scenario-card green-accent">
+      <div class="sc-icon">📣</div>
+      <div class="sc-title">Publish Social Content Without the Platforms</div>
+      <div class="sc-body">Describe your post — or just text a thought — and TextOS turns it into polished, platform-ready social content. Then pushes it where your audience already lives. No logging in to five different apps. No copying and pasting. One text, done.</div>
+      <div class="sc-example"><strong>You text:</strong> "Write a post about why I love what I do"<br>→ Drafted, formatted, and ready to publish.</div>
+    </div>
+
+    <div class="scenario-card pink-accent">
+      <div class="sc-icon">🔑</div>
+      <div class="sc-title">No More Passwords. Ever.</div>
+      <div class="sc-body">The internet has required passwords since day one — and they've been a disaster ever since. TextOS was built around a different truth: your phone number is already your identity. You don't log in to TextOS. You just text it. That's it.</div>
+      <div class="sc-example"><strong>The old way:</strong> Username. Password. Forgot password. Reset link. Two-factor code. Try again.<br><strong>TextOS:</strong> Text us. You're in.</div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- META PROOF — THIS PAGE -->
+<div class="section" style="padding-top:64px;padding-bottom:48px;">
+  <div style="background:linear-gradient(135deg,rgba(0,229,255,0.05),rgba(255,45,120,0.04));border:1px solid rgba(0,229,255,0.2);border-radius:16px;padding:40px 48px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--pink));"></div>
+    <div style="font-family:'Orbitron',monospace;font-size:0.62rem;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">You're Looking at the Proof</div>
+    <div style="font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:700;color:var(--white);line-height:1.5;margin-bottom:16px;">
+      This page was built using TextOS.<br>
+      <span style="color:var(--cyan);">In under 15 minutes. From a text conversation.</span>
+    </div>
+    <p style="color:var(--gray);font-size:0.95rem;line-height:1.8;max-width:680px;margin-bottom:20px;">
+      The concept, the copy, the structure, the branding, the problems list, the conversation examples — 
+      all of it started as ideas I texted to my TextOS agent. Not typed into a form. Not dragged into a template. 
+      <strong style="color:var(--white);">Texted.</strong> Back and forth, the way you'd talk to someone who actually knows what they're doing.
+    </p>
+    <p style="color:var(--gray);font-size:0.95rem;line-height:1.8;max-width:680px;margin-bottom:28px;">
+      I'm going to show you how to do the same thing. 
+      When you join the founding member list, you're not just getting early access to a product — 
+      <strong style="color:var(--white);">you're getting access to the exact workflow I used to build this.</strong>
+    </p>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:40px;height:40px;background:linear-gradient(135deg,rgba(0,229,255,0.2),rgba(255,45,120,0.1));border:1px solid rgba(0,229,255,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">👤</div>
+        <div>
+          <div style="color:var(--white);font-weight:700;font-size:0.9rem;">Rob Gaudet</div>
+          <div style="color:var(--gray);font-size:0.78rem;">Founder, TextOS · Built this page by text</div>
+        </div>
+      </div>
+      <div style="background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);border-radius:8px;padding:8px 16px;font-family:'Orbitron',monospace;font-size:0.65rem;color:var(--cyan);letter-spacing:0.08em;">⏱ Under 15 minutes</div>
+      <div style="background:rgba(255,45,120,0.08);border:1px solid rgba(255,45,120,0.2);border-radius:8px;padding:8px 16px;font-family:'Orbitron',monospace;font-size:0.65rem;color:var(--pink);letter-spacing:0.08em;">💬 Built by text conversation</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- UNIDIRECTIONAL PUSH — WEBSITE BY TEXT -->
+<div class="section" style="padding-top:64px;">
+  <div class="section-label">Your Website. Your Brand. Your Content.</div>
+  <h2>Text It Into Existence.<br><span class="cyan">Change It the Same Way.</span></h2>
+  <p class="section-intro">Imagine a website that just listens. You tell it what you want — and it builds it. You tell it what to change — and it changes. You describe your business — and it writes your copy, picks your colors, creates your logo, and puts it all live. No designer. No developer. No platform to learn. <strong>Just text.</strong></p>
+
+  <!-- THE FLOW -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:36px 40px;margin-bottom:32px;">
+    <div style="font-family:'Orbitron',monospace;font-size:0.62rem;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:24px;">How It Works</div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <div class="push-flow-bubble">
+        <div style="background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.2);border-radius:8px;padding:8px 14px;font-family:'Orbitron',monospace;font-size:0.7rem;color:var(--cyan);flex-shrink:0;white-space:nowrap;">YOU TEXT</div>
+        <div style="background:var(--bg3);border-radius:8px;padding:12px 16px;color:var(--white);font-size:0.9rem;flex:1;">"I run a landscaping company in Baton Rouge called GreenLine. We specialize in residential lawn care and irrigation."</div>
+      </div>
+      <div class="push-flow-bubble">
+        <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:8px;padding:8px 14px;font-family:'Orbitron',monospace;font-size:0.7rem;color:var(--green);flex-shrink:0;white-space:nowrap;">TEXTOS</div>
+        <div style="background:var(--bg3);border-radius:8px;padding:12px 16px;color:var(--gray);font-size:0.9rem;flex:1;">Your site is live at greenline.textos.ai — with your logo, brand colors, service descriptions, and a contact form. Here are 3 logo options. Reply with a number or say "try something bolder."</div>
+      </div>
+      <div class="push-flow-bubble">
+        <div style="background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.2);border-radius:8px;padding:8px 14px;font-family:'Orbitron',monospace;font-size:0.7rem;color:var(--cyan);flex-shrink:0;white-space:nowrap;">YOU TEXT</div>
+        <div style="background:var(--bg3);border-radius:8px;padding:12px 16px;color:var(--white);font-size:0.9rem;flex:1;">"Add a summer special — 20% off new customers through July. And change the hero photo to something that feels more Louisiana."</div>
+      </div>
+      <div class="push-flow-bubble">
+        <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:8px;padding:8px 14px;font-family:'Orbitron',monospace;font-size:0.7rem;color:var(--green);flex-shrink:0;white-space:nowrap;">TEXTOS</div>
+        <div style="background:var(--bg3);border-radius:8px;padding:12px 16px;color:var(--gray);font-size:0.9rem;flex:1;">Done. Summer special is live on your homepage. New hero image updated. Your site also shows up when people ask ChatGPT "best landscapers in Baton Rouge."</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WHAT YOU CAN DO WITH IT -->
+  <div class="push-caps">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start;">
+      <span style="font-size:1.3rem;flex-shrink:0;">🎨</span>
+      <div><div style="font-weight:700;color:var(--white);font-size:0.88rem;margin-bottom:4px;">Design & Branding</div><div style="color:var(--gray);font-size:0.8rem;line-height:1.5;">Logo, color palette, fonts, tagline — generated and refined entirely by text.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start;">
+      <span style="font-size:1.3rem;flex-shrink:0;">✍️</span>
+      <div><div style="font-weight:700;color:var(--white);font-size:0.88rem;margin-bottom:4px;">Copy & Content</div><div style="color:var(--gray);font-size:0.8rem;line-height:1.5;">About pages, service descriptions, blog posts, bios — written for you, edited by text.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start;">
+      <span style="font-size:1.3rem;flex-shrink:0;">🔍</span>
+      <div><div style="font-weight:700;color:var(--white);font-size:0.88rem;margin-bottom:4px;">SEO & AI Search</div><div style="color:var(--gray);font-size:0.8rem;line-height:1.5;">Every site is built to be found on Google and AI search engines — automatically.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start;">
+      <span style="font-size:1.3rem;flex-shrink:0;">🖼️</span>
+      <div><div style="font-weight:700;color:var(--white);font-size:0.88rem;margin-bottom:4px;">Images & Visuals</div><div style="color:var(--gray);font-size:0.8rem;line-height:1.5;">AI-generated images for your site, social posts, and brand — tailored to your business.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start;">
+      <span style="font-size:1.3rem;flex-shrink:0;">🔄</span>
+      <div><div style="font-weight:700;color:var(--white);font-size:0.88rem;margin-bottom:4px;">Instant Updates</div><div style="color:var(--gray);font-size:0.8rem;line-height:1.5;">New hours, new specials, new team members — updated the moment you text it. No webmaster needed.</div></div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start;">
+      <span style="font-size:1.3rem;flex-shrink:0;">🌐</span>
+      <div><div style="font-weight:700;color:var(--white);font-size:0.88rem;margin-bottom:4px;">Published Everywhere</div><div style="color:var(--gray);font-size:0.8rem;line-height:1.5;">Text once — publish to your site, your social channels, and beyond. One message, many destinations.</div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- FOUNDER CREDIBILITY -->
+<div class="section" style="padding-top:64px;padding-bottom:48px;overflow:hidden;">
+  <div class="two-col">
+
+    <!-- LEFT: WHO I AM -->
+    <div>
+      <div style="font-family:'Orbitron',monospace;font-size:0.62rem;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">Who's Behind This</div>
+      <h2 style="font-family:'Orbitron',monospace;font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:700;line-height:1.2;margin-bottom:20px;">I've Spent 30 Years<br><span style="color:var(--cyan);">Building Things That Work.</span></h2>
+      <p style="color:var(--gray);font-size:0.92rem;line-height:1.8;margin-bottom:16px;">I'm Rob Gaudet. I'm a software architect, an AI practitioner, and someone who has spent years talking to hundreds of thousands of people about how technology actually works — and why most of it is failing them.</p>
+      <p style="color:var(--gray);font-size:0.92rem;line-height:1.8;margin-bottom:16px;">I'm not a marketer who discovered AI last year. I build systems. I've been doing it for three decades. And I've spent the last few years watching AI go from a technical curiosity to something that can genuinely change what's possible — <strong style="color:var(--white);">for anyone, not just engineers.</strong></p>
+      <p style="color:var(--gray);font-size:0.92rem;line-height:1.8;">TextOS exists because I kept having the same conversation — with friends, followers, strangers at events — where someone would say <em style="color:var(--white);">"I wish I could do what you do, but I don't know how."</em> This is the answer to that.</p>
+    </div>
+
+    <!-- RIGHT: STATS + WHY -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="two-col-stats">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;">
+          <div style="font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;color:var(--cyan);display:block;margin-bottom:4px;">100M+</div>
+          <div style="color:var(--gray);font-size:0.75rem;line-height:1.3;">Content views across platforms</div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;">
+          <div style="font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;color:var(--cyan);display:block;margin-bottom:4px;">500K+</div>
+          <div style="color:var(--gray);font-size:0.75rem;line-height:1.3;">Engaged followers — real people, not bots</div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;">
+          <div style="font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;color:var(--cyan);display:block;margin-bottom:4px;">30 yrs</div>
+          <div style="color:var(--gray);font-size:0.75rem;line-height:1.3;">Building production software systems</div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;">
+          <div style="font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;color:var(--cyan);display:block;margin-bottom:4px;">1,000+</div>
+          <div style="color:var(--gray);font-size:0.75rem;line-height:1.3;">Live broadcasts on AI & technology</div>
+        </div>
+      </div>
+
+      <!-- WHY I'M BUILDING THIS -->
+      <div style="background:rgba(0,229,255,0.04);border:1px solid rgba(0,229,255,0.15);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;padding:20px 24px;">
+        <div style="font-family:'Orbitron',monospace;font-size:0.6rem;color:var(--cyan);letter-spacing:0.1em;margin-bottom:10px;">WHY I'M BUILDING THIS</div>
+        <p style="color:var(--white);font-size:0.88rem;line-height:1.75;font-style:italic;">"The tools I use every day to run my business, build my brand, and publish my ideas — they're not available to most people. Not because the technology doesn't exist. Because nobody's made it simple enough. That's the only thing TextOS is trying to fix."</p>
+        <div style="margin-top:14px;color:var(--gray);font-size:0.78rem;">— Rob Gaudet, Founder · New Orleans, Louisiana</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- THE PROBLEMS -->
+<div class="section">
+  <div class="section-label">The Problems We're Fixing</div>
+  <h2>You've Accepted These as Normal.<br><span class="pink">They Aren't.</span></h2>
+  <p class="section-intro">The internet was built for engineers and handed to everyone else. These are the daily frustrations that hundreds of millions of people have just stopped noticing.</p>
+
+  <div class="problem-list">
+    <div class="problem-card">
+      <div class="prob-num">PROBLEM 01</div>
+      <div class="prob-title">You Have 300 Passwords and You're One Breach Away From Losing Everything</div>
+      <div class="prob-body">The average person manages 300+ passwords. They reuse them because they have no choice. Every week brings another breach, another reset email, another hour lost on something that should not exist. The web forces you to maintain a secret identity just to use it.</div>
+    </div>
+    <div class="problem-card">
+      <div class="prob-num">PROBLEM 02</div>
+      <div class="prob-title">You're Paying for 12 Platforms and Fully Using Maybe 2</div>
+      <div class="prob-body">Website builder. Email tool. Social scheduler. Design app. Note-taker. Scheduling tool. Each with its own login, learning curve, and monthly bill demanding your attention. The average household spends $273/month on subscriptions and can't name half of them.</div>
+    </div>
+    <div class="problem-card">
+      <div class="prob-num">PROBLEM 03</div>
+      <div class="prob-title">Publishing One Blog Post Requires Six Different Apps</div>
+      <div class="prob-body">Write in Google Docs. Copy to WordPress. Find an image in Canva. Upload it. Add SEO. Schedule in Buffer. Share in Hootsuite. Six apps, six logins, forty-five minutes — for one post that took ten minutes to write. The infrastructure has become more work than the actual thing.</div>
+    </div>
+    <div class="problem-card">
+      <div class="prob-num">PROBLEM 04</div>
+      <div class="prob-title">Your Ideas Disappear Before You Can Do Anything With Them</div>
+      <div class="prob-body">Voice memos nobody transcribes. Notes in apps you forgot you had. Emails to yourself. Ideas you were sure you'd remember. The friction between having a thought and capturing it is just high enough that most great ideas never make it anywhere. They evaporate.</div>
+    </div>
+    <div class="problem-card">
+      <div class="prob-num">PROBLEM 05</div>
+      <div class="prob-title">Building a Website Still Requires Either Money, Time, or a Nephew Who "Knows Computers"</div>
+      <div class="prob-body">The internet has been around for 30 years. Having a web presence still requires hiring a designer, learning a platform, or calling in a favor. Most small businesses, artists, and everyday people either have no website or have one that embarrasses them. This is not a skill problem. It is a tool problem.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- THE HINT -->
+<div class="section">
+  <div class="hint-block">
+    <div class="hint-eyebrow">What We Built</div>
+    <div class="hint-text">
+      One platform. One interface you already know how to use.
+      <em>Everything done by text.</em>
+      And for the first time — no password required. Ever.
+    </div>
+  </div>
+
+  <!-- SCARCITY -->
+  <div style="background:rgba(255,45,120,0.06);border:1px solid rgba(255,45,120,0.2);border-radius:12px;padding:20px 24px;text-align:center;margin-bottom:28px;">
+    <div style="font-family:'Orbitron',monospace;font-size:0.62rem;color:var(--pink);letter-spacing:0.12em;margin-bottom:10px;">⚠️ HARD LIMIT — NO EXCEPTIONS</div>
+    <div style="font-size:1rem;color:var(--white);font-weight:600;line-height:1.6;">Only <span style="color:var(--cyan);font-family:'Orbitron',monospace;font-size:1.3rem;"> 1,000</span> founding member spots exist.<br>When they're gone, this offer is gone permanently.</div>
+  </div>
+  <div class="scarcity-strip">
+    <div class="sc-pill2"><span class="sc-num" style="color:var(--pink);">1,000</span><div class="sc-label">Total founding slots — ever</div></div>
+    <div class="sc-pill2"><span class="sc-num">Forever</span><div class="sc-label">Your name + number locked in</div></div>
+    <div class="sc-pill2"><span class="sc-num">$9.99/mo</span><div class="sc-label">Your rate, founding rate — never increases for the base plan</div></div>
+    <div class="sc-pill2"><span class="sc-num">0</span><div class="sc-label">Passwords. Ever.</div></div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-wrap">
+    <div class="form-card">
+      <div class="form-eyebrow">⚡ Founding Member — Early Access</div>
+      <h2>Claim Your Spot</h2>
+
+      <!-- LAUNCH DATE & EXPECTATION -->
+      <div style="background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.2);border-radius:10px;padding:16px 18px;margin-bottom:16px;text-align:center;">
+        <div style="font-family:'Orbitron',monospace;font-size:0.6rem;color:var(--cyan);letter-spacing:0.12em;margin-bottom:6px;">🚀 TARGET LAUNCH DATE</div>
+        <div style="font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;color:var(--white);">June 1, 2026</div>
+        <div style="color:var(--gray);font-size:0.78rem;margin-top:6px;">TextOS is not live yet. You are reserving your founding member spot now — we'll text you the moment we launch.</div>
+      </div>
+
+      <div style="background:rgba(255,45,120,0.08);border:1px solid rgba(255,45,120,0.3);border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:14px;">
+        <div style="font-size:1.6rem;flex-shrink:0;">🏆</div>
+        <div>
+          <div style="font-family:'Orbitron',monospace;font-size:0.65rem;color:var(--pink);letter-spacing:0.1em;margin-bottom:4px;">FOUNDING MEMBER — SLOT #<span style="color:var(--white);">???</span> OF 1,000</div>
+          <div style="color:var(--gray);font-size:0.82rem;line-height:1.5;">You are among the first 1,000 people to ever join TextOS. <strong style="color:var(--white);">This status is permanent and can never be purchased after launch.</strong> Your slot number is assigned when you sign up — first come, first served.</div>
+        </div>
+      </div>
+
+      <p class="sub">Once all 1,000 founding member spots are claimed, this offer is gone permanently. <strong>Founding members lock in their name, their slot number, and their rate — forever.</strong></p>
+
+      <div class="offer-box">
+          <div class="ob-label">⚡ Founding Member Waitlist — 1,000 Slots Only</div>
+          <div class="ob-pricing">
+            <div class="ob-price">$49</div>
+            <div class="ob-detail">
+              Reserves your founding member spot<br>
+              <strong>Covers your first 3 months of Pro at launch (June 1)</strong><br>
+              <span style="font-size:0.78rem;">Then $9.99/mo for TextOS Pro base plan — your founding rate, never increases · Public rate after launch: $19.99/mo</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00" class="btn-claim" style="display:block;text-align:center;text-decoration:none;">
+          🔒 Reserve My Founding Member Spot → Pay $49
+        </a>
+
+      <p class="form-fine">Secure payment via Stripe · We collect your phone number and TextOS name at checkout<br>
+      <span style="color:rgba(200,200,200,0.5);">$49 now · then $9.99/mo for TextOS Pro base plan — your founding rate, never increases after your 3 months</span></p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>TextOS · textos.ai · © 2026</p>
+  <p style="margin-top:6px;font-size:0.72rem;">Founding member offer available for a limited time. Rate locked as long as subscription remains active.</p>
+</footer>
+
+<script>
+
+  // Pass referral param to Stripe via client_reference_id if possible
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref');
+    if (ref) {
+      // Store for use after payment
+      sessionStorage.setItem('textos_ref', ref);
+      // Update Stripe link to include ref in success URL
+      const stripeLinks = document.querySelectorAll('a[href*="buy.stripe.com"]');
+      stripeLinks.forEach(function(link) {
+        link.href = link.href + '?client_reference_id=' + encodeURIComponent(ref);
+      });
+    }
+  })();
+
+</script>
+
 </body>
 </html>
