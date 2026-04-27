@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Blueprint Process — AI Implementation Framework | TrustLight Advisory</title>
+<meta name="description" content="TrustLight Advisory's Blueprint Process: a proven 4-phase AI implementation framework. From discovery to PRD — every client, same process, client-approved at every gate.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://trustlight.ai/blueprint-marketing.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://trustlight.ai/blueprint-marketing.html">
+<meta property="og:title" content="The Blueprint Process — AI Implementation That Actually Gets Built">
+<meta property="og:description" content="A proven 4-phase framework. Discovery to PRD. Every client, same process. Client-approved at every gate.">
+<meta property="og:image" content="https://trustlight.ai/og-landing.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Blueprint Process — TrustLight Advisory">
+<meta name="twitter:description" content="A proven 4-phase AI implementation framework. From discovery to PRD.">
+<meta name="twitter:image" content="https://trustlight.ai/og-landing.png">
+  <!-- FAVICONS -->
+  <link rel="icon" type="image/png" sizes="32x32" href="https://trustlight.ai/assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://trustlight.ai/assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://trustlight.ai/assets/images/favicon-apple.png">
+  <link rel="shortcut icon" href="https://trustlight.ai/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0a0a0a; --dark: #111; --mid: #1a1a1a;
+  --off-white: #f2ede6; --muted: #888; --amber: #c8832a;
+  --amber-light: #e09a40; --amber-dim: rgba(200,131,42,0.1);
+  --rule: rgba(255,255,255,0.08);
+  --green: #3fb950; --blue: #79c0ff; --red: #f87171; --gold: #c49a2a;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--off-white); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.65; overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 4rem; background: rgba(10,10,10,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); max-width: 100vw; }
+.nav-logo img { height: 28px; display: block; }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--off-white); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+.nav-links a:hover { opacity: 1; color: var(--amber); }
+.nav-cta { background: var(--amber); color: var(--black) !important; opacity: 1 !important; padding: 0.5rem 1.2rem; font-weight: 500 !important; border-radius: 2px; }
+
+/* HERO */
+.hero { padding: 10rem 4rem 6rem; position: relative; overflow: hidden; border-bottom: 1px solid var(--rule); }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 70% at 50% 40%, rgba(200,131,42,0.07) 0%, transparent 70%); }
+.hero-inner { max-width: 900px; margin: 0 auto; position: relative; text-align: center; }
+.eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.2rem; }
+.hero h1 { font-family: 'Libre Baskerville', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; }
+.hero p { font-size: 1.15rem; color: var(--muted); max-width: 660px; margin: 0 auto 2.5rem; line-height: 1.7; }
+.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-primary { background: var(--amber); color: var(--black); text-decoration: none; padding: 0.85rem 2rem; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; border-radius: 3px; transition: background 0.2s; display: inline-block; }
+.btn-primary:hover { background: var(--amber-light); }
+.btn-ghost { color: var(--off-white); text-decoration: none; padding: 0.85rem 2rem; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--rule); border-radius: 3px; transition: all 0.2s; display: inline-block; opacity: 0.7; }
+.btn-ghost:hover { border-color: var(--amber); color: var(--amber); opacity: 1; }
+
+/* SECTION BASE */
+.section { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
+.section-eyebrow { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; }
+.section-title { font-family: 'Libre Baskerville', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; margin-bottom: 1.2rem; line-height: 1.2; }
+.section-sub { color: var(--muted); font-size: 1rem; max-width: 620px; line-height: 1.7; margin-bottom: 3rem; }
+
+/* PROBLEM SECTION */
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+.problem-card { background: var(--mid); border: 1px solid var(--rule); border-radius: 4px; padding: 1.8rem; }
+.problem-card .icon { font-size: 1.4rem; margin-bottom: 0.8rem; }
+.problem-card h3 { font-size: 0.95rem; font-weight: 600; color: var(--off-white); margin-bottom: 0.5rem; }
+.problem-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+/* PHASE INFOGRAPHIC */
+.phase-flow { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; }
+.phase-row { display: grid; grid-template-columns: 80px 1fr; gap: 2rem; align-items: stretch; }
+.phase-row:not(:last-child) .phase-line { display: block; }
+.phase-badge-wrap { display: flex; flex-direction: column; align-items: center; }
+.phase-badge { width: 80px; height: 80px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.6rem; }
+.phase-line { width: 2px; flex: 1; min-height: 32px; margin: 0 auto; }
+.phase-pre .phase-badge { background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.15); }
+.phase-pre .phase-line { background: rgba(255,255,255,0.1); }
+.phase-1 .phase-badge { background: rgba(63,185,80,0.1); border: 2px solid rgba(63,185,80,0.35); }
+.phase-1 .phase-line { background: rgba(63,185,80,0.2); }
+.phase-2 .phase-badge { background: rgba(121,192,255,0.1); border: 2px solid rgba(121,192,255,0.35); }
+.phase-2 .phase-line { background: rgba(121,192,255,0.2); }
+.phase-3 .phase-badge { background: rgba(196,154,42,0.1); border: 2px solid rgba(196,154,42,0.35); }
+.phase-3 .phase-line { background: rgba(196,154,42,0.2); }
+.phase-4 .phase-badge { background: rgba(248,113,113,0.1); border: 2px solid rgba(248,113,113,0.35); }
+.phase-card { background: var(--mid); border: 1px solid var(--rule); border-radius: 6px; padding: 2rem; margin-bottom: 1.5rem; }
+.phase-card-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.phase-num { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 3px 10px; border-radius: 10px; font-weight: 700; }
+.phase-pre-num { background: rgba(255,255,255,0.08); color: var(--muted); }
+.phase-1-num { background: rgba(63,185,80,0.15); color: var(--green); }
+.phase-2-num { background: rgba(121,192,255,0.15); color: var(--blue); }
+.phase-3-num { background: rgba(196,154,42,0.15); color: var(--gold); }
+.phase-4-num { background: rgba(248,113,113,0.15); color: var(--red); }
+.phase-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.2rem; font-weight: 700; }
+.phase-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+.phase-steps { display: flex; flex-direction: column; gap: 0.5rem; }
+.phase-step { display: flex; align-items: flex-start; gap: 0.8rem; font-size: 0.85rem; color: var(--off-white); opacity: 0.8; }
+.phase-step::before { content: '→'; color: var(--amber); flex-shrink: 0; }
+.phase-deliverable { margin-top: 1rem; padding: 0.8rem 1rem; background: rgba(200,131,42,0.06); border: 1px solid rgba(200,131,42,0.2); border-radius: 3px; font-size: 0.8rem; color: var(--amber); }
+.phase-deliverable strong { color: var(--off-white); }
+
+/* WHY IT WORKS */
+.why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 2rem; }
+.why-card { background: var(--mid); border: 1px solid var(--rule); border-radius: 4px; padding: 1.8rem; }
+.why-card .icon { font-size: 1.6rem; margin-bottom: 1rem; }
+.why-card h3 { font-size: 0.95rem; font-weight: 600; color: var(--off-white); margin-bottom: 0.6rem; }
+.why-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+/* DELIVERABLES */
+.deliverables-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+.deliverable { display: flex; align-items: flex-start; gap: 1rem; background: var(--mid); border: 1px solid var(--rule); border-radius: 4px; padding: 1.2rem; }
+.deliverable .check { color: var(--green); font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+.deliverable h4 { font-size: 0.88rem; font-weight: 600; color: var(--off-white); margin-bottom: 0.3rem; }
+.deliverable p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+/* CTA SECTION */
+.cta-section { background: var(--mid); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 6rem 4rem; text-align: center; }
+.cta-inner { max-width: 700px; margin: 0 auto; }
+.cta-inner h2 { font-family: 'Libre Baskerville', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 700; margin-bottom: 1rem; }
+.cta-inner p { color: var(--muted); font-size: 1rem; margin-bottom: 2.5rem; line-height: 1.7; }
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* FOOTER */
+footer { padding: 2.5rem 4rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+footer p { font-size: 0.78rem; color: var(--muted); }
+footer a { color: var(--amber); text-decoration: none; font-size: 0.78rem; }
+.footer-nav { display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; justify-content: center; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 1rem; padding-top: 1rem; }
+.footer-nav a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); text-decoration: none; }
+.footer-nav a:hover { color: var(--amber); }
+
+/* HAMBURGER */
+.nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; padding: 10px; background: none; border: none; z-index: 1100; position: relative; -webkit-tap-highlight-color: transparent; }
+.nav-hamburger span { display: block; width: 26px; height: 3px; background: #f2ede6; border-radius: 2px; transition: all 0.25s ease; pointer-events: none; }
+.mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; z-index: 9998; background: #0a0a0a; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding: 80px 32px 20px; overflow-y: auto; }
+.mobile-menu.open { display: flex !important; }
+.mobile-menu a { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.1em; color: #f2ede6; text-decoration: none; opacity: 0.85; display: block; padding: 6px 0; width: 100%; }
+.mobile-menu a:hover { color: var(--amber); opacity: 1; }
+.mobile-menu .mobile-divider { width: 100%; height: 1px; background: rgba(255,255,255,0.08); margin: 8px 0; }
+.mobile-menu .mobile-cta { background: var(--amber); color: var(--black) !important; opacity: 1 !important; padding: 0.7rem 1.5rem; border-radius: 3px; text-align: center; margin-top: 8px; }
+
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.2rem !important; }
+  .nav-links { display: none !important; }
+  .nav-hamburger { display: flex !important; }
+}
+@media (min-width: 901px) {
+  .nav-hamburger { display: none !important; }
+  .nav-links { display: flex !important; }
+}
+@media (max-width: 768px) {
+  .hero { padding: 8rem 1.5rem 4rem; }
+  .section { padding: 4rem 1.5rem; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .phase-row { grid-template-columns: 60px 1fr; gap: 1rem; }
+  .phase-badge { width: 60px; height: 60px; font-size: 1.2rem; }
+  .why-grid { grid-template-columns: 1fr; }
+  .deliverables-list { grid-template-columns: 1fr; }
+  .cta-section { padding: 4rem 1.5rem; }
+  footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div id="mobile-backdrop" onclick="closeMenu()" style="display:none;position:fixed;inset:0;z-index:9997;background:#0a0a0a;"></div>
+<button id="mobile-close-btn" ontouchstart="" onclick="closeMenu()" style="display:none;position:fixed;top:14px;right:14px;z-index:99999;width:48px;height:48px;background:#222;border:2px solid rgba(255,255,255,0.4);color:#fff;width:48px;height:48px;border-radius:8px;font-size:1.4rem;font-weight:bold;align-items:center;justify-content:center;cursor:pointer;">✕</button>
+
+<nav>
+  <a href="landing.html" class="nav-logo"><img src="https://trustlight.ai/assets/images/logo-white.png" alt="TrustLight Advisory"></a>
+  <ul class="nav-links">
+    <li><a href="landing.html#difference">Why Rob</a></li>
+    <li><a href="landing.html#services">Services</a></li>
+    <li><a href="landing.html#about">Background</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="workshop.html">Workshop</a></li>
+    <li><a href="landing.html#contact" class="nav-cta">Let's Talk</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu" onclick="toggleMenu()" ontouchstart="">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="landing.html" onclick="closeMenu()">Home</a>
+  <a href="landing.html#services" onclick="closeMenu()">Services</a>
+  <a href="landing.html#about" onclick="closeMenu()">Background</a>
+  <div class="mobile-divider"></div>
+  <a href="geo-readiness.html" onclick="closeMenu()">📡 GEO Readiness</a>
+  <a href="openclaw.html" onclick="closeMenu()">⚙️ OpenClaw Agents</a>
+  <a href="workshop.html" onclick="closeMenu()">🎯 Workshop</a>
+  <a href="blueprint-process.html" onclick="closeMenu()">🗺️ Blueprint Process</a>
+  <a href="resources.html" onclick="closeMenu()">📚 Resources</a>
+  <div class="mobile-divider"></div>
+  <a href="events.html" onclick="closeMenu()" style="color:var(--amber);opacity:1;">📅 Events</a>
+  <div class="mobile-divider"></div>
+  <a href="landing.html#contact" class="mobile-cta" onclick="closeMenu()">Let's Talk</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">TrustLight Advisory · Signature Offering</p>
+    <h1>AI Implementation That<br>Actually Gets <em>Built.</em></h1>
+    <p>Most AI consulting ends with a slide deck you can't build from. The Blueprint Process ends with a PRD that Rob can build from directly — or hand off to your development team on day one — client-approved at every step, no surprises at delivery.</p>
+    <div class="hero-actions">
+      <a href="landing.html#contact" class="btn-primary">Start Your Blueprint →</a>
+      <a href="blueprint-process.html" class="btn-ghost">See Every Step</a>
+    </div>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<section style="border-bottom:1px solid var(--rule);">
+  <div class="section">
+    <p class="section-eyebrow">Why Most AI Projects Fail</p>
+    <h2 class="section-title">The problem isn't the AI.<br>It's the process.</h2>
+    <p class="section-sub">Most businesses fail at AI implementation for the same four reasons — not because the technology isn't good enough.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">🌀</div>
+        <h3>No defined process</h3>
+        <p>Every engagement reinvented from scratch. No repeatable system means inconsistent results and missed opportunities.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📋</div>
+        <h3>Deliverables no one can use</h3>
+        <p>Slide decks and strategy documents that look impressive but can't be handed to a developer and turned into something real.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">🔀</div>
+        <h3>Scope that moves</h3>
+        <p>Without client sign-off at each phase, projects drift. What was agreed in month one bears no resemblance to what's delivered in month three.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">🏃</div>
+        <h3>Jumping straight to build</h3>
+        <p>Skipping discovery and going straight to implementation. Building the wrong thing faster than ever before.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROCESS -->
+<section style="border-bottom:1px solid var(--rule);">
+  <div class="section">
+    <p class="section-eyebrow">The Blueprint Process</p>
+    <h2 class="section-title">Four phases. One framework.<br>Every client.</h2>
+    <p class="section-sub">The same proven process, applied to every engagement. You know exactly what's coming at every step — and you sign off before we move to the next one.</p>
+
+    <div class="phase-flow">
+
+      <!-- PRE-ENGAGEMENT -->
+      <div class="phase-row phase-pre">
+        <div class="phase-badge-wrap">
+          <div class="phase-badge">🔍</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-card-header">
+            <span class="phase-num phase-pre-num">PRE-ENGAGEMENT</span>
+            <h3>Discovery</h3>
+          </div>
+          <p>Before we meet, we know your business. Client research, competitive analysis, digital presence audit — all done in advance so the first conversation goes straight to what matters.</p>
+          <div class="phase-steps">
+            <div class="phase-step">Client due diligence research — business profile, market position, digital presence</div>
+            <div class="phase-step">Tailored discovery questionnaire — specific to your business, not generic</div>
+            <div class="phase-step">Mission & vision alignment document — so we both know what success looks like</div>
+          </div>
+          <div class="phase-deliverable"><strong>Deliverable:</strong> Client Intelligence Report + Mission/Vision Deck</div>
+        </div>
+      </div>
+
+      <!-- PHASE 1 -->
+      <div class="phase-row phase-1">
+        <div class="phase-badge-wrap">
+          <div class="phase-badge">🗺️</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-card" style="border-color:rgba(63,185,80,0.2);">
+          <div class="phase-card-header">
+            <span class="phase-num phase-1-num">PHASE 01</span>
+            <h3>Mind Map</h3>
+          </div>
+          <p>We map every function in your business and score each one: Not Started / Exploring / Deployed / Optimized. This becomes your AI opportunity landscape — nothing assumed, everything documented.</p>
+          <div class="phase-steps">
+            <div class="phase-step">Facilitated Mind Map session — every business function on the table</div>
+            <div class="phase-step">AI readiness scoring across operations, sales, marketing, admin, and more</div>
+            <div class="phase-step">Top 3 AI priorities identified and ranked by impact and feasibility</div>
+          </div>
+          <div class="phase-deliverable" style="background:rgba(63,185,80,0.06);border-color:rgba(63,185,80,0.2);color:var(--green);"><strong style="color:var(--off-white);">Deliverable:</strong> Scored Mind Map — client approved before Phase 2 begins</div>
+        </div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="phase-row phase-2">
+        <div class="phase-badge-wrap">
+          <div class="phase-badge">⚡</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-card" style="border-color:rgba(121,192,255,0.2);">
+          <div class="phase-card-header">
+            <span class="phase-num phase-2-num">PHASE 02</span>
+            <h3>Use Cases</h3>
+          </div>
+          <p>We take the top priorities from the Mind Map and define precise, buildable AI use cases. Not vague ideas — specific Actor · System · Outcome definitions that a developer can read and know exactly what to build.</p>
+          <div class="phase-steps">
+            <div class="phase-step">Use Cases session — drilling into each priority use case</div>
+            <div class="phase-step">3–5 precisely defined use cases with impact, feasibility, and priority scores</div>
+            <div class="phase-step">Dependencies mapped — what must exist before each use case can be built</div>
+          </div>
+          <div class="phase-deliverable" style="background:rgba(121,192,255,0.06);border-color:rgba(121,192,255,0.2);color:var(--blue);"><strong style="color:var(--off-white);">Deliverable:</strong> Use Case Document — client approved before Phase 3 begins</div>
+        </div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="phase-row phase-3">
+        <div class="phase-badge-wrap">
+          <div class="phase-badge">📋</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-card" style="border-color:rgba(196,154,42,0.2);">
+          <div class="phase-card-header">
+            <span class="phase-num phase-3-num">PHASE 03</span>
+            <h3>User Stories</h3>
+          </div>
+          <p>The approved use cases are converted into development-ready user stories. Every story follows the standard format — As a [role] I want [action] so that [outcome] — with priority levels and wave sequencing so implementation has a clear order.</p>
+          <div class="phase-steps">
+            <div class="phase-step">Full user story backlog generated from approved use cases</div>
+            <div class="phase-step">P1/P2/P3 prioritization and Wave 1/2/3 sequencing</div>
+            <div class="phase-step">Written in plain language — no technical background required to review</div>
+          </div>
+          <div class="phase-deliverable" style="background:rgba(196,154,42,0.06);border-color:rgba(196,154,42,0.2);"><strong style="color:var(--off-white);">Deliverable:</strong> User Story Backlog — client approved before Phase 4 begins</div>
+        </div>
+      </div>
+
+      <!-- PHASE 4 -->
+      <div class="phase-row phase-4">
+        <div class="phase-badge-wrap">
+          <div class="phase-badge">🚀</div>
+        </div>
+        <div class="phase-card" style="border-color:rgba(248,113,113,0.2);">
+          <div class="phase-card-header">
+            <span class="phase-num phase-4-num">PHASE 04</span>
+            <h3>Roadmap & PRD</h3>
+          </div>
+          <p>Everything comes together. The approved user stories become a phased implementation roadmap — Wave 1 in weeks, Wave 2 in 90 days, Wave 3 in 6 months. Then the full PRD: the final deliverable. Rob builds it himself, or it goes straight to your dev team.</p>
+          <div class="phase-steps">
+            <div class="phase-step">Implementation roadmap with Effort vs. Impact scoring</div>
+            <div class="phase-step">Wave planning — quick wins first, strategic expansion later</div>
+            <div class="phase-step">Full PRD — architecture overview, integrations, governance, change management</div>
+          </div>
+          <div class="phase-deliverable" style="background:rgba(248,113,113,0.06);border-color:rgba(248,113,113,0.2);color:var(--red);"><strong style="color:var(--off-white);">Deliverable:</strong> Roadmap + Full PRD — engagement complete, ready to build</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY IT WORKS -->
+<section style="border-bottom:1px solid var(--rule);">
+  <div class="section">
+    <p class="section-eyebrow">What Makes This Different</p>
+    <h2 class="section-title">Built to produce results,<br>not reports.</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="icon">📐</div>
+        <h3>Every client. Same process.</h3>
+        <p>Not a methodology invented per engagement. A proven system that produces consistent, high-quality outputs regardless of industry or company size.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">🤝</div>
+        <h3>Client-approved at every gate.</h3>
+        <p>Each phase ends with written sign-off before we move forward. No scope drift. No surprises at delivery. You always know exactly where we are.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">🏗️</div>
+        <h3>Ends with something buildable.</h3>
+        <p>The PRD isn't a slide deck. It's a real engineering document. Rob can build from it directly, or it's ready to hand to your internal team or any external development partner.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">🤖</div>
+        <h3>AI-accelerated, human-verified.</h3>
+        <p>Every deliverable is generated with AI and reviewed by Rob Gaudet before it goes to you. Speed of AI, quality of 30 years of engineering experience.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">📍</div>
+        <h3>Built for New Orleans businesses.</h3>
+        <p>Deep familiarity with Louisiana business culture, regulatory environment, and the specific challenges Gulf Coast companies face with technology adoption.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">🔒</div>
+        <h3>No vendor bias. Ever.</h3>
+        <p>TrustLight doesn't sell software or receive referral fees. The recommendation is always what's right for your business — not what's profitable for us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section style="border-bottom:1px solid var(--rule);">
+  <div class="section">
+    <p class="section-eyebrow">What You Walk Away With</p>
+    <h2 class="section-title">Six documents.<br>One complete implementation foundation.</h2>
+    <div class="deliverables-list">
+      <div class="deliverable">
+        <span class="check">✓</span>
+        <div><h4>Client Intelligence Report</h4><p>Business profile, competitive analysis, digital presence audit, and discovery questions — all done before the first meeting.</p></div>
+      </div>
+      <div class="deliverable">
+        <span class="check">✓</span>
+        <div><h4>Mission & Vision Deck</h4><p>Current state, desired state, gaps, and success metrics — your north star for the entire engagement.</p></div>
+      </div>
+      <div class="deliverable">
+        <span class="check">✓</span>
+        <div><h4>Scored Mind Map</h4><p>Every business function mapped and scored for AI readiness, with top priorities identified and ranked.</p></div>
+      </div>
+      <div class="deliverable">
+        <span class="check">✓</span>
+        <div><h4>Use Case Document</h4><p>3–5 precisely defined, buildable AI use cases with impact scoring and dependency mapping.</p></div>
+      </div>
+      <div class="deliverable">
+        <span class="check">✓</span>
+        <div><h4>User Story Backlog</h4><p>Development-ready stories, prioritized and wave-sequenced so your team knows what to build and in what order.</p></div>
+      </div>
+      <div class="deliverable">
+        <span class="check">✓</span>
+        <div><h4>Roadmap + Full PRD</h4><p>Phased implementation plan and a complete Product Requirements Document. Rob builds from it directly, or hands it to your team — ready on day one.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <p class="eyebrow">Ready to Start</p>
+    <h2>Stop planning to implement AI.<br>Start implementing it.</h2>
+    <p>The Blueprint Process typically takes 4–6 weeks from first call to final PRD delivery. At that point, Rob either picks up the build himself or hands the PRD to your team. Either way — you have something real to move on.</p>
+    <div class="cta-actions">
+      <a href="landing.html#contact" class="btn-primary">Book a Strategy Call →</a>
+      <a href="blueprint-process.html" class="btn-ghost">See Every Step of the Process</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 TrustLight Advisory · <a href="mailto:contact@trustlight.ai">contact@trustlight.ai</a></p>
+  <a href="landing.html">trustlight.ai</a>
+  <div class="footer-nav" style="width:100%;">
+    <a href="landing.html">Home</a>
+    <span style="color:rgba(255,255,255,0.12);">·</span>
+    <a href="landing.html#services">Services</a>
+    <span style="color:rgba(255,255,255,0.12);">·</span>
+    <a href="geo-readiness.html">GEO Readiness</a>
+    <span style="color:rgba(255,255,255,0.12);">·</span>
+    <a href="openclaw.html">OpenClaw Agents</a>
+    <span style="color:rgba(255,255,255,0.12);">·</span>
+    <a href="workshop.html">Workshop</a>
+    <span style="color:rgba(255,255,255,0.12);">·</span>
+    <a href="blueprint-process.html">Blueprint Details</a>
+    <span style="color:rgba(255,255,255,0.12);">·</span>
+    <a href="events.html">Events</a>
+    <span style="color:rgba(255,255,255,0.12);">·</span>
+    <a href="resources.html">Resources</a>
+    <span style="color:rgba(255,255,255,0.12);">·</span>
+    <a href="landing.html#contact" style="color:var(--amber);">Let's Talk</a>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  var menu = document.getElementById('mobileMenu');
+  var btn = document.getElementById('hamburger');
+  var open = menu.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+  document.documentElement.style.overflowX = open ? 'hidden' : '';
+  document.getElementById('mobile-close-btn').style.display = open ? 'flex' : 'none';
+  document.getElementById('mobile-backdrop').style.display = open ? 'block' : 'none';
+}
+function closeMenu() {
+  var m = document.getElementById('mobileMenu');
+  var b = document.getElementById('hamburger');
+  if (m) m.classList.remove('open');
+  if (b) b.classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('mobile-close-btn').style.display = 'none';
+  document.getElementById('mobile-backdrop').style.display = 'none';
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
+</script>
+</body>
+</html>

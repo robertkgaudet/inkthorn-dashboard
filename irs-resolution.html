@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IRS Resolution Record — TrustLight Advisory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --off-white: #f2ede6;
+      --amber: #c8832a;
+      --amber-light: #e09a40;
+      --amber-dim: rgba(200,131,42,0.12);
+      --mid: #1c1c1c;
+      --muted: #888;
+      --rule: rgba(255,255,255,0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN OVERLAY ── */
+    #login-overlay {
+      position: fixed; inset: 0;
+      background: var(--black);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+    }
+    .login-box {
+      background: var(--mid);
+      border: 1px solid rgba(200,131,42,0.3);
+      border-radius: 10px;
+      padding: 2.5rem 2rem;
+      width: 100%; max-width: 380px;
+      text-align: center;
+    }
+    .login-box .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: var(--amber);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+    .login-box .subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .login-box input[type="password"] {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .login-box input[type="password"]:focus {
+      border-color: var(--amber);
+    }
+    .login-box button {
+      width: 100%;
+      background: var(--amber);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .login-box button:hover { background: var(--amber-light); }
+    .login-error {
+      font-size: 0.8rem;
+      color: #e05a5a;
+      margin-top: 0.75rem;
+      display: none;
+    }
+
+    /* ── MAIN CONTENT (hidden until unlocked) ── */
+    #main-content { display: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      padding: 1rem 2rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--amber);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .nav-tag {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: 1px solid var(--rule);
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── HEADER ── */
+    .page-header {
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .page-header .eyebrow {
+      font-size: 0.72rem;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+    }
+    .page-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+    .page-header .description {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.65;
+    }
+
+    /* ── STATUS BANNER ── */
+    .status-banner {
+      background: var(--amber-dim);
+      border: 1px solid rgba(200,131,42,0.35);
+      border-radius: 8px;
+      padding: 1rem 1.4rem;
+      margin-bottom: 2.5rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .status-banner .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--amber);
+      margin-top: 5px;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px var(--amber);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .status-banner .status-text strong {
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+    .status-banner .status-text span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      margin-bottom: 2.5rem;
+    }
+    .section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.06em;
+      color: var(--amber);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* ── FACT GRID ── */
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .fact-card {
+      background: var(--mid);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+    }
+    .fact-card .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .fact-card .value {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--off-white);
+    }
+    .fact-card .value.amber { color: var(--amber); }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 5px; top: 6px; bottom: 6px;
+      width: 1px;
+      background: var(--rule);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.5rem;
+      padding-left: 1.2rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.5rem; top: 6px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--amber);
+      border: 2px solid var(--black);
+    }
+    .timeline-item .date {
+      font-size: 0.72rem;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.25rem;
+    }
+    .timeline-item .event {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+    .timeline-item .detail {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── STRATEGY TABLE ── */
+    .strategy-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .strategy-list li {
+      background: var(--mid);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .strategy-list li .tag {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 99px;
+      border: 1px solid rgba(200,131,42,0.4);
+      color: var(--amber);
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .strategy-list li .strat-body .title {
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+    .strategy-list li .strat-body .desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── ADVISORY NOTES ── */
+    .note-block {
+      background: var(--mid);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 8px 8px 0;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .note-block .note-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .note-block .note-body {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .note-block .note-body p { margin-bottom: 0.5rem; }
+    .note-block .note-body p:last-child { margin-bottom: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      margin-top: 4rem;
+      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      color: var(--amber);
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 2rem 1.2rem 4rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     LOGIN OVERLAY
+════════════════════════════════════════ -->
+<div id="login-overlay">
+  <div class="login-box">
+    <div class="logo">TrustLight Advisory</div>
+    <div class="subtitle">Private Record — Authorized Access Only</div>
+    <input type="password" id="pw-input" placeholder="Enter password" />
+    <button onclick="checkPassword()">Access Record</button>
+    <div class="login-error" id="pw-error">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════ -->
+<div id="main-content">
+
+  <nav>
+    <a href="https://trustlight.ai/landing.html" class="nav-logo">TrustLight</a>
+    <span class="nav-tag">Private Record</span>
+    <a href="https://trustlight.ai/budget.html" style="font-size:0.8rem;color:var(--muted);text-decoration:none;margin-left:auto;opacity:0.7;" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted)'">Budget →</a>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-header">
+      <div class="eyebrow">Confidential — IRS Resolution Documentation</div>
+      <h1>IRS Debt Resolution<br>Record of Effort</h1>
+      <p class="description">
+        This document is a private record of good-faith efforts to resolve an outstanding IRS obligation.
+        It documents the financial situation, advisory guidance received, professional representation engaged,
+        and the strategic path forward. Maintained as an evidence record of proactive engagement.
+      </p>
+    </div>
+
+    <!-- STATUS -->
+    <div class="status-banner">
+      <div class="dot"></div>
+      <div class="status-text">
+        <strong>Active Resolution in Progress</strong>
+        <span>Professional representation engaged. Payment plan established. Renegotiation underway.</span>
+      </div>
+    </div>
+
+    <!-- KEY FACTS -->
+    <div class="section">
+      <h2>Key Facts</h2>
+      <div class="fact-grid">
+        <div class="fact-card">
+          <div class="label">Notice Received</div>
+          <div class="value">CP504</div>
+        </div>
+        <div class="fact-card">
+          <div class="label">Notice Type</div>
+          <div class="value">Intent to Levy</div>
+        </div>
+        <div class="fact-card">
+          <div class="label">Amount Assessed</div>
+          <div class="value amber">$200,000+</div>
+        </div>
+        <div class="fact-card">
+          <div class="label">Representation</div>
+          <div class="value">Tax Rise (Active)</div>
+        </div>
+        <div class="fact-card">
+          <div class="label">Payment Plan</div>
+          <div class="value">Established</div>
+        </div>
+        <div class="fact-card">
+          <div class="label">Current Plan Amount</div>
+          <div class="value">$3,000/mo</div>
+        </div>
+        <div class="fact-card">
+          <div class="label">Plan Status</div>
+          <div class="value amber">Renegotiating</div>
+        </div>
+        <div class="fact-card">
+          <div class="label">Income Status</div>
+          <div class="value">Inconsistent</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINANCIAL SITUATION -->
+    <div class="section">
+      <h2>Financial Situation</h2>
+      <div class="note-block">
+        <div class="note-title">Summary of Current Financial Position</div>
+        <div class="note-body">
+          <p>Monthly expenses are approximately $6,000–$7,000, a portion of which relates to an active private business currently in a pre-revenue / revenue-gap phase. Sufficient funds are being generated to cover basic living and business operating expenses, but not materially beyond that.</p>
+          <p>The taxpayer has been liquidating business assets to cover personal draws during this period. There is no consistent income stream sufficient to sustain the current installment agreement amount of $3,000/month. This is not a refusal to pay — it is a documented inability to pay at the established rate without causing financial hardship.</p>
+          <p>The established payment plan of $3,000/month was set prior to full documentation of the current financial position and is being renegotiated with Tax Rise to reflect actual ability to pay.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="section">
+      <h2>Timeline of Actions</h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="date">Prior to April 2026</div>
+          <div class="event">Professional Representation Engaged</div>
+          <div class="detail">Tax Rise retained as professional representative to manage IRS resolution. All communications with the IRS directed through representation.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="date">Prior to April 2026</div>
+          <div class="event">Installment Agreement Established</div>
+          <div class="detail">Payment plan established with IRS at $3,000/month. Plan was accepted in good faith as a starting point for resolution, though sustainability was a concern from the outset.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="date">April 2026</div>
+          <div class="event">CP504 Notice Received</div>
+          <div class="detail">Notice of Intent to Levy received from IRS. This notice has been received and acknowledged. Professional representation has been informed. The 30-day response window is being actively managed.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="date">April 10, 2026</div>
+          <div class="event">Advisory Consultation — Resolution Strategy Reviewed</div>
+          <div class="detail">Comprehensive review of resolution options conducted. Three primary strategies identified: Currently Not Collectible (CNC) status, Partial Pay Installment Agreement (PPIA), and Offer in Compromise (OIC). Financial documentation requirements identified and being prepared for Tax Rise.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="date">In Progress</div>
+          <div class="event">Renegotiation of Payment Plan</div>
+          <div class="detail">Tax Rise is being directed to renegotiate the current installment agreement to reflect actual financial capacity. Exploring reduction of monthly payment and formal OIC candidacy evaluation.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RESOLUTION STRATEGY -->
+    <div class="section">
+      <h2>Resolution Strategies Under Consideration</h2>
+      <ul class="strategy-list">
+
+        <li>
+          <span class="tag">Priority</span>
+          <div class="strat-body">
+            <div class="title">Currently Not Collectible (CNC) Status</div>
+            <div class="desc">If monthly income after allowable expenses is insufficient to sustain any payment, the IRS can place the account in CNC status. This pauses levy action and collection while the financial hardship is documented. Being requested as an immediate protective measure while longer-term strategy is evaluated.</div>
+          </div>
+        </li>
+
+        <li>
+          <span class="tag">Active</span>
+          <div class="strat-body">
+            <div class="title">Partial Pay Installment Agreement (PPIA)</div>
+            <div class="desc">A renegotiated payment plan based on actual ability to pay rather than a standard installment calculation. Payments are set at what the taxpayer can genuinely afford — even if they will not fully satisfy the debt within the collection statute. Currently the most likely near-term resolution vehicle.</div>
+          </div>
+        </li>
+
+        <li>
+          <span class="tag">Evaluating</span>
+          <div class="strat-body">
+            <div class="title">Offer in Compromise (OIC)</div>
+            <div class="desc">A settlement offer to the IRS for less than the full amount owed, based on documented inability to pay. With near-zero net monthly income after allowable expenses and limited asset equity, the calculated OIC offer amount may be a fraction of the $200,000+ balance. Tax Rise is being directed to formally evaluate OIC candidacy. Timeline: 6–12 months to resolution if accepted.</div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- ADVISORY NOTES -->
+    <div class="section">
+      <h2>Advisory Notes</h2>
+
+      <div class="note-block">
+        <div class="note-title">Form 433-A / 433-B — Financial Documentation</div>
+        <div class="note-body">
+          <p>The IRS evaluates ability to pay using a Collection Financial Statement. The following must be documented and submitted to Tax Rise for inclusion in the renegotiation:</p>
+          <p>① Monthly income — average of last 3 months<br>
+             ② Monthly expenses — line by line, including business operating costs<br>
+             ③ Asset inventory — vehicles, equipment, accounts, with estimated equity in each<br>
+             ④ Narrative of income inconsistency — explain the business revenue gap and asset liquidation</p>
+        </div>
+      </div>
+
+      <div class="note-block">
+        <div class="note-title">IRS Collection Process — Where This Stands</div>
+        <div class="note-body">
+          <p>A CP504 is a notice of intent — not a seizure order. The IRS follows a defined process: assessment → billing → Final Notice (Letter 1058 / LT11) → 30-day window → levy action. An active payment plan and engaged representation significantly reduces the risk of levy action proceeding.</p>
+          <p>The critical protective factor is remaining in active, documented communication with the IRS through representation. Silence is the primary trigger for escalation. This record demonstrates the opposite of silence.</p>
+        </div>
+      </div>
+
+      <div class="note-block">
+        <div class="note-title">Direction to Tax Rise</div>
+        <div class="note-body">
+          <p>Tax Rise has been directed to: (1) pursue CNC status immediately as a protective measure, (2) renegotiate the installment agreement to reflect actual financial capacity, and (3) formally evaluate whether an Offer in Compromise is appropriate given the financial profile. If Tax Rise is not actively pursuing these strategies, escalation within the firm or engagement of alternative representation will be considered.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DOCUMENTED EXPENSE RECORD -->
+    <div class="section">
+      <h2>Documented Monthly Expenses — April 2026</h2>
+
+      <div class="note-block" style="margin-bottom:1.5rem;">
+        <div class="note-title">Purpose of This Record</div>
+        <div class="note-body">
+          <p>The following is a complete itemized record of monthly financial obligations as of April 2026. This record supports the taxpayer's claim of financial hardship and inability to sustain the current IRS installment agreement of $3,000/month. Items marked <strong style="color:var(--amber)">⚡ Credit Impact</strong> directly affect credit standing and are prioritized accordingly.</p>
+        </div>
+      </div>
+
+      <!-- Expense Table -->
+      <div style="overflow-x:auto;border:1px solid var(--rule);border-radius:8px;margin-bottom:1rem;">
+        <table style="width:100%;border-collapse:collapse;min-width:600px;font-size:0.84rem;">
+          <thead>
+            <tr style="background:var(--mid2);">
+              <th style="padding:0.5rem 0.75rem;text-align:left;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);border-bottom:1px solid var(--rule);font-weight:500;">Expense</th>
+              <th style="padding:0.5rem 0.75rem;text-align:center;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);border-bottom:1px solid var(--rule);font-weight:500;">Due</th>
+              <th style="padding:0.5rem 0.75rem;text-align:right;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);border-bottom:1px solid var(--rule);font-weight:500;">Amount</th>
+              <th style="padding:0.5rem 0.75rem;text-align:left;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);border-bottom:1px solid var(--rule);font-weight:500;">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- HOUSING -->
+            <tr><td colspan="4" style="padding:0.35rem 0.75rem;background:rgba(200,131,42,0.06);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);font-weight:500;border-bottom:1px solid var(--rule);">Housing</td></tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Rent</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/1</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$2,150.00</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Paid 4/2 via Zelle</td>
+            </tr>
+            <!-- TRANSPORTATION -->
+            <tr><td colspan="4" style="padding:0.35rem 0.75rem;background:rgba(200,131,42,0.06);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);font-weight:500;border-bottom:1px solid var(--rule);">Transportation &amp; Insurance</td></tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">State Farm Car Insurance</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/4</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$281.08</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Required auto coverage</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">ATT Phone</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/4</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$379.18</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Paid 4/2</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Verizon</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/14</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$173.00</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);"></td>
+            </tr>
+            <!-- INSURANCE / PROTECTION -->
+            <tr><td colspan="4" style="padding:0.35rem 0.75rem;background:rgba(200,131,42,0.06);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);font-weight:500;border-bottom:1px solid var(--rule);">Insurance &amp; Protection</td></tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Life Insurance</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/13</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$1,260.75</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Auto-draft</td>
+            </tr>
+            <!-- DEBT SERVICE — CREDIT IMPACT -->
+            <tr><td colspan="4" style="padding:0.35rem 0.75rem;background:rgba(200,131,42,0.06);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);font-weight:500;border-bottom:1px solid var(--rule);">⚡ Debt Service (Credit Impact)</td></tr>
+            <tr style="border-bottom:1px solid var(--rule);border-left:2px solid var(--amber);">
+              <td style="padding:0.45rem 0.75rem;">PayPal MasterCard (0411)</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/1</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$29.00 min</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Paid $100 on 4/3 — $3,000 limit</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);border-left:2px solid var(--amber);">
+              <td style="padding:0.45rem 0.75rem;">Care Credit (Syncrony)</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/13</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$126.00</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">866-396-8254 | Bal: $1,902 / $4,000</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);border-left:2px solid var(--amber);">
+              <td style="padding:0.45rem 0.75rem;">JPMCB</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/25</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">TBD min</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">800-945-2000 | Bal: $13,680 / $15,500</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);border-left:2px solid var(--amber);">
+              <td style="padding:0.45rem 0.75rem;">PayPal MasterCard (6162)</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/25</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$200.00</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Syncrony | Bal: $1,500 / $1,500</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);border-left:2px solid var(--amber);">
+              <td style="padding:0.45rem 0.75rem;">Mariner Finance</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/15</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$180.82</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">864-448-7000</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);border-left:2px solid var(--amber);">
+              <td style="padding:0.45rem 0.75rem;">Lowe's Credit Card</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/12</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$75.00</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Paid 4/4 — ACH only, 800-444-1408</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);border-left:2px solid var(--amber);">
+              <td style="padding:0.45rem 0.75rem;">Regional Finance</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/25</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">TBD</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">864-448-7000</td>
+            </tr>
+            <!-- STORAGE -->
+            <tr><td colspan="4" style="padding:0.35rem 0.75rem;background:rgba(200,131,42,0.06);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);font-weight:500;border-bottom:1px solid var(--rule);">Storage</td></tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Laf Storage (254)</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/13</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$272.00</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Business equipment / assets</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Laf Storage (253)</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/17</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$316.00</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Business equipment / assets</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Stor All New Orleans</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/25</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$91.00</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);"></td>
+            </tr>
+            <!-- BUSINESS (GFHA) -->
+            <tr><td colspan="4" style="padding:0.35rem 0.75rem;background:rgba(200,131,42,0.06);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);font-weight:500;border-bottom:1px solid var(--rule);">GFHA Business Expenses (Carried Personally)</td></tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">SendGrid / Twilio</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/4</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$19.95</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Paid 4/4 — Email/SMS infrastructure</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Everleap (Web Hosting)</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/2</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$250.00</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Business web infrastructure</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">CoreLogic Subscription</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);"></td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$250.00</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Business data platform</td>
+            </tr>
+            <!-- SUBSCRIPTIONS -->
+            <tr><td colspan="4" style="padding:0.35rem 0.75rem;background:rgba(200,131,42,0.06);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);font-weight:500;border-bottom:1px solid var(--rule);">Utilities &amp; Subscriptions</td></tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Google Workspace</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/2</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$41.70</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Paid 4/4</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Grok</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/8</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$29.99</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">AI tools — business use</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">YouTube TV</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/4</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$91.70</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Auto-draft</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Rekordbox</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/2</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$39.24</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Paid 4/2</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Tidal</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/13</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$23.09</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);"></td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Netflix</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/16</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$8.83</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">PayPal Blue</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Amazon Prime</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/4</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$14.99</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Auto-draft</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">MyFico</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/12</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$44.14</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Credit monitoring</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Opportunity Machine</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/1</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$100.00</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Paid 4/3 via ACH</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Facebook Ads</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/28</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$14.99</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Auto-draft</td>
+            </tr>
+            <!-- TAX / LEGAL -->
+            <tr><td colspan="4" style="padding:0.35rem 0.75rem;background:rgba(200,131,42,0.06);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);font-weight:500;border-bottom:1px solid var(--rule);">Tax &amp; Legal Obligations</td></tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">TaxRise (Rep Fees)</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);"></td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">TBD</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">IRS professional representation</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">IRS Installment Agreement</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);"></td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$3,000.00</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">Currently being renegotiated — unsustainable</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule);">
+              <td style="padding:0.45rem 0.75rem;">Louisiana Dept Revenue</td>
+              <td style="padding:0.45rem 0.75rem;text-align:center;color:var(--muted);">4/3</td>
+              <td style="padding:0.45rem 0.75rem;text-align:right;font-family:monospace;">$711.54</td>
+              <td style="padding:0.45rem 0.75rem;color:var(--muted);">State tax obligation</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr style="border-top:1px solid var(--rule);background:var(--mid2);">
+              <td colspan="2" style="padding:0.6rem 0.75rem;font-weight:600;">Total Documented Monthly Obligations</td>
+              <td style="padding:0.6rem 0.75rem;text-align:right;font-family:monospace;font-weight:600;color:var(--amber);">~$7,400+</td>
+              <td style="padding:0.6rem 0.75rem;font-size:0.78rem;color:var(--muted);">Excluding IRS payment &amp; TaxRise fees</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="note-block">
+        <div class="note-title">Cancelled / Removed Subscriptions (Cost Reduction Efforts)</div>
+        <div class="note-body">
+          <p>The following subscriptions were proactively cancelled as part of expense reduction: <strong>Ring</strong> (cancelled 4/2), <strong>LinkedIn</strong> (cancelled 4/2), <strong>Audible</strong> (cancelled 4/2), <strong>People Looker</strong> (cancelled 4/6), <strong>ERASE.com</strong> (paid off), <strong>Robinhood Investments</strong> (paused 3/14). This demonstrates active effort to reduce monthly outgo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARCH 2026 BANK STATEMENT ANALYSIS -->
+    <div class="section" style="margin-top:2rem;">
+      <h2>March 2026 Bank Statement — Chase ···7790</h2>
+
+      <div class="note-block" style="margin-bottom:1rem;">
+        <div class="note-title">Statement Period: Feb 28 – Mar 31, 2026</div>
+        <div class="note-body">
+          <p><strong>Beginning Balance:</strong> -$553.96 &nbsp;|&nbsp; <strong>Ending Balance:</strong> -$639.15<br>
+          <strong>Total Deposits:</strong> $15,092.00 &nbsp;|&nbsp; <strong>Total Withdrawals:</strong> $14,812.19 &nbsp;|&nbsp; <strong>Fees:</strong> $365.00</p>
+          <p style="margin-top:0.5rem;">This account operated in a negative balance for a significant portion of the period, resulting in 10 overdraft fees at $34 each ($340 total) plus a $25 monthly service fee. This is direct evidence of financial hardship and cash flow strain — relevant documentation for the 433-A and hardship argument.</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:1.5rem;">
+        <div style="background:var(--mid);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.2rem;">
+          <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:0.75rem;">Income Sources (March)</div>
+          <div style="font-size:0.84rem;line-height:2;color:var(--muted);">
+            <span style="color:var(--off-white);">BPR Medical LLC (Zelle 3/12):</span> $5,000.00<br>
+            <span style="color:var(--off-white);">Remote Online Deposit (3/2):</span> $2,000.00<br>
+            <span style="color:var(--off-white);">Zelle from James Guenther (3/3):</span> $275.00<br>
+            <span style="color:var(--off-white);">Transfers from ···1750:</span> ~$7,817.00<br>
+            <span style="color:var(--off-white);border-top:1px solid var(--rule);display:block;padding-top:0.4rem;margin-top:0.3rem;">Total Deposits:</span> $15,092.00
+          </div>
+        </div>
+        <div style="background:var(--mid);border:1px solid var(--rule);border-radius:8px;padding:1rem 1.2rem;">
+          <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:0.75rem;">Major Expenses (March)</div>
+          <div style="font-size:0.84rem;line-height:2;color:var(--muted);">
+            <span style="color:var(--off-white);">Rent (Zelle to Clint Flanders):</span> $2,150.00<br>
+            <span style="color:var(--off-white);">Life Insurance:</span> $1,260.75<br>
+            <span style="color:var(--off-white);">Louisiana Revenue (State Tax):</span> $711.54<br>
+            <span style="color:var(--off-white);">Everleap (hosting):</span> $560.00<br>
+            <span style="color:var(--off-white);">Storage (x2 The Storage Center):</span> $697.60<br>
+            <span style="color:var(--off-white);">Mariner Finance (x2):</span> $371.64<br>
+            <span style="color:var(--off-white);">Overdraft Fees (10×$34):</span> $340.00<br>
+            <span style="color:var(--off-white);">Verizon:</span> $141.86
+          </div>
+        </div>
+        <div style="background:var(--red-dim);border:1px solid rgba(224,90,90,0.3);border-radius:8px;padding:1rem 1.2rem;">
+          <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--red);margin-bottom:0.75rem;">⚠️ Hardship Indicators</div>
+          <div style="font-size:0.84rem;line-height:2;color:var(--muted);">
+            <span style="color:var(--off-white);">Account started negative:</span> -$553.96<br>
+            <span style="color:var(--off-white);">Account ended negative:</span> -$639.15<br>
+            <span style="color:var(--off-white);">Overdraft events:</span> 10 separate charges<br>
+            <span style="color:var(--off-white);">Overdraft fees paid:</span> $340.00<br>
+            <span style="color:var(--off-white);">Monthly service fee:</span> $25.00<br>
+            <span style="color:var(--off-white);">Total fees lost:</span> $365.00
+          </div>
+        </div>
+      </div>
+
+      <!-- ONE-TIME EXPENSE NOTE -->
+      <div class="note-block" style="border-left-color:var(--red);">
+        <div class="note-title">⚠️ Extraordinary Cash Outflows — April 9–10, 2026 (~$3,000 in 48 hours)</div>
+        <div class="note-body">
+          <p>Three separate non-recurring financial obligations came due simultaneously in a 48-hour window, resulting in approximately $3,000 in unplanned cash outflows from the taxpayer's personal account:</p>
+          <p><strong>1. Storage Fees — $700 (April 9)</strong><br>Past-due storage unit fees paid to bring accounts current. Business and personal property storage required while in transition.</p>
+          <p><strong>2. DMV Fine — ~$1,100 (April 10)</strong><br>Fine assessed for failure to surrender a company truck license plate after canceling vehicle insurance. Statutory requirement not known to the taxpayer — fine accrued over time due to administrative oversight, not willful non-compliance. Non-recurring, involuntary expense.</p>
+          <p><strong>3. Chase Bank Charge-Off Settlement — $1,200 (April 10)</strong><br>Chase Bank closed the Ground Force Humanitarian Aid (GFHA) business checking account due to a charge-off with an outstanding balance of approximately $3,500. Chase negotiated a settlement of $1,200 paid by the April 10th deadline. Paid from personal funds on behalf of the nonprofit. Account is now fully resolved. This is a business debt satisfied personally — further evidence of the taxpayer carrying organizational obligations out-of-pocket while income is inconsistent.</p>
+          <p style="margin-top:0.75rem;padding:0.75rem;background:rgba(200,131,42,0.08);border-left:2px solid var(--amber);border-radius:0 6px 6px 0;"><strong>IRS Relevance:</strong> These three events represent ~$3,000 in involuntary, non-recurring cash outflows in a single 48-hour window — on top of regular monthly obligations of ~$6,000–7,000. This further demonstrates the taxpayer's inability to sustain a $3,000/month IRS installment payment and strongly supports the hardship argument for CNC status, PPIA renegotiation, or an Offer in Compromise.</p>
+          <p>These events should be documented in the 433-A narrative as contributing factors to financial hardship during Q1–Q2 2026.</p>
+        </div>
+      </div>
+
+      <div class="note-block">
+        <div class="note-title">Subscriptions Identified for Review / Cancellation</div>
+        <div class="note-body">
+          <p>The following were identified on the March statement and should be reviewed for cancellation or necessity: <strong>Kasidie Ent ($149.95)</strong>, <strong>Vocalfy ($28.99)</strong>, <strong>Splice.com ($21.79)</strong>, <strong>Breeze App ($29.99)</strong>, <strong>Business Insider ($12.95)</strong>, <strong>Tinder ($44.19)</strong>. Several of these were already triggering overdraft fees — meaning Rob was paying $34 overdraft fee on top of the subscription cost.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--rule);margin:0 0 2rem;">
+
+    <!-- FORM 433-A SUMMARY -->
+    <div class="section">
+      <h2>Form 433-A Ready Summary</h2>
+
+      <div class="note-block" style="margin-bottom:1.5rem;">
+        <div class="note-title">What This Is</div>
+        <div class="note-body">
+          <p>The IRS uses Form 433-A (Collection Information Statement for Wage Earners and Self-Employed Individuals) to evaluate ability to pay. The following is a pre-organized summary structured to match what Tax Rise will need to complete and submit this form. Bring this to your next Tax Rise meeting.</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.5rem;">
+
+        <div style="background:var(--mid);border:1px solid var(--rule);border-radius:8px;padding:1.1rem 1.2rem;">
+          <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:0.75rem;font-weight:500;">Section 1 — Personal Information</div>
+          <div style="font-size:0.84rem;line-height:2;color:var(--muted);">
+            <span style="color:var(--off-white);font-weight:500;">Name:</span> Rob Gaudet<br>
+            <span style="color:var(--off-white);font-weight:500;">Location:</span> New Orleans, Louisiana<br>
+            <span style="color:var(--off-white);font-weight:500;">Filing Status:</span> [Confirm with Tax Rise]<br>
+            <span style="color:var(--off-white);font-weight:500;">Employment:</span> Self-Employed / Business Owner<br>
+            <span style="color:var(--off-white);font-weight:500;">Business:</span> Ground Force Humanitarian Aid (GFHA)
+          </div>
+        </div>
+
+        <div style="background:var(--mid);border:1px solid var(--rule);border-radius:8px;padding:1.1rem 1.2rem;">
+          <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:0.75rem;font-weight:500;">Section 2 — Income</div>
+          <div style="font-size:0.84rem;line-height:2;color:var(--muted);">
+            <span style="color:var(--off-white);font-weight:500;">Income Type:</span> Self-employed / inconsistent<br>
+            <span style="color:var(--off-white);font-weight:500;">Avg Monthly (3-mo):</span> [Document actual avg]<br>
+            <span style="color:var(--off-white);font-weight:500;">Source:</span> Business revenue + asset liquidation<br>
+            <span style="color:var(--off-white);font-weight:500;">Note:</span> Selling business assets to cover personal draws — not sustainable recurring income
+          </div>
+        </div>
+
+        <div style="background:var(--mid);border:1px solid var(--rule);border-radius:8px;padding:1.1rem 1.2rem;">
+          <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:0.75rem;font-weight:500;">Section 3 — Monthly Expenses (IRS Allowable)</div>
+          <div style="font-size:0.84rem;line-height:2;color:var(--muted);">
+            <span style="color:var(--off-white);font-weight:500;">Housing:</span> $2,150<br>
+            <span style="color:var(--off-white);font-weight:500;">Transportation:</span> $281 (insurance)<br>
+            <span style="color:var(--off-white);font-weight:500;">Phone/Utilities:</span> $552<br>
+            <span style="color:var(--off-white);font-weight:500;">Life Insurance:</span> $1,261<br>
+            <span style="color:var(--off-white);font-weight:500;">Minimum Debt Pmts:</span> ~$612<br>
+            <span style="color:var(--off-white);font-weight:500;">Storage (business):</span> $679<br>
+            <span style="color:var(--off-white);font-weight:500;">Business ops:</span> ~$520<br>
+            <span style="color:var(--off-white);font-weight:500;border-top:1px solid var(--rule);display:block;padding-top:0.35rem;margin-top:0.25rem;">Est. Total:</span> ~$6,055 / month
+          </div>
+        </div>
+
+        <div style="background:var(--mid);border:1px solid var(--rule);border-radius:8px;padding:1.1rem 1.2rem;">
+          <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:0.75rem;font-weight:500;">Section 4 — Assets</div>
+          <div style="font-size:0.84rem;line-height:2;color:var(--muted);">
+            <span style="color:var(--off-white);font-weight:500;">Vehicle:</span> [Year/Make — document equity]<br>
+            <span style="color:var(--off-white);font-weight:500;">Real Property:</span> None (renting)<br>
+            <span style="color:var(--off-white);font-weight:500;">Bank Accounts:</span> [Balance at time of filing]<br>
+            <span style="color:var(--off-white);font-weight:500;">Business Assets:</span> Being liquidated to cover living expenses<br>
+            <span style="color:var(--off-white);font-weight:500;">Investments:</span> Robinhood paused (3/14)
+          </div>
+        </div>
+
+        <div style="background:var(--mid);border:1px solid var(--rule);border-radius:8px;padding:1.1rem 1.2rem;">
+          <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:0.75rem;font-weight:500;">Section 5 — Liabilities</div>
+          <div style="font-size:0.84rem;line-height:2;color:var(--muted);">
+            <span style="color:var(--off-white);font-weight:500;">JPMCB:</span> $13,680 / $15,500 (88%)<br>
+            <span style="color:var(--off-white);font-weight:500;">PayPal MC (6162):</span> $1,500 / $1,500 (maxed)<br>
+            <span style="color:var(--off-white);font-weight:500;">Care Credit:</span> $1,903 / $4,000<br>
+            <span style="color:var(--off-white);font-weight:500;">Lowe's CC:</span> $885 / [limit]<br>
+            <span style="color:var(--off-white);font-weight:500;">Mariner Finance:</span> [Balance TBD]<br>
+            <span style="color:var(--off-white);font-weight:500;">Regional Finance:</span> [Balance TBD]<br>
+            <span style="color:var(--off-white);font-weight:500;border-top:1px solid var(--rule);display:block;padding-top:0.35rem;margin-top:0.25rem;">LA Dept Revenue:</span> $711.54 (state)
+          </div>
+        </div>
+
+        <div style="background:var(--amber-dim);border:1px solid var(--amber-border);border-radius:8px;padding:1.1rem 1.2rem;">
+          <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:0.75rem;font-weight:500;">Hardship Argument Summary</div>
+          <div style="font-size:0.84rem;line-height:1.8;color:var(--off-white);">
+            Monthly obligations (~$6,055) equal or exceed current monthly income. No consistent revenue stream exists. Taxpayer is liquidating business assets to fund basic living expenses — a finite and unsustainable situation. Current IRS payment plan of $3,000/month cannot be sustained without causing additional financial hardship and default. Taxpayer is actively engaged with professional representation and is NOT evading — seeking lawful resolution.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="note-block">
+        <div class="note-title">Documents to Gather for Tax Rise</div>
+        <div class="note-body">
+          <p>① Last 3 months bank statements (all accounts)<br>
+             ② Last 3 months proof of income / revenue records<br>
+             ③ Documentation of asset sales (trailer sale, any other liquidations)<br>
+             ④ Monthly expense receipts / statements matching the figures above<br>
+             ⑤ Business financials showing pre-revenue / gap status<br>
+             ⑥ Credit card statements showing current balances<br>
+             ⑦ Any prior IRS correspondence (all CP notices, letters)</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page -->
+
+  <footer>
+    <div class="footer-logo">TrustLight Advisory</div>
+    <div>New Orleans, Louisiana &nbsp;·&nbsp; Private Record &nbsp;·&nbsp; Confidential</div>
+    <div>© 2026 TrustLight Advisory</div>
+  </footer>
+
+</div><!-- /main-content -->
+
+<script>
+  // Enter key support
+  document.getElementById('pw-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  function checkPassword() {
+    var pw = document.getElementById('pw-input').value;
+    if (pw === 'AAww33!!') {
+      document.getElementById('login-overlay').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+    } else {
+      document.getElementById('pw-error').style.display = 'block';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  }
+</script>
+
+</body>
+</html>

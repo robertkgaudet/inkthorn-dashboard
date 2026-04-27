@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROB GAUDET // SETTINGS & ACTIVITY LOG</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --amber: #c8832a;
+    --amber-light: #e09a40;
+    --cyan: #00d4ff;
+    --red: #ff4444;
+    --green: #00ff88;
+    --bg: #0a0a0a;
+    --card: rgba(255,255,255,0.03);
+    --border: rgba(200,131,42,0.2);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: #f2ede6; font-family: 'Space Grotesk', sans-serif; min-height: 100vh; }
+
+  /* ── LOGIN ── */
+  #login-overlay {
+    position: fixed; inset: 0; background: #0a0a0a;
+    display: flex; align-items: center; justify-content: center; z-index: 999;
+  }
+  #login-overlay.hidden { display: none; }
+  .login-box { text-align: center; }
+  .login-logo { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; font-weight: 900; letter-spacing: 0.2em; color: var(--amber); margin-bottom: 0.5rem; }
+  .login-sub { font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; margin-bottom: 1.5rem; }
+  .login-box input { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #f2ede6; padding: 12px 20px; border-radius: 8px; font-size: 0.9rem; letter-spacing: 0.1em; width: 260px; outline: none; text-align: center; margin-bottom: 1rem; }
+  .login-btn { background: rgba(200,131,42,0.15); border: 1px solid var(--amber); color: var(--amber); padding: 12px 32px; border-radius: 8px; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; cursor: pointer; }
+  .login-btn:hover { background: rgba(200,131,42,0.25); }
+  .login-err { color: var(--red); font-size: 0.7rem; margin-top: 0.75rem; letter-spacing: 0.08em; min-height: 1rem; }
+
+  /* ── APP ── */
+  #app { display: none; max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  #app.visible { display: block; }
+
+  .page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+  .page-title { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.15em; color: var(--amber); }
+  .back-link { font-size: 0.72rem; color: rgba(255,255,255,0.4); text-decoration: none; letter-spacing: 0.08em; border: 1px solid var(--border); padding: 6px 14px; border-radius: 6px; }
+  .back-link:hover { color: var(--amber); border-color: var(--amber); }
+
+  .section-label { font-family: 'Orbitron', sans-serif; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--amber); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+
+  /* ── LOG TABLE ── */
+  .log-filters { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .filter-btn { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: rgba(255,255,255,0.5); padding: 5px 14px; border-radius: 6px; font-size: 0.68rem; letter-spacing: 0.08em; cursor: pointer; }
+  .filter-btn.active { background: rgba(200,131,42,0.15); border-color: var(--amber); color: var(--amber); }
+
+  .log-entry { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; display: grid; grid-template-columns: 140px 90px 1fr auto; gap: 0.75rem; align-items: start; }
+  .log-entry.login_failed { border-left: 3px solid var(--red); }
+  .log-entry.login_success { border-left: 3px solid var(--green); }
+  .log-entry.agent_change { border-left: 3px solid var(--cyan); }
+  .log-ts { font-size: 0.65rem; color: rgba(255,255,255,0.35); font-family: monospace; }
+  .log-type { font-size: 0.6rem; letter-spacing: 0.08em; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-align: center; }
+  .log-type.login_failed { background: rgba(255,68,68,0.15); color: var(--red); }
+  .log-type.login_success { background: rgba(0,255,136,0.1); color: var(--green); }
+  .log-type.agent_change { background: rgba(0,212,255,0.1); color: var(--cyan); }
+  .log-desc { font-size: 0.75rem; color: rgba(255,255,255,0.8); line-height: 1.4; }
+  .log-meta { font-size: 0.62rem; color: rgba(255,255,255,0.3); text-align: right; line-height: 1.6; }
+  .log-pw { font-size: 0.62rem; color: var(--red); font-family: monospace; margin-top: 2px; }
+
+  .log-empty { text-align: center; padding: 3rem; color: rgba(255,255,255,0.2); font-size: 0.8rem; letter-spacing: 0.1em; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; text-align: center; }
+  .stat-val { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--amber); }
+  .stat-val.red { color: var(--red); }
+  .stat-val.cyan { color: var(--cyan); }
+  .stat-label { font-size: 0.62rem; color: rgba(255,255,255,0.4); letter-spacing: 0.1em; margin-top: 0.25rem; }
+
+  .clear-btn { background: rgba(255,68,68,0.1); border: 1px solid rgba(255,68,68,0.3); color: var(--red); padding: 6px 16px; border-radius: 6px; font-size: 0.68rem; letter-spacing: 0.08em; cursor: pointer; }
+  .clear-btn:hover { background: rgba(255,68,68,0.2); }
+
+  @media (max-width: 600px) {
+    .log-entry { grid-template-columns: 1fr 1fr; }
+    .log-desc { grid-column: 1/-1; }
+    .log-meta { text-align: left; }
+    .stats-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div id="login-overlay">
+  <div class="login-box">
+    <div class="login-logo">ROB GAUDET</div>
+    <div class="login-sub">Settings — Restricted Access</div>
+    <input type="password" id="login-pw" placeholder="ENTER ACCESS CODE" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
+    <br>
+    <button class="login-btn" onclick="doLogin()">AUTHENTICATE</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="page-header">
+    <div class="page-title">⚙ SETTINGS & ACTIVITY LOG</div>
+    <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid" id="stats-grid">
+    <div class="stat-card"><div class="stat-val" id="stat-total">—</div><div class="stat-label">TOTAL EVENTS</div></div>
+    <div class="stat-card"><div class="stat-val red" id="stat-failed">—</div><div class="stat-label">FAILED LOGINS</div></div>
+    <div class="stat-card"><div class="stat-val cyan" id="stat-changes">—</div><div class="stat-label">AGENT CHANGES</div></div>
+  </div>
+
+  <!-- Filters -->
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem;">
+    <div class="section-label" style="margin-bottom:0;">ACTIVITY LOG</div>
+    <button class="clear-btn" onclick="clearLog()">CLEAR BROWSER LOG</button>
+  </div>
+
+  <div class="log-filters">
+    <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+    <button class="filter-btn" onclick="setFilter('login_failed',this)">Failed Logins</button>
+    <button class="filter-btn" onclick="setFilter('login_success',this)">Successful Logins</button>
+    <button class="filter-btn" onclick="setFilter('agent_change',this)">Agent Changes</button>
+  </div>
+
+  <div id="log-list"></div>
+</div>
+
+<script>
+const PASS = 'AAww33!!';
+let currentFilter = 'all';
+let allEntries = [];
+
+function doLogin() {
+  const pw = document.getElementById('login-pw').value;
+  if (pw === PASS) {
+    document.getElementById('login-overlay').classList.add('hidden');
+    document.getElementById('app').classList.add('visible');
+    loadLog();
+  } else {
+    document.getElementById('login-err').textContent = 'ACCESS DENIED — INVALID CODE';
+    document.getElementById('login-pw').value = '';
+    setTimeout(() => { document.getElementById('login-err').textContent = ''; }, 2500);
+  }
+}
+
+function getBrowserLog() {
+  try { return JSON.parse(localStorage.getItem('rg_activity_log') || '[]'); } catch(e) { return []; }
+}
+
+function getServerLog() {
+  return fetch('activity-log.json?v=' + Date.now())
+    .then(r => r.ok ? r.json() : {entries:[]})
+    .then(d => d.entries || [])
+    .catch(() => []);
+}
+
+function mergeEntries(browser, server) {
+  const seen = new Set();
+  const merged = [];
+  for (const e of [...browser, ...server]) {
+    const key = e.ts + (e.description || '') + (e.ip || '');
+    if (!seen.has(key)) { seen.add(key); merged.push(e); }
+  }
+  merged.sort((a,b) => b.ts.localeCompare(a.ts));
+  return merged;
+}
+
+function loadLog() {
+  const browser = getBrowserLog();
+  getServerLog().then(function(server) {
+    allEntries = mergeEntries(browser, server);
+    updateStats();
+    renderLog();
+  });
+}
+
+function updateStats() {
+  document.getElementById('stat-total').textContent = allEntries.length;
+  document.getElementById('stat-failed').textContent = allEntries.filter(e => e.type === 'login_failed').length;
+  document.getElementById('stat-changes').textContent = allEntries.filter(e => e.type === 'agent_change').length;
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderLog();
+}
+
+function formatTs(ts) {
+  try {
+    const d = new Date(ts);
+    return d.toLocaleString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit', hour12:true });
+  } catch(e) { return ts; }
+}
+
+function renderLog() {
+  const list = document.getElementById('log-list');
+  const entries = currentFilter === 'all' ? allEntries : allEntries.filter(e => e.type === currentFilter);
+  if (!entries.length) {
+    list.innerHTML = '<div class="log-empty">NO ENTRIES</div>';
+    return;
+  }
+  list.innerHTML = entries.map(function(e) {
+    const typeLabel = {
+      login_failed: 'FAILED LOGIN',
+      login_success: 'LOGIN OK',
+      agent_change: 'AGENT CHANGE'
+    }[e.type] || e.type.toUpperCase();
+    const pwHtml = (e.type === 'login_failed' && e.pw_tried && e.pw_tried !== '***correct***')
+      ? `<div class="log-pw">Tried: "${e.pw_tried}"</div>` : '';
+    const meta = [e.ip, e.location, e.org].filter(Boolean).join(' · ') || 'no geo data';
+    return `<div class="log-entry ${e.type}">
+      <div class="log-ts">${formatTs(e.ts)}</div>
+      <div><span class="log-type ${e.type}">${typeLabel}</span></div>
+      <div class="log-desc">${e.description || ''}${pwHtml}</div>
+      <div class="log-meta">${meta}</div>
+    </div>`;
+  }).join('');
+}
+
+function clearLog() {
+  if (!confirm('Clear the browser activity log? (Server-side agent changes will remain.)')) return;
+  localStorage.removeItem('rg_activity_log');
+  allEntries = allEntries.filter(e => e.type === 'agent_change');
+  updateStats();
+  renderLog();
+}
+
+// Auto-login if coming from dashboard session
+if (sessionStorage.getItem('rg_auth') === '1') {
+  document.getElementById('login-overlay').classList.add('hidden');
+  document.getElementById('app').classList.add('visible');
+  loadLog();
+}
+</script>
+</body>
+</html>

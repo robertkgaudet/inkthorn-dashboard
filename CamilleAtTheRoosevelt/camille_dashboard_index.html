@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camille's Magical Christmas Tea — Project Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blush:       #F5DDE0;
+    --ballet:      #F2C4CE;
+    --rose:        #D4899A;
+    --deep-rose:   #A85570;
+    --cream:       #FAF3E8;
+    --stone:       #E8DDD0;
+    --peach:       #F5E6D8;
+    --linen:       #EDE0D4;
+    --gold:        #C8A96E;
+    --deep-gold:   #8B6914;
+    --crimson:     #8B0000;
+    --dark:        #2C1A0E;
+    --mid:         #5C3D2E;
+    --light-text:  #7A6152;
+    --text-muted:  #9A8070;
+    --border:      rgba(44,26,14,0.12);
+    --border-med:  rgba(44,26,14,0.20);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: var(--cream);
+    color: var(--dark);
+    line-height: 1.75;
+    font-size: 17px;
+    font-weight: 400;
+  }
+
+  /* ── NAV ─────────────────────────────────────────────────────────────── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,243,232,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--border-med);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 52px;
+    overflow-x: auto;
+  }
+  nav a {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--light-text);
+    text-decoration: none;
+    padding: 0 1rem;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--deep-rose); }
+  nav .nav-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--rose);
+    margin-right: auto;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── HERO ─────────────────────────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(160deg, var(--blush) 0%, var(--ballet) 40%, var(--peach) 100%);
+    padding: 80px 2rem 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C8A96E' fill-opacity='0.08'%3E%3Cpath d='M30 0l2 8-2 2-2-2zm0 60l2-8-2-2-2 2zm30-30l-8 2-2-2 2-2zm-60 0l8 2 2-2-2-2zM9 9l5 5-1 3-3-1zm42 42l-5-5 1-3 3 1zM9 51l5-5 3 1-1 3zm42-42l-5 5-3-1 1-3z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--deep-rose);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 6vw, 60px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--dark);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--crimson);
+  }
+  .hero-sub {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--mid);
+    margin-bottom: 36px;
+  }
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  .badge {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 0.5px solid;
+  }
+  .badge-rose    { background: rgba(212,137,154,0.15); color: var(--deep-rose); border-color: var(--rose); }
+  .badge-gold    { background: rgba(200,169,110,0.15); color: var(--deep-gold); border-color: var(--gold); }
+  .badge-crimson { background: rgba(139,0,0,0.08);    color: var(--crimson);   border-color: rgba(139,0,0,0.3); }
+
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    justify-content: center;
+    background: var(--border);
+    border: 0.5px solid var(--border-med);
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .stat {
+    background: rgba(250,243,232,0.85);
+    padding: 16px 28px;
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--crimson);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── LAYOUT ───────────────────────────────────────────────────────────── */
+  .container {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 32px;
+    padding: 48px 0;
+    align-items: start;
+  }
+
+  @media (max-width: 860px) {
+    .main-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── SECTIONS ─────────────────────────────────────────────────────────── */
+  section {
+    margin-bottom: 40px;
+  }
+
+  .section-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border-med);
+  }
+
+  .section-title {
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--dark);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .card {
+    background: white;
+    border: 0.5px solid var(--border-med);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+
+  .card-rose {
+    background: rgba(245,221,224,0.4);
+    border-color: var(--rose);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+
+  p { margin-bottom: 14px; color: var(--mid); line-height: 1.8; }
+  p:last-child { margin-bottom: 0; }
+
+  blockquote {
+    border-left: 2px solid var(--rose);
+    padding-left: 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: var(--light-text);
+    font-size: 18px;
+  }
+
+  /* ── WORK LOG ─────────────────────────────────────────────────────────── */
+  .log-entry {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0 20px;
+    padding: 16px 0;
+    border-bottom: 0.5px solid var(--border);
+    position: relative;
+  }
+  .log-entry:last-child { border-bottom: none; }
+  .log-date {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    padding-top: 2px;
+  }
+  .log-milestone {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: 4px;
+  }
+  .log-desc { font-size: 15px; color: var(--mid); line-height: 1.6; margin: 0; }
+
+  /* ── VOICE PILLARS ────────────────────────────────────────────────────── */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .pillar {
+    background: var(--peach);
+    border: 0.5px solid var(--border-med);
+    border-radius: 10px;
+    padding: 18px 16px;
+  }
+  .pillar-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .pillar-name {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--deep-rose);
+    margin-bottom: 6px;
+  }
+  .pillar-desc { font-size: 14px; color: var(--mid); line-height: 1.6; margin: 0; }
+
+  /* ── CHARACTERS ───────────────────────────────────────────────────────── */
+  .char-card {
+    background: white;
+    border: 0.5px solid var(--border-med);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0 18px;
+    align-items: start;
+  }
+  .char-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .char-name {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 2px;
+  }
+  .char-role {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .char-desc { font-size: 14px; color: var(--mid); line-height: 1.7; margin: 0; }
+  .char-tag {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin: 8px 4px 0 0;
+    background: var(--blush);
+    color: var(--deep-rose);
+    border: 0.5px solid var(--rose);
+  }
+
+  /* ── SCENE TRACKER ────────────────────────────────────────────────────── */
+  .scene {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .scene:last-child { border-bottom: none; }
+  .scene-num {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    min-width: 24px;
+    padding-top: 2px;
+    letter-spacing: 0.05em;
+  }
+  .scene-body { flex: 1; }
+  .scene-title {
+    font-size: 16px;
+    color: var(--dark);
+    margin-bottom: 3px;
+  }
+  .scene-spread {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+  .status {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .status-complete    { background: rgba(45,90,39,0.1);  color: #2D5A27; border: 0.5px solid rgba(45,90,39,0.3); }
+  .status-progress    { background: rgba(200,169,110,0.2); color: var(--deep-gold); border: 0.5px solid var(--gold); }
+  .status-draft       { background: var(--blush);          color: var(--deep-rose);  border: 0.5px solid var(--rose); }
+  .status-notstarted  { background: var(--stone);          color: var(--text-muted); border: 0.5px solid var(--border-med); }
+
+  /* ── SIDEBAR ──────────────────────────────────────────────────────────── */
+  .sidebar-card {
+    background: white;
+    border: 0.5px solid var(--border-med);
+    border-radius: 12px;
+    padding: 22px 22px;
+    margin-bottom: 20px;
+  }
+  .sidebar-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .comp-title {
+    font-size: 15px;
+    color: var(--dark);
+    margin-bottom: 2px;
+  }
+  .comp-note { font-size: 13px; color: var(--text-muted); margin: 0 0 14px; }
+  .comp-note:last-child { margin-bottom: 0; }
+
+  .palette-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .swatch {
+    flex: 1;
+    height: 36px;
+    border-radius: 6px;
+    border: 0.5px solid var(--border);
+  }
+  .swatch-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  .audience-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 14px;
+    color: var(--mid);
+  }
+  .audience-item:last-child { border-bottom: none; }
+  .audience-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--rose);
+    flex-shrink: 0;
+  }
+
+  .market-stat {
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .market-stat:last-child { border-bottom: none; }
+  .market-num {
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--crimson);
+    line-height: 1.1;
+  }
+  .market-desc { font-size: 12px; color: var(--text-muted); margin: 2px 0 0; font-family: 'Jost', sans-serif; }
+
+  .notes-area {
+    background: var(--cream);
+    border: 0.5px solid var(--border-med);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.8;
+    white-space: pre-line;
+  }
+  .note-item {
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 15px;
+    color: var(--mid);
+    line-height: 1.7;
+  }
+  .note-item:last-child { border-bottom: none; }
+  .note-tag {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  /* ── IMAGERY GRID ─────────────────────────────────────────────────────── */
+  .imagery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .imagery-card {
+    background: var(--peach);
+    border: 0.5px solid var(--border-med);
+    border-radius: 10px;
+    padding: 18px 16px;
+  }
+  .imagery-card-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--deep-rose);
+    margin-bottom: 8px;
+  }
+  .imagery-card p { font-size: 13px; color: var(--mid); margin: 0; line-height: 1.7; }
+
+  /* ── FOOTER ───────────────────────────────────────────────────────────── */
+  footer {
+    background: var(--linen);
+    border-top: 0.5px solid var(--border-med);
+    padding: 32px 2rem;
+    text-align: center;
+  }
+  footer p {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    margin: 0;
+  }
+  footer em {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--rose);
+  }
+
+  /* ── DIVIDER ──────────────────────────────────────────────────────────── */
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 0.5em;
+    margin: 8px 0 24px;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-title">Camille in the Crescent City</span>
+  <a href="#summary">Story</a>
+  <a href="#worklog">Log</a>
+  <a href="#voice">Voice</a>
+  <a href="#imagery">Setting</a>
+  <a href="#characters">Characters</a>
+  <a href="#scenes">Scenes</a>
+  <a href="#market">Market</a>
+  <a href="#notes">Notes</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Book One — Project Dashboard</div>
+  <h1><em>Camille's Magical</em><br>Christmas Tea<br>at the Roosevelt Hotel</h1>
+  <div class="hero-sub">Camille in the Crescent City · New Orleans, Louisiana</div>
+  <div class="hero-badges">
+    <span class="badge badge-rose">Children's Picture Book</span>
+    <span class="badge badge-gold">Ages 4–8</span>
+    <span class="badge badge-crimson">Gift Book · Heirloom</span>
+    <span class="badge badge-rose">48–64 Pages</span>
+    <span class="badge badge-gold">Series: Book One</span>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">~4,800</div>
+      <div class="stat-label">Words</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Chapters</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">48</div>
+      <div class="stat-label">Target Pages</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Generations</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+<div class="main-grid">
+
+<!-- LEFT COLUMN: MAIN CONTENT -->
+<div>
+
+  <!-- PROJECT SUMMARY -->
+  <section id="summary">
+    <div class="section-label">Project Summary</div>
+    <div class="card">
+      <p>On a sparkling Christmas morning in New Orleans, a little girl named <strong>Camille</strong> wakes up to the most anticipated day of the year: Teddy Bear Tea at the legendary Roosevelt Hotel. With her faithful poodle Lulu tucked under her arm and her Maman by her side, she rides the St. Charles streetcar through a city draped in garlands and light, steps through the Roosevelt's gilded revolving door into what she can only describe as the North Pole — and discovers a world of frosted Christmas trees, fine china, dancing elves, a Second Line parade, and a very special gift from Santa himself: a tiny golden teddy bear charm that has traveled from her grandmother to her Maman and now, at last, to her.</p>
+      <p>This is a story about tradition, family, the particular magic of New Orleans at Christmas, and the feeling of knowing — deep in your bones — that you are part of something timeless and beautiful. It is a holiday book for children who love wonder, and for the adults who remember what wonder felt like.</p>
+      <blockquote>This book should feel like a cherished memory painted on paper.</blockquote>
+    </div>
+  </section>
+
+  <!-- WORK LOG -->
+  <section id="worklog">
+    <div class="section-label">Work Log</div>
+    <div class="card">
+      <div class="log-entry">
+        <div class="log-date">2025</div>
+        <div>
+          <div class="log-milestone">Origin</div>
+          <p class="log-desc">Story concept developed from personal family tradition — Teddy Bear Tea at the Roosevelt Hotel, New Orleans. Decision to build a multi-book series: <em>Camille in the Crescent City.</em></p>
+        </div>
+      </div>
+      <div class="log-entry">
+        <div class="log-date">Draft 1</div>
+        <div>
+          <div class="log-milestone">First Full Draft</div>
+          <p class="log-desc">Complete manuscript written: ~7,000 words across 12 chapters. Full story arc established including trolley ride, lobby reveal, ballroom, Santa scene, Second Line parade, and room service ending.</p>
+        </div>
+      </div>
+      <div class="log-entry">
+        <div class="log-date">Revision</div>
+        <div>
+          <div class="log-milestone">Editorial Pass</div>
+          <p class="log-desc">Major editorial revision: word count reduced to ~4,800. Camille's voice sharpened to drive the narrative. Lobby description tightened. Room service compressed. New ending selected and finalized — the velvet ribbon closing with the trumpet lullaby.</p>
+        </div>
+      </div>
+      <div class="log-entry">
+        <div class="log-date">Style</div>
+        <div>
+          <div class="log-milestone">Illustration Style Guide — Complete</div>
+          <p class="log-desc">Full illustration brief written: 8 sections covering artistic style, color palette (pink-forward, non-traditional Christmas), character design for Camille, Rani, Ava, Emma, and Lulu, setting notes for Roosevelt Hotel, composition rules, key spread briefs, and what-to-avoid list.</p>
+        </div>
+      </div>
+      <div class="log-entry">
+        <div class="log-date">Now</div>
+        <div>
+          <div class="log-milestone">In Progress</div>
+          <p class="log-desc">Project dashboard built. Submission packet in development. Illustrator outreach pending. Publisher research: Pelican Publishing (New Orleans-based), Sleeping Bear Press, Cameron Kids identified as primary targets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TONE & VOICE -->
+  <section id="voice">
+    <div class="section-label">Tone &amp; Voice</div>
+    <div class="card">
+      <p>The narrative voice is warm, French-Southern, and entirely Camille's. She observes, she feels, she notices. The text reads aloud like something you'd want to return to — unhurried but never slow, specific but never cluttered. Italicized thoughts carry her interior life. Dialogue is short, expressive, and character-specific. Maman speaks with warmth and intention. Camille speaks with wonder and conviction.</p>
+      <p>The model is Eloise in energy and confidence — never in tone. Eloise is wry, urban, comedic. Camille is tender, rooted, deeply feeling. She is not precocious. She is awake.</p>
+    </div>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <span class="pillar-icon">✦</span>
+        <div class="pillar-name">Warmth</div>
+        <p class="pillar-desc">Southern French. Every scene should feel like it's lit from inside.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">✦</span>
+        <div class="pillar-name">Specificity</div>
+        <p class="pillar-desc">New Orleans detail — roux, streetcars, second lines. Nothing generic.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">✦</span>
+        <div class="pillar-name">Wonder</div>
+        <p class="pillar-desc">Camille sees things for the first time and we feel it with her.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">✦</span>
+        <div class="pillar-name">Generational</div>
+        <p class="pillar-desc">The charm travels grandmother → Maman → Camille. Past holds the present.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">✦</span>
+        <div class="pillar-name">Restraint</div>
+        <p class="pillar-desc">Show. Don't narrate. The lobby doesn't need three paragraphs.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">✦</span>
+        <div class="pillar-name">Joy</div>
+        <p class="pillar-desc">The Second Line is New Orleans joy. Earn it. Then let it fly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMAGERY & SETTING -->
+  <section id="imagery">
+    <div class="section-label">Imagery &amp; Setting</div>
+    <div class="card">
+      <p>The Roosevelt Hotel at Christmas is the most photographed hotel in America at this season — and the book earns that distinction without announcing it. The setting is rendered through Camille's senses: gilded columns, mosaic floors, the bronze clock, crystal chandeliers hanging like icicles, frosted white trees with ornaments catching the light. The city itself is as alive as any character: garlands on balconies, wreaths on gas lamp posts, the streetcar jingling through damp streets.</p>
+    </div>
+    <div class="imagery-grid">
+      <div class="imagery-card">
+        <div class="imagery-card-title">The Roosevelt Lobby</div>
+        <p>Gilded columns. Mosaic floors. Crystal chandeliers. Frosted Christmas trees. The iconic bronze clock. Gold Nutcrackers at the entrance. Thousands of twinkling lights bouncing off every surface.</p>
+      </div>
+      <div class="imagery-card">
+        <div class="imagery-card-title">New Orleans Streets</div>
+        <p>St. Charles Avenue at Christmas. Garlands on iron balconies. Wreaths on gas lamp posts. Damp streets catching the light. The streetcar jingling as it rolls.</p>
+      </div>
+      <div class="imagery-card">
+        <div class="imagery-card-title">The Ballroom</div>
+        <p>A snow globe come to life. Frosted trees, fine china, white linen, teddy bear centerpieces. Music floating through warm air. The feeling that anything could happen.</p>
+      </div>
+      <div class="imagery-card">
+        <div class="imagery-card-title">The Suite at Night</div>
+        <p>Christmas lights through the window casting tiny gold stars on the ceiling. Lulu curled warm. Roux tucked under one arm. The trumpet from the lounge, far below — a lullaby just for Camille.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHARACTERS -->
+  <section id="characters">
+    <div class="section-label">Characters</div>
+
+    <div class="char-card">
+      <div class="char-avatar" style="background: var(--ballet);">🎀</div>
+      <div>
+        <div class="char-name">Camille</div>
+        <div class="char-role">Protagonist · Age 5–6</div>
+        <p class="char-desc">French-Southern. Blonde, wavy hair, slightly Parisian in her bearing — she tilts her beret, her chin, her whole self. Watchful and composed, with a capacity for wonder she doesn't always show immediately. Not a doll. Not a type. A girl who feels things deeply. Wears winter-white for the trolley, black velvet tartan for the tea.</p>
+        <span class="char-tag">Protagonist</span>
+        <span class="char-tag">First-person wonder</span>
+        <span class="char-tag">Parisian-Southern</span>
+      </div>
+    </div>
+
+    <div class="char-card">
+      <div class="char-avatar" style="background: #E8F4EA;">💚</div>
+      <div>
+        <div class="char-name">Rani</div>
+        <div class="char-role">Best Friend · Age 5–6</div>
+        <p class="char-desc">Joyful, regal, magnetic. Full natural afro with a delicate jeweled headband. Deep warm brown skin, luminous in illustration. Tall for her age, with the posture of someone who knows she belongs everywhere. Wears deep sapphire blue velvet for the tea. Commands her space. Never a supporting character in visual weight.</p>
+        <span class="char-tag">African American</span>
+        <span class="char-tag">Presence & warmth</span>
+        <span class="char-tag">Sapphire velvet</span>
+      </div>
+    </div>
+
+    <div class="char-card">
+      <div class="char-avatar" style="background: #FEF0E8;">🍊</div>
+      <div>
+        <div class="char-name">Ava</div>
+        <div class="char-role">Best Friend · Age 5–6</div>
+        <p class="char-desc">Spunky, warm, quick to laugh. Copper-red curly hair, slightly wild. Smaller and rounder than the others, with the energy of someone perpetually mid-thought. The one who names her bear Beignet. Wears emerald green with Christmas bows that sparkle like Christmas lights — Camille's words.</p>
+        <span class="char-tag">Red hair</span>
+        <span class="char-tag">Emerald green</span>
+        <span class="char-tag">Comic energy</span>
+      </div>
+    </div>
+
+    <div class="char-card">
+      <div class="char-avatar" style="background: var(--stone);">🌿</div>
+      <div>
+        <div class="char-name">Emma</div>
+        <div class="char-role">Camille's Mother</div>
+        <p class="char-desc">Early 30s. Graceful, unhurried, Southern French in manner and movement. Blonde, usually worn up. The one who carries the tradition — the Roosevelt, the necklace, the memory. Wears emerald green for the evening. Always warm, never overwhelming. The anchor, not the focus.</p>
+        <span class="char-tag">Generational thread</span>
+        <span class="char-tag">Emerald gown</span>
+      </div>
+    </div>
+
+    <div class="char-card">
+      <div class="char-avatar" style="background: #FAF0F5;">🐩</div>
+      <div>
+        <div class="char-name">Lulu</div>
+        <div class="char-role">Camille's Poodle</div>
+        <p class="char-desc">Tiny, white, fluffy, perpetually delighted. Always accessorized — a red Christmas bow for the tea. Drawn with affectionate looseness. She understands everything and approves of most of it. Never incidental on a spread. Always adds a small beat of warmth and humor.</p>
+        <span class="char-tag">Comic warmth</span>
+        <span class="char-tag">Red bow</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE TRACKER -->
+  <section id="scenes">
+    <div class="section-label">Chapter &amp; Scene Tracker</div>
+    <div class="card">
+      <div class="scene">
+        <div class="scene-num">01</div>
+        <div class="scene-body">
+          <div class="scene-title">Morning Light</div>
+          <div class="scene-spread">Spread 3–4 · Full spread · Camille wakes, Emma enters</div>
+        </div>
+        <span class="status status-complete">Complete</span>
+      </div>
+      <div class="scene">
+        <div class="scene-num">02</div>
+        <div class="scene-body">
+          <div class="scene-title">Getting Ready</div>
+          <div class="scene-spread">Spread 5–6 · Half spread · Bath, dress, mirror twirl</div>
+        </div>
+        <span class="status status-complete">Complete</span>
+      </div>
+      <div class="scene">
+        <div class="scene-num">03</div>
+        <div class="scene-body">
+          <div class="scene-title">A Trolley Ride Through Christmas Magic</div>
+          <div class="scene-spread">Spread 7–8 · Full spread · St. Charles streetcar</div>
+        </div>
+        <span class="status status-complete">Complete</span>
+      </div>
+      <div class="scene">
+        <div class="scene-num">04</div>
+        <div class="scene-body">
+          <div class="scene-title">The Most Magical Place in the World</div>
+          <div class="scene-spread">Spread 9–12 · Full spread + text · Roosevelt lobby reveal</div>
+        </div>
+        <span class="status status-complete">Complete</span>
+      </div>
+      <div class="scene">
+        <div class="scene-num">05</div>
+        <div class="scene-body">
+          <div class="scene-title">Getting Ready for Tea</div>
+          <div class="scene-spread">Spread 13–14 · Half spread · Suite, velvet dress</div>
+        </div>
+        <span class="status status-complete">Complete</span>
+      </div>
+      <div class="scene">
+        <div class="scene-num">06</div>
+        <div class="scene-body">
+          <div class="scene-title">The Enchanted Ballroom</div>
+          <div class="scene-spread">Spread 15–18 · Full spread · Friends reunion, ballroom reveal</div>
+        </div>
+        <span class="status status-complete">Complete</span>
+      </div>
+      <div class="scene">
+        <div class="scene-num">07</div>
+        <div class="scene-body">
+          <div class="scene-title">A Feast Fit for Christmas Royalty</div>
+          <div class="scene-spread">Spread 19–22 · Half + spot · Tea, Chef Jean, Bûche de Noël</div>
+        </div>
+        <span class="status status-complete">Complete</span>
+      </div>
+      <div class="scene">
+        <div class="scene-num">08</div>
+        <div class="scene-body">
+          <div class="scene-title">A Magical Surprise</div>
+          <div class="scene-spread">Spread 23–28 · Full spread · Elves, Santa entrance, golden charm</div>
+        </div>
+        <span class="status status-complete">Complete</span>
+      </div>
+      <div class="scene">
+        <div class="scene-num">09</div>
+        <div class="scene-body">
+          <div class="scene-title">A Bear Named Roux</div>
+          <div class="scene-spread">Spread 29–30 · Half spread · Bears distributed, naming</div>
+        </div>
+        <span class="status status-complete">Complete</span>
+      </div>
+      <div class="scene">
+        <div class="scene-num">10</div>
+        <div class="scene-body">
+          <div class="scene-title">A Grand New Orleans Farewell</div>
+          <div class="scene-spread">Spread 31–36 · Full spread · Second Line parade</div>
+        </div>
+        <span class="status status-complete">Complete</span>
+      </div>
+      <div class="scene">
+        <div class="scene-num">11</div>
+        <div class="scene-body">
+          <div class="scene-title">A Proper New Orleans Ending</div>
+          <div class="scene-spread">Spread 37–42 · Full spread · Suite, Lulu, room service feast</div>
+        </div>
+        <span class="status status-complete">Complete</span>
+      </div>
+      <div class="scene">
+        <div class="scene-num">12</div>
+        <div class="scene-body">
+          <div class="scene-title">A Memory to Keep Forever</div>
+          <div class="scene-spread">Spread 43–48 · Full spread · Camille sleeps, golden charm, closing</div>
+        </div>
+        <span class="status status-complete">Complete</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTES & IDEAS -->
+  <section id="notes">
+    <div class="section-label">Notes &amp; Ideas</div>
+    <div class="card">
+      <div class="note-item">
+        <div class="note-tag">Series Vision</div>
+        Camille in the Crescent City — Book 2: <em>Camille's Mardi Gras Mystery</em> (missing crown, parade masks, French Quarter). Book 3: <em>Camille's Springtime Stroll through the Garden District</em> (Easter promenade, blooming oaks). Book 4: <em>Camille's Jazz Fest Journey.</em>
+      </div>
+      <div class="note-item">
+        <div class="note-tag">Roosevelt Fact</div>
+        The Roosevelt Hotel in New Orleans has been voted the most photographed hotel at Christmas in America. Weave in naturally — never announce it. Done in final draft.
+      </div>
+      <div class="note-item">
+        <div class="note-tag">The Charm</div>
+        The golden teddy bear necklace is the emotional spine of the book. Grandmother → Maman → Camille. Consider: does the charm appear again in Book 2 or later books as a connective thread across the series?
+      </div>
+      <div class="note-item">
+        <div class="note-tag">Illustration</div>
+        Pink-forward palette is a non-traditional Christmas choice — this is a differentiator. Eloise energy but warmer. Gouache or full watercolor preferred over ink-forward style. Key illustrators to research: Renée Graef, E.B. Goodale.
+      </div>
+      <div class="note-item">
+        <div class="note-tag">Submission</div>
+        Priority publisher: Pelican Publishing (New Orleans-based, regional specialty). Secondary: Sleeping Bear Press, Cameron Kids. Query emails drafted. Submission packet includes: manuscript, cover letter, synopsis, comp titles, storyboard, visual scene notes, author bio.
+      </div>
+      <div class="note-item">
+        <div class="note-tag">Naming</div>
+        Roux: warm and rich as Maman's gumbo. Jolie: the prettiest bear in New Orleans (Rani's bear). Beignet: soft, sweet, full of love (Ava's bear). These names are perfect — do not change them.
+      </div>
+    </div>
+  </section>
+
+</div><!-- end left column -->
+
+<!-- RIGHT COLUMN: SIDEBAR -->
+<div>
+
+  <!-- AUDIENCE -->
+  <div class="sidebar-card" id="audience">
+    <div class="sidebar-title">Audience</div>
+    <div class="audience-item"><span class="audience-dot"></span>Primary readers: ages 4–8 (read-aloud to 4–5, independent for 6–8)</div>
+    <div class="audience-item"><span class="audience-dot"></span>Gift book buyers: parents, grandparents, family tradition-keepers</div>
+    <div class="audience-item"><span class="audience-dot"></span>New Orleans families and visitors with Roosevelt Hotel connection</div>
+    <div class="audience-item"><span class="audience-dot"></span>Adults who collect heirloom children's books (Eloise, Polar Express)</div>
+    <div class="audience-item"><span class="audience-dot"></span>Cross-generational read — resonates with mothers and grandmothers as much as children</div>
+    <div class="audience-item"><span class="audience-dot"></span>Holiday gift buyers seeking non-generic, culturally specific stories</div>
+  </div>
+
+  <!-- MARKET POTENTIAL -->
+  <div class="sidebar-card" id="market">
+    <div class="sidebar-title">Market Potential</div>
+    <div class="market-stat">
+      <div class="market-num">$2.6B</div>
+      <div class="market-desc">U.S. children's book market (annual)</div>
+    </div>
+    <div class="market-stat">
+      <div class="market-num">#1</div>
+      <div class="market-desc">Most photographed Christmas hotel in America — Roosevelt Hotel</div>
+    </div>
+    <div class="market-stat">
+      <div class="market-num">Gift</div>
+      <div class="market-desc">Premium gift book category — growing, under-served with culturally specific titles</div>
+    </div>
+    <div class="market-stat">
+      <div class="market-num">Series</div>
+      <div class="market-desc">5-book series planned — annual release potential, collectible</div>
+    </div>
+  </div>
+
+  <!-- COMP TITLES -->
+  <div class="sidebar-card">
+    <div class="sidebar-title">Comparable Titles</div>
+    <div class="comp-title">Eloise at Christmastime</div>
+    <p class="comp-note">Kay Thompson — grand hotel setting, spirited heroine, holiday magic. Tonal spirit; our register is warmer and Southern.</p>
+    <div class="comp-title">The Polar Express</div>
+    <p class="comp-note">Chris Van Allsburg — richly illustrated, emotional Christmas journey, heirloom feel. Benchmark for gift book longevity.</p>
+    <div class="comp-title">Miss Rumphius</div>
+    <p class="comp-note">Barbara Cooney — intergenerational story, sense of beauty and place, timeless storytelling. Strong comp for the grandmother-to-granddaughter thread.</p>
+    <div class="comp-title">Olivia Helps with Christmas</div>
+    <p class="comp-note">Ian Falconer — spirited heroine in festive family setting. Personality-driven holiday story.</p>
+  </div>
+
+  <!-- COLOR PALETTE REFERENCE -->
+  <div class="sidebar-card">
+    <div class="sidebar-title">Illustration Palette</div>
+    <div class="palette-row">
+      <div>
+        <div class="swatch" style="background: #F2C4CE;"></div>
+        <div class="swatch-label">Ballet Pink</div>
+      </div>
+      <div>
+        <div class="swatch" style="background: #D4899A;"></div>
+        <div class="swatch-label">Rose</div>
+      </div>
+      <div>
+        <div class="swatch" style="background: #F5DDE0;"></div>
+        <div class="swatch-label">Blush</div>
+      </div>
+      <div>
+        <div class="swatch" style="background: #FAF3E8;"></div>
+        <div class="swatch-label">Cream</div>
+      </div>
+    </div>
+    <div class="palette-row">
+      <div>
+        <div class="swatch" style="background: #C8A96E;"></div>
+        <div class="swatch-label">Soft Gold</div>
+      </div>
+      <div>
+        <div class="swatch" style="background: #8B0000;"></div>
+        <div class="swatch-label">Crimson</div>
+      </div>
+      <div>
+        <div class="swatch" style="background: #E8DDD0;"></div>
+        <div class="swatch-label">Warm Stone</div>
+      </div>
+      <div>
+        <div class="swatch" style="background: #F5E6D8;"></div>
+        <div class="swatch-label">Soft Peach</div>
+      </div>
+    </div>
+    <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px; line-height: 1.6; font-family: 'Jost', sans-serif;">Pink-forward, non-traditional Christmas palette. Colors should feel soft, luminous, watercolor-driven — never saturated or digital.</p>
+  </div>
+
+  <!-- SERIES OVERVIEW -->
+  <div class="sidebar-card">
+    <div class="sidebar-title">Series: Camille in the Crescent City</div>
+    <div class="scene" style="padding: 10px 0;">
+      <div class="scene-num" style="min-width: 20px; font-size: 10px;">01</div>
+      <div class="scene-body">
+        <div class="scene-title" style="font-size: 14px;"><em>Camille's Magical Christmas Tea</em></div>
+        <div class="scene-spread">The Roosevelt Hotel · In progress</div>
+      </div>
+      <span class="status status-progress" style="font-size: 9px;">Active</span>
+    </div>
+    <div class="scene" style="padding: 10px 0;">
+      <div class="scene-num" style="min-width: 20px; font-size: 10px;">02</div>
+      <div class="scene-body">
+        <div class="scene-title" style="font-size: 14px;"><em>Camille's Mardi Gras Mystery</em></div>
+        <div class="scene-spread">French Quarter · Masks, parades, a missing crown</div>
+      </div>
+      <span class="status status-notstarted" style="font-size: 9px;">Planned</span>
+    </div>
+    <div class="scene" style="padding: 10px 0;">
+      <div class="scene-num" style="min-width: 20px; font-size: 10px;">03</div>
+      <div class="scene-body">
+        <div class="scene-title" style="font-size: 14px;"><em>Camille's Springtime Stroll</em></div>
+        <div class="scene-spread">Garden District · Easter promenade, blooming oaks</div>
+      </div>
+      <span class="status status-notstarted" style="font-size: 9px;">Planned</span>
+    </div>
+    <div class="scene" style="padding: 10px 0; border-bottom: none;">
+      <div class="scene-num" style="min-width: 20px; font-size: 10px;">04</div>
+      <div class="scene-body">
+        <div class="scene-title" style="font-size: 14px;"><em>Camille's Jazz Fest Journey</em></div>
+        <div class="scene-spread">City Park · Music, food, second lines</div>
+      </div>
+      <span class="status status-notstarted" style="font-size: 9px;">Planned</span>
+    </div>
+  </div>
+
+</div><!-- end sidebar -->
+</div><!-- end main-grid -->
+</div><!-- end container -->
+
+<footer>
+  <p><em>Camille in the Crescent City</em> &nbsp;·&nbsp; Book One &nbsp;·&nbsp; Project Dashboard &nbsp;·&nbsp; trustlight.ai</p>
+  <p style="margin-top: 8px;">Some traditions are too magical to ever be forgotten.</p>
+</footer>
+
+</body>
+</html>

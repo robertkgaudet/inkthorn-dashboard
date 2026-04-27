@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- FAVICONS -->
+  <link rel="icon" type="image/png" sizes="32x32" href="https://trustlight.ai/assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://trustlight.ai/assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://trustlight.ai/assets/images/favicon-apple.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://trustlight.ai/assets/images/favicon-192.png">
+  <link rel="shortcut icon" href="https://trustlight.ai/favicon.png">
+  <title>Beta in Progress — Speaker Timer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0a; color: #fff;
+      font-family: 'Georgia', serif;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      height: 100vh; overflow: hidden;
+      user-select: none;
+    }
+
+    #label {
+      font-size: 1.3rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: #888; margin-bottom: 12px;
+    }
+
+    #prompt {
+      font-size: 1.05rem; color: #aaa; margin-bottom: 32px;
+      font-style: italic; text-align: center;
+      max-width: 600px; padding: 0 20px;
+    }
+
+    #timer {
+      font-size: 14rem; font-weight: bold;
+      font-family: 'Georgia', serif; line-height: 1;
+      transition: color 0.4s ease; color: #fff;
+      cursor: pointer;
+    }
+    #timer.warning { color: #f0a500; }
+    #timer.danger  { color: #e03030; }
+    #timer.done    { color: #e03030; animation: pulse 0.6s infinite alternate; }
+    #timer.paused  { opacity: 0.4; }
+
+    @keyframes pulse { from { opacity:1; } to { opacity:0.25; } }
+
+    /* Countdown ring during auto-reset pause */
+    #pause-ring-wrap {
+      display: none; margin-top: 16px;
+      flex-direction: column; align-items: center; gap: 6px;
+    }
+    #pause-ring-wrap.visible { display: flex; }
+    #pause-label { font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; color: #555; }
+    #pause-bar-wrap { width: 260px; height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; }
+    #pause-bar { height: 100%; background: #444; border-radius: 2px; transition: width 0.1s linear; }
+
+    /* Config panel */
+    #config {
+      position: fixed; top: 16px; right: 16px;
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px; padding: 8px 14px;
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      color: #555; cursor: default;
+    }
+    #config label { color: #666; }
+    #config input[type=range] { width: 90px; accent-color: #c8832a; cursor: pointer; }
+    #dur-display { color: #aaa; min-width: 32px; text-align: right; }
+    #auto-toggle {
+      cursor: pointer; padding: 3px 10px;
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 3px;
+      font-size: 0.68rem; letter-spacing: 0.1em; color: #666;
+      background: none; transition: all 0.2s;
+    }
+    #auto-toggle.on { border-color: #c8832a; color: #c8832a; }
+
+    #instruction {
+      margin-top: 20px; font-size: 0.9rem;
+      color: #444; letter-spacing: 0.1em; text-align: center;
+    }
+    #instruction span { color: #666; }
+
+    #progress {
+      position: fixed; bottom: 0; left: 0;
+      height: 6px; background: #fff;
+      transition: width 0.25s linear, background 0.4s ease;
+    }
+    #progress.warning { background: #f0a500; }
+    #progress.danger  { background: #e03030; }
+
+    /* Branding */
+    #branding {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 8px; opacity: 0.3; transition: opacity 0.3s ease; margin-top: 28px;
+    }
+    #branding:hover { opacity: 0.65; }
+    #branding .sponsored-label { font-size: 0.62rem; letter-spacing: 0.2em; color: #aaa; text-transform: uppercase; }
+    #branding .logos { display: flex; align-items: center; gap: 20px; }
+    #branding .logo-link { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; }
+    #branding img { height: 20px; width: auto; filter: brightness(0) invert(1); }
+    #branding .domain { font-size: 0.66rem; letter-spacing: 0.1em; color: #ccc; }
+    #branding .divider { color: #444; font-size: 1.1rem; align-self: center; }
+
+    #fs-btn {
+      position: fixed; top: 16px; left: 16px;
+      font-size: 0.65rem; color: rgba(255,255,255,0.15);
+      letter-spacing: 0.1em; cursor: pointer; background: none; border: none;
+    }
+    #fs-btn:hover { color: rgba(255,255,255,0.45); }
+  </style>
+</head>
+<body>
+
+  <button id="fs-btn" onclick="toggleFS()">⛶ FULLSCREEN</button>
+
+  <!-- Config -->
+  <div id="config">
+    <label>Duration</label>
+    <input type="range" id="dur-slider" min="15" max="180" step="5" value="60"
+      oninput="onDurChange(this.value)" onchange="onDurChange(this.value)">
+    <span id="dur-display">1:00</span>
+    <button id="auto-toggle" class="on" onclick="toggleAuto()">AUTO ✓</button>
+  </div>
+
+  <div id="label">Beta in Progress</div>
+  <div id="prompt">Name &nbsp;·&nbsp; What you do &nbsp;·&nbsp; Your biggest AI challenge</div>
+  <div id="timer" onclick="handleClick()">1:00</div>
+
+  <!-- Auto-reset pause countdown -->
+  <div id="pause-ring-wrap">
+    <div id="pause-label">Next speaker in <span id="pause-count">10</span>s</div>
+    <div id="pause-bar-wrap"><div id="pause-bar" style="width:100%"></div></div>
+  </div>
+
+  <div id="branding">
+    <span class="sponsored-label">Sponsored by</span>
+    <div class="logos">
+      <a href="https://thenieux.com" target="_blank" class="logo-link">
+        <img src="https://images.squarespace-cdn.com/content/v1/66c8a05b3f9c342d77944f15/8842bbcc-da79-4822-b941-50409edb003a/The+Nieux+-+White.png" alt="The Nieux">
+        <span class="domain">thenieux.com</span>
+      </a>
+      <span class="divider">·</span>
+      <a href="https://trustlight.ai" target="_blank" class="logo-link">
+        <img src="https://trustlight.ai/assets/images/logo-white.png" alt="TrustLight.ai">
+        <span class="domain">trustlight.ai</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="instruction">Click timer to <span>start</span> · Click again to <span>reset</span></div>
+  <div id="progress" style="width:100%"></div>
+
+<script>
+  // ─── STATE ───
+  let DURATION   = 60;
+  const PAUSE    = 10;   // seconds between auto-cycles
+  let remaining  = DURATION;
+  let pauseLeft  = PAUSE;
+  let interval   = null;
+  let pauseTimer = null;
+  let running    = false;
+  let pausing    = false;
+  let autoMode   = true;
+
+  // ─── AUDIO (Web Audio API — no files needed) ───
+  let audioCtx = null;
+  function getAudioCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+  }
+
+  function beep(freq, duration, gain=0.4, type='sine') {
+    try {
+      const ctx = getAudioCtx();
+      const osc = ctx.createOscillator();
+      const vol = ctx.createGain();
+      osc.connect(vol); vol.connect(ctx.destination);
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+      vol.gain.setValueAtTime(gain, ctx.currentTime);
+      vol.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + duration);
+    } catch(e) {}
+  }
+
+  // Warning beep (5 seconds left) — single medium beep
+  function beepWarning() { beep(880, 0.18, 0.35); }
+
+  // Danger beeps (3, 2, 1 second left) — sharper
+  function beepDanger()  { beep(1046, 0.12, 0.4, 'square'); }
+
+  // Time's up — triple descending tone
+  function beepDone() {
+    beep(1046, 0.22, 0.5);
+    setTimeout(()=> beep(880, 0.22, 0.5), 220);
+    setTimeout(()=> beep(698, 0.4,  0.5), 440);
+  }
+
+  // Auto-reset ready — ascending double beep
+  function beepReady() {
+    beep(698, 0.12, 0.3);
+    setTimeout(()=> beep(1046, 0.2, 0.35), 150);
+  }
+
+  // ─── ELEMENTS ───
+  const timerEl    = document.getElementById('timer');
+  const progressEl = document.getElementById('progress');
+  const pauseWrap  = document.getElementById('pause-ring-wrap');
+  const pauseCount = document.getElementById('pause-count');
+  const pauseBar   = document.getElementById('pause-bar');
+
+  // ─── DISPLAY ───
+  function fmt(s) {
+    return Math.floor(s/60) + ':' + (s%60).toString().padStart(2,'0');
+  }
+
+  function setClass(cls) {
+    timerEl.classList.remove('warning','danger','done','paused');
+    progressEl.classList.remove('warning','danger');
+    if (cls) {
+      timerEl.classList.add(cls);
+      if (cls !== 'done') progressEl.classList.add(cls);
+    }
+  }
+
+  function updateDisplay() {
+    if (remaining <= 0) {
+      timerEl.textContent = 'TIME';
+      progressEl.style.width = '0%';
+      setClass('done');
+      return;
+    }
+    timerEl.textContent = fmt(remaining);
+    progressEl.style.width = (remaining / DURATION * 100) + '%';
+    if      (remaining <= 10) setClass('danger');
+    else if (remaining <= 20) setClass('warning');
+    else                      setClass(null);
+  }
+
+  // ─── TIMER LOGIC ───
+  function startTimer() {
+    running = true; pausing = false;
+    pauseWrap.classList.remove('visible');
+    // Unlock audio on first interaction
+    try { getAudioCtx().resume(); } catch(e) {}
+
+    interval = setInterval(() => {
+      remaining--;
+      updateDisplay();
+
+      // Audio cues
+      if (remaining === 5)  beepWarning();
+      if (remaining <= 3 && remaining > 0) beepDanger();
+      if (remaining <= 0) {
+        clearInterval(interval);
+        running = false;
+        beepDone();
+        if (autoMode) startPause();
+      }
+    }, 1000);
+  }
+
+  function startPause() {
+    pausing = true;
+    pauseLeft = PAUSE;
+    pauseWrap.classList.add('visible');
+    pauseCount.textContent = pauseLeft;
+    pauseBar.style.width = '100%';
+    timerEl.classList.add('paused');
+
+    pauseTimer = setInterval(() => {
+      pauseLeft--;
+      pauseCount.textContent = pauseLeft;
+      pauseBar.style.width = (pauseLeft / PAUSE * 100) + '%';
+      if (pauseLeft <= 0) {
+        clearInterval(pauseTimer);
+        pausing = false;
+        pauseWrap.classList.remove('visible');
+        autoReset();
+      }
+    }, 1000);
+  }
+
+  function autoReset() {
+    remaining = DURATION;
+    updateDisplay();
+    beepReady();
+    setTimeout(startTimer, 600); // tiny pause so beep lands before count
+  }
+
+  function resetFull() {
+    clearInterval(interval);
+    clearInterval(pauseTimer);
+    running = false; pausing = false;
+    remaining = DURATION;
+    pauseWrap.classList.remove('visible');
+    timerEl.classList.remove('paused');
+    updateDisplay();
+  }
+
+  function handleClick() {
+    if (pausing) {
+      // Skip the pause — start immediately
+      clearInterval(pauseTimer);
+      pausing = false;
+      pauseWrap.classList.remove('visible');
+      autoReset();
+    } else if (!running && remaining === DURATION) {
+      startTimer();
+    } else {
+      resetFull();
+    }
+  }
+
+  // ─── CONFIG ───
+  function onDurChange(val) {
+    val = parseInt(val);
+    DURATION = val;
+    document.getElementById('dur-display').textContent = fmt(val);
+    if (!running && !pausing) { remaining = DURATION; updateDisplay(); }
+  }
+
+  function toggleAuto() {
+    autoMode = !autoMode;
+    const btn = document.getElementById('auto-toggle');
+    btn.textContent = autoMode ? 'AUTO ✓' : 'AUTO ✗';
+    btn.classList.toggle('on', autoMode);
+  }
+
+  // ─── KEYBOARD ───
+  document.addEventListener('keydown', e => {
+    if (e.key === ' ') { e.preventDefault(); handleClick(); }
+    if (e.key === 'f' || e.key === 'F') toggleFS();
+    if (e.key === 'Escape' && running) resetFull();
+  });
+
+  // ─── FULLSCREEN ───
+  function toggleFS() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+
+  updateDisplay();
+</script>
+</body>
+</html>

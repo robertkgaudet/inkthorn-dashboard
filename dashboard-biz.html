@@ -13,37 +13,34 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Command Center">
-  <link rel="apple-touch-icon" href="https://inkthorn.ai/assets/inkthorn-mascot.png">
-  <link rel="manifest" href="https://inkthorn.ai/manifest.json">
-<title>InkThorn — Command Center</title>
+  <link rel="apple-touch-icon" href="https://trustlight.ai/rob-profile.jpg">
+  <link rel="manifest" href="https://trustlight.ai/dashboard-manifest.json">
+<title>ROB GAUDET // BUSINESS COMMAND CENTER</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #070711;
-    --bg2: #0f0f1e;
-    --bg3: #14142a;
-    --amber: #f0b840;
-    --amber2: #f5c855;
-    --amber3: #fada70;
-    --cyan: #00f5ff;
-    --cyan2: #00ccdd;
-    --pink: #ff2d87;
-    --purple: #a855f7;
-    --text: #f0f0ff;
-    --text2: #b0b0d8;
-    --text3: #7878a8;
+    --bg: #0a0a0a;
+    --bg2: #111114;
+    --bg3: #16161a;
+    --amber: #c8832a;
+    --amber2: #e09a40;
+    --amber3: #f5b855;
+    --cyan: #00d4ff;
+    --cyan2: #00aacc;
+    --text: #f2ede6;
+    --text2: #b8b0a5;
+    --text3: #6e6760;
     --red: #ff4444;
-    --yellow: #ffe600;
-    --green: #39ff14;
-    --glass-bg: rgba(14, 14, 30, 0.8);
-    --glass-border: rgba(255, 45, 135, 0.25);
-    --glow-amber: 0 0 20px rgba(240, 184, 64, 0.4), 0 0 40px rgba(240, 184, 64, 0.15);
-    --glow-cyan: 0 0 20px rgba(0, 245, 255, 0.4), 0 0 40px rgba(0, 245, 255, 0.15);
-    --glow-amber-strong: 0 0 30px rgba(240, 184, 64, 0.6), 0 0 60px rgba(240, 184, 64, 0.3);
-    --glow-pink: 0 0 20px rgba(255, 45, 135, 0.5), 0 0 40px rgba(255, 45, 135, 0.2);
+    --yellow: #ffcc00;
+    --green: #00ff88;
+    --glass-bg: rgba(22, 22, 26, 0.7);
+    --glass-border: rgba(200, 131, 42, 0.2);
+    --glow-amber: 0 0 20px rgba(200, 131, 42, 0.4), 0 0 40px rgba(200, 131, 42, 0.15);
+    --glow-cyan: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 40px rgba(0, 212, 255, 0.15);
+    --glow-amber-strong: 0 0 30px rgba(224, 154, 64, 0.6), 0 0 60px rgba(200, 131, 42, 0.3);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -120,7 +117,7 @@
   }
 
   .login-logo {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 2.2rem;
     letter-spacing: 4px;
     color: var(--amber2);
@@ -163,7 +160,7 @@
     border-radius: 6px;
     padding: 14px;
     color: #0a0a0a;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.2rem;
     letter-spacing: 3px;
     cursor: pointer;
@@ -208,7 +205,7 @@
   }
 
   .nav-logo {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 4px;
     color: var(--amber2);
@@ -233,7 +230,7 @@
   .nav-tabs::-webkit-scrollbar { display: none; }
 
   .nav-tab {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 0.95rem;
     letter-spacing: 3px;
     color: var(--text3);
@@ -302,7 +299,7 @@
     margin-bottom: 32px;
   }
   .section-title {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 2.8rem;
     letter-spacing: 4px;
     color: var(--amber2);
@@ -385,7 +382,7 @@
     margin-bottom: 10px;
   }
   .kpi-value {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 2.6rem;
     letter-spacing: 2px;
     color: var(--amber2);
@@ -420,7 +417,7 @@
 
   /* ─── CARD TITLES ─── */
   .card-title {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.3rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -465,7 +462,7 @@
     flex-shrink: 0;
   }
   .health-pct {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.4rem;
     color: var(--amber2);
     text-shadow: var(--glow-amber);
@@ -547,7 +544,7 @@
   }
   .focus-item:last-child { border-bottom: none; }
   .focus-num {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.2rem;
     color: var(--amber);
     width: 24px;
@@ -599,7 +596,7 @@
     margin-bottom: 20px;
   }
   .biz-name {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.8rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -725,7 +722,7 @@
     margin-bottom: 16px;
   }
   .burn-number {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 5rem;
     color: var(--amber2);
     text-shadow: var(--glow-amber-strong);
@@ -793,7 +790,7 @@
     box-shadow: 0 0 20px rgba(200,131,42,0.15);
   }
   .debt-name {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.1rem;
     letter-spacing: 2px;
     color: var(--text);
@@ -840,7 +837,7 @@
     box-shadow: var(--glow-amber);
   }
   .irs-banner-title {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 2rem;
     letter-spacing: 6px;
     color: var(--amber2);
@@ -869,7 +866,7 @@
     margin-bottom: 8px;
   }
   .irs-fact-value {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 2px;
     color: var(--amber2);
@@ -899,7 +896,7 @@
     box-shadow: var(--glow-amber);
   }
   .strategy-name {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.5rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -919,7 +916,7 @@
     text-decoration: none;
     padding: 12px 28px;
     border-radius: 6px;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1rem;
     letter-spacing: 3px;
     transition: all 0.3s;
@@ -1001,7 +998,7 @@
     text-align: center;
   }
   .profile-stat-val {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 2px;
     color: var(--amber2);
@@ -1132,7 +1129,7 @@
     border-radius: 6px;
     padding: 10px 24px;
     color: #0a0a0a;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1rem;
     letter-spacing: 2px;
     cursor: pointer;
@@ -1169,7 +1166,7 @@
     margin-bottom: 6px;
   }
   .entry-title {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.3rem;
     letter-spacing: 2px;
     color: var(--text);
@@ -1279,7 +1276,7 @@
     box-shadow: var(--glow-amber);
   }
   .timeline-year {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.6rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -1319,7 +1316,7 @@
     box-shadow: var(--glow-amber-strong);
   }
   .modal-title {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.6rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -1354,7 +1351,7 @@
     border-radius: 6px;
     padding: 10px 20px;
     color: var(--text2);
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 0.95rem;
     letter-spacing: 2px;
     cursor: pointer;
@@ -1438,7 +1435,7 @@
   position: relative;
 }
 .day-cycle-title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.2rem;
   letter-spacing: 0.14em;
   color: #00d4ff;
@@ -1581,54 +1578,6 @@
 .bv-tips .t1 { color: rgba(255,255,255,0.72); }
 .bv-tips .t2 { color: rgba(0,212,255,0.9); margin-top: 0.15rem; display: block; }
 
-/* ── OVERVIEW SENSITIVE BLUR ── */
-.overview-sensitive {
-  position: relative;
-  filter: blur(7px) !important;
-  user-select: none !important;
-  pointer-events: none !important;
-  transition: filter 0.4s;
-}
-.overview-sensitive.revealed { filter: none !important; pointer-events: auto !important; user-select: auto !important; }
-.overview-sensitive-block {
-  position: relative;
-  filter: blur(7px) !important;
-  user-select: none !important;
-  transition: filter 0.4s;
-}
-.overview-sensitive-block.revealed { filter: none !important; }
-.overview-unlock-bar {
-  text-align: center;
-  margin: 0.5rem 0 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-}
-.overview-unlock-bar input {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(200,131,42,0.4);
-  color: #f2ede6;
-  padding: 5px 12px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  width: 160px;
-  outline: none;
-}
-.overview-unlock-bar button {
-  background: rgba(200,131,42,0.15);
-  border: 1px solid rgba(200,131,42,0.5);
-  color: #c8832a;
-  padding: 5px 14px;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-}
-.overview-unlock-bar button:hover { background: rgba(200,131,42,0.25); }
-.overview-unlock-err { color: #ff4444; font-size: 0.65rem; letter-spacing: 0.08em; display:none; }
-
 /* ── NEIGHBORHOOD DISCOVERY BAR ── */
 #neighborhood-scroll::-webkit-scrollbar { display: none; }
 .nbhd-spot {
@@ -1674,7 +1623,7 @@
 }
 .nav-left { flex-shrink: 0; }
 .nav-logo {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.1rem;
   letter-spacing: 0.08em;
   color: #c8832a;
@@ -1759,7 +1708,7 @@
 }
 .mobile-nav-close:hover { border-color: #c8832a; color: #c8832a; }
 .mobile-nav-logo {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.3rem;
   letter-spacing: 0.1em;
   color: #c8832a;
@@ -1902,7 +1851,7 @@
   z-index: 1;
 }
 .ring-value {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.15rem;
   letter-spacing: 0.04em;
   line-height: 1;
@@ -1970,7 +1919,7 @@
   box-shadow: 0 0 60px rgba(200,131,42,0.15);
 }
 .activity-modal h3 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.4rem;
   letter-spacing: 0.08em;
   color: #c8832a;
@@ -2199,7 +2148,7 @@
   margin-bottom: 0.5rem;
 }
 .journal-read-title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.8rem;
   letter-spacing: 0.06em;
   color: #f2ede6;
@@ -2241,7 +2190,7 @@
     margin-bottom: 12px;
   }
   .locked-overlay-label {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 4px;
     color: var(--amber2);
@@ -2315,7 +2264,7 @@ window._gfitConnect = function() {
   var CLIENT_ID = '1085063330986-r202kk8tuqkdjfutc30k84pb2dovnm5t.apps.googleusercontent.com';
   var SCOPES = 'https://www.googleapis.com/auth/fitness.activity.read%20https://www.googleapis.com/auth/fitness.body.read%20https://www.googleapis.com/auth/fitness.location.read';
   sessionStorage.setItem('rg_auth', '1');
-  var redirectUri = encodeURIComponent('https://inkthorn.ai/command-center.html');
+  var redirectUri = encodeURIComponent('https://trustlight.ai/dashboard.html');
   var authUrl = 'https://accounts.google.com/o/oauth2/v2/auth' +
     '?client_id=' + CLIENT_ID +
     '&redirect_uri=' + redirectUri +
@@ -2325,7 +2274,7 @@ window._gfitConnect = function() {
   window.location.href = authUrl;
 };
 </script>
-<link rel="icon" type="image/jpeg" href="https://inkthorn.ai/assets/inkthorn-mascot.png">
+<link rel="icon" type="image/jpeg" href="https://trustlight.ai/rob-profile.jpg">
 </head>
 <body>
 
@@ -2333,7 +2282,7 @@ window._gfitConnect = function() {
 <div id="login-overlay">
   <div class="login-box">
     <div class="login-logo">ROB GAUDET</div>
-    <div class="login-sub">Command Center — Restricted Access</div>
+    <div class="login-sub">Business Command Center — Restricted Access</div>
     <input type="password" id="login-pw" placeholder="ENTER ACCESS CODE" autocomplete="off">
     <button class="login-btn" onclick="doLogin()">AUTHENTICATE</button>
     <div class="login-error" id="login-error">ACCESS DENIED — INVALID CODE</div>
@@ -2347,24 +2296,19 @@ window._gfitConnect = function() {
   <nav id="main-nav">
     <div class="nav-left">
       <div style="display:flex;align-items:center;gap:0.65rem;">
-      <img src="https://inkthorn.ai/assets/inkthorn-mascot.png" alt="Rob" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(200,131,42,0.5);box-shadow:0 0 8px rgba(200,131,42,0.3);">
-      <span class="nav-logo">INKTHORN <span style="color:rgba(200,131,42,0.5)">//</span> COMMAND CENTER</span>
+      <img src="https://trustlight.ai/rob-profile.jpg" alt="Rob" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(200,131,42,0.5);box-shadow:0 0 8px rgba(200,131,42,0.3);">
+      <span class="nav-logo">ROB GAUDET <span style="color:rgba(200,131,42,0.5)">//</span> COMMAND CENTER</span>
     </div>
     </div>
     <div class="nav-tabs" id="nav-tabs">
       <button class="nav-tab active" onclick="showTab('overview',this)">Overview</button>
       <button class="nav-tab" onclick="showTab('businesses',this)">Businesses</button>
       <button class="nav-tab" onclick="showTab('finance',this)">Finance</button>
-      <button class="nav-tab" onclick="showTab('personal',this)">Personal</button>
-      <button class="nav-tab" onclick="showTab('journal',this)">Journal</button>
-      <button class="nav-tab" onclick="showTab('timeline',this)">Timeline</button>
+
     </div>
-    <div style="display:flex;align-items:center;gap:0.5rem;">
-      <a href="dashboard-settings.html" title="Settings & Activity Log" style="font-size:1.1rem;opacity:0.45;text-decoration:none;padding:4px 8px;border-radius:6px;transition:opacity 0.2s;line-height:1;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.45'">⚙</a>
-      <button class="hamburger" id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <button class="hamburger" id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- Mobile Nav Drawer -->
@@ -2376,9 +2320,7 @@ window._gfitConnect = function() {
         <button class="mobile-nav-item active" onclick="showTab('overview',this);toggleMobileNav()">⚡ Overview</button>
         <button class="mobile-nav-item" onclick="showTab('businesses',this);toggleMobileNav()">🏢 Businesses</button>
         <button class="mobile-nav-item" onclick="showTab('finance',this);toggleMobileNav()">💰 Finance</button>
-        <button class="mobile-nav-item" onclick="showTab('personal',this);toggleMobileNav()">👤 Personal</button>
-        <button class="mobile-nav-item" onclick="showTab('journal',this);toggleMobileNav()">📓 Journal</button>
-        <button class="mobile-nav-item" onclick="showTab('timeline',this);toggleMobileNav()">🕐 Timeline</button>
+
       </nav>
     </div>
   </div>
@@ -2386,113 +2328,6 @@ window._gfitConnect = function() {
 
   <!-- ═══ OVERVIEW ═══ -->
   <section class="section active" id="tab-overview">
-
-    <!-- ══════════ DAY CYCLE ══════════ -->
-    <div class="day-cycle-wrap">
-      <div class="day-cycle-header">
-        <div>
-          <div class="day-cycle-title">⚡ DAY CYCLE</div>
-          <div class="day-cycle-now" id="dc-now-label">Loading...</div>
-        </div>
-        <div class="day-type-btns" id="day-type-btns">
-          <button class="day-type-btn active" id="btn-concierge" onclick="setDayConcierge(this)">✦ Concierge</button>
-          <button class="day-type-btn" onclick="setDayType('weekday',this)">Weekday</button>
-          <button class="day-type-btn" onclick="setDayType('weekend',this)">Weekend</button>
-          <button class="day-type-btn" onclick="setDayType('vacation',this)">Vacation</button>
-        </div>
-      </div>
-      <div class="day-cycle-scroll" id="dc-scroll">
-        <div id="dc-track"></div>
-      </div>
-      <!-- Static below-scroll panels: anchor + private. Never scrolls. -->
-      <div id="dc-below-panels" style="display:none;padding:0 1rem 0.5rem;"></div>
-    </div>
-
-    <!-- ══════════ NEIGHBORHOOD DISCOVERY BAR ══════════ -->
-    <div style="margin: 1.2rem 0 1.5rem; border-radius: 12px; border: 1px solid rgba(200,131,42,0.2); background: rgba(255,255,255,0.02); overflow:hidden; display:flex;">
-
-      <!-- LEFT: Map -->
-      <div style="flex-shrink:0; width:200px; min-height:130px; position:relative; overflow:hidden;">
-        <iframe
-          src="https://www.google.com/maps?q=Napoleon+Ave+%26+Magazine+St,+New+Orleans,+LA+70115&output=embed&z=15"
-          width="200" height="160" style="border:0;display:block;filter:saturate(0.6) brightness(0.7);margin-top:-15px;"
-          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:5px 8px;background:linear-gradient(transparent,rgba(0,0,0,0.8));font-size:0.58rem;color:#c8832a;font-weight:700;letter-spacing:0.08em;">
-          📍 NAPOLEON & MAGAZINE
-        </div>
-      </div>
-
-      <!-- RIGHT: Scrollable discovery spots -->
-      <div style="flex:1; overflow:hidden; border-left: 1px solid rgba(200,131,42,0.15);">
-        <div style="padding: 0.45rem 0.85rem 0.3rem; border-bottom: 1px solid rgba(200,131,42,0.1); display:flex; align-items:center; justify-content:space-between;">
-          <span style="font-size:0.58rem;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;">Discover the Neighborhood</span>
-          <span style="font-size:0.58rem;color:rgba(0,212,255,0.6);">🚋 5 blocks to St. Charles Streetcar →</span>
-        </div>
-        <div style="display:flex; overflow-x:auto; gap:0; scrollbar-width:none; -ms-overflow-style:none;" id="neighborhood-scroll">
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🎵</div>
-            <div class="nbhd-name">Tipitina's</div>
-            <div class="nbhd-dist">0.4 mi</div>
-            <div class="nbhd-desc">Legendary music venue. Check tonight's lineup.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">☕</div>
-            <div class="nbhd-name">Congregation Coffee</div>
-            <div class="nbhd-dist">4 blocks</div>
-            <div class="nbhd-desc">Best specialty pour-overs in Uptown.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🌿</div>
-            <div class="nbhd-name">Audubon Park</div>
-            <div class="nbhd-dist">0.6 mi</div>
-            <div class="nbhd-desc">Morning run, Sunday stroll, oaks and open sky.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🍸</div>
-            <div class="nbhd-name">Cure</div>
-            <div class="nbhd-dist">Freret St</div>
-            <div class="nbhd-desc">James Beard bar. Best cocktails in the city.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🧇</div>
-            <div class="nbhd-name">Company Burger</div>
-            <div class="nbhd-dist">Freret St</div>
-            <div class="nbhd-desc">Best burger in New Orleans. Simple. Perfect.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🍦</div>
-            <div class="nbhd-name">Hansen's Sno-Bliz</div>
-            <div class="nbhd-dist">Tchoupitoulas</div>
-            <div class="nbhd-desc">Since 1939. The only sno-ball that matters.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">📚</div>
-            <div class="nbhd-name">Octavia Books</div>
-            <div class="nbhd-dist">Octavia St</div>
-            <div class="nbhd-desc">Independent bookshop. Worth an hour any day.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🥩</div>
-            <div class="nbhd-name">Clancy's</div>
-            <div class="nbhd-dist">Annunciation</div>
-            <div class="nbhd-desc">Classic Uptown. White tablecloth, local crowd.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🍺</div>
-            <div class="nbhd-name">Barrel Proof</div>
-            <div class="nbhd-dist">Magazine St</div>
-            <div class="nbhd-desc">500+ whiskeys. No pretense. Good bourbon.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🌺</div>
-            <div class="nbhd-name">Tulane Campus</div>
-            <div class="nbhd-dist">0.8 mi</div>
-            <div class="nbhd-desc">Beautiful walk. Quiet on weekends.</div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="section-header">
       <div class="section-title">OVERVIEW</div>
@@ -2531,15 +2366,33 @@ window._gfitConnect = function() {
         <div class="kpi-sub">In progress</div>
       </div>
       <div class="kpi-card">
+        <div class="kpi-trend">🔥</div>
+        <div class="kpi-label">Monthly Burn</div>
+        <div class="kpi-value" data-count="7400" data-prefix="$">$0</div>
+        <div class="kpi-sub">+/mo operating cost</div>
+      </div>
+      <div class="kpi-card cyan-accent">
+        <div class="kpi-trend">⚖️</div>
+        <div class="kpi-label">IRS Balance</div>
+        <div class="kpi-value">$200K+</div>
+        <div class="kpi-sub">Resolution active</div>
+      </div>
+      <div class="kpi-card">
         <div class="kpi-trend">📊</div>
         <div class="kpi-label">Leads Pipeline</div>
         <div class="kpi-value" data-count="9464" data-prefix="">0</div>
         <div class="kpi-sub">InkThorn — scraped</div>
       </div>
+      <div class="kpi-card cyan-accent">
+        <div class="kpi-trend">📈</div>
+        <div class="kpi-label">Net Worth Trend</div>
+        <div class="kpi-value">↑</div>
+        <div class="kpi-sub">Rebuilding</div>
+      </div>
     </div>
 
-    <!-- Two Column: Health Matrix + Activity Feed — moved to business dashboard -->
-    <div class="two-col overview-sensitive-block" style="display:none;">
+    <!-- Two Column: Health Matrix + Activity Feed -->
+    <div class="two-col">
       <div class="glass-card">
         <div class="card-title"><div class="dot"></div> BUSINESS HEALTH MATRIX</div>
         <div class="health-matrix">
@@ -2641,20 +2494,33 @@ window._gfitConnect = function() {
 
   <!-- ═══ BUSINESSES ═══ -->
   <section class="section" id="tab-businesses">
-  <div class="locked-section-wrap" id="biz-section-wrap">
-    <div class="locked-tab-overlay" id="overlay-businesses" onclick="rgOverlayClick(this)">
-      <div class="locked-overlay-icon">🔒</div>
-      <div class="locked-overlay-label">RESTRICTED</div>
-      <div class="locked-overlay-sub">Click to unlock</div>
-      <div class="locked-pw-wrap" id="pw-wrap-businesses">
-        <input class="locked-pw-input" type="password" placeholder="Password" id="pw-input-businesses" onclick="event.stopPropagation()" onkeydown="rgPwKeydown(event,'businesses')">
-        <div class="locked-pw-error" id="pw-err-businesses">ACCESS DENIED</div>
-      </div>
-    </div>
     <div class="section-header">
       <div class="section-title">BUSINESSES</div>
       <div class="section-subtitle">5 Active Ventures</div>
     </div>
+
+    <!-- Financial KPIs -->
+    <div class="kpi-grid" style="margin-bottom:1.5rem;">
+      <div class="kpi-card">
+        <div class="kpi-trend">🔥</div>
+        <div class="kpi-label">Monthly Burn</div>
+        <div class="kpi-value" data-count="7400" data-prefix="$">$0</div>
+        <div class="kpi-sub">+/mo operating cost</div>
+      </div>
+      <div class="kpi-card cyan-accent">
+        <div class="kpi-trend">⚖️</div>
+        <div class="kpi-label">IRS Balance</div>
+        <div class="kpi-value">$200K+</div>
+        <div class="kpi-sub">Resolution active</div>
+      </div>
+      <div class="kpi-card cyan-accent">
+        <div class="kpi-trend">📈</div>
+        <div class="kpi-label">Net Worth Trend</div>
+        <div class="kpi-value">↑</div>
+        <div class="kpi-sub">Rebuilding</div>
+      </div>
+    </div>
+
     <div class="business-grid">
 
       <!-- TextOS.ai -->
@@ -2685,12 +2551,9 @@ window._gfitConnect = function() {
             <div class="biz-meta-value">Active Development</div>
           </div>
         </div>
-        <div class="biz-metric">Text-to-website platform · Phone = Identity · No login ever</div>
+        <div class="biz-metric">Telegram Supergroup Provisioner — in design</div>
         <div>
-          <span class="tag">AI</span><span class="tag">SaaS</span><span class="tag">SMS</span><span class="tag">Publishing</span>
-        </div>
-        <div style="margin-top:14px;">
-          <a href="/textos.html" style="display:inline-block;background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.3);color:#00e5ff;font-size:0.78rem;padding:7px 16px;border-radius:6px;text-decoration:none;font-family:'Orbitron',monospace;letter-spacing:0.05em;">View Product Vision →</a>
+          <span class="tag">AI</span><span class="tag">SaaS</span><span class="tag">Telegram</span><span class="tag">NLP</span>
         </div>
         <div class="biz-chart-wrap"><canvas id="chart-textos"></canvas></div>
       </div>
@@ -2840,21 +2703,10 @@ window._gfitConnect = function() {
       </div>
 
     </div>
-  </div><!-- end locked-section-wrap businesses -->
   </section>
 
   <!-- ═══ FINANCE ═══ -->
   <section class="section" id="tab-finance">
-  <div class="locked-section-wrap" id="finance-section-wrap">
-    <div class="locked-tab-overlay" id="overlay-finance" onclick="rgOverlayClick(this)">
-      <div class="locked-overlay-icon">🔒</div>
-      <div class="locked-overlay-label">RESTRICTED</div>
-      <div class="locked-overlay-sub">Click to unlock</div>
-      <div class="locked-pw-wrap" id="pw-wrap-finance">
-        <input class="locked-pw-input" type="password" placeholder="Password" id="pw-input-finance" onclick="event.stopPropagation()" onkeydown="rgPwKeydown(event,'finance')">
-        <div class="locked-pw-error" id="pw-err-finance">ACCESS DENIED</div>
-      </div>
-    </div>
     <div class="section-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
       <div>
         <div class="section-title">FINANCE</div>
@@ -2988,289 +2840,6 @@ window._gfitConnect = function() {
     <div class="mt-md" style="text-align:center;">
       <a href="/budget.html" class="irs-link" style="background:rgba(200,131,42,0.15);color:var(--amber2);border:1px solid var(--amber);">→ FULL BUDGET DASHBOARD</a>
     </div>
-  </div><!-- end locked-section-wrap finance -->
-  </section>
-
-  <!-- ═══ PERSONAL ═══ -->
-  <section class="section" id="tab-personal">
-    <div class="section-header">
-      <div class="section-title">PERSONAL</div>
-      <div class="section-subtitle">Health · Profile · Goals</div>
-    </div>
-    <div class="personal-grid">
-
-      <!-- Health / Activity Tracker -->
-      <!-- ACTIVITY TRACKER -->
-      <div class="card" style="margin-bottom:1.5rem;">
-        <div class="card-title"><div class="dot" style="background:#00d4ff;box-shadow:0 0 8px #00d4ff;"></div> ACTIVITY TRACKER</div>
-
-        <div class="activity-section">
-          <div class="section-label">Today's Progress</div>
-
-          <!-- Rings -->
-          <div class="activity-rings-row">
-            <!-- Steps -->
-            <div class="activity-ring-card">
-              <div class="ring-wrap">
-                <div class="ring-track"></div>
-                <div class="ring-progress" id="ring-steps"></div>
-                <div class="ring-inner">
-                  <div class="ring-value" id="val-steps">0</div>
-                  <div class="ring-unit">steps</div>
-                </div>
-              </div>
-              <div class="ring-label">Steps</div>
-              <div class="ring-goal">Goal: <span id="goal-steps">10,000</span></div>
-            </div>
-            <!-- Distance -->
-            <div class="activity-ring-card">
-              <div class="ring-wrap">
-                <div class="ring-track"></div>
-                <div class="ring-progress" id="ring-distance"></div>
-                <div class="ring-inner">
-                  <div class="ring-value" id="val-distance">0</div>
-                  <div class="ring-unit">miles</div>
-                </div>
-              </div>
-              <div class="ring-label">Distance</div>
-              <div class="ring-goal">Goal: <span id="goal-distance">5</span> mi</div>
-            </div>
-            <!-- Calories -->
-            <div class="activity-ring-card">
-              <div class="ring-wrap">
-                <div class="ring-track"></div>
-                <div class="ring-progress" id="ring-calories"></div>
-                <div class="ring-inner">
-                  <div class="ring-value" id="val-calories">0</div>
-                  <div class="ring-unit">cal</div>
-                </div>
-              </div>
-              <div class="ring-label">Calories</div>
-              <div class="ring-goal">Goal: <span id="goal-calories">500</span></div>
-            </div>
-            <!-- Active Minutes -->
-            <div class="activity-ring-card">
-              <div class="ring-wrap">
-                <div class="ring-track"></div>
-                <div class="ring-progress" id="ring-active"></div>
-                <div class="ring-inner">
-                  <div class="ring-value" id="val-active">0</div>
-                  <div class="ring-unit">min</div>
-                </div>
-              </div>
-              <div class="ring-label">Active Min</div>
-              <div class="ring-goal">Goal: <span id="goal-active">30</span> min</div>
-            </div>
-          </div>
-
-          <!-- Google Fit + Manual log buttons -->
-          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem;">
-            <button class="gfit-connect-btn" id="gfit-btn" onclick="window._gfitConnect && window._gfitConnect()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-              Sync Google Fit
-            </button>
-            <button class="activity-log-btn" onclick="openActivityModal()" style="margin-bottom:0;">
-              ＋ Log Manually
-            </button>
-          </div>
-          <div class="gfit-status" id="gfit-status">Not connected — tap Sync Google Fit</div>
-
-          <!-- 7-day history -->
-          <div class="act-week-chart">
-            <div class="act-week-label">7-Day Steps History</div>
-            <div class="act-bars" id="act-bars"></div>
-          </div>
-        </div>
-
-        <!-- Health status indicators (keep these) -->
-        <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06);">
-          <div class="section-label" style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:#555;margin-bottom:0.75rem;">Wellness Indicators</div>
-          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-            <div style="background:rgba(126,214,160,0.08);border:1px solid rgba(126,214,160,0.2);border-radius:8px;padding:0.6rem 1rem;font-size:0.78rem;">😴 Sleep <span style="color:#7ed6a0;font-weight:600;">7.1 hrs</span></div>
-            <div style="background:rgba(200,131,42,0.08);border:1px solid rgba(200,131,42,0.2);border-radius:8px;padding:0.6rem 1rem;font-size:0.78rem;">🥗 Diet <span style="color:#e09a40;font-weight:600;">On Track</span></div>
-            <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:0.6rem 1rem;font-size:0.78rem;">💧 Hydration <span style="color:#00d4ff;font-weight:600;">Good</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Public Profile -->
-      <div class="glass-card">
-        <div class="card-title"><div class="dot"></div> PUBLIC PROFILE</div>
-        <div class="profile-stats">
-          <div class="profile-stat">
-            <div class="profile-stat-val">500K+</div>
-            <div class="profile-stat-label">Engaged Followers</div>
-          </div>
-          <div class="profile-stat">
-            <div class="profile-stat-val">30 YRS</div>
-            <div class="profile-stat-label">Software Architecture</div>
-          </div>
-          <div class="profile-stat">
-            <div class="profile-stat-val">2012</div>
-            <div class="profile-stat-label">Cajun Navy Founded</div>
-          </div>
-          <div class="profile-stat">
-            <div class="profile-stat-val">NATL</div>
-            <div class="profile-stat-label">Media Figure</div>
-          </div>
-        </div>
-        <div>
-          <span class="tag">Published Author</span>
-          <span class="tag">Keynote Speaker</span>
-          <span class="tag">Cajun Navy Founder</span>
-          <span class="tag">Software Architect</span>
-          <span class="tag">AI Builder</span>
-        </div>
-        <div class="divider"></div>
-        <div style="font-size:0.8rem;color:var(--text2);line-height:1.6;">
-          Senior software systems architect with 30 years experience. Founder of the modern Cajun Navy disaster response movement. National media figure, published author, and keynote speaker across technology and humanitarian sectors.
-        </div>
-      </div>
-
-      <!-- Quick Links -->
-      <div class="glass-card">
-        <div class="card-title"><div class="dot"></div> QUICK LINKS</div>
-        <div class="quick-links">
-          <a href="/textos.html" class="quick-link">TextOS Product Vision <span class="quick-link-arrow">→</span></a>
-          <a href="/irs-resolution.html" class="quick-link">IRS Resolution Record <span class="quick-link-arrow">→</span></a>
-          <a href="/budget.html" class="quick-link">Budget Dashboard <span class="quick-link-arrow">→</span></a>
-          <a href="https://robgaudet.blog" class="quick-link" target="_blank">robgaudet.blog <span class="quick-link-arrow">↗</span></a>
-          <a href="https://calendly.com/inkthorn" class="quick-link" target="_blank">InkThorn Calendly <span class="quick-link-arrow">↗</span></a>
-        </div>
-      </div>
-
-      <!-- Goals -->
-      <div class="glass-card">
-        <div class="card-title"><div class="dot"></div> GOALS</div>
-        <div class="goal-list">
-          <div class="goal-item">
-            <div class="goal-label"><span>Financial Stabilization</span><span class="goal-pct">35%</span></div>
-            <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="35%"></div></div>
-          </div>
-          <div class="goal-item">
-            <div class="goal-label"><span>Reyla — First Paying Client</span><span class="goal-pct">20%</span></div>
-            <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="20%"></div></div>
-          </div>
-          <div class="goal-item">
-            <div class="goal-label"><span>TextOS MVP Launch</span><span class="goal-pct">40%</span></div>
-            <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="40%"></div></div>
-          </div>
-          <div class="goal-item">
-            <div class="goal-label"><span>SBIR Application Submitted</span><span class="goal-pct">55%</span></div>
-            <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="55%"></div></div>
-          </div>
-          <div class="goal-item">
-            <div class="goal-label"><span>InkThorn — First 10 Clients</span><span class="goal-pct">15%</span></div>
-            <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="15%"></div></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══ JOURNAL ═══ -->
-  <section class="section" id="tab-journal">
-    <div class="section-header">
-      <div class="section-title">JOURNAL</div>
-      <div class="section-subtitle">Personal Log — Stored Locally</div>
-    </div>
-
-    <div class="journal-new">
-      <div class="card-title"><div class="dot"></div> NEW ENTRY</div>
-      <input type="text" class="journal-title-input" id="journal-title" placeholder="Entry title...">
-      <textarea class="journal-textarea" id="journal-body" placeholder="Write your thoughts, decisions, observations...&#10;&#10;What happened today? What did you decide? What do you need to remember?"></textarea>
-      <div class="journal-actions">
-        <div class="journal-note">📁 Entries stored in browser localStorage — private to this device</div>
-        <button class="btn-primary" onclick="saveJournalEntry()">SAVE ENTRY</button>
-      </div>
-    </div>
-
-    <div class="card-title"><div class="dot"></div> PREVIOUS ENTRIES</div>
-    <div class="journal-entries" id="journal-entries-list">
-      <!-- Placeholder entries -->
-      <div class="journal-entry-card" data-id="placeholder-1">
-        <div class="entry-date">April 10, 2026 · 11:42 PM</div>
-        <div class="entry-title">Reyla Demo Confirmed — Beaux Box Realty</div>
-        <div class="entry-preview">Big day. Got the first demo locked in with Beaux Box Realty — and I brought this lead in myself. Not Burton. Me. The developer. That tells you everything you need to know about the partnership dynamic and why the equity conversation needs to happen now...</div>
-      </div>
-      <div class="journal-entry-card" data-id="placeholder-2">
-        <div class="entry-date">April 8, 2026 · 09:15 PM</div>
-        <div class="entry-title">InkThorn SMS Campaign — 543 Targets Ready</div>
-        <div class="entry-preview">The scrape is done. 9,464 leads, 543 verified phone numbers. SimpleTexting is set up on (504) 238-4030. Tomorrow the campaign goes live. This is the moment where InkThorn either proves its model or doesn't. I believe it does...</div>
-      </div>
-      <div class="journal-entry-card" data-id="placeholder-3">
-        <div class="entry-date">April 6, 2026 · 07:30 AM</div>
-        <div class="entry-title">SBIR Strategy — Multi-Agency Approach</div>
-        <div class="entry-preview">Talked to Jerry Hollister at BBC Consulting. The play is multi-agency: NSF, DoD, DHS, USDA — each has different eligibility windows. Hutch seminar in Baton Rouge is the next concrete move. NASA track + DoD track at the same event...</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ TIMELINE ═══ -->
-  <section class="section" id="tab-timeline">
-    <div class="section-header">
-      <div class="section-title">TIMELINE</div>
-      <div class="section-subtitle">Life & Career Milestones</div>
-    </div>
-
-    <div class="timeline-wrap" id="timeline-wrap">
-      <div class="timeline-line"></div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-year">2026</div>
-          <div class="timeline-text">InkThorn Crustacean launched. Reyla.ai enters active development. SBIR pursuit begins across NSF, DoD, DHS, USDA. IRS resolution engaged with Tax Rise.</div>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-year">2025</div>
-          <div class="timeline-text">TextOS.ai concept begins — the vision of a conversational AI operating system to replace app fragmentation with a single intelligent text interface.</div>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-year">2024</div>
-          <div class="timeline-text">Ground Force Humanitarian Aid (GFHA) formally established. The operational structure of the Cajun Navy movement takes organizational form.</div>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-year">2012</div>
-          <div class="timeline-text">Cajun Navy movement founded — the modern iteration. Rob builds the community disaster response model that spreads nationally and becomes a media phenomenon. National media figure status established.</div>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-year">~2010</div>
-          <div class="timeline-text">Career landmark: 30 years in software architecture reached. Transition from pure technical work toward civic tech and entrepreneurial ventures accelerates.</div>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-year">Early Career</div>
-          <div class="timeline-text">Senior software systems architect — the foundation. Three decades of building systems that scale. New Orleans roots. The technical foundation that makes everything else possible.</div>
-        </div>
-      </div>
-
-      <div id="custom-milestones"></div>
-    </div>
-
-    <div class="timeline-add">
-      <button class="btn-primary" onclick="openMilestoneModal()">+ ADD MILESTONE</button>
-    </div>
   </section>
 
 </div><!-- /#app -->
@@ -3299,38 +2868,9 @@ document.getElementById('login-pw').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
 });
 
-// ═══ ACTIVITY LOG ═══
-function rgLogActivity(entry) {
-  try {
-    var log = JSON.parse(localStorage.getItem('rg_activity_log') || '[]');
-    log.unshift(entry);
-    if (log.length > 200) log = log.slice(0, 200);
-    localStorage.setItem('rg_activity_log', JSON.stringify(log));
-  } catch(e) {}
-}
-
-function rgGetIPAndLog(entry) {
-  // Fetch IP + geo from ipapi.co (free, no key needed)
-  fetch('https://ipapi.co/json/')
-    .then(function(r) { return r.json(); })
-    .then(function(geo) {
-      entry.ip = geo.ip || 'unknown';
-      entry.location = [geo.city, geo.region, geo.country_name].filter(Boolean).join(', ') || 'unknown';
-      entry.org = geo.org || '';
-      rgLogActivity(entry);
-    })
-    .catch(function() {
-      entry.ip = 'lookup failed';
-      entry.location = 'unknown';
-      rgLogActivity(entry);
-    });
-}
-
 function doLogin() {
   const pw = document.getElementById('login-pw').value;
-  const ts = new Date().toISOString();
   if (pw === PASS) {
-    rgGetIPAndLog({ ts, type: 'login_success', actor: 'user', description: 'Successful login', pw_tried: '***correct***' });
     const overlay = document.getElementById('login-overlay');
     overlay.classList.add('fade-out');
     setTimeout(() => {
@@ -3340,7 +2880,6 @@ function doLogin() {
       initDashboard();
     }, 600);
   } else {
-    rgGetIPAndLog({ ts, type: 'login_failed', actor: 'unknown', description: 'Failed login attempt', pw_tried: pw });
     const err = document.getElementById('login-error');
     err.classList.add('show');
     document.getElementById('login-pw').value = '';
@@ -3587,7 +3126,7 @@ function renderJournalEntries() {
       (function(eid) {
         card.addEventListener('click', function() { openJournalEntry(eid); });
       })(entry.id);
-      list.appendChild(card);
+      list.insertBefore(card, list.firstChild);
     });
   } else {
     list.querySelectorAll('[data-id^="placeholder"]').forEach(el => el.style.display = '');
@@ -3756,28 +3295,16 @@ var currentDayType = (_dow === 0 || _dow === 6) ? 'weekend' : 'weekday';
 
 // ═══ CONCIERGE DAY CYCLE (today-cycle.json) ═══
 var _conciergeBlocks = null;
-var _conciergeAnchor = null;
-var _conciergePrivate = null;
 
 function fetchConciergeCycle() {
-  // Inline data injected at build time
-  var _INLINE_CYCLE = {"date": "2026-04-17", "generated": "2026-04-17T14:47:52Z", "location": "Napoleon & Magazine, Uptown New Orleans, 70115", "mode": "custom", "concierge": {"title": "Friday \u2014 Finish Strong", "notes": ["\ud83c\udfc6 RISE Challenge (Virginia) \u2014 Stability accepted! Complete the application", "\ud83c\udfa4 InnovateSouth deck \u2014 finish it, time the pitch (must be under 4 min), upload to Claude for evaluation & improvements", "\u2705 Ship something before 3pm \u2014 don't drift", "\ud83e\uddfe Review week finances: income, expenses, IRS set-aside", "\ud83d\udcf1 TextOS: any user feedback or product notes to capture", "\ud83c\udf7a End of week beer is earned \u2014 Barrel Proof or Cure", "\ud83d\udcd3 Journal: 3 wins from this week"]}, "private": ["\ud83c\udf39 Date night with Camille tonight \u2014 make it count", "\ud83d\udccd Reservation idea: Clancy's \u2014 call ahead", "\ud83d\udc8c She loves when you just handle the reservation without being asked", "\ud83d\udc8c Dress up a little \u2014 she notices"], "blocks": [{"time": "7:30 AM", "icon": "\ud83c\udfc1", "label": "Friday \u2014 Finish Line", "tips": ["Ship something before 3pm. Don't drift into the weekend.", "One real deliverable. Then you're free."], "recommendation": null}, {"time": "8:00 AM", "icon": "\ud83c\udfc6", "label": "RISE Challenge Application", "tips": ["Stability accepted into RISE Challenge (Virginia)", "Complete and submit the application today"], "recommendation": null}, {"time": "9:00 AM", "icon": "\ud83d\udcbb", "label": "Final Build Push", "tips": ["Last hard coding block of the week", "Leave Reyla in a clean state for Monday"], "recommendation": null}, {"time": "10:00 AM", "icon": "\ud83c\udfa4", "label": "InnovateSouth Pitch Deck", "tips": ["Finish the deck, time the pitch \u2014 must be under 4 min", "Upload to Claude for evaluation & improvements"], "recommendation": null}, {"time": "11:30 AM", "icon": "\ud83e\uddfe", "label": "Finance Review", "tips": ["Weekly check: income logged, expenses noted, IRS set-aside?", "Check the trailer title transfer status if pending"], "recommendation": null}, {"time": "1:00 PM", "icon": "\ud83e\udd57", "label": "Lunch", "tips": ["Friday lunch is a small reward \u2014 make it good", "No-takeout if still in challenge window"], "recommendation": null}, {"time": "2:00 PM", "icon": "\ud83d\udcf1", "label": "TextOS Product Notes", "tips": ["Capture any user feedback or product ideas", "Log before the week closes \u2014 don't lose it"], "recommendation": null}, {"time": "3:00 PM", "icon": "\u2705", "label": "Week Close", "tips": ["Write your 3 wins. Commit and push any open code.", "What moves to Monday? Write it down now."], "recommendation": null}, {"time": "5:30 PM", "icon": "\ud83c\udf7a", "label": "Friday Wind-Down Drink", "tips": ["You earned it. Barrel Proof or Cure.", "Friday on Magazine Street has its own energy."], "recommendation": {"name": "Barrel Proof", "address": "1201 Magazine St, New Orleans", "note": "Best whiskey bar in the South. 5 minutes from home."}}, {"time": "6:00 PM", "icon": "\ud83c\udfb5", "label": "Michael Watson & The Alchemy", "tips": ["d.b.a. \u00b7 Marigny", "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"], "recommendation": {"name": "Michael Watson & The Alchemy", "address": "d.b.a.", "note": "Tonight at 6:00 PM. More info: https://wwoz.org/events/1327376"}}, {"time": "7:00 PM", "icon": "\ud83c\udf39", "label": "Date Night with Camille", "tips": ["Clancy's \u2014 Uptown white tablecloth, classic New Orleans", "She loves when you just handle the reservation without being asked"], "recommendation": {"name": "Clancy's", "address": "6100 Annunciation St, New Orleans", "note": "Uptown white tablecloth, classic New Orleans"}, "_private": true}, {"time": "7:00 PM", "icon": "\ud83c\udfb5", "label": "Willie Green III", "tips": ["Bacchanal (OUTDOORS) \u00b7 Bywater", "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"], "recommendation": {"name": "Willie Green III", "address": "Bacchanal (OUTDOORS)", "note": "Tonight at 7:00 PM. More info: https://wwoz.org/events/1324506"}}, {"time": "8:00 PM", "icon": "\ud83c\udfb6", "label": "Frenchmen Street", "tips": ["Friday night on Frenchmen is an institution", "Walk the street, pick a spot, let New Orleans do its thing"], "recommendation": {"name": "Frenchmen Street", "address": "Frenchmen St, Marigny, New Orleans", "note": "Snug Harbor, d.b.a., The Spotted Cat \u2014 all within 100 feet."}}, {"time": "9:00 PM", "icon": "\ud83d\udcd3", "label": "Journal \u2014 3 Wins This Week", "tips": ["Write down 3 wins from this week before heading out", "Before Steve Aoki \u2014 10 minutes, that's all it takes"], "recommendation": null}, {"time": "10:00 PM", "icon": "\ud83c\udfa7", "label": "Steve Aoki @ Metropolitan", "tips": ["Doors open \u2014 get there early for a good spot", "Metropolitan New Orleans \u2014 live DJ set"], "recommendation": {"name": "Metropolitan", "address": "310 Andrew Higgins Blvd, New Orleans, LA", "note": "One of NOLA's best live music venues"}}]};
-  var today = new Date().toISOString().slice(0, 10);
-  if (_INLINE_CYCLE && _INLINE_CYCLE.blocks && _INLINE_CYCLE.date === today) {
-    _conciergeBlocks = _INLINE_CYCLE.blocks;
-    _conciergeAnchor = _INLINE_CYCLE.concierge || null;
-    _conciergePrivate = _INLINE_CYCLE.private || null;
-    renderConciergeCycle();
-    return;
-  }
   fetch('today-cycle.json?v=' + Date.now())
     .then(function(r) { return r.ok ? r.json() : null; })
     .then(function(data) {
       if (!data || !data.blocks) return;
+      // Only use if it's from today
+      var today = new Date().toISOString().slice(0, 10);
       if (data.date !== today) return;
       _conciergeBlocks = data.blocks;
-      _conciergeAnchor = data.concierge || null;
-      _conciergePrivate = data.private || null;
       renderConciergeCycle();
     })
     .catch(function() {});
@@ -3789,26 +3316,13 @@ function renderConciergeCycle() {
   if (!track) return;
 
   function renderBlock(b) {
-    if (b._private) return ''; // Private blocks never render in visible card list
     var status = getBlockStatus(b.time);
     var nowBadge = status === 'current' ? '<span class="now-badge">● NOW</span>' : '';
     var recHtml = '';
     if (b.recommendation) {
-      var rec = b.recommendation;
-      var moreLink = '';
-      // Extract URL from note if present, otherwise build a Google Maps search link
-      var urlMatch = rec.note && rec.note.match(/https?:\/\/[^\s]+/);
-      if (urlMatch) {
-        moreLink = urlMatch[0];
-      } else if (rec.address) {
-        moreLink = 'https://www.google.com/search?q=' + encodeURIComponent(rec.name + ' ' + rec.address);
-      }
-      var noteClean = rec.note ? rec.note.replace(/https?:\/\/[^\s]+/g, '').trim() : '';
       recHtml = '<div style="margin-top:6px;font-size:10px;color:#c8832a;border-top:1px solid rgba(200,131,42,0.2);padding-top:4px;">' +
-        '📍 <strong>' + rec.name + '</strong><br>' +
-        '<span style="color:rgba(255,255,255,0.5)">' + noteClean + '</span>' +
-        (moreLink ? '<br><a href="' + moreLink + '" target="_blank" rel="noopener" style="color:#00d4ff;font-size:9px;letter-spacing:0.06em;text-decoration:none;">More info →</a>' : '') +
-        '</div>';
+        '📍 <strong>' + b.recommendation.name + '</strong><br>' +
+        '<span style="color:rgba(255,255,255,0.5)">' + b.recommendation.note + '</span></div>';
     }
     return '<div class="day-block-v ' + status + '">' +
       '<div class="bv-icon">' + b.icon + '</div>' +
@@ -3822,48 +3336,8 @@ function renderConciergeCycle() {
     '</div>';
   }
 
-  // Cards only go in the scrolling track
   track.innerHTML = '<div class="day-track-wrap"><div class="day-cards-row">' +
     _conciergeBlocks.map(renderBlock).join('') + '</div></div>';
-
-  // ── Below-scroll static panels (anchor + private) ──────────────────────────
-  var below = document.getElementById('dc-below-panels');
-  if (below) {
-    var belowHtml = '';
-
-    // Anchor: "Set the Week" priority notes
-    if (_conciergeAnchor && _conciergeAnchor.notes && _conciergeAnchor.notes.length) {
-      var notesHtml = _conciergeAnchor.notes.map(function(n) {
-        return '<div style="padding:3px 0;font-size:11px;color:rgba(242,237,230,0.85);line-height:1.6;">' + n + '</div>';
-      }).join('');
-      belowHtml +=
-        '<div style="margin:12px 0 10px;padding:10px 14px;border-radius:10px;background:rgba(200,131,42,0.07);border:1px solid rgba(200,131,42,0.25);">' +
-          '<div style="font-size:9px;font-weight:700;letter-spacing:0.12em;color:#c8832a;text-transform:uppercase;margin-bottom:6px;">✦ ' + (_conciergeAnchor.title || 'Today') + '</div>' +
-          notesHtml +
-        '</div>';
-    }
-
-    // Private: blur-redacted, tap to reveal 15s, auto-reblur
-    if (_conciergePrivate && _conciergePrivate.length) {
-      var privateId = 'prv-' + Math.random().toString(36).slice(2, 8);
-      var privateNotesHtml = _conciergePrivate.map(function(n) {
-        return '<div style="padding:4px 0;font-size:11.5px;line-height:1.7;color:rgba(255,182,193,0.92);">' + n + '</div>';
-      }).join('');
-      belowHtml +=
-        '<div data-private-block="true" style="margin:0 0 4px;border-radius:10px;border:1px solid rgba(255,105,180,0.18);background:rgba(255,20,147,0.04);overflow:hidden;">' +
-          '<div style="padding:8px 14px 6px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;" onclick="togglePrivate(\'' + privateId + '\')" title="Private — tap to reveal">' +
-            '<span style="font-size:9px;font-weight:700;letter-spacing:0.12em;color:rgba(255,105,180,0.65);text-transform:uppercase;">🔒 Private</span>' +
-            '<span id="' + privateId + '-icon" style="font-size:9px;color:rgba(255,105,180,0.4);letter-spacing:0.08em;font-style:italic;">tap to reveal</span>' +
-          '</div>' +
-          '<div id="' + privateId + '" data-private-content="true" style="padding:2px 14px 12px;filter:blur(8px);transition:filter 0.4s ease;cursor:pointer;" onclick="togglePrivate(\'' + privateId + '\')">' +
-            privateNotesHtml +
-          '</div>' +
-        '</div>';
-    }
-
-    below.innerHTML = belowHtml;
-    below.style.display = belowHtml ? '' : 'none';
-  }
 
   // Auto-scroll to current block
   requestAnimationFrame(function() {
@@ -3874,37 +3348,14 @@ function renderConciergeCycle() {
     }
   });
 
-  // Activate the Concierge button, deactivate others
-  document.querySelectorAll('.day-type-btn').forEach(function(b) { b.classList.remove('active'); });
-  var conciergeBtn = document.getElementById('btn-concierge');
-  if (conciergeBtn) { conciergeBtn.style.display = ''; conciergeBtn.classList.add('active'); }
-}
-
-function setDayConcierge(btn) {
-  if (!_conciergeBlocks) return;
-  document.querySelectorAll('.day-type-btn').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  renderConciergeCycle();
-}
-
-function togglePrivate(id) {
-  var el = document.getElementById(id);
-  var icon = document.getElementById(id + '-icon');
-  if (!el) return;
-  var isBlurred = el.style.filter !== 'none' && el.style.filter !== '';
-  if (isBlurred) {
-    el.style.filter = 'none';
-    if (icon) { icon.textContent = 'tap to hide'; icon.style.color = 'rgba(255,105,180,0.7)'; }
-    // Auto-reblur after 15 seconds
-    if (window._prvTimer) clearTimeout(window._prvTimer);
-    window._prvTimer = setTimeout(function() {
-      el.style.filter = 'blur(8px)';
-      if (icon) { icon.textContent = 'tap to reveal'; icon.style.color = 'rgba(255,105,180,0.4)'; }
-    }, 15000);
-  } else {
-    el.style.filter = 'blur(8px)';
-    if (icon) { icon.textContent = 'tap to reveal'; icon.style.color = 'rgba(255,105,180,0.4)'; }
-    if (window._prvTimer) clearTimeout(window._prvTimer);
+  // Swap button label to show concierge mode
+  var btns = document.querySelectorAll('.day-type-btn');
+  btns.forEach(function(b) { b.classList.remove('active'); });
+  // Show a concierge indicator in the header
+  var label = document.getElementById('dc-now-label');
+  if (label && !label.dataset.conciergeSet) {
+    label.dataset.conciergeSet = '1';
+    label.innerHTML += ' &nbsp;<span style="font-size:10px;background:rgba(200,131,42,0.2);color:#c8832a;border-radius:4px;padding:1px 7px;letter-spacing:1px;">✦ CONCIERGE</span>';
   }
 }
 
@@ -3912,10 +3363,7 @@ function setDayType(type, btn) {
   currentDayType = type;
   document.querySelectorAll('.day-type-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  // Clear below panels when leaving concierge mode
-  var below = document.getElementById('dc-below-panels');
-  if (below) { below.innerHTML = ''; below.style.display = 'none'; }
-  renderDayCycle(); // renders standard base cycle, not concierge
+  renderDayCycle();
 }
 
 function getBlockStatus(timeStr) {
@@ -3977,14 +3425,7 @@ function updateDayCycleTime() {
     label.textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }) 
       + ' CDT · ' + now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
   }
-  // Only re-render base cycle if concierge is NOT active
-  var conciergeBtn = document.getElementById('btn-concierge');
-  var conciergeActive = conciergeBtn && conciergeBtn.classList.contains('active');
-  if (conciergeActive) {
-    renderConciergeCycle(); // refresh NOW indicator within concierge view
-  } else {
-    renderDayCycle();
-  }
+  renderDayCycle();
 }
 
 function initDashboard() {
@@ -3993,47 +3434,28 @@ function initDashboard() {
   try { initActivityTracker(); } catch(e) { console.error('initActivityTracker:', e); }
   try { initBizCharts(); } catch(e) { console.error('initBizCharts:', e); }
   setTimeout(initGoogleFit, 800);
-  // Init Day Cycle time label first (no render yet)
-  try {
-    const now = new Date();
-    const label = document.getElementById('dc-now-label');
-    if (label) {
-      label.textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
-        + ' CDT · ' + now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
-    }
-  } catch(e) {}
-  // Fetch + render concierge — always the default view
+  // Fetch concierge cycle — overrides default if today's file exists
   try { fetchConciergeCycle(); } catch(e) { console.error('ConciergeCycle:', e); }
-  // Start the clock interval (updateDayCycleTime won't overwrite concierge since btn is now active)
+  // Init Day Cycle — auto-select weekday/weekend button
   try {
+    var btns = document.querySelectorAll('.day-type-btn');
+    btns.forEach(function(b) {
+      b.classList.remove('active');
+      if (b.textContent.toLowerCase() === currentDayType) b.classList.add('active');
+    });
+  } catch(e) { console.error('DayCycle btn init:', e); }
+  try { 
+    updateDayCycleTime(); 
     setInterval(updateDayCycleTime, 60000);
-  } catch(e) { console.error('DayCycle init error:', e); }
-}
-
-// ═══ OVERVIEW FINANCIAL BLUR ═══
-function ovReveal() {
-  var pw = document.getElementById('overview-unlock-pw').value;
-  var err = document.getElementById('overview-unlock-err');
-  if (pw === PASS) {
-    document.querySelectorAll('.overview-sensitive').forEach(function(el) { el.classList.add('revealed'); });
-    document.querySelectorAll('.overview-sensitive-block').forEach(function(el) { el.classList.add('revealed'); });
-    var bar = document.getElementById('overview-unlock-bar');
-    if (bar) bar.style.display = 'none';
-    sessionStorage.setItem('rg_ov_unlocked', '1');
-  } else {
-    err.style.display = 'inline';
-    setTimeout(function() { err.style.display = 'none'; }, 2000);
+  } catch(e) { 
+    console.error('DayCycle init error:', e);
+    // Force render directly
+    try {
+      var track = document.getElementById('dc-track');
+      if (track && typeof renderDayCycle === 'function') renderDayCycle();
+    } catch(e2) { console.error('Direct render failed:', e2); }
   }
 }
-// Only auto-reveal if the overview was explicitly unlocked this session
-document.addEventListener('DOMContentLoaded', function() {
-  if (sessionStorage.getItem('rg_ov_unlocked') === '1') {
-    document.querySelectorAll('.overview-sensitive').forEach(function(el) { el.classList.add('revealed'); });
-    document.querySelectorAll('.overview-sensitive-block').forEach(function(el) { el.classList.add('revealed'); });
-    var bar = document.getElementById('overview-unlock-bar');
-    if (bar) bar.style.display = 'none';
-  }
-});
 
 // ══════════ MOBILE NAV ══════════
 // Check if already logged in via session
@@ -4251,7 +3673,7 @@ function initGoogleFit() {
 function connectGoogleFit() {
   // Save current auth state so we restore it after redirect
   sessionStorage.setItem('rg_auth', '1');
-  const redirectUri = encodeURIComponent('https://inkthorn.ai/command-center.html');
+  const redirectUri = encodeURIComponent('https://trustlight.ai/dashboard.html');
   const authUrl = 'https://accounts.google.com/o/oauth2/v2/auth' +
     '?client_id=' + GFIT_CLIENT_ID +
     '&redirect_uri=' + redirectUri +

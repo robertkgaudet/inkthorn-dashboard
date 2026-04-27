@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connecting Claude Code to a Legacy .NET App | TrustLight Advisory</title>
+<meta name="description" content="Rob Gaudet walks through how he connected Claude Code to a legacy C# WebForms application — step by step, with full codebase context for real architecture work.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://trustlight.ai/claude-code-legacy.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://trustlight.ai/claude-code-legacy.html">
+<meta property="og:title" content="Connecting Claude Code to a Legacy .NET Application">
+<meta property="og:description" content="Three video scripts — short, medium, and long-form — on how I connected Claude Code to a real WebForms codebase and what changed.">
+<meta property="og:image" content="https://trustlight.ai/og-landing.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="https://trustlight.ai/assets/images/favicon-32.png">
+<link rel="shortcut icon" href="https://trustlight.ai/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0a0a0a; --dark: #111; --mid: #1a1a1a;
+  --off-white: #f2ede6; --muted: #888; --amber: #c8832a;
+  --amber-light: #e09a40; --amber-dim: rgba(200,131,42,0.1);
+  --rule: rgba(255,255,255,0.08);
+  --green: #3fb950; --blue: #79c0ff; --red: #f87171; --gold: #c49a2a;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--off-white); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.65; overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 4rem; background: rgba(10,10,10,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); }
+.nav-logo img { height: 28px; display: block; }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--off-white); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+.nav-links a:hover { opacity: 1; color: var(--amber); }
+.nav-cta { background: var(--amber); color: var(--black) !important; opacity: 1 !important; padding: 0.5rem 1.2rem; font-weight: 500 !important; border-radius: 2px; }
+
+/* HERO */
+.hero { padding: 9rem 4rem 5rem; border-bottom: 1px solid var(--rule); position: relative; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(200,131,42,0.06) 0%, transparent 70%); pointer-events: none; }
+.hero-inner { max-width: 860px; margin: 0 auto; position: relative; }
+.eyebrow { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.2rem; }
+.hero h1 { font-family: 'Libre Baskerville', serif; font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.2rem; }
+.hero-meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.8rem; }
+.hero-meta strong { color: var(--off-white); opacity: 0.7; }
+.hero p.lead { font-size: 1.1rem; color: var(--muted); max-width: 680px; line-height: 1.75; border-left: 3px solid var(--amber); padding-left: 1.5rem; }
+
+/* CONTENT */
+.content { max-width: 860px; margin: 0 auto; padding: 5rem 4rem 7rem; }
+
+/* SCRIPT BLOCK */
+.script-block { margin-bottom: 5rem; }
+.script-label { display: inline-flex; align-items: center; gap: 0.75rem; margin-bottom: 1.2rem; }
+.badge { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; padding: 0.3rem 0.85rem; border-radius: 2px; }
+.badge-short { background: rgba(63,185,80,0.12); color: var(--green); border: 1px solid rgba(63,185,80,0.25); }
+.badge-medium { background: rgba(121,192,255,0.12); color: var(--blue); border: 1px solid rgba(121,192,255,0.25); }
+.badge-long { background: rgba(200,131,42,0.12); color: var(--amber); border: 1px solid rgba(200,131,42,0.25); }
+.script-block h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
+.script-platforms { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; font-style: italic; }
+.script-body { background: var(--mid); border: 1px solid var(--rule); border-radius: 4px; padding: 2.5rem; font-size: 1rem; line-height: 1.9; color: rgba(242,237,230,0.8); }
+.script-body .section-marker { display: block; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); opacity: 0.7; margin: 2.2rem 0 0.6rem; }
+.script-body .section-marker:first-child { margin-top: 0; }
+.script-body em { font-style: italic; color: var(--off-white); }
+.script-body code { background: rgba(121,192,255,0.1); color: var(--blue); font-family: 'Courier New', monospace; font-size: 0.88rem; padding: 0.15rem 0.55rem; border-radius: 3px; }
+.script-rule { border: none; border-top: 1px solid var(--rule); margin: 4rem 0; }
+
+/* TELEPROMPTER BUTTON */
+.teleprompter-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+  color: var(--off-white); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.55rem 1.2rem; border-radius: 3px; cursor: pointer;
+  margin-bottom: 1.5rem; transition: background 0.2s, border-color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.teleprompter-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
+.teleprompter-btn svg { width: 14px; height: 14px; }
+
+/* CTA */
+.cta-block { background: var(--mid); border: 1px solid rgba(200,131,42,0.2); border-radius: 4px; padding: 3.5rem; text-align: center; margin-top: 5rem; }
+.cta-block .eyebrow { margin-bottom: 1rem; }
+.cta-block h3 { font-family: 'Libre Baskerville', serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.8rem; }
+.cta-block p { color: var(--muted); max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.7; }
+.btn-primary { background: var(--amber); color: var(--black); text-decoration: none; padding: 0.9rem 2.2rem; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; border-radius: 2px; transition: background 0.2s; display: inline-block; }
+.btn-primary:hover { background: var(--amber-light); }
+
+/* FOOTER */
+footer { border-top: 1px solid var(--rule); padding: 2.5rem 4rem; text-align: center; color: var(--muted); font-size: 0.8rem; }
+
+/* ══════════════════════════════════════════
+   TELEPROMPTER OVERLAY
+══════════════════════════════════════════ */
+#tp-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 9999;
+  background: #000;
+  flex-direction: column;
+}
+#tp-overlay.active { display: flex; }
+
+/* Top control bar */
+#tp-bar {
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(20,20,20,0.98);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  flex-wrap: wrap;
+}
+#tp-title {
+  font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-right: auto;
+}
+.tp-btn {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  color: #fff; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.45rem 1rem; border-radius: 3px;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.15s;
+  white-space: nowrap;
+}
+.tp-btn:hover { background: rgba(255,255,255,0.15); }
+.tp-btn.active-play { background: rgba(63,185,80,0.2); border-color: rgba(63,185,80,0.4); color: #3fb950; }
+
+/* Speed control */
+#tp-speed-wrap {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+#tp-speed {
+  -webkit-appearance: none; appearance: none;
+  width: 120px; height: 4px;
+  background: rgba(255,255,255,0.15); border-radius: 2px; outline: none; cursor: pointer;
+}
+#tp-speed::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--amber); cursor: pointer;
+}
+#tp-speed::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--amber); border: none; cursor: pointer; }
+#tp-speed-val {
+  font-size: 0.75rem; color: var(--amber); font-weight: 700;
+  min-width: 18px; text-align: center;
+}
+
+/* Font size control */
+#tp-fontsize-wrap {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.tp-font-btn {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  color: #fff; width: 28px; height: 28px; border-radius: 3px;
+  cursor: pointer; font-size: 0.9rem; font-weight: 600; line-height: 1;
+  display: flex; align-items: center; justify-content: center; transition: background 0.15s;
+}
+.tp-font-btn:hover { background: rgba(255,255,255,0.15); }
+
+/* Scroll viewport */
+#tp-viewport {
+  flex: 1; overflow: hidden; position: relative;
+  cursor: pointer;
+}
+
+/* Focus line */
+#tp-focus-line {
+  position: absolute; left: 0; right: 0;
+  top: 38%; height: 3px;
+  background: linear-gradient(90deg, transparent 0%, rgba(200,131,42,0.6) 20%, rgba(200,131,42,0.6) 80%, transparent 100%);
+  pointer-events: none; z-index: 2;
+}
+/* Fade masks top and bottom */
+#tp-viewport::before, #tp-viewport::after {
+  content: ''; position: absolute; left: 0; right: 0; z-index: 1; pointer-events: none;
+}
+#tp-viewport::before {
+  top: 0; height: 30%;
+  background: linear-gradient(to bottom, #000 0%, transparent 100%);
+}
+#tp-viewport::after {
+  bottom: 0; height: 30%;
+  background: linear-gradient(to top, #000 0%, transparent 100%);
+}
+
+/* Scroll content */
+#tp-content {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  width: min(820px, 90vw);
+  padding: 60vh 2rem 60vh;
+  font-size: 2.2rem; line-height: 1.7; font-weight: 400;
+  color: #fff; text-align: center;
+  will-change: transform;
+}
+#tp-content .tp-section-marker {
+  display: block; font-size: 0.8rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(200,131,42,0.7); margin: 3rem 0 0.8rem;
+}
+#tp-content em { font-style: italic; color: rgba(255,255,255,0.7); }
+#tp-content code {
+  background: rgba(121,192,255,0.15); color: #79c0ff;
+  font-family: 'Courier New', monospace; font-size: 0.8em;
+  padding: 0.1em 0.4em; border-radius: 3px;
+}
+
+/* Mirror mode */
+#tp-overlay.mirrored #tp-content { transform: translateX(-50%) scaleX(-1); }
+
+/* Progress bar */
+#tp-progress {
+  position: absolute; bottom: 0; left: 0; height: 3px;
+  background: var(--amber); transition: width 0.1s linear; z-index: 3;
+  pointer-events: none;
+}
+
+/* Keyboard hint */
+#tp-hint {
+  position: absolute; bottom: 1rem; right: 1.5rem;
+  font-size: 0.65rem; color: rgba(255,255,255,0.2); letter-spacing: 0.1em;
+  text-transform: uppercase; z-index: 3; pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { padding: 7rem 1.5rem 4rem; }
+  .content { padding: 3rem 1.5rem 5rem; }
+  .script-body { padding: 1.5rem; }
+  .cta-block { padding: 2rem 1.5rem; }
+  #tp-content { font-size: 1.6rem; }
+  #tp-bar { gap: 0.6rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     TELEPROMPTER OVERLAY
+══════════════════════════════════════════ -->
+<div id="tp-overlay">
+  <div id="tp-bar">
+    <span id="tp-title">Teleprompter</span>
+
+    <div id="tp-speed-wrap">
+      <span>Speed</span>
+      <input type="range" id="tp-speed" min="1" max="10" value="3">
+      <span id="tp-speed-val">3</span>
+    </div>
+
+    <div id="tp-fontsize-wrap">
+      <span>Size</span>
+      <button class="tp-font-btn" id="tp-font-down">−</button>
+      <button class="tp-font-btn" id="tp-font-up">+</button>
+    </div>
+
+    <button class="tp-btn" id="tp-play-btn" onclick="tpTogglePlay()">▶ Play</button>
+    <button class="tp-btn" onclick="tpReset()">↺ Reset</button>
+    <button class="tp-btn" onclick="tpToggleMirror()">⇄ Mirror</button>
+    <button class="tp-btn" onclick="tpClose()">✕ Close</button>
+  </div>
+
+  <div id="tp-viewport" onclick="tpTogglePlay()">
+    <div id="tp-focus-line"></div>
+    <div id="tp-content"></div>
+    <div id="tp-progress"></div>
+    <div id="tp-hint">Space = play/pause &nbsp;·&nbsp; ↑↓ = speed &nbsp;·&nbsp; Esc = close</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MAIN PAGE
+══════════════════════════════════════════ -->
+<nav>
+  <a href="landing.html" class="nav-logo"><img src="https://trustlight.ai/assets/images/logo-white.png" alt="TrustLight Advisory"></a>
+  <ul class="nav-links">
+    <li><a href="landing.html#difference">Why Rob</a></li>
+    <li><a href="landing.html#services">Services</a></li>
+    <li><a href="blueprint-process.html">Blueprint</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="workshop.html">Workshop</a></li>
+    <li><a href="landing.html#contact" class="nav-cta">Let's Talk</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">AI Development · Field Notes</p>
+    <h1>Connecting Claude Code<br>to a Legacy .NET Application</h1>
+    <p class="hero-meta">By <strong>Rob Gaudet</strong> &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; Applied AI Advisory</p>
+    <p class="lead">I built an entire commercial real estate platform by copy-pasting code into a chat window. It works — until it doesn't. This week I made the jump to full-codebase context. Here's exactly how I did it, and three scripts you can use to tell the story yourself.</p>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- SHORT -->
+  <div class="script-block">
+    <div class="script-label">
+      <span class="badge badge-short">90 Seconds</span>
+    </div>
+    <h2>Short Version</h2>
+    <p class="script-platforms">Best for: Instagram Reels &nbsp;·&nbsp; TikTok &nbsp;·&nbsp; YouTube Shorts</p>
+    <button class="teleprompter-btn" onclick="tpOpen('short')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      Open Teleprompter
+    </button>
+    <div class="script-body" id="script-short">I've been building AI applications for two years. And until this week, I was still doing it the old way — copy-pasting code in and out of a chat window.
+
+Here's what changed.
+
+I have a legacy .NET WebForms application. C#. ASP.NET. The kind of code Silicon Valley pretends doesn't exist. But it <em>does</em> exist — there are millions of these apps running real businesses right now.
+
+I installed something called Claude Code. It's a CLI tool — runs right in your terminal. You point it at your project folder... and Claude can see your <em>entire</em> codebase.
+
+Not just one file. Not just what you paste in. Everything.
+
+And then you just... talk to it. Architecture questions. Refactoring. "Why is this breaking?" It reasons across your whole project like a senior engineer who actually read all the code.
+
+The install was three commands. The authentication took 60 seconds.
+
+If you're still copy-pasting into a chat window to build software — stop. There's a better way.
+
+I'm Rob Gaudet. This is what AI looks like when it actually works.</div>
+  </div>
+
+  <hr class="script-rule">
+
+  <!-- MEDIUM -->
+  <div class="script-block">
+    <div class="script-label">
+      <span class="badge badge-medium">3–4 Minutes</span>
+    </div>
+    <h2>Medium Version</h2>
+    <p class="script-platforms">Best for: LinkedIn &nbsp;·&nbsp; YouTube &nbsp;·&nbsp; Twitter/X Video</p>
+    <button class="teleprompter-btn" onclick="tpOpen('medium')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      Open Teleprompter
+    </button>
+    <div class="script-body" id="script-medium">I want to show you something that changed how I write software — and it happened this week.
+
+I'm a software architect. Thirty years. I've built systems that run real businesses — and for the last two years, I've been going deep on AI-assisted development.
+
+But I've been doing it the hard way. Building inside the Claude chat window. Copy a file in, ask a question, get an answer, copy it back. It works — I've built an entire commercial real estate AI platform this way. But it's... friction.
+
+This week I made a change, and I want to walk you through it.
+
+The project is called Reyla — a commercial real estate data platform I'm building in C# and .NET WebForms. Yes, WebForms. Legacy technology. The kind of stack that's been running enterprise applications since 2002 — and still is, at thousands of companies right now.
+
+I installed Claude Code. It's a command-line tool from Anthropic. You install it with npm, authenticate with your Claude account, navigate to your project folder, and type <code>claude</code>.
+
+That's it.
+
+What happens next is different from anything I've experienced with AI tooling. Claude doesn't just see the file you hand it. It sees your entire project. Every file. Every dependency. Every pattern you've built up over months.
+
+I asked it: <em>"Give me an architectural overview of this project."</em>
+
+It came back with a map of my entire application — the data layer, the UI layer, the business logic, the page lifecycle patterns. Accurate. Specific. Like a senior developer who had actually read all the code.
+
+Then I said: <em>"I want to refactor the data access layer to use a repository pattern."</em>
+
+And it planned it. Across multiple files. It knew what to change, what to leave alone, and what to watch out for.
+
+This is what I mean when I say AI that actually works in the real world. Not a demo. Not a toy. A real tool, on a real legacy codebase, doing real architectural work.
+
+If you're building software — old stack or new — and you're still copy-pasting into a chat window, I want you to try this. The gap between where you are and where you could be is three commands and 60 seconds.
+
+I'm Rob Gaudet. I build AI systems that actually hold up. This is TrustLight.</div>
+  </div>
+
+  <hr class="script-rule">
+
+  <!-- LONG -->
+  <div class="script-block">
+    <div class="script-label">
+      <span class="badge badge-long">8–10 Minutes</span>
+    </div>
+    <h2>Long-Form Version</h2>
+    <p class="script-platforms">Best for: YouTube tutorial &nbsp;·&nbsp; Workshop content &nbsp;·&nbsp; Keynote opener</p>
+    <button class="teleprompter-btn" onclick="tpOpen('long')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      Open Teleprompter
+    </button>
+    <div class="script-body" id="script-long"><span class="section-marker">[Intro]</span>Hey, it's Rob Gaudet. I'm a software architect — thirty years of building production systems — and for the last two years I've been doing something most people in my world haven't: going deep on live AI implementation.
+
+Not reading about it. Not consulting from a distance. Actually building things. Shipping them. Finding out what holds up.
+
+Today I want to walk you through something I set up this week that I think is genuinely important for anyone writing software right now — especially if you're working on a legacy codebase.
+
+I'm going to show you how I connected Claude Code to a real .NET WebForms application. Step by step. And I'm going to tell you why it matters.
+
+<span class="section-marker">[The Problem With The Chat Window]</span>Here's how most people use AI for development today. They open a chat window — Claude, ChatGPT, whatever — they paste in a block of code, they ask a question, they get an answer, and they paste it back.
+
+And it works. I built a significant commercial application this way. But there's a ceiling on it.
+
+The AI only knows what you paste in. It doesn't know what's in the file next to it. It doesn't know your data layer. It doesn't know the pattern you established six months ago that everything else depends on. You're always working with a partial picture.
+
+For small changes, fine. But for architecture work — for actually evolving how a system is structured — you need the AI to see the whole thing.
+
+<span class="section-marker">[The Stack: Why WebForms]</span>My project is called Reyla. It's a commercial real estate data platform — AI-assisted analysis, property comps, market data. Built in C# and ASP.NET WebForms.
+
+I know what you're thinking. WebForms. That's 2002 technology. Why?
+
+Because WebForms still runs a massive percentage of enterprise .NET applications. If you're an IT director at a mid-size company, odds are good you have WebForms running something important. And those applications need to evolve — they need AI added, they need new patterns, they need refactoring — but the advice for how to do that with AI tooling assumes you're on React or microservices.
+
+I'm showing you this on WebForms on purpose. Because if it works here, it works anywhere.
+
+<span class="section-marker">[The Setup: Three Commands]</span>Here's what I did.
+
+First, I opened a terminal. On Windows, I used PowerShell — but this works the same in WSL, Mac Terminal, or Linux.
+
+Command one:
+<code>npm install -g @anthropic-ai/claude-code</code>
+
+That installs the Claude Code CLI globally on your machine.
+
+Second, I navigated to my project:
+<code>cd C:\Users\rober\source\repos\Reyla</code>
+
+Third:
+<code>claude</code>
+
+First launch asks you to authenticate. I have a Claude Max subscription, so I logged in with my Anthropic account — usage is included in the plan. If you're on the API, you can use an API key instead.
+
+The browser opens, you authorize, you go back to your terminal, and you're in.
+
+That's the entire setup.
+
+<span class="section-marker">[The First Conversation]</span>The first thing I did was ask for an architectural overview.
+
+<em>"Give me an architectural overview of this project."</em>
+
+Claude read through my codebase — every file — and came back with a structured map of my application. It identified the page structure, the code-behind patterns, where my data access was happening, what my business logic layer looked like, and where the pain points were likely to be if I wanted to make structural changes.
+
+It was accurate. Not generic. Specific to my project, my patterns, my choices.
+
+That's the moment I understood what was different about this approach.
+
+<span class="section-marker">[What This Unlocks]</span>Once you have full-codebase context, the conversations you can have change completely.
+
+Instead of "here's a function, make it better," you can say:
+— <em>"I want to move all data access into a repository pattern — plan that refactor for me."</em>
+— <em>"There's a performance problem somewhere in my property search — help me find it."</em>
+— <em>"I want to add an AI analysis layer to this application — where does it fit architecturally?"</em>
+
+Claude can reason across your whole project. It knows which files would be affected, what the dependencies are, what risks exist.
+
+This is the difference between a code autocomplete tool and an actual architectural collaborator.
+
+<span class="section-marker">[The Bigger Picture]</span>Here's what I want you to take from this.
+
+The AI tools most people know about — the chat windows, the autocomplete — those are the beginning. They're useful. But there's a next level, and it's available right now, and most developers haven't made the jump yet.
+
+If you're building software — whether it's a brand new React app or a fifteen-year-old WebForms application — and you want to move faster without making a mess, this is worth your time.
+
+Three commands. Sixty seconds of authentication. And then you have a senior engineer with full context on your codebase, available whenever you need it.
+
+I'm Rob Gaudet. I'm an applied AI advisor based in New Orleans. I help businesses deploy AI that actually works — not demos, not proofs of concept, production systems.
+
+If you want to go deeper on this, check out TrustLight.ai. I've got more resources there on how I build, and how you can bring this approach to your team.
+
+See you in the next one.</div>
+  </div>
+
+  <div class="cta-block">
+    <p class="eyebrow">TrustLight Advisory</p>
+    <h3>Ready for AI that actually ships?</h3>
+    <p>Rob works with a limited number of clients on live AI implementation. If you're serious about deploying AI that holds up in production, let's talk.</p>
+    <a href="landing.html#contact" class="btn-primary">Book a Conversation</a>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 TrustLight Advisory &nbsp;·&nbsp; Rob Gaudet &nbsp;·&nbsp; New Orleans, Louisiana
+</footer>
+
+<!-- ══════════════════════════════════════════
+     TELEPROMPTER JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+const overlay   = document.getElementById('tp-overlay');
+const tpContent = document.getElementById('tp-content');
+const tpTitle   = document.getElementById('tp-title');
+const tpPlayBtn = document.getElementById('tp-play-btn');
+const speedSlider = document.getElementById('tp-speed');
+const speedVal  = document.getElementById('tp-speed-val');
+const progress  = document.getElementById('tp-progress');
+const viewport  = document.getElementById('tp-viewport');
+
+let scrollY    = 0;
+let playing    = false;
+let rafId      = null;
+let totalScroll = 0;
+let fontSize   = 2.2; // rem
+
+// Speed: slider 1-10 maps to px/frame (approx)
+function getScrollRate() {
+  const s = parseInt(speedSlider.value);
+  // 1 = 0.3px/frame (~18px/sec @60fps), 10 = 3px/frame (~180px/sec)
+  return 0.25 + (s - 1) * 0.3;
+}
+
+speedSlider.addEventListener('input', () => {
+  speedVal.textContent = speedSlider.value;
+});
+
+// Font size buttons
+document.getElementById('tp-font-up').addEventListener('click', (e) => {
+  e.stopPropagation();
+  fontSize = Math.min(fontSize + 0.2, 5);
+  tpContent.style.fontSize = fontSize + 'rem';
+  updateTotalScroll();
+});
+document.getElementById('tp-font-down').addEventListener('click', (e) => {
+  e.stopPropagation();
+  fontSize = Math.max(fontSize - 0.2, 1.0);
+  tpContent.style.fontSize = fontSize + 'rem';
+  updateTotalScroll();
+});
+
+function updateTotalScroll() {
+  totalScroll = tpContent.scrollHeight - viewport.clientHeight;
+}
+
+function tpOpen(scriptId) {
+  // Extract text from the script div, preserving structure
+  const src = document.getElementById('script-' + scriptId);
+  const clone = src.cloneNode(true);
+
+  // Convert section-markers to tp-section-marker spans
+  clone.querySelectorAll('.section-marker').forEach(el => {
+    el.className = 'tp-section-marker';
+  });
+
+  tpContent.innerHTML = clone.innerHTML;
+  tpContent.style.fontSize = fontSize + 'rem';
+
+  const labels = { short: '90-Second Script', medium: '3–4 Minute Script', long: '8–10 Minute Script' };
+  tpTitle.textContent = labels[scriptId] || 'Teleprompter';
+
+  scrollY = 0;
+  playing = false;
+  tpContent.style.transform = `translateX(-50%) translateY(0px)`;
+  progress.style.width = '0%';
+  tpPlayBtn.textContent = '▶ Play';
+  tpPlayBtn.classList.remove('active-play');
+
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  // Wait for render then measure
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      updateTotalScroll();
+    });
+  });
+}
+
+function tpClose() {
+  tpStop();
+  overlay.classList.remove('active');
+  overlay.classList.remove('mirrored');
+  document.body.style.overflow = '';
+}
+
+function tpTogglePlay() {
+  if (playing) { tpStop(); } else { tpPlay(); }
+}
+
+function tpPlay() {
+  playing = true;
+  tpPlayBtn.textContent = '⏸ Pause';
+  tpPlayBtn.classList.add('active-play');
+  scroll();
+}
+
+function tpStop() {
+  playing = false;
+  tpPlayBtn.textContent = '▶ Play';
+  tpPlayBtn.classList.remove('active-play');
+  if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+}
+
+function scroll() {
+  if (!playing) return;
+  updateTotalScroll();
+  scrollY += getScrollRate();
+  if (scrollY >= totalScroll) {
+    scrollY = totalScroll;
+    tpStop();
+    progress.style.width = '100%';
+    tpContent.style.transform = `translateX(-50%) translateY(${-scrollY}px)`;
+    return;
+  }
+  tpContent.style.transform = `translateX(-50%) translateY(${-scrollY}px)`;
+  const pct = totalScroll > 0 ? (scrollY / totalScroll * 100) : 0;
+  progress.style.width = pct + '%';
+  rafId = requestAnimationFrame(scroll);
+}
+
+function tpReset() {
+  tpStop();
+  scrollY = 0;
+  tpContent.style.transform = `translateX(-50%) translateY(0px)`;
+  progress.style.width = '0%';
+}
+
+function tpToggleMirror() {
+  overlay.classList.toggle('mirrored');
+}
+
+// Keyboard controls
+document.addEventListener('keydown', (e) => {
+  if (!overlay.classList.contains('active')) return;
+  if (e.key === 'Escape') { tpClose(); return; }
+  if (e.key === ' ') { e.preventDefault(); tpTogglePlay(); return; }
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    speedSlider.value = Math.min(parseInt(speedSlider.value) + 1, 10);
+    speedVal.textContent = speedSlider.value;
+  }
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    speedSlider.value = Math.max(parseInt(speedSlider.value) - 1, 1);
+    speedVal.textContent = speedSlider.value;
+  }
+  // Manual scroll with arrow keys when paused
+  if (e.key === 'ArrowRight') { scrollY = Math.min(scrollY + 50, totalScroll); tpContent.style.transform = `translateX(-50%) translateY(${-scrollY}px)`; }
+  if (e.key === 'ArrowLeft') { scrollY = Math.max(scrollY - 50, 0); tpContent.style.transform = `translateX(-50%) translateY(${-scrollY}px)`; }
+});
+</script>
+
+</body>
+</html>

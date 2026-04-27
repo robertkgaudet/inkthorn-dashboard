@@ -1,0 +1,29 @@
+{
+  "name": "ROB GAUDET // COMMAND CENTER",
+  "short_name": "Command Center",
+  "description": "Personal command center \u2014 businesses, finance, health, journal",
+  "start_url": "https://trustlight.ai/dashboard.html",
+  "scope": "https://trustlight.ai/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#c8832a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://trustlight.ai/rob-profile.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://trustlight.ai/rob-profile.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "https://trustlight.ai/rob-profile.jpg",
+      "sizes": "any",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

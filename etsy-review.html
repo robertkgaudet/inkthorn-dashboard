@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NolaCultureCo — Mockup Review</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0f0820; color: #f5f0e8; font-family: Arial, sans-serif; padding: 40px 20px; }
+  h1 { font-family: Georgia, serif; color: #c9a84c; text-align: center; font-size: 2rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; }
+  .subtitle { text-align: center; color: rgba(245,240,232,0.5); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 40px; text-transform: uppercase; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 32px; max-width: 1100px; margin: 0 auto; }
+  .card { background: #1a0a2e; border: 1px solid rgba(201,168,76,0.2); border-radius: 12px; overflow: hidden; }
+  .card img { width: 100%; display: block; cursor: zoom-in; transition: opacity 0.2s; }
+  .card img:hover { opacity: 0.92; }
+  .card-info { padding: 16px 20px; }
+  .card-title { font-family: Georgia, serif; color: #c9a84c; font-size: 1rem; margin-bottom: 4px; }
+  .card-price { color: #ff6b9d; font-size: 0.85rem; }
+  .card-status { display: inline-block; margin-top: 8px; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; }
+  .ready { background: rgba(100,200,100,0.15); color: #64c864; border: 1px solid rgba(100,200,100,0.3); }
+  .review { background: rgba(255,107,157,0.12); color: #ff6b9d; border: 1px solid rgba(255,107,157,0.3); }
+  footer { text-align: center; margin-top: 60px; color: rgba(245,240,232,0.3); font-size: 0.8rem; letter-spacing: 1px; }
+
+  /* Lightbox */
+  #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; align-items: center; justify-content: center; cursor: zoom-out; }
+  #lightbox.active { display: flex; }
+  #lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; }
+</style>
+</head>
+<body>
+
+<h1>NolaCultureCo</h1>
+<p class="subtitle">Etsy Mockup Review · All 6 Ready · Updated Apr 23, 2026</p>
+
+<div class="grid">
+
+  <div class="card">
+    <img src="mockups/bar-crawl-final.png" onclick="zoom(this)" alt="Bar Crawl Guide">
+    <div class="card-info">
+      <div class="card-title">French Quarter Bar Crawl Guide</div>
+      <div class="card-price">$4.99</div>
+      <span class="card-status ready">✅ Ready to list</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="mockups/wild-itinerary-final.png" onclick="zoom(this)" alt="Wild Weekend Itinerary">
+    <div class="card-info">
+      <div class="card-title">Wild Weekend Itinerary</div>
+      <div class="card-price">$6.99</div>
+      <span class="card-status ready">✅ Ready to list</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="mockups/elegant-itinerary-final.png" onclick="zoom(this)" alt="Elegant Weekend Itinerary">
+    <div class="card-info">
+      <div class="card-title">Elegant Weekend Itinerary</div>
+      <div class="card-price">$8.99</div>
+      <span class="card-status ready">✅ Ready to list</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="mockups/scavenger-hunt-final.png" onclick="zoom(this)" alt="Scavenger Hunt">
+    <div class="card-info">
+      <div class="card-title">French Quarter Scavenger Hunt</div>
+      <div class="card-price">$5.99</div>
+      <span class="card-status ready">✅ Ready to list</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="mockups/photo-props-final.png" onclick="zoom(this)" alt="Photo Booth Props">
+    <div class="card-info">
+      <div class="card-title">Photo Booth Props Pack</div>
+      <div class="card-price">$4.99</div>
+      <span class="card-status ready">✅ Ready to list</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="mockups/games-bundle-final.png" onclick="zoom(this)" alt="Games Bundle">
+    <div class="card-info">
+      <div class="card-title">Games Bundle (5 games)</div>
+      <div class="card-price">$9.99</div>
+      <span class="card-status ready">✅ Ready to list</span>
+    </div>
+  </div>
+
+</div>
+
+<div style="max-width:1100px;margin:60px auto 0;">
+  <h2 style="font-family:Georgia,serif;color:#c9a84c;letter-spacing:3px;text-transform:uppercase;font-size:1.3rem;margin-bottom:6px;text-align:center;">📄 PDF Files — Review &amp; Download</h2>
+  <p style="text-align:center;color:rgba(245,240,232,0.4);font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">Click any file to open in browser · These are the actual downloadable products</p>
+  <div style="display:flex;justify-content:center;gap:12px;margin-bottom:28px;">
+    <button onclick="showVersion('premium')" id="btn-premium" style="padding:8px 20px;border-radius:20px;border:1px solid #c9a84c;background:#c9a84c;color:#1a0a2e;font-size:0.8rem;font-weight:bold;letter-spacing:1px;text-transform:uppercase;cursor:pointer;">&#9679; Premium (Dark)</button>
+    <button onclick="showVersion('print')" id="btn-print" style="padding:8px 20px;border-radius:20px;border:1px solid rgba(245,240,232,0.3);background:transparent;color:rgba(245,240,232,0.6);font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;">&#9675; Print at Home (White)</button>
+  </div>
+  <script>
+  function showVersion(v) {
+    document.querySelectorAll('.pdf-link').forEach(el => {
+      el.href = el.dataset[v];
+    });
+    document.getElementById('btn-premium').style.background = v === 'premium' ? '#c9a84c' : 'transparent';
+    document.getElementById('btn-premium').style.color = v === 'premium' ? '#1a0a2e' : 'rgba(245,240,232,0.6)';
+    document.getElementById('btn-print').style.background = v === 'print' ? '#c9a84c' : 'transparent';
+    document.getElementById('btn-print').style.color = v === 'print' ? '#1a0a2e' : 'rgba(245,240,232,0.6)';
+    document.getElementById('version-label').textContent = v === 'premium' ? 'Dark background — best for print shops & digital viewing' : 'White background — best for printing at home';
+  }
+  </script>
+  <p id="version-label" style="text-align:center;color:rgba(245,240,232,0.35);font-size:0.75rem;margin-bottom:20px;">Dark background — best for print shops &amp; digital viewing</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;">
+
+    <a href="etsy-pdfs/bar-crawl-guide.pdf" target="_blank" class="pdf-link" data-premium="etsy-pdfs/bar-crawl-guide.pdf" data-print="etsy-pdfs/print/bar-crawl-guide.pdf" style="text-decoration:none;">
+      <div style="background:#1a0a2e;border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:14px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(201,168,76,0.7)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.25)'">
+        <span style="font-size:1.6rem;">📄</span>
+        <div><div style="color:#c9a84c;font-size:0.95rem;font-family:Georgia,serif;">Bar Crawl Guide</div><div style="color:rgba(245,240,232,0.45);font-size:0.78rem;margin-top:2px;">bar-crawl-guide.pdf · 4 pages · $4.99</div></div>
+      </div>
+    </a>
+
+    <a href="etsy-pdfs/wild-weekend-itinerary.pdf" target="_blank" class="pdf-link" data-premium="etsy-pdfs/wild-weekend-itinerary.pdf" data-print="etsy-pdfs/print/wild-weekend-itinerary.pdf" style="text-decoration:none;">
+      <div style="background:#1a0a2e;border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:14px;" onmouseover="this.style.borderColor='rgba(201,168,76,0.7)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.25)'">
+        <span style="font-size:1.6rem;">📄</span>
+        <div><div style="color:#c9a84c;font-size:0.95rem;font-family:Georgia,serif;">Wild Weekend Itinerary</div><div style="color:rgba(245,240,232,0.45);font-size:0.78rem;margin-top:2px;">wild-weekend-itinerary.pdf · 6 pages · $6.99</div></div>
+      </div>
+    </a>
+
+    <a href="etsy-pdfs/elegant-weekend-itinerary.pdf" target="_blank" class="pdf-link" data-premium="etsy-pdfs/elegant-weekend-itinerary.pdf" data-print="etsy-pdfs/print/elegant-weekend-itinerary.pdf" style="text-decoration:none;">
+      <div style="background:#1a0a2e;border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:14px;" onmouseover="this.style.borderColor='rgba(201,168,76,0.7)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.25)'">
+        <span style="font-size:1.6rem;">📄</span>
+        <div><div style="color:#c9a84c;font-size:0.95rem;font-family:Georgia,serif;">Elegant Weekend Itinerary</div><div style="color:rgba(245,240,232,0.45);font-size:0.78rem;margin-top:2px;">elegant-weekend-itinerary.pdf · 6 pages · $8.99</div></div>
+      </div>
+    </a>
+
+    <a href="etsy-pdfs/scavenger-hunt.pdf" target="_blank" class="pdf-link" data-premium="etsy-pdfs/scavenger-hunt.pdf" data-print="etsy-pdfs/print/scavenger-hunt.pdf" style="text-decoration:none;">
+      <div style="background:#1a0a2e;border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:14px;" onmouseover="this.style.borderColor='rgba(201,168,76,0.7)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.25)'">
+        <span style="font-size:1.6rem;">📄</span>
+        <div><div style="color:#c9a84c;font-size:0.95rem;font-family:Georgia,serif;">French Quarter Scavenger Hunt</div><div style="color:rgba(245,240,232,0.45);font-size:0.78rem;margin-top:2px;">scavenger-hunt.pdf · 4 pages · $5.99</div></div>
+      </div>
+    </a>
+
+    <a href="etsy-pdfs/photo-booth-props.pdf" target="_blank" class="pdf-link" data-premium="etsy-pdfs/photo-booth-props.pdf" data-print="etsy-pdfs/print/photo-booth-props.pdf" style="text-decoration:none;">
+      <div style="background:#1a0a2e;border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:14px;" onmouseover="this.style.borderColor='rgba(201,168,76,0.7)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.25)'">
+        <span style="font-size:1.6rem;">📄</span>
+        <div><div style="color:#c9a84c;font-size:0.95rem;font-family:Georgia,serif;">Photo Booth Props Pack</div><div style="color:rgba(245,240,232,0.45);font-size:0.78rem;margin-top:2px;">photo-booth-props.pdf · 4 pages · $4.99</div></div>
+      </div>
+    </a>
+
+    <div style="background:#1a0a2e;border:1px solid rgba(255,107,157,0.25);border-radius:8px;padding:14px 20px;">
+      <div style="color:#ff6b9d;font-size:0.9rem;font-family:Georgia,serif;margin-bottom:8px;">🎮 Games Bundle — 5 PDFs · $9.99</div>
+      <div style="display:flex;flex-direction:column;gap:5px;">
+        <a href="etsy-pdfs/game-bride-trivia.pdf" target="_blank" style="color:rgba(245,240,232,0.6);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#c9a84c'" onmouseout="this.style.color='rgba(245,240,232,0.6)'">📄 How Well Do You Know the Bride?</a>
+        <a href="etsy-pdfs/game-bingo.pdf" target="_blank" style="color:rgba(245,240,232,0.6);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#c9a84c'" onmouseout="this.style.color='rgba(245,240,232,0.6)'">📄 Bachelorette BINGO (5 cards)</a>
+        <a href="etsy-pdfs/game-dare-cards.pdf" target="_blank" style="color:rgba(245,240,232,0.6);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#c9a84c'" onmouseout="this.style.color='rgba(245,240,232,0.6)'">📄 Bourbon Street Dare Cards</a>
+        <a href="etsy-pdfs/game-she-said.pdf" target="_blank" style="color:rgba(245,240,232,0.6);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#c9a84c'" onmouseout="this.style.color='rgba(245,240,232,0.6)'">📄 She Said / He Said</a>
+        <a href="etsy-pdfs/game-mad-libs.pdf" target="_blank" style="color:rgba(245,240,232,0.6);font-size:0.8rem;text-decoration:none;" onmouseover="this.style.color='#c9a84c'" onmouseout="this.style.color='rgba(245,240,232,0.6)'">📄 Wedding Mad Libs</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>nolacultureco.etsy.com · Built by InkThorn Agent · For review only</footer>
+
+<div id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function zoom(img) {
+  document.getElementById('lightbox-img').src = img.src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>

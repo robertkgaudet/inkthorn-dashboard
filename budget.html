@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monthly Budget Tracker — April 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d14;
+    --card: #12121e;
+    --border: #1e1e30;
+    --accent: #2a6fdb;
+    --accent2: #1a9aff;
+    --text: #e8e8f0;
+    --muted: #8888aa;
+    --green: #00c851;
+    --red: #ff4444;
+    --amber: #ffb700;
+    --shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* PASSWORD MODAL */
+  #pwd-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.92);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+  }
+  #pwd-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px 48px;
+    width: 360px;
+    max-width: 90vw;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.7);
+  }
+  #pwd-box .logo-lock {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  #pwd-box h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  #pwd-box p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  #pwd-input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    padding: 10px 14px;
+    font-size: 15px;
+    outline: none;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+    text-align: center;
+    letter-spacing: 0.1em;
+  }
+  #pwd-input:focus { border-color: var(--accent); }
+  #pwd-btn {
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  #pwd-btn:hover { background: var(--accent2); }
+  #pwd-error {
+    color: var(--red);
+    font-size: 12px;
+    margin-top: 10px;
+    min-height: 18px;
+    display: none;
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+  }
+  .shake { animation: shake 0.4s ease; }
+
+  /* MAIN APP */
+  #app { display: none; }
+
+  /* STICKY HEADER */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,13,20,0.97);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .brand a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.03em;
+  }
+  .brand span { color: var(--accent2); }
+  .nav-tabs {
+    display: flex;
+    gap: 2px;
+    list-style: none;
+    overflow-x: auto;
+  }
+  .nav-tabs li button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-tabs li button:hover { color: var(--text); background: var(--border); }
+  .nav-tabs li button.active { color: var(--accent2); background: rgba(42,111,219,0.12); }
+
+  /* MAIN CONTENT */
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+
+  /* PAGE TITLE */
+  .page-header {
+    margin-bottom: 28px;
+  }
+  .page-header .eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .page-header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* SECTIONS */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .section-eyebrow {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  /* METRIC CARDS */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  @media (max-width: 900px) { .metric-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .metric-grid { grid-template-columns: 1fr; } }
+
+  .metric-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 24px;
+    box-shadow: var(--shadow);
+  }
+  .metric-card .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .metric-card .value {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .metric-card .value.red { color: var(--red); }
+  .metric-card .value.green { color: var(--green); }
+  .metric-card .value.amber { color: var(--amber); }
+  .metric-card .value.blue { color: var(--accent2); }
+  .metric-card .sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+  .card h3 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+
+  /* CHART */
+  .chart-wrapper {
+    position: relative;
+    height: 480px;
+  }
+
+  /* TABLES */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+  tbody tr:nth-child(even) { background: rgba(255,255,255,0.015); }
+  tbody tr:nth-child(even):hover { background: rgba(255,255,255,0.04); }
+  tbody td {
+    padding: 10px 14px;
+    color: var(--text);
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  tbody td.wrap { white-space: normal; min-width: 160px; }
+
+  /* STATUS BADGES */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .badge-green { background: rgba(0,200,81,0.12); color: var(--green); border: 1px solid rgba(0,200,81,0.25); }
+  .badge-amber { background: rgba(255,183,0,0.12); color: var(--amber); border: 1px solid rgba(255,183,0,0.25); }
+  .badge-red { background: rgba(255,68,68,0.12); color: var(--red); border: 1px solid rgba(255,68,68,0.25); }
+
+  /* AMOUNT COLORS */
+  .amt-debit { color: var(--red); }
+  .amt-credit { color: var(--green); }
+
+  /* ALERT CARDS */
+  .alert-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    border-radius: 10px;
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+  .alert-card.amber { border-left-color: var(--amber); }
+  .alert-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--red);
+  }
+  .alert-card.amber h4 { color: var(--amber); }
+  .alert-card p { font-size: 13px; color: var(--muted); }
+  .alert-card .alert-amount {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--red);
+    margin: 8px 0 4px;
+  }
+  .alert-card.amber .alert-amount { color: var(--amber); }
+
+  /* NOTABLE CARDS GRID */
+  .notable-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .notable-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  .notable-item .n-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .notable-item .n-amount {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 4px;
+  }
+  .notable-item .n-date { font-size: 12px; color: var(--muted); }
+  .notable-item .n-note { font-size: 12px; color: var(--text); margin-top: 4px; }
+
+  /* INCOME TABLE */
+  .income-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .income-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+  }
+  .income-item .i-source {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .income-item .i-amount {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--green);
+  }
+  .income-item .i-meta { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* TOTALS ROW */
+  .totals-row td {
+    font-weight: 700;
+    color: var(--text) !important;
+    border-top: 1px solid var(--border) !important;
+    background: rgba(42,111,219,0.06) !important;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    border-top: 1px solid var(--border);
+  }
+  footer span { color: var(--accent2); }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 28px 0;
+  }
+
+  /* SCROLLABLE SECTION */
+  .txn-wrap {
+    overflow-y: auto;
+    max-height: 600px;
+    border-radius: 0 0 10px 10px;
+  }
+
+  /* RESPONSIVE NAV */
+  @media (max-width: 700px) {
+    .header-inner { flex-direction: column; height: auto; padding: 12px 16px; gap: 8px; }
+    .nav-tabs li button { padding: 6px 10px; font-size: 11px; }
+    main { padding: 20px 16px 50px; }
+    .page-header h1 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD MODAL -->
+<div id="pwd-overlay">
+  <div id="pwd-box">
+    <div class="logo-lock">TrustLight · Secure Access</div>
+    <h2>Budget Dashboard</h2>
+    <p>April 2026 · Chase Account #7790</p>
+    <input type="password" id="pwd-input" placeholder="Enter password" autocomplete="off">
+    <button id="pwd-btn" onclick="checkPassword()">Unlock</button>
+    <div id="pwd-error">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <a href="https://trustlight.ai/landing.html"><span>Trust</span>Light</a>
+      </div>
+      <nav>
+        <ul class="nav-tabs">
+          <li><button class="active" onclick="showTab('overview',this)">Overview</button></li>
+          <li><button onclick="showTab('bills',this)">Bills</button></li>
+          <li><button onclick="showTab('tech',this)">Tech / AI</button></li>
+          <li><button onclick="showTab('storage',this)">Storage</button></li>
+          <li><button onclick="showTab('transactions',this)">Transactions</button></li>
+          <li><button onclick="showTab('alerts',this)">Alerts</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="eyebrow">Financial Command Center</div>
+      <h1>Monthly Budget Tracker — April 2026</h1>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div id="tab-overview" class="section active">
+
+      <div class="section-eyebrow">At a Glance</div>
+      <div class="section-title">Spending Overview</div>
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="label">Total Debits</div>
+          <div class="value red">$16,082.01</div>
+          <div class="sub">All outflows this month</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Total Credits</div>
+          <div class="value green">$15,371.15</div>
+          <div class="sub">Transfers in + income</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Net</div>
+          <div class="value red">-$710.86</div>
+          <div class="sub">Month-end delta</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Bank Fees</div>
+          <div class="value amber">$68.00</div>
+          <div class="sub">2× overdraft fees</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Spending by Category</h3>
+        <div class="chart-wrapper">
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BILLS -->
+    <div id="tab-bills" class="section">
+      <div class="section-eyebrow">Personal</div>
+      <div class="section-title">Personal Bills</div>
+      <div class="card" style="padding:0;">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Expense</th>
+                <th>Due</th>
+                <th>Amount</th>
+                <th>Auto</th>
+                <th>Status</th>
+                <th>Date Paid</th>
+                <th>Amt Paid</th>
+                <th>Method</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>AT&amp;T</td><td>Apr 6</td><td>$379.18</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/06</td><td>$379.18</td><td>ACH</td><td>—</td></tr>
+              <tr><td>State Farm</td><td>Apr 1</td><td>$256.08</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/01</td><td>$256.08</td><td>ACH</td><td>—</td></tr>
+              <tr><td>Ring AI Pro</td><td>Apr 2</td><td>$21.79</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/02</td><td>$21.79</td><td>Card</td><td>—</td></tr>
+              <tr><td>Tidal</td><td>Apr 10</td><td>$22.79</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/10</td><td>$22.79</td><td>Card</td><td>—</td></tr>
+              <tr><td>Amazon Prime</td><td>Apr 6</td><td>$16.34</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/06</td><td>$16.34</td><td>Card</td><td>—</td></tr>
+              <tr><td>Audible</td><td>Apr 6</td><td>$16.30</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/06</td><td>$16.30</td><td>Card</td><td>—</td></tr>
+              <tr><td>Rocket Money</td><td>Apr 3</td><td>$10.90</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/03</td><td>$10.90</td><td>ACH</td><td>—</td></tr>
+              <tr><td>Webflow</td><td>Apr 9</td><td>$30.52</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/09</td><td>$30.52</td><td>Card</td><td>—</td></tr>
+              <tr><td>Twilio/SendGrid</td><td>Apr 7</td><td>$19.95</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/07</td><td>$19.95</td><td>Card</td><td>—</td></tr>
+              <tr><td>Lowes Credit</td><td>Apr 6</td><td>$75.00</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/06</td><td>$75.00</td><td>ACH</td><td>Minimum payment</td></tr>
+              <tr><td>Synchrony Bank</td><td>Apr 14</td><td>$100.00</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/14</td><td>$100.00</td><td>ACH</td><td>⚠️ Triggered OD fee</td></tr>
+              <tr><td>Opportunity Machine</td><td>Apr 3</td><td>$103.30</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/03</td><td>$103.30</td><td>ACH</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECH / AI -->
+    <div id="tab-tech" class="section">
+      <div class="section-eyebrow">Subscriptions</div>
+      <div class="section-title">AI / Tech Subscriptions</div>
+      <div class="card" style="padding:0; margin-bottom:24px;">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Expense</th>
+                <th>Due</th>
+                <th>Amount</th>
+                <th>Auto</th>
+                <th>Status</th>
+                <th>Date Paid</th>
+                <th>Amt Paid</th>
+                <th>Method</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Anthropic API</td><td>Multiple</td><td>$403.30</td><td>—</td><td><span class="badge badge-green">✅ PAID</span></td><td>Various</td><td>$403.30</td><td>Card</td><td>4 charges this month</td></tr>
+              <tr><td>Claude.ai Pro</td><td>Apr 10</td><td>$109.00</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/10</td><td>$109.00</td><td>Card</td><td>—</td></tr>
+              <tr><td>OpenAI / ChatGPT</td><td>Apr 13</td><td>$50.58</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/13</td><td>$50.58</td><td>Card</td><td>—</td></tr>
+              <tr><td>Google Workspace</td><td>Apr 6</td><td>$41.70</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/06</td><td>$41.70</td><td>PayPal</td><td>—</td></tr>
+              <tr><td>Google Grok</td><td>Apr 8</td><td>$33.14</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/08</td><td>$33.14</td><td>PayPal</td><td>—</td></tr>
+              <tr><td>Canva</td><td>Apr 6</td><td>$79.99</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/06</td><td>$79.99</td><td>PayPal</td><td>—</td></tr>
+              <tr><td>Shopify</td><td>Apr 13</td><td>$1.10</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/13</td><td>$1.10</td><td>Card</td><td>—</td></tr>
+              <tr><td>rekordbox</td><td>Apr 2</td><td>$39.24</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/02</td><td>$39.24</td><td>Card</td><td>—</td></tr>
+              <tr><td>MyFICO</td><td>Apr 13</td><td>$44.14</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/13</td><td>$44.14</td><td>Card</td><td>—</td></tr>
+              <tr><td>Experian</td><td>Apr 10</td><td>$26.24</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/10</td><td>$26.24</td><td>Card</td><td>—</td></tr>
+              <tr><td>PeopleLooker</td><td>Apr 3</td><td>$29.99</td><td>✓</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/03</td><td>$29.99</td><td>Card</td><td>—</td></tr>
+              <tr><td>PSG*Cedars Biz Tier 3</td><td>Apr 20</td><td>$520.99</td><td>—</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/20</td><td>$520.99</td><td>Card</td><td>Sherman Oaks CA</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-eyebrow">Nonprofit</div>
+      <div class="section-title">GFHA Business</div>
+      <div class="card" style="padding:0;">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Expense</th>
+                <th>Due</th>
+                <th>Amount</th>
+                <th>Auto</th>
+                <th>Status</th>
+                <th>Date Paid</th>
+                <th>Amt Paid</th>
+                <th>Method</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Ground Force Humanitarian</td><td>Apr 6</td><td>$20.76</td><td>—</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/06</td><td>$20.76</td><td>Card</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORAGE -->
+    <div id="tab-storage" class="section">
+      <div class="section-eyebrow">Monthly</div>
+      <div class="section-title">Storage Units</div>
+      <div class="card" style="padding:0; margin-bottom:20px;">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Expense</th>
+                <th>Due</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date Paid</th>
+                <th>Amt Paid</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Storage Center (unit 1)</td><td>Apr 9</td><td>$375.20</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/13</td><td>$375.20</td><td>Scott LA</td></tr>
+              <tr><td>Storage Center (unit 2)</td><td>Apr 9</td><td>$322.40</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/13</td><td>$322.40</td><td>Scott LA</td></tr>
+              <tr><td>Storage Center (Apr 13)</td><td>Apr 13</td><td>$272.00</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/14</td><td>$272.00</td><td>—</td></tr>
+              <tr><td>Storage Center (Apr 18)</td><td>Apr 18</td><td>$316.00</td><td><span class="badge badge-green">✅ PAID</span></td><td>04/18</td><td>$316.00</td><td>—</td></tr>
+              <tr class="totals-row"><td><strong>Total Storage</strong></td><td>—</td><td><strong>$1,285.60</strong></td><td>—</td><td>—</td><td><strong>$1,285.60</strong></td><td>⚠️ High — 4 units?</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="alert-card amber">
+        <h4>⚠️ Storage Cost Alert</h4>
+        <div class="alert-amount">$1,285.60/mo</div>
+        <p>4 storage unit charges this month. Consider consolidating to reduce recurring overhead.</p>
+      </div>
+    </div>
+
+    <!-- TRANSACTIONS -->
+    <div id="tab-transactions" class="section">
+      <div class="section-eyebrow">Daily Log</div>
+      <div class="section-title">Full Transaction History</div>
+
+      <div class="section-eyebrow" style="margin-bottom:16px;">Notable One-Time Expenses</div>
+      <div class="notable-grid">
+        <div class="notable-item">
+          <div class="n-label">Vehicle Title Transfer</div>
+          <div class="n-amount">$1,359.02</div>
+          <div class="n-date">04/13 · ABC Title/Uptown</div>
+          <div class="n-note">2 charges</div>
+        </div>
+        <div class="notable-item">
+          <div class="n-label">Beginner DJ Course</div>
+          <div class="n-amount">$1,000.00</div>
+          <div class="n-date">04/03 · PayPal ACH</div>
+          <div class="n-note">Education</div>
+        </div>
+        <div class="notable-item">
+          <div class="n-label">Phil Harris Music</div>
+          <div class="n-amount">$1,000.00</div>
+          <div class="n-date">04/18 · UK merchant</div>
+          <div class="n-note">Music Gear</div>
+        </div>
+        <div class="notable-item">
+          <div class="n-label">Zelle → Clint Flanders</div>
+          <div class="n-amount">$2,150.00</div>
+          <div class="n-date">04/02</div>
+          <div class="n-note">Debt payment</div>
+        </div>
+        <div class="notable-item">
+          <div class="n-label">Zelle → Mary Grace</div>
+          <div class="n-amount">$310.00</div>
+          <div class="n-date">04/20</div>
+          <div class="n-note">Transfer</div>
+        </div>
+        <div class="notable-item">
+          <div class="n-label">PayPal Credit Repayments</div>
+          <div class="n-amount">$1,200.00</div>
+          <div class="n-date">04/02 – 04/03</div>
+          <div class="n-note">Debt paydown</div>
+        </div>
+      </div>
+
+      <div class="section-eyebrow" style="margin-bottom:16px; margin-top: 8px;">Income / Credits</div>
+      <div class="income-grid">
+        <div class="income-item">
+          <div class="i-source">Transfer from CHK ...1750</div>
+          <div class="i-amount">+$2,000.00</div>
+          <div class="i-meta">04/02</div>
+        </div>
+        <div class="income-item">
+          <div class="i-source">Transfer from CHK ...1750</div>
+          <div class="i-amount">+$2,411.67</div>
+          <div class="i-meta">04/02</div>
+        </div>
+        <div class="income-item">
+          <div class="i-source">Remote Deposit #1</div>
+          <div class="i-amount">+$499.29</div>
+          <div class="i-meta">04/02</div>
+        </div>
+        <div class="income-item">
+          <div class="i-source">Transfer from CHK ...1750</div>
+          <div class="i-amount">+$950.00</div>
+          <div class="i-meta">04/01</div>
+        </div>
+        <div class="income-item">
+          <div class="i-source">Transfer from CHK ...1750</div>
+          <div class="i-amount">+$1,500.00</div>
+          <div class="i-meta">04/06 · 2 transfers</div>
+        </div>
+        <div class="income-item">
+          <div class="i-source">Transfer from CHK ...1750</div>
+          <div class="i-amount">+$1,350.00</div>
+          <div class="i-meta">04/10 · 3 transfers</div>
+        </div>
+        <div class="income-item">
+          <div class="i-source">Transfer from CHK ...1750</div>
+          <div class="i-amount">+$660.00</div>
+          <div class="i-meta">04/13 · 5 transfers</div>
+        </div>
+        <div class="income-item">
+          <div class="i-source">Transfer from CHK ...1750</div>
+          <div class="i-amount">+$5,000.00</div>
+          <div class="i-meta">04/16</div>
+        </div>
+        <div class="income-item">
+          <div class="i-source">Gusto Payroll</div>
+          <div class="i-amount">+$600.00</div>
+          <div class="i-meta">04/09</div>
+        </div>
+        <div class="income-item">
+          <div class="i-source">Zelle from Burton Richard</div>
+          <div class="i-amount">+$349.91</div>
+          <div class="i-meta">04/09 · Reyla</div>
+        </div>
+        <div class="income-item">
+          <div class="i-source">Fee Reversals</div>
+          <div class="i-amount">+$156.99</div>
+          <div class="i-meta">04/01 · Chase refunds</div>
+        </div>
+        <div class="income-item">
+          <div class="i-source">UL Press Credit</div>
+          <div class="i-amount">+$34.29</div>
+          <div class="i-meta">04/20 · Return</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section-eyebrow" style="margin-bottom: 8px;">All Transactions</div>
+      <div class="card" style="padding:0;">
+        <div class="txn-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>04/20</td><td>PSG*Cedars Biz Tier 3</td><td>Business</td><td class="amt-debit">-$520.99</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>Walmart Supercenter #5022</td><td>Groceries</td><td class="amt-debit">-$126.10</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>TST* The Will and the W (x2)</td><td>Dining</td><td class="amt-debit">-$49.78</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>Hat Loft Royal</td><td>Shopping</td><td class="amt-debit">-$154.33</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>Firestone</td><td>Auto</td><td class="amt-debit">-$34.09</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>Junebug</td><td>Dining</td><td class="amt-debit">-$26.40</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>Sofia New Orleans</td><td>Dining</td><td class="amt-debit">-$41.14</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>UL Press Lafayette (credit)</td><td>Return</td><td class="amt-credit">+$34.29</td><td>Credit</td></tr>
+              <tr><td>04/20</td><td>UL Press Lafayette (debit x2)</td><td>Shopping</td><td class="amt-debit">-$68.58</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>Gold Mine Saloon</td><td>Dining/Bar</td><td class="amt-debit">-$19.50</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>ATM 819 St Louis St</td><td>ATM</td><td class="amt-debit">-$43.50</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>Leah's Pralines</td><td>Dining</td><td class="amt-debit">-$4.96</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>Natchitochespies</td><td>Dining</td><td class="amt-debit">-$15.00</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>Zelle → Mary Grace</td><td>Transfer</td><td class="amt-debit">-$310.00</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>Cafe Beignet Sheraton (x2)</td><td>Dining</td><td class="amt-debit">-$31.51</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>90949 New Orleans</td><td>Dining</td><td class="amt-debit">-$6.00</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>Rouses Market #26</td><td>Groceries</td><td class="amt-debit">-$25.94</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>SQ*Amps Events</td><td>Entertainment</td><td class="amt-debit">-$42.08</td><td>Debit</td></tr>
+              <tr><td>04/20</td><td>Generations Hall/The Met (x2)</td><td>Entertainment</td><td class="amt-debit">-$55.80</td><td>Debit</td></tr>
+              <tr><td>04/18</td><td>PhilHarrisMusic.com</td><td>Music</td><td class="amt-debit">-$1,000.00</td><td>Debit</td></tr>
+              <tr><td>04/18</td><td>Storage Center 8023</td><td>Storage</td><td class="amt-debit">-$316.00</td><td>Debit</td></tr>
+              <tr><td>04/18</td><td>Junebug</td><td>Dining</td><td class="amt-debit">-$80.30</td><td>Debit</td></tr>
+              <tr><td>04/18</td><td>Curio</td><td>Shopping</td><td class="amt-debit">-$37.79</td><td>Debit</td></tr>
+              <tr><td>04/18</td><td>HH New Orleans</td><td>Dining</td><td class="amt-debit">-$17.35</td><td>Debit</td></tr>
+              <tr><td>04/18</td><td>HOB Club</td><td>Entertainment</td><td class="amt-debit">-$6.66</td><td>Debit</td></tr>
+              <tr><td>04/18</td><td>NORTA Mobile</td><td>Transport</td><td class="amt-debit">-$2.50</td><td>Debit</td></tr>
+              <tr><td>04/17</td><td>PayPal Uber</td><td>Transport</td><td class="amt-debit">-$30.04</td><td>Debit</td></tr>
+              <tr><td>04/17</td><td>Zelle → Victoria</td><td>Transfer</td><td class="amt-debit">-$25.00</td><td>Debit</td></tr>
+              <tr><td>04/17</td><td>CVS Pharmacy</td><td>Health</td><td class="amt-debit">-$44.51</td><td>Debit</td></tr>
+              <tr><td>04/17</td><td>PayPal Uber (x2)</td><td>Transport</td><td class="amt-debit">-$26.59</td><td>Debit</td></tr>
+              <tr><td>04/17</td><td>Lost Bayou Ramblers tickets</td><td>Entertainment</td><td class="amt-debit">-$89.88</td><td>Debit</td></tr>
+              <tr><td>04/17</td><td>Crystal Method tickets</td><td>Entertainment</td><td class="amt-debit">-$74.48</td><td>Debit</td></tr>
+              <tr><td>04/17</td><td>Coterie Restaurant</td><td>Dining</td><td class="amt-debit">-$26.93</td><td>Debit</td></tr>
+              <tr><td>04/17</td><td>Anthropic</td><td>AI/Tech</td><td class="amt-debit">-$272.50</td><td>Debit</td></tr>
+              <tr><td>04/17</td><td>SQ*Aquila Bistro</td><td>Dining</td><td class="amt-debit">-$25.31</td><td>Debit</td></tr>
+              <tr><td>04/16</td><td>Transfer from CHK ...1750</td><td>Income</td><td class="amt-credit">+$5,000.00</td><td>Credit</td></tr>
+              <tr><td>04/15</td><td>Overdraft fee (TikTok)</td><td>Bank Fee</td><td class="amt-debit">-$34.00</td><td>Debit</td></tr>
+              <tr><td>04/15</td><td>Overdraft fee (Synchrony)</td><td>Bank Fee</td><td class="amt-debit">-$34.00</td><td>Debit</td></tr>
+              <tr><td>04/14</td><td>TikTok Shop</td><td>Shopping</td><td class="amt-debit">-$10.90</td><td>Debit</td></tr>
+              <tr><td>04/14</td><td>Synchrony Bank payment</td><td>Debt</td><td class="amt-debit">-$100.00</td><td>Debit</td></tr>
+              <tr><td>04/14</td><td>TST* Really Really Nice</td><td>Dining</td><td class="amt-debit">-$143.00</td><td>Debit</td></tr>
+              <tr><td>04/14</td><td>OpenAI ChatGPT</td><td>AI/Tech</td><td class="amt-debit">-$50.58</td><td>Debit</td></tr>
+              <tr><td>04/14</td><td>Shaya Restaurant</td><td>Dining</td><td class="amt-debit">-$37.93</td><td>Debit</td></tr>
+              <tr><td>04/14</td><td>Storage Center</td><td>Storage</td><td class="amt-debit">-$272.00</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>Piccola Gelateria</td><td>Dining</td><td class="amt-debit">-$18.66</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>Gulf Coast Crawfish</td><td>Dining</td><td class="amt-debit">-$41.74</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>Port Orleans Brewing</td><td>Dining</td><td class="amt-debit">-$13.02</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>Shopify</td><td>AI/Tech</td><td class="amt-debit">-$1.10</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>Saturn Bar</td><td>Dining/Bar</td><td class="amt-debit">-$8.00</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>Superior Seafood (x2)</td><td>Dining</td><td class="amt-debit">-$164.78</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>MyFICO</td><td>AI/Tech</td><td class="amt-debit">-$44.14</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>TST* The Will and the W</td><td>Dining</td><td class="amt-debit">-$51.68</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>Anthropic</td><td>AI/Tech</td><td class="amt-debit">-$27.25</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>Sofia New Orleans</td><td>Dining</td><td class="amt-debit">-$52.27</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>Compere Lapin</td><td>Dining</td><td class="amt-debit">-$22.36</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>Claude.ai subscription</td><td>AI/Tech</td><td class="amt-debit">-$109.00</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>ABC Title/Uptown (x2)</td><td>Legal</td><td class="amt-debit">-$1,359.02</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>Storage Center Scott LA (x2)</td><td>Storage</td><td class="amt-debit">-$697.60</td><td>Debit</td></tr>
+              <tr><td>04/13</td><td>Transfers from CHK ...1750 (x5)</td><td>Income</td><td class="amt-credit">+$660.00</td><td>Credit</td></tr>
+              <tr><td>04/10</td><td>Non-Chase ATM</td><td>ATM</td><td class="amt-debit">-$23.50</td><td>Debit</td></tr>
+              <tr><td>04/10</td><td>TikTok Shop (x2)</td><td>Shopping</td><td class="amt-debit">-$47.82</td><td>Debit</td></tr>
+              <tr><td>04/10</td><td>Experian</td><td>AI/Tech</td><td class="amt-debit">-$26.24</td><td>Debit</td></tr>
+              <tr><td>04/10</td><td>Rainbow Grocery</td><td>Groceries</td><td class="amt-debit">-$15.98</td><td>Debit</td></tr>
+              <tr><td>04/10</td><td>Tidal</td><td>Subscriptions</td><td class="amt-debit">-$22.79</td><td>Debit</td></tr>
+              <tr><td>04/10</td><td>Nouriche</td><td>Health</td><td class="amt-debit">-$10.00</td><td>Debit</td></tr>
+              <tr><td>04/10</td><td>Kelly L Cobb MD (x2)</td><td>Health</td><td class="amt-debit">-$104.48</td><td>Debit</td></tr>
+              <tr><td>04/10</td><td>Scratch Farm Kitchen</td><td>Dining</td><td class="amt-debit">-$57.66</td><td>Debit</td></tr>
+              <tr><td>04/10</td><td>Transfers from CHK ...1750</td><td>Income</td><td class="amt-credit">+$1,350.00</td><td>Credit</td></tr>
+              <tr><td>04/09</td><td>Anthropic (x2)</td><td>AI/Tech</td><td class="amt-debit">-$103.55</td><td>Debit</td></tr>
+              <tr><td>04/09</td><td>Webflow</td><td>AI/Tech</td><td class="amt-debit">-$30.52</td><td>Debit</td></tr>
+              <tr><td>04/09</td><td>Cherry Espresso</td><td>Dining</td><td class="amt-debit">-$24.61</td><td>Debit</td></tr>
+              <tr><td>04/09</td><td>Fat Harry's</td><td>Dining</td><td class="amt-debit">-$24.74</td><td>Debit</td></tr>
+              <tr><td>04/09</td><td>Zelle from Burton Richard</td><td>Income</td><td class="amt-credit">+$349.91</td><td>Credit</td></tr>
+              <tr><td>04/09</td><td>Gusto Payroll</td><td>Income</td><td class="amt-credit">+$600.00</td><td>Credit</td></tr>
+              <tr><td>04/08</td><td>PayPal Google Grok</td><td>AI/Tech</td><td class="amt-debit">-$33.14</td><td>Debit</td></tr>
+              <tr><td>04/08</td><td>Cherry Espresso</td><td>Dining</td><td class="amt-debit">-$5.79</td><td>Debit</td></tr>
+              <tr><td>04/08</td><td>TikTok Shop</td><td>Shopping</td><td class="amt-debit">-$38.45</td><td>Debit</td></tr>
+              <tr><td>04/08</td><td>JetGo (x2)</td><td>Transport</td><td class="amt-debit">-$77.50</td><td>Debit</td></tr>
+              <tr><td>04/08</td><td>Barracuda - Tchoupitoulas</td><td>Dining</td><td class="amt-debit">-$23.83</td><td>Debit</td></tr>
+              <tr><td>04/07</td><td>ATM Withdrawal</td><td>ATM</td><td class="amt-debit">-$200.00</td><td>Debit</td></tr>
+              <tr><td>04/07</td><td>TikTok Shop</td><td>Shopping</td><td class="amt-debit">-$28.60</td><td>Debit</td></tr>
+              <tr><td>04/07</td><td>Hotels.com</td><td>Travel</td><td class="amt-debit">-$62.54</td><td>Debit</td></tr>
+              <tr><td>04/07</td><td>Osteria Lupo</td><td>Dining</td><td class="amt-debit">-$65.62</td><td>Debit</td></tr>
+              <tr><td>04/07</td><td>Twilio/SendGrid</td><td>Tech</td><td class="amt-debit">-$19.95</td><td>Debit</td></tr>
+              <tr><td>04/06</td><td>PayPal Google Workspace</td><td>AI/Tech</td><td class="amt-debit">-$41.70</td><td>Debit</td></tr>
+              <tr><td>04/06</td><td>Canva</td><td>AI/Tech</td><td class="amt-debit">-$79.99</td><td>Debit</td></tr>
+              <tr><td>04/06</td><td>Rouses Market</td><td>Groceries</td><td class="amt-debit">-$82.68</td><td>Debit</td></tr>
+              <tr><td>04/06</td><td>LAZ Parking</td><td>Transport</td><td class="amt-debit">-$25.85</td><td>Debit</td></tr>
+              <tr><td>04/06</td><td>Audible</td><td>Subscriptions</td><td class="amt-debit">-$16.30</td><td>Debit</td></tr>
+              <tr><td>04/06</td><td>Amazon Prime</td><td>Subscriptions</td><td class="amt-debit">-$16.34</td><td>Debit</td></tr>
+              <tr><td>04/06</td><td>Fresh Clean Threads</td><td>Shopping</td><td class="amt-debit">-$54.50</td><td>Debit</td></tr>
+              <tr><td>04/06</td><td>Lowes BRC payment</td><td>Debt</td><td class="amt-debit">-$75.00</td><td>Debit</td></tr>
+              <tr><td>04/06</td><td>AT&amp;T</td><td>Utilities</td><td class="amt-debit">-$379.18</td><td>Debit</td></tr>
+              <tr><td>04/06</td><td>Ground Force Humanitarian</td><td>GFHA</td><td class="amt-debit">-$20.76</td><td>Debit</td></tr>
+              <tr><td>04/06</td><td>Transfers from CHK ...1750</td><td>Income</td><td class="amt-credit">+$1,500.00</td><td>Credit</td></tr>
+              <tr><td>04/03</td><td>Beginner DJ Course</td><td>Education</td><td class="amt-debit">-$1,000.00</td><td>Debit</td></tr>
+              <tr><td>04/03</td><td>Rocket Money Premium</td><td>Subscriptions</td><td class="amt-debit">-$10.90</td><td>Debit</td></tr>
+              <tr><td>04/03</td><td>Opportunity Machine</td><td>Subscriptions</td><td class="amt-debit">-$103.30</td><td>Debit</td></tr>
+              <tr><td>04/03</td><td>PayPal credit repayment (x2)</td><td>Debt</td><td class="amt-debit">-$1,100.00</td><td>Debit</td></tr>
+              <tr><td>04/03</td><td>PeopleLooker</td><td>Tech</td><td class="amt-debit">-$29.99</td><td>Debit</td></tr>
+              <tr><td>04/03</td><td>Superior Seafood</td><td>Dining</td><td class="amt-debit">-$88.10</td><td>Debit</td></tr>
+              <tr><td>04/02</td><td>PayPal PPCR CC repayment</td><td>Debt</td><td class="amt-debit">-$100.00</td><td>Debit</td></tr>
+              <tr><td>04/02</td><td>Zelle → Clint Flanders</td><td>Transfer</td><td class="amt-debit">-$2,150.00</td><td>Debit</td></tr>
+              <tr><td>04/02</td><td>rekordbox subscription</td><td>AI/Tech</td><td class="amt-debit">-$39.24</td><td>Debit</td></tr>
+              <tr><td>04/02</td><td>Ring AI Pro</td><td>Tech</td><td class="amt-debit">-$21.79</td><td>Debit</td></tr>
+              <tr><td>04/02</td><td>Transfers from CHK ...1750</td><td>Income</td><td class="amt-credit">+$4,411.67</td><td>Credit</td></tr>
+              <tr><td>04/02</td><td>Remote Deposit #1</td><td>Income</td><td class="amt-credit">+$499.29</td><td>Credit</td></tr>
+              <tr><td>04/01</td><td>PayPal Uber</td><td>Transport</td><td class="amt-debit">-$18.54</td><td>Debit</td></tr>
+              <tr><td>04/01</td><td>State Farm</td><td>Insurance</td><td class="amt-debit">-$256.08</td><td>Debit</td></tr>
+              <tr><td>04/01</td><td>Transfer from CHK ...1750</td><td>Income</td><td class="amt-credit">+$950.00</td><td>Credit</td></tr>
+              <tr><td>04/01</td><td>Fee reversals + Reversal</td><td>Income</td><td class="amt-credit">+$156.99</td><td>Credit</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALERTS -->
+    <div id="tab-alerts" class="section">
+      <div class="section-eyebrow">Warnings</div>
+      <div class="section-title">Bank Fees &amp; Alerts</div>
+
+      <div class="alert-card">
+        <h4>🔴 Overdraft Fees — April 2026</h4>
+        <div class="alert-amount">$68.00</div>
+        <p>2 overdraft charges hit on April 15th:</p>
+        <ul style="margin: 12px 0 0 20px; color: var(--muted); font-size: 13px; line-height: 2;">
+          <li><strong style="color: var(--text);">$34.00</strong> — triggered by $10.90 TikTok Shop charge</li>
+          <li><strong style="color: var(--text);">$34.00</strong> — triggered by $100.00 Synchrony Bank auto-payment</li>
+        </ul>
+      </div>
+
+      <div class="alert-card amber" style="margin-top: 16px;">
+        <h4>⚠️ Storage Overhead</h4>
+        <div class="alert-amount">$1,285.60/mo</div>
+        <p>4 separate storage unit charges this month. Scott, LA units plus additional charges on 04/13 and 04/18. Consider consolidating.</p>
+      </div>
+
+      <div class="alert-card amber" style="margin-top: 16px;">
+        <h4>⚠️ Net Negative Month</h4>
+        <div class="alert-amount">-$710.86</div>
+        <p>Total debits ($16,082.01) exceeded total credits ($15,371.15) by $710.86. Large one-time expenses (DJ course, music gear, vehicle title, Zelle transfers) drove the overage.</p>
+      </div>
+
+      <div class="alert-card amber" style="margin-top: 16px;">
+        <h4>⚠️ High AI/Tech Spend</h4>
+        <div class="alert-amount">$966.02</div>
+        <p>Anthropic API alone: $403.30 across 4 charges. Review whether API usage is billable to projects or clients.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <span>TrustLight</span> · April 2026 · Chase Account #7790
+  </footer>
+</div>
+
+<script>
+// PASSWORD
+(function() {
+  const FLAG = 'tl_budget_apr26_auth';
+  if (localStorage.getItem(FLAG) === '1') {
+    document.getElementById('pwd-overlay').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  }
+  document.getElementById('pwd-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPassword();
+  });
+  window.checkPassword = function() {
+    const val = document.getElementById('pwd-input').value;
+    const err = document.getElementById('pwd-error');
+    if (val === 'AAww33!!') {
+      localStorage.setItem(FLAG, '1');
+      document.getElementById('pwd-overlay').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      initChart();
+    } else {
+      err.style.display = 'block';
+      err.textContent = 'Incorrect password. Try again.';
+      const box = document.getElementById('pwd-box');
+      box.classList.remove('shake');
+      void box.offsetWidth;
+      box.classList.add('shake');
+      document.getElementById('pwd-input').value = '';
+      document.getElementById('pwd-input').focus();
+    }
+  };
+
+  // If already unlocked, init chart
+  if (localStorage.getItem(FLAG) === '1') {
+    window.addEventListener('DOMContentLoaded', initChart);
+  }
+})();
+
+// TABS
+window.showTab = function(name, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tabs button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'overview') initChart();
+};
+
+// CHART
+let chartInited = false;
+function initChart() {
+  if (chartInited) return;
+  const el = document.getElementById('categoryChart');
+  if (!el) return;
+  chartInited = true;
+
+  const labels = [
+    'Zelle / Debt Payments',
+    'Business / Legal',
+    'Dining & Bars',
+    'Storage',
+    'AI / Tech / Subscriptions',
+    'Utilities & Bills',
+    'Education',
+    'Music Gear',
+    'Shopping',
+    'ATM / Cash',
+    'Entertainment & Events',
+    'Other',
+    'Groceries',
+    'Transport',
+    'Health',
+    'Travel'
+  ];
+  const data = [3585, 2004.07, 1523.98, 1285.60, 966.02, 810.26, 1000, 1000, 406.68, 267, 262.24, 281.82, 250.70, 214.11, 158.99, 62.54];
+
+  const colors = [
+    '#ff4444','#2a6fdb','#1a9aff','#00c851',
+    '#ffb700','#9b59b6','#e67e22','#1abc9c',
+    '#3498db','#e74c3c','#f39c12','#16a085',
+    '#2ecc71','#8e44ad','#d35400','#27ae60'
+  ];
+
+  new Chart(el, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Amount ($)',
+        data: data,
+        backgroundColor: colors.map(c => c + 'cc'),
+        borderColor: colors,
+        borderWidth: 1,
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ' $' + ctx.parsed.x.toLocaleString('en-US', {minimumFractionDigits: 2})
+          },
+          backgroundColor: '#1e1e30',
+          titleColor: '#e8e8f0',
+          bodyColor: '#8888aa',
+          borderColor: '#2a3050',
+          borderWidth: 1,
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          ticks: {
+            color: '#8888aa',
+            callback: v => '$' + v.toLocaleString()
+          },
+          border: { color: '#1e1e30' }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: '#e8e8f0', font: { size: 12 } },
+          border: { color: '#1e1e30' }
+        }
+      }
+    }
+  });
+}
+
+// Init chart if already auth'd on page load
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('app').style.display === 'block') {
+    initChart();
+  }
+});
+</script>
+</body>
+</html>

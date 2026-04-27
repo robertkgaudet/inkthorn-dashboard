@@ -1,0 +1,36 @@
+{
+  "entries": [
+    {
+      "ts": "2026-04-12T20:20:09Z",
+      "type": "agent_change",
+      "actor": "InkThorn Agent",
+      "description": "SEO/GEO fixes: removed trustlight.html + blueprint-process.html from sitemap (duplicate/noindex conflicts), added noindex to trustlight.html redirect page, created llms.txt for AI crawler discovery",
+      "ip": null,
+      "location": "Server-side (agent)"
+    },
+    {
+      "ts": "2026-04-12T17:22:20Z",
+      "type": "agent_change",
+      "actor": "InkThorn Agent",
+      "description": "Settings page created \u2014 activity log with login tracking, IP geolocation, and agent change history deployed to trustlight.ai/dashboard-settings.html",
+      "ip": null,
+      "location": "Server-side (agent)"
+    },
+    {
+      "ts": "2026-04-12T17:20:45Z",
+      "type": "agent_change",
+      "actor": "InkThorn Agent",
+      "description": "Initial activity log created \u2014 dashboard security logging enabled",
+      "ip": null,
+      "location": "Server-side (agent)"
+    },
+    {
+      "ts": "2026-04-12T17:20:06.367566+00:00",
+      "type": "agent_change",
+      "actor": "InkThorn Agent",
+      "description": "Initial activity log created \u2014 dashboard security logging enabled",
+      "ip": null,
+      "location": null
+    }
+  ]
+}

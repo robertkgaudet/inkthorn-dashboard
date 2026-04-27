@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- FAVICONS -->
+  <link rel="icon" type="image/png" sizes="32x32" href="https://trustlight.ai/assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://trustlight.ai/assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://trustlight.ai/assets/images/favicon-apple.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://trustlight.ai/assets/images/favicon-192.png">
+  <link rel="shortcut icon" href="https://trustlight.ai/favicon.png">
+<title>Claude Cowork — Beta in Progress · April 16</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #0a0a0a; --dark: #111; --mid: #1a1a1a;
+    --off-white: #f2ede6; --muted: #888;
+    --amber: #c8832a; --amber-light: #e09a40; --amber-dim: rgba(200,131,42,0.1);
+    --rule: rgba(255,255,255,0.08); --green: #2ecc71;
+  }
+  html, body { height: 100%; overflow: hidden; background: var(--black); font-family: 'DM Sans', sans-serif; }
+
+  /* ─── DECK ─── */
+  #deck { width: 100%; height: calc(100vh - 54px); overflow: hidden; position: relative; }
+
+  /* ─── SLIDES ─── */
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 3rem 4rem 3rem; opacity: 0; pointer-events: none;
+    transition: opacity 0.35s ease; text-align: center;
+  }
+  .slide.active { opacity: 1; pointer-events: auto; }
+  .slide::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    z-index: 0;
+  }
+  .slide > * { position: relative; z-index: 1; }
+  .slide-cover { background: var(--black); }
+  .slide-cover::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(200,131,42,0.08) 0%, transparent 70%); }
+  .slide-section { background: var(--dark); }
+  .slide-content { background: var(--dark); align-items: flex-start; text-align: left; }
+  .slide-demo { background: #0d0d0d; }
+  .slide-waiting { background: var(--black); }
+  .slide-roundtable { background: #0c0c10; }
+  .slide-tribecode { background: #0a100a; }
+
+  /* ─── TYPE ─── */
+  .eyebrow { font-size: clamp(0.65rem,1.1vw,0.85rem); letter-spacing: 0.25em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; }
+  h1.display { font-family: 'Libre Baskerville', serif; font-size: clamp(2.8rem,7vw,6.5rem); line-height: 1.05; font-weight: 700; color: var(--off-white); margin-bottom: 1.2rem; }
+  h2.heading { font-family: 'Libre Baskerville', serif; font-size: clamp(1.8rem,4.5vw,3.6rem); line-height: 1.1; font-weight: 700; color: var(--off-white); margin-bottom: 1rem; }
+  h3.subheading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.3rem,2.8vw,2.2rem); letter-spacing: 0.08em; color: var(--amber); margin-bottom: 0.9rem; }
+  p.body { font-size: clamp(0.95rem,1.6vw,1.3rem); color: var(--muted); line-height: 1.65; max-width: 780px; }
+  .highlight { color: var(--amber); }
+
+  /* ─── BULLETS ─── */
+  .bullet-list { list-style: none; width: 100%; max-width: 820px; display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.2rem; }
+  .bullet-list li { display: flex; align-items: flex-start; gap: 1rem; font-size: clamp(0.9rem,1.6vw,1.2rem); color: var(--off-white); line-height: 1.4; padding: 0.9rem 1.4rem; background: var(--mid); border: 1px solid var(--rule); border-radius: 4px; text-align: left; }
+  .bullet-list li .icon { font-size: 1.2rem; flex-shrink: 0; }
+  .bullet-list li .sub { display: block; font-size: 0.82em; color: var(--muted); margin-top: 0.2rem; }
+
+  /* ─── DEMO CARD ─── */
+  .demo-card { background: var(--mid); border: 1px solid var(--amber); border-radius: 6px; padding: 1.8rem 2.2rem; max-width: 760px; width: 100%; text-align: left; }
+  .demo-step { font-size: clamp(0.6rem,0.9vw,0.75rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.5rem; }
+  .demo-command { font-size: clamp(1rem,1.8vw,1.45rem); color: var(--off-white); font-weight: 500; font-style: italic; border-left: 3px solid var(--amber); padding-left: 1.1rem; margin-bottom: 1.1rem; line-height: 1.4; }
+  .demo-result { font-size: clamp(0.82rem,1.3vw,0.95rem); color: var(--muted); line-height: 1.6; }
+  .demo-result strong { color: var(--off-white); }
+
+  /* ─── SETUP ─── */
+  .setup-steps { display: flex; flex-direction: column; gap: 0.7rem; width: 100%; max-width: 680px; margin-top: 1rem; }
+  .setup-step { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.4rem; background: var(--mid); border: 1px solid var(--rule); border-radius: 4px; font-size: clamp(0.9rem,1.5vw,1.15rem); color: var(--off-white); text-align: left; }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--amber); line-height: 1; flex-shrink: 0; width: 30px; }
+
+  /* ─── AGENDA ─── */
+  .agenda-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; width: 100%; max-width: 960px; margin-top: 1.4rem; }
+  .agenda-item { background: var(--mid); border: 1px solid var(--rule); border-radius: 4px; padding: 1.2rem 0.9rem; text-align: center; }
+  .agenda-item.now { border-color: var(--amber); background: var(--amber-dim); }
+  .agenda-time { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--amber); margin-bottom: 0.25rem; }
+  .agenda-title { font-size: 0.82rem; font-weight: 500; color: var(--off-white); margin-bottom: 0.25rem; }
+  .agenda-desc { font-size: 0.7rem; color: var(--muted); line-height: 1.4; }
+
+  /* ─── ROUNDTABLE ─── */
+  .roundtable-prompt { background: var(--mid); border: 2px solid var(--amber); border-radius: 6px; padding: 2rem 2.5rem; max-width: 720px; width: 100%; margin-top: 1.2rem; }
+  .roundtable-prompt p { font-family: 'Libre Baskerville', serif; font-size: clamp(1.2rem,2.2vw,1.8rem); color: var(--off-white); line-height: 1.5; font-style: italic; }
+  .roundtable-prompt p span { color: var(--amber); font-style: normal; }
+
+  /* ─── TIMER (embedded) ─── */
+  #timer-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 1rem; }
+  #timer-display { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem,12vw,9rem); color: #fff; line-height: 1; transition: color 0.4s; cursor: pointer; }
+  #timer-display.warn   { color: #f0a500; }
+  #timer-display.danger { color: #e03030; }
+  #timer-display.done   { color: #e03030; animation: blink 0.6s infinite alternate; }
+  #timer-display.paused { opacity: 0.4; }
+  @keyframes blink { from { opacity:1; } to { opacity:0.25; } }
+  #timer-hint { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  #timer-progress-wrap { width: min(480px, 65vw); height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; margin-top: 0.3rem; }
+  #timer-progress-bar { height: 100%; background: #fff; width: 100%; transition: background 0.4s; }
+  #timer-progress-bar.warn   { background: #f0a500; }
+  #timer-progress-bar.danger { background: #e03030; }
+  #timer-pause-row { display: none; align-items: center; gap: 10px; margin-top: 4px; }
+  #timer-pause-row.visible { display: flex; }
+  #timer-pause-label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: #555; }
+  #timer-config { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+  #timer-config label { font-size: 0.62rem; letter-spacing: 0.1em; color: #555; text-transform: uppercase; }
+  #timer-dur-slider { width: 80px; accent-color: var(--amber); cursor: pointer; }
+  #timer-dur-val { font-size: 0.68rem; color: #888; min-width: 28px; }
+  #timer-auto-btn { font-size: 0.62rem; letter-spacing: 0.1em; padding: 2px 8px; border: 1px solid rgba(255,255,255,0.15); border-radius: 3px; background: none; color: #555; cursor: pointer; transition: all 0.2s; }
+  #timer-auto-btn.on { border-color: var(--amber); color: var(--amber); }
+
+  /* ─── TRIBE ─── */
+  .tribe-task { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.4rem; background: rgba(46,204,113,0.06); border: 1px solid rgba(46,204,113,0.2); border-radius: 4px; font-size: clamp(0.9rem,1.4vw,1.1rem); color: var(--off-white); text-align: left; width: 100%; max-width: 680px; }
+  .tribe-task .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+
+  /* ─── SPONSOR FOOTER (every slide) ─── */
+  .slide-sponsors {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    display: flex; align-items: center; gap: 1.2rem;
+    padding: 0.55rem 2rem;
+    background: rgba(0,0,0,0.55);
+    border-top: 1px solid rgba(200,131,42,0.2);
+    z-index: 10;
+  }
+  .slide-sponsors .sp-label { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: #555; flex-shrink: 0; }
+  .slide-sponsors img { height: 18px; width: auto; opacity: 0.55; filter: brightness(0) invert(1); }
+  .slide-sponsors .sp-dot { color: #333; font-size: 0.8rem; }
+  .slide-sponsors .sp-url { font-size: 0.62rem; letter-spacing: 0.1em; color: #555; text-decoration: none; }
+  .slide-sponsors .sp-url:hover { color: var(--amber); }
+  .slide-sponsors .sp-spacer { flex: 1; }
+
+  /* ─── BOTTOM NAV BAR ─── */
+  #nav-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; height: 54px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 1.5rem;
+    background: rgba(10,10,10,0.92); backdrop-filter: blur(10px);
+    border-top: 1px solid var(--rule); z-index: 200;
+  }
+  .nav-btn { background: var(--mid); border: 1px solid var(--rule); color: var(--off-white); padding: 0.45rem 1.4rem; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: all 0.2s; }
+  .nav-btn:hover { border-color: var(--amber); color: var(--amber); }
+  .nav-btn:disabled { opacity: 0.2; cursor: default; }
+  .nav-btn.primary { background: var(--amber); color: var(--black); border-color: var(--amber); }
+  .nav-btn.primary:hover { background: var(--amber-light); }
+  #slide-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); flex: 1; text-align: center; }
+  #slide-counter { font-size: 0.72rem; letter-spacing: 0.1em; color: #555; min-width: 48px; text-align: right; }
+
+  #fs-btn { position: fixed; top: 1rem; right: 1rem; font-size: 0.65rem; color: rgba(255,255,255,0.18); letter-spacing: 0.1em; cursor: pointer; z-index: 300; }
+  #fs-btn:hover { color: rgba(255,255,255,0.5); }
+</style>
+</head>
+<body>
+<div id="fs-btn" onclick="toggleFS()">⛶ FULLSCREEN</div>
+<div id="deck">
+
+<!-- ═══ SPONSOR FOOTER TEMPLATE — injected by JS ═══ -->
+
+<!-- SLIDE 0: WAITING -->
+<div class="slide slide-waiting active" id="slide-0">
+  <p class="eyebrow">Beta in Progress · Speakeasy Lunch Series</p>
+  <h1 class="display">Stop Prompting.<br><span class="highlight">Start Delegating.</span></h1>
+  <p class="body">Claude Cowork — Thursday, April 16 · 11:30 AM · The Nieux, New Orleans</p>
+  <p class="body" style="margin-top:0.8rem;font-size:clamp(0.78rem,1.1vw,0.95rem);color:#555;">Grab lunch. Find a seat. We start at 11:30.</p>
+  <p class="body" style="margin-top:0.6rem;font-size:clamp(0.82rem,1.2vw,1rem);color:var(--amber);">💻 Get your laptop out — you'll be doing this live today.</p>
+  <div style="margin-top:2.2rem;display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;">
+    <div style="text-align:center;"><div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;">Venue</div><div style="font-size:0.88rem;color:var(--off-white);">The Nieux · 2040 St Charles Ave</div></div>
+    <div style="text-align:center;"><div style="font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;">Cost</div><div style="font-size:0.88rem;color:var(--off-white);">Free to Attend · $25 Optional Lunch</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 1: AGENDA -->
+<div class="slide slide-section" id="slide-1">
+  <p class="eyebrow">Today's Session</p>
+  <h2 class="heading">Here's how this works.</h2>
+  <div class="agenda-grid">
+    <div class="agenda-item"><div class="agenda-time">11:15</div><div class="agenda-title">Doors Open</div><div class="agenda-desc">Grab lunch, get settled, meet the people next to you</div></div>
+    <div class="agenda-item now"><div class="agenda-time">11:30</div><div class="agenda-title">Cowork Demo</div><div class="agenda-desc">15 min live — Gmail, Calendar, Drive. Real tasks.</div></div>
+    <div class="agenda-item"><div class="agenda-time">11:48</div><div class="agenda-title">The Room Goes</div><div class="agenda-desc">60 seconds each. You're on the clock.</div></div>
+    <div class="agenda-item"><div class="agenda-time">12:30</div><div class="agenda-title">Tribe Code</div><div class="agenda-desc">Laptops out. Build it live together.</div></div>
+  </div>
+  <p class="body" style="margin-top:1.8rem;font-size:clamp(0.82rem,1.3vw,1rem);">No pitch. No traction required. Just show up curious — or already building something.</p>
+  <p class="body" style="margin-top:0.6rem;font-size:clamp(0.82rem,1.2vw,1rem);color:var(--amber);">💻 Laptop open = you follow along live. This isn't a demo you watch — it's one you do.</p>
+</div>
+
+<!-- SLIDE 2: WHY WE'RE HERE -->
+<div class="slide slide-section" id="slide-2">
+  <p class="eyebrow">The Nieux · St Charles Ave · New Orleans</p>
+  <h2 class="heading" style="max-width:820px;">The most ambitious structure<br>ever built. <span class="highlight">Now it's your lunch spot.</span></h2>
+  <p class="body" style="margin-top:1rem;max-width:760px;">The Nieux was once the restaurant at the very top of the Eiffel Tower — the most audacious structure ever built, in an era when most people said it was impossible.<br><br>In 1983 they took it down. Someone in New Orleans bought it, shipped it across the Atlantic, and put it back on St Charles Avenue.<br><br>That's where you're sitting. A room with a history of turning "impossible" into infrastructure.<br><br>Feels like the right place to be learning Claude Cowork.</p>
+</div>
+
+<!-- SLIDE 3: WHAT IS COWORK -->
+<div class="slide slide-content" id="slide-3">
+  <p class="eyebrow">Claude Desktop App · Three Modes</p>
+  <h2 class="heading">Chat answers.<br>Code builds.<br><span class="highlight">Cowork does.</span></h2>
+  <ul class="bullet-list" style="max-width:720px;margin-top:1rem;">
+    <li><span class="icon">💬</span><div><strong>Chat</strong> — Answers questions, drafts content, explains things<span class="sub">You already use this.</span></div></li>
+    <li><span class="icon">💻</span><div><strong>Code</strong> — Writes, debugs, and ships software<span class="sub">For developers.</span></div></li>
+    <li><span class="icon" style="color:var(--amber);">⚡</span><div><strong style="color:var(--amber);">Cowork</strong> — Actually does work across your apps while you do other things<span class="sub">This is what we're doing today.</span></div></li>
+  </ul>
+</div>
+
+<!-- SLIDE 4: SETUP -->
+<div class="slide slide-content" id="slide-4">
+  <p class="eyebrow">Get Connected · Google Workspace</p>
+  <h2 class="heading" style="max-width:640px;">Five steps.<br>Then <span class="highlight">you're live.</span></h2>
+  <p class="body" style="margin-bottom:0.6rem;font-size:clamp(0.82rem,1.2vw,1rem);color:var(--amber);">💻 Pull your laptop out now — follow along as we go through each step together.</p>
+  <div class="setup-steps">
+    <div class="setup-step"><div class="step-num">1</div><div>Download <strong>Claude Desktop</strong> — <span class="highlight">claude.ai/download</span> · Mac or Windows</div></div>
+    <div class="setup-step"><div class="step-num">2</div><div>Sign in, then click the <strong>Cowork</strong> tab (sits next to Chat and Code)</div></div>
+    <div class="setup-step"><div class="step-num">3</div><div>Go to <strong>Settings → Connectors</strong> — enable <span class="highlight">Google Drive</span></div></div>
+    <div class="setup-step"><div class="step-num">4</div><div>Enable <strong>Claude in Chrome</strong> — this unlocks Gmail and Google Calendar</div></div>
+    <div class="setup-step"><div class="step-num">5</div><div>Chrome must be open for browser tasks. Your data stays local — it doesn't leave your machine.</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 5: DEMO 1 — MORNING BRIEFING -->
+<div class="slide slide-demo" id="slide-5">
+  <p class="eyebrow">Live Demo 1 of 4 · Gmail + Calendar</p>
+  <h3 class="subheading">The Morning Briefing</h3>
+  <div class="demo-card">
+    <div class="demo-step">The command</div>
+    <div class="demo-command">"Check my Gmail for anything urgent, pull my calendar for today, and write me a briefing doc."</div>
+    <div class="demo-result"><strong>What Claude does:</strong> Opens Chrome → scans Gmail unread → reads your calendar → produces a formatted briefing with priority items and your day laid out.<br><br><strong>You do:</strong> Nothing. You come back to the result.</div>
+  </div>
+</div>
+
+<!-- SLIDE 6: DEMO 2 — DRAFT AND SAVE -->
+<div class="slide slide-demo" id="slide-6">
+  <p class="eyebrow">Live Demo 2 of 4 · Gmail Drafts</p>
+  <h3 class="subheading">Write It. File It. You Approve It.</h3>
+  <div class="demo-card">
+    <div class="demo-step">The command</div>
+    <div class="demo-command">"Write a follow-up email to today's Beta in Progress attendees — thank them, mention TrustLight.ai, and save it to my Gmail drafts so I can review before it goes out."</div>
+    <div class="demo-result"><strong>What Claude does:</strong> Drafts the email in your voice → opens Chrome → navigates Gmail → composes and saves to Drafts. Nothing sends without you.<br><br><strong>Why it matters:</strong> Claude does the writing and the filing. You stay in control of what actually leaves your inbox.</div>
+  </div>
+</div>
+
+<!-- SLIDE 7: DEMO 3 — CALENDAR -->
+<div class="slide slide-demo" id="slide-7">
+  <p class="eyebrow">Live Demo 3 of 4 · Google Calendar</p>
+  <h3 class="subheading">Put It on the Calendar</h3>
+  <div class="demo-card">
+    <div class="demo-step">The command</div>
+    <div class="demo-command">"Add Beta in Progress to my calendar every other Thursday at 11:30 AM. Location: The Nieux, 2040 St Charles Ave, New Orleans."</div>
+    <div class="demo-result"><strong>What Claude does:</strong> Opens Chrome → navigates Google Calendar → creates the recurring event with full details filled in.<br><br><strong>You do:</strong> Confirm. You'll never miss another one.</div>
+  </div>
+</div>
+
+<!-- SLIDE 8: DEMO 4 — READ A DOC -->
+<div class="slide slide-demo" id="slide-8">
+  <p class="eyebrow">Live Demo 4 of 4 · Google Drive</p>
+  <h3 class="subheading">Read It. Summarize It. Act on It.</h3>
+  <div class="demo-card">
+    <div class="demo-step">The command</div>
+    <div class="demo-command">"Open my Q1 report in Google Drive and give me a 3-bullet executive summary I can share in a meeting."</div>
+    <div class="demo-result"><strong>What Claude does:</strong> Connects via Drive connector → reads the document → returns a clean, shareable summary.<br><br><strong>Push it further:</strong> <em>"Now turn this into a slide deck outline"</em> or <em>"Draft a follow-up email based on this report."</em></div>
+  </div>
+</div>
+
+<!-- SLIDE 9: SCHEDULED TASKS -->
+<div class="slide slide-content" id="slide-9">
+  <p class="eyebrow">The Power Move</p>
+  <h2 class="heading" style="max-width:700px;">Set it once.<br><span class="highlight">Never think about it again.</span></h2>
+  <ul class="bullet-list" style="max-width:740px;margin-top:1rem;">
+    <li><span class="icon">📬</span><div>"Every Monday at 8am, check my Gmail and give me a priority list."<span class="sub">Waiting for you when you open your laptop. Every week.</span></div></li>
+    <li><span class="icon">📊</span><div>"Every Friday at 4pm, pull my Drive metrics folder and send me a weekly digest."<span class="sub">Your weekly report — hands-free.</span></div></li>
+    <li><span class="icon">📅</span><div>"Every Sunday evening, check next week's calendar and flag conflicts."<span class="sub">Your personal chief of staff. No salary required.</span></div></li>
+  </ul>
+</div>
+
+<!-- SLIDE 10: DISCUSSION + TIMER -->
+<div class="slide slide-roundtable" id="slide-10">
+  <p class="eyebrow">Discussion Session · The Room Goes</p>
+  <h2 class="heading" style="margin-bottom:0.6rem;">Your turn.</h2>
+  <div class="roundtable-prompt">
+    <p><span>Your name.</span> What you do.<br>Your biggest <span>AI challenge</span> — or how you're already using it.</p>
+  </div>
+  <p class="body" style="margin-bottom:0.4rem;font-size:clamp(0.78rem,1.1vw,0.95rem);color:#666;">After your 60 seconds — laptop open, Cowork queued up. Tribe Code starts right after.</p>
+  <div id="timer-wrap">
+    <div id="timer-display" onclick="handleTimer()">1:00</div>
+    <div id="timer-progress-wrap"><div id="timer-progress-bar"></div></div>
+    <div id="timer-pause-row"><span id="timer-pause-label">Next speaker in <span id="timer-pause-count">10</span>s</span></div>
+    <div id="timer-config">
+      <label>Duration</label>
+      <input type="range" id="timer-dur-slider" min="15" max="120" step="5" value="60" oninput="onTimerDurChange(this.value)">
+      <span id="timer-dur-val">1:00</span>
+      <button id="timer-auto-btn" class="on" onclick="toggleTimerAuto()">AUTO ✓</button>
+    </div>
+    <div id="timer-hint">Click to start · click again to reset · spacebar advances slide</div>
+  </div>
+</div>
+
+<!-- SLIDE 11: TRIBE CODE -->
+<div class="slide slide-tribecode" id="slide-11">
+  <p class="eyebrow">12:30 – 2:00 PM · Tribe Code</p>
+  <h2 class="heading" style="color:var(--green);">Laptops out.<br>Let's build.</h2>
+  <p class="body" style="margin-bottom:1.5rem;max-width:640px;">This is where Beta in Progress does its real work. The discussion sparks the idea. Tribe Code is where you start moving on it.</p>
+  <div style="display:flex;flex-direction:column;gap:0.7rem;width:100%;max-width:660px;">
+    <div class="tribe-task"><div class="dot"></div>Download Claude Desktop and open Cowork</div>
+    <div class="tribe-task"><div class="dot"></div>Connect Google Drive connector</div>
+    <div class="tribe-task"><div class="dot"></div>Enable Claude in Chrome for Gmail + Calendar</div>
+    <div class="tribe-task"><div class="dot"></div>Run your first live task — try the morning briefing</div>
+    <div class="tribe-task"><div class="dot"></div>Set up one scheduled task before you walk out</div>
+  </div>
+</div>
+
+<!-- SLIDE 12: CLOSE -->
+<div class="slide slide-cover" id="slide-12">
+  <p class="eyebrow">What's Next</p>
+  <h2 class="heading" style="max-width:820px;">The room you just sat in<br>is the <span class="highlight">Sugar Stack</span> doing its thing.</h2>
+  <p class="body" style="margin-top:0.8rem;margin-bottom:2rem;max-width:680px;">Raw idea. Heat. Refinement. Something real. New Orleans has always built this way — community first, technology second. That's not a metaphor. That's the model.<br><br>If today sparked something you want to go deeper on inside your business — that conversation starts at TrustLight.ai.</p>
+  <a href="https://trustlight.ai" style="display:inline-block;background:var(--amber);color:var(--black);font-size:0.88rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;padding:0.85rem 2.2rem;border-radius:2px;text-decoration:none;">trustlight.ai →</a>
+</div>
+
+</div><!-- /deck -->
+
+<!-- NAV BAR -->
+<div id="nav-bar">
+  <button class="nav-btn" id="btn-prev" onclick="prevSlide()" disabled>← Prev</button>
+  <div id="slide-label">Pre-Event · Waiting Screen</div>
+  <div id="slide-counter">1 / 13</div>
+  <button class="nav-btn primary" id="btn-next" onclick="nextSlide()">Next →</button>
+</div>
+
+<script>
+// ─── SPONSOR FOOTER — injected into every slide ───
+const SPONSOR_HTML = `
+  <div class="slide-sponsors">
+    <span class="sp-label">Presented by</span>
+    <img src="https://images.squarespace-cdn.com/content/v1/66c8a05b3f9c342d77944f15/8842bbcc-da79-4822-b941-50409edb003a/The+Nieux+-+White.png" alt="The Nieux">
+    <a href="https://thenieux.com" class="sp-url" target="_blank">thenieux.com</a>
+    <span class="sp-dot">·</span>
+    <img src="https://trustlight.ai/assets/images/logo-white.png" alt="TrustLight">
+    <a href="https://trustlight.ai" class="sp-url" target="_blank">trustlight.ai</a>
+    <span class="sp-dot">·</span>
+    <span class="sp-url">Startup Grind New Orleans</span>
+    <span class="sp-spacer"></span>
+    <span style="font-size:0.58rem;letter-spacing:0.1em;color:#444;text-transform:uppercase;">Beta in Progress · Apr 16</span>
+  </div>`;
+
+document.querySelectorAll('.slide').forEach(s => s.insertAdjacentHTML('beforeend', SPONSOR_HTML));
+
+// ─── SLIDE NAV ───
+const slides = document.querySelectorAll('.slide');
+const labels = [
+  'Pre-Event · Waiting Screen','Agenda','Why We\'re Here',
+  'What Is Cowork?','Setup · Get Connected',
+  'Demo 1 · Morning Briefing','Demo 2 · Write Draft & Save',
+  'Demo 3 · Add to Calendar','Demo 4 · Read Doc / Sheet',
+  'Scheduled Tasks','Discussion · The Room Goes',
+  'Tribe Code','Close · See You Next Time'
+];
+let current = 0;
+
+function showSlide(n) {
+  slides[current].classList.remove('active');
+  current = Math.max(0, Math.min(n, slides.length - 1));
+  slides[current].classList.add('active');
+  document.getElementById('slide-counter').textContent = (current+1)+' / '+slides.length;
+  document.getElementById('slide-label').textContent = labels[current]||'';
+  document.getElementById('btn-prev').disabled = current===0;
+  document.getElementById('btn-next').disabled = current===slides.length-1;
+}
+function nextSlide() { showSlide(current+1); }
+function prevSlide() { showSlide(current-1); }
+
+document.addEventListener('keydown', e => {
+  if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();nextSlide();}
+  if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();prevSlide();}
+  if(e.key==='f'||e.key==='F') toggleFS();
+});
+
+function toggleFS() {
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen();
+  else document.exitFullscreen();
+}
+
+showSlide(0);
+
+// ─── EMBEDDED TIMER ───
+let T_DUR     = 60;
+const T_PAUSE = 10;
+let t_rem     = T_DUR, t_pauseLeft = T_PAUSE;
+let t_interval = null, t_pauseInterval = null;
+let t_running = false, t_pausing = false, t_auto = true;
+
+const tEl    = document.getElementById('timer-display');
+const tBar   = document.getElementById('timer-progress-bar');
+const tProw  = document.getElementById('timer-pause-row');
+const tPcnt  = document.getElementById('timer-pause-count');
+
+let tAudioCtx = null;
+function getTAudio() {
+  if(!tAudioCtx) tAudioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  return tAudioCtx;
+}
+function tBeep(freq,dur,gain=0.35,type='sine') {
+  try {
+    const c=getTAudio(), o=c.createOscillator(), v=c.createGain();
+    o.connect(v); v.connect(c.destination);
+    o.type=type; o.frequency.setValueAtTime(freq,c.currentTime);
+    v.gain.setValueAtTime(gain,c.currentTime);
+    v.gain.exponentialRampToValueAtTime(0.001,c.currentTime+dur);
+    o.start(c.currentTime); o.stop(c.currentTime+dur);
+  } catch(e){}
+}
+function tBeepWarn()  { tBeep(880,0.18,0.3); }
+function tBeepDanger(){ tBeep(1046,0.12,0.38,'square'); }
+function tBeepDone()  { tBeep(1046,0.22,0.45); setTimeout(()=>tBeep(880,0.22,0.45),220); setTimeout(()=>tBeep(698,0.4,0.45),440); }
+function tBeepReady() { tBeep(698,0.12,0.28); setTimeout(()=>tBeep(1046,0.2,0.3),150); }
+
+function tFmt(s){ return Math.floor(s/60)+':'+(s%60).toString().padStart(2,'0'); }
+
+function tSetClass(cls) {
+  tEl.classList.remove('warn','danger','done','paused');
+  tBar.classList.remove('warn','danger');
+  if(cls){ tEl.classList.add(cls); if(cls!=='done') tBar.classList.add(cls); }
+}
+
+function tUpdateDisplay() {
+  if(t_rem<=0){ tEl.textContent='TIME'; tBar.style.width='0%'; tSetClass('done'); return; }
+  tEl.textContent=tFmt(t_rem);
+  tBar.style.width=(t_rem/T_DUR*100)+'%';
+  if(t_rem<=10) tSetClass('danger');
+  else if(t_rem<=20) tSetClass('warn');
+  else tSetClass(null);
+}
+
+function tStart() {
+  t_running=true; t_pausing=false;
+  tProw.classList.remove('visible');
+  tEl.classList.remove('paused');
+  try{ getTAudio().resume(); }catch(e){}
+  t_interval = setInterval(()=>{
+    t_rem--;
+    tUpdateDisplay();
+    if(t_rem===5)  tBeepWarn();
+    if(t_rem<=3 && t_rem>0) tBeepDanger();
+    if(t_rem<=0){
+      clearInterval(t_interval); t_running=false;
+      tBeepDone();
+      if(t_auto) tStartPause();
+    }
+  },1000);
+}
+
+function tStartPause() {
+  t_pausing=true; t_pauseLeft=T_PAUSE;
+  tProw.classList.add('visible');
+  tPcnt.textContent=t_pauseLeft;
+  tEl.classList.add('paused');
+  t_pauseInterval=setInterval(()=>{
+    t_pauseLeft--;
+    tPcnt.textContent=t_pauseLeft;
+    if(t_pauseLeft<=0){
+      clearInterval(t_pauseInterval); t_pausing=false;
+      tProw.classList.remove('visible');
+      tAutoReset();
+    }
+  },1000);
+}
+
+function tAutoReset() {
+  t_rem=T_DUR; tUpdateDisplay(); tBeepReady();
+  setTimeout(tStart,600);
+}
+
+function tResetFull() {
+  clearInterval(t_interval); clearInterval(t_pauseInterval);
+  t_running=false; t_pausing=false; t_rem=T_DUR;
+  tProw.classList.remove('visible');
+  tSetClass(null); tEl.classList.remove('paused');
+  tUpdateDisplay();
+}
+
+function handleTimer() {
+  if(t_pausing){ clearInterval(t_pauseInterval); t_pausing=false; tProw.classList.remove('visible'); tAutoReset(); }
+  else if(!t_running && t_rem===T_DUR){ tStart(); }
+  else{ tResetFull(); }
+}
+
+function onTimerDurChange(val) {
+  T_DUR=parseInt(val);
+  document.getElementById('timer-dur-val').textContent=tFmt(T_DUR);
+  if(!t_running&&!t_pausing){ t_rem=T_DUR; tUpdateDisplay(); }
+}
+
+function toggleTimerAuto() {
+  t_auto=!t_auto;
+  const btn=document.getElementById('timer-auto-btn');
+  btn.textContent=t_auto?'AUTO ✓':'AUTO ✗';
+  btn.classList.toggle('on',t_auto);
+}
+
+tUpdateDisplay();
+</script>
+</body>
+</html>

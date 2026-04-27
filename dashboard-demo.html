@@ -6,44 +6,32 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- PWA / Android Home Screen -->
-  <meta name="theme-color" content="#0a0a0a">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Command Center">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Command Center">
-  <link rel="apple-touch-icon" href="https://inkthorn.ai/assets/inkthorn-mascot.png">
-  <link rel="manifest" href="https://inkthorn.ai/manifest.json">
-<title>InkThorn — Command Center</title>
+<title>Marcus Webb // Command Center</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #070711;
-    --bg2: #0f0f1e;
-    --bg3: #14142a;
-    --amber: #f0b840;
-    --amber2: #f5c855;
-    --amber3: #fada70;
-    --cyan: #00f5ff;
-    --cyan2: #00ccdd;
-    --pink: #ff2d87;
-    --purple: #a855f7;
-    --text: #f0f0ff;
-    --text2: #b0b0d8;
-    --text3: #7878a8;
+    --bg: #0a0a0a;
+    --bg2: #111114;
+    --bg3: #16161a;
+    --amber: #c8832a;
+    --amber2: #e09a40;
+    --amber3: #f5b855;
+    --cyan: #00d4ff;
+    --cyan2: #00aacc;
+    --text: #f2ede6;
+    --text2: #b8b0a5;
+    --text3: #6e6760;
     --red: #ff4444;
-    --yellow: #ffe600;
-    --green: #39ff14;
-    --glass-bg: rgba(14, 14, 30, 0.8);
-    --glass-border: rgba(255, 45, 135, 0.25);
-    --glow-amber: 0 0 20px rgba(240, 184, 64, 0.4), 0 0 40px rgba(240, 184, 64, 0.15);
-    --glow-cyan: 0 0 20px rgba(0, 245, 255, 0.4), 0 0 40px rgba(0, 245, 255, 0.15);
-    --glow-amber-strong: 0 0 30px rgba(240, 184, 64, 0.6), 0 0 60px rgba(240, 184, 64, 0.3);
-    --glow-pink: 0 0 20px rgba(255, 45, 135, 0.5), 0 0 40px rgba(255, 45, 135, 0.2);
+    --yellow: #ffcc00;
+    --green: #00ff88;
+    --glass-bg: rgba(22, 22, 26, 0.7);
+    --glass-border: rgba(200, 131, 42, 0.2);
+    --glow-amber: 0 0 20px rgba(200, 131, 42, 0.4), 0 0 40px rgba(200, 131, 42, 0.15);
+    --glow-cyan: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 40px rgba(0, 212, 255, 0.15);
+    --glow-amber-strong: 0 0 30px rgba(224, 154, 64, 0.6), 0 0 60px rgba(200, 131, 42, 0.3);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -120,7 +108,7 @@
   }
 
   .login-logo {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 2.2rem;
     letter-spacing: 4px;
     color: var(--amber2);
@@ -163,7 +151,7 @@
     border-radius: 6px;
     padding: 14px;
     color: #0a0a0a;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.2rem;
     letter-spacing: 3px;
     cursor: pointer;
@@ -208,7 +196,7 @@
   }
 
   .nav-logo {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 4px;
     color: var(--amber2);
@@ -233,7 +221,7 @@
   .nav-tabs::-webkit-scrollbar { display: none; }
 
   .nav-tab {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 0.95rem;
     letter-spacing: 3px;
     color: var(--text3);
@@ -302,7 +290,7 @@
     margin-bottom: 32px;
   }
   .section-title {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 2.8rem;
     letter-spacing: 4px;
     color: var(--amber2);
@@ -385,7 +373,7 @@
     margin-bottom: 10px;
   }
   .kpi-value {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 2.6rem;
     letter-spacing: 2px;
     color: var(--amber2);
@@ -420,7 +408,7 @@
 
   /* ─── CARD TITLES ─── */
   .card-title {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.3rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -465,7 +453,7 @@
     flex-shrink: 0;
   }
   .health-pct {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.4rem;
     color: var(--amber2);
     text-shadow: var(--glow-amber);
@@ -547,7 +535,7 @@
   }
   .focus-item:last-child { border-bottom: none; }
   .focus-num {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.2rem;
     color: var(--amber);
     width: 24px;
@@ -599,7 +587,7 @@
     margin-bottom: 20px;
   }
   .biz-name {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.8rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -725,7 +713,7 @@
     margin-bottom: 16px;
   }
   .burn-number {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 5rem;
     color: var(--amber2);
     text-shadow: var(--glow-amber-strong);
@@ -793,7 +781,7 @@
     box-shadow: 0 0 20px rgba(200,131,42,0.15);
   }
   .debt-name {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.1rem;
     letter-spacing: 2px;
     color: var(--text);
@@ -840,7 +828,7 @@
     box-shadow: var(--glow-amber);
   }
   .irs-banner-title {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 2rem;
     letter-spacing: 6px;
     color: var(--amber2);
@@ -869,7 +857,7 @@
     margin-bottom: 8px;
   }
   .irs-fact-value {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 2px;
     color: var(--amber2);
@@ -899,7 +887,7 @@
     box-shadow: var(--glow-amber);
   }
   .strategy-name {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.5rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -919,7 +907,7 @@
     text-decoration: none;
     padding: 12px 28px;
     border-radius: 6px;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1rem;
     letter-spacing: 3px;
     transition: all 0.3s;
@@ -1001,7 +989,7 @@
     text-align: center;
   }
   .profile-stat-val {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.4rem;
     letter-spacing: 2px;
     color: var(--amber2);
@@ -1132,7 +1120,7 @@
     border-radius: 6px;
     padding: 10px 24px;
     color: #0a0a0a;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1rem;
     letter-spacing: 2px;
     cursor: pointer;
@@ -1169,7 +1157,7 @@
     margin-bottom: 6px;
   }
   .entry-title {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.3rem;
     letter-spacing: 2px;
     color: var(--text);
@@ -1279,7 +1267,7 @@
     box-shadow: var(--glow-amber);
   }
   .timeline-year {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.6rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -1319,7 +1307,7 @@
     box-shadow: var(--glow-amber-strong);
   }
   .modal-title {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1.6rem;
     letter-spacing: 3px;
     color: var(--amber2);
@@ -1354,7 +1342,7 @@
     border-radius: 6px;
     padding: 10px 20px;
     color: var(--text2);
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 0.95rem;
     letter-spacing: 2px;
     cursor: pointer;
@@ -1438,7 +1426,7 @@
   position: relative;
 }
 .day-cycle-title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.2rem;
   letter-spacing: 0.14em;
   color: #00d4ff;
@@ -1578,71 +1566,8 @@
 .bv-time { font-size: 0.62rem; color: #c8832a; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.2rem; }
 .bv-label { font-size: 0.8rem; font-weight: 600; color: #f2ede6; margin-bottom: 0.4rem; line-height: 1.25; }
 .bv-tips { font-size: 0.68rem; line-height: 1.55; }
-.bv-tips .t1 { color: rgba(255,255,255,0.72); }
-.bv-tips .t2 { color: rgba(0,212,255,0.9); margin-top: 0.15rem; display: block; }
-
-/* ── OVERVIEW SENSITIVE BLUR ── */
-.overview-sensitive {
-  position: relative;
-  filter: blur(7px) !important;
-  user-select: none !important;
-  pointer-events: none !important;
-  transition: filter 0.4s;
-}
-.overview-sensitive.revealed { filter: none !important; pointer-events: auto !important; user-select: auto !important; }
-.overview-sensitive-block {
-  position: relative;
-  filter: blur(7px) !important;
-  user-select: none !important;
-  transition: filter 0.4s;
-}
-.overview-sensitive-block.revealed { filter: none !important; }
-.overview-unlock-bar {
-  text-align: center;
-  margin: 0.5rem 0 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-}
-.overview-unlock-bar input {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(200,131,42,0.4);
-  color: #f2ede6;
-  padding: 5px 12px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  width: 160px;
-  outline: none;
-}
-.overview-unlock-bar button {
-  background: rgba(200,131,42,0.15);
-  border: 1px solid rgba(200,131,42,0.5);
-  color: #c8832a;
-  padding: 5px 14px;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-}
-.overview-unlock-bar button:hover { background: rgba(200,131,42,0.25); }
-.overview-unlock-err { color: #ff4444; font-size: 0.65rem; letter-spacing: 0.08em; display:none; }
-
-/* ── NEIGHBORHOOD DISCOVERY BAR ── */
-#neighborhood-scroll::-webkit-scrollbar { display: none; }
-.nbhd-spot {
-  flex: 0 0 140px;
-  padding: 0.7rem 0.85rem;
-  border-right: 1px solid rgba(200,131,42,0.1);
-  cursor: default;
-  transition: background 0.2s;
-}
-.nbhd-spot:hover { background: rgba(200,131,42,0.06); }
-.nbhd-icon { font-size: 1.3rem; margin-bottom: 0.3rem; }
-.nbhd-name { font-size: 0.72rem; font-weight: 700; color: #f2ede6; line-height: 1.2; margin-bottom: 0.15rem; }
-.nbhd-dist { font-size: 0.58rem; color: #c8832a; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.25rem; }
-.nbhd-desc { font-size: 0.62rem; color: rgba(255,255,255,0.5); line-height: 1.45; }
+.bv-tips .t1 { color: #555; }
+.bv-tips .t2 { color: rgba(0,212,255,0.6); margin-top: 0.15rem; display: block; }
 .now-badge {
   display: inline-block;
   font-size: 0.58rem;
@@ -1674,7 +1599,7 @@
 }
 .nav-left { flex-shrink: 0; }
 .nav-logo {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.1rem;
   letter-spacing: 0.08em;
   color: #c8832a;
@@ -1759,7 +1684,7 @@
 }
 .mobile-nav-close:hover { border-color: #c8832a; color: #c8832a; }
 .mobile-nav-logo {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.3rem;
   letter-spacing: 0.1em;
   color: #c8832a;
@@ -1811,7 +1736,6 @@
   backdrop-filter: blur(2px);
 }
 .mobile-nav-backdrop.open { display: block; }
-
 /* ── ACTIVITY TRACKER ── */
 .activity-section {
   margin-bottom: 2rem;
@@ -1847,83 +1771,61 @@
   border-color: rgba(200,131,42,0.3);
   background: rgba(200,131,42,0.04);
 }
-/* ── ACTIVITY RINGS (CSS conic-gradient — mobile compatible) ── */
-.activity-rings-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-.activity-ring-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 12px;
-  padding: 1.2rem 0.75rem;
-  transition: all 0.25s;
-}
-.activity-ring-card:hover {
-  border-color: rgba(200,131,42,0.3);
-}
 .ring-wrap {
   position: relative;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 80px;
+  height: 80px;
 }
-.ring-track {
+.ring-wrap svg {
+  transform: rotate(-90deg);
+  width: 80px;
+  height: 80px;
+}
+.ring-bg {
+  fill: none;
+  stroke: rgba(255,255,255,0.06);
+  stroke-width: 7;
+}
+.ring-fill {
+  fill: none;
+  stroke-width: 7;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+.ring-fill.steps { stroke: #c8832a; }
+.ring-fill.distance { stroke: #00d4ff; }
+.ring-fill.calories { stroke: #e05a8a; }
+.ring-fill.active-min { stroke: #7ed6a0; }
+.ring-center {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.05);
-}
-.ring-progress {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  transition: background 1s ease;
-}
-.ring-inner {
-  position: relative;
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: #0a0a0a;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  gap: 0;
 }
 .ring-value {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.15rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
   letter-spacing: 0.04em;
   line-height: 1;
   color: #f2ede6;
 }
 .ring-unit {
-  font-size: 0.55rem;
+  font-size: 0.58rem;
   color: #666;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-top: 1px;
 }
 .ring-label {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: #888;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  font-weight: 500;
 }
 .ring-goal {
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   color: #444;
 }
 /* Log form */
@@ -1970,7 +1872,7 @@
   box-shadow: 0 0 60px rgba(200,131,42,0.15);
 }
 .activity-modal h3 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 1.4rem;
   letter-spacing: 0.08em;
   color: #c8832a;
@@ -2092,247 +1994,14 @@
   color: #c8832a;
   margin-top: 0.35rem;
 }
-/* ── GOOGLE FIT CONNECT ── */
-.gfit-connect-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: rgba(66,133,244,0.12);
-  border: 1px solid rgba(66,133,244,0.35);
-  border-radius: 8px;
-  color: #7ab3f5;
-  font-family: 'Space Grotesk','DM Sans',sans-serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  padding: 0.6rem 1.2rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-bottom: 1rem;
-}
-.gfit-connect-btn:hover {
-  background: rgba(66,133,244,0.2);
-  box-shadow: 0 0 12px rgba(66,133,244,0.2);
-}
-.gfit-connect-btn.connected {
-  background: rgba(126,214,160,0.1);
-  border-color: rgba(126,214,160,0.35);
-  color: #7ed6a0;
-}
-.gfit-status {
-  font-size: 0.7rem;
-  color: #555;
-  margin-bottom: 1rem;
-  letter-spacing: 0.04em;
-}
-.gfit-status.live {
-  color: #7ed6a0;
-}
-.gfit-status.live::before {
-  content: '● ';
-  animation: blink-badge 2s infinite;
-}
-
-/* ── JOURNAL ENTRY MODAL ── */
-.entry-preview {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  cursor: pointer;
-  opacity: 0.7;
-  font-size: 0.82rem;
-  line-height: 1.6;
-}
-.entry-preview:hover { opacity: 1; }
-.journal-entry-card { cursor: pointer; position: relative; }
-.entry-read-more {
-  font-size: 0.7rem;
-  color: #c8832a;
-  margin-top: 0.4rem;
-  letter-spacing: 0.06em;
-  cursor: pointer;
-}
-.journal-read-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  z-index: 800;
-  backdrop-filter: blur(6px);
-  align-items: flex-start;
-  justify-content: center;
-  padding: 2rem 1rem;
-  overflow-y: auto;
-}
-.journal-read-modal.open { display: flex; }
-.journal-read-inner {
-  background: #111;
-  border: 1px solid rgba(200,131,42,0.3);
-  border-radius: 14px;
-  padding: 2rem;
-  width: 100%;
-  max-width: 680px;
-  position: relative;
-  box-shadow: 0 0 60px rgba(200,131,42,0.1);
-}
-.journal-read-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.1);
-  color: #888;
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.2s;
-}
-.journal-read-close:hover { border-color: #c8832a; color: #c8832a; }
-.journal-read-date {
-  font-size: 0.68rem;
-  color: #c8832a;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-.journal-read-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.8rem;
-  letter-spacing: 0.06em;
-  color: #f2ede6;
-  margin-bottom: 1.5rem;
-  line-height: 1.1;
-}
-.journal-read-body {
-  font-size: 0.92rem;
-  color: #ccc;
-  line-height: 1.85;
-  white-space: pre-wrap;
-}
-
-  /* ─── LOCKED SECTION OVERLAY ─── */
-  .locked-section-wrap {
-    position: relative;
-    overflow: hidden;
-    min-height: 200px;
-  }
-  .locked-tab-overlay {
-    position: absolute;
-    inset: 0;
-    backdrop-filter: blur(8px);
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    cursor: pointer;
-    transition: opacity 0.3s;
-  }
-  .locked-tab-overlay.unlocking {
-    opacity: 0;
-    pointer-events: none;
-  }
-  .locked-overlay-icon {
-    font-size: 2.5rem;
-    margin-bottom: 12px;
-  }
-  .locked-overlay-label {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.4rem;
-    letter-spacing: 4px;
-    color: var(--amber2);
-    text-shadow: var(--glow-amber);
-    margin-bottom: 6px;
-  }
-  .locked-overlay-sub {
-    font-size: 0.72rem;
-    letter-spacing: 2px;
-    color: var(--text3);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-  .locked-pw-wrap {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: 260px;
-  }
-  .locked-pw-wrap.visible { display: flex; }
-  .locked-pw-input {
-    width: 100%;
-    background: rgba(0,0,0,0.5);
-    border: 1px solid rgba(200,131,42,0.5);
-    border-radius: 6px;
-    padding: 10px 14px;
-    color: var(--text);
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 4px;
-    text-align: center;
-    outline: none;
-  }
-  .locked-pw-input:focus {
-    border-color: var(--amber2);
-    box-shadow: var(--glow-amber);
-  }
-  .locked-pw-error {
-    color: var(--red);
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 700;
-    height: 18px;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  .locked-pw-error.show { opacity: 1; }
-
 </style>
-<script>
-// ── GOOGLE FIT EARLY BOOT ──
-// Step 1: Capture OAuth token from URL hash IMMEDIATELY on page load
-(function() {
-  var hash = window.location.hash;
-  if (hash && hash.indexOf('access_token') !== -1) {
-    var params = new URLSearchParams(hash.substring(1));
-    var token = params.get('access_token');
-    if (token) {
-      localStorage.setItem('gfit_token', token);
-      sessionStorage.setItem('rg_auth', '1');
-      // Clean URL immediately
-      history.replaceState(null, '', window.location.pathname);
-    }
-  }
-})();
-
-// Step 2: Connect button function — available immediately
-window._gfitConnect = function() {
-  var CLIENT_ID = '1085063330986-r202kk8tuqkdjfutc30k84pb2dovnm5t.apps.googleusercontent.com';
-  var SCOPES = 'https://www.googleapis.com/auth/fitness.activity.read%20https://www.googleapis.com/auth/fitness.body.read%20https://www.googleapis.com/auth/fitness.location.read';
-  sessionStorage.setItem('rg_auth', '1');
-  var redirectUri = encodeURIComponent('https://inkthorn.ai/command-center.html');
-  var authUrl = 'https://accounts.google.com/o/oauth2/v2/auth' +
-    '?client_id=' + CLIENT_ID +
-    '&redirect_uri=' + redirectUri +
-    '&response_type=token' +
-    '&scope=' + SCOPES +
-    '&prompt=select_account';
-  window.location.href = authUrl;
-};
-</script>
-<link rel="icon" type="image/jpeg" href="https://inkthorn.ai/assets/inkthorn-mascot.png">
 </head>
 <body>
 
 <!-- ═══ LOGIN OVERLAY ═══ -->
 <div id="login-overlay">
   <div class="login-box">
-    <div class="login-logo">ROB GAUDET</div>
+    <div class="login-logo">MARCUS WEBB</div>
     <div class="login-sub">Command Center — Restricted Access</div>
     <input type="password" id="login-pw" placeholder="ENTER ACCESS CODE" autocomplete="off">
     <button class="login-btn" onclick="doLogin()">AUTHENTICATE</button>
@@ -2346,10 +2015,7 @@ window._gfitConnect = function() {
   <!-- NAV -->
   <nav id="main-nav">
     <div class="nav-left">
-      <div style="display:flex;align-items:center;gap:0.65rem;">
-      <img src="https://inkthorn.ai/assets/inkthorn-mascot.png" alt="Rob" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(200,131,42,0.5);box-shadow:0 0 8px rgba(200,131,42,0.3);">
-      <span class="nav-logo">INKTHORN <span style="color:rgba(200,131,42,0.5)">//</span> COMMAND CENTER</span>
-    </div>
+      <span class="nav-logo">MARCUS WEBB <span style="color:rgba(200,131,42,0.5)">//</span> COMMAND CENTER</span>
     </div>
     <div class="nav-tabs" id="nav-tabs">
       <button class="nav-tab active" onclick="showTab('overview',this)">Overview</button>
@@ -2359,19 +2025,16 @@ window._gfitConnect = function() {
       <button class="nav-tab" onclick="showTab('journal',this)">Journal</button>
       <button class="nav-tab" onclick="showTab('timeline',this)">Timeline</button>
     </div>
-    <div style="display:flex;align-items:center;gap:0.5rem;">
-      <a href="dashboard-settings.html" title="Settings & Activity Log" style="font-size:1.1rem;opacity:0.45;text-decoration:none;padding:4px 8px;border-radius:6px;transition:opacity 0.2s;line-height:1;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.45'">⚙</a>
-      <button class="hamburger" id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <button class="hamburger" id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- Mobile Nav Drawer -->
   <div class="mobile-nav-drawer" id="mobile-drawer">
     <div class="mobile-nav-inner">
       <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
-      <div class="mobile-nav-logo">ROB GAUDET<br><span>COMMAND CENTER</span></div>
+      <div class="mobile-nav-logo">MARCUS WEBB<br><span>COMMAND CENTER</span></div>
       <nav class="mobile-nav-links">
         <button class="mobile-nav-item active" onclick="showTab('overview',this);toggleMobileNav()">⚡ Overview</button>
         <button class="mobile-nav-item" onclick="showTab('businesses',this);toggleMobileNav()">🏢 Businesses</button>
@@ -2394,103 +2057,14 @@ window._gfitConnect = function() {
           <div class="day-cycle-title">⚡ DAY CYCLE</div>
           <div class="day-cycle-now" id="dc-now-label">Loading...</div>
         </div>
-        <div class="day-type-btns" id="day-type-btns">
-          <button class="day-type-btn active" id="btn-concierge" onclick="setDayConcierge(this)">✦ Concierge</button>
-          <button class="day-type-btn" onclick="setDayType('weekday',this)">Weekday</button>
+        <div class="day-type-btns">
+          <button class="day-type-btn active" onclick="setDayType('weekday',this)">Weekday</button>
           <button class="day-type-btn" onclick="setDayType('weekend',this)">Weekend</button>
           <button class="day-type-btn" onclick="setDayType('vacation',this)">Vacation</button>
         </div>
       </div>
       <div class="day-cycle-scroll" id="dc-scroll">
         <div id="dc-track"></div>
-      </div>
-      <!-- Static below-scroll panels: anchor + private. Never scrolls. -->
-      <div id="dc-below-panels" style="display:none;padding:0 1rem 0.5rem;"></div>
-    </div>
-
-    <!-- ══════════ NEIGHBORHOOD DISCOVERY BAR ══════════ -->
-    <div style="margin: 1.2rem 0 1.5rem; border-radius: 12px; border: 1px solid rgba(200,131,42,0.2); background: rgba(255,255,255,0.02); overflow:hidden; display:flex;">
-
-      <!-- LEFT: Map -->
-      <div style="flex-shrink:0; width:200px; min-height:130px; position:relative; overflow:hidden;">
-        <iframe
-          src="https://www.google.com/maps?q=Napoleon+Ave+%26+Magazine+St,+New+Orleans,+LA+70115&output=embed&z=15"
-          width="200" height="160" style="border:0;display:block;filter:saturate(0.6) brightness(0.7);margin-top:-15px;"
-          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:5px 8px;background:linear-gradient(transparent,rgba(0,0,0,0.8));font-size:0.58rem;color:#c8832a;font-weight:700;letter-spacing:0.08em;">
-          📍 NAPOLEON & MAGAZINE
-        </div>
-      </div>
-
-      <!-- RIGHT: Scrollable discovery spots -->
-      <div style="flex:1; overflow:hidden; border-left: 1px solid rgba(200,131,42,0.15);">
-        <div style="padding: 0.45rem 0.85rem 0.3rem; border-bottom: 1px solid rgba(200,131,42,0.1); display:flex; align-items:center; justify-content:space-between;">
-          <span style="font-size:0.58rem;color:rgba(255,255,255,0.4);letter-spacing:0.1em;text-transform:uppercase;">Discover the Neighborhood</span>
-          <span style="font-size:0.58rem;color:rgba(0,212,255,0.6);">🚋 5 blocks to St. Charles Streetcar →</span>
-        </div>
-        <div style="display:flex; overflow-x:auto; gap:0; scrollbar-width:none; -ms-overflow-style:none;" id="neighborhood-scroll">
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🎵</div>
-            <div class="nbhd-name">Tipitina's</div>
-            <div class="nbhd-dist">0.4 mi</div>
-            <div class="nbhd-desc">Legendary music venue. Check tonight's lineup.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">☕</div>
-            <div class="nbhd-name">Congregation Coffee</div>
-            <div class="nbhd-dist">4 blocks</div>
-            <div class="nbhd-desc">Best specialty pour-overs in Uptown.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🌿</div>
-            <div class="nbhd-name">Audubon Park</div>
-            <div class="nbhd-dist">0.6 mi</div>
-            <div class="nbhd-desc">Morning run, Sunday stroll, oaks and open sky.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🍸</div>
-            <div class="nbhd-name">Cure</div>
-            <div class="nbhd-dist">Freret St</div>
-            <div class="nbhd-desc">James Beard bar. Best cocktails in the city.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🧇</div>
-            <div class="nbhd-name">Company Burger</div>
-            <div class="nbhd-dist">Freret St</div>
-            <div class="nbhd-desc">Best burger in New Orleans. Simple. Perfect.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🍦</div>
-            <div class="nbhd-name">Hansen's Sno-Bliz</div>
-            <div class="nbhd-dist">Tchoupitoulas</div>
-            <div class="nbhd-desc">Since 1939. The only sno-ball that matters.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">📚</div>
-            <div class="nbhd-name">Octavia Books</div>
-            <div class="nbhd-dist">Octavia St</div>
-            <div class="nbhd-desc">Independent bookshop. Worth an hour any day.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🥩</div>
-            <div class="nbhd-name">Clancy's</div>
-            <div class="nbhd-dist">Annunciation</div>
-            <div class="nbhd-desc">Classic Uptown. White tablecloth, local crowd.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🍺</div>
-            <div class="nbhd-name">Barrel Proof</div>
-            <div class="nbhd-dist">Magazine St</div>
-            <div class="nbhd-desc">500+ whiskeys. No pretense. Good bourbon.</div>
-          </div>
-          <div class="nbhd-spot">
-            <div class="nbhd-icon">🌺</div>
-            <div class="nbhd-name">Tulane Campus</div>
-            <div class="nbhd-dist">0.8 mi</div>
-            <div class="nbhd-desc">Beautiful walk. Quiet on weekends.</div>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -2504,15 +2078,15 @@ window._gfitConnect = function() {
       <div class="card-title"><div class="dot"></div> TODAY'S FOCUS</div>
       <div class="focus-item">
         <div class="focus-num">01</div>
-        <div class="focus-text"><strong>Reyla demo</strong> — Beaux Box Realty, New Orleans</div>
+        <div class="focus-text"><strong>VeloStack Series A deck</strong> — final review with Sarah</div>
       </div>
       <div class="focus-item">
         <div class="focus-num">02</div>
-        <div class="focus-text"><strong>SBIR Hutch seminar</strong> follow-up — Baton Rouge</div>
+        <div class="focus-text"><strong>Meridian Prop 3</strong> — closing call with broker 2pm</div>
       </div>
       <div class="focus-item">
         <div class="focus-num">03</div>
-        <div class="focus-text"><strong>InkThorn SMS campaign</strong> launch — 543 contacts ready</div>
+        <div class="focus-text"><strong>FounderPath Q2 cohort</strong> — open enrollment goes live</div>
       </div>
     </div>
 
@@ -2525,62 +2099,80 @@ window._gfitConnect = function() {
         <div class="kpi-sub">Active ventures</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-trend">⚡</div>
-        <div class="kpi-label">Active Projects</div>
-        <div class="kpi-value" data-count="8" data-prefix="">0</div>
-        <div class="kpi-sub">In progress</div>
+        <div class="kpi-trend">💰</div>
+        <div class="kpi-label">Monthly Revenue</div>
+        <div class="kpi-value" data-count="71580" data-prefix="$">$0</div>
+        <div class="kpi-sub">All streams combined</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-trend">📊</div>
-        <div class="kpi-label">Leads Pipeline</div>
-        <div class="kpi-value" data-count="9464" data-prefix="">0</div>
-        <div class="kpi-sub">InkThorn — scraped</div>
+        <div class="kpi-trend">📈</div>
+        <div class="kpi-label">Net Monthly</div>
+        <div class="kpi-value">+$53,180</div>
+        <div class="kpi-sub">Revenue minus burn</div>
+      </div>
+      <div class="kpi-card cyan-accent">
+        <div class="kpi-trend">👥</div>
+        <div class="kpi-label">Active Customers</div>
+        <div class="kpi-value" data-count="1984" data-prefix="">0</div>
+        <div class="kpi-sub">Across all ventures</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-trend">🏛️</div>
+        <div class="kpi-label">Portfolio Value</div>
+        <div class="kpi-value">$3.2M</div>
+        <div class="kpi-sub">Total assets</div>
+      </div>
+      <div class="kpi-card cyan-accent">
+        <div class="kpi-trend">🚀</div>
+        <div class="kpi-label">YoY Growth</div>
+        <div class="kpi-value">+34%</div>
+        <div class="kpi-sub">Revenue year over year</div>
       </div>
     </div>
 
-    <!-- Two Column: Health Matrix + Activity Feed — moved to business dashboard -->
-    <div class="two-col overview-sensitive-block" style="display:none;">
+    <!-- Two Column: Health Matrix + Activity Feed -->
+    <div class="two-col">
       <div class="glass-card">
         <div class="card-title"><div class="dot"></div> BUSINESS HEALTH MATRIX</div>
         <div class="health-matrix">
           <div class="health-row">
-            <div class="health-label">TextOS.ai</div>
+            <div class="health-label">VeloStack.io</div>
             <div class="health-chart-wrap"><canvas id="donut-textos"></canvas></div>
             <div>
-              <div class="health-pct">72%</div>
-              <div class="health-status">DEV ACTIVE</div>
+              <div class="health-pct">88%</div>
+              <div class="health-status">GROWTH STAGE</div>
             </div>
           </div>
           <div class="health-row">
-            <div class="health-label">Reyla.ai</div>
+            <div class="health-label">Meridian Capital</div>
             <div class="health-chart-wrap"><canvas id="donut-reyla"></canvas></div>
             <div>
-              <div class="health-pct">61%</div>
-              <div class="health-status">PRE-REVENUE</div>
+              <div class="health-pct">74%</div>
+              <div class="health-status">PORTFOLIO BUILDING</div>
             </div>
           </div>
           <div class="health-row">
-            <div class="health-label">InkThorn</div>
+            <div class="health-label">Ember &amp; Oak</div>
             <div class="health-chart-wrap"><canvas id="donut-inkthorn"></canvas></div>
             <div>
-              <div class="health-pct">85%</div>
+              <div class="health-pct">82%</div>
               <div class="health-status">REVENUE STAGE</div>
             </div>
           </div>
           <div class="health-row">
-            <div class="health-label">Stability.org</div>
+            <div class="health-label">FounderPath</div>
             <div class="health-chart-wrap"><canvas id="donut-stability"></canvas></div>
             <div>
-              <div class="health-pct">45%</div>
-              <div class="health-status">GRANT PHASE</div>
+              <div class="health-pct">79%</div>
+              <div class="health-status">COMMUNITY STAGE</div>
             </div>
           </div>
           <div class="health-row">
-            <div class="health-label">GFHA</div>
+            <div class="health-label">Webb Foundation</div>
             <div class="health-chart-wrap"><canvas id="donut-gfha"></canvas></div>
             <div>
-              <div class="health-pct">38%</div>
-              <div class="health-status">OPS GAP</div>
+              <div class="health-pct">65%</div>
+              <div class="health-status">GRANT CYCLE</div>
             </div>
           </div>
         </div>
@@ -2592,47 +2184,47 @@ window._gfitConnect = function() {
           <div class="activity-item">
             <div class="activity-dot"></div>
             <div class="activity-time">Today 09:14</div>
-            <div class="activity-text"><strong>Reyla.ai</strong> — Demo confirmed with Beaux Box Realty, New Orleans</div>
+            <div class="activity-text"><strong>VeloStack.io</strong> — Hit 142 customers — +12 this week</div>
           </div>
           <div class="activity-item">
             <div class="activity-dot cyan"></div>
             <div class="activity-time">Today 08:30</div>
-            <div class="activity-text"><strong>InkThorn</strong> — SMS campaign prepped. 543 contacts with verified phone numbers</div>
+            <div class="activity-text"><strong>Meridian Capital</strong> — Prop 2 renovation 80% complete, on schedule</div>
           </div>
           <div class="activity-item">
             <div class="activity-dot"></div>
             <div class="activity-time">Yesterday</div>
-            <div class="activity-text"><strong>Stability.org</strong> — SBIR Hutch seminar attendance confirmed — NASA + DoD track</div>
+            <div class="activity-text"><strong>FounderPath</strong> — 94 member businesses launched in 2025</div>
           </div>
           <div class="activity-item">
             <div class="activity-dot cyan"></div>
             <div class="activity-time">Apr 10</div>
-            <div class="activity-text"><strong>IRS</strong> — $3,000 payment processed via Tax Rise. Renegotiation in progress</div>
+            <div class="activity-text"><strong>Webb Foundation</strong> — $50k grant to Austin ISD approved</div>
           </div>
           <div class="activity-item">
             <div class="activity-dot"></div>
             <div class="activity-time">Apr 9</div>
-            <div class="activity-text"><strong>TextOS.ai</strong> — Telegram Supergroup Provisioner design phase initiated</div>
+            <div class="activity-text"><strong>Ember &amp; Oak</strong> — Signed 2-year retainer with Apex Holdings</div>
           </div>
           <div class="activity-item">
             <div class="activity-dot"></div>
             <div class="activity-time">Apr 8</div>
-            <div class="activity-text"><strong>GFHA</strong> — Chase bank charge-off resolved. Account cleared April 2026</div>
+            <div class="activity-text"><strong>VeloStack.io</strong> — MRR growing 18% MoM, 94% retention rate</div>
           </div>
           <div class="activity-item">
             <div class="activity-dot cyan"></div>
             <div class="activity-time">Apr 7</div>
-            <div class="activity-text"><strong>InkThorn</strong> — Lead scraping complete. 9,464 total leads captured</div>
+            <div class="activity-text"><strong>Meridian Capital</strong> — 3 properties cash-flow positive, Prop 3 closing in progress</div>
           </div>
           <div class="activity-item">
             <div class="activity-dot"></div>
             <div class="activity-time">Apr 6</div>
-            <div class="activity-text"><strong>Stability.org</strong> — SBIR multi-agency application strategy finalized (NSF, DoD, DHS, USDA)</div>
+            <div class="activity-text"><strong>FounderPath</strong> — Q2 cohort enrollment opens this week</div>
           </div>
           <div class="activity-item">
             <div class="activity-dot"></div>
             <div class="activity-time">Apr 5</div>
-            <div class="activity-text"><strong>Reyla.ai</strong> — Equity dispute documented. Ownership structure under review</div>
+            <div class="activity-text"><strong>Webb Foundation</strong> — Austin ISD partnership: 3 schools, 200 students enrolled</div>
           </div>
         </div>
       </div>
@@ -2641,361 +2233,336 @@ window._gfitConnect = function() {
 
   <!-- ═══ BUSINESSES ═══ -->
   <section class="section" id="tab-businesses">
-  <div class="locked-section-wrap" id="biz-section-wrap">
-    <div class="locked-tab-overlay" id="overlay-businesses" onclick="rgOverlayClick(this)">
-      <div class="locked-overlay-icon">🔒</div>
-      <div class="locked-overlay-label">RESTRICTED</div>
-      <div class="locked-overlay-sub">Click to unlock</div>
-      <div class="locked-pw-wrap" id="pw-wrap-businesses">
-        <input class="locked-pw-input" type="password" placeholder="Password" id="pw-input-businesses" onclick="event.stopPropagation()" onkeydown="rgPwKeydown(event,'businesses')">
-        <div class="locked-pw-error" id="pw-err-businesses">ACCESS DENIED</div>
-      </div>
-    </div>
     <div class="section-header">
       <div class="section-title">BUSINESSES</div>
       <div class="section-subtitle">5 Active Ventures</div>
     </div>
     <div class="business-grid">
 
-      <!-- TextOS.ai -->
+      <!-- VeloStack.io -->
       <div class="biz-card">
         <div class="biz-header">
           <div>
-            <div class="biz-name">TextOS.ai</div>
-            <div class="biz-type">Commercial SaaS</div>
+            <div class="biz-name">VeloStack.io</div>
+            <div class="biz-type">B2B SaaS — DevOps Automation</div>
           </div>
-          <div class="biz-status status-dev">Active Dev</div>
+          <div class="biz-status status-active">Active / Growth Stage</div>
         </div>
-        <div class="biz-vision">"Conversational AI operating system for personal and business life — replace app fragmentation with a single AI-powered text interface."</div>
+        <div class="biz-vision">"Give every dev team enterprise-grade CI/CD without the enterprise price tag."</div>
         <div class="biz-meta">
           <div class="biz-meta-item">
             <div class="biz-meta-label">Ownership</div>
-            <div class="biz-meta-value">Rob 100%</div>
+            <div class="biz-meta-value">Marcus 75% / Sarah Chen 25%</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">Monthly Spend</div>
-            <div class="biz-meta-value">TBD</div>
+            <div class="biz-meta-label">MRR</div>
+            <div class="biz-meta-value">$24,800 (+18% MoM)</div>
           </div>
           <div class="biz-meta-item">
             <div class="biz-meta-label">Team</div>
-            <div class="biz-meta-value">Rob Gaudet (Founder/Builder)</div>
+            <div class="biz-meta-value">Marcus Webb (CEO), Sarah Chen (CTO), 3 engineers</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">Stage</div>
-            <div class="biz-meta-value">Active Development</div>
+            <div class="biz-meta-label">Vision</div>
+            <div class="biz-meta-value">Eliminate deployment friction for engineering teams</div>
           </div>
         </div>
-        <div class="biz-metric">Text-to-website platform · Phone = Identity · No login ever</div>
+        <div class="biz-metric">142 paying customers · 94% retention · $24,800 MRR</div>
         <div>
-          <span class="tag">AI</span><span class="tag">SaaS</span><span class="tag">SMS</span><span class="tag">Publishing</span>
-        </div>
-        <div style="margin-top:14px;">
-          <a href="/textos.html" style="display:inline-block;background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.3);color:#00e5ff;font-size:0.78rem;padding:7px 16px;border-radius:6px;text-decoration:none;font-family:'Orbitron',monospace;letter-spacing:0.05em;">View Product Vision →</a>
+          <span class="tag">SaaS</span><span class="tag">DevOps</span><span class="tag">CI/CD</span><span class="tag">B2B</span>
         </div>
         <div class="biz-chart-wrap"><canvas id="chart-textos"></canvas></div>
       </div>
 
-      <!-- Reyla.ai -->
+      <!-- Meridian Capital Group -->
       <div class="biz-card">
         <div class="biz-header">
           <div>
-            <div class="biz-name">Reyla.ai</div>
-            <div class="biz-type">Commercial AI Platform</div>
+            <div class="biz-name">Meridian Capital Group</div>
+            <div class="biz-type">Real Estate Investment</div>
           </div>
-          <div class="biz-status status-active">Active</div>
+          <div class="biz-status status-active">Active / Portfolio Building</div>
         </div>
-        <div class="warning-banner">⚠️ Equity dispute documented — see notes. Rob ~80% / Burton Richard ~20%</div>
-        <div class="biz-vision">"AI-powered commercial real estate data platform — give realtors and investors data superpowers through conversational AI."</div>
+        <div class="biz-vision">"Create generational wealth through disciplined real estate acquisition."</div>
         <div class="biz-meta">
           <div class="biz-meta-item">
             <div class="biz-meta-label">Ownership</div>
-            <div class="biz-meta-value">Rob ~80% (disputed)</div>
+            <div class="biz-meta-value">Marcus 100%</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">Monthly Spend</div>
-            <div class="biz-meta-value">TBD</div>
+            <div class="biz-meta-label">AUM</div>
+            <div class="biz-meta-value">$2.4M across 4 properties</div>
           </div>
           <div class="biz-meta-item">
             <div class="biz-meta-label">Team</div>
-            <div class="biz-meta-value">Rob (Dev), Burton Richard (Sales — inactive)</div>
+            <div class="biz-meta-value">Marcus Webb, Lisa Torres (Property Manager)</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">Stage</div>
-            <div class="biz-meta-value">Pre-Revenue</div>
+            <div class="biz-meta-label">Cash Flow</div>
+            <div class="biz-meta-value">$6,200/mo</div>
           </div>
         </div>
-        <div class="biz-metric">First demo booked — Beaux Box Realty, New Orleans (lead by Rob)</div>
+        <div class="biz-metric">3 properties cash-flow positive · 1 in renovation · $2.4M AUM</div>
         <div>
-          <span class="tag">AI</span><span class="tag">Real Estate</span><span class="tag">Data</span><span class="tag">B2B</span>
+          <span class="tag">Real Estate</span><span class="tag">Investment</span><span class="tag">Commercial</span>
         </div>
         <div class="biz-chart-wrap"><canvas id="chart-reyla"></canvas></div>
       </div>
 
-      <!-- InkThorn -->
+      <!-- Ember & Oak Creative -->
       <div class="biz-card">
         <div class="biz-header">
           <div>
-            <div class="biz-name">InkThorn</div>
-            <div class="biz-type">Commercial Web Services · EIN 41-5073150</div>
+            <div class="biz-name">Ember &amp; Oak Creative</div>
+            <div class="biz-type">Content &amp; Brand Studio</div>
           </div>
-          <div class="biz-status status-active">Revenue Stage</div>
+          <div class="biz-status status-active">Active / Revenue Stage</div>
         </div>
-        <div class="biz-vision">"New Orleans' premier AI-powered web presence agency — help local businesses dominate AI-era search with GEO."</div>
+        <div class="biz-vision">"Premium creative work for premium clients — no commodity work."</div>
         <div class="biz-meta">
           <div class="biz-meta-item">
             <div class="biz-meta-label">Ownership</div>
-            <div class="biz-meta-value">Rob 100%</div>
+            <div class="biz-meta-value">Marcus 100%</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">Monthly Spend</div>
-            <div class="biz-meta-value">TBD</div>
+            <div class="biz-meta-label">Monthly Revenue</div>
+            <div class="biz-meta-value">$18,500</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">SMS Line</div>
-            <div class="biz-meta-value">(504) 238-4030</div>
+            <div class="biz-meta-label">Team</div>
+            <div class="biz-meta-value">Marcus Webb, 2 freelancers</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">Calendly</div>
-            <div class="biz-meta-value">calendly.com/inkthorn</div>
+            <div class="biz-meta-label">Vision</div>
+            <div class="biz-meta-value">Build brands that people actually love</div>
           </div>
         </div>
-        <div class="biz-metric">9,464 leads scraped · 543 with phone numbers · SMS campaign ready</div>
+        <div class="biz-metric">7 retainer clients · avg $2,600/mo each · $18,500 MRR</div>
         <div>
-          <span class="tag">GEO</span><span class="tag">SEO</span><span class="tag">AI</span><span class="tag">Local</span><span class="tag">SMS</span>
-        </div>
-        <div class="biz-links">
-          <a href="https://calendly.com/inkthorn" class="biz-link" target="_blank">↗ Calendly</a>
+          <span class="tag">Creative</span><span class="tag">Branding</span><span class="tag">Content</span><span class="tag">Retainer</span>
         </div>
         <div class="biz-chart-wrap"><canvas id="chart-inkthorn"></canvas></div>
       </div>
 
-      <!-- Stability.org -->
+      <!-- FounderPath Collective -->
       <div class="biz-card">
         <div class="biz-header">
           <div>
-            <div class="biz-name">Stability.org</div>
-            <div class="biz-type">Civic Technology / Nonprofit</div>
+            <div class="biz-name">FounderPath Collective</div>
+            <div class="biz-type">Entrepreneur Community / Education</div>
           </div>
-          <div class="biz-status status-grant">Grant Phase</div>
+          <div class="biz-status status-active">Active / Community Stage</div>
         </div>
-        <div class="biz-vision">"Resilience technology for communities facing disasters — build the civic tech infrastructure that saves lives when systems fail."</div>
+        <div class="biz-vision">"Give scrappy builders the frameworks, network, and mentorship that wealthy kids get for free."</div>
         <div class="biz-meta">
           <div class="biz-meta-item">
             <div class="biz-meta-label">Ownership</div>
-            <div class="biz-meta-value">Mission-driven (Rob, Founder)</div>
+            <div class="biz-meta-value">Marcus 100%</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">Monthly Spend</div>
-            <div class="biz-meta-value">Minimal</div>
+            <div class="biz-meta-label">MRR</div>
+            <div class="biz-meta-value">~$22,080 ($12/mo × 1,840)</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">SBIR Partner</div>
-            <div class="biz-meta-value">Jerry Hollister @ BBC Consulting</div>
+            <div class="biz-meta-label">Members</div>
+            <div class="biz-meta-value">1,840 active members</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">Agencies</div>
-            <div class="biz-meta-value">NSF · DoD · DHS · USDA</div>
+            <div class="biz-meta-label">Key Metric</div>
+            <div class="biz-meta-value">94 member businesses launched in 2025</div>
           </div>
         </div>
-        <div class="biz-metric">SBIR applications in progress · Hutch seminar Baton Rouge (NASA + DoD)</div>
+        <div class="biz-metric">1,840 members · 94 businesses launched · ~$22k MRR</div>
         <div>
-          <span class="tag">SBIR</span><span class="tag">CivicTech</span><span class="tag">Nonprofit</span><span class="tag">Disaster</span>
+          <span class="tag">Community</span><span class="tag">Education</span><span class="tag">Membership</span><span class="tag">Founders</span>
         </div>
         <div class="biz-chart-wrap"><canvas id="chart-stability"></canvas></div>
       </div>
 
-      <!-- GFHA -->
+      <!-- Webb Family Foundation -->
       <div class="biz-card">
         <div class="biz-header">
           <div>
-            <div class="biz-name">GFHA</div>
-            <div class="biz-type">Nonprofit Humanitarian Organization</div>
+            <div class="biz-name">Webb Family Foundation</div>
+            <div class="biz-type">Philanthropic Foundation</div>
           </div>
-          <div class="biz-status status-ops">Operational</div>
+          <div class="biz-status status-grant">Active / Grant Cycle</div>
         </div>
-        <div class="biz-vision">"Cajun Navy movement — the original community disaster response model. Empower ordinary people with resources, training, and coordination to save lives."</div>
+        <div class="biz-vision">"Fund coding bootcamps, mentorship, and startup seed grants for kids who can't afford to dream big."</div>
         <div class="biz-meta">
           <div class="biz-meta-item">
             <div class="biz-meta-label">Ownership</div>
-            <div class="biz-meta-value">Mission-driven (Rob, Founder)</div>
+            <div class="biz-meta-value">Mission-driven (Marcus, Founder)</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">Monthly Spend</div>
-            <div class="biz-meta-value">~$500+ (hosting, storage)</div>
+            <div class="biz-meta-label">Grants Awarded</div>
+            <div class="biz-meta-value">$340,000 to date</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">Status</div>
-            <div class="biz-meta-value">Operational / Revenue Gap</div>
+            <div class="biz-meta-label">Current Focus</div>
+            <div class="biz-meta-value">Austin ISD — 3 schools, 200 students</div>
           </div>
           <div class="biz-meta-item">
-            <div class="biz-meta-label">Key Event</div>
-            <div class="biz-meta-value">Chase charge-off resolved Apr 2026</div>
+            <div class="biz-meta-label">Vision</div>
+            <div class="biz-meta-value">Economic mobility for underserved youth through tech education</div>
           </div>
         </div>
-        <div class="biz-metric">Rob is founder of the MODERN Cajun Navy movement — national media figure</div>
+        <div class="biz-metric">$340,000 in grants · Austin ISD partnership · 200 students served</div>
         <div>
-          <span class="tag">Nonprofit</span><span class="tag">Cajun Navy</span><span class="tag">Disaster Response</span>
+          <span class="tag">Nonprofit</span><span class="tag">Education</span><span class="tag">Youth</span><span class="tag">Tech</span>
         </div>
         <div class="biz-chart-wrap"><canvas id="chart-gfha"></canvas></div>
       </div>
 
     </div>
-  </div><!-- end locked-section-wrap businesses -->
   </section>
 
   <!-- ═══ FINANCE ═══ -->
   <section class="section" id="tab-finance">
-  <div class="locked-section-wrap" id="finance-section-wrap">
-    <div class="locked-tab-overlay" id="overlay-finance" onclick="rgOverlayClick(this)">
-      <div class="locked-overlay-icon">🔒</div>
-      <div class="locked-overlay-label">RESTRICTED</div>
-      <div class="locked-overlay-sub">Click to unlock</div>
-      <div class="locked-pw-wrap" id="pw-wrap-finance">
-        <input class="locked-pw-input" type="password" placeholder="Password" id="pw-input-finance" onclick="event.stopPropagation()" onkeydown="rgPwKeydown(event,'finance')">
-        <div class="locked-pw-error" id="pw-err-finance">ACCESS DENIED</div>
-      </div>
-    </div>
-    <div class="section-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
-      <div>
-        <div class="section-title">FINANCE</div>
-        <div class="section-subtitle">Financial Command — April 2026</div>
-      </div>
-      <a href="https://trustlight.ai/budget.html" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(200,131,42,0.12);border:1px solid rgba(200,131,42,0.35);border-radius:8px;color:#e09a40;font-family:'Space Grotesk','DM Sans',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.06em;padding:0.5rem 1rem;text-decoration:none;transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.background='rgba(200,131,42,0.22)';this.style.boxShadow='0 0 12px rgba(200,131,42,0.2)'" onmouseout="this.style.background='rgba(200,131,42,0.12)';this.style.boxShadow='none'">
-        📊 Open Budget →
-      </a>
+    <div class="section-header">
+      <div class="section-title">FINANCE</div>
+      <div class="section-subtitle">Financial Command — Austin, TX · April 2026</div>
     </div>
 
     <!-- Burn Hero -->
     <div class="burn-hero">
       <div class="burn-label">MONTHLY BURN RATE</div>
-      <div class="burn-number" data-count="7400" data-prefix="$">$0</div>
-      <div class="burn-sub">+/month total operating cost (all categories)</div>
+      <div class="burn-number" data-count="18400" data-prefix="$">$0</div>
+      <div class="burn-sub">Monthly operating cost (all categories)</div>
 
       <div class="burn-bar-wrap">
         <div class="burn-bar-label">
           <span style="color:var(--text3);font-size:0.72rem;">Expense Breakdown</span>
-          <span style="color:var(--amber);font-size:0.72rem;">$10,571 total</span>
+          <span style="color:var(--amber);font-size:0.72rem;">$18,400 total</span>
         </div>
         <div class="burn-stacked" id="burn-stacked">
-          <div class="burn-segment" style="background:#c8832a;width:0%" data-w="20.3%" title="Housing $2,150"></div>
-          <div class="burn-segment" style="background:#e09a40;width:0%" data-w="14.6%" title="Insurance $1,542"></div>
-          <div class="burn-segment" style="background:#00d4ff;width:0%" data-w="5.2%" title="Communications $552"></div>
-          <div class="burn-segment" style="background:#00aacc;width:0%" data-w="5.8%" title="Debt Service $611"></div>
-          <div class="burn-segment" style="background:#f5b855;width:0%" data-w="6.4%" title="Storage $679"></div>
-          <div class="burn-segment" style="background:#8888ff;width:0%" data-w="4.9%" title="Business Ops $520"></div>
-          <div class="burn-segment" style="background:#cc88ff;width:0%" data-w="3.8%" title="Subscriptions $407"></div>
-          <div class="burn-segment" style="background:#ff4444;width:0%" data-w="35.1%" title="Tax/Legal $3,711"></div>
+          <div class="burn-segment" style="background:#c8832a;width:0%" data-w="26.1%" title="Housing/Office $4,800"></div>
+          <div class="burn-segment" style="background:#e09a40;width:0%" data-w="33.7%" title="Payroll/Contractors $6,200"></div>
+          <div class="burn-segment" style="background:#00d4ff;width:0%" data-w="10.0%" title="SaaS & Tools $1,840"></div>
+          <div class="burn-segment" style="background:#f5b855;width:0%" data-w="11.4%" title="Marketing $2,100"></div>
+          <div class="burn-segment" style="background:#8888ff;width:0%" data-w="5.3%" title="Insurance $980"></div>
+          <div class="burn-segment" style="background:#cc88ff;width:0%" data-w="6.5%" title="Travel & Entertainment $1,200"></div>
+          <div class="burn-segment" style="background:#00ff88;width:0%" data-w="7.0%" title="Philanthropy $1,280"></div>
         </div>
         <div class="burn-legend">
-          <div class="legend-item"><div class="legend-dot" style="background:#c8832a"></div>Housing $2,150</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#e09a40"></div>Insurance $1,542</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#00d4ff"></div>Communications $552</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#00aacc"></div>Debt Service $611</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#f5b855"></div>Storage $679</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#8888ff"></div>Business Ops $520</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#cc88ff"></div>Subscriptions $407</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#ff4444"></div>Tax/Legal $3,711</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#c8832a"></div>Housing/Office $4,800</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#e09a40"></div>Payroll/Contractors $6,200</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#00d4ff"></div>SaaS &amp; Tools $1,840</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#f5b855"></div>Marketing $2,100</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#8888ff"></div>Insurance $980</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#cc88ff"></div>Travel &amp; Entertainment $1,200</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#00ff88"></div>Philanthropy $1,280</div>
         </div>
       </div>
+    </div>
+
+    <!-- Revenue Overview -->
+    <div class="card-title mt-md mb-md"><div class="dot"></div> MONTHLY REVENUE</div>
+    <div class="debt-grid">
+      <div class="debt-card">
+        <div class="debt-name">VeloStack MRR</div>
+        <div class="debt-amounts"><span class="debt-balance" style="color:var(--green)">$24,800</span><span class="debt-limit">B2B SaaS</span></div>
+        <div class="util-bar"><div class="util-fill util-green" style="width:0%" data-w="35%"></div></div>
+        <div class="util-pct green">+18% MoM growth</div>
+      </div>
+      <div class="debt-card">
+        <div class="debt-name">Meridian Cash Flow</div>
+        <div class="debt-amounts"><span class="debt-balance" style="color:var(--green)">$6,200</span><span class="debt-limit">Real Estate</span></div>
+        <div class="util-bar"><div class="util-fill util-green" style="width:0%" data-w="9%"></div></div>
+        <div class="util-pct green">3 of 4 properties positive</div>
+      </div>
+      <div class="debt-card">
+        <div class="debt-name">Ember &amp; Oak Creative</div>
+        <div class="debt-amounts"><span class="debt-balance" style="color:var(--green)">$18,500</span><span class="debt-limit">Studio</span></div>
+        <div class="util-bar"><div class="util-fill util-green" style="width:0%" data-w="26%"></div></div>
+        <div class="util-pct green">7 retainer clients</div>
+      </div>
+      <div class="debt-card">
+        <div class="debt-name">FounderPath MRR</div>
+        <div class="debt-amounts"><span class="debt-balance" style="color:var(--green)">$22,080</span><span class="debt-limit">Community</span></div>
+        <div class="util-bar"><div class="util-fill util-green" style="width:0%" data-w="31%"></div></div>
+        <div class="util-pct green">1,840 members × $12/mo</div>
+      </div>
+    </div>
+    <div class="irs-banner" style="margin-top:16px;">
+      <div class="irs-banner-title" style="color:var(--green);text-shadow:0 0 20px rgba(0,255,136,0.4);">TOTAL MONTHLY REVENUE: $71,580 · NET: +$53,180</div>
     </div>
 
     <!-- Debt Tracker -->
-    <div class="card-title mt-md mb-md"><div class="dot"></div> DEBT TRACKER</div>
+    <div class="card-title mt-md mb-md"><div class="dot"></div> INVESTMENT LEVERAGE</div>
     <div class="debt-grid">
       <div class="debt-card">
-        <div class="debt-name">JPMCB</div>
-        <div class="debt-amounts"><span class="debt-balance">$13,680</span><span class="debt-limit">/ $15,500</span></div>
-        <div class="util-bar"><div class="util-fill util-red" style="width:0%" data-w="88%"></div></div>
-        <div class="util-pct red">88% utilized — HIGH RISK</div>
+        <div class="debt-name">Commercial Mortgage — Meridian Prop 1</div>
+        <div class="debt-amounts"><span class="debt-balance">$340,000</span><span class="debt-limit">/ $480,000</span></div>
+        <div class="util-bar"><div class="util-fill util-yellow" style="width:0%" data-w="71%"></div></div>
+        <div class="util-pct yellow">71% — Normal investment leverage</div>
       </div>
       <div class="debt-card">
-        <div class="debt-name">PayPal MC 6162</div>
-        <div class="debt-amounts"><span class="debt-balance">$1,500</span><span class="debt-limit">/ $1,500</span></div>
-        <div class="util-bar"><div class="util-fill util-red" style="width:0%" data-w="100%"></div></div>
-        <div class="util-pct red">100% — MAXED</div>
+        <div class="debt-name">Commercial Mortgage — Meridian Prop 2</div>
+        <div class="debt-amounts"><span class="debt-balance">$180,000</span><span class="debt-limit">/ $290,000</span></div>
+        <div class="util-bar"><div class="util-fill util-green" style="width:0%" data-w="62%"></div></div>
+        <div class="util-pct green">62% — Good position</div>
       </div>
       <div class="debt-card">
-        <div class="debt-name">Care Credit</div>
-        <div class="debt-amounts"><span class="debt-balance">$1,903</span><span class="debt-limit">/ $4,000</span></div>
-        <div class="util-bar"><div class="util-fill util-yellow" style="width:0%" data-w="48%"></div></div>
-        <div class="util-pct yellow">48% utilized — MODERATE</div>
+        <div class="debt-name">Business Line of Credit</div>
+        <div class="debt-amounts"><span class="debt-balance">$45,000</span><span class="debt-limit">/ $200,000</span></div>
+        <div class="util-bar"><div class="util-fill util-green" style="width:0%" data-w="22%"></div></div>
+        <div class="util-pct green">22% — Well-managed</div>
       </div>
       <div class="debt-card">
-        <div class="debt-name">PayPal MC 0411</div>
-        <div class="debt-amounts"><span class="debt-balance">~$500</span><span class="debt-limit">/ $3,000</span></div>
-        <div class="util-bar"><div class="util-fill util-green" style="width:0%" data-w="17%"></div></div>
-        <div class="util-pct green">17% utilized — GOOD</div>
-      </div>
-      <div class="debt-card">
-        <div class="debt-name">Lowe's CC</div>
-        <div class="debt-amounts"><span class="debt-balance">~$885</span><span class="debt-limit">/ Unknown</span></div>
-        <div class="util-bar"><div class="util-fill util-yellow" style="width:0%" data-w="55%"></div></div>
-        <div class="util-pct yellow">Unknown limit</div>
-      </div>
-      <div class="debt-card">
-        <div class="debt-name">Mariner Finance</div>
-        <div class="debt-amounts"><span class="debt-balance">TBD</span><span class="debt-limit">/ TBD</span></div>
-        <div class="util-bar"><div class="util-fill util-yellow" style="width:0%" data-w="50%"></div></div>
-        <div class="util-pct yellow">Data pending</div>
-      </div>
-      <div class="debt-card">
-        <div class="debt-name">Regional Finance</div>
-        <div class="debt-amounts"><span class="debt-balance">TBD</span><span class="debt-limit">/ TBD</span></div>
-        <div class="util-bar"><div class="util-fill util-yellow" style="width:0%" data-w="50%"></div></div>
-        <div class="util-pct yellow">Data pending</div>
+        <div class="debt-name">Chase Business Card</div>
+        <div class="debt-amounts"><span class="debt-balance">$8,400</span><span class="debt-limit">/ $25,000</span></div>
+        <div class="util-bar"><div class="util-fill util-yellow" style="width:0%" data-w="34%"></div></div>
+        <div class="util-pct yellow">34% — Monitoring</div>
       </div>
     </div>
 
-    <!-- IRS Panel -->
+    <!-- Growth Capital Summary -->
     <div class="irs-banner">
-      <div class="irs-banner-title">IRS RESOLUTION — ACTIVE</div>
+      <div class="irs-banner-title">GROWTH CAPITAL OVERVIEW</div>
     </div>
     <div class="irs-facts">
       <div class="irs-fact">
-        <div class="irs-fact-label">Balance</div>
-        <div class="irs-fact-value">$200,000+</div>
+        <div class="irs-fact-label">Revenue Run Rate</div>
+        <div class="irs-fact-value">$858,960/yr</div>
       </div>
       <div class="irs-fact">
-        <div class="irs-fact-label">Monthly Plan</div>
-        <div class="irs-fact-value">$3,000/mo</div>
+        <div class="irs-fact-label">Total Assets</div>
+        <div class="irs-fact-value">$3.2M</div>
       </div>
       <div class="irs-fact">
-        <div class="irs-fact-label">Status</div>
-        <div class="irs-fact-value">Renegotiating</div>
+        <div class="irs-fact-label">Total Liabilities</div>
+        <div class="irs-fact-value">$573,400</div>
       </div>
       <div class="irs-fact">
-        <div class="irs-fact-label">Rep</div>
-        <div class="irs-fact-value">Tax Rise</div>
+        <div class="irs-fact-label">Net Worth (est.)</div>
+        <div class="irs-fact-value">$2.6M</div>
       </div>
     </div>
     <div class="irs-strategies">
       <div class="strategy-card priority">
-        <div class="strategy-name">CNC</div>
-        <div class="strategy-label">Currently Not Collectible — Priority</div>
+        <div class="strategy-name">+34%</div>
+        <div class="strategy-label">YoY Revenue Growth</div>
       </div>
       <div class="strategy-card">
-        <div class="strategy-name">PPIA</div>
-        <div class="strategy-label">Partial Pay Installment Agreement — Active</div>
+        <div class="strategy-name">Series A</div>
+        <div class="strategy-label">VeloStack Fundraise — In Progress</div>
       </div>
       <div class="strategy-card">
-        <div class="strategy-name">OIC</div>
-        <div class="strategy-label">Offer in Compromise — Evaluating</div>
+        <div class="strategy-name">$858K</div>
+        <div class="strategy-label">Annual Revenue Run Rate</div>
       </div>
-    </div>
-    <div style="text-align:center;margin-top:8px;">
-      <a href="/irs-resolution.html" class="irs-link">→ FULL IRS RESOLUTION RECORD</a>
     </div>
     <div class="mt-md" style="text-align:center;">
       <a href="/budget.html" class="irs-link" style="background:rgba(200,131,42,0.15);color:var(--amber2);border:1px solid var(--amber);">→ FULL BUDGET DASHBOARD</a>
     </div>
-  </div><!-- end locked-section-wrap finance -->
   </section>
 
   <!-- ═══ PERSONAL ═══ -->
   <section class="section" id="tab-personal">
     <div class="section-header">
       <div class="section-title">PERSONAL</div>
-      <div class="section-subtitle">Health · Profile · Goals</div>
+      <div class="section-subtitle">Health · Profile · Goals · Austin, TX</div>
     </div>
     <div class="personal-grid">
 
@@ -3012,9 +2579,12 @@ window._gfitConnect = function() {
             <!-- Steps -->
             <div class="activity-ring-card">
               <div class="ring-wrap">
-                <div class="ring-track"></div>
-                <div class="ring-progress" id="ring-steps"></div>
-                <div class="ring-inner">
+                <svg viewBox="0 0 80 80">
+                  <circle class="ring-bg" cx="40" cy="40" r="34"/>
+                  <circle class="ring-fill steps" id="ring-steps" cx="40" cy="40" r="34"
+                    stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+                </svg>
+                <div class="ring-center">
                   <div class="ring-value" id="val-steps">0</div>
                   <div class="ring-unit">steps</div>
                 </div>
@@ -3025,9 +2595,12 @@ window._gfitConnect = function() {
             <!-- Distance -->
             <div class="activity-ring-card">
               <div class="ring-wrap">
-                <div class="ring-track"></div>
-                <div class="ring-progress" id="ring-distance"></div>
-                <div class="ring-inner">
+                <svg viewBox="0 0 80 80">
+                  <circle class="ring-bg" cx="40" cy="40" r="34"/>
+                  <circle class="ring-fill distance" id="ring-distance" cx="40" cy="40" r="34"
+                    stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+                </svg>
+                <div class="ring-center">
                   <div class="ring-value" id="val-distance">0</div>
                   <div class="ring-unit">miles</div>
                 </div>
@@ -3038,9 +2611,12 @@ window._gfitConnect = function() {
             <!-- Calories -->
             <div class="activity-ring-card">
               <div class="ring-wrap">
-                <div class="ring-track"></div>
-                <div class="ring-progress" id="ring-calories"></div>
-                <div class="ring-inner">
+                <svg viewBox="0 0 80 80">
+                  <circle class="ring-bg" cx="40" cy="40" r="34"/>
+                  <circle class="ring-fill calories" id="ring-calories" cx="40" cy="40" r="34"
+                    stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+                </svg>
+                <div class="ring-center">
                   <div class="ring-value" id="val-calories">0</div>
                   <div class="ring-unit">cal</div>
                 </div>
@@ -3051,9 +2627,12 @@ window._gfitConnect = function() {
             <!-- Active Minutes -->
             <div class="activity-ring-card">
               <div class="ring-wrap">
-                <div class="ring-track"></div>
-                <div class="ring-progress" id="ring-active"></div>
-                <div class="ring-inner">
+                <svg viewBox="0 0 80 80">
+                  <circle class="ring-bg" cx="40" cy="40" r="34"/>
+                  <circle class="ring-fill active-min" id="ring-active" cx="40" cy="40" r="34"
+                    stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+                </svg>
+                <div class="ring-center">
                   <div class="ring-value" id="val-active">0</div>
                   <div class="ring-unit">min</div>
                 </div>
@@ -3063,17 +2642,10 @@ window._gfitConnect = function() {
             </div>
           </div>
 
-          <!-- Google Fit + Manual log buttons -->
-          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem;">
-            <button class="gfit-connect-btn" id="gfit-btn" onclick="window._gfitConnect && window._gfitConnect()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-              Sync Google Fit
-            </button>
-            <button class="activity-log-btn" onclick="openActivityModal()" style="margin-bottom:0;">
-              ＋ Log Manually
-            </button>
-          </div>
-          <div class="gfit-status" id="gfit-status">Not connected — tap Sync Google Fit</div>
+          <!-- Log button -->
+          <button class="activity-log-btn" onclick="openActivityModal()">
+            ＋ Log Today's Activity
+          </button>
 
           <!-- 7-day history -->
           <div class="act-week-chart">
@@ -3098,32 +2670,32 @@ window._gfitConnect = function() {
         <div class="card-title"><div class="dot"></div> PUBLIC PROFILE</div>
         <div class="profile-stats">
           <div class="profile-stat">
-            <div class="profile-stat-val">500K+</div>
-            <div class="profile-stat-label">Engaged Followers</div>
+            <div class="profile-stat-val">180K+</div>
+            <div class="profile-stat-label">Social Followers</div>
           </div>
           <div class="profile-stat">
-            <div class="profile-stat-val">30 YRS</div>
-            <div class="profile-stat-label">Software Architecture</div>
+            <div class="profile-stat-val">TEDx</div>
+            <div class="profile-stat-label">Speaker</div>
           </div>
           <div class="profile-stat">
-            <div class="profile-stat-val">2012</div>
-            <div class="profile-stat-label">Cajun Navy Founded</div>
+            <div class="profile-stat-val">F30U40</div>
+            <div class="profile-stat-label">Forbes 30 Under 40</div>
           </div>
           <div class="profile-stat">
-            <div class="profile-stat-val">NATL</div>
-            <div class="profile-stat-label">Media Figure</div>
+            <div class="profile-stat-val">AUSTIN</div>
+            <div class="profile-stat-label">Texas, USA</div>
           </div>
         </div>
         <div>
-          <span class="tag">Published Author</span>
-          <span class="tag">Keynote Speaker</span>
-          <span class="tag">Cajun Navy Founder</span>
-          <span class="tag">Software Architect</span>
-          <span class="tag">AI Builder</span>
+          <span class="tag">TEDx Speaker</span>
+          <span class="tag">Forbes 30 Under 40</span>
+          <span class="tag">Entrepreneur</span>
+          <span class="tag">Investor</span>
+          <span class="tag">Builder</span>
         </div>
         <div class="divider"></div>
         <div style="font-size:0.8rem;color:var(--text2);line-height:1.6;">
-          Senior software systems architect with 30 years experience. Founder of the modern Cajun Navy disaster response movement. National media figure, published author, and keynote speaker across technology and humanitarian sectors.
+          Entrepreneur, investor, and builder based in Austin, Texas. Founder of VeloStack.io, Meridian Capital Group, Ember &amp; Oak Creative, FounderPath Collective, and the Webb Family Foundation. TEDx speaker, Forbes 30 Under 40 alum, and champion of first-generation entrepreneurs.
         </div>
       </div>
 
@@ -3131,11 +2703,10 @@ window._gfitConnect = function() {
       <div class="glass-card">
         <div class="card-title"><div class="dot"></div> QUICK LINKS</div>
         <div class="quick-links">
-          <a href="/textos.html" class="quick-link">TextOS Product Vision <span class="quick-link-arrow">→</span></a>
-          <a href="/irs-resolution.html" class="quick-link">IRS Resolution Record <span class="quick-link-arrow">→</span></a>
           <a href="/budget.html" class="quick-link">Budget Dashboard <span class="quick-link-arrow">→</span></a>
-          <a href="https://robgaudet.blog" class="quick-link" target="_blank">robgaudet.blog <span class="quick-link-arrow">↗</span></a>
-          <a href="https://calendly.com/inkthorn" class="quick-link" target="_blank">InkThorn Calendly <span class="quick-link-arrow">↗</span></a>
+          <a href="https://velostack.io" class="quick-link" target="_blank">VeloStack.io <span class="quick-link-arrow">↗</span></a>
+          <a href="https://founderpathcollective.com" class="quick-link" target="_blank">FounderPath Collective <span class="quick-link-arrow">↗</span></a>
+          <a href="https://webbfamilyfoundation.org" class="quick-link" target="_blank">Webb Family Foundation <span class="quick-link-arrow">↗</span></a>
         </div>
       </div>
 
@@ -3144,24 +2715,24 @@ window._gfitConnect = function() {
         <div class="card-title"><div class="dot"></div> GOALS</div>
         <div class="goal-list">
           <div class="goal-item">
-            <div class="goal-label"><span>Financial Stabilization</span><span class="goal-pct">35%</span></div>
-            <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="35%"></div></div>
+            <div class="goal-label"><span>Replace $200k/yr salary</span><span class="goal-pct" style="color:var(--green)">ACHIEVED ✓</span></div>
+            <div class="goal-bar"><div class="goal-fill" style="width:0%;background:linear-gradient(90deg,var(--green),#00cc66);" data-w="100%"></div></div>
           </div>
           <div class="goal-item">
-            <div class="goal-label"><span>Reyla — First Paying Client</span><span class="goal-pct">20%</span></div>
-            <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="20%"></div></div>
+            <div class="goal-label"><span>VeloStack Series A — Launch</span><span class="goal-pct">65%</span></div>
+            <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="65%"></div></div>
           </div>
           <div class="goal-item">
-            <div class="goal-label"><span>TextOS MVP Launch</span><span class="goal-pct">40%</span></div>
+            <div class="goal-label"><span>Foundation: Fund 500 students by 2027</span><span class="goal-pct">40%</span></div>
             <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="40%"></div></div>
           </div>
           <div class="goal-item">
-            <div class="goal-label"><span>SBIR Application Submitted</span><span class="goal-pct">55%</span></div>
-            <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="55%"></div></div>
+            <div class="goal-label"><span>Meridian — 5th Property Acquisition</span><span class="goal-pct">25%</span></div>
+            <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="25%"></div></div>
           </div>
           <div class="goal-item">
-            <div class="goal-label"><span>InkThorn — First 10 Clients</span><span class="goal-pct">15%</span></div>
-            <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="15%"></div></div>
+            <div class="goal-label"><span>FounderPath — 2,500 Members</span><span class="goal-pct">74%</span></div>
+            <div class="goal-bar"><div class="goal-fill" style="width:0%" data-w="74%"></div></div>
           </div>
         </div>
       </div>
@@ -3190,19 +2761,19 @@ window._gfitConnect = function() {
     <div class="journal-entries" id="journal-entries-list">
       <!-- Placeholder entries -->
       <div class="journal-entry-card" data-id="placeholder-1">
-        <div class="entry-date">April 10, 2026 · 11:42 PM</div>
-        <div class="entry-title">Reyla Demo Confirmed — Beaux Box Realty</div>
-        <div class="entry-preview">Big day. Got the first demo locked in with Beaux Box Realty — and I brought this lead in myself. Not Burton. Me. The developer. That tells you everything you need to know about the partnership dynamic and why the equity conversation needs to happen now...</div>
+        <div class="entry-date">April 10, 2026 · 10:30 PM</div>
+        <div class="entry-title">Series A Prep</div>
+        <div class="entry-preview">Had a great session with Sarah on the pitch deck today. The MRR growth story is compelling — 18% month over month is a number that speaks for itself. Investors are going to want to understand the retention mechanics. 94% is the real moat...</div>
       </div>
       <div class="journal-entry-card" data-id="placeholder-2">
-        <div class="entry-date">April 8, 2026 · 09:15 PM</div>
-        <div class="entry-title">InkThorn SMS Campaign — 543 Targets Ready</div>
-        <div class="entry-preview">The scrape is done. 9,464 leads, 543 verified phone numbers. SimpleTexting is set up on (504) 238-4030. Tomorrow the campaign goes live. This is the moment where InkThorn either proves its model or doesn't. I believe it does...</div>
+        <div class="entry-date">April 8, 2026 · 06:45 PM</div>
+        <div class="entry-title">Foundation Visit</div>
+        <div class="entry-preview">Visited the Austin ISD school today. Watched a 16-year-old deploy her first app. That's why we do this. She had no idea what she was capable of two months ago. Now she's building. That's the whole mission in one moment...</div>
       </div>
       <div class="journal-entry-card" data-id="placeholder-3">
-        <div class="entry-date">April 6, 2026 · 07:30 AM</div>
-        <div class="entry-title">SBIR Strategy — Multi-Agency Approach</div>
-        <div class="entry-preview">Talked to Jerry Hollister at BBC Consulting. The play is multi-agency: NSF, DoD, DHS, USDA — each has different eligibility windows. Hutch seminar in Baton Rouge is the next concrete move. NASA track + DoD track at the same event...</div>
+        <div class="entry-date">April 6, 2026 · 08:00 AM</div>
+        <div class="entry-title">Property Update</div>
+        <div class="entry-preview">Prop 3 renovation is moving faster than expected. The contractor thinks we could be cash-flow positive by June if the lease-up goes well. That would put all four properties in the black by summer. Meridian is becoming the real anchor of the portfolio...</div>
       </div>
     </div>
   </section>
@@ -3221,7 +2792,7 @@ window._gfitConnect = function() {
         <div class="timeline-dot"></div>
         <div class="timeline-card">
           <div class="timeline-year">2026</div>
-          <div class="timeline-text">InkThorn Crustacean launched. Reyla.ai enters active development. SBIR pursuit begins across NSF, DoD, DHS, USDA. IRS resolution engaged with Tax Rise.</div>
+          <div class="timeline-text">VeloStack Series A fundraise begins. Webb Family Foundation reaches $340K in total grants awarded. Meridian Prop 3 acquisition in progress.</div>
         </div>
       </div>
 
@@ -3229,7 +2800,7 @@ window._gfitConnect = function() {
         <div class="timeline-dot"></div>
         <div class="timeline-card">
           <div class="timeline-year">2025</div>
-          <div class="timeline-text">TextOS.ai concept begins — the vision of a conversational AI operating system to replace app fragmentation with a single intelligent text interface.</div>
+          <div class="timeline-text">FounderPath Collective hits 1,800 active members. Meridian Capital Group acquires 4th property. VeloStack crosses $20K MRR milestone.</div>
         </div>
       </div>
 
@@ -3237,31 +2808,39 @@ window._gfitConnect = function() {
         <div class="timeline-dot"></div>
         <div class="timeline-card">
           <div class="timeline-year">2024</div>
-          <div class="timeline-text">Ground Force Humanitarian Aid (GFHA) formally established. The operational structure of the Cajun Navy movement takes organizational form.</div>
+          <div class="timeline-text">Ember &amp; Oak Creative Studio launched. Webb Family Foundation established with first grants to Austin youth tech programs.</div>
         </div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-card">
-          <div class="timeline-year">2012</div>
-          <div class="timeline-text">Cajun Navy movement founded — the modern iteration. Rob builds the community disaster response model that spreads nationally and becomes a media phenomenon. National media figure status established.</div>
+          <div class="timeline-year">2023</div>
+          <div class="timeline-text">VeloStack.io reaches $1M ARR. First hire made — Sarah Chen joins as CTO. Meridian Capital Group makes first commercial acquisition.</div>
         </div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-card">
-          <div class="timeline-year">~2010</div>
-          <div class="timeline-text">Career landmark: 30 years in software architecture reached. Transition from pure technical work toward civic tech and entrepreneurial ventures accelerates.</div>
+          <div class="timeline-year">2022</div>
+          <div class="timeline-text">VeloStack.io founded — Marcus's first SaaS product. Meridian Capital Group formed to systematize real estate investment strategy.</div>
         </div>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-card">
-          <div class="timeline-year">Early Career</div>
-          <div class="timeline-text">Senior software systems architect — the foundation. Three decades of building systems that scale. New Orleans roots. The technical foundation that makes everything else possible.</div>
+          <div class="timeline-year">2020</div>
+          <div class="timeline-text">Left corporate consulting to build full time. Bet everything on entrepreneurship. Austin, Texas becomes home base for the next chapter.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-year">2015</div>
+          <div class="timeline-text">Started career in software consulting, Austin TX. The foundation of technical depth and client relationships that would fuel everything that followed.</div>
         </div>
       </div>
 
@@ -3290,47 +2869,15 @@ window._gfitConnect = function() {
 
 <script>
 // ═══ AUTH ═══
-const PASS = 'AAww33!!';
-window.onerror = function(msg, src, line, col, err) {
-  console.error('DASHBOARD ERROR:', msg, 'at line', line, err);
-};
+const PASS = 'demo2026';
 
 document.getElementById('login-pw').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
 });
 
-// ═══ ACTIVITY LOG ═══
-function rgLogActivity(entry) {
-  try {
-    var log = JSON.parse(localStorage.getItem('rg_activity_log') || '[]');
-    log.unshift(entry);
-    if (log.length > 200) log = log.slice(0, 200);
-    localStorage.setItem('rg_activity_log', JSON.stringify(log));
-  } catch(e) {}
-}
-
-function rgGetIPAndLog(entry) {
-  // Fetch IP + geo from ipapi.co (free, no key needed)
-  fetch('https://ipapi.co/json/')
-    .then(function(r) { return r.json(); })
-    .then(function(geo) {
-      entry.ip = geo.ip || 'unknown';
-      entry.location = [geo.city, geo.region, geo.country_name].filter(Boolean).join(', ') || 'unknown';
-      entry.org = geo.org || '';
-      rgLogActivity(entry);
-    })
-    .catch(function() {
-      entry.ip = 'lookup failed';
-      entry.location = 'unknown';
-      rgLogActivity(entry);
-    });
-}
-
 function doLogin() {
   const pw = document.getElementById('login-pw').value;
-  const ts = new Date().toISOString();
   if (pw === PASS) {
-    rgGetIPAndLog({ ts, type: 'login_success', actor: 'user', description: 'Successful login', pw_tried: '***correct***' });
     const overlay = document.getElementById('login-overlay');
     overlay.classList.add('fade-out');
     setTimeout(() => {
@@ -3340,7 +2887,6 @@ function doLogin() {
       initDashboard();
     }, 600);
   } else {
-    rgGetIPAndLog({ ts, type: 'login_failed', actor: 'unknown', description: 'Failed login attempt', pw_tried: pw });
     const err = document.getElementById('login-error');
     err.classList.add('show');
     document.getElementById('login-pw').value = '';
@@ -3419,11 +2965,11 @@ function createDonut(id, pct, color) {
 }
 
 function initDonuts() {
-  createDonut('donut-textos', 72, '#e09a40');
-  createDonut('donut-reyla', 61, '#00d4ff');
-  createDonut('donut-inkthorn', 85, '#00ff88');
-  createDonut('donut-stability', 45, '#ffcc00');
-  createDonut('donut-gfha', 38, '#ff8888');
+  createDonut('donut-textos', 88, '#e09a40');
+  createDonut('donut-reyla', 74, '#00d4ff');
+  createDonut('donut-inkthorn', 82, '#00ff88');
+  createDonut('donut-stability', 79, '#ffcc00');
+  createDonut('donut-gfha', 65, '#ff8888');
 }
 
 // ═══ BUSINESS BAR CHARTS ═══
@@ -3464,28 +3010,28 @@ function makeBarChart(id, labels, data, color) {
 
 function initBizCharts() {
   makeBarChart('chart-textos',
-    ['Core AI', 'Telegram', 'UI/UX', 'API', 'Auth'],
-    [80, 45, 60, 70, 85],
+    ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'],
+    [12400, 15800, 18200, 20900, 23100, 24800],
     '#e09a40'
   );
   makeBarChart('chart-reyla',
-    ['Prospects', 'Contacted', 'Demo Sched', 'Demo Done', 'Closed'],
-    [100, 35, 10, 2, 0],
+    ['Prop 1', 'Prop 2', 'Prop 3', 'Prop 4'],
+    [480000, 290000, 210000, 380000],
     '#00d4ff'
   );
   makeBarChart('chart-inkthorn',
-    ['Scraped', 'w/ Phone', 'SMS Sent', 'Responded', 'Demo'],
-    [100, 6, 0, 0, 0],
+    ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'],
+    [11200, 13400, 15100, 16800, 17500, 18500],
     '#00ff88'
   );
   makeBarChart('chart-stability',
-    ['NSF', 'DoD', 'DHS', 'USDA', 'NASA'],
-    [40, 55, 30, 25, 50],
+    ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'],
+    [1420, 1550, 1640, 1720, 1800, 1840],
     '#ffcc00'
   );
   makeBarChart('chart-gfha',
-    ['Comms', 'Logistics', 'Funding', 'Training', 'Network'],
-    [70, 55, 20, 45, 80],
+    ['2022', '2023', '2024', '2025', '2026'],
+    [25000, 60000, 110000, 200000, 340000],
     '#ff8888'
   );
 }
@@ -3512,7 +3058,7 @@ function animateFinance() {
     function tick(now) {
       const progress = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      burnEl.textContent = prefix + Math.floor(eased * target).toLocaleString() + '+/mo';
+      burnEl.textContent = prefix + Math.floor(eased * target).toLocaleString() + '/mo';
       if (progress < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
@@ -3529,11 +3075,11 @@ function animateGoals() {
 // ═══ JOURNAL (localStorage) ═══
 function getJournalEntries() {
   try {
-    return JSON.parse(localStorage.getItem('rg_journal') || '[]');
+    return JSON.parse(localStorage.getItem('mw_journal') || '[]');
   } catch { return []; }
 }
 function saveJournalEntries(entries) {
-  localStorage.setItem('rg_journal', JSON.stringify(entries));
+  localStorage.setItem('mw_journal', JSON.stringify(entries));
 }
 
 function saveJournalEntry() {
@@ -3562,7 +3108,7 @@ function deleteJournalEntry(id) {
 
 function renderJournalEntries() {
   const list = document.getElementById('journal-entries-list');
-  const entries = getAllJournalEntries();
+  const entries = getJournalEntries();
   // Remove real entries (keep placeholder if no real entries)
   list.querySelectorAll('[data-id]').forEach(el => {
     if (!el.dataset.id.startsWith('placeholder')) el.remove();
@@ -3575,72 +3121,31 @@ function renderJournalEntries() {
       const card = document.createElement('div');
       card.className = 'journal-entry-card';
       card.dataset.id = entry.id;
-      var syncBadge = entry.source === 'shared-sync' ? '<span style="font-size:10px;background:#0ff2;color:#0ff;border-radius:4px;padding:1px 6px;margin-left:8px;letter-spacing:1px;">AUTO-SYNC</span>' : '';
-      var deletable = entry.source !== 'shared-sync';
       card.innerHTML = `
-        ${deletable ? `<button class="entry-delete" onclick="event.stopPropagation();deleteJournalEntry('${entry.id}')" title="Delete">✕</button>` : ''}
-        <div class="entry-date">${entry.date}${syncBadge}</div>
+        <button class="entry-delete" onclick="deleteJournalEntry('${entry.id}')" title="Delete">✕</button>
+        <div class="entry-date">${entry.date}</div>
         <div class="entry-title">${entry.title}</div>
         <div class="entry-preview">${entry.body}</div>
-        <div class="entry-read-more">Read full entry →</div>
       `;
-      (function(eid) {
-        card.addEventListener('click', function() { openJournalEntry(eid); });
-      })(entry.id);
-      list.appendChild(card);
+      list.insertBefore(card, list.firstChild);
     });
   } else {
     list.querySelectorAll('[data-id^="placeholder"]').forEach(el => el.style.display = '');
   }
 }
 
-// ═══ SHARED JOURNAL (fetched from repo) ═══
-var _sharedJournalEntries = [];
-
-function fetchSharedJournal() {
-  // Cache-bust so we always get the latest on tab open
-  var url = 'shared-journal.json?v=' + Date.now();
-  fetch(url)
-    .then(function(r) { return r.ok ? r.json() : []; })
-    .then(function(data) {
-      _sharedJournalEntries = Array.isArray(data) ? data : [];
-      renderJournalEntries();
-    })
-    .catch(function() { _sharedJournalEntries = []; });
-}
-
-function getAllJournalEntries() {
-  var local = getJournalEntries();
-  var shared = _sharedJournalEntries;
-  // Merge: local entries first (user-written), then shared (auto-sync), dedup by id
-  var seen = {};
-  var merged = [];
-  local.concat(shared).forEach(function(e) {
-    if (!seen[e.id]) { seen[e.id] = true; merged.push(e); }
-  });
-  // Sort: newest first (by id which is epoch-based or string-sortable)
-  merged.sort(function(a, b) {
-    var aid = parseInt(a.id) || 0;
-    var bid = parseInt(b.id) || 0;
-    if (aid && bid) return bid - aid;
-    return a.id < b.id ? 1 : -1;
-  });
-  return merged;
-}
-
 function loadJournal() {
-  fetchSharedJournal(); // async — renders when ready
-  renderJournalEntries(); // render local immediately
+  renderJournalEntries();
 }
 
 // ═══ TIMELINE (localStorage) ═══
 function getMilestones() {
   try {
-    return JSON.parse(localStorage.getItem('rg_milestones') || '[]');
+    return JSON.parse(localStorage.getItem('mw_milestones') || '[]');
   } catch { return []; }
 }
 function saveMilestones(ms) {
-  localStorage.setItem('rg_milestones', JSON.stringify(ms));
+  localStorage.setItem('mw_milestones', JSON.stringify(ms));
 }
 
 function openMilestoneModal() {
@@ -3693,26 +3198,41 @@ document.getElementById('milestone-modal').addEventListener('click', function(e)
 });
 
 // ═══ INIT ═══
+function initDashboard() {
+  animateCounters();
+  initDonuts();
+  initBizCharts();
+  // Animate first tab's bars after counters
+  setTimeout(() => {
+    // no finance bars on overview
+  }, 500);
+  // Init Activity Tracker
+  initActivityTracker();
+  // Init Day Cycle
+  updateDayCycleTime();
+  setInterval(updateDayCycleTime, 60000);
+}
+
 // ══════════ DAY CYCLE V2 — FULL VERTICAL ══════════
-var DAY_DATA = {
+const DAY_DATA = {
   weekday: [
     { time: '6:00 AM', icon: '🌅', label: 'Wake Up', tips: ['Hydrate before coffee', 'One word: what\'s your intention today?'] },
     { time: '6:30 AM', icon: '🚿', label: 'Shower & Get Ready', tips: ['Mental prep time', 'Rehearse your biggest conversation'] },
     { time: '7:00 AM', icon: '☕', label: 'Coffee & Breakfast', tips: ['Review Today\'s Focus', 'Check overnight messages'] },
     { time: '7:30 AM', icon: '📋', label: 'Day Planning', tips: ['3 priorities max — pick them now', 'Block your deep work window'] },
     { time: '8:00 AM', icon: '🧠', label: 'Deep Work Block #1', tips: ['Hardest problem first', 'Phone down, doors closed'] },
-    { time: '9:00 AM', icon: '📱', label: 'Comms Window', tips: ['Sweep Telegram + email', 'Reply to InkThorn leads now'] },
+    { time: '9:00 AM', icon: '📱', label: 'Comms Window', tips: ['Sweep Telegram + email', 'Reply to FounderPath & VeloStack messages'] },
     { time: '9:30 AM', icon: '🚗', label: 'Commute / Transition', tips: ['Voice memo ideas while driving', 'Starbucks stop — you\'ve earned it'] },
-    { time: '10:00 AM', icon: '💼', label: 'Deep Work Block #2', tips: ['Peak cognitive window', 'Reyla or TextOS sprint'] },
+    { time: '10:00 AM', icon: '💼', label: 'Deep Work Block #2', tips: ['Peak cognitive window', 'VeloStack or Meridian deep work'] },
     { time: '11:00 AM', icon: '📞', label: 'Calls & Meetings', tips: ['Schedule all demos here', 'SBIR / partner calls'] },
-    { time: '12:00 PM', icon: '🥗', label: 'Lunch', tips: ['Step away from the screen', 'Eat real food — no takeout challenge!'] },
+    { time: '12:00 PM', icon: '🥗', label: 'Lunch', tips: ['Step away from the screen', 'Eat real food — fueling performance'] },
     { time: '12:30 PM', icon: '📣', label: 'Content Window', tips: ['Post to social now (peak reach)', 'Blog idea? Voice memo it'] },
-    { time: '1:00 PM', icon: '🤝', label: 'Business Development', tips: ['Follow up InkThorn leads', 'Reyla pipeline — who\'s next?'] },
+    { time: '1:00 PM', icon: '🤝', label: 'Business Development', tips: ['Follow up VeloStack trial leads', 'Reyla pipeline — who\'s next?'] },
     { time: '2:00 PM', icon: '🔨', label: 'Build / Execute', tips: ['Heads-down sprint', 'Ship something today — anything'] },
     { time: '3:00 PM', icon: '📊', label: 'Admin & Finance', tips: ['Review burn rate', 'Log any transactions'] },
     { time: '4:00 PM', icon: '✍️', label: 'Write & Publish', tips: ['Blog draft or social hooks', 'Capture today\'s insights'] },
     { time: '5:00 PM', icon: '🏃', label: 'Move Your Body', tips: ['Walk, gym, anything physical', 'Detach from screens — mandatory'] },
-    { time: '6:00 PM', icon: '🍳', label: 'Cook & Eat', tips: ['No takeout challenge is watching you', 'Cooking = mental reset'] },
+    { time: '6:00 PM', icon: '🍳', label: 'Cook & Eat', tips: ['No-alcohol month — stay the course', 'Cook something worth eating'] },
     { time: '7:00 PM', icon: '🌆', label: 'Evening Work (Optional)', tips: ['Light project work only', 'Social + networking time'] },
     { time: '8:00 PM', icon: '🎵', label: 'Personal Time', tips: ['Music, DJ, creative play', 'Recharge — you earned this'] },
     { time: '9:00 PM', icon: '📓', label: 'Journal & Review', tips: ['What won today?', 'Update dashboard notes'] },
@@ -3723,16 +3243,16 @@ var DAY_DATA = {
   weekend: [
     { time: '7:00 AM', icon: '🌤️', label: 'Easy Wake', tips: ['No alarm stress today', 'Let the day come to you'] },
     { time: '8:00 AM', icon: '☕', label: 'Long Coffee', tips: ['Read, reflect, enjoy', 'Journal if inspired — no pressure'] },
-    { time: '9:00 AM', icon: '🥐', label: 'Brunch Vibes', tips: ['Go out in New Orleans', 'Magazine St? Marigny? Bywater?'] },
+    { time: '9:00 AM', icon: '🥐', label: 'Brunch Vibes', tips: ['Go out in Austin', 'South Congress? Domain? Rainey St?'] },
     { time: '10:00 AM', icon: '🚶', label: 'Get Outside', tips: ['Walk, park, sunlight', 'Body and mind need this'] },
-    { time: '11:00 AM', icon: '🛒', label: 'Errands / Market', tips: ['Crescent City Farmers Market Sat AM', 'Stock up for the week ahead'] },
+    { time: '11:00 AM', icon: '🛒', label: 'Errands / Market', tips: ['SFC Farmers Market Sat AM', 'Stock up for the week ahead'] },
     { time: '12:00 PM', icon: '🍻', label: 'Social Lunch', tips: ['Meet someone interesting', 'Best networking = no agenda'] },
     { time: '1:00 PM', icon: '🎨', label: 'Creative Time', tips: ['Music, writing, building for fun', 'What would you do if no one was watching?'] },
     { time: '2:00 PM', icon: '💡', label: 'Light Strategy', tips: ['Review the week\'s wins', 'One big idea to bring into Monday'] },
     { time: '3:00 PM', icon: '🎶', label: 'Music / DJ', tips: ['Rekordbox session', 'Tidal discovery — find new tracks'] },
     { time: '4:00 PM', icon: '🌳', label: 'Family & Friends', tips: ['Be fully present', 'Put the phone away — actually'] },
-    { time: '6:00 PM', icon: '🍝', label: 'Dinner', tips: ['New Orleans food is a gift', 'Cook something worth remembering'] },
-    { time: '7:00 PM', icon: '🎭', label: 'NOLA Night', tips: ['Live music, shows, culture', 'This is why you live here'] },
+    { time: '6:00 PM', icon: '🍝', label: 'Dinner', tips: ['Austin food scene is world-class', 'Cook something worth remembering'] },
+    { time: '7:00 PM', icon: '🎭', label: 'NOLA Night', tips: ['Live music, shows, culture', 'This is why you live in Austin'] },
     { time: '9:00 PM', icon: '🥂', label: 'Late Evening', tips: ['Good conversations, good people', 'Stories worth telling later'] },
     { time: '11:00 PM', icon: '🌙', label: 'Rest Up', tips: ['Big week ahead', 'Recharge fully — no half measures'] }
   ],
@@ -3750,172 +3270,13 @@ var DAY_DATA = {
   ]
 };
 
-// Auto-detect weekday vs weekend based on current day
-var _dow = new Date().getDay(); // 0=Sun, 6=Sat
-var currentDayType = (_dow === 0 || _dow === 6) ? 'weekend' : 'weekday';
-
-// ═══ CONCIERGE DAY CYCLE (today-cycle.json) ═══
-var _conciergeBlocks = null;
-var _conciergeAnchor = null;
-var _conciergePrivate = null;
-
-function fetchConciergeCycle() {
-  // Inline data injected at build time
-  var _INLINE_CYCLE = {"date": "2026-04-17", "generated": "2026-04-17T14:47:52Z", "location": "Napoleon & Magazine, Uptown New Orleans, 70115", "mode": "custom", "concierge": {"title": "Friday \u2014 Finish Strong", "notes": ["\ud83c\udfc6 RISE Challenge (Virginia) \u2014 Stability accepted! Complete the application", "\ud83c\udfa4 InnovateSouth deck \u2014 finish it, time the pitch (must be under 4 min), upload to Claude for evaluation & improvements", "\u2705 Ship something before 3pm \u2014 don't drift", "\ud83e\uddfe Review week finances: income, expenses, IRS set-aside", "\ud83d\udcf1 TextOS: any user feedback or product notes to capture", "\ud83c\udf7a End of week beer is earned \u2014 Barrel Proof or Cure", "\ud83d\udcd3 Journal: 3 wins from this week"]}, "private": ["\ud83c\udf39 Date night with Camille tonight \u2014 make it count", "\ud83d\udccd Reservation idea: Clancy's \u2014 call ahead", "\ud83d\udc8c She loves when you just handle the reservation without being asked", "\ud83d\udc8c Dress up a little \u2014 she notices"], "blocks": [{"time": "7:30 AM", "icon": "\ud83c\udfc1", "label": "Friday \u2014 Finish Line", "tips": ["Ship something before 3pm. Don't drift into the weekend.", "One real deliverable. Then you're free."], "recommendation": null}, {"time": "8:00 AM", "icon": "\ud83c\udfc6", "label": "RISE Challenge Application", "tips": ["Stability accepted into RISE Challenge (Virginia)", "Complete and submit the application today"], "recommendation": null}, {"time": "9:00 AM", "icon": "\ud83d\udcbb", "label": "Final Build Push", "tips": ["Last hard coding block of the week", "Leave Reyla in a clean state for Monday"], "recommendation": null}, {"time": "10:00 AM", "icon": "\ud83c\udfa4", "label": "InnovateSouth Pitch Deck", "tips": ["Finish the deck, time the pitch \u2014 must be under 4 min", "Upload to Claude for evaluation & improvements"], "recommendation": null}, {"time": "11:30 AM", "icon": "\ud83e\uddfe", "label": "Finance Review", "tips": ["Weekly check: income logged, expenses noted, IRS set-aside?", "Check the trailer title transfer status if pending"], "recommendation": null}, {"time": "1:00 PM", "icon": "\ud83e\udd57", "label": "Lunch", "tips": ["Friday lunch is a small reward \u2014 make it good", "No-takeout if still in challenge window"], "recommendation": null}, {"time": "2:00 PM", "icon": "\ud83d\udcf1", "label": "TextOS Product Notes", "tips": ["Capture any user feedback or product ideas", "Log before the week closes \u2014 don't lose it"], "recommendation": null}, {"time": "3:00 PM", "icon": "\u2705", "label": "Week Close", "tips": ["Write your 3 wins. Commit and push any open code.", "What moves to Monday? Write it down now."], "recommendation": null}, {"time": "5:30 PM", "icon": "\ud83c\udf7a", "label": "Friday Wind-Down Drink", "tips": ["You earned it. Barrel Proof or Cure.", "Friday on Magazine Street has its own energy."], "recommendation": {"name": "Barrel Proof", "address": "1201 Magazine St, New Orleans", "note": "Best whiskey bar in the South. 5 minutes from home."}}, {"time": "6:00 PM", "icon": "\ud83c\udfb5", "label": "Michael Watson & The Alchemy", "tips": ["d.b.a. \u00b7 Marigny", "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"], "recommendation": {"name": "Michael Watson & The Alchemy", "address": "d.b.a.", "note": "Tonight at 6:00 PM. More info: https://wwoz.org/events/1327376"}}, {"time": "7:00 PM", "icon": "\ud83c\udf39", "label": "Date Night with Camille", "tips": ["Clancy's \u2014 Uptown white tablecloth, classic New Orleans", "She loves when you just handle the reservation without being asked"], "recommendation": {"name": "Clancy's", "address": "6100 Annunciation St, New Orleans", "note": "Uptown white tablecloth, classic New Orleans"}, "_private": true}, {"time": "7:00 PM", "icon": "\ud83c\udfb5", "label": "Willie Green III", "tips": ["Bacchanal (OUTDOORS) \u00b7 Bywater", "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"], "recommendation": {"name": "Willie Green III", "address": "Bacchanal (OUTDOORS)", "note": "Tonight at 7:00 PM. More info: https://wwoz.org/events/1324506"}}, {"time": "8:00 PM", "icon": "\ud83c\udfb6", "label": "Frenchmen Street", "tips": ["Friday night on Frenchmen is an institution", "Walk the street, pick a spot, let New Orleans do its thing"], "recommendation": {"name": "Frenchmen Street", "address": "Frenchmen St, Marigny, New Orleans", "note": "Snug Harbor, d.b.a., The Spotted Cat \u2014 all within 100 feet."}}, {"time": "9:00 PM", "icon": "\ud83d\udcd3", "label": "Journal \u2014 3 Wins This Week", "tips": ["Write down 3 wins from this week before heading out", "Before Steve Aoki \u2014 10 minutes, that's all it takes"], "recommendation": null}, {"time": "10:00 PM", "icon": "\ud83c\udfa7", "label": "Steve Aoki @ Metropolitan", "tips": ["Doors open \u2014 get there early for a good spot", "Metropolitan New Orleans \u2014 live DJ set"], "recommendation": {"name": "Metropolitan", "address": "310 Andrew Higgins Blvd, New Orleans, LA", "note": "One of NOLA's best live music venues"}}]};
-  var today = new Date().toISOString().slice(0, 10);
-  if (_INLINE_CYCLE && _INLINE_CYCLE.blocks && _INLINE_CYCLE.date === today) {
-    _conciergeBlocks = _INLINE_CYCLE.blocks;
-    _conciergeAnchor = _INLINE_CYCLE.concierge || null;
-    _conciergePrivate = _INLINE_CYCLE.private || null;
-    renderConciergeCycle();
-    return;
-  }
-  fetch('today-cycle.json?v=' + Date.now())
-    .then(function(r) { return r.ok ? r.json() : null; })
-    .then(function(data) {
-      if (!data || !data.blocks) return;
-      if (data.date !== today) return;
-      _conciergeBlocks = data.blocks;
-      _conciergeAnchor = data.concierge || null;
-      _conciergePrivate = data.private || null;
-      renderConciergeCycle();
-    })
-    .catch(function() {});
-}
-
-function renderConciergeCycle() {
-  if (!_conciergeBlocks) return;
-  var track = document.getElementById('dc-track');
-  if (!track) return;
-
-  function renderBlock(b) {
-    if (b._private) return ''; // Private blocks never render in visible card list
-    var status = getBlockStatus(b.time);
-    var nowBadge = status === 'current' ? '<span class="now-badge">● NOW</span>' : '';
-    var recHtml = '';
-    if (b.recommendation) {
-      var rec = b.recommendation;
-      var moreLink = '';
-      // Extract URL from note if present, otherwise build a Google Maps search link
-      var urlMatch = rec.note && rec.note.match(/https?:\/\/[^\s]+/);
-      if (urlMatch) {
-        moreLink = urlMatch[0];
-      } else if (rec.address) {
-        moreLink = 'https://www.google.com/search?q=' + encodeURIComponent(rec.name + ' ' + rec.address);
-      }
-      var noteClean = rec.note ? rec.note.replace(/https?:\/\/[^\s]+/g, '').trim() : '';
-      recHtml = '<div style="margin-top:6px;font-size:10px;color:#c8832a;border-top:1px solid rgba(200,131,42,0.2);padding-top:4px;">' +
-        '📍 <strong>' + rec.name + '</strong><br>' +
-        '<span style="color:rgba(255,255,255,0.5)">' + noteClean + '</span>' +
-        (moreLink ? '<br><a href="' + moreLink + '" target="_blank" rel="noopener" style="color:#00d4ff;font-size:9px;letter-spacing:0.06em;text-decoration:none;">More info →</a>' : '') +
-        '</div>';
-    }
-    return '<div class="day-block-v ' + status + '">' +
-      '<div class="bv-icon">' + b.icon + '</div>' +
-      '<div class="bv-time">' + b.time + nowBadge + '</div>' +
-      '<div class="bv-label">' + b.label + '</div>' +
-      '<div class="bv-tips">' +
-        '<div class="t1">' + b.tips[0] + '</div>' +
-        '<div class="t2">' + b.tips[1] + '</div>' +
-      '</div>' +
-      recHtml +
-    '</div>';
-  }
-
-  // Cards only go in the scrolling track
-  track.innerHTML = '<div class="day-track-wrap"><div class="day-cards-row">' +
-    _conciergeBlocks.map(renderBlock).join('') + '</div></div>';
-
-  // ── Below-scroll static panels (anchor + private) ──────────────────────────
-  var below = document.getElementById('dc-below-panels');
-  if (below) {
-    var belowHtml = '';
-
-    // Anchor: "Set the Week" priority notes
-    if (_conciergeAnchor && _conciergeAnchor.notes && _conciergeAnchor.notes.length) {
-      var notesHtml = _conciergeAnchor.notes.map(function(n) {
-        return '<div style="padding:3px 0;font-size:11px;color:rgba(242,237,230,0.85);line-height:1.6;">' + n + '</div>';
-      }).join('');
-      belowHtml +=
-        '<div style="margin:12px 0 10px;padding:10px 14px;border-radius:10px;background:rgba(200,131,42,0.07);border:1px solid rgba(200,131,42,0.25);">' +
-          '<div style="font-size:9px;font-weight:700;letter-spacing:0.12em;color:#c8832a;text-transform:uppercase;margin-bottom:6px;">✦ ' + (_conciergeAnchor.title || 'Today') + '</div>' +
-          notesHtml +
-        '</div>';
-    }
-
-    // Private: blur-redacted, tap to reveal 15s, auto-reblur
-    if (_conciergePrivate && _conciergePrivate.length) {
-      var privateId = 'prv-' + Math.random().toString(36).slice(2, 8);
-      var privateNotesHtml = _conciergePrivate.map(function(n) {
-        return '<div style="padding:4px 0;font-size:11.5px;line-height:1.7;color:rgba(255,182,193,0.92);">' + n + '</div>';
-      }).join('');
-      belowHtml +=
-        '<div data-private-block="true" style="margin:0 0 4px;border-radius:10px;border:1px solid rgba(255,105,180,0.18);background:rgba(255,20,147,0.04);overflow:hidden;">' +
-          '<div style="padding:8px 14px 6px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;" onclick="togglePrivate(\'' + privateId + '\')" title="Private — tap to reveal">' +
-            '<span style="font-size:9px;font-weight:700;letter-spacing:0.12em;color:rgba(255,105,180,0.65);text-transform:uppercase;">🔒 Private</span>' +
-            '<span id="' + privateId + '-icon" style="font-size:9px;color:rgba(255,105,180,0.4);letter-spacing:0.08em;font-style:italic;">tap to reveal</span>' +
-          '</div>' +
-          '<div id="' + privateId + '" data-private-content="true" style="padding:2px 14px 12px;filter:blur(8px);transition:filter 0.4s ease;cursor:pointer;" onclick="togglePrivate(\'' + privateId + '\')">' +
-            privateNotesHtml +
-          '</div>' +
-        '</div>';
-    }
-
-    below.innerHTML = belowHtml;
-    below.style.display = belowHtml ? '' : 'none';
-  }
-
-  // Auto-scroll to current block
-  requestAnimationFrame(function() {
-    var scroll = document.getElementById('dc-scroll');
-    var current = track.querySelector('.day-block-v.current');
-    if (scroll && current) {
-      scroll.scrollLeft = current.offsetLeft - (scroll.clientWidth / 2) + (current.offsetWidth / 2);
-    }
-  });
-
-  // Activate the Concierge button, deactivate others
-  document.querySelectorAll('.day-type-btn').forEach(function(b) { b.classList.remove('active'); });
-  var conciergeBtn = document.getElementById('btn-concierge');
-  if (conciergeBtn) { conciergeBtn.style.display = ''; conciergeBtn.classList.add('active'); }
-}
-
-function setDayConcierge(btn) {
-  if (!_conciergeBlocks) return;
-  document.querySelectorAll('.day-type-btn').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  renderConciergeCycle();
-}
-
-function togglePrivate(id) {
-  var el = document.getElementById(id);
-  var icon = document.getElementById(id + '-icon');
-  if (!el) return;
-  var isBlurred = el.style.filter !== 'none' && el.style.filter !== '';
-  if (isBlurred) {
-    el.style.filter = 'none';
-    if (icon) { icon.textContent = 'tap to hide'; icon.style.color = 'rgba(255,105,180,0.7)'; }
-    // Auto-reblur after 15 seconds
-    if (window._prvTimer) clearTimeout(window._prvTimer);
-    window._prvTimer = setTimeout(function() {
-      el.style.filter = 'blur(8px)';
-      if (icon) { icon.textContent = 'tap to reveal'; icon.style.color = 'rgba(255,105,180,0.4)'; }
-    }, 15000);
-  } else {
-    el.style.filter = 'blur(8px)';
-    if (icon) { icon.textContent = 'tap to reveal'; icon.style.color = 'rgba(255,105,180,0.4)'; }
-    if (window._prvTimer) clearTimeout(window._prvTimer);
-  }
-}
+let currentDayType = 'weekday';
 
 function setDayType(type, btn) {
   currentDayType = type;
   document.querySelectorAll('.day-type-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  // Clear below panels when leaving concierge mode
-  var below = document.getElementById('dc-below-panels');
-  if (below) { below.innerHTML = ''; below.style.display = 'none'; }
-  renderDayCycle(); // renders standard base cycle, not concierge
+  renderDayCycle();
 }
 
 function getBlockStatus(timeStr) {
@@ -3963,11 +3324,6 @@ function renderDayCycle() {
       scroll.scrollLeft = cardLeft - (scrollWidth / 2) + (cardWidth / 2);
     }
   });
-  // Inject activity badge if data exists
-  try {
-    const today = getTodayActivity();
-    if (today && today.steps > 0) updateDayCycleActivityBadge(today);
-  } catch(e) {}
 }
 
 function updateDayCycleTime() {
@@ -3975,82 +3331,25 @@ function updateDayCycleTime() {
   const label = document.getElementById('dc-now-label');
   if (label) {
     label.textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }) 
-      + ' CDT · ' + now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+      + ' Austin, TX · ' + now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
   }
-  // Only re-render base cycle if concierge is NOT active
-  var conciergeBtn = document.getElementById('btn-concierge');
-  var conciergeActive = conciergeBtn && conciergeBtn.classList.contains('active');
-  if (conciergeActive) {
-    renderConciergeCycle(); // refresh NOW indicator within concierge view
-  } else {
-    renderDayCycle();
-  }
+  renderDayCycle();
 }
-
-function initDashboard() {
-  try { animateCounters(); } catch(e) { console.error('animateCounters:', e); }
-  try { initDonuts(); } catch(e) { console.error('initDonuts:', e); }
-  try { initActivityTracker(); } catch(e) { console.error('initActivityTracker:', e); }
-  try { initBizCharts(); } catch(e) { console.error('initBizCharts:', e); }
-  setTimeout(initGoogleFit, 800);
-  // Init Day Cycle time label first (no render yet)
-  try {
-    const now = new Date();
-    const label = document.getElementById('dc-now-label');
-    if (label) {
-      label.textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
-        + ' CDT · ' + now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
-    }
-  } catch(e) {}
-  // Fetch + render concierge — always the default view
-  try { fetchConciergeCycle(); } catch(e) { console.error('ConciergeCycle:', e); }
-  // Start the clock interval (updateDayCycleTime won't overwrite concierge since btn is now active)
-  try {
-    setInterval(updateDayCycleTime, 60000);
-  } catch(e) { console.error('DayCycle init error:', e); }
-}
-
-// ═══ OVERVIEW FINANCIAL BLUR ═══
-function ovReveal() {
-  var pw = document.getElementById('overview-unlock-pw').value;
-  var err = document.getElementById('overview-unlock-err');
-  if (pw === PASS) {
-    document.querySelectorAll('.overview-sensitive').forEach(function(el) { el.classList.add('revealed'); });
-    document.querySelectorAll('.overview-sensitive-block').forEach(function(el) { el.classList.add('revealed'); });
-    var bar = document.getElementById('overview-unlock-bar');
-    if (bar) bar.style.display = 'none';
-    sessionStorage.setItem('rg_ov_unlocked', '1');
-  } else {
-    err.style.display = 'inline';
-    setTimeout(function() { err.style.display = 'none'; }, 2000);
-  }
-}
-// Only auto-reveal if the overview was explicitly unlocked this session
-document.addEventListener('DOMContentLoaded', function() {
-  if (sessionStorage.getItem('rg_ov_unlocked') === '1') {
-    document.querySelectorAll('.overview-sensitive').forEach(function(el) { el.classList.add('revealed'); });
-    document.querySelectorAll('.overview-sensitive-block').forEach(function(el) { el.classList.add('revealed'); });
-    var bar = document.getElementById('overview-unlock-bar');
-    if (bar) bar.style.display = 'none';
-  }
-});
 
 // ══════════ MOBILE NAV ══════════
 // Check if already logged in via session
 // (For convenience: check sessionStorage)
-if (sessionStorage.getItem('rg_auth') === '1') {
-  try {
-    document.getElementById('login-overlay').style.display = 'none';
-    document.getElementById('app').classList.add('visible');
-    initDashboard();
-  } catch(e) { console.error('Auto-login init error:', e); }
+if (sessionStorage.getItem('mw_auth') === '1') {
+  document.getElementById('login-overlay').style.display = 'none';
+  document.getElementById('app').classList.add('visible');
+  initDashboard();
 }
 
 // Store auth in session
 const _origLogin = doLogin;
 window.doLogin = function() {
   const pw = document.getElementById('login-pw').value;
-  if (pw === PASS) sessionStorage.setItem('rg_auth', '1');
+  if (pw === PASS) sessionStorage.setItem('mw_auth', '1');
   _origLogin();
 };
 
@@ -4062,6 +3361,8 @@ function toggleMobileNav() {
 }
 
 // ══════════ ACTIVITY TRACKER ══════════
+const CIRCUMFERENCE = 2 * Math.PI * 34; // 213.6
+
 const ACT_GOALS = { steps: 10000, distance: 5, calories: 500, active: 30 };
 
 function getTodayKey() {
@@ -4082,32 +3383,12 @@ function getTodayActivity() {
   return data[getTodayKey()] || { steps: 0, distance: 0, calories: 0, active: 0 };
 }
 
-const ACT_COLORS = {
-  'ring-steps': '#c8832a',
-  'ring-distance': '#00d4ff',
-  'ring-calories': '#e05a8a',
-  'ring-active': '#7ed6a0'
-};
-
 function setRing(id, value, goal) {
   const el = document.getElementById(id);
   if (!el) return;
   const pct = Math.min(value / goal, 1);
-  const deg = Math.round(pct * 360);
-  const color = ACT_COLORS[id] || '#c8832a';
-  const trackColor = 'rgba(255,255,255,0.06)';
-  if (deg === 0) {
-    el.style.background = trackColor;
-  } else if (deg >= 360) {
-    el.style.background = color;
-  } else {
-    el.style.background = `conic-gradient(${color} 0deg, ${color} ${deg}deg, ${trackColor} ${deg}deg, ${trackColor} 360deg)`;
-  }
-  // Add subtle glow on the card
-  const card = el.closest('.activity-ring-card');
-  if (card && pct > 0) {
-    card.style.boxShadow = `0 0 12px ${color}22`;
-  }
+  const offset = CIRCUMFERENCE - (pct * CIRCUMFERENCE);
+  el.style.strokeDashoffset = offset;
 }
 
 function formatNum(n) {
@@ -4117,27 +3398,16 @@ function formatNum(n) {
 
 function renderActivityRings() {
   const today = getTodayActivity();
-  var steps = today.steps || 0;
-  var distance = today.distance || 0;
-  var calories = today.calories || 0;
-  var active = today.active || 0;
-
-  // Update text values
-  var vs = document.getElementById('val-steps');
-  var vd = document.getElementById('val-distance');
-  var vc = document.getElementById('val-calories');
-  var va = document.getElementById('val-active');
-  if (vs) vs.textContent = formatNum(steps);
-  if (vd) vd.textContent = distance.toFixed(1);
-  if (vc) vc.textContent = formatNum(calories);
-  if (va) va.textContent = active;
-
-  // Apply ring colors immediately (no delay needed for conic-gradient)
-  setRing('ring-steps', steps, ACT_GOALS.steps);
-  setRing('ring-distance', distance, ACT_GOALS.distance);
-  setRing('ring-calories', calories, ACT_GOALS.calories);
-  setRing('ring-active', active, ACT_GOALS.active);
-
+  document.getElementById('val-steps').textContent = formatNum(today.steps || 0);
+  document.getElementById('val-distance').textContent = (today.distance || 0).toFixed(1);
+  document.getElementById('val-calories').textContent = formatNum(today.calories || 0);
+  document.getElementById('val-active').textContent = today.active || 0;
+  setTimeout(() => {
+    setRing('ring-steps', today.steps || 0, ACT_GOALS.steps);
+    setRing('ring-distance', today.distance || 0, ACT_GOALS.distance);
+    setRing('ring-calories', today.calories || 0, ACT_GOALS.calories);
+    setRing('ring-active', today.active || 0, ACT_GOALS.active);
+  }, 300);
   updateDayCycleActivityBadge(today);
 }
 
@@ -4226,253 +3496,35 @@ function initActivityTracker() {
   renderActivityWeekChart();
 }
 
-// Day cycle badge update is called directly from renderActivityRings
-
-// ══════════ GOOGLE FIT INTEGRATION (REDIRECT FLOW) ══════════
-const GFIT_CLIENT_ID = '1085063330986-r202kk8tuqkdjfutc30k84pb2dovnm5t.apps.googleusercontent.com';
-const GFIT_SCOPES = [
-  'https://www.googleapis.com/auth/fitness.activity.read',
-  'https://www.googleapis.com/auth/fitness.body.read',
-  'https://www.googleapis.com/auth/fitness.location.read'
-].join('%20');
-
-let gfitAccessToken = null;
-
-function initGoogleFit() {
-  const stored = localStorage.getItem('gfit_token');
-  if (stored) {
-    gfitAccessToken = stored;
-    setGfitConnected();
-    renderActivityRings(); // show cached data with colors
-    fetchGoogleFitData();  // refresh from API
-  }
-}
-
-function connectGoogleFit() {
-  // Save current auth state so we restore it after redirect
-  sessionStorage.setItem('rg_auth', '1');
-  const redirectUri = encodeURIComponent('https://inkthorn.ai/command-center.html');
-  const authUrl = 'https://accounts.google.com/o/oauth2/v2/auth' +
-    '?client_id=' + GFIT_CLIENT_ID +
-    '&redirect_uri=' + redirectUri +
-    '&response_type=token' +
-    '&scope=' + GFIT_SCOPES +
-    '&prompt=select_account';
-  window.location.href = authUrl;
-}
-
-function handleGfitToken(tokenResponse) {
-  // Legacy — not used in redirect flow
-}
-
-function setGfitConnected() {
-  const btn = document.getElementById('gfit-btn');
-  if (btn) {
-    btn.classList.add('connected');
-    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google Fit Connected ✓`;
-  }
-  // Show switch account button
-  let switchBtn = document.getElementById('gfit-switch-btn');
-  if (!switchBtn) {
-    switchBtn = document.createElement('button');
-    switchBtn.id = 'gfit-switch-btn';
-    switchBtn.textContent = '⇄ Switch Account';
-    switchBtn.style.cssText = 'background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:#555;font-family:Space Grotesk,DM Sans,sans-serif;font-size:0.72rem;padding:0.3rem 0.65rem;cursor:pointer;transition:all 0.2s;';
-    switchBtn.onmouseover = function(){this.style.borderColor='#c8832a';this.style.color='#c8832a';};
-    switchBtn.onmouseout = function(){this.style.borderColor='rgba(255,255,255,0.1)';this.style.color='#555';};
-    switchBtn.onclick = disconnectGoogleFit;
-    const btnWrap = btn.parentNode;
-    if (btnWrap) btnWrap.appendChild(switchBtn);
-  }
-  switchBtn.style.display = 'inline-block';
-  const status = document.getElementById('gfit-status');
-  if (status) {
-    status.className = 'gfit-status live';
-    status.textContent = 'Live data from Google Fit';
-  }
-}
-
-async function fetchGoogleFitData() {
-  if (!gfitAccessToken) return;
-
-  const now = new Date();
-  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
-  const startMs = startOfDay.getTime();
-  const endMs = now.getTime();
-
-  const body = {
-    aggregateBy: [
-      { dataTypeName: 'com.google.step_count.delta' },
-      { dataTypeName: 'com.google.calories.expended' },
-      { dataTypeName: 'com.google.distance.delta' },
-      { dataTypeName: 'com.google.active_minutes' }
-    ],
-    bucketByTime: { durationMillis: endMs - startMs },
-    startTimeMillis: startMs,
-    endTimeMillis: endMs
+const _origRenderDayCycle = window.renderDayCycle;
+if (_origRenderDayCycle) {
+  window.renderDayCycle = function() {
+    _origRenderDayCycle();
+    const today = getTodayActivity();
+    updateDayCycleActivityBadge(today);
   };
+}
 
-  try {
-    const res = await fetch('https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + gfitAccessToken,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    });
-
-    if (res.status === 401) {
-      // Token expired
-      localStorage.removeItem('gfit_token');
-      gfitAccessToken = null;
-      const status = document.getElementById('gfit-status');
-      if (status) { status.className = 'gfit-status'; status.textContent = 'Session expired — tap Sync Google Fit to reconnect'; }
-      return;
+// Seed demo activity data for presentation
+(function seedDemoActivity() {
+  const existing = localStorage.getItem('rg_activity');
+  if (existing && Object.keys(JSON.parse(existing)).length > 0) return; // don't overwrite real data
+  const data = {};
+  const sampleSteps = [8420, 11200, 6800, 9900, 12400, 7600, 0];
+  const sampleDist =  [3.8,   5.1,  3.1,  4.5,  5.6,  3.4, 0];
+  const sampleCal =   [380,   510,  290,  440,  580,  330, 0];
+  const sampleAct =   [35,    52,   28,   44,   61,   31,  0];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = d.toISOString().split('T')[0];
+    const idx = 6 - i;
+    if (i > 0) { // don't seed today
+      data[key] = { steps: sampleSteps[idx], distance: sampleDist[idx], calories: sampleCal[idx], active: sampleAct[idx] };
     }
-
-    const data = await res.json();
-    let steps = 0, calories = 0, distance = 0, activeMin = 0;
-
-    if (data.bucket && data.bucket.length > 0) {
-      data.bucket.forEach(bucket => {
-        (bucket.dataset || []).forEach(ds => {
-          (ds.point || []).forEach(pt => {
-            (pt.value || []).forEach(v => {
-              const val = v.intVal || v.fpVal || 0;
-              if (ds.dataSourceId.includes('step_count')) steps += Math.round(val);
-              else if (ds.dataSourceId.includes('calories')) calories += Math.round(val);
-              else if (ds.dataSourceId.includes('distance')) distance += val;
-              else if (ds.dataSourceId.includes('active_minutes')) activeMin += Math.round(val);
-            });
-          });
-        });
-      });
-    }
-
-    // Convert distance from meters to miles
-    const distanceMiles = Math.round(distance / 1609.34 * 10) / 10;
-
-    // Save to localStorage and update rings
-    const actData = getActivityData();
-    actData[getTodayKey()] = {
-      steps,
-      distance: distanceMiles,
-      calories,
-      active: activeMin,
-      source: 'google_fit',
-      synced: new Date().toISOString()
-    };
-    saveActivityData(actData);
-    renderActivityRings();
-    renderActivityWeekChart();
-
-    const status = document.getElementById('gfit-status');
-    if (status) {
-      status.className = 'gfit-status live';
-      status.textContent = `Live — last synced ${new Date().toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit'})}`;
-    }
-
-  } catch(err) {
-    console.error('Google Fit fetch error:', err);
-    const status = document.getElementById('gfit-status');
-    if (status) { status.className = 'gfit-status'; status.textContent = 'Sync error — check console'; }
   }
-}
-
-// Auto-refresh every 15 minutes if connected
-setInterval(() => {
-  if (gfitAccessToken) fetchGoogleFitData();
-}, 15 * 60 * 1000);
-
-function disconnectGoogleFit() {
-  localStorage.removeItem('gfit_token');
-  gfitAccessToken = null;
-  const btn = document.getElementById('gfit-btn');
-  if (btn) {
-    btn.classList.remove('connected');
-    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Sync Google Fit`;
-  }
-  const switchBtn = document.getElementById('gfit-switch-btn');
-  if (switchBtn) switchBtn.style.display = 'none';
-  const status = document.getElementById('gfit-status');
-  if (status) { status.className = 'gfit-status'; status.textContent = 'Disconnected — tap Sync Google Fit to connect a different account'; }
-  // Re-trigger connect with account picker
-  setTimeout(connectGoogleFit, 300);
-}
-
-// Run initGoogleFit on page load to catch OAuth redirect token in URL hash
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initGoogleFit);
-} else {
-  initGoogleFit();
-}
-
-// ═══ SEED JOURNAL FROM SHARED FILE ═══
-(function seedGenXJournal() {
-  try {
-    var existing = JSON.parse(localStorage.getItem('rg_journal') || '[]');
-    var existingIds = existing.map(function(e) { return e.id; });
-    
-    var genXEntries = [
-      {
-        id: 'genx-20260411-jobs',
-        date: 'April 11, 2026',
-        title: 'Jobs Before 15 (and the Offshore Year)',
-        body: 'Before I was 15, I\'d already had a full career.\n\nAge 3: Used to pick up neighbors\' newspapers from their driveways and knock on their doors and try to sell them back. First sales job. No shame, no fear.\n\nAge 8: Parents divorced. Grass at mom\'s house was a foot tall. She asked me to mow it. I walked a mile to my grandmother\'s house alone, borrowed her lawn mower, and pushed it all the way back. The grass was so tall the mower kept dying. I figured out on my own to only mow half the deck width so I could keep moving. Nobody taught me that. I worked it out.\n\nAge 10: Signed myself up to play soccer at the YMCA. Paid for it myself. Bought my own cleats. Rode my bike to weekday practices and Saturday morning games. That was 46 years ago. I still play soccer every week.\n\nAge 13: Paper route. Bike with a loaded paper bag over my shoulders. Had to memorize every house on the route. Once a month, went door-to-door collecting money.\n\nAge 15: Had to pay for the school ski trip myself. Worked at Wendy\'s, then a frame shop, then Chess King as a salesperson. All before graduation.\n\nAfter high school: Worked offshore on oil rigs. Flew on helicopters. 2 weeks out, 1 week home. Made real money for the first time. Showed my dad my paycheck — he said I needed to pay rent. I got my own apartment. I\'ve never lived at home again.'
-      },
-      {
-        id: 'genx-20260411-yahoo',
-        date: 'April 11, 2026',
-        title: 'Tea Party Patriots: National Coordinator (Yahoo News, ~2010)',
-        body: 'Rob Gaudet — software consultant from Bossier City, LA — built TeaPartyPatriots.org from his home office.\n\n• 6,000+ events posted in 18 months\n• 2,400 local Tea Party groups listed state by state\n• 127,000 registered members, hundreds signing up daily\n• ~1 million email list across related sites\n• Tea Party Patriots Facebook page: 436,767 fans\n\nRob stopped taking client work entirely and went full-time. He forfeited an estimated $100,000 in personal income and became the paid national coordinator of Tea Party Patriots.\n\n"Even without the Internet, the Tea Party would still have grown, but it has been absolutely critical in allowing people to connect, share and promote their events."\n\n"I\'ve been pushing to enable citizens to hold government accountable. There\'s been a lot of pain and sacrifice with my family to make this happen. Our Founding Fathers talked about sacrificing fortune for our sacred honor. I have a better understanding now of what they were talking about."'
-      },
-      {
-        id: 'genx-20260411-teaparty-origin',
-        date: 'April 11, 2026',
-        title: 'The Tea Party Origin Story (From the Emails)',
-        body: 'March 26, 2009 — 9:05 PM CST. The first email.\n\nSubject: "Database guy from the red river."\n\nRob Gaudet, software consultant from Bossier City, LA, cold-emails Michael Patrick Leahy and Eric Odom. He offers to help with data infrastructure for the emerging Tea Party movement.\n\nThat same night, Michael Leahy replies: "Can you lead a project starting now to create a comprehensive real-time updated spreadsheet with ALL April 15 Tea Party info?... Will you accept this task? If so, can you start tonight?"\n\nRob\'s reply: "Sure thing."\n\nTwo words. That\'s how it started.\n\nMarch 30, 2009 — Rob pitches the website: "I have made significant progress. Tea Parties can be added and approved. They can be listed by state. Also you can enter a zip code and it will show events within a 500 mile radius."\n\nHe\'d built zip-code radius search, state filtering, event approval workflows — the skeleton of what would become TeaPartyPatriots.org — in 4 days. From Bossier City, Louisiana. Working from home.\n\nBy mid-2009: Running the TPP Technology Team — fielding dozens of volunteer web developers, managing a remote team for a movement with no budget.\n\n2010: Full force. In national board calls, litigation strategy, political discussions around Senate primaries across the country. Not just the webmaster — an operational core member.\n\nThe cost: Rob estimated forfeiting $100,000 in personal income. He did it anyway.'
-      }
-    ];
-
-    var added = 0;
-    genXEntries.forEach(function(entry) {
-      if (existingIds.indexOf(entry.id) === -1) {
-        existing.unshift(entry); // add to top
-        added++;
-      }
-    });
-    
-    if (added > 0) {
-      localStorage.setItem('rg_journal', JSON.stringify(existing));
-      console.log('Seeded ' + added + ' Gen X journal entries');
-    }
-  } catch(e) { console.error('Journal seed error:', e); }
+  localStorage.setItem('rg_activity', JSON.stringify(data));
 })();
-
-
-// ── JOURNAL ENTRY READER ──
-function openJournalEntry(id) {
-  const entries = getAllJournalEntries();
-  const entry = entries.find(function(e) { return e.id === id; });
-  if (!entry) return;
-  document.getElementById('jread-date').textContent = entry.date;
-  document.getElementById('jread-title').textContent = entry.title;
-  document.getElementById('jread-body').textContent = entry.body;
-  const modal = document.getElementById('journal-read-modal');
-  modal.classList.add('open');
-  modal.scrollTop = 0;
-  document.body.style.overflow = 'hidden';
-}
-function closeJournalEntry() {
-  document.getElementById('journal-read-modal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-// Close on backdrop click
-document.getElementById('journal-read-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeJournalEntry();
-});
-
 </script>
 
 <!-- ══ ACTIVITY LOG MODAL ══ -->
@@ -4501,76 +3553,5 @@ document.getElementById('journal-read-modal').addEventListener('click', function
     </div>
   </div>
 </div>
-
-<!-- ══ LOCKED SECTION OVERLAY LOGIC ══ -->
-<script>
-(function() {
-  var RG_PW = 'AAww33!!';
-  var SESSION_KEY = 'rg_biz_unlocked';
-
-  function unlockOverlay(sectionId) {
-    var overlay = document.getElementById('overlay-' + sectionId);
-    if (!overlay) return;
-    overlay.classList.add('unlocking');
-    setTimeout(function() {
-      overlay.parentNode.removeChild(overlay);
-    }, 350);
-  }
-
-  function checkSessionUnlock() {
-    if (sessionStorage.getItem(SESSION_KEY) === '1') {
-      unlockOverlay('businesses');
-      unlockOverlay('finance');
-    }
-  }
-
-  window.rgOverlayClick = function(overlay) {
-    var sectionId = overlay.id.replace('overlay-', '');
-    var pwWrap = document.getElementById('pw-wrap-' + sectionId);
-    if (!pwWrap) return;
-    if (!pwWrap.classList.contains('visible')) {
-      pwWrap.classList.add('visible');
-      var input = document.getElementById('pw-input-' + sectionId);
-      if (input) setTimeout(function() { input.focus(); }, 50);
-    }
-  };
-
-  window.rgPwKeydown = function(e, sectionId) {
-    if (e.key !== 'Enter') return;
-    var input = document.getElementById('pw-input-' + sectionId);
-    var errEl = document.getElementById('pw-err-' + sectionId);
-    if (!input) return;
-    if (input.value === RG_PW) {
-      sessionStorage.setItem(SESSION_KEY, '1');
-      unlockOverlay('businesses');
-      unlockOverlay('finance');
-    } else {
-      input.value = '';
-      if (errEl) {
-        errEl.classList.add('show');
-        setTimeout(function() { errEl.classList.remove('show'); }, 2000);
-      }
-    }
-  };
-
-  // Run on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', checkSessionUnlock);
-  } else {
-    checkSessionUnlock();
-  }
-})();
-</script>
-
-<!-- ══ JOURNAL READ MODAL ══ -->
-<div class="journal-read-modal" id="journal-read-modal">
-  <div class="journal-read-inner">
-    <button class="journal-read-close" onclick="closeJournalEntry()">✕</button>
-    <div class="journal-read-date" id="jread-date"></div>
-    <div class="journal-read-title" id="jread-title"></div>
-    <div class="journal-read-body" id="jread-body"></div>
-  </div>
-</div>
-
 </body>
 </html>
