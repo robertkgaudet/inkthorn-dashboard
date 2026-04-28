@@ -1,67 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-04-27T23:16:31.128Z",
+  "updated": "2026-04-28T13:37:05.719Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-04-27",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Ali Macofsky",
-      "url": "https://504comedy.com/event/1347/ali-macofsky-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Mon Apr 27 2026",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-04-27",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Bear With Me Comedy Open Mic",
-      "url": "https://504comedy.com/event/35/bearwithme",
-      "venue": "Twelve Mile Limit",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Monday",
-      "start_dt": "2026-04-27T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-04-27",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Funny Mondays",
-      "url": "https://504comedy.com/event/1154/funny-mondays",
-      "venue": "New York Pizza",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Monday",
-      "start_dt": "2026-04-27T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-04-27",
-      "time": "9:30pm",
-      "time_sort": 2130,
-      "title": "Gumbolaya All Acts Open Mic",
-      "url": "https://504comedy.com/event/944/gumbolaya-in-the-bayou-pride-edition",
-      "venue": "Poor Boys",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Monday",
-      "start_dt": "2026-04-27T21:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-04-28",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -71,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$25",
       "repeat": "Tue Apr 28 2026",
-      "start_dt": "2026-04-27T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-04-28",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -89,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-04-28",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -103,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-04-28",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -117,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-29",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -131,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-29",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -145,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-29",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -159,7 +103,7 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-29",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -173,7 +117,7 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-29",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -187,7 +131,7 @@
     },
     {
       "category": "comedy",
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-29",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -408,78 +352,72 @@
       "cost": "FREE",
       "repeat": "Every Sunday",
       "start_dt": "2026-05-03T20:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Monday",
+      "date": "2026-05-04",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Bear With Me Comedy Open Mic",
+      "url": "https://504comedy.com/event/35/bearwithme",
+      "venue": "Twelve Mile Limit",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Monday",
+      "start_dt": "2026-05-03T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Monday",
+      "date": "2026-05-04",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Funny Mondays",
+      "url": "https://504comedy.com/event/1154/funny-mondays",
+      "venue": "New York Pizza",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Monday",
+      "start_dt": "2026-05-04T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Monday",
+      "date": "2026-05-04",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Damn That's Funny",
+      "url": "https://504comedy.com/event/931/damn-thats-funny",
+      "venue": "bar redux",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "First Monday",
+      "start_dt": "2026-05-04T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Monday",
+      "date": "2026-05-04",
+      "time": "9:30pm",
+      "time_sort": 2130,
+      "title": "Gumbolaya All Acts Open Mic",
+      "url": "https://504comedy.com/event/944/gumbolaya-in-the-bayou-pride-edition",
+      "venue": "Poor Boys",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Monday",
+      "start_dt": "2026-05-04T21:30-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-04-27",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-27",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Ali Macofsky",
-          "url": "https://504comedy.com/event/1347/ali-macofsky-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Mon Apr 27 2026",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-27",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Bear With Me Comedy Open Mic",
-          "url": "https://504comedy.com/event/35/bearwithme",
-          "venue": "Twelve Mile Limit",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Monday",
-          "start_dt": "2026-04-27T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-27",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Funny Mondays",
-          "url": "https://504comedy.com/event/1154/funny-mondays",
-          "venue": "New York Pizza",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Monday",
-          "start_dt": "2026-04-27T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-27",
-          "time": "9:30pm",
-          "time_sort": 2130,
-          "title": "Gumbolaya All Acts Open Mic",
-          "url": "https://504comedy.com/event/944/gumbolaya-in-the-bayou-pride-edition",
-          "venue": "Poor Boys",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Monday",
-          "start_dt": "2026-04-27T21:30-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-04-28",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-28",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -489,11 +427,11 @@
           "type": "Stand-up",
           "cost": "$25",
           "repeat": "Tue Apr 28 2026",
-          "start_dt": "2026-04-27T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-28",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -507,7 +445,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-28",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -521,7 +459,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-04-28",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -536,12 +474,12 @@
       ]
     },
     {
-      "day": "Wednesday",
+      "day": "Tomorrow",
       "date": "2026-04-29",
       "events": [
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-29",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -555,7 +493,7 @@
         },
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-29",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -569,7 +507,7 @@
         },
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-29",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -583,7 +521,7 @@
         },
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-29",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -597,7 +535,7 @@
         },
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-29",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -611,7 +549,7 @@
         },
         {
           "category": "comedy",
-          "day": "Wednesday",
+          "day": "Tomorrow",
           "date": "2026-04-29",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -856,6 +794,68 @@
           "cost": "FREE",
           "repeat": "Every Sunday",
           "start_dt": "2026-05-03T20:30-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Monday",
+      "date": "2026-05-04",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Monday",
+          "date": "2026-05-04",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Bear With Me Comedy Open Mic",
+          "url": "https://504comedy.com/event/35/bearwithme",
+          "venue": "Twelve Mile Limit",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Monday",
+          "start_dt": "2026-05-03T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Monday",
+          "date": "2026-05-04",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Funny Mondays",
+          "url": "https://504comedy.com/event/1154/funny-mondays",
+          "venue": "New York Pizza",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Monday",
+          "start_dt": "2026-05-04T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Monday",
+          "date": "2026-05-04",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Damn That's Funny",
+          "url": "https://504comedy.com/event/931/damn-thats-funny",
+          "venue": "bar redux",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "First Monday",
+          "start_dt": "2026-05-04T21:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Monday",
+          "date": "2026-05-04",
+          "time": "9:30pm",
+          "time_sort": 2130,
+          "title": "Gumbolaya All Acts Open Mic",
+          "url": "https://504comedy.com/event/944/gumbolaya-in-the-bayou-pride-edition",
+          "venue": "Poor Boys",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Monday",
+          "start_dt": "2026-05-04T21:30-05:00"
         }
       ]
     }
