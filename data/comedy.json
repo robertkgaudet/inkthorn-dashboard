@@ -1,36 +1,8 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-04-29T13:35:52.730Z",
+  "updated": "2026-04-29T23:17:10.296Z",
   "source": "504Comedy.com",
   "shows": [
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-04-29",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Sahib Singh",
-      "url": "https://504comedy.com/event/1349/sahib-singh-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Wed Apr 29 2026",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-04-29",
-      "time": "8:30pm",
-      "time_sort": 2030,
-      "title": "Open Gym Comedy Open Mic",
-      "url": "https://504comedy.com/event/1322/open-gym-comedy-open-mic",
-      "venue": "Sports Drink",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Wednesday",
-      "start_dt": "2026-04-29T20:30-05:00"
-    },
     {
       "category": "comedy",
       "day": "Today",
@@ -43,7 +15,7 @@
       "type": "Open Mic",
       "cost": "FREE",
       "repeat": "Every Wednesday",
-      "start_dt": "2026-04-29T21:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
@@ -83,6 +55,20 @@
       "url": "https://504comedy.com/event/1316/one-more-pie-comedy-open-mic",
       "venue": "One More Pie",
       "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Wednesday",
+      "start_dt": "2026-04-29T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Today",
+      "date": "2026-04-29",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Open Gym Comedy Open Mic",
+      "url": "https://504comedy.com/event/1322/open-gym-comedy-open-mic",
+      "venue": "Sports Drink",
+      "type": "Open Mic",
       "cost": "FREE",
       "repeat": "Every Wednesday",
       "start_dt": "2026-04-29T21:00-05:00"
@@ -287,15 +273,15 @@
       "category": "comedy",
       "day": "Sunday",
       "date": "2026-05-03",
-      "time": "8:30pm",
-      "time_sort": 2030,
+      "time": "8:00pm",
+      "time_sort": 2000,
       "title": "Open Gym Comedy Open Mic",
       "url": "https://504comedy.com/event/1152/open-gym-comedy-open-mic",
       "venue": "Sports Drink",
-      "type": "Open Mic",
+      "type": "Stand-up",
       "cost": "FREE",
       "repeat": "Every Sunday",
-      "start_dt": "2026-05-03T20:30-05:00"
+      "start_dt": "2026-05-03T20:00-05:00"
     },
     {
       "category": "comedy",
@@ -405,34 +391,6 @@
           "category": "comedy",
           "day": "Today",
           "date": "2026-04-29",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Sahib Singh",
-          "url": "https://504comedy.com/event/1349/sahib-singh-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Wed Apr 29 2026",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-29",
-          "time": "8:30pm",
-          "time_sort": 2030,
-          "title": "Open Gym Comedy Open Mic",
-          "url": "https://504comedy.com/event/1322/open-gym-comedy-open-mic",
-          "venue": "Sports Drink",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Wednesday",
-          "start_dt": "2026-04-29T20:30-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-04-29",
           "time": "9:00pm",
           "time_sort": 2100,
           "title": "Think You're Funny?",
@@ -441,7 +399,7 @@
           "type": "Open Mic",
           "cost": "FREE",
           "repeat": "Every Wednesday",
-          "start_dt": "2026-04-29T21:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
@@ -481,6 +439,20 @@
           "url": "https://504comedy.com/event/1316/one-more-pie-comedy-open-mic",
           "venue": "One More Pie",
           "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Wednesday",
+          "start_dt": "2026-04-29T21:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Today",
+          "date": "2026-04-29",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Open Gym Comedy Open Mic",
+          "url": "https://504comedy.com/event/1322/open-gym-comedy-open-mic",
+          "venue": "Sports Drink",
+          "type": "Open Mic",
           "cost": "FREE",
           "repeat": "Every Wednesday",
           "start_dt": "2026-04-29T21:00-05:00"
@@ -709,15 +681,15 @@
           "category": "comedy",
           "day": "Sunday",
           "date": "2026-05-03",
-          "time": "8:30pm",
-          "time_sort": 2030,
+          "time": "8:00pm",
+          "time_sort": 2000,
           "title": "Open Gym Comedy Open Mic",
           "url": "https://504comedy.com/event/1152/open-gym-comedy-open-mic",
           "venue": "Sports Drink",
-          "type": "Open Mic",
+          "type": "Stand-up",
           "cost": "FREE",
           "repeat": "Every Sunday",
-          "start_dt": "2026-05-03T20:30-05:00"
+          "start_dt": "2026-05-03T20:00-05:00"
         }
       ]
     },
