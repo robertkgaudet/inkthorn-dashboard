@@ -209,10 +209,15 @@ async function renderNolaEvents(data, el) {
   let allEvents = [];
 
   // Music — today only from WWOZ
-  const musicShows = (data.shows || []).slice().sort((a, b) => {
-    const norm = t => (t < 600 ? t + 2400 : t);
-    return norm(a.time_sort) - norm(b.time_sort);
-  });
+  // Exclude Jazz Fest genre shows — those are loaded separately from jazzfest.json
+  // with proper per-day filtering. Keeping them here causes stale shows to appear
+  // every day when the scraper hasn't refreshed live-music.json.
+  const musicShows = (data.shows || [])
+    .filter(s => s.genre !== 'Jazz Fest')
+    .slice().sort((a, b) => {
+      const norm = t => (t < 600 ? t + 2400 : t);
+      return norm(a.time_sort) - norm(b.time_sort);
+    });
   for (const s of musicShows) {
     allEvents.push({
       category:  'music',
