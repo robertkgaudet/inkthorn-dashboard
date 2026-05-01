@@ -1,17 +1,17 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-05-01T13:31:38.518Z",
+  "updated": "2026-05-01T23:15:39.513Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 68,
-    "feels_like_f": 68,
-    "humidity": 90,
+    "temp_f": 63,
+    "feels_like_f": 63,
+    "humidity": 93,
     "description": "Overcast",
     "code": "122",
     "emoji": "☁️",
     "wind_mph": 9,
-    "wind_dir": "E",
+    "wind_dir": "NE",
     "visibility_miles": 16,
     "uv_index": 0
   },
@@ -19,13 +19,13 @@
     {
       "date": "2026-05-01",
       "label": "Fri, May 1",
-      "high_f": 71,
+      "high_f": 73,
       "low_f": 60,
-      "description": "Overcast",
-      "emoji": "☁️",
+      "description": "Light Drizzle",
+      "emoji": "🌡️",
       "sunrise": "06:17 AM",
       "sunset": "07:38 PM",
-      "avg_humidity": 92,
+      "avg_humidity": 94,
       "chance_of_rain": 100
     },
     {
@@ -33,23 +33,23 @@
       "label": "Sat, May 2",
       "high_f": 74,
       "low_f": 57,
-      "description": "Overcast",
-      "emoji": "☁️",
+      "description": "Partly Cloudy",
+      "emoji": "⛅",
       "sunrise": "06:16 AM",
       "sunset": "07:39 PM",
-      "avg_humidity": 69,
+      "avg_humidity": 70,
       "chance_of_rain": 100
     },
     {
       "date": "2026-05-03",
       "label": "Sun, May 3",
-      "high_f": 75,
-      "low_f": 58,
+      "high_f": 74,
+      "low_f": 59,
       "description": "Clear",
       "emoji": "☀️",
       "sunrise": "06:16 AM",
       "sunset": "07:39 PM",
-      "avg_humidity": 48,
+      "avg_humidity": 49,
       "chance_of_rain": 0
     }
   ]
