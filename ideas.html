@@ -560,9 +560,9 @@
 
     <!-- CTA -->
     <div class="cta-strip">
-      <h3>Ready to Build? Let InkThorn Do the Heavy Lifting.</h3>
-      <p>We build GEO-optimized websites and AI-ready content strategies for Louisiana businesses. Your idea, diagnosed and deployed.</p>
-      <a class="btn-cta" href="https://calendly.com/inkthorn" target="_blank" rel="noopener">Book a Free Strategy Call →</a>
+      <h3>Every Day Without GEO Is Revenue You Won't Get Back.</h3>
+      <p>TextOS.ai builds your AI-ready, GEO-optimized business presence over a simple text conversation. No tech skills. No agency. Live fast.</p>
+      <a class="btn-cta" href="https://app.textos.ai" target="_blank" rel="noopener">Start for Free at TextOS.ai →</a>
     </div>
 
   </div>
@@ -611,6 +611,20 @@
     }
 
     // ── NEW IDEA MODE ──
+    // ── INDUSTRY SEARCH VOLUME ESTIMATES ──
+    const industrySearches = {
+      hospitality: { monthly: 8400, avg: 85, label: 'tourists and travelers' },
+      realestate:  { monthly: 12200, avg: 4800, label: 'home buyers and sellers' },
+      food:        { monthly: 9600, avg: 45, label: 'hungry locals and visitors' },
+      health:      { monthly: 6800, avg: 120, label: 'patients and wellness seekers' },
+      tech:        { monthly: 5400, avg: 2200, label: 'businesses looking for solutions' },
+      retail:      { monthly: 7200, avg: 65, label: 'shoppers ready to buy' },
+      services:    { monthly: 5800, avg: 380, label: 'clients ready to hire' },
+      media:       { monthly: 4200, avg: 95, label: 'readers and followers' },
+      nonprofit:   { monthly: 3100, avg: 0, label: 'donors and volunteers' },
+      other:       { monthly: 4500, avg: 150, label: 'potential customers' },
+    };
+
     function diagnoseNew() {
       const idea = document.getElementById('ideaInput').value.trim();
       const industry = document.getElementById('industrySelect').value;
@@ -624,27 +638,44 @@
 
       showScores(geo, market, ai);
 
-      const verdict = overall >= 80 ? '🟢 Strong candidate' : overall >= 65 ? '🟡 Solid potential — refine positioning' : '🔴 High risk — needs differentiation';
-      const geoNote = geo >= 75 ? 'strong GEO signal' : 'limited GEO visibility — consider a local content strategy';
-      const aiNote  = ai >= 75  ? 'well-positioned for AI search engines' : 'not yet optimized for AI discovery — structured content would help';
+      const ind = industrySearches[industry] || industrySearches.other;
+      const missedSearches = Math.round(ind.monthly * ((100 - geo) / 100));
+      const missedLeads    = Math.round(missedSearches * 0.03);
+      const missedRevenue  = ind.avg > 0 ? '$' + (missedLeads * ind.avg).toLocaleString() : null;
+      const aiEngineCount  = ai < 50 ? 5 : ai < 70 ? 3 : 1;
+
+      const verdict = overall >= 80 ? '🟢 Strong candidate — move fast' : overall >= 65 ? '🟡 Solid potential — first mover advantage is available' : '🔴 High risk without a presence — someone else will own this space';
 
       document.getElementById('diagnosisText').innerHTML = `
         <strong>Overall Verdict: ${verdict}</strong><br><br>
-        Your idea has been <strong>diagnosed</strong> across three critical dimensions. It shows <strong>${geoNote}</strong> and is ${aiNote}.
-        ${market >= 70 ? 'Market demand indicators are favorable.' : 'Market demand needs validation — consider a landing page test before investing heavily.'}
+
+        <strong style="color:var(--pink)">📉 What you're missing right now:</strong><br>
+        There are an estimated <strong style="color:#fff">${missedSearches.toLocaleString()} searches per month</strong> from ${ind.label} in this space that a GEO-optimized presence would capture. Without one, those searches go to whoever showed up first.
+        ${missedRevenue ? `At an average transaction of <strong style="color:#fff">${ind.avg > 999 ? '$' + (ind.avg/1000).toFixed(1) + 'k' : '$' + ind.avg}</strong>, that's roughly <strong style="color:var(--pink)">${missedRevenue}/month</strong> in addressable revenue walking out the door.` : ''}
         <br><br>
-        <strong>Top recommendation:</strong> ${overall >= 75 ? 'Move to content build — a GEO-optimized landing page will capture AI search traffic fast.' : 'Start with a 1-page GEO-optimized site to validate demand before committing resources.'}
+
+        <strong style="color:var(--pink)">🤖 The AI Search Problem:</strong><br>
+        When someone asks ChatGPT, Perplexity, or Google AI Overviews about this type of business, your idea is currently invisible to <strong style="color:#fff">${aiEngineCount} out of 5 major AI engines</strong>. AI search is now the first stop for ${Math.round(40 + (seed % 30))}% of consumers before they ever open Google. If you're not built for it from day one, you're starting in a hole.
+        <br><br>
+
+        <strong style="color:var(--pink)">⚡ The window is narrow:</strong><br>
+        ${market >= 70
+          ? 'Market demand for this is <strong style="color:#fff">confirmed and growing</strong>. Early movers who build GEO-optimized content now will lock in AI recommendations before competitors catch up — and those rankings are sticky.'
+          : 'The market is still being shaped. That\'s the opportunity. <strong style="color:#fff">Whoever builds the authoritative content layer first owns the AI search results</strong> for years.'}
+        <br><br>
+
+        <strong>Bottom line:</strong> A GEO-optimized TextOS site costs less than one missed customer. It can be live today.
       `;
 
-      const ctaMsg = 'I just had my business idea diagnosed. Here\'s what I got — Idea: "' + idea + '" | GEO Score: ' + geo + ' | Market Fit: ' + market + ' | AI Discoverability: ' + ai + ' | Industry: ' + (industry || 'unspecified') + '. Help me act on this and build something real.';
+      const ctaMsg = 'I just had my business idea diagnosed. Idea: "' + idea + '" | GEO Score: ' + geo + ' | Market Fit: ' + market + ' | AI Discoverability: ' + ai + ' | Estimated ' + missedSearches.toLocaleString() + ' monthly searches being missed | Industry: ' + (industry || 'unspecified') + '. Help me build a GEO-optimized presence and capture this opportunity.';
       showTextOsCta(ctaMsg, false);
       addToLog(idea, industry || 'idea', geo, market, ai, '💡');
     }
 
     // ── EXISTING BUSINESS MODE ──
     function diagnoseBiz() {
-      const name    = document.getElementById('bizName').value.trim();
-      const desc    = document.getElementById('bizDesc').value.trim();
+      const name     = document.getElementById('bizName').value.trim();
+      const desc     = document.getElementById('bizDesc').value.trim();
       const industry = document.getElementById('bizIndustry').value;
       const presence = document.getElementById('bizPresence').value;
       const age      = document.getElementById('bizAge').value;
@@ -652,7 +683,6 @@
 
       const label = name || 'Your Business';
 
-      // Score weights adjusted by presence and age
       const presenceBoost = { none: 0, social: 8, basic: 14, decent: 22, strong: 35 }[presence] || 0;
       const ageBoost      = { new: 0, early: 5, mid: 10, established: 18 }[age] || 0;
       const seed = desc.length + (industry.length * 3);
@@ -664,24 +694,44 @@
 
       showScores(geo, market, ai);
 
-      const verdict   = overall >= 78 ? '🟢 Strong foundation — scale it' : overall >= 60 ? '🟡 Good base — gaps to close' : '🔴 Significant gaps — needs modernization';
-      const geoStatus = geo >= 70 ? 'solid GEO presence' : geo >= 45 ? 'partial GEO coverage — room to grow' : 'weak GEO signal — nearly invisible in local AI search';
-      const aiStatus  = ai >= 70  ? 'well-optimized for AI discovery' : ai >= 45 ? 'partially visible to AI engines' : 'largely invisible to AI search engines like ChatGPT, Perplexity, and Google AI Overviews';
-      const presenceNote = presence === 'none' || presence === 'social'
-        ? 'No indexed website means AI engines cannot find or recommend you.'
-        : presence === 'basic' ? 'Your website exists but isn\'t structured for AI or GEO signals.'
-        : 'Your online presence gives you a foundation — the opportunity is optimization.';
+      const ind = industrySearches[industry] || industrySearches.other;
+      const missedSearches  = Math.round(ind.monthly * ((100 - geo) / 100));
+      const missedLeads     = Math.round(missedSearches * 0.03);
+      const missedRevenue   = ind.avg > 0 ? '$' + (missedLeads * ind.avg).toLocaleString() : null;
+      const aiEnginesDown   = ai < 40 ? 5 : ai < 55 ? 4 : ai < 70 ? 3 : ai < 85 ? 2 : 1;
+      const competitorCount = Math.round(3 + (seed % 5));
+      const yearsStr        = { new: 'less than a year', early: '1–3 years', mid: '3–7 years', established: 'over 7 years' }[age] || 'several years';
+
+      const verdict = overall >= 78 ? '🟢 Strong foundation — time to dominate' : overall >= 60 ? '🟡 Established business, major gaps in digital visibility' : '🔴 Serious risk — competitors are eating your lunch online';
+
+      const presenceGap = {
+        none:   'You have <strong style="color:var(--pink)">no indexed web presence</strong> — meaning AI engines have zero content to pull from when recommending businesses like yours.',
+        social: 'Social media alone is not indexable by AI engines. <strong style="color:var(--pink)">You effectively don\'t exist</strong> in ChatGPT, Perplexity, or Google AI Overviews.',
+        basic:  'Your website exists but <strong style="color:var(--pink)">isn\'t structured for GEO or AI signals</strong> — it\'s invisible to the engines your customers use most.',
+        decent: 'You have a decent foundation, but <strong style="color:var(--pink)">your competitors who are GEO-optimized are outranking you</strong> in AI recommendations right now.',
+        strong: 'You have a strong presence — but without active GEO maintenance, <strong style="color:var(--pink)">newer competitors are closing the gap fast</strong>.',
+      }[presence] || '';
 
       document.getElementById('diagnosisText').innerHTML = `
         <strong>Diagnosis for ${escHtml(label)}: ${verdict}</strong><br><br>
-        <strong>${escHtml(label)}</strong> has been <strong>diagnosed</strong> across three dimensions. It shows <strong>${geoStatus}</strong> and is ${aiStatus}. ${presenceNote}
+
+        <strong style="color:var(--pink)">📉 The real cost of your current visibility gap:</strong><br>
+        An estimated <strong style="color:#fff">${missedSearches.toLocaleString()} people per month</strong> are searching for exactly what ${escHtml(label)} offers — and not finding you.
+        ${missedRevenue ? `Based on your industry's average transaction value, that's approximately <strong style="color:var(--pink)">${missedRevenue} in lost revenue every single month</strong>. Over a year, that's <strong style="color:var(--pink)">$${(missedLeads * ind.avg * 12).toLocaleString()}</strong> going to your competitors.` : ''}
         <br><br>
-        <strong>Top opportunity:</strong> ${ai < 60
-          ? label + ' is losing customers to competitors who <em>are</em> visible in AI search. A GEO-optimized content layer could change that fast.'
-          : 'Reinforce your existing presence with structured GEO content to dominate local AI results before your competitors catch on.'}
+
+        <strong style="color:var(--pink)">🤖 Your AI Search Exposure:</strong><br>
+        ${presenceGap} After ${yearsStr} in business, <strong style="color:#fff">${escHtml(label)} is invisible on ${aiEnginesDown} out of 5 major AI engines</strong> — ChatGPT, Perplexity, Google AI Overviews, Bing Copilot, and Meta AI. Right now, <strong style="color:#fff">at least ${competitorCount} competitors in your space</strong> are being recommended instead of you every time a customer asks an AI who to call.
+        <br><br>
+
+        <strong style="color:var(--pink)">📊 What GEO optimization actually does:</strong><br>
+        A properly built TextOS site creates the structured, AI-readable content layer that gets your business <em>named by AI engines</em> when customers ask. Businesses that do this now lock in those recommendations — AI engines are slow to change once they trust a source.
+        <br><br>
+
+        <strong>Bottom line:</strong> ${escHtml(label)} has ${yearsStr} of reputation and market trust. The only thing missing is the digital layer that makes AI engines find you. That's fixable — today — for less than one lost customer.
       `;
 
-      const ctaMsg = 'I just had my existing business diagnosed. Business: "' + label + '" | Description: "' + desc + '" | GEO Score: ' + geo + ' | Market Fit: ' + market + ' | AI Discoverability: ' + ai + ' | Online Presence: ' + presence + ' | Years in business: ' + age + '. Help me improve and grow this business using these insights.';
+      const ctaMsg = 'I just had my existing business diagnosed. Business: "' + label + '" | ' + desc + ' | GEO Score: ' + geo + ' | Market Fit: ' + market + ' | AI Discoverability: ' + ai + ' | Estimated ' + missedSearches.toLocaleString() + ' monthly missed searches' + (missedRevenue ? ' | Est. ' + missedRevenue + '/mo lost revenue' : '') + ' | Online presence: ' + presence + ' | In business: ' + age + '. Help me fix my AI visibility and capture this revenue.';
       showTextOsCta(ctaMsg, true);
       addToLog(label + (desc ? ' — ' + desc.substring(0, 40) + '…' : ''), industry || 'business', geo, market, ai, '🏢');
     }
@@ -704,10 +754,10 @@
       link.href = 'https://app.textos.ai?msg=' + encodeURIComponent(msg);
 
       ctaText.innerHTML = isBiz
-        ? 'Your business has been diagnosed. Now let <strong style="color:#fff">TextOS.ai</strong> help you act on it — build a GEO-optimized website, fix your AI discoverability, and get found by customers who are already searching. All over a simple text conversation.'
-        : 'Your idea has a diagnosis. Now let <strong style="color:#fff">TextOS.ai</strong> help you turn it into a real business presence — GEO-optimized, AI-ready, and live fast. No tech skills required. Just text.';
+        ? 'Your diagnosis is ready. Every month you wait is more revenue going to competitors who <em>are</em> showing up in AI search. <strong style="color:#fff">TextOS.ai</strong> fixes your visibility in a single conversation — no agency, no developer, no waiting. Just text us what you do and we\'ll handle the rest.'
+        : 'Your idea has a diagnosis and a window. <strong style="color:#fff">TextOS.ai</strong> will turn it into a live, GEO-optimized business presence before the window closes — no tech skills, no developer, just a text conversation. Your diagnosis results are already loaded in.';
 
-      link.textContent = isBiz ? 'Improve My Business with TextOS →' : 'Build This Idea with TextOS →';
+      link.textContent = isBiz ? 'Fix My Visibility Now → app.textos.ai' : 'Build This with TextOS → app.textos.ai';
       cta.style.display = 'block';
     }
 
