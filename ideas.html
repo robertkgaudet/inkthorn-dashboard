@@ -810,6 +810,20 @@
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
+    // ── AFFILIATE REF TRACKING ──
+    (function() {
+      const p = new URLSearchParams(window.location.search);
+      const ref = p.get('ref');
+      if (!ref) return;
+      // Log the click
+      const clicks = JSON.parse(localStorage.getItem('ink_clicks') || '[]');
+      clicks.push({ ref, page: 'ideas', ts: Date.now() });
+      localStorage.setItem('ink_clicks', JSON.stringify(clicks.slice(-500)));
+      // Persist ref for 90 days
+      const exp = Date.now() + 90 * 24 * 60 * 60 * 1000;
+      localStorage.setItem('ink_ref', JSON.stringify({ ref, exp }));
+    })();
+
     // ── AUTO-RUN FROM URL PARAMS ──
     document.addEventListener('DOMContentLoaded', function() {
       const ap = window._autoParams;

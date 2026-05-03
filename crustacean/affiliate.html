@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>InkThorn Crustacean — Affiliate Partner Program</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100vh; background: #06000f; color: #f0f0ff; font-family: 'Space Grotesk', sans-serif; }
+
+    .topbar {
+      background: rgba(10,0,20,0.95);
+      border-bottom: 1px solid rgba(168,85,247,0.2);
+      padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    .topbar-logo { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 900; color: #f0f0ff; letter-spacing: 0.05em; }
+    .topbar-logo span { color: #a855f7; }
+    .topbar-nav { display: flex; gap: 20px; align-items: center; }
+    .topbar-nav a { font-size: 0.78rem; color: #7878a8; text-decoration: none; font-weight: 600; }
+    .topbar-nav a:hover { color: #a855f7; }
+
+    .hero {
+      background: linear-gradient(135deg, #0d001a 0%, #1a0035 50%, #0a0a1a 100%);
+      padding: 64px 28px 56px;
+      text-align: center;
+      border-bottom: 1px solid rgba(168,85,247,0.15);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(168,85,247,0.15);
+      border: 1px solid rgba(168,85,247,0.4);
+      color: #c4b5fd;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em;
+      padding: 6px 18px; border-radius: 999px; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.8rem); font-weight: 900;
+      background: linear-gradient(135deg, #fff 0%, #c4b5fd 50%, #a855f7 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 16px; line-height: 1.2;
+    }
+    .hero p { font-size: 1.05rem; color: rgba(240,240,255,0.65); max-width: 560px; margin: 0 auto 28px; line-height: 1.6; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* ── Payout cards ── */
+    .payout-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 40px; }
+    .payout-card {
+      background: rgba(22,12,45,0.7); border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 14px; padding: 22px; text-align: center;
+    }
+    .payout-card .amount { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 900; color: #a855f7; margin: 8px 0 4px; }
+    .payout-card .plan { font-size: 0.72rem; font-weight: 700; color: #7878a8; letter-spacing: 0.08em; text-transform: uppercase; }
+    .payout-card .desc { font-size: 0.82rem; color: rgba(240,240,255,0.55); margin-top: 6px; line-height: 1.4; }
+
+    /* ── Generator card ── */
+    .gen-card {
+      background: rgba(22,12,45,0.7);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 16px; padding: 32px;
+      position: relative; overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .gen-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, #a855f7, #ff2d87, #00d4ff);
+    }
+    .gen-card h2 {
+      font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: #c4b5fd; margin-bottom: 22px;
+    }
+    .field-group { margin-bottom: 18px; }
+    .field-group label { display: block; font-size: 0.78rem; font-weight: 600; color: #7878a8; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+    .field-group input {
+      width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 10px; color: #f0f0ff; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem; padding: 11px 14px; outline: none; transition: border-color 0.2s;
+    }
+    .field-group input:focus { border-color: #a855f7; background: rgba(168,85,247,0.05); }
+    .btn-generate {
+      display: block; width: 100%;
+      background: linear-gradient(135deg, #a855f7, #ff2d87);
+      color: #fff; font-family: 'Orbitron', sans-serif; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; padding: 14px; border-radius: 10px;
+      border: none; cursor: pointer; transition: opacity 0.2s;
+    }
+    .btn-generate:hover { opacity: 0.88; }
+
+    /* ── Link output ── */
+    .link-output { display: none; margin-top: 24px; }
+    .link-output.visible { display: block; }
+    .link-box-label { font-family: 'Orbitron', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; color: #7878a8; text-transform: uppercase; margin-bottom: 8px; }
+    .link-row {
+      display: flex; gap: 8px; align-items: center;
+      background: rgba(0,0,0,0.3); border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 10px; padding: 12px 16px;
+    }
+    .link-row span { flex: 1; font-family: monospace; font-size: 0.82rem; color: #c4b5fd; word-break: break-all; }
+    .btn-copy {
+      flex-shrink: 0; background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.4);
+      color: #c4b5fd; font-family: 'Orbitron', sans-serif; font-size: 0.55rem; font-weight: 700;
+      letter-spacing: 0.1em; padding: 7px 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-copy:hover { background: rgba(168,85,247,0.3); }
+    .btn-copy.copied { background: rgba(74,222,128,0.2); border-color: #4ade80; color: #4ade80; }
+
+    .links-section { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+    @media (max-width: 600px) { .links-section { grid-template-columns: 1fr; } }
+
+    /* ── Rep card (preview) ── */
+    .rep-card {
+      background: rgba(168,85,247,0.07); border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 12px; padding: 18px 22px; margin-top: 20px;
+      display: none;
+    }
+    .rep-card.visible { display: block; }
+    .rep-card-header { font-family: 'Orbitron', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; color: #a855f7; text-transform: uppercase; margin-bottom: 12px; }
+    .rep-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+    .rep-meta-item { }
+    .rep-meta-label { font-size: 0.7rem; color: #7878a8; font-family: 'Orbitron', sans-serif; letter-spacing: 0.06em; }
+    .rep-meta-value { font-size: 1rem; font-weight: 700; color: #f0f0ff; margin-top: 2px; }
+
+    /* ── How it works ── */
+    .how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 40px; }
+    .how-card {
+      background: rgba(22,12,45,0.5); border: 1px solid rgba(168,85,247,0.12);
+      border-radius: 12px; padding: 20px;
+    }
+    .how-num { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; color: rgba(168,85,247,0.4); margin-bottom: 8px; }
+    .how-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 6px; }
+    .how-desc { font-size: 0.82rem; color: rgba(240,240,255,0.55); line-height: 1.5; }
+
+    /* ── Admin link ── */
+    .admin-strip {
+      background: rgba(255,45,135,0.06); border: 1px solid rgba(255,45,135,0.2);
+      border-radius: 12px; padding: 16px 22px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap; margin-top: 40px;
+    }
+    .admin-strip p { font-size: 0.85rem; color: rgba(240,240,255,0.6); }
+    .admin-strip a {
+      font-family: 'Orbitron', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em;
+      padding: 9px 20px; border-radius: 999px; border: 1px solid rgba(255,45,135,0.5);
+      background: rgba(255,45,135,0.1); color: #ff2d87; text-decoration: none; white-space: nowrap;
+    }
+    .admin-strip a:hover { background: rgba(255,45,135,0.2); }
+  </style>
+</head>
+<body>
+
+  <nav class="topbar">
+    <div>
+      <div class="topbar-logo">InkThorn <span>Crustacean</span></div>
+    </div>
+    <div class="topbar-nav">
+      <a href="/crustacean/">Home</a>
+      <a href="/crustacean/dashboard.html">🗂️ Leads</a>
+      <a href="/crustacean/earnings.html">💰 Earnings</a>
+      <a href="/crustacean/affiliate.html" style="color:#f0f0ff;">🔗 Affiliate</a>
+      <a href="/crustacean/training.html">📋 Training</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge">🔗 AFFILIATE PARTNER PROGRAM</div>
+    <h1>Sell GEO Services.<br>Earn Real Commissions.</h1>
+    <p>Generate your unique tracking link, share it with prospects, and earn every time they sign up for InkThorn GEO services.</p>
+  </div>
+
+  <div class="container">
+
+    <!-- Payout Structure -->
+    <div style="font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.15em;color:#7878a8;text-transform:uppercase;margin-bottom:16px;">💰 Commission Structure</div>
+    <div class="payout-grid">
+      <div class="payout-card">
+        <div class="plan">Starter Site</div>
+        <div class="amount">$39</div>
+        <div class="desc">$39/mo plan · <strong style="color:#c4b5fd;">20% = $7.80/mo</strong> recurring per client</div>
+      </div>
+      <div class="payout-card">
+        <div class="plan">Growth Site</div>
+        <div class="amount">$79</div>
+        <div class="desc">$79/mo plan · <strong style="color:#c4b5fd;">20% = $15.80/mo</strong> recurring per client</div>
+      </div>
+      <div class="payout-card">
+        <div class="plan">Pro GEO</div>
+        <div class="amount">$149</div>
+        <div class="desc">$149/mo plan · <strong style="color:#c4b5fd;">20% = $29.80/mo</strong> recurring per client</div>
+      </div>
+      <div class="payout-card" style="border-color:rgba(255,45,135,0.3);">
+        <div class="plan">10 Clients @ Growth</div>
+        <div class="amount" style="color:#ff2d87;">$158</div>
+        <div class="desc">10 clients on $79/mo = <strong style="color:#ff2d87;">$158/mo passive income</strong> every month they stay</div>
+      </div>
+    </div>
+
+    <!-- Link Generator -->
+    <div class="gen-card">
+      <h2>⚡ Generate Your Affiliate Links</h2>
+
+      <div class="field-group">
+        <label>Your Name</label>
+        <input type="text" id="repName" placeholder="e.g. Marcus Johnson" oninput="updatePreview()" />
+      </div>
+      <div class="field-group">
+        <label>Your Affiliate Code (no spaces)</label>
+        <input type="text" id="repCode" placeholder="e.g. marcus · mjohnson · team-nola" oninput="sanitizeCode(); updatePreview()" />
+      </div>
+
+      <button class="btn-generate" onclick="generateLinks()">🔗 Generate My Affiliate Links</button>
+
+      <!-- Rep preview -->
+      <div class="rep-card" id="repCard">
+        <div class="rep-card-header">👤 Your Rep Profile</div>
+        <div class="rep-meta">
+          <div class="rep-meta-item">
+            <div class="rep-meta-label">Name</div>
+            <div class="rep-meta-value" id="previewName">—</div>
+          </div>
+          <div class="rep-meta-item">
+            <div class="rep-meta-label">Code</div>
+            <div class="rep-meta-value" id="previewCode" style="color:#a855f7;font-family:monospace;">—</div>
+          </div>
+          <div class="rep-meta-item">
+            <div class="rep-meta-label">Status</div>
+            <div class="rep-meta-value" style="color:#4ade80;">✅ Active</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Link output -->
+      <div class="link-output" id="linkOutput">
+        <div class="links-section">
+          <div>
+            <div class="link-box-label">🏠 Main Site Link</div>
+            <div class="link-row">
+              <span id="link-main">—</span>
+              <button class="btn-copy" onclick="copyLink('link-main', this)">COPY</button>
+            </div>
+          </div>
+          <div>
+            <div class="link-box-label">🔬 Diagnosis Tool Link</div>
+            <div class="link-row">
+              <span id="link-diagnose">—</span>
+              <button class="btn-copy" onclick="copyLink('link-diagnose', this)">COPY</button>
+            </div>
+          </div>
+          <div>
+            <div class="link-box-label">📋 Services Page Link</div>
+            <div class="link-row">
+              <span id="link-services">—</span>
+              <button class="btn-copy" onclick="copyLink('link-services', this)">COPY</button>
+            </div>
+          </div>
+          <div>
+            <div class="link-box-label">📱 TextOS Signup Link</div>
+            <div class="link-row">
+              <span id="link-textos">—</span>
+              <button class="btn-copy" onclick="copyLink('link-textos', this)">COPY</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:14px 18px;font-size:0.82rem;color:rgba(240,240,255,0.6);line-height:1.55;">
+          💡 <strong style="color:#00d4ff;">Pro tip:</strong> Use the <strong>Diagnosis Tool Link</strong> when pitching a specific business — it auto-runs the diagnosis with your affiliate code attached. Every click is tracked. Every conversion is tied to you.
+        </div>
+      </div>
+    </div>
+
+    <!-- How It Works -->
+    <div style="font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.15em;color:#7878a8;text-transform:uppercase;margin-bottom:16px;">📖 HOW IT WORKS</div>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <div class="how-title">Generate Your Links</div>
+        <div class="how-desc">Enter your name and code above. You get 4 unique tracking URLs — one for each touchpoint in the sales flow.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <div class="how-title">Share & Diagnose</div>
+        <div class="how-desc">Use the Diagnosis Tool link when pitching any business. Opens textos.ai with their data pre-loaded and your code embedded.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <div class="how-title">Clicks Are Tracked</div>
+        <div class="how-desc">Every visit through your link logs your code in the prospect's browser. It persists for 90 days — you get credit even if they sign up later.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">04</div>
+        <div class="how-title">Earn Recurring Commissions</div>
+        <div class="how-desc">20% of monthly subscription, every month the client stays. 10 clients on the Growth plan = $158/mo without leaving your couch.</div>
+      </div>
+    </div>
+
+    <!-- Admin link -->
+    <div class="admin-strip">
+      <p>📊 <strong>Rob / Admin:</strong> Track all affiliate clicks, leads, and conversions across every rep code.</p>
+      <a href="/crustacean/affiliate-admin.html">View Affiliate Admin →</a>
+    </div>
+
+  </div>
+
+  <script>
+    function sanitizeCode() {
+      const el = document.getElementById('repCode');
+      el.value = el.value.toLowerCase().replace(/[^a-z0-9-]/g, '');
+    }
+
+    function updatePreview() {
+      const name = document.getElementById('repName').value.trim();
+      const code = document.getElementById('repCode').value.trim();
+      if (name || code) {
+        document.getElementById('repCard').classList.add('visible');
+        document.getElementById('previewName').textContent = name || '—';
+        document.getElementById('previewCode').textContent = code || '—';
+      }
+    }
+
+    function generateLinks() {
+      const name = document.getElementById('repName').value.trim();
+      const code = document.getElementById('repCode').value.trim();
+      if (!name || !code) { alert('Enter your name and affiliate code first.'); return; }
+
+      const base = 'https://inkthorn.ai';
+      const textos = 'https://textos.ai';
+
+      document.getElementById('link-main').textContent     = `${base}/?ref=${code}`;
+      document.getElementById('link-diagnose').textContent = `${textos}/ideas.html?ref=${code}`;
+      document.getElementById('link-services').textContent = `${base}/services.html?ref=${code}`;
+      document.getElementById('link-textos').textContent   = `https://app.textos.ai?ref=${code}`;
+
+      document.getElementById('linkOutput').classList.add('visible');
+      document.getElementById('repCard').classList.add('visible');
+      document.getElementById('previewName').textContent = name;
+      document.getElementById('previewCode').textContent = code;
+
+      // Save to localStorage so admin can see all generated codes
+      const reps = JSON.parse(localStorage.getItem('ink_reps') || '{}');
+      if (!reps[code]) {
+        reps[code] = { name, code, created: new Date().toISOString(), clicks: {}, conversions: 0 };
+        localStorage.setItem('ink_reps', JSON.stringify(reps));
+      }
+    }
+
+    function copyLink(id, btn) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'COPIED ✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'COPY'; btn.classList.remove('copied'); }, 2000);
+      });
+    }
+
+    // Track ref click if arriving via ?ref=
+    (function() {
+      const ref = new URLSearchParams(window.location.search).get('ref');
+      if (!ref) return;
+      const clicks = JSON.parse(localStorage.getItem('ink_clicks') || '[]');
+      clicks.push({ ref, page: 'affiliate', ts: Date.now() });
+      localStorage.setItem('ink_clicks', JSON.stringify(clicks.slice(-500)));
+      // Also update rep record if exists
+      const reps = JSON.parse(localStorage.getItem('ink_reps') || '{}');
+      if (reps[ref]) {
+        reps[ref].clicks = reps[ref].clicks || {};
+        reps[ref].clicks.affiliate = (reps[ref].clicks.affiliate || 0) + 1;
+        localStorage.setItem('ink_reps', JSON.stringify(reps));
+      }
+    })();
+  </script>
+
+</body>
+</html>

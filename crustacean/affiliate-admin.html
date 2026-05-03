@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>InkThorn — Affiliate Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="../assets/favicon.png" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100vh; background: #06000f; color: #f0f0ff; font-family: 'Space Grotesk', sans-serif; }
+
+    .topbar {
+      background: rgba(10,0,20,0.95); border-bottom: 1px solid rgba(255,45,135,0.2);
+      padding: 14px 28px; display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);
+    }
+    .topbar-logo { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 900; color: #f0f0ff; }
+    .topbar-logo span { color: #ff2d87; }
+    .topbar-nav a { font-size: 0.78rem; color: #7878a8; text-decoration: none; font-weight: 600; margin-left: 20px; }
+    .topbar-nav a:hover { color: #ff2d87; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 36px 24px 80px; }
+
+    .page-title {
+      font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 900;
+      background: linear-gradient(135deg, #fff 0%, #ff2d87 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 8px;
+    }
+    .page-sub { font-size: 0.82rem; color: #7878a8; margin-bottom: 32px; }
+
+    /* ── Stats ── */
+    .stats-bar { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 32px; }
+    .stat-card {
+      background: rgba(22,12,45,0.7); border: 1px solid rgba(255,45,135,0.2);
+      border-radius: 12px; padding: 16px 22px; min-width: 130px;
+    }
+    .stat-label { font-size: 0.6rem; color: #7878a8; font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; }
+    .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; color: #ff2d87; margin-top: 4px; }
+
+    /* ── Section ── */
+    .section-hdr {
+      font-family: 'Orbitron', sans-serif; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.15em; color: #7878a8; text-transform: uppercase;
+      padding-bottom: 10px; border-bottom: 1px solid rgba(255,45,135,0.15); margin-bottom: 18px;
+    }
+
+    /* ── Table ── */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; margin-bottom: 40px; }
+    .data-table thead tr { background: rgba(255,45,135,0.08); border-bottom: 2px solid rgba(255,45,135,0.25); }
+    .data-table th {
+      text-align: left; padding: 10px 14px;
+      font-family: 'Orbitron', sans-serif; font-size: 0.5rem; font-weight: 700;
+      letter-spacing: 0.12em; color: #ff2d87; white-space: nowrap;
+    }
+    .data-table tbody tr { border-bottom: 1px solid rgba(168,85,247,0.1); transition: background 0.15s; }
+    .data-table tbody tr:hover { background: rgba(255,45,135,0.04); }
+    .data-table td { padding: 11px 14px; }
+
+    .badge {
+      font-family: 'Orbitron', sans-serif; font-size: 0.5rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 999px; letter-spacing: 0.06em;
+    }
+    .badge-active  { background: rgba(74,222,128,0.12); border: 1px solid rgba(74,222,128,0.3); color: #4ade80; }
+    .badge-new     { background: rgba(0,212,255,0.12);  border: 1px solid rgba(0,212,255,0.3);  color: #00d4ff; }
+    .badge-hot     { background: rgba(255,45,135,0.12); border: 1px solid rgba(255,45,135,0.3); color: #ff2d87; }
+
+    /* ── Click log ── */
+    .click-log { max-height: 380px; overflow-y: auto; }
+    .click-row {
+      display: flex; gap: 16px; align-items: center;
+      padding: 9px 14px; border-bottom: 1px solid rgba(168,85,247,0.08);
+      font-size: 0.82rem;
+    }
+    .click-row:hover { background: rgba(168,85,247,0.04); }
+    .click-code { font-family: 'Orbitron', sans-serif; font-size: 0.65rem; font-weight: 700; color: #a855f7; min-width: 100px; }
+    .click-page { color: #00d4ff; font-family: monospace; font-size: 0.78rem; min-width: 80px; }
+    .click-time { color: #7878a8; font-size: 0.72rem; margin-left: auto; white-space: nowrap; }
+
+    /* ── Empty ── */
+    .empty-msg { text-align: center; padding: 48px; color: #7878a8; font-size: 0.88rem; }
+    .empty-icon { font-size: 2rem; margin-bottom: 10px; }
+
+    /* ── Controls ── */
+    .controls-row { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+    .btn-sm {
+      font-family: 'Orbitron', sans-serif; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em;
+      padding: 7px 16px; border-radius: 999px; border: 1px solid; cursor: pointer; transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-refresh { border-color: rgba(0,212,255,0.4); background: rgba(0,212,255,0.08); color: #00d4ff; }
+    .btn-refresh:hover { background: rgba(0,212,255,0.2); }
+    .btn-clear { border-color: rgba(255,100,100,0.3); background: rgba(255,100,100,0.06); color: #ff8080; }
+    .btn-clear:hover { background: rgba(255,100,100,0.15); }
+    .btn-csv { border-color: rgba(168,85,247,0.4); background: rgba(168,85,247,0.08); color: #a855f7; }
+    .btn-csv:hover { background: rgba(168,85,247,0.2); }
+
+    /* ── Add rep ── */
+    .add-rep-card {
+      background: rgba(22,12,45,0.6); border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 14px; padding: 24px; margin-bottom: 32px;
+    }
+    .add-rep-card h3 { font-family: 'Orbitron', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; color: #a855f7; text-transform: uppercase; margin-bottom: 16px; }
+    .add-rep-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .add-rep-row input {
+      flex: 1; min-width: 150px; background: rgba(255,255,255,0.04); border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 8px; color: #f0f0ff; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.88rem; padding: 9px 12px; outline: none;
+    }
+    .add-rep-row input:focus { border-color: #a855f7; }
+    .btn-add { background: linear-gradient(135deg,#a855f7,#ff2d87); color:#fff; font-family:'Orbitron',sans-serif; font-size:0.6rem; font-weight:700; letter-spacing:0.1em; padding:9px 20px; border-radius:8px; border:none; cursor:pointer; white-space:nowrap; }
+    .btn-add:hover { opacity:0.88; }
+  </style>
+</head>
+<body>
+
+  <nav class="topbar">
+    <div class="topbar-logo">InkThorn <span>Affiliate Admin</span></div>
+    <div class="topbar-nav">
+      <a href="/crustacean/affiliate.html">← Affiliate Page</a>
+      <a href="/crustacean/dashboard.html">🗂️ Leads Dashboard</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-title">🔗 Affiliate Rep Tracker</div>
+    <div class="page-sub">All rep codes, click activity, and conversion tracking — across all pages.</div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat-card"><div class="stat-label">Total Reps</div><div class="stat-value" id="stat-reps">0</div></div>
+      <div class="stat-card"><div class="stat-label">Total Clicks</div><div class="stat-value" id="stat-clicks">0</div></div>
+      <div class="stat-card"><div class="stat-label">Diagnose Clicks</div><div class="stat-value" id="stat-diag">0</div></div>
+      <div class="stat-card"><div class="stat-label">Conversions</div><div class="stat-value" style="color:#4ade80;" id="stat-conv">0</div></div>
+      <div class="stat-card"><div class="stat-label">Est. MRR</div><div class="stat-value" style="color:#fbbf24;" id="stat-mrr">$0</div></div>
+    </div>
+
+    <!-- Add rep manually -->
+    <div class="add-rep-card">
+      <h3>➕ Add Rep Manually</h3>
+      <div class="add-rep-row">
+        <input type="text" id="add-name" placeholder="Rep name" />
+        <input type="text" id="add-code" placeholder="Affiliate code (no spaces)" />
+        <input type="text" id="add-notes" placeholder="Notes (territory, team, etc.)" />
+        <button class="btn-add" onclick="addRep()">ADD REP</button>
+      </div>
+    </div>
+
+    <!-- Rep table -->
+    <div class="section-hdr">👥 Registered Reps</div>
+    <div class="controls-row">
+      <button class="btn-sm btn-refresh" onclick="renderAll()">↺ Refresh</button>
+      <button class="btn-sm btn-csv" onclick="exportRepCsv()">⬇ Export CSV</button>
+      <button class="btn-sm btn-clear" onclick="clearData()">🗑 Clear All Data</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="data-table" id="rep-table">
+        <thead><tr>
+          <th>#</th><th>NAME</th><th>CODE</th><th>NOTES</th><th>CREATED</th>
+          <th>MAIN CLICKS</th><th>DIAGNOSE CLICKS</th><th>SERVICES CLICKS</th><th>TEXTOS CLICKS</th>
+          <th>CONVERSIONS</th><th>EST. MRR</th><th>STATUS</th><th>ACTION</th>
+        </tr></thead>
+        <tbody id="rep-tbody"></tbody>
+      </table>
+    </div>
+    <div class="empty-msg" id="rep-empty" style="display:none;"><div class="empty-icon">👥</div><p>No reps yet. Add one above or have reps generate their links on the affiliate page.</p></div>
+
+    <!-- Click log -->
+    <div class="section-hdr" style="margin-top:40px;">📋 Recent Click Log</div>
+    <div class="click-log" id="click-log-wrap">
+      <div class="empty-msg" id="click-empty"><div class="empty-icon">🖱️</div><p>No clicks recorded yet.</p></div>
+    </div>
+
+  </div>
+
+  <script>
+    // ── Data helpers ──
+    function getReps() { return JSON.parse(localStorage.getItem('ink_reps') || '{}'); }
+    function getClicks() { return JSON.parse(localStorage.getItem('ink_clicks') || '[]'); }
+    function saveReps(r) { localStorage.setItem('ink_reps', JSON.stringify(r)); }
+
+    function addRep() {
+      const name  = document.getElementById('add-name').value.trim();
+      const code  = document.getElementById('add-code').value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'');
+      const notes = document.getElementById('add-notes').value.trim();
+      if (!name || !code) { alert('Name and code required.'); return; }
+      const reps = getReps();
+      if (reps[code]) { alert('Code already exists.'); return; }
+      reps[code] = { name, code, notes, created: new Date().toISOString(), clicks: {}, conversions: 0, mrr: 0 };
+      saveReps(reps);
+      document.getElementById('add-name').value = '';
+      document.getElementById('add-code').value = '';
+      document.getElementById('add-notes').value = '';
+      renderAll();
+    }
+
+    function setConversion(code) {
+      const plan = prompt('Plan sold?\n1 = Starter ($39/mo) → $7.80/mo\n2 = Growth ($79/mo) → $15.80/mo\n3 = Pro ($149/mo) → $29.80/mo', '2');
+      const commMap = { '1': 7.80, '2': 15.80, '3': 29.80 };
+      const comm = commMap[plan];
+      if (!comm) return;
+      const reps = getReps();
+      if (!reps[code]) return;
+      reps[code].conversions = (reps[code].conversions || 0) + 1;
+      reps[code].mrr = Math.round(((reps[code].mrr || 0) + comm) * 100) / 100;
+      saveReps(reps);
+      renderAll();
+    }
+
+    function deleteRep(code) {
+      if (!confirm('Remove rep ' + code + '?')) return;
+      const reps = getReps();
+      delete reps[code];
+      saveReps(reps);
+      renderAll();
+    }
+
+    function clearData() {
+      if (!confirm('Clear ALL affiliate data? This cannot be undone.')) return;
+      localStorage.removeItem('ink_reps');
+      localStorage.removeItem('ink_clicks');
+      renderAll();
+    }
+
+    function renderAll() {
+      const reps   = getReps();
+      const clicks = getClicks();
+      const codes  = Object.keys(reps);
+
+      // Aggregate clicks from log into rep records
+      clicks.forEach(c => {
+        if (reps[c.ref]) {
+          reps[c.ref].clicks = reps[c.ref].clicks || {};
+          reps[c.ref].clicks[c.page] = (reps[c.ref].clicks[c.page] || 0) + 1;
+        }
+      });
+
+      // Stats
+      const totalClicks = clicks.length;
+      const diagClicks  = clicks.filter(c=>c.page==='diagnose'||c.page==='ideas').length;
+      const totalConv   = codes.reduce((s,k)=>s+(reps[k].conversions||0),0);
+      const totalMrr    = codes.reduce((s,k)=>s+(reps[k].mrr||0),0);
+
+      document.getElementById('stat-reps').textContent   = codes.length;
+      document.getElementById('stat-clicks').textContent = totalClicks;
+      document.getElementById('stat-diag').textContent   = diagClicks;
+      document.getElementById('stat-conv').textContent   = totalConv;
+      document.getElementById('stat-mrr').textContent    = '$' + totalMrr.toFixed(2);
+
+      // Rep table
+      const tbody = document.getElementById('rep-tbody');
+      const empty = document.getElementById('rep-empty');
+      if (!codes.length) {
+        tbody.innerHTML=''; empty.style.display='block';
+      } else {
+        empty.style.display = 'none';
+        tbody.innerHTML = codes.map((code, i) => {
+          const r = reps[code];
+          const cl = r.clicks || {};
+          const totalRepClicks = Object.values(cl).reduce((s,v)=>s+v,0);
+          const created = r.created ? new Date(r.created).toLocaleDateString() : '—';
+          const conv = r.conversions || 0;
+          const mrr  = (r.mrr || 0).toFixed(2);
+          const statusBadge = conv > 0
+            ? '<span class="badge badge-hot">🔥 CONVERTING</span>'
+            : totalRepClicks > 0
+            ? '<span class="badge badge-new">🔵 ACTIVE</span>'
+            : '<span class="badge badge-active" style="color:#7878a8;border-color:rgba(120,120,168,0.3);background:rgba(120,120,168,0.08);">⬜ INACTIVE</span>';
+          return `<tr>
+            <td style="color:#7878a8;font-family:monospace;font-size:0.75rem;">${i+1}</td>
+            <td style="font-weight:700;color:#f0f0ff;">${escHtml(r.name)}</td>
+            <td style="font-family:monospace;color:#a855f7;font-weight:700;">${escHtml(code)}</td>
+            <td style="font-size:0.78rem;color:#7878a8;">${escHtml(r.notes||'—')}</td>
+            <td style="font-size:0.78rem;color:#7878a8;">${created}</td>
+            <td style="color:#f0f0ff;font-weight:600;">${cl.main||0}</td>
+            <td style="color:#00d4ff;font-weight:600;">${(cl.diagnose||0)+(cl.ideas||0)}</td>
+            <td style="color:#f0f0ff;">${cl.services||0}</td>
+            <td style="color:#f0f0ff;">${cl.textos||0}</td>
+            <td style="color:#4ade80;font-weight:700;">${conv}</td>
+            <td style="color:#fbbf24;font-weight:700;">$${mrr}/mo</td>
+            <td>${statusBadge}</td>
+            <td style="white-space:nowrap;">
+              <button onclick="setConversion('${escHtml(code)}')" style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;padding:5px 10px;border-radius:6px;border:1px solid rgba(74,222,128,0.4);background:rgba(74,222,128,0.1);color:#4ade80;cursor:pointer;margin-right:4px;">+ SALE</button>
+              <button onclick="deleteRep('${escHtml(code)}')" style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,100,100,0.3);background:rgba(255,100,100,0.06);color:#ff8080;cursor:pointer;">✕</button>
+            </td>
+          </tr>`;
+        }).join('');
+      }
+
+      // Click log
+      const logWrap = document.getElementById('click-log-wrap');
+      const clickEmpty = document.getElementById('click-empty');
+      const sorted = [...clicks].reverse().slice(0, 200);
+      if (!sorted.length) {
+        logWrap.innerHTML = '<div class="empty-msg" id="click-empty"><div class="empty-icon">🖱️</div><p>No clicks recorded yet.</p></div>';
+      } else {
+        logWrap.innerHTML = sorted.map(c => {
+          const repName = reps[c.ref] ? reps[c.ref].name : '(unknown)';
+          const t = new Date(c.ts);
+          return `<div class="click-row">
+            <span class="click-code">${escHtml(c.ref)}</span>
+            <span style="color:#f0f0ff;font-size:0.82rem;">${escHtml(repName)}</span>
+            <span class="click-page">${escHtml(c.page)}</span>
+            <span class="click-time">${t.toLocaleDateString()} ${t.toLocaleTimeString()}</span>
+          </div>`;
+        }).join('');
+      }
+    }
+
+    function exportRepCsv() {
+      const reps = getReps();
+      const rows = [['name','code','notes','created','clicks_main','clicks_diagnose','clicks_services','clicks_textos','conversions','mrr_month']];
+      Object.values(reps).forEach(r => {
+        const cl = r.clicks || {};
+        rows.push([
+          '"'+r.name.replace(/"/g,'""')+'"', r.code,
+          '"'+(r.notes||'').replace(/"/g,'""')+'"',
+          r.created ? new Date(r.created).toLocaleDateString() : '',
+          cl.main||0, (cl.diagnose||0)+(cl.ideas||0), cl.services||0, cl.textos||0,
+          r.conversions||0, (r.mrr||0).toFixed(2)
+        ]);
+      });
+      const blob = new Blob([rows.map(r=>r.join(',')).join('\n')], {type:'text/csv'});
+      const a = document.createElement('a'); a.href=URL.createObjectURL(blob);
+      a.download='affiliate-reps.csv'; a.click();
+    }
+
+    function escHtml(s) {
+      return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // Track ref click if arriving via ?ref=
+    (function() {
+      const ref = new URLSearchParams(window.location.search).get('ref');
+      if (!ref) return;
+      const clicks = getClicks();
+      clicks.push({ ref, page: 'admin', ts: Date.now() });
+      localStorage.setItem('ink_clicks', JSON.stringify(clicks.slice(-500)));
+    })();
+
+    // Init
+    renderAll();
+  </script>
+
+</body>
+</html>
