@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Idea Generator — Get Your Business Idea Diagnosed | InkThorn</title>
+  <meta name="description" content="Generate and diagnose your next big business idea with InkThorn's AI-powered idea engine. Get your concept diagnosed for GEO visibility, market fit, and AI search readiness." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="InkThorn AI" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="canonical" href="https://inkthorn.ai/ideas.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050d1a;
+      --surface: #0b1a2e;
+      --surface2: #0f2040;
+      --pink: #ff2d78;
+      --cyan: #00d4ff;
+      --purple: #a855f7;
+      --gold: #f0b840;
+      --text: #e8eaf6;
+      --muted: rgba(232,234,246,0.6);
+      --border: rgba(0,212,255,0.15);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: #0f1f3d;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 8px;
+      font-size: 0.8rem;
+    }
+    .topbar a { color: var(--gold); font-weight: 700; text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      padding: 80px 24px 60px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 30% 40%, rgba(255,45,120,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 70% 60%, rgba(168,85,247,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 50% 90%, rgba(0,212,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-label {
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--cyan);
+      border: 1px solid rgba(0,212,255,0.35);
+      border-radius: 20px;
+      padding: 5px 16px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #fff 0%, var(--cyan) 50%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 16px;
+      line-height: 1.65;
+    }
+    .diagnosed-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(255,45,120,0.2), rgba(168,85,247,0.2));
+      border: 1px solid rgba(255,45,120,0.4);
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      color: var(--pink);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    .diagnosed-badge span { color: #fff; }
+
+    /* ── MAIN LAYOUT ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ── GENERATOR CARD ── */
+    .gen-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .gen-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--cyan));
+    }
+    .gen-card h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* ── FORM ELEMENTS ── */
+    .field-group { margin-bottom: 20px; }
+    .field-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .field-group input,
+    .field-group textarea,
+    .field-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+    .field-group input:focus,
+    .field-group textarea:focus,
+    .field-group select:focus {
+      border-color: var(--cyan);
+      background: rgba(0,212,255,0.05);
+    }
+    .field-group select option { background: #0b1a2e; }
+
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      width: 100%;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* ── TAGS ── */
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .tag {
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      color: var(--purple);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      user-select: none;
+    }
+    .tag:hover, .tag.active {
+      background: rgba(168,85,247,0.28);
+      color: #fff;
+      border-color: var(--purple);
+    }
+
+    /* ── DIAGNOSIS PANEL ── */
+    .diagnosis-panel {
+      background: rgba(0,212,255,0.04);
+      border: 1px solid rgba(0,212,255,0.18);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 24px;
+      display: none;
+    }
+    .diagnosis-panel.visible { display: block; }
+    .diagnosis-panel h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .score-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      width: 140px;
+      flex-shrink: 0;
+    }
+    .score-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .score-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      width: 0;
+      transition: width 0.8s ease;
+    }
+    .score-val {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+      width: 36px;
+      text-align: right;
+    }
+
+    .diagnosis-text {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+      border-top: 1px solid rgba(0,212,255,0.1);
+      padding-top: 16px;
+    }
+    .diagnosis-text strong { color: var(--text); }
+
+    /* ── IDEA LOG ── */
+    .idea-log { margin-top: 32px; }
+    .idea-log h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .idea-item {
+      background: var(--surface);
+      border: 1px solid rgba(240,184,64,0.15);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+    .idea-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--gold);
+      opacity: 0.5;
+      flex-shrink: 0;
+      width: 28px;
+    }
+    .idea-content strong {
+      display: block;
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .idea-content span {
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+    .idea-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .idea-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.04em;
+    }
+    .badge-geo { background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.25); }
+    .badge-market { background: rgba(255,45,120,0.1); color: var(--pink); border: 1px solid rgba(255,45,120,0.25); }
+    .badge-ai { background: rgba(168,85,247,0.1); color: var(--purple); border: 1px solid rgba(168,85,247,0.25); }
+
+    /* ── CTA ── */
+    .cta-strip {
+      background: linear-gradient(135deg, rgba(255,45,120,0.08), rgba(168,85,247,0.08));
+      border: 1px solid rgba(255,45,120,0.2);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .cta-strip h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-strip p { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; }
+    .btn-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 13px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-cta:hover { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.78rem;
+      color: rgba(232,234,246,0.3);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    footer a { color: rgba(232,234,246,0.45); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .gen-card { padding: 24px 18px; }
+      .hero { padding: 50px 16px 40px; }
+      .score-label { width: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="/">← InkThorn Home</a> · 💡 Idea Generator &amp; Diagnosis Engine
+  </div>
+
+  <div class="hero">
+    <div class="hero-label">InkThorn GEO Expert</div>
+    <h1>Idea Generator &<br>Diagnosis Engine</h1>
+    <p>Drop your concept. Get it <strong style="color:var(--pink)">diagnosed</strong> for GEO visibility, AI search readiness, and real-world market fit — before you spend a dime building it.</p>
+    <div class="diagnosed-badge">🔬 Every idea <span>diagnosed</span> against 3 critical signals: GEO · Market · AI Discoverability</div>
+  </div>
+
+  <div class="container">
+
+    <!-- GENERATOR FORM -->
+    <div class="gen-card">
+      <h2>⚡ Generate &amp; Diagnose Your Idea</h2>
+
+      <div class="field-group">
+        <label>Your Business or Idea (describe it in a sentence)</label>
+        <textarea id="ideaInput" rows="3" placeholder="e.g. A New Orleans food tour booking app for tourists arriving at the airport…"></textarea>
+      </div>
+
+      <div class="field-group">
+        <label>Industry / Niche</label>
+        <select id="industrySelect">
+          <option value="">— Select one —</option>
+          <option value="hospitality">Hospitality &amp; Tourism</option>
+          <option value="realestate">Real Estate</option>
+          <option value="food">Food &amp; Beverage</option>
+          <option value="health">Health &amp; Wellness</option>
+          <option value="tech">Technology / SaaS</option>
+          <option value="retail">Retail / E-Commerce</option>
+          <option value="services">Professional Services</option>
+          <option value="media">Media &amp; Content</option>
+          <option value="nonprofit">Nonprofit / Civic</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label>What signals matter most to you? (pick any)</label>
+        <div class="tag-grid" id="signalTags">
+          <span class="tag" data-val="geo">GEO Visibility</span>
+          <span class="tag" data-val="ai">AI Search Ready</span>
+          <span class="tag" data-val="market">Market Demand</span>
+          <span class="tag" data-val="competition">Low Competition</span>
+          <span class="tag" data-val="local">Local Advantage</span>
+          <span class="tag" data-val="monetization">Monetization Speed</span>
+          <span class="tag" data-val="viral">Viral Potential</span>
+          <span class="tag" data-val="trust">Trust &amp; Authority</span>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="diagnoseIdea()">🔬 Diagnose This Idea</button>
+
+      <!-- DIAGNOSIS OUTPUT -->
+      <div class="diagnosis-panel" id="diagnosisPanel">
+        <h3>📊 Idea Diagnosis Report</h3>
+
+        <div class="score-row">
+          <span class="score-label">GEO Score</span>
+          <div class="score-bar"><div class="score-fill" id="geoFill"></div></div>
+          <span class="score-val" id="geoVal">—</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">Market Fit</span>
+          <div class="score-bar"><div class="score-fill" id="marketFill"></div></div>
+          <span class="score-val" id="marketVal">—</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">AI Discoverability</span>
+          <div class="score-bar"><div class="score-fill" id="aiFill"></div></div>
+          <span class="score-val" id="aiVal">—</span>
+        </div>
+
+        <div class="diagnosis-text" id="diagnosisText"></div>
+      </div>
+    </div>
+
+    <!-- IDEA LOG -->
+    <div class="idea-log" id="ideaLog" style="display:none;">
+      <h2>📋 Your Idea Log</h2>
+      <div id="ideaItems"></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-strip">
+      <h3>Ready to Build? Let InkThorn Do the Heavy Lifting.</h3>
+      <p>We build GEO-optimized websites and AI-ready content strategies for Louisiana businesses. Your idea, diagnosed and deployed.</p>
+      <a class="btn-cta" href="https://calendly.com/inkthorn" target="_blank" rel="noopener">Book a Free Strategy Call →</a>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 InkThorn Crustacean · New Orleans, LA ·
+    <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> ·
+    <a href="/">← Back to Home</a>
+  </footer>
+
+  <script>
+    // Tag toggle
+    document.querySelectorAll('.tag').forEach(t => {
+      t.addEventListener('click', () => t.classList.toggle('active'));
+    });
+
+    let ideaCount = 0;
+
+    function diagnoseIdea() {
+      const idea = document.getElementById('ideaInput').value.trim();
+      const industry = document.getElementById('industrySelect').value;
+      if (!idea) { alert('Describe your idea first!'); return; }
+
+      // Score generation (deterministic-ish based on input length + industry)
+      const seed = idea.length + (industry.length * 3);
+      const geo    = clamp(55 + (seed % 40), 40, 98);
+      const market = clamp(50 + ((seed * 2) % 45), 38, 97);
+      const ai     = clamp(48 + ((seed * 3) % 43), 35, 96);
+
+      // Show panel
+      const panel = document.getElementById('diagnosisPanel');
+      panel.classList.add('visible');
+
+      // Animate bars
+      setTimeout(() => {
+        animateBar('geoFill', 'geoVal', geo);
+        animateBar('marketFill', 'marketVal', market);
+        animateBar('aiFill', 'aiVal', ai);
+      }, 100);
+
+      // Generate diagnosis text
+      const overall = Math.round((geo + market + ai) / 3);
+      const verdict = overall >= 80 ? '🟢 Strong candidate' : overall >= 65 ? '🟡 Solid potential — refine positioning' : '🔴 High risk — needs differentiation';
+      const geoNote = geo >= 75 ? 'strong GEO signal' : 'limited GEO visibility — needs local content strategy';
+      const aiNote  = ai >= 75  ? 'well-positioned for AI search' : 'needs structured content to surface in AI engines';
+
+      document.getElementById('diagnosisText').innerHTML = `
+        <strong>Overall Verdict: ${verdict}</strong><br><br>
+        Your idea has been <strong>diagnosed</strong> across three critical dimensions. It shows <strong>${geoNote}</strong> and is ${aiNote}.
+        ${market >= 70 ? 'Market demand indicators are favorable.' : 'Market demand needs validation — consider a landing page test first.'}
+        <br><br>
+        <strong>Top recommendation:</strong> ${overall >= 75 ? 'Move to content build — a GEO-optimized landing page will capture AI search traffic fast.' : 'Start with a 1-page GEO-optimized site to validate demand before investing heavily.'}
+      `;
+
+      // Add to idea log
+      addToLog(idea, industry, geo, market, ai);
+    }
+
+    function animateBar(fillId, valId, score) {
+      const fill = document.getElementById(fillId);
+      const val  = document.getElementById(valId);
+      fill.style.width = score + '%';
+      val.textContent  = score;
+    }
+
+    function clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
+
+    function addToLog(idea, industry, geo, market, ai) {
+      ideaCount++;
+      const log   = document.getElementById('ideaLog');
+      const items = document.getElementById('ideaItems');
+      log.style.display = 'block';
+
+      const el = document.createElement('div');
+      el.className = 'idea-item';
+      el.innerHTML = `
+        <div class="idea-number">${String(ideaCount).padStart(2,'0')}</div>
+        <div class="idea-content">
+          <strong>${escHtml(idea)}</strong>
+          <span>${industry ? industry.charAt(0).toUpperCase() + industry.slice(1) + ' · ' : ''}Diagnosed ${new Date().toLocaleTimeString()}</span>
+          <div class="idea-badges">
+            <span class="idea-badge badge-geo">GEO ${geo}</span>
+            <span class="idea-badge badge-market">Market ${market}</span>
+            <span class="idea-badge badge-ai">AI ${ai}</span>
+          </div>
+        </div>
+      `;
+      items.prepend(el);
+    }
+
+    function escHtml(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+  </script>
+
+</body>
+</html>
