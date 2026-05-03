@@ -530,6 +530,19 @@
           <input type="text" id="bizName" placeholder="e.g. Bayou Brew Coffee Co." />
         </div>
         <div class="field-group">
+          <label>Your Website URL <span style="color:var(--cyan);font-weight:400;font-size:0.75rem;">(optional but recommended — we'll analyze it for real)</span></label>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="url" id="bizUrl" placeholder="https://yourbusiness.com" style="flex:1;" />
+            <button onclick="fetchSite()" id="fetchBtn"
+              style="flex-shrink:0;background:rgba(0,212,255,0.12);border:1px solid rgba(0,212,255,0.4);color:var(--cyan);font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:11px 16px;border-radius:10px;cursor:pointer;transition:all 0.2s;white-space:nowrap;"
+              onmouseover="this.style.background='rgba(0,212,255,0.22)'" onmouseout="this.style.background='rgba(0,212,255,0.12)'">
+              🔍 ANALYZE SITE
+            </button>
+          </div>
+          <!-- Site scan results -->
+          <div id="siteScanResult" style="display:none;margin-top:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:14px 16px;font-size:0.8rem;line-height:1.7;"></div>
+        </div>
+        <div class="field-group">
           <label>What does your business do? (one sentence)</label>
           <textarea id="bizDesc" rows="3" placeholder="e.g. We run a specialty coffee shop in Mid-City New Orleans with a loyal local following…"></textarea>
         </div>
@@ -772,10 +785,13 @@
       const ageBoost      = { new: 0, early: 5, mid: 10, established: 18 }[age] || 0;
       const seed = desc.length + (industry.length * 3);
 
-      const geo    = clamp(30 + presenceBoost + (seed % 28), 28, 96);
+      // Use real scan data if available, otherwise estimate
+      const scan = window._siteScan;
+      const geo    = scan ? clamp(scan.geoScore,  10, 96) : clamp(30 + presenceBoost + (seed % 28), 28, 96);
+      const ai     = scan ? clamp(scan.aiScore,   10, 94) : clamp(20 + presenceBoost + ((seed * 3) % 32), 18, 94);
       const market = clamp(45 + ageBoost + ((seed * 2) % 30), 38, 97);
-      const ai     = clamp(20 + presenceBoost + ((seed * 3) % 32), 18, 94);
       const overall = Math.round((geo + market + ai) / 3);
+      const scannedUrl = scan ? scan.url : null;
 
       showScores(geo, market, ai);
 
@@ -797,8 +813,17 @@
         strong: 'You have a strong presence — but without active GEO maintenance, <strong style="color:var(--pink)">newer competitors are closing the gap fast</strong>.',
       }[presence] || '';
 
+      // Build site-specific findings block if we have a real scan
+      const scanBlock = scan ? `
+        <strong style="color:var(--pink)">🌐 What We Found on Your Website (${escHtml(scannedUrl)}):</strong><br>
+        ${scan.flags.length ? scan.flags.slice(0,4).map(f=>`<span style="display:block;padding:2px 0;font-size:0.87rem;">${f}</span>`).join('') : ''}
+        ${scan.wins.length  ? `<span style="display:block;padding-top:6px;color:rgba(232,234,246,0.6);font-size:0.82rem;">${scan.wins.length} positive signals also found — but ${scan.flags.length} critical gaps remain.</span>` : ''}
+        <br>` : '';
+
       document.getElementById('diagnosisText').innerHTML = `
         <strong>Diagnosis for ${escHtml(label)}: ${verdict}</strong><br><br>
+
+        ${scanBlock}
 
         <strong style="color:var(--pink)">📉 The real cost of your current visibility gap:</strong><br>
         An estimated <strong style="color:#fff">${missedSearches.toLocaleString()} people per month</strong> are searching for exactly what ${escHtml(label)} offers — and not finding you.
@@ -816,7 +841,10 @@
         <strong>Bottom line:</strong> ${escHtml(label)} has ${yearsStr} of reputation and market trust. The only thing missing is the digital layer that makes AI engines find you. That's fixable — today — for less than one lost customer.
       `;
 
-      const ctaMsg = 'I just had my existing business diagnosed. Business: "' + label + '" | ' + desc + ' | GEO Score: ' + geo + ' | Market Fit: ' + market + ' | AI Discoverability: ' + ai + ' | Estimated ' + missedSearches.toLocaleString() + ' monthly missed searches' + (missedRevenue ? ' | Est. ' + missedRevenue + '/mo lost revenue' : '') + ' | Online presence: ' + presence + ' | In business: ' + age + '. Help me fix my AI visibility and capture this revenue.';
+      const scanSummary = scan
+        ? ' | Website scanned: ' + scannedUrl + ' | Site issues: ' + scan.flags.slice(0,3).map(f=>f.replace(/<[^>]+>/g,'')).join('; ')
+        : '';
+      const ctaMsg = 'I just had my existing business diagnosed. Business: "' + label + '" | ' + desc + ' | GEO Score: ' + geo + ' | Market Fit: ' + market + ' | AI Discoverability: ' + ai + ' | Estimated ' + missedSearches.toLocaleString() + ' monthly missed searches' + (missedRevenue ? ' | Est. ' + missedRevenue + '/mo lost revenue' : '') + ' | Online presence: ' + presence + ' | In business: ' + age + scanSummary + '. Help me fix my AI visibility and capture this revenue.';
       showTextOsCta(ctaMsg, true);
       addToLog(label + (desc ? ' — ' + desc.substring(0, 40) + '…' : ''), industry || 'business', geo, market, ai, '🏢');
     }
@@ -877,6 +905,198 @@
 
     function escHtml(s) {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── SITE SCANNER ──
+    window._siteScan = null;
+
+    async function fetchSite() {
+      const urlRaw = document.getElementById('bizUrl').value.trim();
+      if (!urlRaw) { alert('Enter a website URL first.'); return; }
+      let url = urlRaw;
+      if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+
+      const btn = document.getElementById('fetchBtn');
+      const result = document.getElementById('siteScanResult');
+      btn.textContent = '⏳ SCANNING…';
+      btn.disabled = true;
+      result.style.display = 'block';
+      result.innerHTML = '<span style="color:var(--muted);">Fetching your site… this takes a few seconds.</span>';
+
+      try {
+        // Use allorigins CORS proxy to fetch the HTML
+        const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+        const resp = await fetch(proxyUrl, { signal: AbortSignal.timeout(12000) });
+        if (!resp.ok) throw new Error('Proxy error ' + resp.status);
+        const data = await resp.json();
+        const html = data.contents || '';
+
+        if (!html || html.length < 200) throw new Error('Site returned empty content');
+
+        // Parse into a DOM
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        const scan = analyzeSiteHTML(doc, html, url);
+        window._siteScan = scan;
+
+        // Auto-fill presence selector based on scan
+        const presSel = document.getElementById('bizPresence');
+        if      (scan.geoScore >= 70) presSel.value = 'strong';
+        else if (scan.geoScore >= 45) presSel.value = 'decent';
+        else if (scan.geoScore >= 20) presSel.value = 'basic';
+        else                          presSel.value = 'social';
+
+        // Show summary
+        result.innerHTML = renderScanSummary(scan);
+      } catch(e) {
+        window._siteScan = null;
+        result.innerHTML = `<span style="color:#ff8080;">⚠️ Couldn't fetch that site (${escHtml(e.message)}). That's okay — fill in the fields below and we'll still diagnose your business.</span>`;
+      }
+
+      btn.textContent = '🔍 ANALYZE SITE';
+      btn.disabled = false;
+    }
+
+    function analyzeSiteHTML(doc, html, url) {
+      const scan = { url, checks: [], geoScore: 0, aiScore: 0, seoScore: 0, flags: [], wins: [] };
+      const lhtml = html.toLowerCase();
+
+      // ── Title tag ──
+      const title = doc.querySelector('title');
+      if (title && title.textContent.trim().length > 10) {
+        scan.wins.push('✅ Page title found: <em>' + escHtml(title.textContent.trim().substring(0,60)) + '</em>');
+        scan.seoScore += 15;
+      } else {
+        scan.flags.push('❌ Missing or empty page title — AI engines can\'t identify what your business does');
+      }
+
+      // ── Meta description ──
+      const desc = doc.querySelector('meta[name="description"]');
+      if (desc && desc.getAttribute('content') && desc.getAttribute('content').length > 20) {
+        scan.wins.push('✅ Meta description present');
+        scan.seoScore += 10; scan.aiScore += 5;
+      } else {
+        scan.flags.push('❌ No meta description — AI search engines skip sites without one when generating recommendations');
+      }
+
+      // ── Open Graph ──
+      const og = doc.querySelector('meta[property="og:title"]') || doc.querySelector('meta[property="og:description"]');
+      if (og) {
+        scan.wins.push('✅ Open Graph tags found — social sharing is set up');
+        scan.aiScore += 8;
+      } else {
+        scan.flags.push('❌ No Open Graph tags — invisible when shared on Facebook, LinkedIn, AI crawlers');
+      }
+
+      // ── Schema / JSON-LD ──
+      const schema = doc.querySelector('script[type="application/ld+json"]');
+      if (schema) {
+        scan.wins.push('✅ Structured data (Schema.org) detected — good for AI engines');
+        scan.aiScore += 20; scan.geoScore += 15;
+      } else {
+        scan.flags.push('❌ No structured data (Schema.org) — this is the #1 reason AI engines can\'t find local businesses');
+      }
+
+      // ── Local business signals ──
+      const hasAddress = /\b(street|ave|blvd|rd|drive|lane|suite|floor|new orleans|baton rouge|lafayette|louisiana|LA \d{5})\b/i.test(html);
+      if (hasAddress) {
+        scan.wins.push('✅ Local address signals detected');
+        scan.geoScore += 15;
+      } else {
+        scan.flags.push('❌ No local address visible on page — AI can\'t confirm where your business operates');
+      }
+
+      // ── Phone number ──
+      const hasPhone = /(\(\d{3}\)\s?\d{3}[-.\s]\d{4}|\d{3}[-.\s]\d{3}[-.\s]\d{4})/.test(html);
+      if (hasPhone) {
+        scan.wins.push('✅ Phone number found');
+        scan.geoScore += 10;
+      } else {
+        scan.flags.push('❌ No phone number detected — reduces trust signals for AI search');
+      }
+
+      // ── Mobile viewport ──
+      const viewport = doc.querySelector('meta[name="viewport"]');
+      if (viewport) {
+        scan.wins.push('✅ Mobile-ready (viewport meta tag present)');
+        scan.seoScore += 8;
+      } else {
+        scan.flags.push('❌ Not mobile-optimized — Google and AI rank mobile-first sites higher');
+      }
+
+      // ── HTTPS ──
+      if (url.startsWith('https://')) {
+        scan.wins.push('✅ HTTPS / Secure site');
+        scan.seoScore += 5; scan.aiScore += 5;
+      } else {
+        scan.flags.push('❌ Not HTTPS — browsers and AI crawlers distrust non-secure sites');
+      }
+
+      // ── Social media links ──
+      const hasSocial = /(facebook\.com|instagram\.com|twitter\.com|x\.com|linkedin\.com|tiktok\.com)/i.test(html);
+      if (hasSocial) {
+        scan.wins.push('✅ Social media links present');
+        scan.aiScore += 5;
+      } else {
+        scan.flags.push('⚠️ No social media links found — AI engines use social signals to validate businesses');
+      }
+
+      // ── AI/GEO keywords ──
+      const hasGeoKeywords = /(near me|best in|serving|located in|local|community|neighborhood)/i.test(html);
+      if (hasGeoKeywords) {
+        scan.wins.push('✅ Local/GEO keyword signals detected');
+        scan.geoScore += 10;
+      } else {
+        scan.flags.push('⚠️ Weak local keyword signals — not optimized for "near me" or local AI search queries');
+      }
+
+      // ── Content length ──
+      const textContent = doc.body ? doc.body.innerText || doc.body.textContent : '';
+      if (textContent.length > 800) {
+        scan.wins.push('✅ Site has substantial content (' + Math.round(textContent.length/100)*100 + '+ characters)');
+        scan.aiScore += 8; scan.seoScore += 8;
+      } else {
+        scan.flags.push('❌ Thin content — AI engines need substance to understand and recommend your business');
+      }
+
+      // Cap scores
+      scan.geoScore  = Math.min(100, scan.geoScore);
+      scan.aiScore   = Math.min(100, scan.aiScore);
+      scan.seoScore  = Math.min(100, scan.seoScore);
+      scan.overall   = Math.round((scan.geoScore + scan.aiScore + scan.seoScore) / 3);
+
+      return scan;
+    }
+
+    function renderScanSummary(scan) {
+      const color = scan.overall >= 70 ? '#4ade80' : scan.overall >= 45 ? '#fbbf24' : '#ff2d87';
+      const verdict = scan.overall >= 70 ? 'Decent foundation — optimization gaps remain'
+                    : scan.overall >= 45 ? 'Partial presence — significant AI visibility gaps'
+                    : 'Critical gaps — largely invisible to AI search';
+
+      let html = `<div style="margin-bottom:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;">🌐 Site Analysis: ${escHtml(scan.url)}</span>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px;">
+        <div style="text-align:center;"><div style="font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;color:${color};">${scan.overall}</div><div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">Overall</div></div>
+        <div style="text-align:center;"><div style="font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;color:#00d4ff;">${scan.geoScore}</div><div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">GEO</div></div>
+        <div style="text-align:center;"><div style="font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;color:#a855f7;">${scan.aiScore}</div><div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">AI Visibility</div></div>
+        <div style="text-align:center;"><div style="font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;color:#fbbf24;">${scan.seoScore}</div><div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">SEO</div></div>
+        <div style="flex:1;min-width:160px;display:flex;align-items:center;"><span style="font-size:0.82rem;color:${color};font-weight:600;">${verdict}</span></div>
+      </div>`;
+
+      if (scan.flags.length) {
+        html += `<div style="margin-bottom:8px;font-size:0.75rem;font-weight:700;color:#ff2d87;font-family:'Orbitron',sans-serif;letter-spacing:0.08em;text-transform:uppercase;">Issues Found (${scan.flags.length})</div>`;
+        html += scan.flags.map(f => `<div style="font-size:0.8rem;color:rgba(232,234,246,0.75);padding:3px 0;">${f}</div>`).join('');
+      }
+      if (scan.wins.length) {
+        html += `<div style="margin:10px 0 6px;font-size:0.75rem;font-weight:700;color:#4ade80;font-family:'Orbitron',sans-serif;letter-spacing:0.08em;text-transform:uppercase;">What's Working (${scan.wins.length})</div>`;
+        html += scan.wins.map(w => `<div style="font-size:0.8rem;color:rgba(232,234,246,0.75);padding:3px 0;">${w}</div>`).join('');
+      }
+
+      html += `<div style="margin-top:10px;font-size:0.75rem;color:var(--cyan);font-weight:600;">✔ Site analysis complete — scores incorporated into your diagnosis below.</div>`;
+      return html;
     }
 
     // ── AFFILIATE REF TRACKING ──
