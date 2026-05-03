@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-05-02T23:13:38.806Z",
+  "updated": "2026-05-03T13:31:44.421Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-05-02",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Alec Flynn",
-      "url": "https://504comedy.com/event/1352/alec-flynn-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Sat May 02 2026",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-02",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "The Oldest Profession - Solo Comedy Show",
-      "url": "https://504comedy.com/event/1365/the-oldest-profession--solo-comedy-show-at-actors-apothecary-may-1st-2nd",
-      "venue": "The Actor’s Apothecary",
-      "type": "Stand-up",
-      "cost": "$40",
-      "repeat": "Sat May 02 2026",
-      "start_dt": "2026-05-02T19:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-02",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Jokes on Oak",
-      "url": "https://504comedy.com/event/1116/jokes-on-oak",
-      "venue": "Oak St Brewery",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Saturday",
-      "start_dt": "2026-05-02T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-05-03",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -57,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$25",
       "repeat": "Sun May 03 2026",
-      "start_dt": "2026-05-03T19:00-05:00"
+      "start_dt": "2026-06-07T19:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-03",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -71,11 +29,11 @@
       "type": "Stand-up",
       "cost": "FREE",
       "repeat": "First Sunday",
-      "start_dt": "2026-05-02T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-03",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-03",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-05-04",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -117,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-05-04",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -131,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-05-04",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -145,7 +103,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-05-04",
       "time": "9:30pm",
       "time_sort": 2130,
@@ -380,64 +338,72 @@
       "cost": "FREE",
       "repeat": "Every Friday",
       "start_dt": "2026-05-08T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-05-09",
+      "time": "5:00pm",
+      "time_sort": 1700,
+      "title": "Aparna Nancherla",
+      "url": "https://504comedy.com/event/1355/aparna-nancherla-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Sat May 09 2026",
+      "start_dt": "2026-05-08T17:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-05-09",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Cheers! An Improvised Comedy Celebration",
+      "url": "https://504comedy.com/event/951/cheers-an-improvised-comedy-celebration",
+      "venue": "Big Couch",
+      "type": "Improv",
+      "cost": "$10",
+      "repeat": "Second Saturday",
+      "start_dt": "2026-05-09T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-05-09",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Jokes on Oak",
+      "url": "https://504comedy.com/event/1116/jokes-on-oak",
+      "venue": "Oak St Brewery",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Saturday",
+      "start_dt": "2026-05-09T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-05-09",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Anger Management: Comedy Meets Therapy",
+      "url": "https://504comedy.com/event/1121/anger-management-comedy-meets-therapy",
+      "venue": "Howlin' Wolf Den",
+      "type": "Stand-up",
+      "cost": "$15",
+      "repeat": "Second Saturday",
+      "start_dt": "2026-05-09T21:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-05-02",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-02",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Alec Flynn",
-          "url": "https://504comedy.com/event/1352/alec-flynn-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Sat May 02 2026",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-02",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "The Oldest Profession - Solo Comedy Show",
-          "url": "https://504comedy.com/event/1365/the-oldest-profession--solo-comedy-show-at-actors-apothecary-may-1st-2nd",
-          "venue": "The Actor’s Apothecary",
-          "type": "Stand-up",
-          "cost": "$40",
-          "repeat": "Sat May 02 2026",
-          "start_dt": "2026-05-02T19:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-02",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Jokes on Oak",
-          "url": "https://504comedy.com/event/1116/jokes-on-oak",
-          "venue": "Oak St Brewery",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Saturday",
-          "start_dt": "2026-05-02T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-05-03",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-03",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -447,11 +413,11 @@
           "type": "Stand-up",
           "cost": "$25",
           "repeat": "Sun May 03 2026",
-          "start_dt": "2026-05-03T19:00-05:00"
+          "start_dt": "2026-06-07T19:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-03",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -461,11 +427,11 @@
           "type": "Stand-up",
           "cost": "FREE",
           "repeat": "First Sunday",
-          "start_dt": "2026-05-02T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-03",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -479,7 +445,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-03",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -494,12 +460,12 @@
       ]
     },
     {
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-05-04",
       "events": [
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-05-04",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -513,7 +479,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-05-04",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -527,7 +493,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-05-04",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -541,7 +507,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-05-04",
           "time": "9:30pm",
           "time_sort": 2130,
@@ -800,6 +766,68 @@
           "cost": "FREE",
           "repeat": "Every Friday",
           "start_dt": "2026-05-08T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Saturday",
+      "date": "2026-05-09",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-05-09",
+          "time": "5:00pm",
+          "time_sort": 1700,
+          "title": "Aparna Nancherla",
+          "url": "https://504comedy.com/event/1355/aparna-nancherla-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Sat May 09 2026",
+          "start_dt": "2026-05-08T17:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-05-09",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Cheers! An Improvised Comedy Celebration",
+          "url": "https://504comedy.com/event/951/cheers-an-improvised-comedy-celebration",
+          "venue": "Big Couch",
+          "type": "Improv",
+          "cost": "$10",
+          "repeat": "Second Saturday",
+          "start_dt": "2026-05-09T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-05-09",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Jokes on Oak",
+          "url": "https://504comedy.com/event/1116/jokes-on-oak",
+          "venue": "Oak St Brewery",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Saturday",
+          "start_dt": "2026-05-09T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-05-09",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Anger Management: Comedy Meets Therapy",
+          "url": "https://504comedy.com/event/1121/anger-management-comedy-meets-therapy",
+          "venue": "Howlin' Wolf Den",
+          "type": "Stand-up",
+          "cost": "$15",
+          "repeat": "Second Saturday",
+          "start_dt": "2026-05-09T21:00-05:00"
         }
       ]
     }
