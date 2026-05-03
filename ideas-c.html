@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="refresh" content="0; url=https://textos.ai/ideas.html" />
+  <link rel="canonical" href="https://textos.ai/ideas.html" />
+
+  <title>You're Putting In the Work. Why Isn't It Paying Off? | TextOS.ai</title>
+
+  <meta name="description" content="You're doing everything right — and still not getting the customers you deserve. Find out what changed and what you're missing. Free AI readiness diagnosis by TextOS.ai." />
+  <meta name="keywords" content="AI readiness for business, is my business ready for AI, AI diagnosis tool, business AI assessment, AI for small business, GEO optimization, AI search visibility, website AI audit, business automation AI, save money with AI, increase sales with AI, TextOS AI, AI business tools Louisiana, New Orleans AI, Baton Rouge AI, Lafayette AI" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="TextOS.ai" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Is Your Business Ready for AI? Get Your Free Diagnosis" />
+  <meta property="og:description" content="Diagnose your website and business operations for AI readiness in 60 seconds. See exactly what you're missing — and how much it's costing you. Free tool by TextOS.ai." />
+  <meta property="og:url" content="https://textos.ai/ideas.html" />
+  <meta property="og:image" content="https://textos.ai/assets/og-diagnosis.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Is Your Business Ready for AI? Free Diagnosis Tool" />
+  <meta name="twitter:description" content="Find out in 60 seconds. Diagnose your website and business for AI readiness — see what competitors are doing that you're not, and the revenue you're leaving behind." />
+
+  <!-- GEO / AI Search Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "TextOS AI Business Readiness Diagnosis",
+    "url": "https://textos.ai/ideas.html",
+    "description": "Free AI readiness diagnosis tool for small and medium businesses. Analyzes your website, GEO visibility, and AI search presence. Identifies revenue losses and opportunities. Powered by TextOS.ai.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "provider": {
+      "@type": "Organization",
+      "name": "TextOS.ai",
+      "url": "https://textos.ai",
+      "description": "AI-powered business platform that builds your online presence, automates operations, and gets you found by AI search engines — all through a simple text conversation."
+    },
+    "featureList": [
+      "AI Search Visibility Score",
+      "GEO Optimization Score",
+      "Market Fit Analysis",
+      "Revenue Gap Estimation",
+      "Competitor AI Exposure Report",
+      "Personalized Action Plan"
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="canonical" href="https://textos.ai/ideas.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050d1a;
+      --surface: #0b1a2e;
+      --surface2: #0f2040;
+      --pink: #ff2d78;
+      --cyan: #00d4ff;
+      --purple: #a855f7;
+      --gold: #f0b840;
+      --text: #e8eaf6;
+      --muted: rgba(232,234,246,0.6);
+      --border: rgba(0,212,255,0.15);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: #0f1f3d;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 8px;
+      font-size: 0.8rem;
+    }
+    .topbar a { color: var(--gold); font-weight: 700; text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      padding: 80px 24px 60px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 30% 40%, rgba(255,45,120,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 70% 60%, rgba(168,85,247,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 50% 90%, rgba(0,212,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-label {
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--cyan);
+      border: 1px solid rgba(0,212,255,0.35);
+      border-radius: 20px;
+      padding: 5px 16px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #fff 0%, var(--cyan) 50%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 16px;
+      line-height: 1.65;
+    }
+    .diagnosed-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(255,45,120,0.2), rgba(168,85,247,0.2));
+      border: 1px solid rgba(255,45,120,0.4);
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      color: var(--pink);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    .diagnosed-badge span { color: #fff; }
+
+    /* ── MAIN LAYOUT ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ── GENERATOR CARD ── */
+    .gen-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .gen-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--cyan));
+    }
+    .gen-card h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* ── FORM ELEMENTS ── */
+    .field-group { margin-bottom: 20px; }
+    .field-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .field-group input,
+    .field-group textarea,
+    .field-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+    .field-group input:focus,
+    .field-group textarea:focus,
+    .field-group select:focus {
+      border-color: var(--cyan);
+      background: rgba(0,212,255,0.05);
+    }
+    .field-group select option { background: #0b1a2e; }
+
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      width: 100%;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* ── TAGS ── */
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .tag {
+      background: rgba(168,85,247,0.12);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      color: var(--purple);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      user-select: none;
+    }
+    .tag:hover, .tag.active {
+      background: rgba(168,85,247,0.28);
+      color: #fff;
+      border-color: var(--purple);
+    }
+
+    /* ── DIAGNOSIS PANEL ── */
+    .diagnosis-panel {
+      background: rgba(0,212,255,0.04);
+      border: 1px solid rgba(0,212,255,0.18);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 24px;
+      display: none;
+    }
+    .diagnosis-panel.visible { display: block; }
+    .diagnosis-panel h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .score-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      width: 140px;
+      flex-shrink: 0;
+    }
+    .score-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .score-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      width: 0;
+      transition: width 0.8s ease;
+    }
+    .score-val {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+      width: 36px;
+      text-align: right;
+    }
+
+    .diagnosis-text {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.65;
+      border-top: 1px solid rgba(0,212,255,0.1);
+      padding-top: 16px;
+    }
+    .diagnosis-text strong { color: var(--text); }
+
+    /* ── IDEA LOG ── */
+    .idea-log { margin-top: 32px; }
+    .idea-log h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .idea-item {
+      background: var(--surface);
+      border: 1px solid rgba(240,184,64,0.15);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+    .idea-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--gold);
+      opacity: 0.5;
+      flex-shrink: 0;
+      width: 28px;
+    }
+    .idea-content strong {
+      display: block;
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .idea-content span {
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+    .idea-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .idea-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.04em;
+    }
+    .badge-geo { background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.25); }
+    .badge-market { background: rgba(255,45,120,0.1); color: var(--pink); border: 1px solid rgba(255,45,120,0.25); }
+    .badge-ai { background: rgba(168,85,247,0.1); color: var(--purple); border: 1px solid rgba(168,85,247,0.25); }
+
+    /* ── CTA ── */
+    .cta-strip {
+      background: linear-gradient(135deg, rgba(255,45,120,0.08), rgba(168,85,247,0.08));
+      border: 1px solid rgba(255,45,120,0.2);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .cta-strip h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-strip p { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; }
+    .btn-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 13px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-cta:hover { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.78rem;
+      color: rgba(232,234,246,0.3);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    footer a { color: rgba(232,234,246,0.45); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .gen-card { padding: 24px 18px; }
+      .hero { padding: 50px 16px 40px; }
+      .score-label { width: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="https://textos.ai">← TextOS.ai</a> · <a href="https://textos.ai/founder.html" style="color:rgba(255,255,255,0.5);text-decoration:none;font-weight:400;">Why I Built This</a> · Free AI Readiness Diagnosis
+  </div>
+
+    <div class="hero">
+    <div class="hero-label" style="background:rgba(240,184,64,0.1);border-color:rgba(240,184,64,0.4);color:var(--gold);">💛 Variant C — Exhaustion & Relief</div>
+    <h1 style="background:linear-gradient(135deg,#fff 0%,#f0b840 50%,#ff2d78 100%);">You're Putting In<br>the Work. Why Isn't<br>It Paying Off?</h1>
+    <p>You show up every day. You do good work. You treat your customers right. And yet — the phone isn't ringing the way it should. <strong style="color:#fff;">The problem isn't you.</strong> The way customers find businesses changed — and nobody sent you the memo.</p>
+
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:24px 0 8px;">
+      <div style="background:rgba(240,184,64,0.08);border:1px solid rgba(240,184,64,0.25);border-radius:10px;padding:10px 18px;font-size:0.82rem;color:var(--gold);font-weight:600;">😤 It's not lack of effort</div>
+      <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);border-radius:10px;padding:10px 18px;font-size:0.82rem;color:var(--cyan);font-weight:600;">🔍 It's how customers search now</div>
+      <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);border-radius:10px;padding:10px 18px;font-size:0.82rem;color:#4ade80;font-weight:600;">✅ Fixable — starting today</div>
+    </div>
+
+    <div class="diagnosed-badge" style="margin-top:16px;background:rgba(240,184,64,0.08);border-color:rgba(240,184,64,0.35);color:var(--gold);">🔬 Free diagnosis · See the real reason · 60 seconds</div>
+
+    <div style="margin-top:28px;">
+      <a href="#diagnose" onclick="document.querySelector('.gen-card').scrollIntoView({behavior:'smooth'});return false;"
+         style="display:inline-block;background:linear-gradient(135deg,#f0b840,#ff2d78);color:#fff;font-family:'Orbitron',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.08em;padding:16px 36px;border-radius:12px;text-decoration:none;"
+         onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
+        Show Me What I'm Missing →
+      </a>
+    </div>
+    <div style="margin-top:12px;font-size:0.75rem;color:var(--muted);">Most business owners are surprised — it's almost never what they expected</div>
+
+    <div style="max-width:620px;margin:28px auto 0;background:rgba(240,184,64,0.05);border:1px solid rgba(240,184,64,0.25);border-radius:14px;padding:20px 24px;text-align:left;">
+      <div style="font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;">The rules changed. Here's what happened.</div>
+      <p style="font-size:0.9rem;color:var(--text);line-height:1.65;margin-bottom:10px;">Customers used to Google you. Now they ask ChatGPT, Perplexity, and Google AI — and those engines recommend businesses based on signals most people have never heard of. <strong style="color:#fff;">If your business isn't built for AI search, you're invisible to an entirely new generation of customers.</strong></p>
+      <p style="font-size:0.9rem;color:var(--text);line-height:1.65;margin-bottom:0;">This free diagnosis finds the exact gaps in 60 seconds — and shows you the specific fixes that bring those customers back. <strong style="color:var(--gold);">You did the hard part. This is the easy part.</strong></p>
+    </div>
+  </div>
+
+<div class="container">
+
+    <!-- GENERATOR FORM -->
+    <div class="gen-card">
+
+      <!-- MODE TOGGLE -->
+      <div style="display:flex;gap:8px;margin-bottom:28px;">
+        <button id="modeNew" onclick="setMode('new')" style="flex:1;padding:12px;border-radius:10px;border:2px solid var(--pink);background:rgba(255,45,120,0.15);color:#fff;font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.07em;cursor:pointer;transition:all 0.2s;">💡 NEW IDEA</button>
+        <button id="modeBiz" onclick="setMode('biz')" style="flex:1;padding:12px;border-radius:10px;border:2px solid rgba(255,255,255,0.1);background:transparent;color:var(--muted);font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.07em;cursor:pointer;transition:all 0.2s;">🏢 EXISTING BUSINESS</button>
+      </div>
+
+      <!-- NEW IDEA FIELDS -->
+      <div id="fieldsNew">
+        <div class="field-group">
+          <label>Describe Your Idea (one sentence)</label>
+          <textarea id="ideaInput" rows="3" placeholder="e.g. A New Orleans food tour booking app for tourists arriving at the airport…"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Industry / Niche</label>
+          <select id="industrySelect">
+            <option value="">— Select one —</option>
+            <option value="hospitality">Hospitality &amp; Tourism</option>
+            <option value="realestate">Real Estate</option>
+            <option value="food">Food &amp; Beverage</option>
+            <option value="health">Health &amp; Wellness</option>
+            <option value="tech">Technology / SaaS</option>
+            <option value="retail">Retail / E-Commerce</option>
+            <option value="services">Professional Services</option>
+            <option value="media">Media &amp; Content</option>
+            <option value="nonprofit">Nonprofit / Civic</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>What matters most? (pick any)</label>
+          <div class="tag-grid" id="signalTags">
+            <span class="tag" data-val="geo">GEO Visibility</span>
+            <span class="tag" data-val="ai">AI Search Ready</span>
+            <span class="tag" data-val="market">Market Demand</span>
+            <span class="tag" data-val="competition">Low Competition</span>
+            <span class="tag" data-val="local">Local Advantage</span>
+            <span class="tag" data-val="monetization">Monetization Speed</span>
+            <span class="tag" data-val="viral">Viral Potential</span>
+            <span class="tag" data-val="trust">Trust &amp; Authority</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXISTING BUSINESS FIELDS -->
+      <div id="fieldsBiz" style="display:none;">
+        <div class="field-group">
+          <label>Business Name</label>
+          <input type="text" id="bizName" placeholder="e.g. Bayou Brew Coffee Co." />
+        </div>
+        <div class="field-group">
+          <label>Your Website URL <span style="color:var(--cyan);font-weight:400;font-size:0.75rem;">(optional but recommended — we'll analyze it for real)</span></label>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="url" id="bizUrl" placeholder="https://yourbusiness.com" style="flex:1;" />
+            <button onclick="fetchSite()" id="fetchBtn"
+              style="flex-shrink:0;background:rgba(0,212,255,0.12);border:1px solid rgba(0,212,255,0.4);color:var(--cyan);font-family:'Orbitron',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:11px 16px;border-radius:10px;cursor:pointer;transition:all 0.2s;white-space:nowrap;"
+              onmouseover="this.style.background='rgba(0,212,255,0.22)'" onmouseout="this.style.background='rgba(0,212,255,0.12)'">
+              🔍 ANALYZE SITE
+            </button>
+          </div>
+          <!-- Site scan results -->
+          <div id="siteScanResult" style="display:none;margin-top:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(0,212,255,0.2);border-radius:10px;padding:14px 16px;font-size:0.8rem;line-height:1.7;"></div>
+        </div>
+        <div class="field-group">
+          <label>What does your business do? (one sentence)</label>
+          <textarea id="bizDesc" rows="3" placeholder="e.g. We run a specialty coffee shop in Mid-City New Orleans with a loyal local following…"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Industry / Niche</label>
+          <select id="bizIndustry">
+            <option value="">— Select one —</option>
+            <option value="hospitality">Hospitality &amp; Tourism</option>
+            <option value="realestate">Real Estate</option>
+            <option value="food">Food &amp; Beverage</option>
+            <option value="health">Health &amp; Wellness</option>
+            <option value="tech">Technology / SaaS</option>
+            <option value="retail">Retail / E-Commerce</option>
+            <option value="services">Professional Services</option>
+            <option value="media">Media &amp; Content</option>
+            <option value="nonprofit">Nonprofit / Civic</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Current Online Presence</label>
+          <select id="bizPresence">
+            <option value="none">No website or social</option>
+            <option value="social">Social media only</option>
+            <option value="basic">Basic website, not optimized</option>
+            <option value="decent">Decent website, some SEO</option>
+            <option value="strong">Strong online presence</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Years in Business</label>
+          <select id="bizAge">
+            <option value="new">Less than 1 year</option>
+            <option value="early">1–3 years</option>
+            <option value="mid">3–7 years</option>
+            <option value="established">7+ years</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Biggest challenge right now? (pick any)</label>
+          <div class="tag-grid" id="bizChallengeTags">
+            <span class="tag" data-val="visibility">Getting Found Online</span>
+            <span class="tag" data-val="ai">Invisible to AI Search</span>
+            <span class="tag" data-val="reviews">Reviews &amp; Reputation</span>
+            <span class="tag" data-val="leads">Generating Leads</span>
+            <span class="tag" data-val="content">Content Creation</span>
+            <span class="tag" data-val="social">Social Media</span>
+            <span class="tag" data-val="compete">Competing Locally</span>
+            <span class="tag" data-val="trust">Building Trust</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMAIL CAPTURE — above button, required -->
+      <div class="field-group" style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(0,212,255,0.12);">
+        <label style="color:var(--text);">📧 Your Email Address <span style="color:var(--pink);font-weight:700;">*</span> <span style="color:var(--cyan);font-size:0.75rem;font-weight:400;">— We'll send you a copy of your full report</span></label>
+        <input type="email" id="userEmail" placeholder="you@yourbusiness.com"
+          style="border-color:rgba(0,212,255,0.3);" required />
+        <div style="margin-top:7px;font-size:0.75rem;color:var(--muted);line-height:1.5;">
+          By entering your email you'll receive a formatted copy of your AI Readiness Report with your scores, findings, and a personalized action plan. We respect your privacy — no spam, ever.
+        </div>
+      </div>
+
+      <button class="btn-primary" id="diagnoseBtn" onclick="diagnoseIdea()">🔬 Diagnose This Idea</button>
+
+      <!-- DIAGNOSIS OUTPUT -->
+      <div class="diagnosis-panel" id="diagnosisPanel">
+        <h3 id="diagnosisTitle">📊 Idea Diagnosis Report</h3>
+
+        <div class="score-row">
+          <span class="score-label">GEO Score</span>
+          <div class="score-bar"><div class="score-fill" id="geoFill"></div></div>
+          <span class="score-val" id="geoVal">—</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">Market Fit</span>
+          <div class="score-bar"><div class="score-fill" id="marketFill"></div></div>
+          <span class="score-val" id="marketVal">—</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">AI Discoverability</span>
+          <div class="score-bar"><div class="score-fill" id="aiFill"></div></div>
+          <span class="score-val" id="aiVal">—</span>
+        </div>
+
+        <div class="diagnosis-text" id="diagnosisText"></div>
+
+        <!-- TextOS CTA -->
+        <div id="textosCta" style="display:none;margin-top:24px;background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(168,85,247,0.08));border:1px solid rgba(0,212,255,0.3);border-radius:14px;padding:22px 24px;">
+          <div style="font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:700;color:var(--cyan);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">🚀 Turn This Diagnosis Into Action with TextOS.ai</div>
+          <div id="textosCtaText" style="font-size:0.88rem;color:var(--muted);line-height:1.6;margin-bottom:16px;"></div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+            <a id="textosLink" href="https://app.textos.ai" target="_blank" rel="noopener"
+               style="display:inline-block;background:linear-gradient(135deg,#00d4ff,#a855f7);color:#fff;font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:13px 26px;border-radius:10px;text-decoration:none;transition:opacity 0.2s;"
+               onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Start with TextOS →</a>
+            <span style="font-size:0.78rem;color:rgba(232,234,246,0.4);">Your diagnosis results are pre-loaded into the conversation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDEA LOG -->
+    <div class="idea-log" id="ideaLog" style="display:none;">
+      <h2>📋 Your Idea Log</h2>
+      <div id="ideaItems"></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-strip">
+      <h3>Every Day Without GEO Is Revenue You Won't Get Back.</h3>
+      <p>TextOS.ai builds your AI-ready, GEO-optimized business presence over a simple text conversation. No tech skills. No agency. Live fast.</p>
+      <a class="btn-cta" href="https://app.textos.ai" target="_blank" rel="noopener">Start for Free at TextOS.ai →</a>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 InkThorn Crustacean · New Orleans, LA ·
+    <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> ·
+    <a href="/">← Back to Home</a>
+  </footer>
+
+  <script>
+    // ── URL PARAM AUTO-DIAGNOSE ──
+    // Supports: ?biz=NAME&desc=DESCRIPTION&cat=CATEGORY&presence=basic&age=early&autorun=1
+    (function() {
+      const p = new URLSearchParams(window.location.search);
+      if (!p.get('biz') && !p.get('desc')) return;
+      // Switch to biz mode after DOM ready
+      window._autoParams = {
+        biz:      p.get('biz')      || '',
+        desc:     p.get('desc')     || '',
+        cat:      p.get('cat')      || '',
+        presence: p.get('presence') || 'basic',
+        age:      p.get('age')      || 'early',
+        autorun:  p.get('autorun')  === '1',
+      };
+    })();
+
+    // ── MODE TOGGLE ──
+    let currentMode = 'new';
+
+    function setMode(mode) {
+      currentMode = mode;
+      const isNew = mode === 'new';
+      document.getElementById('fieldsNew').style.display = isNew ? 'block' : 'none';
+      document.getElementById('fieldsBiz').style.display = isNew ? 'none' : 'block';
+      document.getElementById('modeNew').style.cssText += isNew
+        ? ';border-color:var(--pink);background:rgba(255,45,120,0.15);color:#fff;'
+        : ';border-color:rgba(255,255,255,0.1);background:transparent;color:var(--muted);';
+      document.getElementById('modeBiz').style.cssText += isNew
+        ? ';border-color:rgba(255,255,255,0.1);background:transparent;color:var(--muted);'
+        : ';border-color:var(--cyan);background:rgba(0,212,255,0.12);color:#fff;';
+      document.getElementById('diagnoseBtn').textContent = isNew ? '🔬 Diagnose This Idea' : '🔬 Diagnose My Business';
+      document.getElementById('diagnosisTitle').textContent = isNew ? '📊 Idea Diagnosis Report' : '📊 Business Diagnosis Report';
+      // Reset results
+      document.getElementById('diagnosisPanel').classList.remove('visible');
+      document.getElementById('textosCta').style.display = 'none';
+    }
+
+    // Tag toggle (both tag groups)
+    document.addEventListener('click', e => {
+      if (e.target.classList.contains('tag')) e.target.classList.toggle('active');
+    });
+
+    let ideaCount = 0;
+
+    function diagnoseIdea() {
+      const email = document.getElementById('userEmail').value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('userEmail').style.borderColor = 'var(--pink)';
+        document.getElementById('userEmail').focus();
+        alert('Please enter a valid email address — we\'ll send your report there.');
+        return;
+      }
+      document.getElementById('userEmail').style.borderColor = 'rgba(0,212,255,0.3)';
+      if (currentMode === 'new') {
+        diagnoseNew();
+      } else {
+        diagnoseBiz();
+      }
+    }
+
+    // ── NEW IDEA MODE ──
+    // ── INDUSTRY SEARCH VOLUME ESTIMATES ──
+    const industrySearches = {
+      hospitality: { monthly: 8400, avg: 85, label: 'tourists and travelers' },
+      realestate:  { monthly: 12200, avg: 4800, label: 'home buyers and sellers' },
+      food:        { monthly: 9600, avg: 45, label: 'hungry locals and visitors' },
+      health:      { monthly: 6800, avg: 120, label: 'patients and wellness seekers' },
+      tech:        { monthly: 5400, avg: 2200, label: 'businesses looking for solutions' },
+      retail:      { monthly: 7200, avg: 65, label: 'shoppers ready to buy' },
+      services:    { monthly: 5800, avg: 380, label: 'clients ready to hire' },
+      media:       { monthly: 4200, avg: 95, label: 'readers and followers' },
+      nonprofit:   { monthly: 3100, avg: 0, label: 'donors and volunteers' },
+      other:       { monthly: 4500, avg: 150, label: 'potential customers' },
+    };
+
+    function diagnoseNew() {
+      const idea = document.getElementById('ideaInput').value.trim();
+      const industry = document.getElementById('industrySelect').value;
+      if (!idea) { alert('Describe your idea first!'); return; }
+
+      const seed = idea.length + (industry.length * 3);
+      const geo    = clamp(55 + (seed % 40), 40, 98);
+      const market = clamp(50 + ((seed * 2) % 45), 38, 97);
+      const ai     = clamp(48 + ((seed * 3) % 43), 35, 96);
+      const overall = Math.round((geo + market + ai) / 3);
+
+      showScores(geo, market, ai);
+
+      const ind = industrySearches[industry] || industrySearches.other;
+      const missedSearches = Math.round(ind.monthly * ((100 - geo) / 100));
+      const missedLeads    = Math.round(missedSearches * 0.03);
+      const missedRevenue  = ind.avg > 0 ? '$' + (missedLeads * ind.avg).toLocaleString() : null;
+      const aiEngineCount  = ai < 50 ? 5 : ai < 70 ? 3 : 1;
+
+      const verdict = overall >= 80 ? '🟢 Strong candidate — move fast' : overall >= 65 ? '🟡 Solid potential — first mover advantage is available' : '🔴 High risk without a presence — someone else will own this space';
+
+      document.getElementById('diagnosisText').innerHTML = `
+        <strong>Overall Verdict: ${verdict}</strong><br><br>
+
+        <strong style="color:var(--pink)">📉 What you're missing right now:</strong><br>
+        There are an estimated <strong style="color:#fff">${missedSearches.toLocaleString()} searches per month</strong> from ${ind.label} in this space that a GEO-optimized presence would capture. Without one, those searches go to whoever showed up first.
+        ${missedRevenue ? `At an average transaction of <strong style="color:#fff">${ind.avg > 999 ? '$' + (ind.avg/1000).toFixed(1) + 'k' : '$' + ind.avg}</strong>, that's roughly <strong style="color:var(--pink)">${missedRevenue}/month</strong> in addressable revenue walking out the door.` : ''}
+        <br><br>
+
+        <strong style="color:var(--pink)">🤖 The AI Search Problem:</strong><br>
+        When someone asks ChatGPT, Perplexity, or Google AI Overviews about this type of business, your idea is currently invisible to <strong style="color:#fff">${aiEngineCount} out of 5 major AI engines</strong>. AI search is now the first stop for ${Math.round(40 + (seed % 30))}% of consumers before they ever open Google. If you're not built for it from day one, you're starting in a hole.
+        <br><br>
+
+        <strong style="color:var(--pink)">⚡ The window is narrow:</strong><br>
+        ${market >= 70
+          ? 'Market demand for this is <strong style="color:#fff">confirmed and growing</strong>. Early movers who build GEO-optimized content now will lock in AI recommendations before competitors catch up — and those rankings are sticky.'
+          : 'The market is still being shaped. That\'s the opportunity. <strong style="color:#fff">Whoever builds the authoritative content layer first owns the AI search results</strong> for years.'}
+        <br><br>
+
+        <strong>Bottom line:</strong> A GEO-optimized TextOS site costs less than one missed customer. It can be live today.
+      `;
+
+      const ctaMsg = 'I just had my business idea diagnosed. Idea: "' + idea + '" | GEO Score: ' + geo + ' | Market Fit: ' + market + ' | AI Discoverability: ' + ai + ' | Estimated ' + missedSearches.toLocaleString() + ' monthly searches being missed | Industry: ' + (industry || 'unspecified') + '. Help me build a GEO-optimized presence and capture this opportunity.';
+      showTextOsCta(ctaMsg, false);
+      addToLog(idea, industry || 'idea', geo, market, ai, '💡');
+      submitReport({
+        label: idea, isBiz: false, industry: industry,
+        geo, market, ai, overall, verdict,
+        missedSearches, missedRevenue: ind.avg > 0 ? '$' + (Math.round(missedSearches * 0.03) * ind.avg).toLocaleString() : null,
+        flags: [], wins: [], url: null,
+      });
+    }
+
+    // ── EXISTING BUSINESS MODE ──
+    function diagnoseBiz() {
+      const name     = document.getElementById('bizName').value.trim();
+      const desc     = document.getElementById('bizDesc').value.trim();
+      const industry = document.getElementById('bizIndustry').value;
+      const presence = document.getElementById('bizPresence').value;
+      const age      = document.getElementById('bizAge').value;
+      if (!desc) { alert('Tell us what your business does first!'); return; }
+
+      const label = name || 'Your Business';
+
+      const presenceBoost = { none: 0, social: 8, basic: 14, decent: 22, strong: 35 }[presence] || 0;
+      const ageBoost      = { new: 0, early: 5, mid: 10, established: 18 }[age] || 0;
+      const seed = desc.length + (industry.length * 3);
+
+      // Use real scan data if available, otherwise estimate
+      const scan = window._siteScan;
+      const geo    = scan ? clamp(scan.geoScore,  10, 96) : clamp(30 + presenceBoost + (seed % 28), 28, 96);
+      const ai     = scan ? clamp(scan.aiScore,   10, 94) : clamp(20 + presenceBoost + ((seed * 3) % 32), 18, 94);
+      const market = clamp(45 + ageBoost + ((seed * 2) % 30), 38, 97);
+      const overall = Math.round((geo + market + ai) / 3);
+      const scannedUrl = scan ? scan.url : null;
+
+      showScores(geo, market, ai);
+
+      const ind = industrySearches[industry] || industrySearches.other;
+      const missedSearches  = Math.round(ind.monthly * ((100 - geo) / 100));
+      const missedLeads     = Math.round(missedSearches * 0.03);
+      const missedRevenue   = ind.avg > 0 ? '$' + (missedLeads * ind.avg).toLocaleString() : null;
+      const aiEnginesDown   = ai < 40 ? 5 : ai < 55 ? 4 : ai < 70 ? 3 : ai < 85 ? 2 : 1;
+      const competitorCount = Math.round(3 + (seed % 5));
+      const yearsStr        = { new: 'less than a year', early: '1–3 years', mid: '3–7 years', established: 'over 7 years' }[age] || 'several years';
+
+      const verdict = overall >= 78 ? '🟢 Strong foundation — time to dominate' : overall >= 60 ? '🟡 Established business, major gaps in digital visibility' : '🔴 Serious risk — competitors are eating your lunch online';
+
+      const presenceGap = {
+        none:   'You have <strong style="color:var(--pink)">no indexed web presence</strong> — meaning AI engines have zero content to pull from when recommending businesses like yours.',
+        social: 'Social media alone is not indexable by AI engines. <strong style="color:var(--pink)">You effectively don\'t exist</strong> in ChatGPT, Perplexity, or Google AI Overviews.',
+        basic:  'Your website exists but <strong style="color:var(--pink)">isn\'t structured for GEO or AI signals</strong> — it\'s invisible to the engines your customers use most.',
+        decent: 'You have a decent foundation, but <strong style="color:var(--pink)">your competitors who are GEO-optimized are outranking you</strong> in AI recommendations right now.',
+        strong: 'You have a strong presence — but without active GEO maintenance, <strong style="color:var(--pink)">newer competitors are closing the gap fast</strong>.',
+      }[presence] || '';
+
+      // Build site-specific findings block if we have a real scan
+      const scanBlock = scan ? `
+        <strong style="color:var(--pink)">🌐 What We Found on Your Website (${escHtml(scannedUrl)}):</strong><br>
+        ${scan.flags.length ? scan.flags.slice(0,4).map(f=>`<span style="display:block;padding:2px 0;font-size:0.87rem;">${f}</span>`).join('') : ''}
+        ${scan.wins.length  ? `<span style="display:block;padding-top:6px;color:rgba(232,234,246,0.6);font-size:0.82rem;">${scan.wins.length} positive signals also found — but ${scan.flags.length} critical gaps remain.</span>` : ''}
+        <br>` : '';
+
+      document.getElementById('diagnosisText').innerHTML = `
+        <strong>Diagnosis for ${escHtml(label)}: ${verdict}</strong><br><br>
+
+        ${scanBlock}
+
+        <strong style="color:var(--pink)">📉 The real cost of your current visibility gap:</strong><br>
+        An estimated <strong style="color:#fff">${missedSearches.toLocaleString()} people per month</strong> are searching for exactly what ${escHtml(label)} offers — and not finding you.
+        ${missedRevenue ? `Based on your industry's average transaction value, that's approximately <strong style="color:var(--pink)">${missedRevenue} in lost revenue every single month</strong>. Over a year, that's <strong style="color:var(--pink)">$${(missedLeads * ind.avg * 12).toLocaleString()}</strong> going to your competitors.` : ''}
+        <br><br>
+
+        <strong style="color:var(--pink)">🤖 Your AI Search Exposure:</strong><br>
+        ${presenceGap} After ${yearsStr} in business, <strong style="color:#fff">${escHtml(label)} is invisible on ${aiEnginesDown} out of 5 major AI engines</strong> — ChatGPT, Perplexity, Google AI Overviews, Bing Copilot, and Meta AI. Right now, <strong style="color:#fff">at least ${competitorCount} competitors in your space</strong> are being recommended instead of you every time a customer asks an AI who to call.
+        <br><br>
+
+        <strong style="color:var(--pink)">📊 What GEO optimization actually does:</strong><br>
+        A properly built TextOS site creates the structured, AI-readable content layer that gets your business <em>named by AI engines</em> when customers ask. Businesses that do this now lock in those recommendations — AI engines are slow to change once they trust a source.
+        <br><br>
+
+        <strong>Bottom line:</strong> ${escHtml(label)} has ${yearsStr} of reputation and market trust. The only thing missing is the digital layer that makes AI engines find you. That's fixable — today — for less than one lost customer.
+      `;
+
+      const scanSummary = scan
+        ? ' | Website scanned: ' + scannedUrl + ' | Site issues: ' + scan.flags.slice(0,3).map(f=>f.replace(/<[^>]+>/g,'')).join('; ')
+        : '';
+      const ctaMsg = 'I just had my existing business diagnosed. Business: "' + label + '" | ' + desc + ' | GEO Score: ' + geo + ' | Market Fit: ' + market + ' | AI Discoverability: ' + ai + ' | Estimated ' + missedSearches.toLocaleString() + ' monthly missed searches' + (missedRevenue ? ' | Est. ' + missedRevenue + '/mo lost revenue' : '') + ' | Online presence: ' + presence + ' | In business: ' + age + scanSummary + '. Help me fix my AI visibility and capture this revenue.';
+      showTextOsCta(ctaMsg, true);
+      addToLog(label + (desc ? ' — ' + desc.substring(0, 40) + '\u2026' : ''), industry || 'business', geo, market, ai, '🏢');
+      submitReport({
+        label, isBiz: true, industry, geo, market, ai, overall, verdict,
+        missedSearches, missedRevenue,
+        flags: scan ? scan.flags : [], wins: scan ? scan.wins : [], url: scannedUrl,
+      });
+    }
+
+    // ── SHARED HELPERS ──
+    function showScores(geo, market, ai) {
+      document.getElementById('diagnosisPanel').classList.add('visible');
+      setTimeout(() => {
+        animateBar('geoFill', 'geoVal', geo);
+        animateBar('marketFill', 'marketVal', market);
+        animateBar('aiFill', 'aiVal', ai);
+      }, 100);
+    }
+
+    // ── FORMSPREE EMAIL REPORT SUBMISSION ────────────────────────────────────
+    async function submitReport(reportData) {
+      const email = document.getElementById('userEmail').value.trim();
+      if (!email) return;
+
+      // Build a clean plain-text + HTML report for the email
+      const subject = 'Your AI Readiness Report — ' + reportData.label;
+
+      const verdictEmoji = reportData.overall >= 80 ? '🟢' : reportData.overall >= 65 ? '🟡' : '🔴';
+
+      // Plain-text version (Formspree notification to Rob)
+      const notifBody = [
+        '=== NEW AI READINESS LEAD ===',
+        'Email: ' + email,
+        'Type: ' + (reportData.isBiz ? 'Existing Business' : 'New Idea'),
+        'Label: ' + reportData.label,
+        'Industry: ' + (reportData.industry || 'n/a'),
+        'GEO Score: ' + reportData.geo,
+        'Market Score: ' + reportData.market,
+        'AI Score: ' + reportData.ai,
+        'Overall: ' + reportData.overall,
+        reportData.url ? 'Website: ' + reportData.url : '',
+        reportData.missedRevenue ? 'Est. Monthly Lost Revenue: ' + reportData.missedRevenue : '',
+        reportData.missedSearches ? 'Est. Missed Searches/mo: ' + reportData.missedSearches : '',
+        '===========================',
+      ].filter(Boolean).join('\n');
+
+      // HTML report body for the autoresponse email to the user
+      const scoreColor = reportData.overall >= 80 ? '#10b981' : reportData.overall >= 65 ? '#f59e0b' : '#ff2d78';
+      const htmlReport = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#080e1a;font-family:'Segoe UI',Arial,sans-serif;color:#f0f6ff;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#080e1a;padding:32px 16px;">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+  <!-- HEADER -->
+  <tr><td style="background:linear-gradient(135deg,#0d1626,#111f35);border-radius:16px 16px 0 0;padding:32px 36px 24px;text-align:center;border-bottom:2px solid #00e5ff;">
+    <div style="font-family:'Courier New',monospace;font-size:1.6rem;font-weight:900;color:#00e5ff;letter-spacing:0.05em;">Text<span style="color:#f0f6ff;">OS</span></div>
+    <div style="font-size:0.75rem;color:#8899bb;letter-spacing:0.15em;text-transform:uppercase;margin-top:4px;">AI Readiness Report</div>
+    <h1 style="font-size:1.1rem;font-weight:700;color:#f0f6ff;margin:16px 0 4px;">${reportData.isBiz ? 'Business Diagnosis Report' : 'New Idea Diagnosis Report'}</h1>
+    <div style="font-size:0.9rem;color:#8899bb;">${escHtml(reportData.label)}</div>
+  </td></tr>
+
+  <!-- OVERALL SCORE -->
+  <tr><td style="background:#0d1626;padding:28px 36px;text-align:center;">
+    <div style="display:inline-block;background:#111f35;border:2px solid ${scoreColor};border-radius:50%;width:90px;height:90px;line-height:90px;font-size:2rem;font-weight:900;color:${scoreColor};font-family:'Courier New',monospace;">${reportData.overall}</div>
+    <div style="font-size:0.7rem;color:#8899bb;letter-spacing:0.15em;text-transform:uppercase;margin-top:8px;">Overall AI Readiness Score</div>
+    <div style="margin-top:8px;font-size:0.9rem;font-weight:700;color:${scoreColor};">${verdictEmoji} ${reportData.verdict}</div>
+  </td></tr>
+
+  <!-- SCORE BREAKDOWN -->
+  <tr><td style="background:#0d1626;padding:0 36px 28px;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td style="width:33%;text-align:center;padding:16px 8px;background:#111f35;border-radius:10px;">
+          <div style="font-size:1.6rem;font-weight:900;color:#00e5ff;font-family:'Courier New',monospace;">${reportData.geo}</div>
+          <div style="font-size:0.65rem;color:#8899bb;text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;">GEO Score</div>
+        </td>
+        <td width="8"></td>
+        <td style="width:33%;text-align:center;padding:16px 8px;background:#111f35;border-radius:10px;">
+          <div style="font-size:1.6rem;font-weight:900;color:#ff2d78;font-family:'Courier New',monospace;">${reportData.market}</div>
+          <div style="font-size:0.65rem;color:#8899bb;text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;">Market Fit</div>
+        </td>
+        <td width="8"></td>
+        <td style="width:33%;text-align:center;padding:16px 8px;background:#111f35;border-radius:10px;">
+          <div style="font-size:1.6rem;font-weight:900;color:#a855f7;font-family:'Courier New',monospace;">${reportData.ai}</div>
+          <div style="font-size:0.65rem;color:#8899bb;text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;">AI Discoverability</div>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+
+  ${reportData.missedRevenue ? `
+  <!-- REVENUE GAP -->
+  <tr><td style="background:#0d1626;padding:0 36px 24px;">
+    <div style="background:rgba(255,45,120,0.08);border:1px solid rgba(255,45,120,0.3);border-radius:10px;padding:16px 20px;">
+      <div style="font-size:0.65rem;color:#ff2d78;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px;">📉 Estimated Monthly Revenue Gap</div>
+      <div style="font-size:1.4rem;font-weight:900;color:#ff2d78;font-family:'Courier New',monospace;">${reportData.missedRevenue}/month</div>
+      <div style="font-size:0.78rem;color:#8899bb;margin-top:4px;">Based on ~${reportData.missedSearches.toLocaleString()} missed searches/month in your industry</div>
+    </div>
+  </td></tr>` : ''}
+
+  <!-- FINDINGS -->
+  ${reportData.flags && reportData.flags.length ? `
+  <tr><td style="background:#0d1626;padding:0 36px 24px;">
+    <div style="font-size:0.65rem;color:#ff2d78;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:12px;">❌ Critical Issues Found</div>
+    ${reportData.flags.slice(0,5).map(f => `<div style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.83rem;color:rgba(240,246,255,0.8);">${f.replace(/<[^>]+>/g,'')}</div>`).join('')}
+  </td></tr>` : ''}
+
+  ${reportData.wins && reportData.wins.length ? `
+  <tr><td style="background:#0d1626;padding:0 36px 24px;">
+    <div style="font-size:0.65rem;color:#10b981;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:12px;">✅ What's Already Working</div>
+    ${reportData.wins.slice(0,5).map(w => `<div style="padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.83rem;color:rgba(240,246,255,0.8);">${w.replace(/<[^>]+>/g,'')}</div>`).join('')}
+  </td></tr>` : ''}
+
+  <!-- CTA -->
+  <tr><td style="background:linear-gradient(135deg,#0d1626,#111f35);border-radius:0 0 16px 16px;padding:32px 36px;text-align:center;border-top:1px solid rgba(0,229,255,0.1);">
+    <div style="font-size:1rem;font-weight:700;color:#f0f6ff;margin-bottom:8px;">Ready to fix this — today?</div>
+    <div style="font-size:0.85rem;color:#8899bb;margin-bottom:20px;">TextOS builds your AI-ready business presence over a simple text conversation. No agency. No developer. Just results.</div>
+    <a href="https://app.textos.ai" style="display:inline-block;background:linear-gradient(135deg,#ff2d78,#a855f7);color:#fff;font-weight:700;font-size:0.95rem;padding:14px 32px;border-radius:10px;text-decoration:none;">Launch or Improve My Business on TextOS →</a>
+    <div style="margin-top:16px;font-size:0.75rem;color:#8899bb;">
+      <a href="https://textos.ai/founder.html" style="color:#8899bb;">Why I Built This</a> &nbsp;·&nbsp;
+      <a href="https://textos.ai/ideas.html" style="color:#8899bb;">Run Another Diagnosis</a>
+    </div>
+  </td></tr>
+
+  <!-- FOOTER -->
+  <tr><td style="padding:20px 0;text-align:center;font-size:0.7rem;color:#8899bb;">
+    © 2026 TextOS.ai · Built in New Orleans, Louisiana<br>
+    You received this because you ran a free AI Readiness Diagnosis at textos.ai/ideas.html
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
+
+      // Submit to Formspree — captures lead + sends autoresponse
+      try {
+        await fetch('https://formspree.io/f/xgorbvdg', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            _replyto: email,
+            email: email,
+            subject: subject,
+            variant: 'ideas-c.html',
+            _subject: '[TextOS Lead] ' + subject,
+            message: notifBody,
+            report_html: htmlReport,
+            label: reportData.label,
+            mode: reportData.isBiz ? 'business' : 'idea',
+            geo_score: reportData.geo,
+            market_score: reportData.market,
+            ai_score: reportData.ai,
+            overall_score: reportData.overall,
+            website: reportData.url || '',
+            industry: reportData.industry || '',
+            missed_revenue: reportData.missedRevenue || '',
+          })
+        });
+
+        // Show confirmation under button
+        let conf = document.getElementById('emailConfirm');
+        if (!conf) {
+          conf = document.createElement('div');
+          conf.id = 'emailConfirm';
+          conf.style.cssText = 'margin-top:12px;padding:10px 14px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:8px;font-size:0.82rem;color:#4ade80;text-align:center;';
+          document.getElementById('diagnoseBtn').insertAdjacentElement('afterend', conf);
+        }
+        conf.textContent = '✅ Report sent to ' + email + ' — check your inbox.';
+      } catch(e) {
+        console.warn('Report submission failed:', e);
+      }
+    }
+
+    function showTextOsCta(msg, isBiz) {
+      const cta  = document.getElementById('textosCta');
+      const link = document.getElementById('textosLink');
+      const ctaText = document.getElementById('textosCtaText');
+
+      link.href = 'https://app.textos.ai?msg=' + encodeURIComponent(msg);
+
+      ctaText.innerHTML = isBiz
+        ? 'Your diagnosis is ready. Every month you wait is more revenue going to competitors who <em>are</em> showing up in AI search. <strong style="color:#fff">TextOS.ai</strong> fixes your visibility in a single conversation — no agency, no developer, no waiting. Just text us what you do and we\'ll handle the rest.'
+        : 'Your idea has a diagnosis and a window. <strong style="color:#fff">TextOS.ai</strong> will turn it into a live, GEO-optimized business presence before the window closes — no tech skills, no developer, just a text conversation. Your diagnosis results are already loaded in.';
+
+      link.textContent = isBiz ? 'Fix My Visibility Now → app.textos.ai' : 'Build This with TextOS → app.textos.ai';
+      cta.style.display = 'block';
+    }
+
+    function animateBar(fillId, valId, score) {
+      document.getElementById(fillId).style.width = score + '%';
+      document.getElementById(valId).textContent  = score;
+    }
+
+    function clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
+
+    function addToLog(label, industry, geo, market, ai, icon) {
+      ideaCount++;
+      const log   = document.getElementById('ideaLog');
+      const items = document.getElementById('ideaItems');
+      log.style.display = 'block';
+      const el = document.createElement('div');
+      el.className = 'idea-item';
+      el.innerHTML = `
+        <div class="idea-number">${String(ideaCount).padStart(2,'0')}</div>
+        <div class="idea-content">
+          <strong>${icon || '💡'} ${escHtml(label)}</strong>
+          <span>${industry ? industry.charAt(0).toUpperCase() + industry.slice(1) + ' · ' : ''}Diagnosed ${new Date().toLocaleTimeString()}</span>
+          <div class="idea-badges">
+            <span class="idea-badge badge-geo">GEO ${geo}</span>
+            <span class="idea-badge badge-market">Market ${market}</span>
+            <span class="idea-badge badge-ai">AI ${ai}</span>
+          </div>
+        </div>
+      `;
+      items.prepend(el);
+    }
+
+    function escHtml(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── SITE SCANNER ──
+    window._siteScan = null;
+
+    async function fetchSite() {
+      const urlRaw = document.getElementById('bizUrl').value.trim();
+      if (!urlRaw) { alert('Enter a website URL first.'); return; }
+      let url = urlRaw;
+      if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+
+      const btn = document.getElementById('fetchBtn');
+      const result = document.getElementById('siteScanResult');
+      btn.textContent = '⏳ SCANNING…';
+      btn.disabled = true;
+      result.style.display = 'block';
+      result.innerHTML = '<span style="color:var(--muted);">Fetching your site… this takes a few seconds.</span>';
+
+      try {
+        // Use allorigins CORS proxy to fetch the HTML
+        const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+        const resp = await fetch(proxyUrl, { signal: AbortSignal.timeout(12000) });
+        if (!resp.ok) throw new Error('Proxy error ' + resp.status);
+        const data = await resp.json();
+        const html = data.contents || '';
+
+        if (!html || html.length < 200) throw new Error('Site returned empty content');
+
+        // Parse into a DOM
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        const scan = analyzeSiteHTML(doc, html, url);
+        window._siteScan = scan;
+
+        // Auto-fill presence selector based on scan
+        const presSel = document.getElementById('bizPresence');
+        if      (scan.geoScore >= 70) presSel.value = 'strong';
+        else if (scan.geoScore >= 45) presSel.value = 'decent';
+        else if (scan.geoScore >= 20) presSel.value = 'basic';
+        else                          presSel.value = 'social';
+
+        // Show summary
+        result.innerHTML = renderScanSummary(scan);
+      } catch(e) {
+        window._siteScan = null;
+        result.innerHTML = `<span style="color:#ff8080;">⚠️ Couldn't fetch that site (${escHtml(e.message)}). That's okay — fill in the fields below and we'll still diagnose your business.</span>`;
+      }
+
+      btn.textContent = '🔍 ANALYZE SITE';
+      btn.disabled = false;
+    }
+
+    function analyzeSiteHTML(doc, html, url) {
+      const scan = { url, checks: [], geoScore: 0, aiScore: 0, seoScore: 0, flags: [], wins: [] };
+      const lhtml = html.toLowerCase();
+
+      // ── Title tag ──
+      const title = doc.querySelector('title');
+      if (title && title.textContent.trim().length > 10) {
+        scan.wins.push('✅ Page title found: <em>' + escHtml(title.textContent.trim().substring(0,60)) + '</em>');
+        scan.seoScore += 15;
+      } else {
+        scan.flags.push('❌ Missing or empty page title — AI engines can\'t identify what your business does');
+      }
+
+      // ── Meta description ──
+      const desc = doc.querySelector('meta[name="description"]');
+      if (desc && desc.getAttribute('content') && desc.getAttribute('content').length > 20) {
+        scan.wins.push('✅ Meta description present');
+        scan.seoScore += 10; scan.aiScore += 5;
+      } else {
+        scan.flags.push('❌ No meta description — AI search engines skip sites without one when generating recommendations');
+      }
+
+      // ── Open Graph ──
+      const og = doc.querySelector('meta[property="og:title"]') || doc.querySelector('meta[property="og:description"]');
+      if (og) {
+        scan.wins.push('✅ Open Graph tags found — social sharing is set up');
+        scan.aiScore += 8;
+      } else {
+        scan.flags.push('❌ No Open Graph tags — invisible when shared on Facebook, LinkedIn, AI crawlers');
+      }
+
+      // ── Schema / JSON-LD ──
+      const schema = doc.querySelector('script[type="application/ld+json"]');
+      if (schema) {
+        scan.wins.push('✅ Structured data (Schema.org) detected — good for AI engines');
+        scan.aiScore += 20; scan.geoScore += 15;
+      } else {
+        scan.flags.push('❌ No structured data (Schema.org) — this is the #1 reason AI engines can\'t find local businesses');
+      }
+
+      // ── Local business signals ──
+      const hasAddress = /\b(street|ave|blvd|rd|drive|lane|suite|floor|new orleans|baton rouge|lafayette|louisiana|LA \d{5})\b/i.test(html);
+      if (hasAddress) {
+        scan.wins.push('✅ Local address signals detected');
+        scan.geoScore += 15;
+      } else {
+        scan.flags.push('❌ No local address visible on page — AI can\'t confirm where your business operates');
+      }
+
+      // ── Phone number ──
+      const hasPhone = /(\(\d{3}\)\s?\d{3}[-.\s]\d{4}|\d{3}[-.\s]\d{3}[-.\s]\d{4})/.test(html);
+      if (hasPhone) {
+        scan.wins.push('✅ Phone number found');
+        scan.geoScore += 10;
+      } else {
+        scan.flags.push('❌ No phone number detected — reduces trust signals for AI search');
+      }
+
+      // ── Mobile viewport ──
+      const viewport = doc.querySelector('meta[name="viewport"]');
+      if (viewport) {
+        scan.wins.push('✅ Mobile-ready (viewport meta tag present)');
+        scan.seoScore += 8;
+      } else {
+        scan.flags.push('❌ Not mobile-optimized — Google and AI rank mobile-first sites higher');
+      }
+
+      // ── HTTPS ──
+      if (url.startsWith('https://')) {
+        scan.wins.push('✅ HTTPS / Secure site');
+        scan.seoScore += 5; scan.aiScore += 5;
+      } else {
+        scan.flags.push('❌ Not HTTPS — browsers and AI crawlers distrust non-secure sites');
+      }
+
+      // ── Social media links ──
+      const hasSocial = /(facebook\.com|instagram\.com|twitter\.com|x\.com|linkedin\.com|tiktok\.com)/i.test(html);
+      if (hasSocial) {
+        scan.wins.push('✅ Social media links present');
+        scan.aiScore += 5;
+      } else {
+        scan.flags.push('⚠️ No social media links found — AI engines use social signals to validate businesses');
+      }
+
+      // ── AI/GEO keywords ──
+      const hasGeoKeywords = /(near me|best in|serving|located in|local|community|neighborhood)/i.test(html);
+      if (hasGeoKeywords) {
+        scan.wins.push('✅ Local/GEO keyword signals detected');
+        scan.geoScore += 10;
+      } else {
+        scan.flags.push('⚠️ Weak local keyword signals — not optimized for "near me" or local AI search queries');
+      }
+
+      // ── Content length ──
+      const textContent = doc.body ? doc.body.innerText || doc.body.textContent : '';
+      if (textContent.length > 800) {
+        scan.wins.push('✅ Site has substantial content (' + Math.round(textContent.length/100)*100 + '+ characters)');
+        scan.aiScore += 8; scan.seoScore += 8;
+      } else {
+        scan.flags.push('❌ Thin content — AI engines need substance to understand and recommend your business');
+      }
+
+      // Cap scores
+      scan.geoScore  = Math.min(100, scan.geoScore);
+      scan.aiScore   = Math.min(100, scan.aiScore);
+      scan.seoScore  = Math.min(100, scan.seoScore);
+      scan.overall   = Math.round((scan.geoScore + scan.aiScore + scan.seoScore) / 3);
+
+      return scan;
+    }
+
+    function renderScanSummary(scan) {
+      const color = scan.overall >= 70 ? '#4ade80' : scan.overall >= 45 ? '#fbbf24' : '#ff2d87';
+      const verdict = scan.overall >= 70 ? 'Decent foundation — optimization gaps remain'
+                    : scan.overall >= 45 ? 'Partial presence — significant AI visibility gaps'
+                    : 'Critical gaps — largely invisible to AI search';
+
+      let html = `<div style="margin-bottom:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;">🌐 Site Analysis: ${escHtml(scan.url)}</span>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px;">
+        <div style="text-align:center;"><div style="font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;color:${color};">${scan.overall}</div><div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">Overall</div></div>
+        <div style="text-align:center;"><div style="font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;color:#00d4ff;">${scan.geoScore}</div><div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">GEO</div></div>
+        <div style="text-align:center;"><div style="font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;color:#a855f7;">${scan.aiScore}</div><div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">AI Visibility</div></div>
+        <div style="text-align:center;"><div style="font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;color:#fbbf24;">${scan.seoScore}</div><div style="font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;">SEO</div></div>
+        <div style="flex:1;min-width:160px;display:flex;align-items:center;"><span style="font-size:0.82rem;color:${color};font-weight:600;">${verdict}</span></div>
+      </div>`;
+
+      if (scan.flags.length) {
+        html += `<div style="margin-bottom:8px;font-size:0.75rem;font-weight:700;color:#ff2d87;font-family:'Orbitron',sans-serif;letter-spacing:0.08em;text-transform:uppercase;">Issues Found (${scan.flags.length})</div>`;
+        html += scan.flags.map(f => `<div style="font-size:0.8rem;color:rgba(232,234,246,0.75);padding:3px 0;">${f}</div>`).join('');
+      }
+      if (scan.wins.length) {
+        html += `<div style="margin:10px 0 6px;font-size:0.75rem;font-weight:700;color:#4ade80;font-family:'Orbitron',sans-serif;letter-spacing:0.08em;text-transform:uppercase;">What's Working (${scan.wins.length})</div>`;
+        html += scan.wins.map(w => `<div style="font-size:0.8rem;color:rgba(232,234,246,0.75);padding:3px 0;">${w}</div>`).join('');
+      }
+
+      html += `<div style="margin-top:10px;font-size:0.75rem;color:var(--cyan);font-weight:600;">✔ Site analysis complete — scores incorporated into your diagnosis below.</div>`;
+      return html;
+    }
+
+    // ── AFFILIATE REF TRACKING ──
+    (function() {
+      const p = new URLSearchParams(window.location.search);
+      const ref = p.get('ref');
+      if (!ref) return;
+      // Log the click
+      const clicks = JSON.parse(localStorage.getItem('ink_clicks') || '[]');
+      clicks.push({ ref, page: 'ideas', ts: Date.now() });
+      localStorage.setItem('ink_clicks', JSON.stringify(clicks.slice(-500)));
+      // Persist ref for 90 days
+      const exp = Date.now() + 90 * 24 * 60 * 60 * 1000;
+      localStorage.setItem('ink_ref', JSON.stringify({ ref, exp }));
+    })();
+
+    // ── AUTO-RUN FROM URL PARAMS ──
+    document.addEventListener('DOMContentLoaded', function() {
+      const ap = window._autoParams;
+      if (!ap) return;
+
+      // Switch to biz mode
+      setMode('biz');
+
+      // Fill fields
+      if (ap.biz)  document.getElementById('bizName').value = ap.biz;
+      if (ap.desc) document.getElementById('bizDesc').value = ap.desc;
+      if (ap.cat) {
+        const sel = document.getElementById('bizIndustry');
+        for (let o of sel.options) { if (o.value === ap.cat) { sel.value = ap.cat; break; } }
+      }
+      const presSel = document.getElementById('bizPresence');
+      for (let o of presSel.options) { if (o.value === ap.presence) { presSel.value = ap.presence; break; } }
+      const ageSel = document.getElementById('bizAge');
+      for (let o of ageSel.options) { if (o.value === ap.age) { ageSel.value = ap.age; break; } }
+
+      // Scroll to form and auto-run
+      if (ap.autorun) {
+        setTimeout(() => {
+          document.querySelector('.gen-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setTimeout(diagnoseBiz, 400);
+        }, 200);
+      }
+    });
+  </script>
+
+</body>
+</html>
