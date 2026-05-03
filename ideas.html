@@ -469,6 +469,15 @@
         </div>
 
         <div class="diagnosis-text" id="diagnosisText"></div>
+
+        <!-- TextOS CTA -->
+        <div id="textosCta" style="display:none;margin-top:20px;background:linear-gradient(135deg,rgba(0,212,255,0.07),rgba(168,85,247,0.07));border:1px solid rgba(0,212,255,0.25);border-radius:12px;padding:20px 22px;display:none;align-items:center;gap:18px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:200px;">
+            <div style="font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:700;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Turn This Diagnosis Into Action</div>
+            <div style="font-size:0.88rem;color:var(--muted);line-height:1.55;">TextOS.ai is your AI-powered business co-pilot. Take these results and let TextOS help you build your website, content strategy, and online presence — all over a simple text conversation.</div>
+          </div>
+          <a id="textosLink" href="https://app.textos.ai" target="_blank" rel="noopener" style="display:inline-block;background:linear-gradient(135deg,#00d4ff,#a855f7);color:#fff;font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:12px 22px;border-radius:10px;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">🚀 Improve with TextOS →</a>
+        </div>
       </div>
     </div>
 
@@ -536,6 +545,13 @@
         <br><br>
         <strong>Top recommendation:</strong> ${overall >= 75 ? 'Move to content build — a GEO-optimized landing page will capture AI search traffic fast.' : 'Start with a 1-page GEO-optimized site to validate demand before investing heavily.'}
       `;
+
+      // Show TextOS CTA with idea pre-filled in URL
+      const cta = document.getElementById('textosCta');
+      const textosLink = document.getElementById('textosLink');
+      const msg = encodeURIComponent('I just got my business idea diagnosed: ' + idea + '. GEO score: ' + geo + ', Market fit: ' + market + ', AI discoverability: ' + ai + '. Help me improve it.');
+      textosLink.href = 'https://app.textos.ai?msg=' + msg;
+      cta.style.display = 'flex';
 
       // Add to idea log
       addToLog(idea, industry, geo, market, ai);
