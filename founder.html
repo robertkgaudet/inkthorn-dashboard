@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why I Built This — Rob Gaudet, Founder of TextOS.ai</title>
+  <meta name="description" content="Rob Gaudet spent 30 years building systems for businesses. He started at 18 waiting tables at Ryan's Steakhouse and ended up architecting enterprise software for Fortune 500 companies. TextOS is what he would have wanted all along." />
+  <meta name="author" content="Rob Gaudet" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://textos.ai/founder.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Why I Built This — Rob Gaudet, Founder of TextOS.ai" />
+  <meta property="og:description" content="A letter from someone who's been in the trenches of business for 30 years — and built TextOS because he kept seeing the same pain everywhere he went." />
+  <meta property="og:url" content="https://textos.ai/founder.html" />
+  <meta property="og:image" content="https://trustlight.ai/rob-profile.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Why I Built This — Rob Gaudet" />
+  <meta name="twitter:description" content="30 years in the trenches of business. TextOS is what I would have wanted all along." />
+  <meta name="twitter:image" content="https://trustlight.ai/rob-profile.jpg" />
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Rob Gaudet",
+    "jobTitle": "Founder, TextOS.ai",
+    "description": "Senior software architect, founder of the Cajun Navy movement, and builder of TextOS.ai. 30 years turning business pain into working systems.",
+    "url": "https://textos.ai/founder.html",
+    "image": "https://trustlight.ai/rob-profile.jpg",
+    "address": { "@type": "PostalAddress", "addressLocality": "New Orleans", "addressRegion": "LA", "addressCountry": "US" },
+    "sameAs": ["https://textos.ai", "https://inkthorn.ai"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0c0a;
+      --surface: #181410;
+      --border: rgba(255,255,255,0.07);
+      --text: #e8e4de;
+      --muted: rgba(232,228,222,0.55);
+      --accent: #c8955a;
+      --accent-light: #e8b87a;
+      --warm: #f5f0e8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    .topnav {
+      background: rgba(14,12,10,0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+    }
+    .topnav-logo {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+    .topnav-links { display: flex; gap: 24px; align-items: center; }
+    .topnav-links a {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    .topnav-links a:hover { color: var(--text); }
+    .topnav-links a.cta {
+      background: var(--accent);
+      color: #1a1200;
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+    .topnav-links a.cta:hover { background: var(--accent-light); }
+
+    /* ── HERO ── */
+    .founder-hero {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 48px;
+      text-align: center;
+    }
+
+    .founder-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 0 6px rgba(200,149,90,0.12), 0 8px 32px rgba(0,0,0,0.5);
+      margin-bottom: 22px;
+    }
+
+    .founder-name {
+      font-family: 'Lora', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--warm);
+      margin-bottom: 4px;
+    }
+
+    .founder-location {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+
+    .founder-tagline {
+      font-family: 'Lora', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+      margin: 40px auto;
+      opacity: 0.5;
+    }
+
+    /* ── STORY ── */
+    .story {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .section {
+      margin-bottom: 56px;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--warm);
+      line-height: 1.35;
+      margin-bottom: 20px;
+    }
+
+    .section p {
+      font-size: 1.05rem;
+      color: rgba(232,228,222,0.82);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    .pull-quote {
+      border-left: 3px solid var(--accent);
+      padding: 14px 22px;
+      margin: 24px 0;
+      background: rgba(200,149,90,0.06);
+      border-radius: 0 8px 8px 0;
+    }
+    .pull-quote p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--accent-light);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    /* ── CLOSING CTA ── */
+    .closing-cta {
+      background: linear-gradient(135deg, rgba(200,149,90,0.08), rgba(200,149,90,0.04));
+      border: 1px solid rgba(200,149,90,0.25);
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-align: center;
+      margin-top: 56px;
+    }
+    .closing-cta h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--warm);
+      margin-bottom: 12px;
+    }
+    .closing-cta p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 22px;
+      line-height: 1.65;
+    }
+    .btn-start {
+      display: inline-block;
+      background: var(--accent);
+      color: #1a1200;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-start:hover { background: var(--accent-light); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(232,228,222,0.3);
+    }
+    footer a { color: rgba(200,149,90,0.6); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .founder-hero { padding: 40px 16px 32px; }
+      .story { padding: 0 16px 60px; }
+      .section p { font-size: 0.97rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="topnav">
+    <a class="topnav-logo" href="https://textos.ai">TextOS.ai</a>
+    <div class="topnav-links">
+      <a href="https://textos.ai/ideas.html">AI Diagnosis</a>
+      <a href="https://textos.ai/founder.html" style="color:var(--accent-light);">Why I Built This</a>
+      <a href="https://app.textos.ai" class="cta">Get Started →</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="founder-hero">
+    <img class="founder-photo" src="https://trustlight.ai/rob-profile.jpg" alt="Rob Gaudet, Founder of TextOS.ai" />
+    <div class="founder-name">Rob Gaudet</div>
+    <div class="founder-location">New Orleans, Louisiana</div>
+    <p class="founder-tagline">"I didn't build TextOS for the press release. I built it because I've watched good people fail for lack of the right information at the right time — and I finally had the tools to do something about it."</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- STORY -->
+  <div class="story">
+
+    <!-- Section 1 -->
+    <div class="section">
+      <div class="section-label">Section 1 · 1987</div>
+      <h2>Where it started — Ryan's Steakhouse</h2>
+      <p>I was 18 years old and waiting tables at Ryan's Steakhouse. By 24 I was the general manager with 60 employees, most of them older than me.</p>
+      <p>What that job taught me — before the internet, before software, before any of this — was how a business actually runs. Every day I could walk to the cash register, pull a report, and know exactly where we stood. Sales by hour. Covers. Waste. That number told me what decisions to make before lunch.</p>
+      <div class="pull-quote"><p>I didn't know it then, but that was the most important thing I ever learned about running a business: real-time information makes good operators. The absence of it makes desperate ones.</p></div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section">
+      <div class="section-label">Section 2 · 1995</div>
+      <h2>The career change nobody saw coming</h2>
+      <p>In 1995 my son was born. I was still working at Ryan's full-time. And I started teaching myself to code at night.</p>
+      <p>I don't know exactly what I was chasing — maybe I just knew the restaurant industry wasn't going to be enough, and software felt like leverage I didn't have yet. By 1997 I had fully changed careers. My first programming job was building ValueBin.com for East Texas Distributing.</p>
+      <p>I never looked back.</p>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section">
+      <div class="section-label">Section 3 · 1997–2026</div>
+      <h2>Thirty years of building systems</h2>
+      <p>For the next thirty years I built systems for businesses — large ones, enterprise-scale ones — to replace how they operated. Not to add a feature. To replace how they worked, end to end.</p>
+      <p>Before I ever wrote a line of architecture I would spend months interviewing the people doing the actual work. Hundreds of them. Because the fastest way to build the wrong system is to assume you already understand the problem.</p>
+      <div class="pull-quote"><p>That methodology — listen first, simplify ruthlessly, build for the person doing the job, not the person approving the budget — made or saved the companies I worked with hundreds of millions of dollars. I stopped counting.</p></div>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="section">
+      <div class="section-label">Section 4 · The pain that never went away</div>
+      <h2>What I kept seeing</h2>
+      <p>Here's what I kept seeing, in every company, in every industry, at every scale: the people with the best ideas had the worst infrastructure. Not because they were bad operators. Because nobody had ever built them a real system.</p>
+      <p>A solopreneur running a side hustle doesn't have a team of analysts. They have a phone and a headache and a list of things they haven't gotten to yet. And the tools that exist were built by people who've never done payroll, never hired someone twice their age, never had to decide between making rent and buying inventory.</p>
+      <p>I have done all of those things.</p>
+      <div class="pull-quote"><p>I know what it actually feels like to run out of information when you need it most.</p></div>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="section">
+      <div class="section-label">Section 5 · Why it exists</div>
+      <h2>Why TextOS exists</h2>
+      <p>I built TextOS sitting under an oak tree at lunch with my wife. No office. No venture money. No team of engineers. Just Telegram and thirty years of knowing exactly what a small-business owner needs and doesn't have.</p>
+      <p>TextOS is not magic. It is what I would have wanted in 1987, and in 1995, and in every company I ever walked into with a yellow legal pad and a lot of questions.</p>
+      <div class="pull-quote"><p>It is a system. Built for operators, by one.</p></div>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="section">
+      <div class="section-label">Section 6 · The mission</div>
+      <h2>What I am trying to do</h2>
+      <p>AI is not going to save your business by itself. But it will give you the information and leverage you need — if someone builds it right, for the right person, for the right reasons.</p>
+      <p>That is what I am trying to do. I have made it my mission to help you get your business ready for the age of AI. Not with hype. With a system that actually works.</p>
+      <div style="margin-top:28px;font-family:'Lora',serif;font-size:1.05rem;font-style:italic;color:var(--accent-light);">— Rob</div>
+    </div>
+
+    <!-- Closing CTA -->
+    <div class="closing-cta">
+      <h3>TextOS is open to Founders now.</h3>
+      <p>Lock in your rate while it lasts. This is the system I would have wanted — and now it's yours.</p>
+      <a class="btn-start" href="https://textos.ai">Lock in your rate at textos.ai →</a>
+      <div style="margin-top:16px;">
+        <a href="https://textos.ai/ideas.html" style="font-size:0.85rem;color:var(--accent);text-decoration:none;">Or get your free AI Readiness Diagnosis first →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 TextOS.ai · Built in New Orleans, Louisiana ·
+    <a href="https://textos.ai">Home</a> ·
+    <a href="https://textos.ai/founder.html">Why I Built This</a> ·
+    <a href="https://textos.ai/ideas.html">AI Diagnosis</a> ·
+    <a href="https://app.textos.ai">Get Started</a>
+    <div style="margin-top:10px;"><a href="https://textos.ai/founder.html">Why I Built This</a></div>
+  </footer>
+
+</body>
+</html>
