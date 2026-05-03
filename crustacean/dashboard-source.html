@@ -228,10 +228,91 @@
 
   <!-- Tab Nav -->
   <nav class="dash-tabs" id="dash-tabs">
+    <button class="dash-tab" data-panel="hotleads">🔥 Hot Leads</button>
     <button class="dash-tab active" data-panel="nola">🦞 New Orleans</button>
     <button class="dash-tab" data-panel="br">🎯 Baton Rouge</button>
     <button class="dash-tab" data-panel="lafayette">⚜️ Lafayette DMA</button>
   </nav>
+
+  <!-- ══ HOT LEADS PANEL ══ -->
+  <div class="dash-panel" id="panel-hotleads">
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-label">Total Scored</div>
+        <div class="stat-value" style="color:#ff2d87;" id="hot-stat-total">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Showing</div>
+        <div class="stat-value" style="color:#ff2d87;" id="hot-stat-showing">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Score Threshold</div>
+        <div class="stat-value" style="color:#ff2d87;font-size:1rem;" id="hot-stat-threshold">≥ 70</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Markets</div>
+        <div class="stat-value" style="color:#ff2d87;font-size:0.9rem;">NOLA · BR · LAF</div>
+      </div>
+    </div>
+
+    <!-- Explainer -->
+    <div style="background:rgba(255,45,135,0.06);border:1px solid rgba(255,45,135,0.2);border-radius:12px;padding:18px 22px;margin-bottom:24px;">
+      <div style="font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;color:#ff2d87;margin-bottom:10px;">🧠 AI INTEREST SCORE — HOW IT WORKS</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;font-size:0.78rem;color:#a8a8c8;line-height:1.5;">
+        <div><strong style="color:#f0f0ff;">📣 Review Volume (35 pts)</strong><br>High review count = active online audience. They already know how to get customers to engage digitally.</div>
+        <div><strong style="color:#f0f0ff;">⭐ Rating Sweet Spot (20 pts)</strong><br>4.0–4.7 = motivated to improve. 5.0 with few reviews = not engaged. Under 3.5 = pain point = sales hook.</div>
+        <div><strong style="color:#f0f0ff;">🏷️ Category Receptivity (25 pts)</strong><br>Some industries adopt AI faster. Restaurants, salons, services firms actively seek competitive edges online.</div>
+        <div><strong style="color:#f0f0ff;">📞 Phone Present (10 pts)</strong><br>Listed phone = legitimately operating business actively managing their profile. No phone = lower confidence.</div>
+        <div><strong style="color:#f0f0ff;">🚀 Review Momentum (10 pts)</strong><br>Large review counts with strong ratings signal active community engagement — a warm social media audience by proxy.</div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <div class="controls-left">
+        <div class="section-header" style="color:#ff2d87;border:none;margin:0;">🔥 Top AI-Ready Prospects — All Markets</div>
+        <div style="font-size:0.75rem;color:#7878a8;font-family:monospace;" id="hot-count-label">Loading…</div>
+      </div>
+      <div class="controls-right">
+        <select id="hot-market-filter" class="filter-select" style="border:1px solid rgba(255,45,135,0.4);color:#ff2d87;">
+          <option value="">All Markets</option>
+          <option value="nola">🦞 New Orleans</option>
+          <option value="br">🎯 Baton Rouge</option>
+          <option value="lafayette">⚜️ Lafayette</option>
+        </select>
+        <select id="hot-cat-filter" class="filter-select" style="border:1px solid rgba(255,45,135,0.4);color:#ff2d87;">
+          <option value="">All Categories</option>
+        </select>
+        <select id="hot-min-score" class="filter-select" style="border:1px solid rgba(255,45,135,0.4);color:#ff2d87;">
+          <option value="70">Score ≥ 70</option>
+          <option value="80">Score ≥ 80</option>
+          <option value="90">Score ≥ 90</option>
+          <option value="50">Score ≥ 50</option>
+          <option value="0">Show All</option>
+        </select>
+        <input id="hot-search" type="text" class="search-input" placeholder="Search businesses…" style="border:1px solid rgba(255,45,135,0.3);" />
+        <a id="hot-csv-btn" href="#" class="csv-btn" style="border:1px solid rgba(255,45,135,0.4);background:rgba(255,45,135,0.08);color:#ff2d87;">⬇ CSV</a>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table class="leads-table">
+        <thead><tr style="background:rgba(255,45,135,0.08);border-bottom:2px solid rgba(255,45,135,0.3);">
+          <th style="color:#ff2d87;">RANK</th>
+          <th style="color:#ff2d87;">BUSINESS</th>
+          <th style="color:#ff2d87;">MARKET</th>
+          <th style="color:#ff2d87;">CATEGORY</th>
+          <th style="color:#ff2d87;">PHONE</th>
+          <th style="color:#ff2d87;">REVIEWS</th>
+          <th style="color:#ff2d87;">RATING</th>
+          <th style="color:#ff2d87;">AI SCORE</th>
+          <th style="color:#ff2d87;">DEMO SITE</th>
+        </tr></thead>
+        <tbody id="hot-tbody"></tbody>
+      </table>
+    </div>
+    <div class="empty-state" id="hot-empty"><div class="icon">🔍</div><p>No results — try lowering the score threshold.</p></div>
+  </div>
 
   <!-- ══ NOLA PANEL ══ -->
   <div class="dash-panel active" id="panel-nola">
@@ -413,10 +494,227 @@
       document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+      if (btn.dataset.panel === 'hotleads'  && !window._hotLoaded)    initHotLeads();
       if (btn.dataset.panel === 'nola'      && !window._nolaLoaded)   initMarket('nola');
       if (btn.dataset.panel === 'br'        && !window._brLoaded)     initMarket('br');
       if (btn.dataset.panel === 'lafayette' && !window._lafLoaded)    initMarket('lafayette');
     });
+
+    // ── AI Interest Score ────────────────────────────────────────────────────
+    // Categories most receptive to AI/GEO services (higher = better prospect)
+    const CAT_AI_SCORE = {
+      restaurant:40, cafe:38, bar:32, bakery:30,
+      hair_salon:42, beauty_salon:42, barber_shop:38, nail_salon:38, spa:40,
+      gym:35, yoga_studio:36, pilates_studio:34,
+      dentist:45, doctor:40, chiropractor:38, optician:36,
+      lawyer:48, accountant:44, insurance_agency:44, real_estate_agency:46,
+      car_repair:36, car_dealership:40, car_wash:28,
+      electrician:40, plumber:40, roofing_contractor:42, painter:38, cleaning_service:38,
+      florist:34, clothing_store:35, jewelry_store:36, furniture_store:34,
+      hotel:42, lodging:40, travel_agency:38,
+      photographer:36, event_venue:40, catering_service:38,
+      default: 28
+    };
+
+    function aiScore(lead) {
+      let score = 0;
+
+      // 1. Review Volume (0–35 pts) — high reviews = social engagement
+      const rv = lead.reviewCount || 0;
+      if      (rv >= 1000) score += 35;
+      else if (rv >= 500)  score += 30;
+      else if (rv >= 200)  score += 25;
+      else if (rv >= 100)  score += 20;
+      else if (rv >= 50)   score += 14;
+      else if (rv >= 20)   score += 8;
+      else if (rv >= 5)    score += 3;
+
+      // 2. Rating Sweet Spot (0–20 pts) — 4.0–4.7 = motivated + engaged
+      const r = lead.rating || 0;
+      if      (r >= 4.0 && r <= 4.7) score += 20;
+      else if (r > 4.7 && r <= 4.9)  score += 14; // 4.8–4.9 = great but less hungry
+      else if (r === 5.0)             score += 6;  // perfect = suspicious/few reviews
+      else if (r >= 3.5)              score += 10; // room to improve = sales hook
+      else if (r >= 3.0)              score += 16; // pain point = strong hook
+      else if (r > 0)                 score += 6;
+
+      // 3. Category AI Receptivity (0–25 pts)
+      const catBase = CAT_AI_SCORE[lead.category] || CAT_AI_SCORE.default;
+      score += Math.round(catBase * 25 / 48); // normalize to 25 pt scale
+
+      // 4. Phone Present (0–10 pts)
+      if (lead.phone && lead.phone.trim()) score += 10;
+
+      // 5. Review Momentum (0–10 pts) — big volume + good rating = active online community
+      if (rv >= 200 && r >= 4.0) score += 10;
+      else if (rv >= 100 && r >= 3.8) score += 6;
+      else if (rv >= 50 && r >= 3.5) score += 3;
+
+      return Math.min(100, score);
+    }
+
+    function scoreLabel(s) {
+      if (s >= 90) return { label: '🔥 ON FIRE',   color: '#ff2d87' };
+      if (s >= 80) return { label: '⚡ HOT',        color: '#f97316' };
+      if (s >= 70) return { label: '✅ WARM',       color: '#fbbf24' };
+      if (s >= 60) return { label: '🔵 POSSIBLE',  color: '#60a5fa' };
+      return              { label: '⬜ COLD',       color: '#7878a8' };
+    }
+
+    // ── Hot Leads Engine ─────────────────────────────────────────────────────
+    window._hotLeadsAll = [];
+
+    async function initHotLeads() {
+      window._hotLoaded = true;
+      document.getElementById('hot-tbody').innerHTML =
+        '<tr><td colspan="9" style="text-align:center;padding:2rem;color:#7878a8;">⏳ Loading all markets and scoring…</td></tr>';
+
+      // Load all three markets in parallel
+      const sources = [
+        { key: 'nola',      label: '🦞 New Orleans', jsonUrl: '../data/leads.json',             demoBase: 'https://inkthorn.ai/crustacean/demos/' },
+        { key: 'br',        label: '🎯 Baton Rouge',  jsonUrl: '../data/baton-rouge-leads.json', demoBase: 'https://inkthorn.ai/crustacean/demos-br/' },
+        { key: 'lafayette', label: '⚜️ Lafayette',    jsonUrl: '../data/lafayette-leads.json',   demoBase: 'https://inkthorn.ai/crustacean/demos-lafayette/' },
+      ];
+
+      const results = await Promise.all(sources.map(async s => {
+        try {
+          const raw = await fetch(s.jsonUrl+'?_='+Date.now()).then(r=>r.json());
+          return (raw.leads || []).map(l => ({ ...l, _market: s.key, _marketLabel: s.label, _demoBase: s.demoBase }));
+        } catch(e) { return []; }
+      }));
+
+      const allLeads = results.flat().map(l => ({ ...l, _aiScore: aiScore(l) }));
+      window._hotLeadsAll = allLeads;
+
+      document.getElementById('hot-stat-total').textContent = allLeads.length.toLocaleString();
+
+      // Populate category filter (deduplicated across all markets)
+      const catSel = document.getElementById('hot-cat-filter');
+      [...new Set(allLeads.map(l=>l.category))].sort().forEach(c => {
+        const o = document.createElement('option'); o.value=c; o.textContent=catLabel(c); catSel.appendChild(o);
+      });
+
+      // Wire up controls
+      ['hot-market-filter','hot-cat-filter','hot-min-score','hot-search'].forEach(id => {
+        document.getElementById(id).addEventListener(id==='hot-search'?'input':'change', renderHotLeads);
+      });
+
+      // CSV export
+      document.getElementById('hot-csv-btn').addEventListener('click', e => {
+        e.preventDefault();
+        exportHotCsv();
+      });
+
+      renderHotLeads();
+    }
+
+    function renderHotLeads() {
+      const marketF = document.getElementById('hot-market-filter').value;
+      const catF    = document.getElementById('hot-cat-filter').value;
+      const minScore = parseInt(document.getElementById('hot-min-score').value) || 0;
+      const q        = document.getElementById('hot-search').value.toLowerCase();
+
+      document.getElementById('hot-stat-threshold').textContent = '≥ ' + (minScore || 0);
+
+      let filtered = window._hotLeadsAll.filter(l => {
+        if (marketF && l._market !== marketF) return false;
+        if (catF    && l.category !== catF)   return false;
+        if (l._aiScore < minScore)            return false;
+        if (q && !l.name.toLowerCase().includes(q) &&
+                 !l.address.toLowerCase().includes(q) &&
+                 !(l.phone||'').includes(q) &&
+                 !l.category.toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      // Sort by score desc
+      filtered.sort((a,b) => b._aiScore - a._aiScore);
+
+      // Cap at 500 for performance
+      const display = filtered.slice(0, 500);
+
+      document.getElementById('hot-count-label').textContent =
+        `${filtered.length.toLocaleString()} leads scored (showing top ${display.length.toLocaleString()})`;
+      document.getElementById('hot-stat-showing').textContent = filtered.length.toLocaleString();
+
+      const tbody = document.getElementById('hot-tbody');
+      const empty = document.getElementById('hot-empty');
+
+      if (!display.length) { tbody.innerHTML=''; empty.style.display='block'; return; }
+      empty.style.display = 'none';
+
+      tbody.innerHTML = display.map((l, i) => {
+        const sl     = scoreLabel(l._aiScore);
+        const color  = CAT_COLORS[l.category] || CAT_COLORS.default;
+        const cl     = catLabel(l.category);
+        const demoUrl = l._demoBase + slugify(l.name) + '/';
+        const stars  = l.rating ? '★'.repeat(Math.floor(l.rating)) : '—';
+        const pct    = l._aiScore;
+        const barColor = l._aiScore >= 90 ? '#ff2d87' : l._aiScore >= 80 ? '#f97316' : l._aiScore >= 70 ? '#fbbf24' : '#60a5fa';
+
+        return `<tr onclick="window.open('${escHtml(demoUrl)}','_blank')"
+                    onmouseover="this.style.background='rgba(255,45,135,0.06)'"
+                    onmouseout="this.style.background=''">
+          <td style="color:#7878a8;font-family:monospace;font-size:0.75rem;font-weight:700;">${i+1}</td>
+          <td>
+            <div style="font-weight:700;color:#f0f0ff;font-size:0.9rem;">${escHtml(l.name)}</div>
+            <div style="font-size:0.7rem;color:#7878a8;">${escHtml((l.address||'').split(',').slice(0,2).join(','))}</div>
+          </td>
+          <td style="font-size:0.72rem;color:#a8a8c8;white-space:nowrap;">${escHtml(l._marketLabel)}</td>
+          <td><span style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid ${color}60;color:${color};background:${color}12;">${escHtml(cl)}</span></td>
+          <td style="font-family:monospace;font-size:0.8rem;">
+            ${l.phone ? `<a href="tel:${l.phone.replace(/\D/g,'')}" onclick="event.stopPropagation()" style="color:#ff2d87;text-decoration:none;">${escHtml(l.phone)}</a>` : '<span style="color:#7878a8">—</span>'}
+          </td>
+          <td style="color:#f0f0ff;font-weight:600;">${(l.reviewCount||0).toLocaleString()}</td>
+          <td style="white-space:nowrap;">
+            ${l.rating ? `<span style="color:#fbbf24;">${stars}</span><span style="color:#7878a8;font-size:0.72rem;margin-left:4px;">${l.rating}</span>` : '<span style="color:#7878a8">—</span>'}
+          </td>
+          <td style="min-width:110px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="flex:1;height:5px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden;">
+                <div style="height:100%;width:${pct}%;background:${barColor};border-radius:3px;"></div>
+              </div>
+              <span style="font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:900;color:${barColor};min-width:26px;">${pct}</span>
+            </div>
+            <div style="font-size:0.65rem;font-weight:700;color:${sl.color};margin-top:2px;">${sl.label}</div>
+          </td>
+          <td><a href="${escHtml(demoUrl)}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
+              style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;padding:5px 12px;border-radius:999px;border:1px solid rgba(255,45,135,0.5);background:rgba(255,45,135,0.1);color:#ff2d87;text-decoration:none;">VIEW ↗</a></td>
+        </tr>`;
+      }).join('');
+    }
+
+    function exportHotCsv() {
+      const marketF  = document.getElementById('hot-market-filter').value;
+      const catF     = document.getElementById('hot-cat-filter').value;
+      const minScore = parseInt(document.getElementById('hot-min-score').value) || 0;
+
+      let data = window._hotLeadsAll.filter(l =>
+        (!marketF || l._market===marketF) &&
+        (!catF    || l.category===catF) &&
+        l._aiScore >= minScore
+      ).sort((a,b) => b._aiScore - a._aiScore);
+
+      const rows = [['rank','name','market','category','phone','rating','reviews','ai_score','address','demo_url']];
+      data.forEach((l,i) => {
+        rows.push([
+          i+1,
+          '"'+l.name.replace(/"/g,'""')+'"',
+          l._market,
+          l.category,
+          l.phone||'',
+          l.rating||'',
+          l.reviewCount||0,
+          l._aiScore,
+          '"'+(l.address||'').replace(/"/g,'""')+'"',
+          l._demoBase+slugify(l.name)+'/'
+        ]);
+      });
+
+      const blob = new Blob([rows.map(r=>r.join(',')).join('\n')], {type:'text/csv'});
+      const a = document.createElement('a'); a.href=URL.createObjectURL(blob);
+      a.download='hot-leads-scored.csv'; a.click();
+    }
 
     // ── Market config ────────────────────────────────────────────────────────
     const MARKETS = {
