@@ -408,49 +408,115 @@
 
     <!-- GENERATOR FORM -->
     <div class="gen-card">
-      <h2>⚡ Generate &amp; Diagnose Your Idea</h2>
 
-      <div class="field-group">
-        <label>Your Business or Idea (describe it in a sentence)</label>
-        <textarea id="ideaInput" rows="3" placeholder="e.g. A New Orleans food tour booking app for tourists arriving at the airport…"></textarea>
+      <!-- MODE TOGGLE -->
+      <div style="display:flex;gap:8px;margin-bottom:28px;">
+        <button id="modeNew" onclick="setMode('new')" style="flex:1;padding:12px;border-radius:10px;border:2px solid var(--pink);background:rgba(255,45,120,0.15);color:#fff;font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.07em;cursor:pointer;transition:all 0.2s;">💡 NEW IDEA</button>
+        <button id="modeBiz" onclick="setMode('biz')" style="flex:1;padding:12px;border-radius:10px;border:2px solid rgba(255,255,255,0.1);background:transparent;color:var(--muted);font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.07em;cursor:pointer;transition:all 0.2s;">🏢 EXISTING BUSINESS</button>
       </div>
 
-      <div class="field-group">
-        <label>Industry / Niche</label>
-        <select id="industrySelect">
-          <option value="">— Select one —</option>
-          <option value="hospitality">Hospitality &amp; Tourism</option>
-          <option value="realestate">Real Estate</option>
-          <option value="food">Food &amp; Beverage</option>
-          <option value="health">Health &amp; Wellness</option>
-          <option value="tech">Technology / SaaS</option>
-          <option value="retail">Retail / E-Commerce</option>
-          <option value="services">Professional Services</option>
-          <option value="media">Media &amp; Content</option>
-          <option value="nonprofit">Nonprofit / Civic</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-
-      <div class="field-group">
-        <label>What signals matter most to you? (pick any)</label>
-        <div class="tag-grid" id="signalTags">
-          <span class="tag" data-val="geo">GEO Visibility</span>
-          <span class="tag" data-val="ai">AI Search Ready</span>
-          <span class="tag" data-val="market">Market Demand</span>
-          <span class="tag" data-val="competition">Low Competition</span>
-          <span class="tag" data-val="local">Local Advantage</span>
-          <span class="tag" data-val="monetization">Monetization Speed</span>
-          <span class="tag" data-val="viral">Viral Potential</span>
-          <span class="tag" data-val="trust">Trust &amp; Authority</span>
+      <!-- NEW IDEA FIELDS -->
+      <div id="fieldsNew">
+        <div class="field-group">
+          <label>Describe Your Idea (one sentence)</label>
+          <textarea id="ideaInput" rows="3" placeholder="e.g. A New Orleans food tour booking app for tourists arriving at the airport…"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Industry / Niche</label>
+          <select id="industrySelect">
+            <option value="">— Select one —</option>
+            <option value="hospitality">Hospitality &amp; Tourism</option>
+            <option value="realestate">Real Estate</option>
+            <option value="food">Food &amp; Beverage</option>
+            <option value="health">Health &amp; Wellness</option>
+            <option value="tech">Technology / SaaS</option>
+            <option value="retail">Retail / E-Commerce</option>
+            <option value="services">Professional Services</option>
+            <option value="media">Media &amp; Content</option>
+            <option value="nonprofit">Nonprofit / Civic</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>What matters most? (pick any)</label>
+          <div class="tag-grid" id="signalTags">
+            <span class="tag" data-val="geo">GEO Visibility</span>
+            <span class="tag" data-val="ai">AI Search Ready</span>
+            <span class="tag" data-val="market">Market Demand</span>
+            <span class="tag" data-val="competition">Low Competition</span>
+            <span class="tag" data-val="local">Local Advantage</span>
+            <span class="tag" data-val="monetization">Monetization Speed</span>
+            <span class="tag" data-val="viral">Viral Potential</span>
+            <span class="tag" data-val="trust">Trust &amp; Authority</span>
+          </div>
         </div>
       </div>
 
-      <button class="btn-primary" onclick="diagnoseIdea()">🔬 Diagnose This Idea</button>
+      <!-- EXISTING BUSINESS FIELDS -->
+      <div id="fieldsBiz" style="display:none;">
+        <div class="field-group">
+          <label>Business Name</label>
+          <input type="text" id="bizName" placeholder="e.g. Bayou Brew Coffee Co." />
+        </div>
+        <div class="field-group">
+          <label>What does your business do? (one sentence)</label>
+          <textarea id="bizDesc" rows="3" placeholder="e.g. We run a specialty coffee shop in Mid-City New Orleans with a loyal local following…"></textarea>
+        </div>
+        <div class="field-group">
+          <label>Industry / Niche</label>
+          <select id="bizIndustry">
+            <option value="">— Select one —</option>
+            <option value="hospitality">Hospitality &amp; Tourism</option>
+            <option value="realestate">Real Estate</option>
+            <option value="food">Food &amp; Beverage</option>
+            <option value="health">Health &amp; Wellness</option>
+            <option value="tech">Technology / SaaS</option>
+            <option value="retail">Retail / E-Commerce</option>
+            <option value="services">Professional Services</option>
+            <option value="media">Media &amp; Content</option>
+            <option value="nonprofit">Nonprofit / Civic</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Current Online Presence</label>
+          <select id="bizPresence">
+            <option value="none">No website or social</option>
+            <option value="social">Social media only</option>
+            <option value="basic">Basic website, not optimized</option>
+            <option value="decent">Decent website, some SEO</option>
+            <option value="strong">Strong online presence</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Years in Business</label>
+          <select id="bizAge">
+            <option value="new">Less than 1 year</option>
+            <option value="early">1–3 years</option>
+            <option value="mid">3–7 years</option>
+            <option value="established">7+ years</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Biggest challenge right now? (pick any)</label>
+          <div class="tag-grid" id="bizChallengeTags">
+            <span class="tag" data-val="visibility">Getting Found Online</span>
+            <span class="tag" data-val="ai">Invisible to AI Search</span>
+            <span class="tag" data-val="reviews">Reviews &amp; Reputation</span>
+            <span class="tag" data-val="leads">Generating Leads</span>
+            <span class="tag" data-val="content">Content Creation</span>
+            <span class="tag" data-val="social">Social Media</span>
+            <span class="tag" data-val="compete">Competing Locally</span>
+            <span class="tag" data-val="trust">Building Trust</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="diagnoseBtn" onclick="diagnoseIdea()">🔬 Diagnose This Idea</button>
 
       <!-- DIAGNOSIS OUTPUT -->
       <div class="diagnosis-panel" id="diagnosisPanel">
-        <h3>📊 Idea Diagnosis Report</h3>
+        <h3 id="diagnosisTitle">📊 Idea Diagnosis Report</h3>
 
         <div class="score-row">
           <span class="score-label">GEO Score</span>
@@ -471,12 +537,15 @@
         <div class="diagnosis-text" id="diagnosisText"></div>
 
         <!-- TextOS CTA -->
-        <div id="textosCta" style="display:none;margin-top:20px;background:linear-gradient(135deg,rgba(0,212,255,0.07),rgba(168,85,247,0.07));border:1px solid rgba(0,212,255,0.25);border-radius:12px;padding:20px 22px;display:none;align-items:center;gap:18px;flex-wrap:wrap;">
-          <div style="flex:1;min-width:200px;">
-            <div style="font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:700;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Turn This Diagnosis Into Action</div>
-            <div style="font-size:0.88rem;color:var(--muted);line-height:1.55;">TextOS.ai is your AI-powered business co-pilot. Take these results and let TextOS help you build your website, content strategy, and online presence — all over a simple text conversation.</div>
+        <div id="textosCta" style="display:none;margin-top:24px;background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(168,85,247,0.08));border:1px solid rgba(0,212,255,0.3);border-radius:14px;padding:22px 24px;">
+          <div style="font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:700;color:var(--cyan);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px;">🚀 Turn This Diagnosis Into Action with TextOS.ai</div>
+          <div id="textosCtaText" style="font-size:0.88rem;color:var(--muted);line-height:1.6;margin-bottom:16px;"></div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+            <a id="textosLink" href="https://app.textos.ai" target="_blank" rel="noopener"
+               style="display:inline-block;background:linear-gradient(135deg,#00d4ff,#a855f7);color:#fff;font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:13px 26px;border-radius:10px;text-decoration:none;transition:opacity 0.2s;"
+               onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Start with TextOS →</a>
+            <span style="font-size:0.78rem;color:rgba(232,234,246,0.4);">Your diagnosis results are pre-loaded into the conversation</span>
           </div>
-          <a id="textosLink" href="https://app.textos.ai" target="_blank" rel="noopener" style="display:inline-block;background:linear-gradient(135deg,#00d4ff,#a855f7);color:#fff;font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:12px 22px;border-radius:10px;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">🚀 Improve with TextOS →</a>
         </div>
       </div>
     </div>
@@ -503,81 +572,161 @@
   </footer>
 
   <script>
-    // Tag toggle
-    document.querySelectorAll('.tag').forEach(t => {
-      t.addEventListener('click', () => t.classList.toggle('active'));
+    // ── MODE TOGGLE ──
+    let currentMode = 'new';
+
+    function setMode(mode) {
+      currentMode = mode;
+      const isNew = mode === 'new';
+      document.getElementById('fieldsNew').style.display = isNew ? 'block' : 'none';
+      document.getElementById('fieldsBiz').style.display = isNew ? 'none' : 'block';
+      document.getElementById('modeNew').style.cssText += isNew
+        ? ';border-color:var(--pink);background:rgba(255,45,120,0.15);color:#fff;'
+        : ';border-color:rgba(255,255,255,0.1);background:transparent;color:var(--muted);';
+      document.getElementById('modeBiz').style.cssText += isNew
+        ? ';border-color:rgba(255,255,255,0.1);background:transparent;color:var(--muted);'
+        : ';border-color:var(--cyan);background:rgba(0,212,255,0.12);color:#fff;';
+      document.getElementById('diagnoseBtn').textContent = isNew ? '🔬 Diagnose This Idea' : '🔬 Diagnose My Business';
+      document.getElementById('diagnosisTitle').textContent = isNew ? '📊 Idea Diagnosis Report' : '📊 Business Diagnosis Report';
+      // Reset results
+      document.getElementById('diagnosisPanel').classList.remove('visible');
+      document.getElementById('textosCta').style.display = 'none';
+    }
+
+    // Tag toggle (both tag groups)
+    document.addEventListener('click', e => {
+      if (e.target.classList.contains('tag')) e.target.classList.toggle('active');
     });
 
     let ideaCount = 0;
 
     function diagnoseIdea() {
+      if (currentMode === 'new') {
+        diagnoseNew();
+      } else {
+        diagnoseBiz();
+      }
+    }
+
+    // ── NEW IDEA MODE ──
+    function diagnoseNew() {
       const idea = document.getElementById('ideaInput').value.trim();
       const industry = document.getElementById('industrySelect').value;
       if (!idea) { alert('Describe your idea first!'); return; }
 
-      // Score generation (deterministic-ish based on input length + industry)
       const seed = idea.length + (industry.length * 3);
       const geo    = clamp(55 + (seed % 40), 40, 98);
       const market = clamp(50 + ((seed * 2) % 45), 38, 97);
       const ai     = clamp(48 + ((seed * 3) % 43), 35, 96);
+      const overall = Math.round((geo + market + ai) / 3);
 
-      // Show panel
-      const panel = document.getElementById('diagnosisPanel');
-      panel.classList.add('visible');
+      showScores(geo, market, ai);
 
-      // Animate bars
+      const verdict = overall >= 80 ? '🟢 Strong candidate' : overall >= 65 ? '🟡 Solid potential — refine positioning' : '🔴 High risk — needs differentiation';
+      const geoNote = geo >= 75 ? 'strong GEO signal' : 'limited GEO visibility — consider a local content strategy';
+      const aiNote  = ai >= 75  ? 'well-positioned for AI search engines' : 'not yet optimized for AI discovery — structured content would help';
+
+      document.getElementById('diagnosisText').innerHTML = `
+        <strong>Overall Verdict: ${verdict}</strong><br><br>
+        Your idea has been <strong>diagnosed</strong> across three critical dimensions. It shows <strong>${geoNote}</strong> and is ${aiNote}.
+        ${market >= 70 ? 'Market demand indicators are favorable.' : 'Market demand needs validation — consider a landing page test before investing heavily.'}
+        <br><br>
+        <strong>Top recommendation:</strong> ${overall >= 75 ? 'Move to content build — a GEO-optimized landing page will capture AI search traffic fast.' : 'Start with a 1-page GEO-optimized site to validate demand before committing resources.'}
+      `;
+
+      const ctaMsg = 'I just had my business idea diagnosed. Here\'s what I got — Idea: "' + idea + '" | GEO Score: ' + geo + ' | Market Fit: ' + market + ' | AI Discoverability: ' + ai + ' | Industry: ' + (industry || 'unspecified') + '. Help me act on this and build something real.';
+      showTextOsCta(ctaMsg, false);
+      addToLog(idea, industry || 'idea', geo, market, ai, '💡');
+    }
+
+    // ── EXISTING BUSINESS MODE ──
+    function diagnoseBiz() {
+      const name    = document.getElementById('bizName').value.trim();
+      const desc    = document.getElementById('bizDesc').value.trim();
+      const industry = document.getElementById('bizIndustry').value;
+      const presence = document.getElementById('bizPresence').value;
+      const age      = document.getElementById('bizAge').value;
+      if (!desc) { alert('Tell us what your business does first!'); return; }
+
+      const label = name || 'Your Business';
+
+      // Score weights adjusted by presence and age
+      const presenceBoost = { none: 0, social: 8, basic: 14, decent: 22, strong: 35 }[presence] || 0;
+      const ageBoost      = { new: 0, early: 5, mid: 10, established: 18 }[age] || 0;
+      const seed = desc.length + (industry.length * 3);
+
+      const geo    = clamp(30 + presenceBoost + (seed % 28), 28, 96);
+      const market = clamp(45 + ageBoost + ((seed * 2) % 30), 38, 97);
+      const ai     = clamp(20 + presenceBoost + ((seed * 3) % 32), 18, 94);
+      const overall = Math.round((geo + market + ai) / 3);
+
+      showScores(geo, market, ai);
+
+      const verdict   = overall >= 78 ? '🟢 Strong foundation — scale it' : overall >= 60 ? '🟡 Good base — gaps to close' : '🔴 Significant gaps — needs modernization';
+      const geoStatus = geo >= 70 ? 'solid GEO presence' : geo >= 45 ? 'partial GEO coverage — room to grow' : 'weak GEO signal — nearly invisible in local AI search';
+      const aiStatus  = ai >= 70  ? 'well-optimized for AI discovery' : ai >= 45 ? 'partially visible to AI engines' : 'largely invisible to AI search engines like ChatGPT, Perplexity, and Google AI Overviews';
+      const presenceNote = presence === 'none' || presence === 'social'
+        ? 'No indexed website means AI engines cannot find or recommend you.'
+        : presence === 'basic' ? 'Your website exists but isn\'t structured for AI or GEO signals.'
+        : 'Your online presence gives you a foundation — the opportunity is optimization.';
+
+      document.getElementById('diagnosisText').innerHTML = `
+        <strong>Diagnosis for ${escHtml(label)}: ${verdict}</strong><br><br>
+        <strong>${escHtml(label)}</strong> has been <strong>diagnosed</strong> across three dimensions. It shows <strong>${geoStatus}</strong> and is ${aiStatus}. ${presenceNote}
+        <br><br>
+        <strong>Top opportunity:</strong> ${ai < 60
+          ? label + ' is losing customers to competitors who <em>are</em> visible in AI search. A GEO-optimized content layer could change that fast.'
+          : 'Reinforce your existing presence with structured GEO content to dominate local AI results before your competitors catch on.'}
+      `;
+
+      const ctaMsg = 'I just had my existing business diagnosed. Business: "' + label + '" | Description: "' + desc + '" | GEO Score: ' + geo + ' | Market Fit: ' + market + ' | AI Discoverability: ' + ai + ' | Online Presence: ' + presence + ' | Years in business: ' + age + '. Help me improve and grow this business using these insights.';
+      showTextOsCta(ctaMsg, true);
+      addToLog(label + (desc ? ' — ' + desc.substring(0, 40) + '…' : ''), industry || 'business', geo, market, ai, '🏢');
+    }
+
+    // ── SHARED HELPERS ──
+    function showScores(geo, market, ai) {
+      document.getElementById('diagnosisPanel').classList.add('visible');
       setTimeout(() => {
         animateBar('geoFill', 'geoVal', geo);
         animateBar('marketFill', 'marketVal', market);
         animateBar('aiFill', 'aiVal', ai);
       }, 100);
+    }
 
-      // Generate diagnosis text
-      const overall = Math.round((geo + market + ai) / 3);
-      const verdict = overall >= 80 ? '🟢 Strong candidate' : overall >= 65 ? '🟡 Solid potential — refine positioning' : '🔴 High risk — needs differentiation';
-      const geoNote = geo >= 75 ? 'strong GEO signal' : 'limited GEO visibility — needs local content strategy';
-      const aiNote  = ai >= 75  ? 'well-positioned for AI search' : 'needs structured content to surface in AI engines';
+    function showTextOsCta(msg, isBiz) {
+      const cta  = document.getElementById('textosCta');
+      const link = document.getElementById('textosLink');
+      const ctaText = document.getElementById('textosCtaText');
 
-      document.getElementById('diagnosisText').innerHTML = `
-        <strong>Overall Verdict: ${verdict}</strong><br><br>
-        Your idea has been <strong>diagnosed</strong> across three critical dimensions. It shows <strong>${geoNote}</strong> and is ${aiNote}.
-        ${market >= 70 ? 'Market demand indicators are favorable.' : 'Market demand needs validation — consider a landing page test first.'}
-        <br><br>
-        <strong>Top recommendation:</strong> ${overall >= 75 ? 'Move to content build — a GEO-optimized landing page will capture AI search traffic fast.' : 'Start with a 1-page GEO-optimized site to validate demand before investing heavily.'}
-      `;
+      link.href = 'https://app.textos.ai?msg=' + encodeURIComponent(msg);
 
-      // Show TextOS CTA with idea pre-filled in URL
-      const cta = document.getElementById('textosCta');
-      const textosLink = document.getElementById('textosLink');
-      const msg = encodeURIComponent('I just got my business idea diagnosed: ' + idea + '. GEO score: ' + geo + ', Market fit: ' + market + ', AI discoverability: ' + ai + '. Help me improve it.');
-      textosLink.href = 'https://app.textos.ai?msg=' + msg;
-      cta.style.display = 'flex';
+      ctaText.innerHTML = isBiz
+        ? 'Your business has been diagnosed. Now let <strong style="color:#fff">TextOS.ai</strong> help you act on it — build a GEO-optimized website, fix your AI discoverability, and get found by customers who are already searching. All over a simple text conversation.'
+        : 'Your idea has a diagnosis. Now let <strong style="color:#fff">TextOS.ai</strong> help you turn it into a real business presence — GEO-optimized, AI-ready, and live fast. No tech skills required. Just text.';
 
-      // Add to idea log
-      addToLog(idea, industry, geo, market, ai);
+      link.textContent = isBiz ? 'Improve My Business with TextOS →' : 'Build This Idea with TextOS →';
+      cta.style.display = 'block';
     }
 
     function animateBar(fillId, valId, score) {
-      const fill = document.getElementById(fillId);
-      const val  = document.getElementById(valId);
-      fill.style.width = score + '%';
-      val.textContent  = score;
+      document.getElementById(fillId).style.width = score + '%';
+      document.getElementById(valId).textContent  = score;
     }
 
     function clamp(v, min, max) { return Math.min(max, Math.max(min, v)); }
 
-    function addToLog(idea, industry, geo, market, ai) {
+    function addToLog(label, industry, geo, market, ai, icon) {
       ideaCount++;
       const log   = document.getElementById('ideaLog');
       const items = document.getElementById('ideaItems');
       log.style.display = 'block';
-
       const el = document.createElement('div');
       el.className = 'idea-item';
       el.innerHTML = `
         <div class="idea-number">${String(ideaCount).padStart(2,'0')}</div>
         <div class="idea-content">
-          <strong>${escHtml(idea)}</strong>
+          <strong>${icon || '💡'} ${escHtml(label)}</strong>
           <span>${industry ? industry.charAt(0).toUpperCase() + industry.slice(1) + ' · ' : ''}Diagnosed ${new Date().toLocaleTimeString()}</span>
           <div class="idea-badges">
             <span class="idea-badge badge-geo">GEO ${geo}</span>
@@ -590,7 +739,7 @@
     }
 
     function escHtml(s) {
-      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
   </script>
 
