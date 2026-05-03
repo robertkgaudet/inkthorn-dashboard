@@ -101,6 +101,49 @@
     }
     .topnav-links a.cta:hover { background: var(--accent-light); }
 
+    /* ── Hamburger ── */
+    .hb-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--accent-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      line-height: 1;
+    }
+    @media (max-width: 640px) {
+      .topnav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: rgba(14,12,10,0.98);
+        border-bottom: 1px solid rgba(200,149,90,0.2);
+        padding: 12px 0;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+        z-index: 200;
+        gap: 0;
+      }
+      .topnav-links.open { display: flex; }
+      .topnav-links a {
+        padding: 13px 24px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        width: 100%;
+        font-size: 0.95rem;
+      }
+      .topnav-links a:last-child { border-bottom: none; }
+      .topnav-links a.cta {
+        margin: 8px 24px;
+        width: calc(100% - 48px);
+        text-align: center;
+        border-radius: 8px;
+        padding: 12px 16px;
+      }
+      .hb-btn { display: block; }
+    }
+
     /* ── HERO ── */
     .founder-hero {
       max-width: 680px;
@@ -264,14 +307,40 @@
 </head>
 <body>
 
-  <nav class="topnav">
+  <nav class="topnav" style="position:relative;">
     <a class="topnav-logo" href="https://textos.ai">TextOS.ai</a>
-    <div class="topnav-links">
-      <a href="https://textos.ai/ideas.html">AI Diagnosis</a>
+    <button class="hb-btn" id="hb-btn" aria-label="Menu">☰</button>
+    <div class="topnav-links" id="topnav-links">
+      <a href="https://textos.ai/ideas.html">🔬 Diagnose Your Business</a>
       <a href="https://textos.ai/founder.html" style="color:var(--accent-light);">Why I Built This</a>
-      <a href="https://app.textos.ai" class="cta">Get Started →</a>
+      <a href="https://textos.ai">Home</a>
+      <a href="https://textos.ai/ideas.html" class="cta">Check AI Readiness →</a>
     </div>
   </nav>
+  <script>
+    (function() {
+      var btn = document.getElementById('hb-btn');
+      var nav = document.getElementById('topnav-links');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var open = nav.classList.toggle('open');
+        btn.textContent = open ? '✕' : '☰';
+      });
+      document.addEventListener('click', function(e) {
+        if (nav.classList.contains('open') && !nav.contains(e.target) && e.target !== btn) {
+          nav.classList.remove('open');
+          btn.textContent = '☰';
+        }
+      });
+      nav.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          nav.classList.remove('open');
+          btn.textContent = '☰';
+        });
+      });
+    })();
+  </script>
 
   <!-- HERO -->
   <div class="founder-hero">
