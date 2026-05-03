@@ -306,6 +306,7 @@
           <th style="color:#ff2d87;">REVIEWS</th>
           <th style="color:#ff2d87;">RATING</th>
           <th style="color:#ff2d87;">AI SCORE</th>
+          <th style="color:#ff2d87;">DIAGNOSE</th>
           <th style="color:#ff2d87;">DEMO SITE</th>
         </tr></thead>
         <tbody id="hot-tbody"></tbody>
@@ -359,7 +360,7 @@
       <table class="leads-table" style="--head-color:#4ade80;">
         <thead><tr style="background:rgba(74,222,128,0.08);border-bottom-color:rgba(74,222,128,0.3);">
           <th style="color:#4ade80;">#</th><th style="color:#4ade80;">BUSINESS</th><th style="color:#4ade80;">CATEGORY</th>
-          <th style="color:#4ade80;">PHONE</th><th style="color:#4ade80;">RATING</th><th style="color:#4ade80;">DEMO SITE</th>
+          <th style="color:#4ade80;">PHONE</th><th style="color:#4ade80;">RATING</th><th style="color:#00d4ff;">DIAGNOSE</th><th style="color:#4ade80;">DEMO SITE</th>
         </tr></thead>
         <tbody id="nola-tbody"></tbody>
       </table>
@@ -409,7 +410,7 @@
       <table class="leads-table">
         <thead><tr style="background:rgba(0,245,255,0.08);border-bottom-color:rgba(0,245,255,0.3);">
           <th style="color:#00f5ff;">#</th><th style="color:#00f5ff;">BUSINESS</th><th style="color:#00f5ff;">CATEGORY</th>
-          <th style="color:#00f5ff;">PHONE</th><th style="color:#00f5ff;">RATING</th><th style="color:#00f5ff;">DEMO SITE</th>
+          <th style="color:#00f5ff;">PHONE</th><th style="color:#00f5ff;">RATING</th><th style="color:#00d4ff;">DIAGNOSE</th><th style="color:#00f5ff;">DEMO SITE</th>
         </tr></thead>
         <tbody id="br-tbody"></tbody>
       </table>
@@ -459,7 +460,7 @@
       <table class="leads-table">
         <thead><tr style="background:rgba(168,85,247,0.08);border-bottom-color:rgba(168,85,247,0.3);">
           <th style="color:#a855f7;">#</th><th style="color:#a855f7;">BUSINESS</th><th style="color:#a855f7;">CATEGORY</th>
-          <th style="color:#a855f7;">PHONE</th><th style="color:#a855f7;">RATING</th><th style="color:#a855f7;">DEMO SITE</th>
+          <th style="color:#a855f7;">PHONE</th><th style="color:#a855f7;">RATING</th><th style="color:#00d4ff;">DIAGNOSE</th><th style="color:#a855f7;">DEMO SITE</th>
         </tr></thead>
         <tbody id="laf-tbody"></tbody>
       </table>
@@ -499,6 +500,31 @@
       if (btn.dataset.panel === 'br'        && !window._brLoaded)     initMarket('br');
       if (btn.dataset.panel === 'lafayette' && !window._lafLoaded)    initMarket('lafayette');
     });
+
+    // ── Diagnose URL builder ─────────────────────────────────────────────────
+    function diagnoseUrl(lead) {
+      const presenceMap = {
+        restaurant:'food', cafe:'food', bar:'food', bakery:'food',
+        hair_salon:'services', beauty_salon:'services', barber_shop:'services', nail_salon:'services', spa:'services',
+        gym:'health', yoga_studio:'health', pilates_studio:'health', dentist:'health', doctor:'health', chiropractor:'health',
+        lawyer:'services', accountant:'services', insurance_agency:'services', real_estate_agency:'realestate',
+        car_repair:'services', car_dealership:'retail', clothing_store:'retail', jewelry_store:'retail',
+        hotel:'hospitality', lodging:'hospitality', travel_agency:'hospitality',
+        photographer:'media', event_venue:'hospitality', catering_service:'food',
+      };
+      const cat      = presenceMap[lead.category] || 'other';
+      const presence = (lead.reviewCount||0) > 200 ? 'decent' : (lead.reviewCount||0) > 50 ? 'basic' : 'social';
+      const age      = 'established';
+      const params   = new URLSearchParams({
+        biz:      lead.name,
+        desc:     (lead.category||'').replace(/_/g,' ') + ' in ' + ((lead.address||'').split(',').slice(1,3).join(',').trim()),
+        cat,
+        presence,
+        age,
+        autorun:  '1',
+      });
+      return 'https://textos.ai/ideas.html?' + params.toString();
+    }
 
     // ── AI Interest Score ────────────────────────────────────────────────────
     // Categories most receptive to AI/GEO services (higher = better prospect)
@@ -678,6 +704,8 @@
             </div>
             <div style="font-size:0.65rem;font-weight:700;color:${sl.color};margin-top:2px;">${sl.label}</div>
           </td>
+          <td><a href="${escHtml(diagnoseUrl(l))}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
+              style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;padding:5px 12px;border-radius:999px;border:1px solid rgba(0,212,255,0.5);background:rgba(0,212,255,0.1);color:#00d4ff;text-decoration:none;white-space:nowrap;">🔬 DIAGNOSE</a></td>
           <td><a href="${escHtml(demoUrl)}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
               style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;padding:5px 12px;border-radius:999px;border:1px solid rgba(255,45,135,0.5);background:rgba(255,45,135,0.1);color:#ff2d87;text-decoration:none;">VIEW ↗</a></td>
         </tr>`;
@@ -850,12 +878,14 @@
         const cl = catLabel(l.category);
         const demoUrl = cfg.demoBase+slugify(l.name)+'/';
         const stars = l.rating?'★'.repeat(Math.floor(l.rating))+(l.rating%1>=0.5?'½':''):'—';
+        const dxUrl = diagnoseUrl(l);
         return `<tr onclick="window.open('${escHtml(demoUrl)}','_blank')" onmouseover="this.style.background='rgba(168,85,247,0.06)'" onmouseout="this.style.background=''">
           <td style="color:#7878a8;font-family:monospace;font-size:0.75rem;">${i+1}</td>
           <td><div style="font-weight:700;color:#f0f0ff;font-size:0.9rem;">${escHtml(l.name)}</div><div style="font-size:0.72rem;color:#7878a8;">${escHtml((l.address||'').split(',').slice(0,2).join(','))}</div></td>
           <td><span style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid ${color}60;color:${color};background:${color}12;">${escHtml(cl)}</span></td>
           <td style="font-family:monospace;font-size:0.8rem;color:${accent};">${l.phone?`<a href="tel:${l.phone.replace(/\D/g,'')}" onclick="event.stopPropagation()" style="color:${accent};text-decoration:none;">${escHtml(l.phone)}</a>`:'<span style="color:#7878a8">—</span>'}</td>
           <td style="white-space:nowrap;">${l.rating?`<span style="color:#fbbf24;">${stars}</span><span style="color:#7878a8;font-size:0.72rem;margin-left:4px;">${l.rating} (${(l.reviewCount||0).toLocaleString()})</span>`:'<span style="color:#7878a8">—</span>'}</td>
+          <td><a href="${escHtml(dxUrl)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;padding:5px 12px;border-radius:999px;border:1px solid rgba(0,212,255,0.5);background:rgba(0,212,255,0.1);color:#00d4ff;text-decoration:none;white-space:nowrap;">🔬 DIAGNOSE</a></td>
           <td><a href="${escHtml(demoUrl)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-family:'Orbitron',sans-serif;font-size:0.5rem;font-weight:700;padding:5px 12px;border-radius:999px;border:1px solid ${accent}60;background:${accent}12;color:${accent};text-decoration:none;">VIEW SITE ↗</a></td>
         </tr>`;
       }).join('');

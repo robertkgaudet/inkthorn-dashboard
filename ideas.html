@@ -574,6 +574,22 @@
   </footer>
 
   <script>
+    // ── URL PARAM AUTO-DIAGNOSE ──
+    // Supports: ?biz=NAME&desc=DESCRIPTION&cat=CATEGORY&presence=basic&age=early&autorun=1
+    (function() {
+      const p = new URLSearchParams(window.location.search);
+      if (!p.get('biz') && !p.get('desc')) return;
+      // Switch to biz mode after DOM ready
+      window._autoParams = {
+        biz:      p.get('biz')      || '',
+        desc:     p.get('desc')     || '',
+        cat:      p.get('cat')      || '',
+        presence: p.get('presence') || 'basic',
+        age:      p.get('age')      || 'early',
+        autorun:  p.get('autorun')  === '1',
+      };
+    })();
+
     // ── MODE TOGGLE ──
     let currentMode = 'new';
 
@@ -793,6 +809,35 @@
     function escHtml(s) {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
+
+    // ── AUTO-RUN FROM URL PARAMS ──
+    document.addEventListener('DOMContentLoaded', function() {
+      const ap = window._autoParams;
+      if (!ap) return;
+
+      // Switch to biz mode
+      setMode('biz');
+
+      // Fill fields
+      if (ap.biz)  document.getElementById('bizName').value = ap.biz;
+      if (ap.desc) document.getElementById('bizDesc').value = ap.desc;
+      if (ap.cat) {
+        const sel = document.getElementById('bizIndustry');
+        for (let o of sel.options) { if (o.value === ap.cat) { sel.value = ap.cat; break; } }
+      }
+      const presSel = document.getElementById('bizPresence');
+      for (let o of presSel.options) { if (o.value === ap.presence) { presSel.value = ap.presence; break; } }
+      const ageSel = document.getElementById('bizAge');
+      for (let o of ageSel.options) { if (o.value === ap.age) { ageSel.value = ap.age; break; } }
+
+      // Scroll to form and auto-run
+      if (ap.autorun) {
+        setTimeout(() => {
+          document.querySelector('.gen-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setTimeout(diagnoseBiz, 400);
+        }, 200);
+      }
+    });
   </script>
 
 </body>
