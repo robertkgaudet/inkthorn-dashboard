@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TextOS — Your idea deserves a real shot.</title>
+  <meta name="description" content="You've had the idea. TextOS builds the business. Live landing page, cold emails sent, Stripe set up — all by texting. No app. No password. Founding member spots open now." />
+  <link rel="canonical" href="https://textos.ai/landing-v2.html" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================
+       DESIGN TOKENS
+    ============================ */
+    :root {
+      --bg:       #080e1a;
+      --surface:  #0d1626;
+      --surface2: #111f35;
+      --cyan:     #00e5ff;
+      --pink:     #ff2d78;
+      --amber:    #f59e0b;
+      --purple:   #a855f7;
+      --green:    #10b981;
+      --white:    #f0f6ff;
+      --gray:     #8899bb;
+      --font-head: 'Orbitron', monospace;
+      --font-body: 'Space Grotesk', sans-serif;
+    }
+
+    /* ============================
+       RESET & BASE
+    ============================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    img { max-width: 100%; display: block; }
+
+    /* ============================
+       LAYOUT HELPERS
+    ============================ */
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section { padding: 80px 0; }
+
+    .section-label {
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 620px;
+      margin-bottom: 48px;
+    }
+
+    /* ============================
+       NAV
+    ============================ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 14, 26, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 229, 255, 0.08);
+      padding: 16px 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-cta {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--pink);
+      color: #fff;
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.88; text-decoration: none; }
+
+    /* ============================
+       HERO
+    ============================ */
+    .hero {
+      padding: 100px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle gradient glow behind hero */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(0,229,255,0.07) 0%, rgba(168,85,247,0.05) 50%, transparent 75%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      border: 1px solid rgba(0,229,255,0.3);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-head);
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+    }
+
+    .hero-tagline .accent-cyan { color: var(--cyan); }
+    .hero-tagline .accent-pink { color: var(--pink); }
+
+    .hero-subhead {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--gray);
+      max-width: 640px;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+
+    .hero-pain {
+      background: var(--surface);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 8px 8px 0;
+      padding: 18px 24px;
+      max-width: 640px;
+      font-size: 1rem;
+      color: var(--gray);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .hero-pain strong {
+      color: var(--white);
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 18px 36px;
+      background: linear-gradient(135deg, var(--pink) 0%, #c71e62 100%);
+      color: #fff;
+      font-family: var(--font-head);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-radius: 8px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 0 28px rgba(255, 45, 120, 0.35);
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 36px rgba(255, 45, 120, 0.5);
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      color: var(--cyan);
+      font-size: 1rem;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(0,229,255,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .hero-sub-note {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+    .hero-sub-note span { color: var(--green); font-weight: 600; }
+
+    /* ============================
+       PAIN SECTION
+    ============================ */
+    .pain-section { background: var(--surface); }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .pain-card {
+      background: var(--bg);
+      border: 1px solid rgba(0,229,255,0.1);
+      border-radius: 12px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .pain-card:hover { border-color: rgba(0,229,255,0.25); }
+
+    .pain-card::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-family: Georgia, serif;
+      font-size: 8rem;
+      color: rgba(0,229,255,0.05);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .pain-card-quote {
+      font-size: 1.05rem;
+      color: var(--white);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .pain-card-resolution {
+      font-family: var(--font-head);
+      font-size: 0.78rem;
+      color: var(--cyan);
+      letter-spacing: 0.04em;
+      border-top: 1px solid rgba(0,229,255,0.15);
+      padding-top: 16px;
+    }
+
+    /* ============================
+       WHAT ACTUALLY HAPPENS
+    ============================ */
+    .phases-section { background: var(--bg); }
+
+    .phases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .phase-item {
+      background: var(--surface);
+      border: 1px solid rgba(168,85,247,0.12);
+      border-radius: 10px;
+      padding: 22px 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .phase-item:hover {
+      border-color: rgba(168,85,247,0.3);
+      background: var(--surface2);
+    }
+
+    .phase-number {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--purple);
+      line-height: 1;
+      min-width: 28px;
+    }
+
+    .phase-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .phase-desc {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .phases-callout {
+      margin-top: 40px;
+      background: linear-gradient(135deg, rgba(0,229,255,0.06) 0%, rgba(168,85,247,0.06) 100%);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 12px;
+      padding: 28px 32px;
+      text-align: center;
+    }
+
+    .phases-callout p {
+      font-size: 1.1rem;
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    .phases-callout .highlight-cyan { color: var(--cyan); font-weight: 600; }
+    .phases-callout .highlight-pink { color: var(--pink); font-weight: 600; }
+
+    /* ============================
+       HOW IT WORKS
+    ============================ */
+    .how-section { background: var(--surface); }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 720px;
+      margin-top: 48px;
+      counter-reset: step;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .step-item:last-child { border-bottom: none; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--bg);
+    }
+
+    .step-content h3 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .step-content p {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .how-footnote {
+      margin-top: 40px;
+      max-width: 640px;
+      padding: 20px 24px;
+      background: var(--surface2);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+    .how-footnote strong { color: var(--white); }
+
+    /* ============================
+       WHO IT'S FOR
+    ============================ */
+    .who-section { background: var(--bg); }
+
+    .profile-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .profile-card {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 32px 28px;
+      border-top: 3px solid var(--cyan);
+      transition: transform 0.2s;
+    }
+    .profile-card:nth-child(2) { border-top-color: var(--pink); }
+    .profile-card:nth-child(3) { border-top-color: var(--amber); }
+
+    .profile-card:hover { transform: translateY(-4px); }
+
+    .profile-situation {
+      font-size: 1rem;
+      color: var(--white);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .profile-punchline {
+      font-family: var(--font-head);
+      font-size: 0.78rem;
+      color: var(--cyan);
+      letter-spacing: 0.04em;
+    }
+    .profile-card:nth-child(2) .profile-punchline { color: var(--pink); }
+    .profile-card:nth-child(3) .profile-punchline { color: var(--amber); }
+
+    /* ============================
+       OFFER BOX
+    ============================ */
+    .offer-section { background: var(--surface); }
+
+    .offer-box {
+      background: linear-gradient(135deg, rgba(255,45,120,0.08) 0%, rgba(168,85,247,0.08) 100%);
+      border: 1px solid rgba(255,45,120,0.25);
+      border-radius: 16px;
+      padding: 56px 48px;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .offer-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at top, rgba(255,45,120,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .offer-badge {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--pink);
+      border: 1px solid rgba(255,45,120,0.4);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    .offer-price {
+      font-family: var(--font-head);
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .offer-price-sub {
+      font-size: 1rem;
+      color: var(--gray);
+      margin-bottom: 32px;
+    }
+    .offer-price-sub span { color: var(--green); font-weight: 600; }
+
+    .offer-includes {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 36px;
+      text-align: left;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .offer-includes li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--white);
+    }
+
+    .offer-includes li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .offer-scarcity {
+      font-family: var(--font-head);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--amber);
+      margin-bottom: 28px;
+    }
+
+    /* ============================
+       FOOTER
+    ============================ */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 48px 0 32px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 24px;
+      margin-bottom: 28px;
+    }
+
+    .footer-links a {
+      color: var(--gray);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); text-decoration: none; }
+
+    .footer-copy {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+
+    .footer-fine-print {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(136, 153, 187, 0.6);
+      line-height: 1.6;
+    }
+
+    /* ============================
+       RESPONSIVE
+    ============================ */
+    @media (max-width: 640px) {
+      section { padding: 60px 0; }
+
+      .hero { padding: 72px 0 60px; }
+
+      .offer-box { padding: 36px 24px; }
+
+      .btn-primary { padding: 16px 28px; font-size: 0.82rem; }
+
+      .hero-cta-group { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================
+       NAV
+  ============================== -->
+  <nav>
+    <div class="container nav-inner">
+      <span class="nav-logo">TextOS</span>
+      <a href="https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00" class="nav-cta stripe-link">Founding Member → $49</a>
+    </div>
+  </nav>
+
+  <!-- ==============================
+       HERO
+  ============================== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-eyebrow">Founding Member Offer — 1,000 spots</div>
+
+      <h1 class="hero-tagline">
+        Your idea deserves<br />
+        <span class="accent-cyan">a real</span> <span class="accent-pink">shot.</span>
+      </h1>
+
+      <p class="hero-subhead">
+        You've had the idea. You know what you want to build. The part where it never gets done?
+        That's what TextOS fixes. Text your idea. Get a real business.
+      </p>
+
+      <div class="hero-pain">
+        <strong>You've tried ChatGPT.</strong> You've tried Squarespace. You've tried the course.
+        You got drafts, not results. TextOS doesn't help you build — <strong>it builds for you.</strong>
+      </div>
+
+      <div class="hero-cta-group">
+        <a href="https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00" class="btn-primary stripe-link">
+          Reserve My Founding Member Spot → $49
+        </a>
+        <a href="/textos-how-it-works.html" class="btn-secondary">See how it works →</a>
+      </div>
+
+      <p class="hero-sub-note">
+        Then <span>$9.99/mo — your founding rate, locked forever.</span>
+        &nbsp;Public rate after launch: $29.99/mo &nbsp;·&nbsp; Cancel anytime
+      </p>
+    </div>
+  </section>
+
+  <!-- ==============================
+       THE PAIN
+  ============================== -->
+  <section class="pain-section">
+    <div class="container">
+      <p class="section-label">The Problem</p>
+      <h2 class="section-title">Sound familiar?</h2>
+
+      <div class="cards-grid">
+
+        <div class="pain-card">
+          <p class="pain-card-quote">
+            "I opened ChatGPT with a real business idea. I got a great outline. Then I closed the tab.
+            Three weeks later the tab is still there."
+          </p>
+          <p class="pain-card-resolution">TextOS doesn't outline it. It ships it.</p>
+        </div>
+
+        <div class="pain-card">
+          <p class="pain-card-quote">
+            "I started building my website four times. Each time I got stuck on something —
+            what to write, what to charge, who to contact first."
+          </p>
+          <p class="pain-card-resolution">TextOS decides the sequence. You just text.</p>
+        </div>
+
+        <div class="pain-card">
+          <p class="pain-card-quote">
+            "I bought a course. $997. I watched 4 modules.
+            I still haven't launched."
+          </p>
+          <p class="pain-card-resolution">TextOS isn't a course. It's the execution.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       WHAT ACTUALLY HAPPENS
+  ============================== -->
+  <section class="phases-section">
+    <div class="container">
+      <p class="section-label">What TextOS does</p>
+      <h2 class="section-title">Here's what TextOS actually does.</h2>
+      <p class="section-sub">
+        Not a template. Not a tutorial. Eight concrete outputs that turn an idea into a working business.
+      </p>
+
+      <div class="phases-grid">
+
+        <div class="phase-item">
+          <span class="phase-number">1</span>
+          <div>
+            <p class="phase-title">Mission document</p>
+            <p class="phase-desc">What your business is, who it's for, why it wins.</p>
+          </div>
+        </div>
+
+        <div class="phase-item">
+          <span class="phase-number">2</span>
+          <div>
+            <p class="phase-title">Market research</p>
+            <p class="phase-desc">Who's already in this space and where the gap is.</p>
+          </div>
+        </div>
+
+        <div class="phase-item">
+          <span class="phase-number">3</span>
+          <div>
+            <p class="phase-title">Live landing page</p>
+            <p class="phase-desc">Real URL, live on the internet, today.</p>
+          </div>
+        </div>
+
+        <div class="phase-item">
+          <span class="phase-number">4</span>
+          <div>
+            <p class="phase-title">Hero image</p>
+            <p class="phase-desc">Generated and placed on the page automatically.</p>
+          </div>
+        </div>
+
+        <div class="phase-item">
+          <span class="phase-number">5</span>
+          <div>
+            <p class="phase-title">Cold email pitch</p>
+            <p class="phase-desc">Written, formatted, ready to send to your first 10 prospects.</p>
+          </div>
+        </div>
+
+        <div class="phase-item">
+          <span class="phase-number">6</span>
+          <div>
+            <p class="phase-title">Social media calendar</p>
+            <p class="phase-desc">30 days of posts, specific to your business.</p>
+          </div>
+        </div>
+
+        <div class="phase-item">
+          <span class="phase-number">7</span>
+          <div>
+            <p class="phase-title">Investor data room</p>
+            <p class="phase-desc">One-pager for when someone asks "can I see your deck?"</p>
+          </div>
+        </div>
+
+        <div class="phase-item">
+          <span class="phase-number">8</span>
+          <div>
+            <p class="phase-title">Stripe Connect setup</p>
+            <p class="phase-desc">Real payment infrastructure, not a mockup.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="phases-callout">
+        <p>
+          <span class="highlight-cyan">Free tier gets phases 1–3 in under 60 seconds.</span>
+          &nbsp;&nbsp;
+          <span class="highlight-pink">Founding members get all 8.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       HOW IT WORKS
+  ============================== -->
+  <section class="how-section">
+    <div class="container">
+      <p class="section-label">The process</p>
+      <h2 class="section-title">Three steps. No decisions required.</h2>
+
+      <div class="steps-list">
+
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Text your idea</h3>
+            <p>One sentence is enough. TextOS doesn't need a business plan — it builds one.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>TextOS runs the build</h3>
+            <p>No decisions, no setup, no documentation to write. It runs the entire sequence on its own.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>You get real artifacts</h3>
+            <p>Live URLs you can share. Emails already sent. Real accounts, not mockups. You're launched.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="how-footnote">
+        <strong>No app. No password.</strong> Sign in with Google or a magic link.
+        Optional: connect Telegram for real-time text control — build and update your business from your phone.
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       WHO IT'S FOR
+  ============================== -->
+  <section class="who-section">
+    <div class="container">
+      <p class="section-label">Who this is for</p>
+      <h2 class="section-title">TextOS is for people who are ready to go.</h2>
+      <p class="section-sub">
+        Not beginners. Not people who need hand-holding. People with a real idea who need execution, not another tool to learn.
+      </p>
+
+      <div class="profile-cards">
+
+        <div class="profile-card">
+          <p class="profile-situation">
+            If you're the kind of person who has 45 minutes after the baby goes to sleep — and you've been using every one of those minutes on things that feel productive but never ship — TextOS is what you've been waiting for.
+            You're not stuck because you don't know enough. You're stuck because nothing closes the loop between "here's my idea" and "here's my business."
+          </p>
+          <p class="profile-punchline">TextOS closes that loop.</p>
+        </div>
+
+        <div class="profile-card">
+          <p class="profile-situation">
+            If you've been doing the work informally for years — advising, consulting, training — and you know you should formalize it, but every time you sit down to start you don't know which piece comes first: website? outreach? pricing? — TextOS decides that for you.
+            You don't need a plan. You need a system that runs the plan.
+          </p>
+          <p class="profile-punchline">TextOS runs the plan.</p>
+        </div>
+
+        <div class="profile-card">
+          <p class="profile-situation">
+            If you've built something real — a following, a product, a reputation — and you're ready to own your channel instead of renting attention on someone else's platform, TextOS builds you a home online that actually works.
+            You don't need a tech degree. You don't need to trust someone's nephew. You just need to text.
+          </p>
+          <p class="profile-punchline">TextOS builds your home.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       OFFER
+  ============================== -->
+  <section class="offer-section" id="offer">
+    <div class="container">
+
+      <div class="offer-box">
+        <div class="offer-badge">Founding Member Offer</div>
+
+        <p class="offer-price">$49</p>
+        <p class="offer-price-sub">
+          Then <span>$9.99/mo — your founding rate, locked forever.</span><br />
+          Public rate after launch: $29.99/mo &nbsp;·&nbsp; Cancel anytime
+        </p>
+
+        <ul class="offer-includes">
+          <li>First 3 months of Pro access included at launch</li>
+          <li>Monthly rate locked at $9.99/mo forever — you never pay the public rate</li>
+          <li>Official founding member slot number</li>
+          <li>Early access before public launch</li>
+          <li>All 8 build phases — mission through Stripe setup</li>
+        </ul>
+
+        <p class="offer-scarcity">1,000 founding member slots. When they're gone, this offer is gone.</p>
+
+        <a href="https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00" class="btn-primary stripe-link">
+          Reserve My Founding Member Spot → $49
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==============================
+       FOOTER
+  ============================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="/founder.html">Why I Built This</a>
+        <a href="/textos-how-it-works.html">How It Works</a>
+        <a href="/ideas.html">Free AI Diagnosis</a>
+        <a href="/journal/">Build Journal</a>
+        <a href="/textos.html">Product Vision</a>
+      </div>
+
+      <p class="footer-copy">TextOS &nbsp;·&nbsp; textos.ai &nbsp;·&nbsp; © 2026</p>
+
+      <p class="footer-fine-print">
+        The $49 founding member purchase includes your first 3 months of TextOS Pro at launch.
+        After the included period, your founding rate of $9.99/mo will apply automatically.
+        You may cancel at any time before renewal. The public rate of $29.99/mo applies to non-founding members after launch.
+        Founding member slots are limited to 1,000 total and are issued in order of purchase.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ==============================
+       REFERRAL PARAM PASS-THROUGH
+  ============================== -->
+  <script>
+    (function () {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var ref = params.get('ref');
+        if (!ref) return;
+
+        // Append ref to all Stripe links
+        var stripeLinks = document.querySelectorAll('a.stripe-link');
+        stripeLinks.forEach(function (el) {
+          var href = el.getAttribute('href');
+          if (!href) return;
+          var sep = href.indexOf('?') === -1 ? '?' : '&';
+          el.setAttribute('href', href + sep + 'client_reference_id=' + encodeURIComponent(ref));
+        });
+      } catch (e) {
+        // Fail silently — don't block anything
+      }
+    })();
+  </script>
+
+</body>
+</html>
