@@ -1,35 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://inkthorn.ai/sitemap.xml
-
-# Allow all major AI crawlers explicitly
-User-agent: GPTBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-# Block private/internal pages
-Disallow: /playbook.html
-Disallow: /mission.html
-Disallow: /mission-class.html
-Disallow: /crustacean/dashboard.html
-Disallow: /crustacean/dashboard-source.html
-Disallow: /encrypted/
+Sitemap: https://textos.ai/sitemap.xml

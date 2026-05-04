@@ -2,45 +2,89 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://inkthorn.ai/</loc>
-    <lastmod>2026-04-12</lastmod>
+    <loc>https://textos.ai/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
+  <!-- Landing Pages -->
   <url>
-    <loc>https://inkthorn.ai/community/</loc>
-    <lastmod>2026-04-12</lastmod>
-    <changefreq>daily</changefreq>
+    <loc>https://textos.ai/landing-v4.html</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://inkthorn.ai/story.html</loc>
-    <lastmod>2026-04-12</lastmod>
+    <loc>https://textos.ai/landing-v3.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://inkthorn.ai/blog/</loc>
-    <lastmod>2026-04-12</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://textos.ai/landing.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- AI Readiness Diagnosis — Ideas Pages -->
+  <url>
+    <loc>https://textos.ai/ideas.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://textos.ai/ideas-a.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://textos.ai/ideas-b.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://textos.ai/ideas-c.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Product & Vision -->
+  <url>
+    <loc>https://textos.ai/textos.html</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://inkthorn.ai/privacy.html</loc>
-    <lastmod>2026-04-12</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://textos.ai/textos-how-it-works.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://textos.ai/textos-index.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://textos.ai/textos-gtm.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://textos.ai/textos-exec-summary.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 
+  <!-- Founder & Story -->
   <url>
-    <loc>https://inkthorn.ai/terms.html</loc>
-    <lastmod>2026-04-12</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <loc>https://textos.ai/founder.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Conversion -->
+  <url>
+    <loc>https://textos.ai/thanks.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 
 </urlset>
