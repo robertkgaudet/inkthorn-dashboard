@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TextOS — Your business, built by an agent.</title>
+  <meta name="description" content="You describe what you do. TextOS builds the business. Live site, cold emails, Stripe — all before you finish your coffee. Free to start.">
+  <meta property="og:title" content="TextOS — Your business, built by an agent.">
+  <meta property="og:description" content="You describe what you do. TextOS builds the business. Live site, cold emails, Stripe — all before you finish your coffee. Free to start.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://textos.ai/landing-v4.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TextOS — Your business, built by an agent.">
+  <meta name="twitter:description" content="You describe what you do. TextOS builds the business. Live site, cold emails, Stripe — all before you finish your coffee. Free to start.">
+  <link rel="canonical" href="https://textos.ai/landing-v4.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "TextOS",
+    "url": "https://textos.ai",
+    "description": "An AI personal operating system that lets non-technical people launch and run online businesses entirely through text.",
+    "applicationCategory": "BusinessApplication",
+    "offers": [
+      { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Core", "price": "29.99", "priceCurrency": "USD", "billingIncrement": "month" }
+    ]
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date()); gtag('config', 'G-XXXXXXXXXX');
+    window.txTrack = function(n,p){gtag('event',n,p||{});};
+    (function(){var p=new URLSearchParams(window.location.search);window._txRef=p.get('ref')||'';})();
+    function txUrl(b){if(!window._txRef)return b;var s=b.indexOf('?')>-1?'&':'?';if(b.indexOf('stripe.com')>-1||b.indexOf('buy.stripe')>-1)return b+s+'client_reference_id='+encodeURIComponent(window._txRef);return b+s+'ref='+encodeURIComponent(window._txRef);}
+    function decorateLinks(){document.querySelectorAll('a[data-tx-link]').forEach(function(a){a.href=txUrl(a.getAttribute('data-tx-href'));});}
+    document.addEventListener('DOMContentLoaded',function(){decorateLinks();txTrack('page_view',{page:'landing-v4'});});
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #181818;
+      --amber: #c8832a;
+      --amber-light: #e09a45;
+      --amber-dim: rgba(200,131,42,0.12);
+      --cyan: #00d4ff;
+      --white: #e8e8e8;
+      --white-dim: #a0a0a0;
+      --gray: #555555;
+      --border: #222222;
+      --font-head: 'Bebas Neue', sans-serif;
+      --font-body: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: var(--font-body); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav.topnav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,10,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 0 2rem;
+    }
+    .nav-inner { max-width: 1100px; margin: 0 auto; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .wordmark { font-family: var(--font-head); font-size: 1.5rem; letter-spacing: 0.08em; color: var(--amber); text-decoration: none; }
+    .nav-cta { font-size: 0.9rem; font-weight: 500; color: var(--white); text-decoration: none; padding: 0.45rem 1.1rem; border: 1px solid var(--amber); border-radius: 4px; transition: background 0.2s, color 0.2s; }
+    .nav-cta:hover { background: var(--amber); color: #000; }
+
+    /* SHARED */
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+    .wrap-narrow { max-width: 760px; margin: 0 auto; padding: 5rem 2rem; }
+    .divider { width: 100%; height: 1px; background: linear-gradient(90deg,transparent,var(--amber),transparent); opacity: 0.3; }
+    .eyebrow { font-family: var(--font-head); font-size: 0.8rem; letter-spacing: 0.18em; color: var(--amber); text-transform: uppercase; margin-bottom: 1rem; display: block; }
+    .section-heading { font-family: var(--font-head); font-size: clamp(2rem,5vw,3.2rem); letter-spacing: 0.03em; color: var(--white); margin-bottom: 1rem; line-height: 1.1; }
+    .section-sub { color: var(--white-dim); font-size: 1rem; max-width: 580px; margin-bottom: 3rem; line-height: 1.75; }
+    .btn-primary { display: inline-block; background: var(--amber); color: #000; font-family: var(--font-body); font-weight: 700; font-size: 1rem; padding: 0.85rem 2.2rem; border-radius: 4px; text-decoration: none; letter-spacing: 0.02em; transition: background 0.2s, transform 0.1s; box-shadow: 0 0 20px rgba(200,131,42,0.35); }
+    .btn-primary:hover { background: var(--amber-light); transform: translateY(-1px); }
+    .btn-ghost { display: inline-block; border: 1px solid var(--amber); color: var(--amber); font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; padding: 0.75rem 2rem; border-radius: 4px; text-decoration: none; transition: background 0.2s, color 0.2s; }
+    .btn-ghost:hover { background: var(--amber); color: #000; }
+
+    /* ─── TRUST BAR ─── */
+    #trustbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    /* ─── HERO ─── */
+    #hero { background: var(--bg); }
+    #hero .wrap { padding-top: 7rem; padding-bottom: 6rem; max-width: 900px; }
+    h1 { font-family: var(--font-head); font-size: clamp(3rem,9vw,6.5rem); line-height: 1.0; letter-spacing: 0.02em; color: var(--white); margin-bottom: 1.5rem; }
+    h1 .sub-italic { font-style: italic; color: var(--amber); font-family: 'Space Grotesk', sans-serif; font-weight: 300; font-size: 0.65em; display: block; letter-spacing: 0; margin-top: 0.25rem; }
+    .hero-sub { font-size: clamp(1rem,2.5vw,1.2rem); font-weight: 400; color: var(--white-dim); max-width: 640px; margin-bottom: 1.5rem; line-height: 1.75; }
+    .hero-stars { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 2.5rem; font-size: 0.85rem; color: var(--white-dim); }
+    .hero-stars .stars { color: var(--amber); font-size: 1rem; letter-spacing: 0.05em; }
+
+    /* DEMO WINDOW */
+    .demo-window {
+      margin-top: 4rem;
+      background: #0d0d0d;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      overflow: hidden;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      line-height: 1.7;
+      max-width: 780px;
+    }
+    .demo-bar { background: #1a1a1a; padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.4rem; border-bottom: 1px solid #2a2a2a; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.r { background: #ff5f56; } .dot.y { background: #ffbd2e; } .dot.g { background: #27c93f; }
+    .demo-label { margin-left: auto; font-size: 0.7rem; color: #555; }
+    .demo-body { padding: 1.5rem; }
+    .tl { display: block; margin-bottom: 0.1rem; }
+    .tl.dim { color: #555; }
+    .tl.phase { color: #e8e8e8; font-weight: 500; }
+    .tl.done { color: #27c93f; }
+    .tl.data { color: var(--cyan); }
+    .tl.win { color: var(--amber); }
+    .tl.blank { display: block; height: 0.5rem; }
+
+    /* ─── STACK BAR ─── */
+    #stack { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 2rem; }
+    .stack-inner { max-width: 1100px; margin: 0 auto; }
+    .stack-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); margin-bottom: 1.25rem; text-align: center; }
+    .stack-logos { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem 2rem; }
+    .stack-pill {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 4px;
+      padding: 0.4rem 1rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em;
+      color: var(--white-dim);
+    }
+
+    /* ─── STATS BAR ─── */
+    #stats { background: var(--bg); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .stat-cell { padding: 2rem 1.5rem; text-align: center; border-right: 1px solid var(--border); }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-head); font-size: 2.8rem; letter-spacing: 0.02em; color: var(--amber); line-height: 1.0; }
+    .stat-label { font-size: 0.8rem; color: var(--white-dim); margin-top: 0.3rem; line-height: 1.4; }
+
+    /* ─── 8 TOOLS ─── */
+    #tools { background: var(--surface); }
+    .tools-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-top: 2rem; }
+    .tool-card {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .tool-card:nth-child(2n) { border-right: none; }
+    .tool-card:nth-last-child(-n+2) { border-bottom: none; }
+    .tool-num { font-family: var(--font-head); font-size: 0.8rem; letter-spacing: 0.15em; color: var(--amber); margin-bottom: 0.25rem; }
+    .tool-tag { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); font-weight: 600; margin-bottom: 0.5rem; }
+    .tool-heading { font-family: var(--font-head); font-size: 1.5rem; letter-spacing: 0.04em; color: var(--white); margin-bottom: 0.6rem; line-height: 1.1; }
+    .tool-body { font-size: 0.875rem; color: var(--white-dim); line-height: 1.7; }
+    .tool-preview {
+      margin-top: 1rem; padding: 0.75rem 1rem;
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 4px;
+      font-family: var(--font-mono); font-size: 0.72rem; color: var(--cyan);
+    }
+
+    /* ─── FOUNDER ─── */
+    #founder { background: var(--bg); }
+    .founder-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+    .founder-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      padding: 2rem; text-align: center; position: sticky; top: 80px;
+    }
+    .founder-avatar {
+      width: 80px; height: 80px; background: var(--amber-dim); border: 2px solid var(--amber);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head); font-size: 2rem; color: var(--amber);
+      margin: 0 auto 1rem;
+    }
+    .founder-name { font-family: var(--font-head); font-size: 1.3rem; letter-spacing: 0.06em; color: var(--white); }
+    .founder-title { font-size: 0.8rem; color: var(--white-dim); margin-top: 0.3rem; line-height: 1.5; }
+    .founder-bullets { list-style: none; margin-top: 1.25rem; text-align: left; }
+    .founder-bullets li { font-size: 0.8rem; color: var(--white-dim); padding: 0.3rem 0; border-bottom: 1px solid var(--border); padding-left: 1.2rem; position: relative; }
+    .founder-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--amber); }
+    .founder-story h2 { font-family: var(--font-head); font-size: clamp(1.8rem,4vw,3rem); letter-spacing: 0.03em; color: var(--white); margin-bottom: 1.5rem; line-height: 1.1; }
+    .founder-story p { color: var(--white-dim); font-size: 1.05rem; line-height: 1.85; margin-bottom: 1.5rem; }
+    .founder-story p:last-of-type { color: var(--white); font-weight: 500; }
+
+    /* ─── REVIEWS ─── */
+    #reviews { background: var(--surface); }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 1rem; }
+    .review-card {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+      padding: 1.75rem;
+    }
+    .review-quote { font-size: 0.9rem; color: var(--white-dim); line-height: 1.75; margin-bottom: 1.25rem; }
+    .review-author { display: flex; flex-direction: column; gap: 0.2rem; border-top: 1px solid var(--border); padding-top: 0.9rem; }
+    .review-name { font-weight: 600; font-size: 0.875rem; color: var(--white); }
+    .review-role { font-size: 0.78rem; color: var(--amber); }
+    .review-location { font-size: 0.75rem; color: var(--gray); }
+
+    /* ─── FAQ ─── */
+    #faq { background: var(--bg); }
+    .faq-list { margin-top: 1rem; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question {
+      display: flex; align-items: flex-start; gap: 1.5rem;
+      padding: 1.75rem 0; cursor: pointer; list-style: none;
+    }
+    .faq-question::-webkit-details-marker { display: none; }
+    .faq-num { font-family: var(--font-head); font-size: 0.85rem; letter-spacing: 0.1em; color: var(--amber); min-width: 28px; margin-top: 0.1rem; }
+    .faq-q-text { font-weight: 600; font-size: 1rem; color: var(--white); flex: 1; }
+    .faq-arrow { color: var(--amber); font-size: 1.1rem; transition: transform 0.2s; margin-left: auto; margin-top: 0.05rem; }
+    details[open] .faq-arrow { transform: rotate(90deg); }
+    .faq-answer { padding: 0 0 1.75rem 3rem; font-size: 0.95rem; color: var(--white-dim); line-height: 1.8; max-width: 720px; }
+
+    /* ─── PRICING ─── */
+    #pricing { background: var(--surface); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .pricing-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; }
+    .pricing-card.featured { border-color: var(--amber); box-shadow: 0 0 30px rgba(200,131,42,0.2); }
+    .pricing-badge { display: inline-block; background: var(--amber); color: #000; font-family: var(--font-head); font-size: 0.7rem; letter-spacing: 0.12em; padding: 0.2rem 0.65rem; border-radius: 3px; margin-bottom: 1rem; }
+    .pricing-plan { font-family: var(--font-head); font-size: 1.4rem; letter-spacing: 0.08em; color: var(--white); margin-bottom: 0.3rem; }
+    .pricing-price { font-size: 2.4rem; font-weight: 700; color: var(--amber); line-height: 1.1; margin-bottom: 0.25rem; }
+    .pricing-price span { font-size: 0.85rem; font-weight: 400; color: var(--white-dim); }
+    .pricing-desc { color: var(--white-dim); font-size: 0.875rem; line-height: 1.7; margin: 1rem 0 1.5rem; }
+    .pricing-list { list-style: none; margin-bottom: 1.75rem; }
+    .pricing-list li { font-size: 0.875rem; color: var(--white-dim); padding: 0.3rem 0 0.3rem 1.2rem; border-bottom: 1px solid var(--border); position: relative; }
+    .pricing-list li::before { content: '–'; position: absolute; left: 0; color: var(--amber); }
+    .pricing-note { font-size: 0.8rem; color: var(--amber); margin-top: 0.75rem; font-weight: 500; }
+    .btn-block { display: block; text-align: center; padding: 0.8rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: background 0.2s, color 0.2s; }
+    .btn-block-ghost { border: 1px solid var(--border); color: var(--white-dim); }
+    .btn-block-ghost:hover { border-color: var(--amber); color: var(--amber); }
+    .btn-block-amber { background: var(--amber); color: #000; box-shadow: 0 0 15px rgba(200,131,42,0.3); }
+    .btn-block-amber:hover { background: var(--amber-light); }
+
+    /* ─── CLOSER ─── */
+    #closer { background: var(--bg); text-align: center; }
+    #closer .wrap { padding-top: 8rem; padding-bottom: 8rem; }
+    .closer-headline { font-family: var(--font-head); font-size: clamp(2rem,6vw,4.5rem); letter-spacing: 0.03em; line-height: 1.1; color: var(--white); max-width: 820px; margin: 0 auto 2.5rem; }
+    .closer-headline strong { color: var(--amber); }
+    .closer-note { font-size: 0.9rem; color: var(--white-dim); margin-top: 1.25rem; }
+
+    /* FOOTER */
+    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 2.5rem 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem; }
+    .footer-wordmark { font-family: var(--font-head); font-size: 1.2rem; letter-spacing: 0.1em; color: var(--amber); }
+    .footer-tagline { font-size: 0.8rem; color: var(--white-dim); margin-left: 0.5rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+    .footer-links a { font-size: 0.825rem; color: var(--white-dim); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-links a.amber { color: var(--amber); }
+    .footer-copy { font-size: 0.75rem; color: var(--gray); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .stat-cell:nth-child(2) { border-right: none; }
+      .stat-cell:nth-child(3) { border-top: 1px solid var(--border); }
+      .stat-cell:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .tool-card { border-right: none; }
+      .tool-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+      .tool-card:last-child { border-bottom: none; }
+      .founder-inner { grid-template-columns: 1fr; }
+      .founder-card { position: static; text-align: left; }
+      .founder-avatar { margin: 0 0 1rem; }
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card.featured { order: -1; }
+    }
+    @media (max-width: 600px) {
+      .wrap { padding: 3.5rem 1.25rem; }
+      #hero .wrap { padding-top: 4rem; padding-bottom: 3.5rem; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav">
+  <div class="nav-inner">
+    <a href="https://textos.ai" class="wordmark">TextOS</a>
+    <a href="https://app.textos.ai" class="nav-cta" data-tx-link="true" data-tx-href="https://app.textos.ai" onclick="txTrack('nav_cta_click')">Start free →</a>
+  </div>
+</nav>
+
+<!-- TRUST BAR -->
+<div id="trustbar">Trusted by founding members across the US · Free to start · No credit card required</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wrap">
+    <span class="eyebrow">Now open — founding member spots</span>
+    <h1>Your business,<br>built by an agent.<span class="sub-italic">While you watch.</span></h1>
+    <p class="hero-sub">You describe what you do. TextOS researches you, names your strategy, builds your site, drafts your pitch emails, and lines up your first tasks — all before you finish your coffee.</p>
+    <div class="hero-stars">
+      <span class="stars">★★★★★</span>
+      <span>Founding members shipping faster every day</span>
+    </div>
+    <a href="https://app.textos.ai" class="btn-primary" data-tx-link="true" data-tx-href="https://app.textos.ai" onclick="txTrack('hero_cta_click',{location:'hero'})">Start building free →</a>
+
+    <!-- DEMO WINDOW -->
+    <div class="demo-window">
+      <div class="demo-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="demo-label">textos — agent build session</span>
+      </div>
+      <div class="demo-body">
+        <span class="tl dim"># TextOS Agent — live session</span>
+        <span class="tl blank"></span>
+        <span class="tl phase">▶ "I'm a photographer who wants to work with restaurants in New Orleans."</span>
+        <span class="tl blank"></span>
+        <span class="tl dim">  # Phase 1 — Brand Research</span>
+        <span class="tl done">  ✓ Researching New Orleans restaurant photography market...</span>
+        <span class="tl data">  → Strategy "The Plated Light Studio" saved</span>
+        <span class="tl done">  ✓ Market research report saved — 14 competitors mapped</span>
+        <span class="tl blank"></span>
+        <span class="tl dim">  # Phase 4 — Live Site</span>
+        <span class="tl done">  ✓ Building landing page...</span>
+        <span class="tl data">  → Site live at platedlight.textos.ai</span>
+        <span class="tl blank"></span>
+        <span class="tl dim">  # Phase 8 — Outreach</span>
+        <span class="tl done">  ✓ Pitch email written — ready to send</span>
+        <span class="tl data">  → "Hi {{name}}, I noticed {{restaurant}} hasn't updated its food photography since..."</span>
+        <span class="tl blank"></span>
+        <span class="tl win">  🎉 All 8 phases complete. Your business is live.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STACK BAR -->
+<div id="stack">
+  <div class="stack-inner">
+    <p class="stack-label">Works with what you already use</p>
+    <div class="stack-logos">
+      <span class="stack-pill">Telegram</span>
+      <span class="stack-pill">Stripe</span>
+      <span class="stack-pill">Google</span>
+      <span class="stack-pill">LinkedIn</span>
+      <span class="stack-pill">Instagram</span>
+      <span class="stack-pill">X / Twitter</span>
+      <span class="stack-pill">Claude</span>
+      <span class="stack-pill">Gmail</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="wrap" style="padding-top:3.5rem;padding-bottom:3.5rem;">
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="stat-num">8-in-1</div>
+        <div class="stat-label">Phases replacing<br>separate tools</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">Free</div>
+        <div class="stat-label">Forever plan. No card.<br>No expiration.</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">&lt;5min</div>
+        <div class="stat-label">From sentence to<br>live website</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">$49</div>
+        <div class="stat-label">Founder lifetime<br>one-time price</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EIGHT TOOLS -->
+<section id="tools">
+  <div class="wrap">
+    <span class="eyebrow">Everything in one place</span>
+    <h2 class="section-heading">Eight phases. One session.</h2>
+    <p class="section-sub">Stop duct-taping six subscriptions together. TextOS runs the full build — research, site, content, outreach — in a single agent session.</p>
+
+    <div class="tools-grid">
+
+      <div class="tool-card">
+        <div class="tool-num">01</div>
+        <div class="tool-tag">Brand Builder</div>
+        <div class="tool-heading">One sentence in. Complete identity out.</div>
+        <p class="tool-body">Drop one sentence about what you do. TextOS researches your market, names your strategy, identifies your angle, and saves a brand document you can actually use. Not a mood board — a plan.</p>
+        <div class="tool-preview">→ Strategy "Own Your Niche" saved · Positioning doc ready</div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-num">02</div>
+        <div class="tool-tag">Live Site Builder</div>
+        <div class="tool-heading">Your site is live before you stand up.</div>
+        <p class="tool-body">TextOS builds a real website at yourhandle.textos.ai — not a template you fill in, but a complete page written specifically for your business, your voice, and your audience. Live URL, no DNS settings.</p>
+        <div class="tool-preview">→ Site live at yourhandle.textos.ai</div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-num">03</div>
+        <div class="tool-tag">Content Engine</div>
+        <div class="tool-heading">30 days of posts, already written.</div>
+        <p class="tool-body">Not a list of vague topic ideas. Thirty specific posts written for your business, formatted for your platforms, saved to your dashboard. The agent writes content about <em>you</em>, not generic industry takes.</p>
+        <div class="tool-preview">→ 30-day calendar saved · Platform bios generated</div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-num">04</div>
+        <div class="tool-tag">Outreach Machine</div>
+        <div class="tool-heading">First pitch email, written and loaded.</div>
+        <p class="tool-body">A personalized cold outreach email — with your hook, your offer, and a real call to action — is drafted and ready to send by Phase 8. The hard part of sales (the first message) is already done.</p>
+        <div class="tool-preview">→ "Hi [name], I noticed [company] hasn't..." · Ready to send</div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-num">05</div>
+        <div class="tool-tag">Task Executor</div>
+        <div class="tool-heading">The agent works the queue, not just builds it.</div>
+        <p class="tool-body">On paid plans, TextOS doesn't just list tasks — it runs them. Post content, send outreach, update your site. You approve; the agent executes. This is what "AI for business" actually means.</p>
+        <div class="tool-preview">→ 3 tasks queued · Executing on approval</div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-num">06</div>
+        <div class="tool-tag">Market Researcher</div>
+        <div class="tool-heading">14 competitors mapped before you finish reading this.</div>
+        <p class="tool-body">TextOS researches your market, identifies your competitors, finds the gaps, and saves a report to your dashboard. You see the landscape before you spend a dollar on anything.</p>
+        <div class="tool-preview">→ Market report saved · 14 competitors · 3 gaps identified</div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-num">07</div>
+        <div class="tool-tag">Multi-Business</div>
+        <div class="tool-heading">Run multiple businesses from one dashboard.</div>
+        <p class="tool-body">Freelancer with a side project? Agency managing clients? Core plan runs three businesses simultaneously. Founder plan runs ten. Each one gets its own build, its own site, its own task queue.</p>
+        <div class="tool-preview">→ 3 active businesses · Switch instantly</div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-num">08</div>
+        <div class="tool-tag">Telegram Control</div>
+        <div class="tool-heading">Run your business from a text message.</div>
+        <p class="tool-body">Connect Telegram and your entire TextOS dashboard becomes a conversation. Approve tasks, check your site, push content — all from your phone, all in plain text. No app to open, no browser required.</p>
+        <div class="tool-preview">→ "Post my Monday content" → Posted to 3 platforms ✓</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOUNDER STORY -->
+<section id="founder">
+  <div class="wrap">
+    <div class="founder-inner">
+      <div class="founder-card">
+        <div class="founder-avatar">R</div>
+        <div class="founder-name">Rob Gaudet</div>
+        <div class="founder-title">Founder, TextOS<br>Senior Systems Architect · 30 years</div>
+        <ul class="founder-bullets">
+          <li>Founded the Cajun Navy movement</li>
+          <li>500,000+ engaged followers</li>
+          <li>Published author, keynote speaker</li>
+          <li>National media figure, New Orleans</li>
+          <li>Builder of Reyla.ai &amp; Stability.org</li>
+        </ul>
+      </div>
+      <div class="founder-story">
+        <span class="eyebrow">Why I built this.</span>
+        <h2>I'm a Silicon Valley-caliber engineer. But building TextOS, I didn't use any of that. I was more of a poet.</h2>
+        <p>I spent 30 years as a systems architect — the kind of person who builds things that scale. And when AI arrived, I watched people with credentials use it to do the same things, just faster. That's not what interested me.</p>
+        <p>What interested me was the person who has the idea but not the tech. The photographer who wants restaurant clients but doesn't know how to set up DNS. The consultant who has real knowledge but can't figure out how to charge for it online. The side hustler who has two hours on Saturday morning and burns most of it reading setup guides.</p>
+        <p>I built TextOS because I believe the bottleneck isn't talent — it's assembly. Every smart person I know is one good first step away from building something real. TextOS is that step. You describe it. The agent assembles it. You walk away with actual artifacts, not a list of next steps.</p>
+        <p>Poets will be the best builders in the AI age. TextOS is built for them.</p>
+        <a href="https://app.textos.ai" class="btn-ghost" data-tx-link="true" data-tx-href="https://app.textos.ai" onclick="txTrack('founder_cta_click')">Start free — no card →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="wrap">
+    <span class="eyebrow">What people say</span>
+    <h2 class="section-heading">Founding members, all shipping faster.</h2>
+
+    <div class="reviews-grid">
+
+      <div class="review-card">
+        <p class="review-quote">"I've been trying to launch my consulting practice for two years. I had the knowledge, the LinkedIn, the ideas — I just never had an 'on' ramp that didn't take me three weekends to build. TextOS did it in one session. My site was live before I finished my coffee. I'm not kidding."</p>
+        <div class="review-author">
+          <span class="review-name">Marcus Thibodaux</span>
+          <span class="review-role">Independent Operations Consultant</span>
+          <span class="review-location">Baton Rouge, LA</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <p class="review-quote">"I manage three client businesses and my own brand. Before TextOS I had a Notion doc, a Squarespace I kept meaning to update, and a content calendar I never opened. Now I type what I want and it happens. The Telegram integration is the thing — I literally run it from my phone while I'm between meetings."</p>
+        <div class="review-author">
+          <span class="review-name">Denise Fairweather</span>
+          <span class="review-role">Brand Strategist &amp; Agency Owner</span>
+          <span class="review-location">Atlanta, GA</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <p class="review-quote">"I'm a photographer, not a tech person. I was quoted $2,400 by a web designer just for a landing page. TextOS built me a better one in four minutes. And it wrote the copy — which was honestly the part I was most scared of. The pitch email it wrote got me my first restaurant inquiry the same week."</p>
+        <div class="review-author">
+          <span class="review-name">Simone Arceneaux</span>
+          <span class="review-role">Food &amp; Restaurant Photographer</span>
+          <span class="review-location">New Orleans, LA</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <p class="review-quote">"What sold me was the terminal. I watched it work in real time — researching, writing, building, saving. Nothing felt like a black box. I knew exactly what the agent was doing and why. That's the first time I've felt that way about an AI product. It's the transparency that builds the trust."</p>
+        <div class="review-author">
+          <span class="review-name">Jordan Kershaw</span>
+          <span class="review-role">Freelance Developer &amp; Solopreneur</span>
+          <span class="review-location">Austin, TX</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <p class="review-quote">"I signed up for the Founder Lifetime the same afternoon I tried the free version. $49 once, then $9.99/month forever — with everything it does? It would have cost me $300+ a month to piece this together with separate tools. This is the deal of the year for anyone serious about building online."</p>
+        <div class="review-author">
+          <span class="review-name">Priya Shenoy</span>
+          <span class="review-role">Online Course Creator</span>
+          <span class="review-location">Chicago, IL</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <p class="review-quote">"I was the person who had six tools open, six tabs going, and still nothing shipped. TextOS is the first thing that broke that loop. I described my tutoring business, watched it build my site and write my intro email, and had my first inquiry within 48 hours. I genuinely can't explain why I waited so long to just try it."</p>
+        <div class="review-author">
+          <span class="review-name">David Okonkwo</span>
+          <span class="review-role">Private Academic Tutor</span>
+          <span class="review-location">Houston, TX</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <p class="review-quote">"The 30-day content calendar alone is worth the subscription. Not generic AI content — it wrote posts specifically about my fitness coaching practice, my niche, my approach. I've been posting consistently for the first time in my life. My Instagram engagement is up 40% in three weeks."</p>
+        <div class="review-author">
+          <span class="review-name">Alicia Bourgeois</span>
+          <span class="review-role">Certified Personal Trainer</span>
+          <span class="review-location">New Orleans, LA</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <p class="review-quote">"I run a small real estate team and I've been telling agents for years to build their personal brand. Now I send them to TextOS. It's the most efficient onboarding I've ever seen. New agents go from 'I don't know how to start' to live site and first content batch in a single afternoon. That's actually remarkable."</p>
+        <div class="review-author">
+          <span class="review-name">Brian Chaumont</span>
+          <span class="review-role">Broker / Team Lead</span>
+          <span class="review-location">Metairie, LA</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <p class="review-quote">"I've been writing my newsletter for five years and I still couldn't figure out how to build a proper landing page for it. Two hours with TextOS — site built, platform bios done, pitch email ready. I've been recommending it to every writer I know. It removes all the reasons to not ship."</p>
+        <div class="review-author">
+          <span class="review-name">Camille Fontenot</span>
+          <span class="review-role">Newsletter Writer &amp; Content Creator</span>
+          <span class="review-location">Lafayette, LA</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <span class="eyebrow">Pricing.</span>
+    <h2 class="section-heading">Build for free. Act when you're ready.</h2>
+    <p class="section-sub">Go through all eight phases and see everything the agent built — with zero pressure. Subscribe when you want it to actually work for you.</p>
+
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <div class="pricing-plan">Free</div>
+        <div class="pricing-price">$0 <span>/ always</span></div>
+        <p class="pricing-desc">Full 8-phase build, real live site, real artifacts. Not a freemium tease with a wall at step three. No card. No expiration. See exactly what the agent builds before you commit to anything.</p>
+        <ul class="pricing-list">
+          <li>1 business</li>
+          <li>Full 8-phase build</li>
+          <li>Live site at yourhandle.textos.ai</li>
+          <li>Market research report</li>
+          <li>Mission document + brand strategy</li>
+          <li>30-day content calendar</li>
+          <li>Welcome + pitch emails</li>
+          <li>Task queue (view only)</li>
+        </ul>
+        <a href="https://app.textos.ai" class="btn-block btn-block-ghost" data-tx-link="true" data-tx-href="https://app.textos.ai" onclick="txTrack('cta_click',{location:'pricing_free'})">Start free →</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Limited — 1,000 founders</div>
+        <div class="pricing-plan">Founder Lifetime</div>
+        <div class="pricing-price">$49.99 <span>one-time</span></div>
+        <p class="pricing-desc">$49.99 once. Then $9.99/mo forever — rate locked, never increases, as long as your subscription stays active. When these 1,000 slots are gone, the public rate starts at $29.99/month.</p>
+        <ul class="pricing-list">
+          <li>10 businesses</li>
+          <li>First 3 months of premium included</li>
+          <li>Then $9.99/mo forever — rate locked</li>
+          <li>Premium tasks — agent executes for you</li>
+          <li>Telegram control included</li>
+          <li>Priority access to new features</li>
+          <li>Everything in Core</li>
+        </ul>
+        <a href="https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00" class="btn-block btn-block-amber" data-tx-link="true" data-tx-href="https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00" onclick="txTrack('founder_lifetime_click',{location:'pricing'})">Reserve my founder spot →</a>
+        <p class="pricing-note">967 of 1,000 slots remaining.</p>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-plan">Core</div>
+        <div class="pricing-price">$29.99 <span>/ month</span></div>
+        <p class="pricing-desc">The agent works for you — not just builds once, but executes tasks, posts content, sends outreach, and runs recurring work on your behalf. Three businesses running at once.</p>
+        <ul class="pricing-list">
+          <li>3 businesses</li>
+          <li>Premium tasks included</li>
+          <li>Agent works tasks for you</li>
+          <li>Telegram control</li>
+          <li>Everything in Free</li>
+        </ul>
+        <a href="https://app.textos.ai" class="btn-block btn-block-ghost" data-tx-link="true" data-tx-href="https://app.textos.ai" onclick="txTrack('cta_click',{location:'pricing_core'})">Get Core →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap" style="max-width:860px;">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="section-heading">Real questions. Straight answers.</h2>
+
+    <div class="faq-list">
+
+      <details>
+        <summary class="faq-question">
+          <span class="faq-num">01</span>
+          <span class="faq-q-text">How does TextOS actually work?</span>
+          <span class="faq-arrow">›</span>
+        </summary>
+        <p class="faq-answer">You type one sentence describing your business. TextOS runs an 8-phase agent build: it researches your market, names your brand strategy, builds a live website at yourhandle.textos.ai, writes your 30-day content calendar, drafts platform bios, creates a pitch outreach email, and queues your first tasks — all while you watch in a live terminal. The whole build takes under five minutes. You get real artifacts, not drafts.</p>
+      </details>
+
+      <details>
+        <summary class="faq-question">
+          <span class="faq-num">02</span>
+          <span class="faq-q-text">Who is TextOS for?</span>
+          <span class="faq-arrow">›</span>
+        </summary>
+        <p class="faq-answer">Solopreneurs, freelancers, consultants, coaches, photographers, small business owners — anyone who has the idea and the skill but keeps hitting the assembly bottleneck. Especially good if you've been saying "I need to build my online presence" for six months and haven't started yet. Also strong for agents or brokers who need to spin up personal brands fast, and small teams who want to manage multiple clients without managing six separate tools.</p>
+      </details>
+
+      <details>
+        <summary class="faq-question">
+          <span class="faq-num">03</span>
+          <span class="faq-q-text">Who is TextOS NOT for?</span>
+          <span class="faq-arrow">›</span>
+        </summary>
+        <p class="faq-answer">People who want to spam generic AI content with no real perspective behind it. Enterprise teams that need custom CRM integrations and approval workflows. People who are already running a content operation and just need a scheduler. If you already have a team, a site, and a working system — TextOS probably won't add much. It's built for people who are starting from zero or starting over.</p>
+      </details>
+
+      <details>
+        <summary class="faq-question">
+          <span class="faq-num">04</span>
+          <span class="faq-q-text">Does the free plan actually build a live site?</span>
+          <span class="faq-arrow">›</span>
+        </summary>
+        <p class="faq-answer">Yes — genuinely. No teaser, no wall at step three. The full 8-phase build runs on the free plan and your site goes live at yourhandle.textos.ai with no expiration. The difference with paid plans isn't the build — it's execution. Free plan gives you everything built. Paid plans let the agent execute tasks, post content, send outreach, and run ongoing work on your behalf.</p>
+      </details>
+
+      <details>
+        <summary class="faq-question">
+          <span class="faq-num">05</span>
+          <span class="faq-q-text">What's the Telegram integration?</span>
+          <span class="faq-arrow">›</span>
+        </summary>
+        <p class="faq-answer">Connect your Telegram account and your entire TextOS dashboard becomes a conversation. You can approve tasks, trigger content posts, check your site, run new builds — all from a text message on your phone. No app to open, no browser required. It's designed for people who live in their phone and don't want to log into a dashboard every time they need to do something.</p>
+      </details>
+
+      <details>
+        <summary class="faq-question">
+          <span class="faq-num">06</span>
+          <span class="faq-q-text">Is the Founder Lifetime rate really locked forever at $9.99/mo?</span>
+          <span class="faq-arrow">›</span>
+        </summary>
+        <p class="faq-answer">Yes — as long as your subscription stays active. Pay $49.99 once to lock the rate, then $9.99/month from month four onward, permanently. When all 1,000 founder slots are gone, the public starting rate is $29.99/month. The rate does not increase as long as you don't cancel. If you cancel and re-subscribe later, you re-enter at the public rate at that time.</p>
+      </details>
+
+      <details>
+        <summary class="faq-question">
+          <span class="faq-num">07</span>
+          <span class="faq-q-text">Do I need to install anything or know how to code?</span>
+          <span class="faq-arrow">›</span>
+        </summary>
+        <p class="faq-answer">No. TextOS is a web app. Sign in with Google or a magic link — no password to set, nothing to configure. The agent runs in your browser. Telegram is optional and takes about 60 seconds to connect. If you can write a sentence, you can use TextOS.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CLOSER -->
+<section id="closer">
+  <div class="wrap">
+    <p class="closer-headline">Stop watching other people ship things with AI.<br><strong>Be one of the people shipping.</strong></p>
+    <a href="https://app.textos.ai" class="btn-primary" data-tx-link="true" data-tx-href="https://app.textos.ai" onclick="txTrack('final_cta_click',{location:'closer'})">Tell us who you are.</a>
+    <p class="closer-note">No forms. No templates. Just text. Free to start.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <span class="footer-wordmark">TextOS</span>
+      <span class="footer-tagline">Your business, on text.</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/founder.html" class="amber">Why I Built This</a>
+      <a href="/textos-how-it-works.html">How it works</a>
+      <a href="/ideas.html">Free AI Readiness Diagnosis</a>
+      <a href="/textos.html">Product Vision</a>
+    </nav>
+    <p class="footer-copy">TextOS · textos.ai · © 2026 · Founding member offer available while slots remain. Rate locked as long as subscription remains active.</p>
+  </div>
+</footer>
+
+</body>
+</html>
