@@ -57,21 +57,21 @@
   <link rel="canonical" href="https://textos.ai/ideas.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,400&family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #050d1a;
-      --surface: #0b1a2e;
-      --surface2: #0f2040;
-      --pink: #ff2d78;
-      --cyan: #00d4ff;
-      --purple: #a855f7;
-      --gold: #f0b840;
-      --text: #e8eaf6;
-      --muted: rgba(232,234,246,0.6);
-      --border: rgba(0,212,255,0.15);
+      --bg:      #f7f2e6;
+      --surface: #ede5d0;
+      --surface2:#e3d8c0;
+      --pink:    #c05228;
+      --cyan:    #3a7c96;
+      --purple:  #6b9478;
+      --gold:    #c08820;
+      --text:    #2c1e0c;
+      --muted:   rgba(44,30,12,0.55);
+      --border:  rgba(100,68,28,0.15);
     }
 
     body {
@@ -82,17 +82,16 @@
       overflow-x: hidden;
     }
 
-    /* ── TOP BAR ── */
     .topbar {
-      background: #0f1f3d;
-      color: rgba(255,255,255,0.7);
+      background: #ede5d0;
+      color: rgba(44,30,12,0.65);
       text-align: center;
       padding: 8px;
       font-size: 0.8rem;
+      border-bottom: 1px solid rgba(100,68,28,0.12);
     }
     .topbar a { color: var(--gold); font-weight: 700; text-decoration: none; }
 
-    /* ── HERO ── */
     .hero {
       position: relative;
       padding: 80px 24px 60px;
@@ -101,12 +100,11 @@
     }
     .hero::before {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 70% 50% at 30% 40%, rgba(255,45,120,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 70% 60%, rgba(168,85,247,0.10) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 50% 90%, rgba(0,212,255,0.08) 0%, transparent 60%);
+        radial-gradient(ellipse 60% 50% at 25% 40%, rgba(192,82,40,0.09) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 45% at 75% 55%, rgba(58,124,150,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 50% 95%, rgba(192,136,32,0.07) 0%, transparent 60%);
       pointer-events: none;
     }
     .hero-label {
@@ -116,25 +114,23 @@
       font-weight: 700;
       letter-spacing: 0.15em;
       color: var(--cyan);
-      border: 1px solid rgba(0,212,255,0.35);
+      border: 1px solid rgba(58,124,150,0.35);
+      background: rgba(58,124,150,0.07);
       border-radius: 20px;
       padding: 5px 16px;
       margin-bottom: 24px;
       text-transform: uppercase;
     }
     .hero h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(1.8rem, 5vw, 3.2rem);
-      font-weight: 900;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
       line-height: 1.15;
-      background: linear-gradient(135deg, #fff 0%, var(--cyan) 50%, var(--purple) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--text);
       margin-bottom: 20px;
     }
     .hero p {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
       color: var(--muted);
       max-width: 620px;
       margin: 0 auto 16px;
@@ -142,52 +138,48 @@
     }
     .diagnosed-badge {
       display: inline-block;
-      background: linear-gradient(135deg, rgba(255,45,120,0.2), rgba(168,85,247,0.2));
-      border: 1px solid rgba(255,45,120,0.4);
+      background: rgba(192,136,32,0.1);
+      border: 1px solid rgba(192,136,32,0.3);
       border-radius: 8px;
       padding: 10px 20px;
       font-size: 0.9rem;
-      color: var(--pink);
+      color: var(--gold);
       font-weight: 600;
       margin-top: 8px;
     }
-    .diagnosed-badge span { color: #fff; }
+    .diagnosed-badge span { color: var(--text); }
 
-    /* ── MAIN LAYOUT ── */
     .container {
       max-width: 860px;
       margin: 0 auto;
       padding: 0 20px 80px;
     }
 
-    /* ── GENERATOR CARD ── */
     .gen-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: #fdf8ef;
+      border: 1px solid rgba(100,68,28,0.18);
       border-radius: 16px;
       padding: 36px;
       margin-bottom: 32px;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 2px 24px rgba(100,68,28,0.08);
     }
     .gen-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--pink), var(--purple), var(--cyan));
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--pink), var(--gold), var(--cyan));
     }
     .gen-card h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
       color: var(--cyan);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
       margin-bottom: 20px;
     }
 
-    /* ── FORM ELEMENTS ── */
     .field-group { margin-bottom: 20px; }
     .field-group label {
       display: block;
@@ -202,8 +194,8 @@
     .field-group textarea,
     .field-group select {
       width: 100%;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(0,212,255,0.2);
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(100,68,28,0.22);
       border-radius: 10px;
       color: var(--text);
       font-family: 'Space Grotesk', sans-serif;
@@ -217,13 +209,13 @@
     .field-group textarea:focus,
     .field-group select:focus {
       border-color: var(--cyan);
-      background: rgba(0,212,255,0.05);
+      background: rgba(58,124,150,0.05);
     }
-    .field-group select option { background: #0b1a2e; }
+    .field-group select option { background: #fdf8ef; color: var(--text); }
 
     .btn-primary {
       display: inline-block;
-      background: linear-gradient(135deg, var(--pink), var(--purple));
+      background: linear-gradient(135deg, var(--pink), var(--gold));
       color: #fff;
       font-family: 'Orbitron', sans-serif;
       font-size: 0.85rem;
@@ -238,9 +230,7 @@
       width: 100%;
     }
     .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-    .btn-primary:active { transform: translateY(0); }
 
-    /* ── TAGS ── */
     .tag-grid {
       display: flex;
       flex-wrap: wrap;
@@ -248,10 +238,10 @@
       margin-bottom: 20px;
     }
     .tag {
-      background: rgba(168,85,247,0.12);
-      border: 1px solid rgba(168,85,247,0.3);
+      background: rgba(58,124,150,0.08);
+      border: 1px solid rgba(58,124,150,0.25);
       border-radius: 20px;
-      color: var(--purple);
+      color: var(--cyan);
       font-size: 0.78rem;
       font-weight: 600;
       padding: 5px 14px;
@@ -260,15 +250,14 @@
       user-select: none;
     }
     .tag:hover, .tag.active {
-      background: rgba(168,85,247,0.28);
-      color: #fff;
-      border-color: var(--purple);
+      background: rgba(58,124,150,0.2);
+      color: var(--text);
+      border-color: var(--cyan);
     }
 
-    /* ── DIAGNOSIS PANEL ── */
     .diagnosis-panel {
-      background: rgba(0,212,255,0.04);
-      border: 1px solid rgba(0,212,255,0.18);
+      background: rgba(58,124,150,0.06);
+      border: 1px solid rgba(58,124,150,0.2);
       border-radius: 12px;
       padding: 24px;
       margin-top: 24px;
@@ -276,11 +265,10 @@
     }
     .diagnosis-panel.visible { display: block; }
     .diagnosis-panel h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.85rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
       color: var(--cyan);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
       margin-bottom: 16px;
     }
 
@@ -299,7 +287,7 @@
     .score-bar {
       flex: 1;
       height: 6px;
-      background: rgba(255,255,255,0.07);
+      background: rgba(100,68,28,0.1);
       border-radius: 4px;
       overflow: hidden;
     }
@@ -324,25 +312,22 @@
       font-size: 0.9rem;
       color: var(--muted);
       line-height: 1.65;
-      border-top: 1px solid rgba(0,212,255,0.1);
+      border-top: 1px solid rgba(100,68,28,0.12);
       padding-top: 16px;
     }
-    .diagnosis-text strong { color: var(--text); }
+    .diagnosis-text strong, .diagnosis-text b { color: var(--text) !important; }
 
-    /* ── IDEA LOG ── */
     .idea-log { margin-top: 32px; }
     .idea-log h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
       color: var(--gold);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
       margin-bottom: 16px;
     }
     .idea-item {
-      background: var(--surface);
-      border: 1px solid rgba(240,184,64,0.15);
+      background: #fdf8ef;
+      border: 1px solid rgba(192,136,32,0.2);
       border-radius: 12px;
       padding: 18px 20px;
       margin-bottom: 12px;
@@ -357,56 +342,31 @@
       font-size: 1.1rem;
       font-weight: 900;
       color: var(--gold);
-      opacity: 0.5;
+      opacity: 0.65;
       flex-shrink: 0;
       width: 28px;
     }
-    .idea-content strong {
-      display: block;
-      font-size: 0.97rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-    .idea-content span {
-      font-size: 0.83rem;
-      color: var(--muted);
-    }
+    .idea-content strong { display: block; font-size: 0.97rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .idea-content span { font-size: 0.83rem; color: var(--muted); }
     .idea-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-    .idea-badge {
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 12px;
-      letter-spacing: 0.04em;
-    }
-    .badge-geo { background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.25); }
-    .badge-market { background: rgba(255,45,120,0.1); color: var(--pink); border: 1px solid rgba(255,45,120,0.25); }
-    .badge-ai { background: rgba(168,85,247,0.1); color: var(--purple); border: 1px solid rgba(168,85,247,0.25); }
+    .idea-badge { font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; letter-spacing: 0.04em; }
+    .badge-geo    { background: rgba(58,124,150,0.1);  color: var(--cyan);   border: 1px solid rgba(58,124,150,0.25); }
+    .badge-market { background: rgba(192,82,40,0.1);   color: var(--pink);   border: 1px solid rgba(192,82,40,0.25); }
+    .badge-ai     { background: rgba(107,148,120,0.1); color: var(--purple); border: 1px solid rgba(107,148,120,0.25); }
 
-    /* ── CTA ── */
     .cta-strip {
-      background: linear-gradient(135deg, rgba(255,45,120,0.08), rgba(168,85,247,0.08));
-      border: 1px solid rgba(255,45,120,0.2);
+      background: linear-gradient(135deg, rgba(192,82,40,0.07), rgba(58,124,150,0.07));
+      border: 1px solid rgba(192,82,40,0.2);
       border-radius: 16px;
       padding: 32px;
       text-align: center;
       margin-top: 40px;
     }
-    .cta-strip h3 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, var(--pink), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+    .cta-strip h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; margin-bottom: 10px; color: var(--text); }
     .cta-strip p { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; }
     .btn-cta {
       display: inline-block;
-      background: linear-gradient(135deg, var(--pink), var(--purple));
+      background: linear-gradient(135deg, var(--pink), var(--gold));
       color: #fff;
       font-family: 'Orbitron', sans-serif;
       font-size: 0.8rem;
@@ -420,15 +380,26 @@
     }
     .btn-cta:hover { opacity: 0.85; }
 
-    /* ── FOOTER ── */
+    #siteScanResult {
+      background: rgba(58,124,150,0.06) !important;
+      border-color: rgba(58,124,150,0.2) !important;
+      color: var(--text) !important;
+    }
+    #textosCta {
+      background: rgba(58,124,150,0.06) !important;
+      border-color: rgba(58,124,150,0.25) !important;
+    }
+    #textosCta > div:first-child { color: var(--cyan) !important; }
+
     footer {
       text-align: center;
       padding: 24px;
       font-size: 0.78rem;
-      color: rgba(232,234,246,0.3);
-      border-top: 1px solid rgba(255,255,255,0.05);
+      color: rgba(44,30,12,0.4);
+      border-top: 1px solid rgba(100,68,28,0.12);
+      background: #ede5d0;
     }
-    footer a { color: rgba(232,234,246,0.45); text-decoration: none; }
+    footer a { color: rgba(44,30,12,0.5); text-decoration: none; }
 
     @media (max-width: 600px) {
       .gen-card { padding: 24px 18px; }
@@ -449,17 +420,17 @@
     <p>Diagnose your website and your entire business in 60 seconds. See exactly where AI can <strong style="color:var(--cyan)">save you money</strong>, <strong style="color:var(--pink)">increase your sales</strong>, and <strong style="color:var(--gold)">buy back your time</strong> — with a personalized action plan you can act on today.</p>
 
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:24px 0 8px;">
-      <div style="background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);border-radius:10px;padding:10px 18px;font-size:0.82rem;color:var(--cyan);font-weight:600;">💰 Proven to save money</div>
-      <div style="background:rgba(255,45,120,0.08);border:1px solid rgba(255,45,120,0.25);border-radius:10px;padding:10px 18px;font-size:0.82rem;color:var(--pink);font-weight:600;">📈 Increases sales</div>
+      <div style="background:rgba(58,124,150,0.08);border:1px solid rgba(58,124,150,0.25);border-radius:10px;padding:10px 18px;font-size:0.82rem;color:var(--cyan);font-weight:600;">💰 Proven to save money</div>
+      <div style="background:rgba(192,82,40,0.08);border:1px solid rgba(192,82,40,0.25);border-radius:10px;padding:10px 18px;font-size:0.82rem;color:var(--pink);font-weight:600;">📈 Increases sales</div>
       <div style="background:rgba(240,184,64,0.08);border:1px solid rgba(240,184,64,0.25);border-radius:10px;padding:10px 18px;font-size:0.82rem;color:var(--gold);font-weight:600;">⏱️ Buys you more time</div>
-      <div style="background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.25);border-radius:10px;padding:10px 18px;font-size:0.82rem;color:var(--purple);font-weight:600;">🤖 Powered by TextOS AI</div>
+      <div style="background:rgba(107,148,120,0.08);border:1px solid rgba(107,148,120,0.25);border-radius:10px;padding:10px 18px;font-size:0.82rem;color:var(--purple);font-weight:600;">🤖 Powered by TextOS AI</div>
     </div>
 
     <div class="diagnosed-badge" style="margin-top:16px;">🔬 Free · No account required · Results in 60 seconds</div>
 
     <div style="margin-top:28px;">
       <a href="#diagnose" onclick="document.querySelector('.gen-card').scrollIntoView({behavior:'smooth'});return false;"
-         style="display:inline-block;background:linear-gradient(135deg,#ff2d78,#a855f7);color:#fff;font-family:'Orbitron',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.08em;padding:16px 36px;border-radius:12px;text-decoration:none;transition:opacity 0.2s;"
+         style="display:inline-block;background:linear-gradient(135deg,#c05228,#c08820);color:#fff;font-family:'Orbitron',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.08em;padding:16px 36px;border-radius:12px;text-decoration:none;transition:opacity 0.2s;"
          onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
         🔬 Diagnose My Business Now →
       </a>
@@ -467,7 +438,7 @@
     <div style="margin-top:12px;font-size:0.75rem;color:var(--muted);">Trusted by businesses across New Orleans, Baton Rouge &amp; Lafayette</div>
 
     <!-- COMPETITOR URGENCY BANNER -->
-    <div style="max-width:620px;margin:28px auto 0;background:linear-gradient(135deg,rgba(255,45,120,0.1),rgba(168,85,247,0.1));border:1px solid rgba(255,45,120,0.35);border-radius:14px;padding:20px 24px;text-align:left;">
+    <div style="max-width:620px;margin:28px auto 0;background:linear-gradient(135deg,rgba(192,82,40,0.08),rgba(58,124,150,0.08));border:1px solid rgba(192,82,40,0.25);border-radius:14px;padding:20px 24px;text-align:left;">
       <div style="font-family:'Orbitron',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;color:var(--pink);text-transform:uppercase;margin-bottom:10px;">⚠️ Your Competitors Aren't Waiting</div>
       <p style="font-size:0.9rem;color:var(--text);line-height:1.65;margin-bottom:10px;">Right now, businesses just like yours — in your city, in your industry — are being recommended by ChatGPT, Google AI, and Perplexity to customers who are ready to buy. <strong style="color:#fff;">Those customers never even see your name.</strong></p>
       <p style="font-size:0.9rem;color:var(--text);line-height:1.65;margin-bottom:10px;">AI search is the new front door. The businesses that walked through it first are locking in customers, cutting costs with automation, and pulling ahead — quietly, permanently. <strong style="color:var(--pink);">Every month you wait is ground you're giving away.</strong></p>
@@ -691,11 +662,11 @@
       document.getElementById('fieldsNew').style.display = isNew ? 'block' : 'none';
       document.getElementById('fieldsBiz').style.display = isNew ? 'none' : 'block';
       document.getElementById('modeNew').style.cssText += isNew
-        ? ';border-color:var(--pink);background:rgba(255,45,120,0.15);color:#fff;'
-        : ';border-color:rgba(255,255,255,0.1);background:transparent;color:var(--muted);';
+        ? ';border-color:var(--pink);background:rgba(192,82,40,0.12);color:var(--text);'
+        : ';border-color:rgba(44,30,12,0.15);background:transparent;color:var(--muted);';
       document.getElementById('modeBiz').style.cssText += isNew
-        ? ';border-color:rgba(255,255,255,0.1);background:transparent;color:var(--muted);'
-        : ';border-color:var(--cyan);background:rgba(0,212,255,0.12);color:#fff;';
+        ? ';border-color:rgba(44,30,12,0.15);background:transparent;color:var(--muted);'
+        : ';border-color:var(--cyan);background:rgba(58,124,150,0.12);color:var(--text);';
       document.getElementById('diagnoseBtn').textContent = isNew ? '🔬 Diagnose This Idea' : '🔬 Diagnose My Business';
       document.getElementById('diagnosisTitle').textContent = isNew ? '📊 Idea Diagnosis Report' : '📊 Business Diagnosis Report';
       // Reset results

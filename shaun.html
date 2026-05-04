@@ -6,604 +6,736 @@
   <title>InkThorn — Shaun's Field Guide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0d1117;
-      --surface:   #131920;
-      --surface2:  #1a2330;
-      --teal:      #5b9e8a;
-      --teal-light:#7ab8a4;
-      --teal-dim:  rgba(91,158,138,0.12);
-      --teal-glow: rgba(91,158,138,0.18);
-      --warm:      #e6e0d6;
-      --warm-dim:  #8a9aaa;
-      --muted:     #3a4a58;
-      --border:    rgba(255,255,255,0.07);
-      --border-teal: rgba(91,158,138,0.28);
+      --bg:        #f7f2e6;
+      --surface:   #ede5d0;
+      --surface2:  #e3d8c0;
+      --fire:      #c05228;
+      --water:     #3a7c96;
+      --wind:      #6b9478;
+      --earth:     #c08820;
+      --text:      #2c1e0c;
+      --muted:     rgba(44,30,12,0.55);
+      --border:    rgba(100,68,28,0.15);
+      --fire-dim:  rgba(192,82,40,0.1);
+      --water-dim: rgba(58,124,150,0.1);
+      --earth-dim: rgba(192,136,32,0.1);
+      --wind-dim:  rgba(107,148,120,0.1);
       --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-sans:  'Inter', system-ui, sans-serif;
+      --font-sans:  'Space Grotesk', system-ui, sans-serif;
+      --font-data:  'Orbitron', sans-serif;
     }
-
-    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
-      color: var(--warm);
+      color: var(--text);
       font-family: var(--font-sans);
-      font-size: 16px;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* ── NAV ── */
     nav {
-      background: rgba(13,17,23,0.9);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
+      background: #ede5d0;
+      border-bottom: 1px solid rgba(100,68,28,0.12);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    .nav-inner {
-      max-width: 860px; margin: 0 auto; height: 58px;
-      display: flex; align-items: center; justify-content: space-between;
+    .nav-brand {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--fire);
+      text-decoration: none;
+      letter-spacing: -0.01em;
     }
-    .wordmark {
-      font-family: var(--font-serif); font-size: 1.35rem; font-weight: 500;
-      letter-spacing: 0.06em; color: var(--teal-light); text-decoration: none;
-    }
-    .nav-sub { font-size: 0.78rem; color: var(--warm-dim); letter-spacing: 0.08em; }
-
-    /* ── WRAP ── */
-    .wrap { max-width: 860px; margin: 0 auto; padding: 4rem 2rem; }
-    .wrap-sm { max-width: 680px; margin: 0 auto; padding: 4rem 2rem; }
-
-    /* ── DIVIDER ── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--teal-dim), transparent);
-      margin: 0;
-    }
-
-    /* ── EYEBROW ── */
-    .eyebrow {
-      font-family: var(--font-sans); font-size: 0.7rem; font-weight: 500;
-      letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal);
-      display: block; margin-bottom: 1rem;
+    .nav-title {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.04em;
     }
 
-    /* ══════════════════════════════════
-       HERO — THE DIAGNOSIS TOOL
-    ══════════════════════════════════ */
-    #hero {
-      background: var(--bg);
+    /* ── HERO ── */
+    .hero {
       position: relative;
+      background: var(--bg);
+      padding: 80px 24px 72px;
+      text-align: center;
       overflow: hidden;
     }
-    #hero::before {
+    .hero::before {
       content: '';
-      position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
-      width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(91,158,138,0.07) 0%, transparent 70%);
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 65% 55% at 20% 35%, rgba(192,82,40,0.09) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 50% at 80% 60%, rgba(58,124,150,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 40% at 50% 100%, rgba(192,136,32,0.06) 0%, transparent 55%);
       pointer-events: none;
     }
-    #hero .wrap { padding-top: 5.5rem; padding-bottom: 5rem; position: relative; }
-
-    .hero-label {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: var(--teal-dim); border: 1px solid var(--border-teal);
-      border-radius: 20px; padding: 0.3rem 0.9rem;
-      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--teal-light);
-      margin-bottom: 1.75rem;
+    .hero-pill {
+      display: inline-block;
+      background: var(--water-dim);
+      border: 1px solid rgba(58,124,150,0.3);
+      border-radius: 24px;
+      padding: 6px 18px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--water);
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
     }
-
-    h1 {
+    .hero h1 {
       font-family: var(--font-serif);
-      font-size: clamp(2.8rem, 8vw, 5rem);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
       font-weight: 300;
-      line-height: 1.08;
-      letter-spacing: 0.01em;
-      color: var(--warm);
-      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
     }
-    h1 em {
+    .hero h1 em {
       font-style: italic;
-      color: var(--teal-light);
+      color: var(--fire);
     }
-
     .hero-sub {
-      font-size: 1.05rem; font-weight: 300;
-      color: var(--warm-dim); max-width: 560px;
-      line-height: 1.85; margin-bottom: 3rem;
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
     }
 
-    /* ── DIAGNOSIS CTA CARD ── */
-    .diagnosis-card {
-      background: var(--surface);
-      border: 1px solid var(--border-teal);
-      border-radius: 14px;
-      padding: 2.5rem;
-      max-width: 580px;
+    /* ── DIAGNOSIS CARD ── */
+    .diag-card {
+      background: #fff;
+      border: 1px solid rgba(192,136,32,0.25);
+      border-radius: 20px;
+      padding: 40px 44px;
+      max-width: 560px;
+      margin: 0 auto;
+      box-shadow: 0 4px 40px rgba(100,68,28,0.1), 0 1px 4px rgba(100,68,28,0.06);
       position: relative;
-      box-shadow: 0 0 60px rgba(91,158,138,0.08), 0 8px 32px rgba(0,0,0,0.3);
     }
-    .diagnosis-card::before {
+    .diag-card::before {
       content: '';
-      position: absolute; top: 0; left: 2rem; right: 2rem; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--teal), transparent);
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 20px 20px 0 0;
+      background: linear-gradient(90deg, var(--fire), var(--earth), var(--water));
     }
-    .diagnosis-title {
-      font-family: var(--font-serif); font-size: 1.6rem; font-weight: 400;
-      color: var(--warm); margin-bottom: 0.5rem; line-height: 1.2;
+    .diag-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
     }
-    .diagnosis-desc {
-      font-size: 0.88rem; color: var(--warm-dim); line-height: 1.7; margin-bottom: 1.75rem;
+    .diag-card-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
     }
-    .diagnosis-scores {
-      display: flex; gap: 1rem; margin-bottom: 1.75rem;
+    .score-pills {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
     }
     .score-pill {
-      flex: 1; background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 8px; padding: 0.75rem 1rem; text-align: center;
-    }
-    .score-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm-dim); margin-bottom: 0.3rem; }
-    .score-val { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 500; color: var(--teal-light); }
-    .btn-diagnosis {
-      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
-      background: var(--teal); color: #0d1117;
-      font-family: var(--font-sans); font-weight: 600; font-size: 1rem;
-      padding: 0.95rem 2rem; border-radius: 8px; text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-      box-shadow: 0 0 24px rgba(91,158,138,0.3);
-    }
-    .btn-diagnosis:hover { background: var(--teal-light); transform: translateY(-1px); }
-    .btn-diagnosis .arrow { transition: transform 0.15s; }
-    .btn-diagnosis:hover .arrow { transform: translateX(3px); }
-    .diagnosis-note {
-      font-size: 0.75rem; color: var(--warm-dim); text-align: center;
-      margin-top: 0.85rem; letter-spacing: 0.04em;
-    }
-
-    /* ══════════════════════════════════
-       HOW TO USE IT — THE WALK
-    ══════════════════════════════════ */
-    #walk { background: var(--surface); }
-    #walk .wrap { padding-top: 4.5rem; padding-bottom: 4.5rem; }
-    .walk-heading {
-      font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 400; color: var(--warm); margin-bottom: 0.6rem; line-height: 1.15;
-    }
-    .walk-sub {
-      font-size: 0.9rem; color: var(--warm-dim); max-width: 520px; margin-bottom: 3rem; line-height: 1.75;
-    }
-    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-    .step-card {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 10px; padding: 1.75rem; position: relative;
-    }
-    .step-card::after {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--teal), transparent);
-      border-radius: 10px 10px 0 0; opacity: 0.5;
-    }
-    .step-icon { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
-    .step-num-label {
-      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--teal); margin-bottom: 0.4rem;
-    }
-    .step-title {
-      font-family: var(--font-serif); font-size: 1.15rem; font-weight: 500;
-      color: var(--warm); margin-bottom: 0.5rem; line-height: 1.2;
-    }
-    .step-body { font-size: 0.83rem; color: var(--warm-dim); line-height: 1.7; }
-
-    /* ══════════════════════════════════
-       MESSAGE FROM ROB
-    ══════════════════════════════════ */
-    #message { background: var(--bg); }
-    #message .wrap-sm { padding-top: 5rem; padding-bottom: 5rem; }
-    .message-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px; padding: 3rem;
-      position: relative;
-    }
-    .quote-mark {
-      font-family: var(--font-serif); font-size: 5rem; font-weight: 300;
-      color: var(--teal); opacity: 0.25; line-height: 0.5;
-      position: absolute; top: 1.75rem; left: 2rem;
-    }
-    .message-text {
-      font-family: var(--font-serif); font-size: 1.2rem; font-weight: 300;
-      font-style: italic; color: var(--warm); line-height: 1.85;
-      padding-top: 1.5rem;
-    }
-    .message-text p { margin-bottom: 1.1rem; }
-    .message-text p:last-of-type { margin-bottom: 0; font-style: normal; font-weight: 400; }
-    .message-sig {
-      margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: gap;
-    }
-    .sig-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 500; color: var(--warm); }
-    .sig-title { font-size: 0.75rem; color: var(--warm-dim); margin-top: 0.15rem; letter-spacing: 0.04em; }
-    .call-chip {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: var(--teal-dim); border: 1px solid var(--border-teal);
-      border-radius: 20px; padding: 0.55rem 1.1rem;
-      text-decoration: none; transition: background 0.2s;
-    }
-    .call-chip:hover { background: rgba(91,158,138,0.22); }
-    .call-chip-num {
-      font-family: var(--font-serif); font-size: 1.1rem; font-weight: 500; color: var(--teal-light);
-    }
-    .call-chip-label { font-size: 0.7rem; color: var(--warm-dim); }
-
-    /* ══════════════════════════════════
-       TOOLS
-    ══════════════════════════════════ */
-    #tools { background: var(--surface); }
-    #tools .wrap { padding-top: 4.5rem; padding-bottom: 4.5rem; }
-    .tools-heading {
-      font-family: var(--font-serif); font-size: clamp(1.6rem, 4vw, 2.5rem);
-      font-weight: 400; color: var(--warm); margin-bottom: 0.5rem; line-height: 1.15;
-    }
-    .tools-sub { font-size: 0.9rem; color: var(--warm-dim); max-width: 500px; margin-bottom: 2.5rem; line-height: 1.75; }
-
-    .tool-group { margin-bottom: 2.5rem; }
-    .tool-group-label {
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--teal); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;
-    }
-    .tool-group-label::after {
-      content: ''; flex: 1; height: 1px; background: var(--border);
-    }
-
-    .link-list { display: flex; flex-direction: column; gap: 0.6rem; }
-    .link-row {
-      display: grid; grid-template-columns: 2.5rem 1fr auto;
-      align-items: center; gap: 1rem;
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 8px; padding: 1.1rem 1.25rem;
-      text-decoration: none; color: inherit;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .link-row:hover { border-color: var(--border-teal); background: rgba(91,158,138,0.04); }
-    .link-row-icon { font-size: 1.2rem; text-align: center; }
-    .link-row-title {
-      font-size: 0.9rem; font-weight: 500; color: var(--warm); margin-bottom: 0.15rem;
-    }
-    .link-row-desc { font-size: 0.78rem; color: var(--warm-dim); line-height: 1.5; }
-    .badge {
-      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.18rem 0.45rem; border-radius: 3px; white-space: nowrap;
-    }
-    .badge-go { background: rgba(91,158,138,0.15); color: var(--teal-light); border: 1px solid rgba(91,158,138,0.25); }
-    .badge-new { background: rgba(180,160,120,0.12); color: #c4a87a; border: 1px solid rgba(180,160,120,0.2); }
-    .badge-ref { background: rgba(255,255,255,0.04); color: var(--warm-dim); border: 1px solid var(--border); }
-
-    /* ══════════════════════════════════
-       BOTTOM CTA
-    ══════════════════════════════════ */
-    #cta { background: var(--bg); }
-    #cta .wrap-sm { padding-top: 5rem; padding-bottom: 5.5rem; text-align: center; }
-    .cta-heading {
-      font-family: var(--font-serif); font-size: clamp(1.6rem, 5vw, 3rem);
-      font-weight: 300; font-style: italic; color: var(--warm);
-      line-height: 1.2; margin-bottom: 0.75rem;
-    }
-    .cta-sub { font-size: 0.9rem; color: var(--warm-dim); margin-bottom: 2.5rem; }
-    .btn-call {
-      display: inline-flex; align-items: center; gap: 0.65rem;
-      background: var(--teal); color: #0d1117;
-      font-family: var(--font-sans); font-weight: 600; font-size: 1rem;
-      padding: 0.9rem 2.25rem; border-radius: 8px; text-decoration: none;
-      box-shadow: 0 0 28px rgba(91,158,138,0.25); transition: background 0.2s, transform 0.15s;
-    }
-    .btn-call:hover { background: var(--teal-light); transform: translateY(-1px); }
-    .cta-note { font-size: 0.75rem; color: var(--muted); margin-top: 1rem; }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border); padding: 2rem;
+      flex: 1;
+      min-width: 120px;
+      background: var(--surface2);
+      border-radius: 12px;
+      padding: 14px 12px;
       text-align: center;
     }
-    .footer-mark { font-family: var(--font-serif); font-size: 1rem; color: var(--teal); letter-spacing: 0.06em; }
-    .footer-copy { font-size: 0.72rem; color: var(--muted); margin-top: 0.4rem; }
+    .score-pill-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .score-pill-value {
+      font-family: var(--font-data);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--earth);
+    }
+    .score-pill-value.water { color: var(--water); }
+    .btn-run {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, var(--fire), var(--earth));
+      color: #fff;
+      font-family: var(--font-data);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: opacity 0.2s, transform 0.15s;
+      margin-bottom: 14px;
+    }
+    .btn-run:hover { opacity: 0.88; transform: translateY(-2px); }
+    .diag-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+    .diag-note span { color: var(--wind); font-weight: 600; }
 
-    /* RESPONSIVE */
-    @media (max-width: 680px) {
-      .steps { grid-template-columns: 1fr; }
-      .diagnosis-scores { flex-direction: column; gap: 0.6rem; }
-      .diagnosis-card { padding: 1.75rem 1.25rem; }
-      .message-card { padding: 2rem 1.5rem; }
-      .wrap, .wrap-sm { padding-left: 1.25rem; padding-right: 1.25rem; }
-      .message-sig { flex-direction: column; gap: 1.25rem; align-items: flex-start; }
-      .link-row { grid-template-columns: 2.2rem 1fr; }
-      .badge { display: none; }
+    /* ── WALK SECTION ── */
+    .walk-section {
+      background: #ede5d0;
+      padding: 80px 24px;
+    }
+    .section-eyebrow {
+      font-family: var(--font-data);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fire);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 48px;
+    }
+    .section-heading em { font-style: italic; color: var(--water); }
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .beats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .beat-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+      border: 1px solid rgba(100,68,28,0.1);
+      box-shadow: 0 2px 16px rgba(100,68,28,0.06);
+    }
+    .beat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--fire), var(--earth));
+    }
+    .beat-number {
+      font-family: var(--font-data);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--fire);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .beat-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .beat-body {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .beat-body strong { color: var(--text); font-weight: 600; }
+    .beat-script {
+      margin-top: 14px;
+      background: var(--surface2);
+      border-left: 3px solid var(--fire);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 14px;
+      font-size: 0.83rem;
+      color: var(--text);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ── ROB'S NOTE ── */
+    .note-section {
+      background: var(--bg);
+      padding: 80px 24px;
+    }
+    .note-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .note-card {
+      background: #fff;
+      border: 1px solid rgba(192,136,32,0.2);
+      border-radius: 20px;
+      padding: 48px 52px;
+      position: relative;
+      box-shadow: 0 4px 32px rgba(100,68,28,0.08);
+    }
+    .note-quote-mark {
+      font-family: var(--font-serif);
+      font-size: 6rem;
+      font-weight: 300;
+      color: rgba(192,136,32,0.18);
+      line-height: 0.6;
+      margin-bottom: 24px;
+      display: block;
+      user-select: none;
+    }
+    .note-eyebrow {
+      font-family: var(--font-data);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--earth);
+      margin-bottom: 20px;
+      display: block;
+    }
+    .note-text {
+      font-family: var(--font-serif);
+      font-size: 1.18rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+    .note-text strong {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--fire);
+    }
+    .note-sig {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .call-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--fire-dim);
+      border: 1px solid rgba(192,82,40,0.3);
+      border-radius: 24px;
+      padding: 9px 18px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--fire);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .call-chip:hover { background: rgba(192,82,40,0.18); }
+
+    /* ── TOOLKIT ── */
+    .toolkit-section {
+      background: var(--surface);
+      padding: 80px 24px;
+    }
+    .toolkit-inner {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .group-label {
+      font-family: var(--font-data);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--earth);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      margin-top: 40px;
+    }
+    .group-label:first-child { margin-top: 0; }
+    .group-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(192,136,32,0.2);
+    }
+    .link-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #fff;
+      border: 1px solid rgba(192,136,32,0.15);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .link-row:hover {
+      border-color: var(--fire);
+      box-shadow: 0 2px 16px rgba(192,82,40,0.1);
+      transform: translateY(-1px);
+    }
+    .link-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      width: 36px;
+      text-align: center;
+    }
+    .link-content { flex: 1; min-width: 0; }
+    .link-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .link-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .link-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 10px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .badge-fire  { background: var(--fire-dim);  color: var(--fire);  border: 1px solid rgba(192,82,40,0.25); }
+    .badge-water { background: var(--water-dim); color: var(--water); border: 1px solid rgba(58,124,150,0.25); }
+    .badge-earth { background: var(--earth-dim); color: var(--earth); border: 1px solid rgba(192,136,32,0.25); }
+    .badge-wind  { background: var(--wind-dim);  color: var(--wind);  border: 1px solid rgba(107,148,120,0.25); }
+
+    /* ── BOTTOM CTA ── */
+    .bottom-cta {
+      background: var(--bg);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .bottom-cta-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 20px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .bottom-cta-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+    .btn-fire {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--fire), var(--earth));
+      color: #fff;
+      font-family: var(--font-data);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 15px 36px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-fire:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #e3d8c0;
+      border-top: 1px solid rgba(100,68,28,0.12);
+      padding: 28px 24px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(44,30,12,0.45);
+    }
+    footer a {
+      color: rgba(44,30,12,0.5);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--fire); }
+
+    @media (max-width: 600px) {
+      .diag-card { padding: 28px 22px; }
+      .note-card { padding: 32px 24px; }
+      .score-pills { flex-direction: column; }
+      nav { padding: 14px 18px; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="https://inkthorn.ai" class="wordmark">🦞 InkThorn</a>
-    <span class="nav-sub">Shaun's Field Guide</span>
-  </div>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a href="https://inkthorn.ai" class="nav-brand">🦞 InkThorn</a>
+    <span class="nav-title">Shaun's Field Guide</span>
+  </nav>
 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-pill">🔬 Your primary tool in the field</div>
+    <h1>Walk in.<br><em>Run the scan.</em><br>Show them the truth.</h1>
+    <p class="hero-sub">Your door-to-door flow, simplified. Every visit follows three beats — and this tool makes the middle one effortless. Pull it up, enter the business name, and let the AI do the talking.</p>
 
-<!-- ── HERO ── -->
-<section id="hero">
-  <div class="wrap">
-    <span class="hero-label">🔬 Your primary tool in the field</span>
+    <!-- DIAGNOSIS CARD -->
+    <div class="diag-card">
+      <div class="diag-card-title">AI Readiness Diagnosis</div>
+      <p class="diag-card-desc">Run a live scan with your prospect. In 60 seconds, they'll see exactly where they stand — and what's costing them business right now.</p>
 
-    <h1>Walk in.<br>Run the scan.<br><em>Show them the truth.</em></h1>
-
-    <p class="hero-sub">Every business you visit gets a free AI Readiness Diagnosis — on the spot. Pull this up on your phone, type in their business, and let the numbers speak for themselves. It's your conversation starter, your proof, and your close.</p>
-
-    <div class="diagnosis-card">
-      <div class="diagnosis-title">AI Readiness Diagnosis</div>
-      <p class="diagnosis-desc">Free tool — no account needed. Enter a business description, see their GEO score, market fit, and AI discoverability in 60 seconds. Show this to every owner you meet.</p>
-      <div class="diagnosis-scores">
+      <div class="score-pills">
         <div class="score-pill">
-          <div class="score-label">GEO Score</div>
-          <div class="score-val">—</div>
+          <div class="score-pill-label">GEO Score</div>
+          <div class="score-pill-value">—</div>
         </div>
         <div class="score-pill">
-          <div class="score-label">Market Fit</div>
-          <div class="score-val">—</div>
+          <div class="score-pill-label">Market Fit</div>
+          <div class="score-pill-value water">—</div>
         </div>
         <div class="score-pill">
-          <div class="score-label">AI Visibility</div>
-          <div class="score-val">—</div>
+          <div class="score-pill-label">AI Visibility</div>
+          <div class="score-pill-value">—</div>
         </div>
       </div>
-      <a href="https://textos.ai/ideas.html" class="btn-diagnosis" target="_blank">
-        Run the Diagnosis <span class="arrow">→</span>
+
+      <a href="https://textos.ai/ideas.html" class="btn-run" target="_blank">
+        Run the Diagnosis →
       </a>
-      <p class="diagnosis-note">Free · No signup · Results in 60 seconds · Works on any phone</p>
+      <div class="diag-note">
+        <span>Free</span> · No signup · <span>60 seconds</span> · Works on any phone
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
+  <!-- WALK SECTION -->
+  <section class="walk-section">
+    <div class="section-inner">
+      <span class="section-eyebrow">Your door-to-door flow</span>
+      <h2 class="section-heading">Three beats.<br><em>Every conversation.</em></h2>
 
-
-<!-- ── HOW TO USE IT ── -->
-<section id="walk">
-  <div class="wrap">
-    <span class="eyebrow">Your door-to-door flow</span>
-    <h2 class="walk-heading">Three beats.<br>Every conversation.</h2>
-    <p class="walk-sub">You don't need a pitch deck. You don't need a presentation. Just walk in, be genuine, and run the tool. The numbers do the convincing.</p>
-
-    <div class="steps">
-
-      <div class="step-card">
-        <span class="step-icon">🚶</span>
-        <div class="step-num-label">Beat 1 — Walk in</div>
-        <div class="step-title">Introduce yourself</div>
-        <p class="step-body">Keep it simple. "Hi, I'm Shaun — I work with InkThorn, a local AI company. We do free AI readiness checks for businesses in the area. Mind if I show you something quick?" That's it. No pressure, no pitch.</p>
-      </div>
-
-      <div class="step-card">
-        <span class="step-icon">📱</span>
-        <div class="step-num-label">Beat 2 — Pull up the tool</div>
-        <div class="step-title">Run the scan together</div>
-        <p class="step-body">Open this page on your phone, tap the diagnosis link, and type in their business with them watching. It takes 60 seconds. When their score comes up — let them read it. Silence is your friend here.</p>
-      </div>
-
-      <div class="step-card">
-        <span class="step-icon">📅</span>
-        <div class="step-num-label">Beat 3 — Book the call</div>
-        <div class="step-title">Hand them the next step</div>
-        <p class="step-body">After the score, ask: "Want to see exactly what it would look like to fix this for your business?" Then send them the Calendly link or book it right there on your phone. Your job is done.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-
-<!-- ── MESSAGE FROM ROB ── -->
-<section id="message">
-  <div class="wrap-sm">
-    <span class="eyebrow">A note from Rob</span>
-
-    <div class="message-card">
-      <div class="quote-mark">"</div>
-      <div class="message-text">
-        <p>Shaun — I am genuinely fired up about this. What we've built here is something most local businesses have never seen before. GEO is where SEO was in 2005 — and you get to be the person who walks through the door and shows them exactly where they stand before anyone else does.</p>
-        <p>We have 9,464 leads across New Orleans, Baton Rouge, and Lafayette. 543 of them with verified phone numbers. The tool you're holding right now is free, it's instant, and it shows business owners a truth they can't argue with. Your job is to walk, connect, and let the diagnosis do the heavy lifting.</p>
-        <p>I've built everything you need on this page. All of it is ready. Now it just needs you to take it out into the world.</p>
-        <p>Call me anytime. I mean that.</p>
-      </div>
-      <div class="message-sig">
-        <div>
-          <div class="sig-name">Rob Gaudet</div>
-          <div class="sig-title">Founder, InkThorn · New Orleans, Louisiana</div>
+      <div class="beats-grid">
+        <div class="beat-card">
+          <div class="beat-number">Beat 01</div>
+          <div class="beat-title">Walk In</div>
+          <p class="beat-body">Introduce yourself simply. Don't pitch — just open the door with a question they can't say no to.</p>
+          <div class="beat-script">
+            "Hey, I work with a company called InkThorn — we help local businesses show up when people search on AI like ChatGPT and Google. Mind if I show you something real quick on my phone?"
+          </div>
         </div>
-        <a href="tel:3185723161" class="call-chip">
-          <div>
-            <div class="call-chip-label">Call or text</div>
-            <div class="call-chip-num">318-572-3161</div>
+
+        <div class="beat-card">
+          <div class="beat-number">Beat 02</div>
+          <div class="beat-title">Pull Up the Tool</div>
+          <p class="beat-body">Open the diagnosis on your phone. <strong>Enter their business name right in front of them.</strong> Let the AI generate their scores live. Let the silence do the work.</p>
+          <div class="beat-script">
+            "Watch this — I'm going to type in your business name and let the AI tell us exactly where you stand. Takes about 60 seconds."
           </div>
-        </a>
+        </div>
+
+        <div class="beat-card">
+          <div class="beat-number">Beat 03</div>
+          <div class="beat-title">Book the Call</div>
+          <p class="beat-body">Once they see their score, don't pitch — offer a conversation. <strong>Rob handles the close.</strong> Your job is just to get the calendar open.</p>
+          <div class="beat-script">
+            "The guy who built this tool — Rob — does a free 20-minute call. He'll walk you through exactly what this means for your business. Want me to get you on his calendar?"
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
-
-
-<!-- ── TOOLS ── -->
-<section id="tools">
-  <div class="wrap">
-    <span class="eyebrow">Your full toolkit</span>
-    <h2 class="tools-heading">Everything you need,<br>all in one place.</h2>
-    <p class="tools-sub">Start with Training + Scripts before your first day. Use the Leads Dashboard to plan your route. Everything else is here when you need it.</p>
-
-    <!-- START HERE -->
-    <div class="tool-group">
-      <div class="tool-group-label">Start here first</div>
-      <div class="link-list">
-
-        <a href="https://inkthorn.ai/crustacean/training.html" class="link-row" target="_blank">
-          <div class="link-row-icon">📋</div>
-          <div>
-            <div class="link-row-title">Sales Training</div>
-            <div class="link-row-desc">Read before your first day. The InkThorn pitch methodology — how to position GEO, what objections you'll hear, how to respond.</div>
-          </div>
-          <span class="badge badge-go">Read first</span>
-        </a>
-
-        <a href="https://inkthorn.ai/crustacean/scripts.html" class="link-row" target="_blank">
-          <div class="link-row-icon">📞</div>
-          <div>
-            <div class="link-row-title">Daily Call Scripts</div>
-            <div class="link-row-desc">Word-for-word scripts for your intro, pitch, objection handling, and close. Use these on every conversation until they're second nature.</div>
-          </div>
-          <span class="badge badge-go">Daily use</span>
-        </a>
-
-        <a href="https://inkthorn.ai/crustacean/earnings.html" class="link-row" target="_blank">
-          <div class="link-row-icon">💰</div>
-          <div>
-            <div class="link-row-title">Earnings Calculator</div>
-            <div class="link-row-desc">Run your numbers before you start. Punch in calls per day and closes per week — see exactly what you're working toward.</div>
-          </div>
-          <span class="badge badge-go">Motivate</span>
-        </a>
-
+  <!-- ROB'S NOTE -->
+  <section class="note-section">
+    <div class="note-inner">
+      <span class="section-eyebrow" style="display:block;margin-bottom:8px;">A note from Rob</span>
+      <div class="note-card">
+        <span class="note-quote-mark">"</span>
+        <span class="note-eyebrow">From Rob · InkThorn Founder</span>
+        <p class="note-text">
+          Shaun — you're not just selling something. You're walking into businesses that are already losing ground to AI search, and you're the first person who's ever shown them the truth about it. That's not a small thing.<br><br>
+          The tool does the heavy lifting. Your job is to get in front of people and let them see what's happening. <strong>When they see their score, they'll ask you what to do next.</strong> That's when you hand it to me.<br><br>
+          Don't overthink the pitch. Just walk in, pull up the phone, run the scan. The numbers speak for themselves.
+        </p>
+        <div class="note-sig">— Rob Gaudet</div>
+        <a href="tel:13185723161" class="call-chip">📞 318-572-3161</a>
       </div>
     </div>
+  </section>
 
-    <!-- DAILY TOOLS -->
-    <div class="tool-group">
-      <div class="tool-group-label">Use these every day</div>
-      <div class="link-list">
+  <!-- TOOLKIT -->
+  <section class="toolkit-section">
+    <div class="toolkit-inner">
+      <span class="section-eyebrow">Everything you need</span>
+      <h2 class="section-heading" style="text-align:left;margin-bottom:36px;">Your toolkit.</h2>
 
-        <a href="https://inkthorn.ai/crustacean/dashboard.html" class="link-row" target="_blank">
-          <div class="link-row-icon">🗂️</div>
-          <div>
-            <div class="link-row-title">Leads Dashboard</div>
-            <div class="link-row-desc">Your full database — 9,464 businesses across NOLA, Baton Rouge, and Lafayette. Use it to plan your route and track who you've talked to.</div>
-          </div>
-          <span class="badge badge-go">Live</span>
-        </a>
+      <div class="group-label">🔬 The Primary Tool</div>
 
-        <a href="https://textos.ai/ideas.html" class="link-row" target="_blank">
-          <div class="link-row-icon">🔬</div>
-          <div>
-            <div class="link-row-title">AI Readiness Diagnosis</div>
-            <div class="link-row-desc">Your primary in-field tool. Run it with every business owner you meet. Also send it as a follow-up after every conversation.</div>
-          </div>
-          <span class="badge badge-new">Primary tool</span>
-        </a>
+      <a href="https://textos.ai/ideas.html" class="link-row" target="_blank">
+        <span class="link-icon">🔬</span>
+        <div class="link-content">
+          <div class="link-title">AI Readiness Diagnosis</div>
+          <div class="link-desc">The core field tool. Enter any business name — get their GEO Score, Market Fit, and AI Visibility live.</div>
+        </div>
+        <span class="link-badge badge-fire">Primary</span>
+      </a>
 
-        <a href="https://inkthorn.ai/services.html" class="link-row" target="_blank">
-          <div class="link-row-icon">📄</div>
-          <div>
-            <div class="link-row-title">Services Page</div>
-            <div class="link-row-desc">Send this when a prospect asks "what exactly do you do?" Clean, direct, no fluff.</div>
-          </div>
-          <span class="badge badge-go">Send to prospects</span>
-        </a>
+      <div class="group-label">📅 Booking</div>
 
-        <a href="https://calendly.com/inkthorn" class="link-row" target="_blank">
-          <div class="link-row-icon">📅</div>
-          <div>
-            <div class="link-row-title">Book a Strategy Call</div>
-            <div class="link-row-desc">When they say yes — send this link or book it right there. A booked call is a closed lead. This is your finish line.</div>
-          </div>
-          <span class="badge badge-go">Your close</span>
-        </a>
+      <a href="https://calendly.com/robgaudet/inkthorn" class="link-row" target="_blank">
+        <span class="link-icon">📅</span>
+        <div class="link-content">
+          <div class="link-title">Rob's Calendly</div>
+          <div class="link-desc">Book a free 20-minute discovery call. Send this link or open it on their phone to book right there.</div>
+        </div>
+        <span class="link-badge badge-water">Book</span>
+      </a>
 
-      </div>
+      <div class="group-label">🌐 Web Properties</div>
+
+      <a href="https://inkthorn.ai" class="link-row" target="_blank">
+        <span class="link-icon">🦞</span>
+        <div class="link-content">
+          <div class="link-title">InkThorn.ai</div>
+          <div class="link-desc">Main site. Show prospects where their business will live after sign-up.</div>
+        </div>
+        <span class="link-badge badge-earth">Site</span>
+      </a>
+
+      <a href="https://textos.ai" class="link-row" target="_blank">
+        <span class="link-icon">📱</span>
+        <div class="link-content">
+          <div class="link-title">TextOS.ai</div>
+          <div class="link-desc">The platform that powers everything. Show them what they're getting.</div>
+        </div>
+        <span class="link-badge badge-water">Platform</span>
+      </a>
+
+      <div class="group-label">📊 Dashboard & Reports</div>
+
+      <a href="https://inkthorn.ai/dashboard.html" class="link-row" target="_blank">
+        <span class="link-icon">📊</span>
+        <div class="link-content">
+          <div class="link-title">InkThorn Dashboard</div>
+          <div class="link-desc">Your personal dashboard. Track visits, leads, and activity.</div>
+        </div>
+        <span class="link-badge badge-earth">Dashboard</span>
+      </a>
+
+      <a href="https://textos.ai/founder.html" class="link-row" target="_blank">
+        <span class="link-icon">📖</span>
+        <div class="link-content">
+          <div class="link-title">Why Rob Built This</div>
+          <div class="link-desc">Great share for hesitant prospects. Rob's story — real, short, convincing.</div>
+        </div>
+        <span class="link-badge badge-wind">Story</span>
+      </a>
+
+      <div class="group-label">💬 Scripts & Objections</div>
+
+      <a href="https://inkthorn.ai/scripts.html" class="link-row" target="_blank">
+        <span class="link-icon">💬</span>
+        <div class="link-content">
+          <div class="link-title">Objection Handlers</div>
+          <div class="link-desc">"Not interested," "We already have a website," "We don't need AI" — handled.</div>
+        </div>
+        <span class="link-badge badge-fire">Scripts</span>
+      </a>
+
+      <a href="https://inkthorn.ai/faq.html" class="link-row" target="_blank">
+        <span class="link-icon">❓</span>
+        <div class="link-content">
+          <div class="link-title">FAQ for Prospects</div>
+          <div class="link-desc">Common questions answered simply. Good to have open on your phone.</div>
+        </div>
+        <span class="link-badge badge-wind">Reference</span>
+      </a>
+
+      <div class="group-label">📣 Social & Media</div>
+
+      <a href="https://www.facebook.com/inkthorn.ai" class="link-row" target="_blank">
+        <span class="link-icon">📘</span>
+        <div class="link-content">
+          <div class="link-title">InkThorn Facebook</div>
+          <div class="link-desc">Follow + share. Social proof helps when prospects look us up.</div>
+        </div>
+        <span class="link-badge badge-water">Social</span>
+      </a>
+
+      <a href="https://textos.ai/case-studies.html" class="link-row" target="_blank">
+        <span class="link-icon">⭐</span>
+        <div class="link-content">
+          <div class="link-title">Case Studies</div>
+          <div class="link-desc">Real results from real businesses. Pull these up for skeptical owners.</div>
+        </div>
+        <span class="link-badge badge-earth">Proof</span>
+      </a>
+
+      <a href="https://textos.ai/pricing.html" class="link-row" target="_blank">
+        <span class="link-icon">💰</span>
+        <div class="link-content">
+          <div class="link-title">Pricing Page</div>
+          <div class="link-desc">If they ask "how much?" — send them here or show them on your phone.</div>
+        </div>
+        <span class="link-badge badge-fire">Pricing</span>
+      </a>
     </div>
+  </section>
 
-    <!-- AFFILIATE -->
-    <div class="tool-group">
-      <div class="tool-group-label">Your commissions</div>
-      <div class="link-list">
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta">
+    <h2 class="bottom-cta-heading">You already have everything you need.<br>Now go walk in.</h2>
+    <p class="bottom-cta-sub">Every business you visit today is one Rob hasn't been able to reach yet. That's your edge.</p>
+    <a href="https://textos.ai/ideas.html" class="btn-fire" target="_blank">🔬 Open the Diagnosis Tool</a>
+  </section>
 
-        <a href="https://inkthorn.ai/crustacean/affiliate.html" class="link-row" target="_blank">
-          <div class="link-row-icon">🔗</div>
-          <div>
-            <div class="link-row-title">Affiliate Program</div>
-            <div class="link-row-desc">Set up your referral links before your first call. Every deal you bring in pays you — make sure it's tracked from day one.</div>
-          </div>
-          <span class="badge badge-new">Set up first</span>
-        </a>
-
-        <a href="https://inkthorn.ai/crustacean/affiliate-admin.html" class="link-row" target="_blank">
-          <div class="link-row-icon">📊</div>
-          <div>
-            <div class="link-row-title">Affiliate Tracker</div>
-            <div class="link-row-desc">Your running count of referrals, pipeline, and closed deals. Check it at the end of each day.</div>
-          </div>
-          <span class="badge badge-new">Track deals</span>
-        </a>
-
-      </div>
-    </div>
-
-    <!-- REFERENCE -->
-    <div class="tool-group">
-      <div class="tool-group-label">Background & reference</div>
-      <div class="link-list">
-
-        <a href="https://inkthorn.ai/" class="link-row" target="_blank">
-          <div class="link-row-icon">🦞</div>
-          <div>
-            <div class="link-row-title">InkThorn Main Dashboard</div>
-            <div class="link-row-desc">The company hub. Good to know what you're representing.</div>
-          </div>
-          <span class="badge badge-ref">Reference</span>
-        </a>
-
-        <a href="https://inkthorn.ai/playbook.html" class="link-row" target="_blank">
-          <div class="link-row-icon">📖</div>
-          <div>
-            <div class="link-row-title">InkThorn Playbook</div>
-            <div class="link-row-desc">The full strategy, pricing, and game plan. Read when you want the whole picture.</div>
-          </div>
-          <span class="badge badge-ref">Private</span>
-        </a>
-
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-
-<!-- ── BOTTOM CTA ── -->
-<section id="cta">
-  <div class="wrap-sm">
-    <p class="cta-heading">Any questions, any time —<br>just call.</p>
-    <p class="cta-sub">Rob is hands-on with this. Don't overthink it. Just go.</p>
-    <a href="tel:3185723161" class="btn-call">📲 318-572-3161</a>
-    <p class="cta-note">Text works too.</p>
-  </div>
-</section>
-
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-mark">🦞 InkThorn Crustacean</div>
-  <div class="footer-copy">Built for Shaun Steckler · InkThorn · inkthorn.ai · © 2026</div>
-</footer>
+  <!-- FOOTER -->
+  <footer>
+    <div>InkThorn · Powered by <a href="https://textos.ai">TextOS.ai</a> · Built by Rob Gaudet</div>
+    <div style="margin-top:6px;">Questions? Call Rob: <a href="tel:13185723161">318-572-3161</a></div>
+  </footer>
 
 </body>
 </html>
