@@ -1,67 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-05-07T23:17:06.221Z",
+  "updated": "2026-05-08T13:34:48.388Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-05-07",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "Comedy Gumbeaux",
-      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-      "venue": "Howlin' Wolf Den",
-      "type": "Open Mic",
-      "cost": "$5",
-      "repeat": "Every Thursday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-07",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Queers Of Comedy New Orleans",
-      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-      "venue": "Oz New Orleans",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-05-07T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-07",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Sit. Stay. Stand-Up!",
-      "url": "https://504comedy.com/event/1301/sit-stay-standup",
-      "venue": "The Dog House",
-      "type": "Stand-up",
-      "cost": "$10",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-05-07T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-07",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Punchlines & Pasties",
-      "url": "https://504comedy.com/event/1317/punchlines--pasties",
-      "venue": "The Original NiteCap",
-      "type": "Open Mic",
-      "cost": "$10",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-05-07T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-05-08",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -71,11 +15,11 @@
       "type": "Storytelling",
       "cost": "$10",
       "repeat": "Second Friday",
-      "start_dt": "2026-05-07T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-08",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -89,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-08",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-05-09",
       "time": "5:00pm",
       "time_sort": 1700,
@@ -117,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-05-09",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -131,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-05-09",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -145,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-05-09",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -338,78 +282,86 @@
       "cost": "FREE",
       "repeat": "Every Wednesday",
       "start_dt": "2026-05-13T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-05-14",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Moral Panic",
+      "url": "https://504comedy.com/event/856/moral-panic",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$20",
+      "repeat": "Second Thursday",
+      "start_dt": "2026-05-13T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-05-14",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Comedy Gumbeaux",
+      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+      "venue": "Howlin' Wolf Den",
+      "type": "Open Mic",
+      "cost": "$5",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-05-14T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-05-14",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Queers Of Comedy New Orleans",
+      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+      "venue": "Oz New Orleans",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-05-14T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-05-14",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Sit. Stay. Stand-Up!",
+      "url": "https://504comedy.com/event/1301/sit-stay-standup",
+      "venue": "The Dog House",
+      "type": "Stand-up",
+      "cost": "$10",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-05-14T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-05-14",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Punchlines & Pasties",
+      "url": "https://504comedy.com/event/1317/punchlines--pasties",
+      "venue": "The Original NiteCap",
+      "type": "Open Mic",
+      "cost": "$10",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-05-14T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-05-07",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-07",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "Comedy Gumbeaux",
-          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-          "venue": "Howlin' Wolf Den",
-          "type": "Open Mic",
-          "cost": "$5",
-          "repeat": "Every Thursday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-07",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Queers Of Comedy New Orleans",
-          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-          "venue": "Oz New Orleans",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-05-07T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-07",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Sit. Stay. Stand-Up!",
-          "url": "https://504comedy.com/event/1301/sit-stay-standup",
-          "venue": "The Dog House",
-          "type": "Stand-up",
-          "cost": "$10",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-05-07T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-07",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Punchlines & Pasties",
-          "url": "https://504comedy.com/event/1317/punchlines--pasties",
-          "venue": "The Original NiteCap",
-          "type": "Open Mic",
-          "cost": "$10",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-05-07T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-05-08",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-08",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -419,11 +371,11 @@
           "type": "Storytelling",
           "cost": "$10",
           "repeat": "Second Friday",
-          "start_dt": "2026-05-07T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-08",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -437,7 +389,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-08",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -452,12 +404,12 @@
       ]
     },
     {
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-05-09",
       "events": [
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-05-09",
           "time": "5:00pm",
           "time_sort": 1700,
@@ -471,7 +423,7 @@
         },
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-05-09",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -485,7 +437,7 @@
         },
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-05-09",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -499,7 +451,7 @@
         },
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-05-09",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -716,6 +668,82 @@
           "cost": "FREE",
           "repeat": "Every Wednesday",
           "start_dt": "2026-05-13T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Thursday",
+      "date": "2026-05-14",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-05-14",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Moral Panic",
+          "url": "https://504comedy.com/event/856/moral-panic",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$20",
+          "repeat": "Second Thursday",
+          "start_dt": "2026-05-13T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-05-14",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Comedy Gumbeaux",
+          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+          "venue": "Howlin' Wolf Den",
+          "type": "Open Mic",
+          "cost": "$5",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-05-14T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-05-14",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Queers Of Comedy New Orleans",
+          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+          "venue": "Oz New Orleans",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-05-14T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-05-14",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Sit. Stay. Stand-Up!",
+          "url": "https://504comedy.com/event/1301/sit-stay-standup",
+          "venue": "The Dog House",
+          "type": "Stand-up",
+          "cost": "$10",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-05-14T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-05-14",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Punchlines & Pasties",
+          "url": "https://504comedy.com/event/1317/punchlines--pasties",
+          "venue": "The Original NiteCap",
+          "type": "Open Mic",
+          "cost": "$10",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-05-14T20:00-05:00"
         }
       ]
     }
