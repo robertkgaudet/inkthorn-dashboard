@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-05-08T23:17:21.233Z",
+  "updated": "2026-05-09T13:31:59.616Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-05-08",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Greetings from Queer Mountain",
-      "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
-      "venue": "ALLways Lounge",
-      "type": "Storytelling",
-      "cost": "$10",
-      "repeat": "Second Friday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-08",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Aparna Nancherla",
-      "url": "https://504comedy.com/event/1354/aparna-nancherla-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Fri May 08 2026",
-      "start_dt": "2026-05-15T19:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-08",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "The Comedy Lounge",
-      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-      "venue": "Vino: Fine Wine & Spirits",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Friday",
-      "start_dt": "2026-05-08T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-05-09",
       "time": "5:00pm",
       "time_sort": 1700,
@@ -57,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$25",
       "repeat": "Sat May 09 2026",
-      "start_dt": "2026-05-08T17:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-09",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -75,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-09",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -85,11 +43,11 @@
       "type": "Stand-up",
       "cost": "FREE",
       "repeat": "Every Saturday",
-      "start_dt": "2026-05-09T20:00-05:00"
+      "start_dt": "2026-06-13T20:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-09",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -103,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-05-10",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -113,11 +71,11 @@
       "type": "Stand-up",
       "cost": "$15",
       "repeat": "Every Sunday",
-      "start_dt": "2026-05-09T20:00-05:00"
+      "start_dt": "2026-06-13T20:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-05-10",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -352,64 +310,58 @@
       "cost": "$10",
       "repeat": "Every Thursday",
       "start_dt": "2026-05-14T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-05-15",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Doug Benson",
+      "url": "https://504comedy.com/event/1356/doug-benson-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Fri May 15 2026",
+      "start_dt": "2026-05-14T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-05-15",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Comedy Lounge",
+      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+      "venue": "Vino: Fine Wine & Spirits",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Friday",
+      "start_dt": "2026-05-15T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-05-15",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Comedy Teabag: A Dark Dirty Comedy Show",
+      "url": "https://504comedy.com/event/1156/comedy-teabag-a-dark-dirty-comedy-show",
+      "venue": "Howlin' Wolf Den",
+      "type": "Stand-up",
+      "cost": "$15",
+      "repeat": "Third Friday",
+      "start_dt": "2026-05-15T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-05-08",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-08",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Greetings from Queer Mountain",
-          "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
-          "venue": "ALLways Lounge",
-          "type": "Storytelling",
-          "cost": "$10",
-          "repeat": "Second Friday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-08",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Aparna Nancherla",
-          "url": "https://504comedy.com/event/1354/aparna-nancherla-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Fri May 08 2026",
-          "start_dt": "2026-05-15T19:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-08",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "The Comedy Lounge",
-          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-          "venue": "Vino: Fine Wine & Spirits",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Friday",
-          "start_dt": "2026-05-08T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-05-09",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-09",
           "time": "5:00pm",
           "time_sort": 1700,
@@ -419,11 +371,11 @@
           "type": "Stand-up",
           "cost": "$25",
           "repeat": "Sat May 09 2026",
-          "start_dt": "2026-05-08T17:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-09",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -437,7 +389,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-09",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -447,11 +399,11 @@
           "type": "Stand-up",
           "cost": "FREE",
           "repeat": "Every Saturday",
-          "start_dt": "2026-05-09T20:00-05:00"
+          "start_dt": "2026-06-13T20:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-09",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -466,12 +418,12 @@
       ]
     },
     {
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-05-10",
       "events": [
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-05-10",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -481,11 +433,11 @@
           "type": "Stand-up",
           "cost": "$15",
           "repeat": "Every Sunday",
-          "start_dt": "2026-05-09T20:00-05:00"
+          "start_dt": "2026-06-13T20:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-05-10",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -744,6 +696,54 @@
           "cost": "$10",
           "repeat": "Every Thursday",
           "start_dt": "2026-05-14T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "date": "2026-05-15",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-05-15",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Doug Benson",
+          "url": "https://504comedy.com/event/1356/doug-benson-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Fri May 15 2026",
+          "start_dt": "2026-05-14T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-05-15",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Comedy Lounge",
+          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+          "venue": "Vino: Fine Wine & Spirits",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Friday",
+          "start_dt": "2026-05-15T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-05-15",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Comedy Teabag: A Dark Dirty Comedy Show",
+          "url": "https://504comedy.com/event/1156/comedy-teabag-a-dark-dirty-comedy-show",
+          "venue": "Howlin' Wolf Den",
+          "type": "Stand-up",
+          "cost": "$15",
+          "repeat": "Third Friday",
+          "start_dt": "2026-05-15T20:00-05:00"
         }
       ]
     }
