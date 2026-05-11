@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOLA Guide Queue — NolaCultureCo</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a12;
+    --card: #12121e;
+    --border: #2a2a3e;
+    --neon-pink: #ff2d78;
+    --neon-cyan: #00f5ff;
+    --neon-purple: #b44fff;
+    --neon-gold: #f59e0b;
+    --neon-green: #00ff88;
+    --text: #e8e8f0;
+    --text2: #9090a8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    padding: 2rem 1rem 5rem;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 0.75rem;
+  }
+  header h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.1rem, 3.5vw, 1.7rem);
+    color: var(--neon-pink);
+    letter-spacing: 0.06em;
+    text-shadow: 0 0 20px rgba(255,45,120,0.5);
+  }
+  header p {
+    color: var(--text2);
+    font-size: 0.82rem;
+    margin-top: 0.4rem;
+  }
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1.5rem auto 2.5rem;
+    max-width: 600px;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.6rem;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 12px rgba(0,245,255,0.4);
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+  }
+  .section-divider {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--neon-purple);
+    text-shadow: 0 0 12px rgba(180,79,255,0.5);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #2a2a3e;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .guide-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+  .guide-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    position: relative;
+    transition: border-color 0.15s;
+  }
+  .guide-card:hover {
+    border-color: rgba(255,45,120,0.3);
+  }
+  .guide-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem;
+    color: var(--text2);
+    min-width: 28px;
+    padding-top: 2px;
+  }
+  .guide-emoji {
+    font-size: 1.3rem;
+    min-width: 28px;
+    text-align: center;
+  }
+  .guide-body { flex: 1; }
+  .guide-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .guide-desc {
+    font-size: 0.82rem;
+    color: var(--text2);
+    line-height: 1.55;
+  }
+  .guide-hook {
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: var(--neon-cyan);
+    font-style: italic;
+    opacity: 0.85;
+  }
+  .badge {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    align-self: flex-start;
+    margin-top: 2px;
+  }
+  .badge-series { background: rgba(0,245,255,0.1); color: var(--neon-cyan); border: 1px solid rgba(0,245,255,0.25); }
+  .badge-journey { background: rgba(255,45,120,0.1); color: var(--neon-pink); border: 1px solid rgba(255,45,120,0.25); }
+  .badge-local { background: rgba(180,79,255,0.1); color: var(--neon-purple); border: 1px solid rgba(180,79,255,0.25); }
+  .badge-anchor { background: rgba(245,158,11,0.1); color: var(--neon-gold); border: 1px solid rgba(245,158,11,0.25); }
+
+  footer {
+    text-align: center;
+    margin-top: 3.5rem;
+    color: var(--text2);
+    font-size: 0.75rem;
+  }
+  footer span { color: var(--neon-pink); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>NOLA GUIDE QUEUE</h1>
+  <p>NolaCultureCo · Queued for development · Not yet in production</p>
+</header>
+
+<div class="container">
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num">25</div>
+      <div class="stat-label">Guides Queued</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Categories</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Series / Multi-Part</div>
+    </div>
+  </div>
+
+  <!-- FOOD, DRINK & NIGHTLIFE -->
+  <div class="section-divider">🍺 Food, Drink & Nightlife</div>
+  <div class="guide-grid">
+
+    <div class="guide-card">
+      <div class="guide-num">#01</div>
+      <div class="guide-emoji">🦞</div>
+      <div class="guide-body">
+        <div class="guide-title">Seafood & Crawfish Restaurant Guide</div>
+        <div class="guide-desc">The definitive NOLA seafood hit list — crawfish boils, raw oyster bars, BBQ shrimp, whole fried fish. Organized by neighborhood and price point so every squad finds their table.</div>
+        <div class="guide-hook">Hook: You didn't come to New Orleans to eat a burger.</div>
+      </div>
+      <div class="badge badge-local">LOCAL</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#02</div>
+      <div class="guide-emoji">🍺</div>
+      <div class="guide-body">
+        <div class="guide-title">Brewery Guide — Part 1: The First Six</div>
+        <div class="guide-desc">NOLA has 12+ craft breweries. Part 1 covers the first group of 6 — each profiled with their signature beers, vibe, and what makes them specific to the city. Includes taproom details and food options.</div>
+        <div class="guide-hook">Hook: New Orleans doesn't just have bars. It has breweries worth building a day around.</div>
+      </div>
+      <div class="badge badge-series">SERIES PT 1</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#03</div>
+      <div class="guide-emoji">🍻</div>
+      <div class="guide-body">
+        <div class="guide-title">Brewery Guide — Part 2: The Second Six</div>
+        <div class="guide-desc">The second cohort of 6 NOLA craft breweries — same format, same depth. Profiles, signature pours, neighborhood context, and what sets each one apart from the pack.</div>
+        <div class="guide-hook">Hook: The second six are just as good. Sometimes better.</div>
+      </div>
+      <div class="badge badge-series">SERIES PT 2</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#04</div>
+      <div class="guide-emoji">🕯️</div>
+      <div class="guide-body">
+        <div class="guide-title">Speakeasy Tour Guide</div>
+        <div class="guide-desc">The hidden bars, the unmarked doors, the password-required rooms. A curated tour of New Orleans speakeasies and secret bars — with entry tips, what to order, and the story behind each one.</div>
+        <div class="guide-hook">Hook: The best bars in New Orleans don't have signs.</div>
+      </div>
+      <div class="badge badge-journey">JOURNEY</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#05</div>
+      <div class="guide-emoji">🏊</div>
+      <div class="guide-body">
+        <div class="guide-title">Pool Guide — NOLA's Best Pools & Swim Spots</div>
+        <div class="guide-desc">Top pools in the city including the Garden District Hotel, Blackbird, The Country Club, and The Barnett Hotel — plus day-pass info, vibe ratings, and what to bring. For bachelorettes and visitors who want to cool down in style.</div>
+        <div class="guide-hook">Hook: New Orleans summers are brutal. These pools are not.</div>
+      </div>
+      <div class="badge badge-anchor">ANCHOR</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#06</div>
+      <div class="guide-emoji">🥃</div>
+      <div class="guide-body">
+        <div class="guide-title">6 Oldest Bars Journey — Start & End at Jean Lafitte's</div>
+        <div class="guide-desc">A narrative bar crawl through the 6 oldest bars in New Orleans — in reverse order. Start with a purple drink at Jean Lafitte's Blacksmith Shop (oldest bar in the US). End back there to sing with Lucky Lee Hendler around the piano. Bring jar money to request your favorites.</div>
+        <div class="guide-hook">Hook: The oldest bar in America has a piano player and a jar. Bring dollar bills.</div>
+      </div>
+      <div class="badge badge-journey">SIGNATURE JOURNEY</div>
+    </div>
+
+  </div>
+
+  <!-- LIVE MUSIC -->
+  <div class="section-divider">🎵 Live Music</div>
+  <div class="guide-grid">
+
+    <div class="guide-card">
+      <div class="guide-num">#07</div>
+      <div class="guide-emoji">🎷</div>
+      <div class="guide-body">
+        <div class="guide-title">LIVE Music Tour Guide — The Essential NOLA Night</div>
+        <div class="guide-desc">The master guide to live music in New Orleans — where to go, when to go, how to navigate Frenchmen Street vs. Bourbon vs. the neighborhoods. For first-timers and repeat visitors alike.</div>
+        <div class="guide-hook">Hook: New Orleans is the only city in America where the music follows you.</div>
+      </div>
+      <div class="badge badge-anchor">ANCHOR</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#08</div>
+      <div class="guide-emoji">🌿</div>
+      <div class="guide-body">
+        <div class="guide-title">Live Music Courtyard Guide</div>
+        <div class="guide-desc">The open-air secret — bars and restaurants with live music in stunning courtyards. Spanish moss, string lights, wrought iron, and a brass band. These are the venues that don't show up on the tourist map.</div>
+        <div class="guide-hook">Hook: The best seat in New Orleans is in an open courtyard you almost walked past.</div>
+      </div>
+      <div class="badge badge-local">LOCAL</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#09</div>
+      <div class="guide-emoji">🎸</div>
+      <div class="guide-body">
+        <div class="guide-title">Live Music by Genre — Jazz Edition</div>
+        <div class="guide-desc">First in a series of genre-specific music guides. Jazz — traditional, modern, bebop, second line — with the venues, the nights, and the bands to catch. Built for listeners who know what they're looking for.</div>
+        <div class="guide-hook">Hook: Jazz isn't background music here. It's the point.</div>
+      </div>
+      <div class="badge badge-series">SERIES</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#10</div>
+      <div class="guide-emoji">🎵</div>
+      <div class="guide-body">
+        <div class="guide-title">Live Music by Genre — Blues, Funk & Soul Edition</div>
+        <div class="guide-desc">Second in the genre series. The deeper cuts — blues bars, funk nights, soul revues. NOLA is the birthplace of funk. This guide takes it seriously.</div>
+        <div class="guide-hook">Hook: James Brown got funk from New Orleans. Here's where it still lives.</div>
+      </div>
+      <div class="badge badge-series">SERIES</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#11</div>
+      <div class="guide-emoji">🎶</div>
+      <div class="guide-body">
+        <div class="guide-title">Live Music by Generation — For the Boomers</div>
+        <div class="guide-desc">First in a generational music guide series. Classic rock, Motown, blues. Venues that skew older, play longer sets, and don't require earplugs. A guide for the grown-ups in the group.</div>
+        <div class="guide-hook">Hook: Some of the best live music in New Orleans is in a quiet room with serious players.</div>
+      </div>
+      <div class="badge badge-series">SERIES</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#12</div>
+      <div class="guide-emoji">🎤</div>
+      <div class="guide-body">
+        <div class="guide-title">Live Music by Generation — For the Millennials & Gen Z</div>
+        <div class="guide-desc">Second in the generational series. Indie, hip-hop, electronic, and the new NOLA sound. Venues with energy, late hours, and crowds that know every word. The city's next generation of music.</div>
+        <div class="guide-hook">Hook: New Orleans didn't freeze in time. The next sound is already here.</div>
+      </div>
+      <div class="badge badge-series">SERIES</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#13</div>
+      <div class="guide-emoji">🎧</div>
+      <div class="guide-body">
+        <div class="guide-title">DJ Venues Guide</div>
+        <div class="guide-desc">The clubs, rooftops, and late-night rooms where DJs run the show. Cover charges, door times, resident DJs, and the nights worth planning around. For the bachelorette crew that wants to dance until 4am.</div>
+        <div class="guide-hook">Hook: When the brass bands go home, the DJs take over.</div>
+      </div>
+      <div class="badge badge-local">LOCAL</div>
+    </div>
+
+  </div>
+
+  <!-- ENTERTAINMENT & CULTURE -->
+  <div class="section-divider">🎭 Entertainment & Culture</div>
+  <div class="guide-grid">
+
+    <div class="guide-card">
+      <div class="guide-num">#14</div>
+      <div class="guide-emoji">💃</div>
+      <div class="guide-body">
+        <div class="guide-title">Burlesque Tour Guide</div>
+        <div class="guide-desc">New Orleans has one of the most active burlesque scenes in the country. Show schedules, top performers, venue guides, and what to expect as a first-timer. Perfect add-on for the bachelorette itinerary.</div>
+        <div class="guide-hook">Hook: It's not Vegas. It's weirder, more talented, and a lot more fun.</div>
+      </div>
+      <div class="badge badge-journey">EXPERIENCE</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#15</div>
+      <div class="guide-emoji">😂</div>
+      <div class="guide-body">
+        <div class="guide-title">Comedy Show Tour Guide</div>
+        <div class="guide-desc">Built around 504Comedy.com — the hub of New Orleans stand-up. Show listings, venue profiles, open mic nights, and the local comedians worth watching. The city is funnier than people expect.</div>
+        <div class="guide-hook">Hook: New Orleans storytelling is world-class. The comedy is next.</div>
+      </div>
+      <div class="badge badge-local">LOCAL</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#16</div>
+      <div class="guide-emoji">🎭</div>
+      <div class="guide-body">
+        <div class="guide-title">Mardi Gras Costume Guide</div>
+        <div class="guide-desc">Where to buy, what to rent, how to dress for your krewe, what's appropriate for which parade, and the unwritten rules locals follow. Works year-round — people plan their costumes months out.</div>
+        <div class="guide-hook">Hook: In New Orleans, Mardi Gras is a lifestyle, not a holiday.</div>
+      </div>
+      <div class="badge badge-anchor">ANCHOR</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#17</div>
+      <div class="guide-emoji">🧛</div>
+      <div class="guide-body">
+        <div class="guide-title">Vampire Tour Guide</div>
+        <div class="guide-desc">The vampire mythology of New Orleans is deep, documented, and genuinely eerie. This guide covers the real history, the architecture, the alleged sightings, the vampire bars, and the self-guided walking route through the French Quarter after dark.</div>
+        <div class="guide-hook">Hook: New Orleans has real vampire lore. This isn't Anne Rice fiction — it's older.</div>
+      </div>
+      <div class="badge badge-journey">JOURNEY</div>
+    </div>
+
+  </div>
+
+  <!-- HISTORY & MYSTERY -->
+  <div class="section-divider">👻 History & Mystery</div>
+  <div class="guide-grid">
+
+    <div class="guide-card">
+      <div class="guide-num">#18</div>
+      <div class="guide-emoji">👻</div>
+      <div class="guide-body">
+        <div class="guide-title">Self-Paced Ghost Tour</div>
+        <div class="guide-desc">A printable walking tour of the most haunted spots in New Orleans — no guide required, no booking needed. Stop-by-stop route through the French Quarter, Tremé, and Garden District with the story of each location.</div>
+        <div class="guide-hook">Hook: The best ghost tour in New Orleans is the one you do at midnight, alone.</div>
+      </div>
+      <div class="badge badge-journey">JOURNEY</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#19</div>
+      <div class="guide-emoji">🐊</div>
+      <div class="guide-body">
+        <div class="guide-title">Swamp Tour Guide</div>
+        <div class="guide-desc">Not all swamp tours are equal. This guide covers the best operators, what to look for, which ones go to the real bayou vs. a tourist pond, and how to book. Includes what to wear, what to expect, and the wildlife you'll see.</div>
+        <div class="guide-hook">Hook: An hour from the French Quarter, the world goes completely wild.</div>
+      </div>
+      <div class="badge badge-local">LOCAL</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#20</div>
+      <div class="guide-emoji">🍽️</div>
+      <div class="guide-body">
+        <div class="guide-title">6 Oldest Restaurants Journey — Start at 6th, End at the Oldest</div>
+        <div class="guide-desc">A narrative dining journey through the 6 oldest continuously operating restaurants in New Orleans — in reverse order. Built as a weekend progression, with context on what each restaurant meant to the city in its time.</div>
+        <div class="guide-hook">Hook: The oldest restaurant in New Orleans has been serving the same dish since before the Civil War.</div>
+      </div>
+      <div class="badge badge-journey">SIGNATURE JOURNEY</div>
+    </div>
+
+  </div>
+
+  <!-- NEIGHBORHOODS & LOCAL LIFE -->
+  <div class="section-divider">🏘️ Neighborhoods & Local Life</div>
+  <div class="guide-grid">
+
+    <div class="guide-card">
+      <div class="guide-num">#21</div>
+      <div class="guide-emoji">👜</div>
+      <div class="guide-body">
+        <div class="guide-title">Magazine Street Guide</div>
+        <div class="guide-desc">6 miles of boutiques, galleries, restaurants, coffee shops, and antique stores. This guide organizes Magazine Street into walkable blocks — what's worth stopping for, what to skip, and the hidden gems the locals actually use.</div>
+        <div class="guide-hook">Hook: Magazine Street is New Orleans' main street. Nobody told the tourists.</div>
+      </div>
+      <div class="badge badge-local">LOCAL</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#22</div>
+      <div class="guide-emoji">🌳</div>
+      <div class="guide-body">
+        <div class="guide-title">Garden District Guide</div>
+        <div class="guide-desc">The mansions, the restaurants, the walking routes, and the real history behind the neighborhood. Includes Commander's Palace, Lafayette Cemetery, the Garden District Book Shop, and the architecture tour most visitors miss.</div>
+        <div class="guide-hook">Hook: The Garden District is what New Orleans looks like when it slows down.</div>
+      </div>
+      <div class="badge badge-local">LOCAL</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#23</div>
+      <div class="guide-emoji">🏡</div>
+      <div class="guide-body">
+        <div class="guide-title">Uptown Guide</div>
+        <div class="guide-desc">Where the locals actually live. Uptown neighborhoods, Audubon Park, the best neighborhood restaurants, the bars that don't show up in travel guides, and the full Magazine Street stretch. The side of New Orleans that feels like home.</div>
+        <div class="guide-hook">Hook: Uptown is where you go when you want to feel like you actually live here.</div>
+      </div>
+      <div class="badge badge-local">LOCAL</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#24</div>
+      <div class="guide-emoji">🎓</div>
+      <div class="guide-body">
+        <div class="guide-title">College Guide — Loyola & Tulane</div>
+        <div class="guide-desc">The campus neighborhoods, the bars, the restaurants, the coffee shops, and the off-campus life around Loyola and Tulane. Built for visiting families, prospective students, and anyone spending time in the Freret/Uptown corridor.</div>
+        <div class="guide-hook">Hook: Two of the most interesting college campuses in the South — right next to each other.</div>
+      </div>
+      <div class="badge badge-local">LOCAL</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#25</div>
+      <div class="guide-emoji">🚃</div>
+      <div class="guide-body">
+        <div class="guide-title">Streetcar Guide — The $1.25 Tour of New Orleans</div>
+        <div class="guide-desc">A complete guide to riding the St. Charles streetcar from end to end — what to look for out the window, where to get off, what's worth eating or drinking at each stop, and how to use it as the backbone of a full day in the city.</div>
+        <div class="guide-hook">Hook: The best $1.25 you'll spend in any American city.</div>
+      </div>
+      <div class="badge badge-journey">JOURNEY</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#26</div>
+      <div class="guide-emoji">🌺</div>
+      <div class="guide-body">
+        <div class="guide-title">City Park Guide</div>
+        <div class="guide-desc">1,300 acres. Ancient live oaks, the New Orleans Museum of Art, Sculpture Garden, Botanical Garden, Café Du Monde outpost, paddle boats, and golf. This guide makes sense of it all and builds a day around the park.</div>
+        <div class="guide-hook">Hook: City Park is bigger than Central Park. Most tourists never set foot in it.</div>
+      </div>
+      <div class="badge badge-local">LOCAL</div>
+    </div>
+
+    <div class="guide-card">
+      <div class="guide-num">#27</div>
+      <div class="guide-emoji">🪑</div>
+      <div class="guide-body">
+        <div class="guide-title">Antiquing Guide</div>
+        <div class="guide-desc">New Orleans has one of the most concentrated antique markets in the country — Magazine Street, Royal Street, and the Warehouse District. This guide covers the best shops, what each specializes in, price ranges, and how to negotiate.</div>
+        <div class="guide-hook">Hook: Every piece has a story here. Most of them are true.</div>
+      </div>
+      <div class="badge badge-local">LOCAL</div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <span>NolaCultureCo</span> · InkThorn · Guide Queue · Not yet in production
+</footer>
+
+</body>
+</html>
