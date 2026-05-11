@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Etsy Auth — NolaCultureCo</title>
+<style>
+  body { background: #0f0820; color: #f5f0e8; font-family: monospace; padding: 40px; text-align: center; }
+  h2 { color: #c9a84c; font-size: 1.4rem; }
+  .code-box { background: #1a0a2e; border: 2px solid #c9a84c; border-radius: 8px; padding: 20px; margin: 24px auto; max-width: 700px; word-break: break-all; font-size: 1rem; color: #64c864; }
+  .label { color: rgba(245,240,232,0.5); font-size: 0.85rem; margin-bottom: 8px; }
+  .error { color: #ff6b9d; }
+  button { margin-top: 16px; padding: 10px 24px; background: #c9a84c; color: #1a0a2e; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; }
+</style>
+</head>
+<body>
+<h2>NolaCultureCo — Etsy Auth</h2>
+<div id="content"></div>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  const error = params.get('error');
+  const div = document.getElementById('content');
+
+  if (error) {
+    div.innerHTML = `<p class="error">Error: ${error}</p><p>${params.get('error_description') || ''}</p>`;
+  } else if (code) {
+    div.innerHTML = `
+      <p style="color:#64c864;font-size:1.1rem;">✅ Auth successful! Copy this code and paste it into your terminal:</p>
+      <div class="code-box" id="code">${code}</div>
+      <button onclick="navigator.clipboard.writeText('${code}').then(()=>this.textContent='Copied!')">Copy Code</button>
+    `;
+  } else {
+    div.innerHTML = `<p class="error">No code found in URL.</p>`;
+  }
+</script>
+</body>
+</html>
