@@ -1,0 +1,729 @@
+================================================================================
+TextOS — Autonomous Business Engine
+Architecture Brief for AI Implementation Agent
+Version: 2.0 | Date: May 2026 | Author: Rob Gaudet
+================================================================================
+
+BEFORE YOU READ THE ARCHITECTURE — FIVE QUESTIONS ANSWERED
+================================================================================
+
+The architect agent reviewing this document asked five sharp questions before
+reading. Those questions are answered here first. The rest of the document is
+written with those answers assumed.
+
+--------------------------------------------------------------------------------
+ANSWER 1: FIRST PRODUCT TYPE — WE START WITH DIGITAL PRODUCTS ONLY
+--------------------------------------------------------------------------------
+
+We are committing to ONE product type for the first build: DIGITAL_PRODUCT.
+
+Definition: A downloadable file (PDF guide, template set, checklist, worksheet,
+mini-course in PDF format, or resource pack) that is generated entirely by AI,
+delivered instantly via a download link after Stripe payment, and requires zero
+ongoing fulfillment.
+
+Why this first:
+- Simplest Stripe configuration (one-time payment, no subscription complexity)
+- No delivery infrastructure beyond a signed S3/R2 URL
+- Product is entirely AI-generated text — no dependencies on external systems
+- Fastest path from mission to live paywall (target: under 24 hours)
+- Proven highest-converting ad category on Meta and TikTok
+- Validates the entire pipeline end-to-end before adding complexity
+
+All other product types (newsletter, micro-SaaS, course, community, etc.) are
+PARKED. They are documented for future reference but nothing in this build phase
+touches them. Once DIGITAL_PRODUCT is shipping and the pipeline is proven,
+we add the next type. One at a time.
+
+--------------------------------------------------------------------------------
+ANSWER 2: IMPROVEMENT LOOP TRIGGER — SCHEDULED NIGHTLY + EVENT-DRIVEN THRESHOLDS
+--------------------------------------------------------------------------------
+
+The autonomous improvement loop uses a HYBRID model: scheduled nightly runs as
+the baseline, plus event-driven triggers for critical thresholds.
+
+NIGHTLY SCHEDULED JOB (runs at 2:00 AM UTC daily):
+  - Pull ad performance data from all platforms
+  - Ingest Stripe revenue events from past 24 hours
+  - Ingest user behavior data from Supabase (downloads, bounce, abandonment)
+  - Run optimization decision rules (see Phase 3)
+  - Generate performance report and store in business record
+  - Queue any creative or product changes for next morning
+
+EVENT-DRIVEN TRIGGERS (fire immediately on threshold breach):
+  - Ad spend exceeds daily budget cap → pause all campaigns immediately
+  - ROAS drops below 0.5 for 48 consecutive hours → pause campaign, alert dashboard
+  - Stripe webhook: payment failure rate exceeds 15% in 24 hours → flag for review
+  - Conversion rate drops more than 50% from 7-day average → flag landing page
+  - Zero conversions after $100 ad spend → pause campaign, generate new creative set
+
+WHY THIS DESIGN:
+Event-driven for anything that can cause financial damage (overspend, broken funnel).
+Scheduled for everything that is optimization rather than emergency response.
+This avoids a continuous polling architecture that would burn Cloudflare Worker
+invocations unnecessarily and create race conditions in the decision engine.
+
+IMPLEMENTATION: Cloudflare Queues for event-driven triggers. Cloudflare Cron
+Triggers for the nightly scheduled job. Workers process both.
+
+--------------------------------------------------------------------------------
+ANSWER 3: AD MANAGEMENT FEE — TEXTOS HOLDS FLOAT, PAYS PLATFORMS DIRECTLY
+--------------------------------------------------------------------------------
+
+TextOS collects the activator's ad budget upfront and pays the ad platforms
+directly. The management fee is deducted before funds are disbursed to platforms.
+
+THE FLOW:
+  Activator pre-funds a TextOS Ad Wallet via Stripe
+  → TextOS holds those funds in a dedicated Stripe balance
+  → TextOS deducts 15–20% management fee at the time of platform disbursement
+  → TextOS pays remaining 80–85% to ad platforms via their billing APIs
+  → Activator sees net spend and fee breakdown in their dashboard
+
+WHY THIS MODEL (not invoicing separately):
+  - Separate invoicing requires activators to connect their own ad platform
+    billing accounts, which creates credential management complexity
+  - Pre-funded wallet gives TextOS full control of spend pacing and budget caps
+  - Single financial relationship (Activator → TextOS) is simpler legally
+  - TextOS can enforce hard budget caps before any overspend occurs
+  - Standard model for managed ad services (agencies work this way)
+
+STRIPE IMPLEMENTATION:
+  - Use Stripe Connect (already in our stack) for the wallet structure
+  - Activator funds wallet via Stripe checkout (card or ACH)
+  - TextOS platform Stripe account holds and disburses funds
+  - Fee is logged as a line item in the Stripe transfer metadata
+  - Low-balance alert triggers at 20% of monthly budget remaining
+  - Auto-pause all campaigns if wallet hits $0
+
+LEGAL NOTE: TextOS is acting as a media buyer. Standard media buying agreements
+and terms of service should cover this. This is not money transmission — it is
+prepaid advertising management. Consult legal before launch.
+
+--------------------------------------------------------------------------------
+ANSWER 4: THIS DOCUMENT ASSUMES YOUR EXISTING STACK
+--------------------------------------------------------------------------------
+
+This document was NOT written greenfield. It assumes the following already exists
+and does NOT propose rebuilding any of it:
+
+CONFIRMED EXISTING (do not rebuild):
+  ✓ Stripe Connect schema and integration
+  ✓ Token economy ($49.99/month, 30 tokens, per-task token fees)
+  ✓ Task system (token-activated tasks — NOT the focus of this build)
+  ✓ Cloudflare Workers (use for new workers in this pipeline)
+  ✓ Cloudflare D1 (use as primary database for new business/campaign tables)
+  ✓ Cloudflare R2 (use for ad creative storage and product file delivery)
+  ✓ Cloudflare KV (use for campaign state, rate limiting, API credential caching)
+  ✓ Cloudflare Queues (use for event-driven triggers and async job processing)
+  ✓ Business concept generation
+  ✓ Mission statement generation
+  ✓ Brand creation
+  ✓ Website generation and deployment
+
+WHAT THIS BUILD ADDS (net new only):
+  → Product generation pipeline (DIGITAL_PRODUCT type only, Phase 1)
+  → R2 product file storage + signed download URL delivery
+  → Stripe payment (one-time purchase) wired to the existing Connect schema
+  → Paywall page injected into the existing generated website
+  → Ad creative generation pipeline (copy, image briefs, video scripts)
+  → Ad platform API integrations (Meta first, then Google, then others)
+  → Nightly optimization worker + event-driven threshold workers
+  → Ad Wallet funding flow (Stripe → TextOS balance → platform disbursement)
+  → Business performance dashboard (revenue, ROAS, conversion rate, ad spend)
+
+NEW DATABASE TABLES NEEDED (in D1, following existing schema patterns):
+  business_products       (product assets, file location, pricing, version)
+  ad_campaigns            (campaign config, platform, status, daily budget)
+  ad_creatives            (creative assets, platform format, performance data)
+  ad_wallets              (activator balance, disbursement history, fee ledger)
+  performance_snapshots   (daily metrics per business: revenue, ROAS, CVR, etc.)
+
+--------------------------------------------------------------------------------
+ANSWER 5: CONFLICT RESOLUTION — AI CHANGES NEVER OVERWRITE MANUAL EDITS
+--------------------------------------------------------------------------------
+
+If an activator manually edits any field — product copy, pricing, landing page
+headline, ad creative — that field is LOCKED from autonomous modification until
+the activator explicitly unlocks it.
+
+THE VERSIONING AND OVERRIDE SYSTEM:
+
+Every content field in the business record has three properties:
+  content:      the current value
+  source:       "ai_generated" | "human_edited" | "ai_optimized"
+  locked:       true | false
+
+Rules:
+  - All fields start as source="ai_generated", locked=false
+  - When an activator edits a field manually, source="human_edited", locked=true
+  - The nightly optimization loop SKIPS all locked=true fields entirely
+  - The improvement engine can only modify locked=false fields
+  - If the AI wants to change a locked field, it queues a RECOMMENDATION
+    visible in the dashboard — activator approves or rejects, does not auto-apply
+  - Activator can explicitly unlock any field from the dashboard at any time
+
+RATIONALE:
+  Human intent is always authoritative. If an activator took the time to write
+  their own headline, that is a signal, not noise. The AI should work around it,
+  not override it. This also gives activators confidence that TextOS won't
+  randomly change something they deliberately set.
+
+  The recommendation queue (for locked fields) means the AI still adds value
+  even when it can't make changes — it shows its work and lets humans decide.
+
+================================================================================
+WHAT IS ALREADY BUILT (CURRENT STATE)
+================================================================================
+
+TextOS currently does all of the following without human input after activation:
+
+  ✓ Accepts a business idea from an activator (or generates one autonomously)
+  ✓ Generates mission statement, brand identity, and business concept
+  ✓ Builds and deploys the business website to a live URL
+
+THE THREE GAPS THIS BUILD CLOSES:
+
+GAP 1 — THE PRODUCT DOES NOT EXIST YET
+  The website is live but there is nothing to sell on it.
+  TextOS must generate the actual digital product, store it in R2,
+  and make it purchasable. This is the first thing we build.
+
+GAP 2 — NO PAYWALL OR PAYMENT COLLECTION
+  There is no Stripe checkout, no purchase flow, no download delivery.
+  TextOS must inject a paywall into the existing website and wire it
+  to Stripe using the existing Connect infrastructure.
+
+GAP 3 — NO CUSTOMER ACQUISITION PIPELINE
+  No ads are running. No one knows the business exists.
+  TextOS must generate ad creative and publish campaigns via platform APIs.
+  The activator sets a monthly ad budget once. TextOS manages everything else.
+
+THE FOURTH PIECE — AUTONOMOUS IMPROVEMENT LOOP
+  Once the above three are working, the loop closes:
+  performance data → optimization decisions → better products and better ads
+  → more revenue → reinvested into next cycle → repeat indefinitely.
+
+================================================================================
+TEXTOS BUSINESS MODEL
+================================================================================
+
+Activators pay two things:
+
+  1. PLATFORM SUBSCRIPTION: $49.99/month
+     Includes 30 tokens for the existing task system.
+     Token-based tasks are NOT the focus of this build phase — do not touch them.
+
+  2. AD WALLET FUNDING: Set by activator monthly (minimum $300 recommended)
+     Activator pre-funds their TextOS Ad Wallet via Stripe.
+     TextOS deducts 15–20% management fee and pays ad platforms directly.
+     TextOS revenue scales with activator ad spend — incentives are aligned.
+
+REVENUE MATH (per active business):
+  Activator spends $1,000/month on ads
+  → TextOS management fee: $150–$200/month
+  → Plus platform subscription: $49.99/month
+  → Total TextOS revenue per business: ~$200–$250/month
+  At 100 active businesses: $20,000–$25,000/month from fees alone
+  Plus subscription revenue: $5,000/month
+  This scales directly with the number of businesses running and their ad budgets.
+
+================================================================================
+PHASE 1 — PRODUCT GENERATION (DIGITAL_PRODUCT TYPE ONLY)
+================================================================================
+
+This is the first thing to build. Nothing else starts until this works end-to-end.
+
+STEP 1: GENERATE PRODUCT ASSETS
+--------------------------------------------------------------------------------
+
+INPUT:
+  mission_statement   (from existing TextOS business record)
+  target_audience     (from existing TextOS business record)
+  brand_name          (from existing TextOS business record)
+
+OUTPUT stored in business_products table:
+  product_name          [AI-generated product title]
+  product_tagline       [one-line value proposition]
+  product_description   [250-word sales description]
+  feature_list          [5–7 bullet points: what they get]
+  pricing               [recommended price: $17–$97 based on category]
+  lead_magnet_title     [free checklist or mini-version title]
+  lead_magnet_content   [the actual free content — 300–500 words]
+  product_content       [the full product — 2,000–5,000 words]
+  product_filename      [slug-based filename for R2 storage]
+  product_format        "PDF"
+  version               1
+  source                "ai_generated"
+  locked                false
+
+PRODUCT CONTENT STRUCTURE (for PDF generation):
+  Cover page            (brand name, product title, tagline)
+  Introduction          (the problem this solves — 300 words)
+  Core content          (5–10 sections, each 200–400 words)
+  Action steps          (3–5 concrete things the reader does immediately)
+  Resources / tools     (curated list relevant to the topic)
+  Next steps CTA        (soft upsell to the activator's next offer)
+
+STEP 2: GENERATE PDF AND STORE IN R2
+--------------------------------------------------------------------------------
+
+  Generate PDF from product_content using a headless browser or PDF library
+  Apply brand colors and logo from existing brand record
+  Store in R2 at: /businesses/{business_id}/products/v{version}/{product_filename}.pdf
+  Generate a signed download URL (expires 24 hours after purchase)
+  Store R2 object key in business_products record
+
+STEP 3: INJECT PAYWALL INTO EXISTING WEBSITE
+--------------------------------------------------------------------------------
+
+The existing generated website already has a homepage and brand pages.
+We add two new pages and modify the homepage CTA.
+
+NEW PAGES:
+  /buy
+    Hero: product name + tagline
+    What you get: feature_list rendered as visual checklist
+    Price: large, clear, single CTA button → Stripe checkout
+    Social proof: AI-generated testimonial block (3 believable personas)
+    FAQ: 5 objections + answers (AI-generated)
+    Guarantee: 30-day money-back (builds trust, reduces friction)
+
+  /download
+    Shown immediately after successful Stripe payment
+    "Your [product name] is ready" + download button
+    Signed R2 URL embedded in download button
+    Thank you message + what to do next
+    Soft upsell: "Want us to do this for you?" (future service upsell hook)
+
+HOMEPAGE MODIFICATION:
+  Change primary CTA from generic to: "Get [product_name] — $[price]"
+  Add lead magnet opt-in as secondary CTA: "Free [lead_magnet_title] →"
+  Both CTAs are injected into existing homepage template, locked=false
+
+STEP 4: STRIPE PAYMENT CONFIGURATION
+--------------------------------------------------------------------------------
+
+Using existing Stripe Connect infrastructure:
+  Create a Stripe Price object: one-time, amount = product pricing
+  Create a Stripe Checkout Session on /buy page load
+  Configure success_url: /download?session_id={CHECKOUT_SESSION_ID}
+  Configure cancel_url: /buy (returns to sales page)
+  Webhook: payment_intent.succeeded → generate signed download URL → store in KV
+    Key: download:{session_id}  Value: {signed_r2_url}  TTL: 86400 (24 hours)
+  Webhook: charge.refunded → invalidate download URL in KV
+
+STEP 5: EMAIL DELIVERY
+--------------------------------------------------------------------------------
+
+On payment_intent.succeeded:
+  Send purchase confirmation email via existing email provider
+  Subject: "Your [product_name] is ready to download"
+  Body: download button (same signed URL), order summary, support contact
+  Store email in Supabase for future sequences (with consent captured at checkout)
+
+On email capture (lead magnet opt-in):
+  Send lead_magnet_content immediately
+  Queue welcome sequence: 3 emails over 7 days
+    Email 1 (day 0):  Deliver lead magnet + set expectations
+    Email 2 (day 3):  Expand on the core problem — build trust
+    Email 3 (day 7):  Introduce the paid product — soft pitch with price
+
+================================================================================
+PHASE 2 — AD CREATIVE GENERATION AND PUBLISHING
+================================================================================
+
+Does not start until Phase 1 is complete and at least one test purchase has
+confirmed the end-to-end payment and delivery flow works.
+
+STEP 1: GENERATE CREATIVE SUITE
+--------------------------------------------------------------------------------
+
+For each business, generate a complete creative suite before any campaign goes live.
+All assets stored in R2 at: /businesses/{business_id}/creatives/
+
+TEXT ASSETS (generated by Claude Sonnet):
+
+  primary_headlines     10 variants
+    — 3 problem-focused:    "Still doing [painful task] by hand?"
+    — 3 benefit-focused:    "Get [specific result] in [specific timeframe]"
+    — 2 curiosity:          "The [niche] secret that [authority figure] uses"
+    — 2 social proof:       "[Number] [audience] already use this"
+
+  body_copy_short       10 variants (125 chars max — Meta/TikTok)
+  body_copy_long        5 variants (500 chars — Google Display/LinkedIn)
+  cta_variants          10 variants (beyond "Buy Now" — specific to product)
+  objection_busters     5 variants (price, trust, relevance, urgency, need)
+
+IMAGE AD BRIEFS (10 art direction briefs for image generation):
+  Each brief contains:
+    visual_concept:     what the image shows
+    text_overlay:       headline text baked into image
+    color_palette:      from existing brand record
+    mood:               professional | urgent | aspirational | social proof
+    format:             1:1 | 4:5 | 9:16 | 1.91:1
+
+VIDEO SCRIPTS (5 scripts at 15s, 30s, 60s):
+  Structure for every script:
+    HOOK     (0–3s):    scroll-stopping opening — question, bold claim, or pattern interrupt
+    PROBLEM  (3–8s):    name the pain clearly and specifically
+    SOLUTION (8–20s):   show or describe the product as the answer
+    PROOF    (20–25s):  social proof signal — number of users, result, or testimonial
+    CTA      (25–30s):  single clear action — "Download now for $[price]"
+
+  Also generate:
+    3 UGC-style scripts (written as if from a satisfied customer)
+    5 talking-head prompts (for AI avatar tools or stock footage direction)
+
+PLATFORM FORMAT VARIANTS:
+  Meta:       1:1 (1080×1080), 4:5 (1080×1350), 9:16 (1080×1920), 1.91:1 (1200×628)
+  Google:     Responsive Display (15 headlines, 4 descriptions, image assets)
+  TikTok:     9:16 vertical only (1080×1920)
+  LinkedIn:   1.91:1 (1200×627), 1:1 (1200×1200)
+  Pinterest:  2:3 (1000×1500)
+  Reddit:     16:9 (1200×628)
+
+STEP 2: BUILD ORDER FOR AD PLATFORM INTEGRATIONS
+--------------------------------------------------------------------------------
+
+Build in this order. Each platform must be fully tested before the next begins.
+
+PLATFORM 1: META (Facebook + Instagram) — build first
+  API:        graph.facebook.com/v19.0
+  Auth:       System User Access Token (long-lived, stored in KV)
+  Why first:  Largest audience, best conversion data, most mature API,
+              digital products convert extremely well on Meta
+
+PLATFORM 2: GOOGLE ADS — build second
+  API:        googleads.googleapis.com
+  Auth:       OAuth2 + developer token
+  Why second: High-intent search traffic, strong for "buy [product type]" queries
+
+PLATFORM 3: TIKTOK — build third
+  API:        business-api.tiktok.com/open_api/v1.3
+  Auth:       App access token
+  Why third:  Fastest-growing platform for impulse digital product purchases
+
+PLATFORM 4+: LinkedIn, Reddit, Pinterest, X
+  Build after Platforms 1–3 are running and generating data.
+  Priority order depends on which business types prove most successful.
+
+STEP 3: CAMPAIGN STRUCTURE (auto-configured per business)
+--------------------------------------------------------------------------------
+
+CAMPAIGN 1 — COLD ACQUISITION
+  Ad Set A:   Broad interest targeting (largest possible audience)
+  Ad Set B:   Lookalike audience (seeded from email list if >100 contacts)
+  Ad Set C:   Keyword/interest targeting specific to product topic
+  Budget:     70% of daily budget
+  Objective:  Purchase (Stripe checkout completion event)
+  Creative:   3 ad variants per ad set at launch
+
+CAMPAIGN 2 — RETARGETING (launches after 72 hours of cold traffic)
+  Ad Set A:   Website visitors (last 30 days) who did not purchase
+  Ad Set B:   Lead magnet downloaders who did not upgrade to paid
+  Ad Set C:   Checkout page visitors who did not complete purchase
+  Budget:     20% of daily budget
+  Creative:   Urgency + social proof variants
+  Frequency:  Hard cap at 3 impressions per user per day
+
+CAMPAIGN 3 — LEAD MAGNET (runs in parallel with Campaign 1)
+  Goal:       Build email list for nurture sequence
+  Ad Set:     Same targeting as Campaign 1, Ad Set A
+  Budget:     10% of daily budget
+  CTA:        Free lead magnet opt-in (lower friction than direct purchase)
+  Follow-up:  7-day email sequence → purchase pitch on Day 7
+
+AD WALLET DISBURSEMENT:
+  Daily budget requested by campaign structure
+  → TextOS deducts 15–20% management fee
+  → Remaining 80–85% disbursed to platform billing accounts
+  → All transactions logged in ad_wallets table
+  → Low balance alert at 20% remaining ($60 if $300/month wallet)
+  → All campaigns pause automatically if wallet reaches $0
+
+STEP 4: QUALITY GATES (enforced before any campaign goes live)
+--------------------------------------------------------------------------------
+
+These checks must all pass before ads are published. Block on failure.
+
+  ✓ Stripe checkout tested end-to-end (real $1 test transaction completed)
+  ✓ Download URL delivery confirmed working after successful payment
+  ✓ Email confirmation received after test purchase
+  ✓ Landing page /buy loads in < 3 seconds (Lighthouse performance > 80)
+  ✓ /buy page renders correctly at 390px mobile width
+  ✓ No placeholder text on any page (regex check for common placeholders)
+  ✓ Privacy policy and terms pages exist and are linked from footer
+  ✓ Ad platform credentials verified (test API call returns 200)
+  ✓ Ad wallet has sufficient balance for at least 7 days of configured spend
+  ✓ All creative assets uploaded to ad platform creative libraries
+  ✓ Pixel/conversion tracking installed and firing on purchase confirmation
+
+================================================================================
+PHASE 3 — AUTONOMOUS OPTIMIZATION ENGINE
+================================================================================
+
+NIGHTLY JOB (2:00 AM UTC via Cloudflare Cron Trigger):
+--------------------------------------------------------------------------------
+
+  1. Pull performance data from all active ad platforms
+     Store in performance_snapshots table with timestamp
+
+  2. Run creative performance analysis
+     For each ad with impressions > 2,000:
+       IF CTR < 0.8% → mark status = "underperforming"
+       IF frequency > 4.0 → mark status = "fatigued"
+     If 3+ ads in any ad set are underperforming or fatigued:
+       → Queue: generate 5 new creative variants from top 3 performers
+       → New variants launch next morning with 20% of ad set budget as test
+
+  3. Run budget optimization
+     For each ad set with spend > $30:
+       IF ROAS > 3.0  → increase daily budget by 20%, max 3x initial budget
+       IF ROAS < 1.5  → decrease daily budget by 50%
+       IF ROAS < 0.8  → pause ad set, queue replacement creative brief
+
+  4. Run product improvement analysis
+     Check conversion rate (visitors to /buy → Stripe purchase):
+       IF CVR < 3% AND sessions > 200 → queue: generate 3 new headline variants
+       IF CVR < 1% AND sessions > 500 → queue: generate new pricing test ($17 vs $27 vs $37)
+     Check email sequence performance:
+       IF Day-7 email purchase rate < 5% → queue: generate improved pitch email variant
+
+  5. Apply queued changes (locked=false fields only)
+     Changes to locked=true fields go to recommendation queue in dashboard instead
+
+  6. Generate and store daily performance report in business record
+
+EVENT-DRIVEN TRIGGERS (Cloudflare Queue, fire immediately):
+--------------------------------------------------------------------------------
+
+  TRIGGER: payment_intent.succeeded
+    → Generate signed download URL → store in KV with 24hr TTL
+    → Send purchase confirmation email
+    → Increment conversion counter in performance_snapshots
+
+  TRIGGER: ad_spend_threshold (daily budget cap exceeded)
+    → Pause ALL campaigns for this business immediately
+    → Alert activator dashboard
+    → Log overspend event
+
+  TRIGGER: roas_critical (ROAS < 0.5 for 48 hours)
+    → Pause campaign
+    → Generate diagnostic report
+    → Queue new creative set
+    → Alert activator dashboard
+
+  TRIGGER: conversion_rate_drop (CVR drops > 50% from 7-day average)
+    → Check if paywall page is loading correctly (ping /buy)
+    → Check if Stripe checkout is responding
+    → If technical issue: alert immediately
+    → If not technical: flag for nightly analysis
+
+  TRIGGER: wallet_low (balance < 20% of monthly budget)
+    → Send low balance notification to activator
+    → If balance < $10: pause all campaigns, send urgent alert
+
+CREATIVE LEARNING LOOP (runs weekly, Sunday 3:00 AM UTC):
+--------------------------------------------------------------------------------
+
+  1. Identify top 3 performing ads by ROAS from past 7 days
+  2. Extract patterns: hook type, visual style, copy angle, CTA used, audience
+  3. Tag these patterns in ad_creatives table as "winning_patterns"
+  4. Generate 10 new creative variants that combine elements of winners
+  5. Schedule new variants to begin A/B testing Monday morning
+  6. Archive bottom 10% of performers (keep data, remove from active rotation)
+
+PRODUCT IMPROVEMENT LOOP (runs monthly, 1st of month 4:00 AM UTC):
+--------------------------------------------------------------------------------
+
+  Pull 30-day data:
+    revenue, refund_rate, download_count, email_open_rates, email_click_rates
+
+  Generate improvement recommendations:
+    IF refund_rate > 5%:
+      → Analyze what buyers expected vs. what product delivers
+      → Generate improved product description variants
+      → Queue as recommendation (locked=true fields) or auto-apply (locked=false)
+
+    IF email Day-7 purchase rate < 5%:
+      → Generate improved nurture sequence
+      → Auto-apply to new subscribers (existing subscribers keep current sequence)
+
+  Generate product_v2 brief if:
+    revenue > $500 AND download_count > 50 AND 30 days have passed
+    → v2 is a deeper/expanded version of v1 — upsell opportunity
+    → Brief stored in business_products as version=2, status="queued"
+    → Activator approves v2 from dashboard before it launches
+
+================================================================================
+CONFLICT RESOLUTION — AI vs HUMAN EDITS
+================================================================================
+
+Every content field has three properties: content, source, locked.
+
+  source values:  "ai_generated" | "human_edited" | "ai_optimized"
+  locked values:  true | false
+
+Rules (non-negotiable):
+  - Field starts as source="ai_generated", locked=false
+  - Activator manually edits field → source="human_edited", locked=true
+  - Optimization loop reads locked before any write
+  - locked=true → skip this field, write recommendation to dashboard instead
+  - locked=false → optimization loop may update, source becomes "ai_optimized"
+  - Activator can toggle locked from dashboard at any time
+  - Recommendation queue shows: current value | suggested value | expected impact
+  - Activator accepts or rejects each recommendation — never auto-applied to locked fields
+
+================================================================================
+ACTIVATOR INTERFACE — THE ONLY HUMAN TOUCHPOINTS
+================================================================================
+
+ONE-TIME SETUP (do once, never again):
+  1. Enter business idea (or accept TextOS suggestion)
+  2. Connect Stripe account via Stripe Connect
+  3. Fund Ad Wallet (minimum $300 to start)
+  4. Set monthly budget cap
+  5. (Optional) Set target audience parameters — TextOS has smart defaults
+
+ONGOING OPTIONAL INTERACTIONS:
+  - Review weekly performance summary (email or dashboard)
+  - Accept or reject product improvement recommendations (locked fields)
+  - Adjust monthly ad budget up or down
+  - Approve product v2 when queued
+  - Pause or restart the business
+
+THAT IS ALL. Everything else in this document runs without human input.
+
+================================================================================
+ENVIRONMENT VARIABLES REQUIRED (net new — do not duplicate existing)
+================================================================================
+
+# Ad Platform Credentials
+META_ACCESS_TOKEN=
+META_AD_ACCOUNT_ID=
+META_BUSINESS_ID=
+META_PIXEL_ID=
+
+GOOGLE_ADS_DEVELOPER_TOKEN=
+GOOGLE_ADS_CLIENT_ID=
+GOOGLE_ADS_CLIENT_SECRET=
+GOOGLE_ADS_REFRESH_TOKEN=
+GOOGLE_ADS_CUSTOMER_ID=
+
+TIKTOK_ACCESS_TOKEN=
+TIKTOK_ADVERTISER_ID=
+
+LINKEDIN_ACCESS_TOKEN=
+LINKEDIN_AD_ACCOUNT_ID=
+
+# Content/Image Generation
+ANTHROPIC_API_KEY=           # already exists — use Claude Sonnet for creative generation
+IMAGE_GENERATION_API_KEY=    # for ad image generation
+
+# R2 Buckets (net new)
+R2_PRODUCTS_BUCKET=          # for PDF product file storage
+R2_CREATIVES_BUCKET=         # for ad creative asset storage
+
+# Existing — confirm these exist and do not recreate
+STRIPE_SECRET_KEY=           # already exists
+STRIPE_WEBHOOK_SECRET=       # already exists
+SUPABASE_URL=                # already exists
+SUPABASE_SERVICE_ROLE_KEY=   # already exists
+CLOUDFLARE_API_TOKEN=        # already exists
+CLOUDFLARE_ACCOUNT_ID=       # already exists
+
+================================================================================
+IMPLEMENTATION ORDER
+================================================================================
+
+WEEK 1 — PRODUCT AND PAYWALL (Phase 1 complete)
+  [ ] DIGITAL_PRODUCT asset generation pipeline (Claude Sonnet)
+  [ ] PDF generation and R2 storage
+  [ ] Signed download URL generation (R2 presigned URLs, 24hr TTL)
+  [ ] Stripe one-time payment: Price object, Checkout Session, webhooks
+  [ ] /buy and /download pages injected into existing website template
+  [ ] Homepage CTA updated to point to /buy
+  [ ] Purchase confirmation email
+  [ ] Lead magnet opt-in form + 7-day email sequence
+  [ ] field locking system (content/source/locked on all content fields)
+  [ ] End-to-end test: real $1 purchase → download received → email confirmed
+
+WEEK 2 — AD WALLET AND META ADS (Phase 2, Platform 1)
+  [ ] Ad Wallet funding flow (Stripe → TextOS balance)
+  [ ] Management fee deduction logic (15–20%)
+  [ ] Meta Ads API integration (campaigns, ad sets, ads, creative upload)
+  [ ] Ad creative generation pipeline (text assets — Claude Sonnet)
+  [ ] Image brief generation pipeline (art direction briefs)
+  [ ] Video script generation pipeline (15s/30s/60s)
+  [ ] Campaign auto-builder (3-campaign structure)
+  [ ] Quality gates enforcement layer
+  [ ] Campaign launch: first live Meta campaign
+
+WEEK 3 — GOOGLE ADS + OPTIMIZATION ENGINE
+  [ ] Google Ads API integration
+  [ ] Nightly optimization Cron Trigger worker
+  [ ] Event-driven Queue workers (spend cap, ROAS critical, CVR drop, wallet low)
+  [ ] Performance data ingestion pipeline (D1 performance_snapshots table)
+  [ ] Budget optimization decision rules
+  [ ] Creative rotation logic
+  [ ] Activator dashboard: revenue, spend, ROAS, CVR, active campaigns
+
+WEEK 4 — TIKTOK + IMPROVEMENT LOOPS + POLISH
+  [ ] TikTok Ads API integration
+  [ ] Weekly creative learning loop worker
+  [ ] Monthly product improvement loop worker
+  [ ] Product v2 generation and queuing
+  [ ] Recommendation queue UI in dashboard
+  [ ] Low balance alerts and auto-pause
+  [ ] Performance summary email (weekly automated report to activator)
+  [ ] Full end-to-end test: mission → product → paywall → ads → revenue → optimization
+
+================================================================================
+SUCCESS METRICS
+================================================================================
+
+PHASE 1 COMPLETE WHEN:
+  - New DIGITAL_PRODUCT deploys end-to-end in < 24 hours from mission input
+  - Real payment processed and download delivered without human intervention
+  - Email sequence confirmed firing on schedule
+
+PHASE 2 COMPLETE WHEN:
+  - Meta campaign live within 48 hours of Phase 1 completion
+  - Ad creative generated, uploaded, and serving without human input
+  - Ad Wallet management fee flowing correctly
+
+PHASE 3 COMPLETE WHEN:
+  - Nightly optimization running without human intervention for 14+ days
+  - At least one creative rotation has fired based on performance data
+  - At least one budget adjustment has fired based on ROAS rules
+
+BUSINESS SUCCESS TARGETS:
+  Median time to first paid customer:     < 14 days from activation
+  Median time to $1,000 MRR per business: < 60 days from activation
+  Average ROAS across portfolio:          > 2.0x
+  Monthly churn rate (platform):          < 8%
+  Activator NPS:                          > 50
+
+THE NORTH STAR:
+  Revenue generated per dollar of ad spend, across all active businesses,
+  trending upward month-over-month as the learning corpus grows.
+
+================================================================================
+THE POSITIONING THAT WINS
+================================================================================
+
+"TextOS is the only business platform where your ad budget is the only
+human decision you make."
+
+The activator brings an idea and a budget.
+TextOS builds the product, deploys the paywall, writes the ads, publishes them,
+collects the revenue, optimizes the campaigns, and improves the product — forever.
+
+Every business it runs makes every future business smarter.
+The corpus of learned patterns is the moat.
+
+================================================================================
+Reference: textos.ai | Author: Rob Gaudet | New Orleans, 2026
+Version 2.0 — Updated with architect agent clarifications
+================================================================================

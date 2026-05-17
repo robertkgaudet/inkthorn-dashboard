@@ -1,0 +1,98 @@
+TO: TextOS Architect Agent
+
+We've been doing some strategic planning on what TextOS should be able to do next.
+
+Here is an honest picture of where we are and what we need to build.
+
+---
+
+WHAT TEXTOS ALREADY DOES:
+
+- Accepts a business idea from an activator (or generates one autonomously)
+- Generates the mission statement, brand, and business concept
+- Builds and deploys the website
+
+---
+
+WHAT IS MISSING — THE THREE GAPS:
+
+GAP 1: THE PRODUCT DOES NOT EXIST YET
+The website exists but the actual product or service on it does not.
+TextOS needs to build the product itself — whether that is a digital download,
+a newsletter, a web tool, a report, a course, a data set, or a service package.
+The product must be real, complete, and deliverable before any traffic is sent.
+
+GAP 2: THERE IS NO PAYWALL OR PAYMENT SYSTEM
+The website has no way to collect money yet.
+TextOS needs to add a paywall, connect Stripe, configure pricing, and set up
+the full free-to-paid conversion flow appropriate to the business type.
+The activator connects their Stripe account via Stripe Connect as a one-time setup.
+
+GAP 3: THERE IS NO CUSTOMER ACQUISITION PIPELINE
+No ads are running. No traffic is being generated. No one knows the business exists.
+TextOS needs to generate all ad creative — copy, images, video scripts — and publish
+campaigns automatically via the ad platform APIs (Meta, Google, TikTok, LinkedIn, etc.).
+The activator sets a monthly ad budget once. TextOS manages everything from there.
+
+---
+
+THE FOURTH THING — AUTONOMOUS IMPROVEMENT
+
+Once the product exists, the paywall is live, and traffic is flowing, TextOS needs
+to close the loop. It should ingest performance data — views, conversion rate, 
+revenue, churn, user behavior, ad ROAS — and use that data to:
+
+- Improve the product iteratively without human input
+- Optimize ad campaigns (scale winners, kill losers, generate new creative)
+- Improve the paywall conversion flow over time
+- Identify what users want next and build it
+
+This is the recursive engine. Every business TextOS runs should get better
+on its own, indefinitely, based purely on real user activity and metrics.
+
+---
+
+TEXTOS BUSINESS MODEL (how we make money):
+
+Activators pay two things:
+  1. Platform subscription: $49.99/month — includes 30 tokens
+     (Tokens cover other TextOS tasks. Those features exist but are NOT the focus right now.)
+  2. Ad spend budget: set by the activator monthly — they pay this directly
+
+TextOS takes 15–20% of the activator's monthly ad spend as a management fee.
+This means TextOS revenue scales directly with activator ad budgets.
+The more successful the businesses TextOS builds, the more activators spend on ads,
+the more TextOS earns. Incentives are perfectly aligned.
+
+NOTE FOR THE ARCHITECT: The token-based task system already exists and should not
+be touched. Our focus right now is exclusively on:
+  (a) building the product autonomously
+  (b) deploying the paywall and payment collection
+  (c) building the ad creative generation and publishing pipeline
+  (d) closing the optimization loop
+
+---
+
+THE ACTIVATOR'S ROLE (INTENTIONALLY MINIMAL):
+
+1. Show up with an idea — or accept one TextOS generates
+2. Do a one-time setup: connect Stripe, set monthly ad budget, add platform credentials
+3. That's it. TextOS handles everything else.
+
+---
+
+WHAT I NEED FROM YOU:
+
+1. Review the full architecture brief (link below) against what we have already built
+2. Tell me what is already covered, what is partially done, and what is genuinely new
+3. Flag anything that conflicts with our existing stack or architecture
+4. Tell me what you would build first given our current state
+5. Identify any gaps in the brief we should address before building
+
+The goal is to integrate this into what we already have — not start over.
+What do you see?
+
+---
+
+FULL ARCHITECTURE BRIEF:
+https://trustlight.ai/vibecoding/textos-autonomous-business-engine.txt
