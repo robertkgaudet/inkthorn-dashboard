@@ -1,67 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-05-16T23:15:55.950Z",
+  "updated": "2026-05-17T13:32:02.731Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-05-16",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Doug Benson",
-      "url": "https://504comedy.com/event/1357/doug-benson-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Sat May 16 2026",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-16",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "Two Friends Improv Theater - A Night of Improv",
-      "url": "https://504comedy.com/event/1059/two-friends-improv-theater--a-night-of-improv",
-      "venue": "The Actor’s Apothecary",
-      "type": "Improv",
-      "cost": "$8",
-      "repeat": "Third Saturday",
-      "start_dt": "2026-05-16T19:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-16",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Jokes on Oak",
-      "url": "https://504comedy.com/event/1116/jokes-on-oak",
-      "venue": "Oak St Brewery",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Saturday",
-      "start_dt": "2026-06-20T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-16",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Weekend Warriors",
-      "url": "https://504comedy.com/event/1368/weekend-warriors",
-      "venue": "The Actor’s Apothecary",
-      "type": "Improv",
-      "cost": "$10",
-      "repeat": "Third Saturday",
-      "start_dt": "2026-05-16T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-05-17",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -71,11 +15,11 @@
       "type": "Improv",
       "cost": "$10",
       "repeat": "Third Sunday",
-      "start_dt": "2026-06-20T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-17",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -85,11 +29,11 @@
       "type": "Stand-up",
       "cost": "$15",
       "repeat": "Every Sunday",
-      "start_dt": "2026-05-17T20:00-05:00"
+      "start_dt": "2026-06-21T20:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-17",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-05-18",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -117,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-05-18",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -131,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-05-18",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -145,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-05-18",
       "time": "9:30pm",
       "time_sort": 2130,
@@ -394,78 +338,44 @@
       "cost": "$25",
       "repeat": "Fri May 22 2026",
       "start_dt": "2026-05-22T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-05-23",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Lane Lonion",
+      "url": "https://504comedy.com/event/1358/lane-lonion-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$20",
+      "repeat": "Sat May 23 2026",
+      "start_dt": "2026-05-22T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-05-23",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Jokes on Oak",
+      "url": "https://504comedy.com/event/1116/jokes-on-oak",
+      "venue": "Oak St Brewery",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Saturday",
+      "start_dt": "2026-05-23T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-05-16",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-16",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Doug Benson",
-          "url": "https://504comedy.com/event/1357/doug-benson-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Sat May 16 2026",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-16",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "Two Friends Improv Theater - A Night of Improv",
-          "url": "https://504comedy.com/event/1059/two-friends-improv-theater--a-night-of-improv",
-          "venue": "The Actor’s Apothecary",
-          "type": "Improv",
-          "cost": "$8",
-          "repeat": "Third Saturday",
-          "start_dt": "2026-05-16T19:30-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-16",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Jokes on Oak",
-          "url": "https://504comedy.com/event/1116/jokes-on-oak",
-          "venue": "Oak St Brewery",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Saturday",
-          "start_dt": "2026-06-20T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-16",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Weekend Warriors",
-          "url": "https://504comedy.com/event/1368/weekend-warriors",
-          "venue": "The Actor’s Apothecary",
-          "type": "Improv",
-          "cost": "$10",
-          "repeat": "Third Saturday",
-          "start_dt": "2026-05-16T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-05-17",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-17",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -475,11 +385,11 @@
           "type": "Improv",
           "cost": "$10",
           "repeat": "Third Sunday",
-          "start_dt": "2026-06-20T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-17",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -489,11 +399,11 @@
           "type": "Stand-up",
           "cost": "$15",
           "repeat": "Every Sunday",
-          "start_dt": "2026-05-17T20:00-05:00"
+          "start_dt": "2026-06-21T20:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-17",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -508,12 +418,12 @@
       ]
     },
     {
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-05-18",
       "events": [
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-05-18",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -527,7 +437,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-05-18",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -541,7 +451,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-05-18",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -555,7 +465,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-05-18",
           "time": "9:30pm",
           "time_sort": 2130,
@@ -828,6 +738,40 @@
           "cost": "$25",
           "repeat": "Fri May 22 2026",
           "start_dt": "2026-05-22T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Saturday",
+      "date": "2026-05-23",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-05-23",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Lane Lonion",
+          "url": "https://504comedy.com/event/1358/lane-lonion-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$20",
+          "repeat": "Sat May 23 2026",
+          "start_dt": "2026-05-22T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-05-23",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Jokes on Oak",
+          "url": "https://504comedy.com/event/1116/jokes-on-oak",
+          "venue": "Oak St Brewery",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Saturday",
+          "start_dt": "2026-05-23T20:00-05:00"
         }
       ]
     }
