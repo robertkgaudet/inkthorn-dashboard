@@ -1,0 +1,2287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibe Coding Mastery — Full Day Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0D0D0D;
+    --white: #FFFFFF;
+    --gray-50: #F8F8F8;
+    --gray-100: #F0F0F0;
+    --gray-200: #E0E0E0;
+    --gray-400: #999;
+    --gray-600: #555;
+    --amber: #C8832A;
+    --amber-light: #FFF3E0;
+    --blue: #1E6FBF;
+    --blue-light: #EBF4FF;
+    --green: #1A7A3C;
+    --green-light: #E8F5EC;
+    --red: #C0392B;
+    --red-light: #FDEDED;
+    --orange: #E07B20;
+    --orange-light: #FFF0E0;
+    --purple: #6B3FA0;
+    --purple-light: #F3EEFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* PRINT */
+  @media print {
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    body { font-size: 12px; }
+    .cover { min-height: auto; padding: 60px 40px; }
+  }
+
+  /* COVER PAGE */
+  .cover {
+    background: var(--black);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 10%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 60px,
+      rgba(200, 131, 42, 0.04) 60px,
+      rgba(200, 131, 42, 0.04) 61px
+    );
+  }
+
+  .cover-badge {
+    display: inline-block;
+    background: var(--amber);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 4px;
+    margin-bottom: 32px;
+    width: fit-content;
+  }
+
+  .cover h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(60px, 8vw, 100px);
+    color: var(--white);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 24px;
+  }
+
+  .cover h1 span {
+    color: var(--amber);
+  }
+
+  .cover-sub {
+    font-size: 20px;
+    color: rgba(255,255,255,0.6);
+    max-width: 600px;
+    margin-bottom: 48px;
+    line-height: 1.5;
+  }
+
+  .cover-stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .cover-stat {
+    border-left: 3px solid var(--amber);
+    padding-left: 16px;
+  }
+
+  .cover-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .cover-stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .cover-footer {
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+    text-align: right;
+  }
+
+  .cover-footer-text {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* MAIN CONTENT */
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    padding: 80px 0 40px;
+    border-bottom: 1px solid var(--gray-200);
+    margin-bottom: 48px;
+  }
+
+  .section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--amber);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: var(--black);
+    margin-bottom: 16px;
+  }
+
+  .section-header p {
+    font-size: 18px;
+    color: var(--gray-600);
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  /* TIME BADGE */
+  .time-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-600);
+    margin-bottom: 32px;
+  }
+
+  .time-badge span {
+    width: 8px;
+    height: 8px;
+    background: var(--amber);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* SCHEDULE TABLE */
+  .schedule {
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+
+  .schedule-row {
+    display: grid;
+    grid-template-columns: 120px 80px 1fr;
+    border-bottom: 1px solid var(--gray-100);
+    align-items: stretch;
+  }
+
+  .schedule-row:last-child { border-bottom: none; }
+  .schedule-row:first-child { background: var(--gray-50); }
+
+  .schedule-cell {
+    padding: 16px 20px;
+    font-size: 14px;
+    border-right: 1px solid var(--gray-100);
+  }
+
+  .schedule-cell:last-child { border-right: none; }
+
+  .schedule-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--gray-600);
+    font-weight: 500;
+  }
+
+  .schedule-duration {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--amber);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .schedule-title {
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+
+  .schedule-desc {
+    font-size: 13px;
+    color: var(--gray-600);
+  }
+
+  .schedule-header .schedule-cell {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+  }
+
+  /* LESSON CARDS */
+  .lesson-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  @media (max-width: 680px) {
+    .lesson-grid { grid-template-columns: 1fr; }
+  }
+
+  .lesson-card {
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .lesson-card-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  .lesson-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .lesson-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.3;
+  }
+
+  .lesson-card-body {
+    padding: 20px 24px;
+  }
+
+  .lesson-card p {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .lesson-objectives {
+    list-style: none;
+  }
+
+  .lesson-objectives li {
+    font-size: 13px;
+    color: var(--black);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--gray-100);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .lesson-objectives li:last-child { border-bottom: none; }
+
+  .lesson-objectives li::before {
+    content: '→';
+    color: var(--amber);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* CALLOUT BOXES */
+  .callout {
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    border-left: 4px solid;
+  }
+
+  .callout-pro {
+    background: var(--green-light);
+    border-color: var(--green);
+  }
+
+  .callout-con {
+    background: var(--red-light);
+    border-color: var(--red);
+  }
+
+  .callout-warning {
+    background: var(--orange-light);
+    border-color: var(--orange);
+  }
+
+  .callout-tip {
+    background: var(--amber-light);
+    border-color: var(--amber);
+  }
+
+  .callout-info {
+    background: var(--blue-light);
+    border-color: var(--blue);
+  }
+
+  .callout-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .callout-pro .callout-label { color: var(--green); }
+  .callout-con .callout-label { color: var(--red); }
+  .callout-warning .callout-label { color: var(--orange); }
+  .callout-tip .callout-label { color: var(--amber); }
+  .callout-info .callout-label { color: var(--blue); }
+
+  .callout p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* RULE CARDS */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  @media (max-width: 680px) {
+    .rules-grid { grid-template-columns: 1fr; }
+  }
+
+  .rule-card {
+    background: var(--black);
+    border-radius: 12px;
+    padding: 24px;
+    color: var(--white);
+  }
+
+  .rule-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .rule-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .rule-card p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+  }
+
+  /* ARCHITECTURE DIAGRAM */
+  .arch-diagram {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  .arch-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .arch-box {
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .arch-box-dark { background: var(--black); color: var(--white); }
+  .arch-box-amber { background: var(--amber); color: var(--white); }
+  .arch-box-blue { background: var(--blue-light); color: var(--blue); border: 1px solid var(--blue); }
+  .arch-box-green { background: var(--green-light); color: var(--green); border: 1px solid var(--green); }
+  .arch-box-gray { background: var(--gray-100); color: var(--gray-600); border: 1px solid var(--gray-200); }
+  .arch-box-purple { background: var(--purple-light); color: var(--purple); border: 1px solid var(--purple); }
+
+  .arch-arrow {
+    font-size: 20px;
+    color: var(--gray-400);
+    display: flex;
+    align-items: center;
+  }
+
+  .arch-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .arch-divider {
+    border: none;
+    border-top: 1px dashed var(--gray-200);
+    margin: 24px 0;
+  }
+
+  /* CODE BLOCKS */
+  .code-block {
+    background: var(--black);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+  }
+
+  .code-block-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .code-block pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .code-comment { color: rgba(255,255,255,0.35); }
+  .code-highlight { color: var(--amber); }
+  .code-good { color: #4ADE80; }
+  .code-bad { color: #F87171; }
+
+  /* CHECKLIST */
+  .checklist {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-100);
+    font-size: 14px;
+  }
+
+  .checklist li:last-child { border-bottom: none; }
+
+  .check-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--gray-300);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* TOOL TABLE */
+  .tool-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 48px;
+    font-size: 14px;
+  }
+
+  .tool-table th {
+    background: var(--gray-50);
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .tool-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: top;
+  }
+
+  .tool-table tr:last-child td { border-bottom: none; }
+
+  .tool-name {
+    font-weight: 700;
+    color: var(--black);
+  }
+
+  .tool-cost {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* BEST PRACTICE CARDS */
+  .practice-list {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .practice-card {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 20px;
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 20px;
+    align-items: start;
+  }
+
+  .practice-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .practice-icon-green { background: var(--green-light); }
+  .practice-icon-amber { background: var(--amber-light); }
+  .practice-icon-blue { background: var(--blue-light); }
+  .practice-icon-red { background: var(--red-light); }
+  .practice-icon-purple { background: var(--purple-light); }
+
+  .practice-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 6px;
+  }
+
+  .practice-card p {
+    font-size: 13px;
+    color: var(--gray-600);
+    line-height: 1.5;
+  }
+
+  /* MISTAKE CARDS */
+  .mistake-card {
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .mistake-header {
+    background: var(--red-light);
+    padding: 14px 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    border-bottom: 1px solid rgba(192, 57, 43, 0.15);
+  }
+
+  .mistake-icon {
+    font-size: 18px;
+  }
+
+  .mistake-header h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--red);
+  }
+
+  .mistake-body {
+    padding: 16px 20px;
+  }
+
+  .mistake-body p {
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .mistake-fix {
+    background: var(--green-light);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  /* HANDS-ON EXERCISES */
+  .exercise-card {
+    background: var(--black);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+    color: var(--white);
+  }
+
+  .exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .exercise-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .exercise-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+  }
+
+  .exercise-time {
+    background: rgba(255,255,255,0.1);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    white-space: nowrap;
+  }
+
+  .exercise-steps {
+    list-style: none;
+    counter-reset: steps;
+  }
+
+  .exercise-steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+
+  .exercise-steps li:last-child { border-bottom: none; }
+
+  .exercise-steps li::before {
+    content: counter(steps);
+    min-width: 24px;
+    height: 24px;
+    background: var(--amber);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* QUICK REFERENCE */
+  .quick-ref {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 48px;
+  }
+
+  .quick-ref h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.04em;
+    margin-bottom: 24px;
+  }
+
+  .ref-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .ref-grid { grid-template-columns: 1fr; }
+  }
+
+  .ref-item {
+    border-radius: 8px;
+    padding: 14px 16px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+  }
+
+  .ref-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 6px;
+  }
+
+  .ref-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--black);
+    font-weight: 500;
+    word-break: break-all;
+  }
+
+  /* DIVIDERS */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--gray-200);
+    margin: 64px 0;
+  }
+
+  /* TYPOGRAPHY */
+  h2.section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    letter-spacing: 0.02em;
+    color: var(--black);
+    margin-bottom: 16px;
+  }
+
+  h3.subsection {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 16px;
+    padding-top: 32px;
+  }
+
+  p.lead {
+    font-size: 17px;
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 660px;
+  }
+
+  p.body {
+    font-size: 15px;
+    color: var(--black);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 48px 0;
+  }
+
+  .toc h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+    color: var(--black);
+  }
+
+  .toc-list {
+    list-style: none;
+    display: grid;
+    gap: 4px;
+  }
+
+  .toc-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    gap: 16px;
+  }
+
+  .toc-list li:hover { background: var(--gray-50); }
+
+  .toc-list a {
+    color: var(--black);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .toc-list a:hover { color: var(--amber); }
+
+  .toc-page {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--gray-400);
+    white-space: nowrap;
+  }
+
+  .toc-section {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    padding: 16px 12px 6px;
+    margin-top: 8px;
+  }
+
+  /* PASSWORD BOX */
+  .password-box {
+    background: var(--black);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  .password-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+
+  .password-box p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 24px;
+  }
+
+  .password-reveal {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 16px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    color: var(--amber);
+    letter-spacing: 0.2em;
+    display: inline-block;
+    margin-bottom: 16px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .password-hint {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* BADGE STRIP */
+  .badge-strip {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .badge {
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-600);
+  }
+
+  .badge-amber { background: var(--amber-light); color: var(--amber); border-color: var(--amber); }
+  .badge-green { background: var(--green-light); color: var(--green); border-color: var(--green); }
+  .badge-blue { background: var(--blue-light); color: var(--blue); border-color: var(--blue); }
+  .badge-red { background: var(--red-light); color: var(--red); border-color: var(--red); }
+
+  /* NAV */
+  .course-nav {
+    position: sticky;
+    top: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 40px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 52px;
+    overflow-x: auto;
+  }
+
+  .course-nav a {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-400);
+    text-decoration: none;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+
+  .course-nav a:hover { color: var(--amber); }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--black);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+  }
+
+  .nav-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--gray-200);
+    flex-shrink: 0;
+  }
+
+  /* QUOTE */
+  .pull-quote {
+    border-left: 4px solid var(--amber);
+    padding: 16px 24px;
+    margin: 32px 0;
+    background: var(--amber-light);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .pull-quote p {
+    font-size: 17px;
+    font-style: italic;
+    color: var(--black);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .pull-quote cite {
+    font-size: 12px;
+    color: var(--gray-600);
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  .course-footer {
+    background: var(--black);
+    padding: 60px 10%;
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  @media (max-width: 680px) {
+    .course-footer { grid-template-columns: 1fr; padding: 40px 24px; }
+  }
+
+  .footer-col h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    color: var(--amber);
+    margin-bottom: 16px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+  }
+
+  .footer-col ul li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    padding: 4px 0;
+    line-height: 1.5;
+  }
+
+  .footer-bottom {
+    background: var(--black);
+    padding: 24px 10%;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* SPACER */
+  .spacer { height: 48px; }
+  .spacer-sm { height: 24px; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover" id="cover">
+  <div class="cover-badge">Day Training Course · 2026 Edition</div>
+  <h1>VIBE CODING<br><span>MASTERY</span></h1>
+  <p class="cover-sub">How to build a real production application using AI — without writing a single line of code yourself. Based on 3 weeks building TextOS from zero to launch.</p>
+  <div class="cover-stats">
+    <div class="cover-stat">
+      <div class="cover-stat-num">7</div>
+      <div class="cover-stat-label">Hours of Training</div>
+    </div>
+    <div class="cover-stat">
+      <div class="cover-stat-num">25</div>
+      <div class="cover-stat-label">Students Per Class</div>
+    </div>
+    <div class="cover-stat">
+      <div class="cover-stat-num">1</div>
+      <div class="cover-stat-label">App Built Today</div>
+    </div>
+    <div class="cover-stat">
+      <div class="cover-stat-num">0</div>
+      <div class="cover-stat-label">Lines of Code Written</div>
+    </div>
+  </div>
+  <div class="cover-footer">
+    <div class="cover-footer-text">Rob Gaudet · TextOS · textos.ai</div>
+    <div class="cover-footer-text" style="margin-top:4px">Confidential — Class Use Only</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="course-nav no-print">
+  <span class="nav-logo">VIBE CODING</span>
+  <div class="nav-divider"></div>
+  <a href="#overview">Overview</a>
+  <a href="#tools">Tools</a>
+  <a href="#architecture">Architecture</a>
+  <a href="#morning">Morning</a>
+  <a href="#afternoon">Afternoon</a>
+  <a href="#lessons">Lessons</a>
+  <a href="#mistakes">Mistakes</a>
+  <a href="#reference">Reference</a>
+</nav>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc" id="overview">
+    <h3>What's In This Course</h3>
+    <ul class="toc-list">
+      <div class="toc-section">Course Foundation</div>
+      <li><a href="#what-is-vibe-coding">What Is Vibe Coding?</a><span class="toc-page">Module 1</span></li>
+      <li><a href="#tools">Tools & Setup</a><span class="toc-page">Module 2</span></li>
+      <li><a href="#architecture">How It All Works Together</a><span class="toc-page">Module 3</span></li>
+      <div class="toc-section">Morning Session (9:00–12:00)</div>
+      <li><a href="#roles">The Two Roles: Architect vs Implementer</a><span class="toc-page">9:00</span></li>
+      <li><a href="#brief-writing">How to Write a Brief That Works</a><span class="toc-page">9:45</span></li>
+      <li><a href="#project-setup">Setting Up Your Project</a><span class="toc-page">10:30</span></li>
+      <li><a href="#first-deploy">Your First Deploy</a><span class="toc-page">11:00</span></li>
+      <div class="toc-section">Afternoon Session (1:00–4:00)</div>
+      <li><a href="#building">Building Real Features</a><span class="toc-page">1:00</span></li>
+      <li><a href="#debugging">When Things Break</a><span class="toc-page">2:00</span></li>
+      <li><a href="#shipping">Shipping to Production</a><span class="toc-page">2:45</span></li>
+      <li><a href="#demo">Demo & Showcase</a><span class="toc-page">3:30</span></li>
+      <div class="toc-section">Reference Material</div>
+      <li><a href="#lessons">15 Lessons From the Real Build</a><span class="toc-page">Appendix A</span></li>
+      <li><a href="#mistakes">The 12 Biggest Mistakes</a><span class="toc-page">Appendix B</span></li>
+      <li><a href="#reference">Quick Reference Card</a><span class="toc-page">Appendix C</span></li>
+    </ul>
+  </div>
+
+  <!-- MODULE 1: WHAT IS VIBE CODING -->
+  <div id="what-is-vibe-coding">
+    <div class="section-header">
+      <span class="section-number">Module 01</span>
+      <h2>What Is Vibe Coding?</h2>
+      <p>The complete shift in how software gets built — and why it changes everything for non-technical founders.</p>
+    </div>
+
+    <p class="body">Vibe coding is using AI to build production software by describing <em>what</em> you want, not <em>how</em> to build it. Instead of writing code, you write instructions. Instead of being the engineer, you become the architect.</p>
+
+    <div class="pull-quote">
+      <p>"I built TextOS in 5 days — sitting under an oak tree at lunch with my wife using only my laptop and Claude. No app. Just text. That's exactly what I'm selling."</p>
+      <cite>Rob Gaudet, Founder of TextOS</cite>
+    </div>
+
+    <p class="body">The reason vibe coding works isn't magic. It works because AI is now skilled enough to write production code — and your job shifts from being the one who writes code to being the one who knows what to build and why. That's a fundamentally different skill set, and it's one you already have.</p>
+
+    <h3 class="subsection">Why This Works Now (And Didn't 2 Years Ago)</h3>
+
+    <div class="lesson-grid">
+      <div class="lesson-card">
+        <div class="lesson-card-header">
+          <span class="lesson-num">2022</span>
+          <h3>The Old Way</h3>
+        </div>
+        <div class="lesson-card-body">
+          <ul class="lesson-objectives">
+            <li>Hire a developer or learn to code yourself</li>
+            <li>Spend months on basic infrastructure</li>
+            <li>$50K–$200K before first user</li>
+            <li>Technical debt from day one</li>
+            <li>Ideas die in the gap between vision and execution</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-card-header">
+          <span class="lesson-num">2026</span>
+          <h3>The Vibe Coding Way</h3>
+        </div>
+        <div class="lesson-card-body">
+          <ul class="lesson-objectives">
+            <li>You describe the outcome. AI writes the code</li>
+            <li>Production infrastructure in hours</li>
+            <li>$0–$500 before first user</li>
+            <li>Architecture stays in your head + spec docs</li>
+            <li>Build speed limited by clarity, not code</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warning">
+      <span class="callout-label">⚠ Important Distinction</span>
+      <p>Vibe coding doesn't mean "ask AI to build everything and hope." It means you become the architect who directs the AI. <strong>Your judgment, taste, and product thinking is the most valuable part of the equation.</strong> AI handles the implementation. You handle the vision and the decisions.</p>
+    </div>
+
+    <h3 class="subsection">The 3 Things That Make Vibe Coding Work</h3>
+
+    <div class="rules-grid">
+      <div class="rule-card">
+        <span class="rule-num">01</span>
+        <h4>Architectural Thinking</h4>
+        <p>You must understand WHAT you're building well enough to describe it. The more clearly you think, the better the output.</p>
+      </div>
+      <div class="rule-card">
+        <span class="rule-num">02</span>
+        <h4>Research Before Code</h4>
+        <p>Always understand the existing system before changing it. The biggest mistakes come from skipping research and guessing.</p>
+      </div>
+      <div class="rule-card">
+        <span class="rule-num">03</span>
+        <h4>Verify Everything</h4>
+        <p>AI claims it's done. Often it isn't. Always verify in the browser, logs, and database — not just by reading the AI's response.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- MODULE 2: TOOLS -->
+  <div id="tools">
+    <div class="section-header">
+      <span class="section-number">Module 02</span>
+      <h2>Tools & Setup</h2>
+      <p>Everything you need to install before class starts. Get this done before 9am.</p>
+    </div>
+
+    <div class="callout callout-info">
+      <span class="callout-label">Pre-Class Requirement</span>
+      <p>All tools must be installed and accounts created before class starts. Setup takes approximately 45 minutes. Do this the evening before.</p>
+    </div>
+
+    <h3 class="subsection">Required Tools</h3>
+
+    <table class="tool-table">
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>What It Does</th>
+          <th>Cost</th>
+          <th>Install</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tool-name">Claude.ai</span></td>
+          <td>Your architect AI — where you think, plan, and write briefs. This is the brain of the operation.</td>
+          <td><span class="tool-cost">FREE / $20/mo Pro</span></td>
+          <td>claude.ai</td>
+        </tr>
+        <tr>
+          <td><span class="tool-name">Claude Code</span></td>
+          <td>The implementer AI that actually writes and runs code. Runs inside VS Code as an extension.</td>
+          <td><span class="tool-cost">Usage-based</span></td>
+          <td>VS Code extension</td>
+        </tr>
+        <tr>
+          <td><span class="tool-name">VS Code</span></td>
+          <td>Code editor where Claude Code runs. You won't write code here, but you'll use it to manage Claude Code.</td>
+          <td><span class="tool-cost">FREE</span></td>
+          <td>code.visualstudio.com</td>
+        </tr>
+        <tr>
+          <td><span class="tool-name">GitHub</span></td>
+          <td>Where your code is stored and versioned. Claude Code pushes code here automatically.</td>
+          <td><span class="tool-cost">FREE</span></td>
+          <td>github.com</td>
+        </tr>
+        <tr>
+          <td><span class="tool-name">Cloudflare</span></td>
+          <td>Where your app lives. Handles hosting, domains, databases, and edge functions. Best free tier in the industry.</td>
+          <td><span class="tool-cost">FREE (5$/mo Workers Paid)</span></td>
+          <td>cloudflare.com</td>
+        </tr>
+        <tr>
+          <td><span class="tool-name">Supabase</span></td>
+          <td>Your database and authentication. Postgres SQL with a visual dashboard you can actually understand.</td>
+          <td><span class="tool-cost">FREE tier</span></td>
+          <td>supabase.com</td>
+        </tr>
+        <tr>
+          <td><span class="tool-name">Node.js v22+</span></td>
+          <td>Required for the deployment tools to work. Must be v22 or higher — older versions break Wrangler 4.x.</td>
+          <td><span class="tool-cost">FREE</span></td>
+          <td>nodejs.org</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="subsection">Authentication Setup</h3>
+
+    <p class="body">Every tool needs credentials. This is the part most people skip and then wonder why nothing deploys. Set this up properly once and you'll never fight it again.</p>
+
+    <div class="code-block">
+      <span class="code-block-label">Cloudflare API Token — Setup Steps</span>
+      <pre>1. Go to: cloudflare.com → My Profile → API Tokens
+2. Click "Create Token"
+3. Use "Edit Cloudflare Workers" template
+4. Set permissions: Workers Scripts (Edit), Pages (Edit), Account Settings (Read)
+5. Copy the token immediately — you only see it once
+6. Save to a password manager (Bitwarden, 1Password, etc.)
+7. NEVER paste it in a chat, email, or document
+
+<span class="code-comment">// Store in your project's .env file like this:</span>
+<span class="code-highlight">CLOUDFLARE_API_TOKEN=cfut_xxxxxxxxxxxxxxxxxxxx</span>
+
+<span class="code-comment">// Set it in PowerShell before deploying:</span>
+<span class="code-highlight">$env:CLOUDFLARE_API_TOKEN = (Get-Content ".env" | Where-Object { $_ -match "^CLOUDFLARE_API_TOKEN=" } | ForEach-Object { $_ -replace "^CLOUDFLARE_API_TOKEN=", "" })</span></pre>
+    </div>
+
+    <div class="callout callout-con">
+      <span class="callout-label">🔴 Critical Security Rule</span>
+      <p>NEVER paste API tokens, secrets, or passwords into Claude.ai chat — even test-mode keys. Once in chat history, they can be accessed or exposed. Store credentials in a password manager and .env files only. If you accidentally expose a token, rotate it immediately in the provider's dashboard.</p>
+    </div>
+
+    <h3 class="subsection">The CLAUDE.md File — Your Most Important File</h3>
+
+    <p class="body">Every project gets a <code>CLAUDE.md</code> file at the root. This is the document that Claude Code reads at the start of every session. It tells the AI who you are, what you're building, the rules it must follow, and the architecture it must respect. This file is the most important file in your entire project.</p>
+
+    <div class="code-block">
+      <span class="code-block-label">CLAUDE.md — Essential Sections</span>
+      <pre><span class="code-highlight">## PROJECT</span>
+What the app does, who it's for, and the tech stack.
+
+<span class="code-highlight">## ROLES</span>
+Claude (claude.ai) = ARCHITECT (writes briefs, describes outcomes)
+Claude Code = IMPLEMENTER (writes code, deploys, verifies)
+
+<span class="code-highlight">## ROUTING RULES</span>
+Document the exact routing patterns your framework uses.
+This prevents the #1 source of wasted hours.
+
+<span class="code-highlight">## DEPLOY PATTERN</span>
+Step 1: Deploy to TEST → verify → get approval → deploy PROD
+NEVER skip test. NEVER deploy prod without approval.
+
+<span class="code-highlight">## DAILY CHECKLIST</span>
+[ ] Read CLAUDE.md in all repos
+[ ] Check for existing components before building new ones
+[ ] Run auth check before deploying
+
+<span class="code-highlight">## SECURITY RULES</span>
+Never display token values. Read from .env only. 
+Show first 4 chars max to confirm loading.</pre>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- MODULE 3: ARCHITECTURE -->
+  <div id="architecture">
+    <div class="section-header">
+      <span class="section-number">Module 03</span>
+      <h2>How It All Works Together</h2>
+      <p>The mental model for modern AI-built applications. Understand this and every decision becomes clearer.</p>
+    </div>
+
+    <h3 class="subsection">The Full Stack Architecture</h3>
+
+    <div class="arch-diagram">
+      <span class="arch-label">What The User Sees</span>
+      <div class="arch-row">
+        <div class="arch-box arch-box-dark">Browser</div>
+        <div class="arch-arrow">↔</div>
+        <div class="arch-box arch-box-amber">Your Domain</div>
+      </div>
+
+      <hr class="arch-divider">
+      <span class="arch-label">Frontend Layer (Static Files)</span>
+      <div class="arch-row">
+        <div class="arch-box arch-box-blue">Astro Pages</div>
+        <div class="arch-arrow">+</div>
+        <div class="arch-box arch-box-blue">CSS / JS</div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box arch-box-green">Cloudflare Pages</div>
+      </div>
+
+      <hr class="arch-divider">
+      <span class="arch-label">Backend Layer (API Server)</span>
+      <div class="arch-row">
+        <div class="arch-box arch-box-blue">Routes / Logic</div>
+        <div class="arch-arrow">+</div>
+        <div class="arch-box arch-box-blue">Claude AI Calls</div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box arch-box-green">Cloudflare Workers</div>
+      </div>
+
+      <hr class="arch-divider">
+      <span class="arch-label">Data Layer (Persistence)</span>
+      <div class="arch-row">
+        <div class="arch-box arch-box-purple">Auth (Supabase)</div>
+        <div class="arch-arrow">+</div>
+        <div class="arch-box arch-box-purple">Database (Postgres)</div>
+        <div class="arch-arrow">+</div>
+        <div class="arch-box arch-box-purple">Files (R2)</div>
+      </div>
+
+      <hr class="arch-divider">
+      <span class="arch-label">AI Layer</span>
+      <div class="arch-row">
+        <div class="arch-box arch-box-amber">Claude Sonnet</div>
+        <div class="arch-arrow">+</div>
+        <div class="arch-box arch-box-amber">Claude Haiku</div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-box arch-box-gray">Anthropic API</div>
+      </div>
+    </div>
+
+    <h3 class="subsection">The Two Environments — Never Mix Them</h3>
+
+    <div class="lesson-grid">
+      <div class="lesson-card">
+        <div class="lesson-card-header" style="background:#F0FFF4; border-bottom: 1px solid #BBF7D0;">
+          <span class="lesson-num" style="color: #1A7A3C;">TEST ENVIRONMENT</span>
+          <h3>textos-web-test.pages.dev</h3>
+        </div>
+        <div class="lesson-card-body">
+          <ul class="lesson-objectives">
+            <li>All deployments go here first</li>
+            <li>No real charges, no real data</li>
+            <li>Stripe in test mode (fake cards)</li>
+            <li>Where you verify before going live</li>
+            <li>Your test account only</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-card-header" style="background:#FFF0E0; border-bottom: 1px solid #FFC870;">
+          <span class="lesson-num" style="color: #C8832A;">PRODUCTION ENVIRONMENT</span>
+          <h3>app.yourdomain.com</h3>
+        </div>
+        <div class="lesson-card-body">
+          <ul class="lesson-objectives">
+            <li>Only after test is verified</li>
+            <li>Real users, real data, real money</li>
+            <li>Requires explicit approval from you</li>
+            <li>NEVER deploy here without testing</li>
+            <li>If it breaks here, users are affected</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warning">
+      <span class="callout-label">⚠ Learned the Hard Way</span>
+      <p>A single typo in a .env file — a duplicate variable with a placeholder URL — took down production for 2 hours. The fix was one line. The lesson: always have test before prod, always verify after deploy, always check env files when production breaks unexpectedly.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- MORNING SESSION -->
+  <div id="morning">
+    <div class="section-header">
+      <span class="section-number">Morning Session</span>
+      <h2>9:00 AM — 12:00 PM</h2>
+      <p>Foundation, setup, and your first working deployment.</p>
+    </div>
+
+    <div class="schedule">
+      <div class="schedule-row schedule-header">
+        <div class="schedule-cell">Time</div>
+        <div class="schedule-cell">Duration</div>
+        <div class="schedule-cell">Module</div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell"><span class="schedule-time">9:00</span></div>
+        <div class="schedule-cell"><span class="schedule-duration">30 min</span></div>
+        <div class="schedule-cell">
+          <div class="schedule-title">Welcome & The Vibe Coding Mindset</div>
+          <div class="schedule-desc">What this day will build. Why this approach works. The mindset shift from "I can't code" to "I direct code."</div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell"><span class="schedule-time">9:30</span></div>
+        <div class="schedule-cell"><span class="schedule-duration">45 min</span></div>
+        <div class="schedule-cell">
+          <div class="schedule-title">The Two Roles: Architect & Implementer</div>
+          <div class="schedule-desc">You are the architect. Claude Code is the implementer. This distinction is everything. Hands-on: write your first brief.</div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell"><span class="schedule-time">10:15</span></div>
+        <div class="schedule-cell"><span class="schedule-duration">15 min</span></div>
+        <div class="schedule-cell">
+          <div class="schedule-title">Break</div>
+          <div class="schedule-desc">Take 15 minutes. Come back ready to deploy.</div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell"><span class="schedule-time">10:30</span></div>
+        <div class="schedule-cell"><span class="schedule-duration">45 min</span></div>
+        <div class="schedule-cell">
+          <div class="schedule-title">Project Setup & First Deploy</div>
+          <div class="schedule-desc">Create your project, set up GitHub, configure Cloudflare Pages, and deploy your first "hello world" to a live URL.</div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell"><span class="schedule-time">11:15</span></div>
+        <div class="schedule-cell"><span class="schedule-duration">45 min</span></div>
+        <div class="schedule-cell">
+          <div class="schedule-title">Building Your Homepage</div>
+          <div class="schedule-desc">Use Claude Code to build a real homepage for your app. Hands-on practice with the brief-to-deploy cycle.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE TWO ROLES -->
+    <div id="roles">
+      <h2 class="section-title">The Two Roles</h2>
+      <p class="lead">This is the most important concept in the entire course. Get this right and everything else follows.</p>
+
+      <div class="lesson-grid">
+        <div class="lesson-card" style="border-top: 4px solid var(--amber);">
+          <div class="lesson-card-header">
+            <span class="lesson-num">Your Role</span>
+            <h3>The Architect</h3>
+          </div>
+          <div class="lesson-card-body">
+            <p>You describe outcomes, constraints, patterns to follow, and how to verify success. You make all product decisions. You define what done looks like.</p>
+            <ul class="lesson-objectives">
+              <li>Write briefs that specify WHAT to build and WHY</li>
+              <li>Define which files to touch and which to leave alone</li>
+              <li>Reference existing working code as the pattern</li>
+              <li>Decide when something is good enough to ship</li>
+              <li>Catch mistakes before they become expensive</li>
+            </ul>
+          </div>
+        </div>
+        <div class="lesson-card" style="border-top: 4px solid var(--blue);">
+          <div class="lesson-card-header">
+            <span class="lesson-num">Claude Code's Role</span>
+            <h3>The Implementer</h3>
+          </div>
+          <div class="lesson-card-body">
+            <p>Claude Code figures out HOW to implement your brief. It writes the actual code, runs tests, deploys to the right environment, and reports results.</p>
+            <ul class="lesson-objectives">
+              <li>Figures out the implementation details</li>
+              <li>Writes and tests the actual code</li>
+              <li>Deploys to test environment first</li>
+              <li>Reports what was done and what to verify</li>
+              <li>NEVER makes product decisions autonomously</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-con">
+        <span class="callout-label">🔴 The Most Common Mistake</span>
+        <p>Writing code in your briefs. When you write specific function bodies, variable names, or copy-paste code blocks in your briefs, you become the implementer — and you're worse at implementation than Claude Code. Your value is in architectural direction, not code syntax. Write outcomes, not code.</p>
+      </div>
+
+      <div class="callout callout-pro">
+        <span class="callout-label">✅ What a Good Brief Looks Like</span>
+        <p>"Add a bulletin feed that reads from task_runs, deduplicates by task slug, shows 8 most recent events as human-readable sentences, newest first. Follow the same pattern as the existing renderTasks() function in builder.astro." — That's 2 sentences. Not 30 lines of JavaScript.</p>
+      </div>
+    </div>
+
+    <!-- BRIEF WRITING -->
+    <div id="brief-writing">
+      <h2 class="section-title">Writing Briefs That Work</h2>
+      <p class="lead">A brief is your instruction to Claude Code. Good briefs produce good code. Vague briefs produce confused code. Rushed briefs produce wasted hours.</p>
+
+      <h3 class="subsection">The Anatomy of a Good Brief</h3>
+
+      <div class="code-block">
+        <span class="code-block-label">Brief Template</span>
+        <pre><span class="code-highlight">WHAT:</span> [One sentence describing the outcome, not the implementation]
+  Example: "Add a live 'LIVE' badge to the nav that pulses green 
+  when any task is running for this business"
+
+<span class="code-highlight">FILES TO TOUCH:</span> [Exact file paths — limits scope]
+  src/pages/business/live.astro — add the badge HTML and CSS
+
+<span class="code-highlight">PATTERN TO FOLLOW:</span> [Reference existing working code]
+  Same animation pattern as the existing pulsing dot in 
+  builder.astro around line 847
+
+<span class="code-highlight">DO NOT TOUCH:</span> [Explicit exclusions prevent accidents]
+  Do not modify builder.astro, manage.astro, or any other page
+
+<span class="code-highlight">VERIFY BY:</span> [How to confirm it worked]
+  After deploying to test, confirm the badge appears in the nav 
+  and pulses amber when tasks are running in the console</pre>
+      </div>
+
+      <h3 class="subsection">Hands-On Exercise 1</h3>
+    </div>
+
+    <div class="exercise-card">
+      <div class="exercise-header">
+        <div>
+          <span class="exercise-num">Exercise 01 of 04</span>
+          <h3>Write Your First Brief</h3>
+        </div>
+        <span class="exercise-time">20 minutes</span>
+      </div>
+      <ol class="exercise-steps">
+        <li>Choose a simple feature you want on your app's homepage (a headline, a sign-up form, a list of benefits)</li>
+        <li>Open Claude.ai and describe the feature in 2-3 sentences — what it should look like and what it should do</li>
+        <li>Ask Claude to help you turn that description into a properly formatted brief using the template above</li>
+        <li>Review the brief together. Is it clear what Claude Code should build? Is it clear what NOT to touch? Is the verify step specific enough?</li>
+        <li>Share your brief with the group. We'll give feedback on clarity before anyone sends it to Claude Code</li>
+      </ol>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- AFTERNOON SESSION -->
+  <div id="afternoon">
+    <div class="section-header">
+      <span class="section-number">Afternoon Session</span>
+      <h2>1:00 PM — 4:00 PM</h2>
+      <p>Real features, real debugging, real deployment. Finish with a working demo.</p>
+    </div>
+
+    <div class="schedule">
+      <div class="schedule-row schedule-header">
+        <div class="schedule-cell">Time</div>
+        <div class="schedule-cell">Duration</div>
+        <div class="schedule-cell">Module</div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell"><span class="schedule-time">1:00</span></div>
+        <div class="schedule-cell"><span class="schedule-duration">45 min</span></div>
+        <div class="schedule-cell">
+          <div class="schedule-title">Building Your Core Feature</div>
+          <div class="schedule-desc">The main thing your app does. Write the brief, deploy to test, verify, deploy to production.</div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell"><span class="schedule-time">1:45</span></div>
+        <div class="schedule-cell"><span class="schedule-duration">45 min</span></div>
+        <div class="schedule-cell">
+          <div class="schedule-title">When Things Break: Debugging With AI</div>
+          <div class="schedule-desc">How to diagnose issues, how to read error messages, how to write debugging briefs, when to roll back.</div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell"><span class="schedule-time">2:30</span></div>
+        <div class="schedule-cell"><span class="schedule-duration">15 min</span></div>
+        <div class="schedule-cell">
+          <div class="schedule-title">Break</div>
+          <div class="schedule-desc">Final push coming. Take 15.</div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell"><span class="schedule-time">2:45</span></div>
+        <div class="schedule-cell"><span class="schedule-duration">30 min</span></div>
+        <div class="schedule-cell">
+          <div class="schedule-title">Polish & Ship to Production</div>
+          <div class="schedule-desc">Final deploy to your production URL. Verify everything works. Prepare your 3-minute demo.</div>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-cell"><span class="schedule-time">3:15</span></div>
+        <div class="schedule-cell"><span class="schedule-duration">45 min</span></div>
+        <div class="schedule-cell">
+          <div class="schedule-title">Demo Showcase</div>
+          <div class="schedule-desc">Each student demos their app. 3 minutes per person. What it does, how you built it, what's next.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILDING -->
+    <div id="building">
+      <h2 class="section-title">Building Real Features</h2>
+      <p class="lead">The deploy cycle is the most important rhythm in vibe coding. Brief → Deploy Test → Verify → Approve → Deploy Prod.</p>
+
+      <div class="practice-list">
+        <div class="practice-card">
+          <div class="practice-icon practice-icon-green">1️⃣</div>
+          <div>
+            <h4>Research First, Always</h4>
+            <p>Before writing ANY brief, search project knowledge and read CLAUDE.md. Does a component already exist for this? Is there an established pattern? This single rule would have saved 7 hours on a routing problem that was already documented.</p>
+          </div>
+        </div>
+        <div class="practice-card">
+          <div class="practice-icon practice-icon-amber">2️⃣</div>
+          <div>
+            <h4>One Thing At a Time</h4>
+            <p>Never bundle multiple changes in one deploy. If something breaks, you'll have no idea which change caused it. One feature, one brief, one deploy. Verify it works. Then move to the next.</p>
+          </div>
+        </div>
+        <div class="practice-card">
+          <div class="practice-icon practice-icon-blue">3️⃣</div>
+          <div>
+            <h4>Test Then Prod — No Exceptions</h4>
+            <p>Deploy to test first. Verify with your own eyes in the browser. Only then approve production. "It worked in test" is the only green light for production. Never deploy directly to prod to save time.</p>
+          </div>
+        </div>
+        <div class="practice-card">
+          <div class="practice-icon practice-icon-purple">4️⃣</div>
+          <div>
+            <h4>Verify in the Real Environment</h4>
+            <p>Claude Code saying "it works" means nothing. Open the browser. Sign in as a real user. Click the thing. Test at mobile width. Read the console. Check the database. Only what you verify with your own eyes counts as done.</p>
+          </div>
+        </div>
+        <div class="practice-card">
+          <div class="practice-icon practice-icon-red">5️⃣</div>
+          <div>
+            <h4>No Fallbacks, No Placeholder Data</h4>
+            <p>If your code is supposed to show a user's business name but the name isn't loaded yet, show a loading state — not "Your Business." Fake data in production trains users to ignore real data and hides real bugs. If it's missing, show it's missing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEBUGGING -->
+    <div id="debugging">
+      <h2 class="section-title">When Things Break</h2>
+      <p class="lead">Things will break. Every single time. The skill isn't avoiding breaks — it's diagnosing and fixing them faster than anyone else.</p>
+
+      <h3 class="subsection">The Debugging Brief Formula</h3>
+
+      <div class="code-block">
+        <span class="code-block-label">Debugging Brief — Always Start Here</span>
+        <pre><span class="code-highlight">STEP 1: DO NOT FIX ANYTHING YET</span>
+Read the exact error message. Paste it here: [error text]
+Read the file where the error occurs. Show me lines [X-Y].
+
+<span class="code-highlight">STEP 2: TRACE THE CODE PATH</span>
+What function called what function that caused this error?
+Show me the exact call chain.
+
+<span class="code-highlight">STEP 3: GREP BEFORE FIXING</span>
+Search the entire codebase for similar patterns.
+How many places have the same potential issue?
+
+<span class="code-highlight">STEP 4: ONLY THEN FIX</span>
+Fix the root cause, not the symptom.
+Show me the diff before applying it.
+Deploy to test and verify the error is gone.</pre>
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-label">💡 Lesson from the Real Build</span>
+        <p>The most expensive debugging session (7+ hours) was caused by skipping Step 1. We guessed at solutions, deployed 15+ times, and eventually found that a single line in a routing config file — already documented in CLAUDE.md — was the entire problem. Research before fix. Every time.</p>
+      </div>
+
+      <h3 class="subsection">Hands-On Exercise 2</h3>
+    </div>
+
+    <div class="exercise-card">
+      <div class="exercise-header">
+        <div>
+          <span class="exercise-num">Exercise 02 of 04</span>
+          <h3>Break Something, Then Fix It</h3>
+        </div>
+        <span class="exercise-time">25 minutes</span>
+      </div>
+      <ol class="exercise-steps">
+        <li>Ask Claude Code to intentionally introduce a small bug into your app (a broken link, a wrong color, a missing element)</li>
+        <li>Open your browser and confirm you can see the bug</li>
+        <li>Write a debugging brief using the formula above — describe what you see wrong without suggesting a fix</li>
+        <li>Watch how Claude Code traces the problem, finds the root cause, and proposes a fix</li>
+        <li>Approve the fix, deploy to test, verify it's resolved, then deploy to production</li>
+      </ol>
+    </div>
+
+    <!-- SHIPPING -->
+    <div id="shipping">
+      <h2 class="section-title">Shipping to Production</h2>
+      <p class="lead">The deploy ritual that keeps production healthy. Do this in order every single time.</p>
+
+      <div class="code-block">
+        <span class="code-block-label">The Deploy Ritual — Non-Negotiable Order</span>
+        <pre><span class="code-good">STEP 1: Pre-deploy check</span>
+npx wrangler whoami   <span class="code-comment">← confirms auth token is loaded</span>
+node --version        <span class="code-comment">← must be v22+</span>
+
+<span class="code-good">STEP 2: Deploy to TEST</span>
+npm run deploy:test
+<span class="code-comment">→ Verify at: https://your-app-test.pages.dev</span>
+<span class="code-comment">→ Sign in as real user</span>
+<span class="code-comment">→ Test the feature you changed</span>
+<span class="code-comment">→ Check browser console for errors</span>
+<span class="code-comment">→ Test at mobile width (390px)</span>
+
+<span class="code-good">STEP 3: Get approval (yourself or a teammate)</span>
+<span class="code-comment">→ "I verified X, Y, Z on test. Approving for production."</span>
+
+<span class="code-good">STEP 4: Deploy to PRODUCTION</span>
+npm run build
+npx wrangler pages deploy dist --project-name your-app
+
+<span class="code-good">STEP 5: Verify on production</span>
+<span class="code-comment">→ Open https://app.yourdomain.com</span>
+<span class="code-comment">→ Verify the same things you verified on test</span>
+<span class="code-comment">→ Check that nothing else broke</span>
+
+<span class="code-bad">NEVER: Deploy directly to production without testing</span>
+<span class="code-bad">NEVER: Trust Claude Code's "it works" claim without verifying yourself</span>
+<span class="code-bad">NEVER: Deploy multiple changes in one batch</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- LESSONS LEARNED -->
+  <div id="lessons">
+    <div class="section-header">
+      <span class="section-number">Appendix A</span>
+      <h2>15 Lessons From The Real Build</h2>
+      <p>Every lesson below was learned the hard way during 3 weeks building TextOS. You don't have to repeat them.</p>
+    </div>
+
+    <div class="practice-list">
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-amber">⚡</div>
+        <div>
+          <h4>Lesson 1: Research is the job</h4>
+          <p>Before touching any code, search for existing patterns. The answer is almost always already in the codebase. A 7-hour debugging session was solved by reading a config file that had the answer documented. Research first. Always.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-blue">🏗</div>
+        <div>
+          <h4>Lesson 2: Architecture lives in CLAUDE.md</h4>
+          <p>Every architectural decision you make needs to live in CLAUDE.md. The routing pattern, the deploy pattern, the environment variables, the roles. If it's not in CLAUDE.md, a new session won't know it and will repeat your mistakes.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-green">✅</div>
+        <div>
+          <h4>Lesson 3: AI claims "done" before it's done</h4>
+          <p>Claude Code will tell you something is deployed and working. Often it isn't. The deploy failed silently, or it deployed to a hash preview URL instead of the real URL, or the feature has a subtle bug. Verify everything yourself.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-red">🔒</div>
+        <div>
+          <h4>Lesson 4: Tokens get exposed in the worst moments</h4>
+          <p>API tokens were accidentally displayed in plain text in chat twice during the build. Both required immediate rotation. Never ask AI to show you a token, never paste a token in chat, never echo a token value. Read tokens from files silently.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-purple">🧠</div>
+        <div>
+          <h4>Lesson 5: Silent failures are worse than crashes</h4>
+          <p>Code that silently falls back to placeholder data caused hours of confusion. A business was getting named "Venture Clarity" instead of its real name — and no error was thrown. Make your code fail loudly. A crash you can find. A silent fallback you can't.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-amber">🎨</div>
+        <div>
+          <h4>Lesson 6: Design with the user in mind from day one</h4>
+          <p>We spent a full session building a design vision before touching any code for the Business Manager page. That vision conversation took 2 hours but saved 20 hours of code-first iterations. Get the design right on paper first.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-blue">📱</div>
+        <div>
+          <h4>Lesson 7: Mobile first, always</h4>
+          <p>Every page must be tested at 390px (iPhone 14 Pro) before it ships. Twice. Once when you build it, once after every deploy. Mobile is how most users will first see your product. If it doesn't work on mobile, it doesn't work.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-green">🔄</div>
+        <div>
+          <h4>Lesson 8: Session context resets — plan for it</h4>
+          <p>Every new Claude.ai session starts fresh. Your CLAUDE.md in project knowledge is what carries context forward. The morning ritual of syncing project knowledge and asking for overnight ideas is what keeps the session productive from minute one.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-red">⛔</div>
+        <div>
+          <h4>Lesson 9: Never make the founder the bottleneck</h4>
+          <p>If every deploy requires you to manually paste a command, you've become the bottleneck. Invest upfront in making deployments autonomous. If Claude Code can't deploy on its own, that's a tooling problem to fix, not a workflow to accept.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-purple">📝</div>
+        <div>
+          <h4>Lesson 10: Data-driven beats hardcoded</h4>
+          <p>Every hardcoded list in your code is future technical debt. When tasks were hardcoded in an array instead of the database, adding one task required a code deploy. Make things data-driven from day one — your future self will thank you.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-amber">🚀</div>
+        <div>
+          <h4>Lesson 11: Speed comes from clarity, not typing</h4>
+          <p>The fastest sessions were the ones where the brief was written carefully before any code was touched. The slowest sessions were where we jumped straight to coding without a clear outcome in mind. Clarity is the multiplier.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-blue">🔍</div>
+        <div>
+          <h4>Lesson 12: Wrangler auth fails silently</h4>
+          <p>The deployment tool (Wrangler) can silently fail to authenticate. Every deploy brief must start with <code>npx wrangler whoami</code> to confirm auth. If you skip this, you'll think something deployed when it didn't.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-green">💰</div>
+        <div>
+          <h4>Lesson 13: Model choice is a business decision</h4>
+          <p>Claude Sonnet for quality, Claude Haiku for speed and cost. Using Sonnet for everything burns budget fast. Using Haiku for everything produces mediocre output. Route tasks by value: high-value user-facing content gets Sonnet, routine tasks get Haiku.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-red">⚠</div>
+        <div>
+          <h4>Lesson 14: Duplicate env vars will wreck you</h4>
+          <p>A duplicate variable in .env.production (one correct, one a leftover placeholder) took down production. The second entry silently overrides the first. Always check your env files for duplicates after adding anything new.</p>
+        </div>
+      </div>
+      <div class="practice-card">
+        <div class="practice-icon practice-icon-purple">🎯</div>
+        <div>
+          <h4>Lesson 15: 30 years of architecture compounds at AI speed</h4>
+          <p>The reason TextOS was built in 5 days isn't just AI — it's 30 years of knowing which patterns are right, which shortcuts create debt, and which decisions matter. Vibe coding amplifies your expertise. The clearer your thinking, the better the output.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- THE 12 BIGGEST MISTAKES -->
+  <div id="mistakes">
+    <div class="section-header">
+      <span class="section-number">Appendix B</span>
+      <h2>The 12 Biggest Mistakes</h2>
+      <p>Every mistake on this list happened during the real TextOS build. Some cost hours. Some nearly cost the launch.</p>
+    </div>
+
+    <div class="mistake-card">
+      <div class="mistake-header">
+        <span class="mistake-icon">🚨</span>
+        <h4>Mistake 1: Skipping research and guessing at solutions</h4>
+      </div>
+      <div class="mistake-body">
+        <p>The routing architecture for the entire frontend was documented in a config file and a CLAUDE.md entry. Ignoring those docs and guessing led to 7+ hours of failed deployment attempts.</p>
+        <div class="mistake-fix">Fix: Read CLAUDE.md and search project knowledge BEFORE writing any brief. No exceptions.</div>
+      </div>
+    </div>
+
+    <div class="mistake-card">
+      <div class="mistake-header">
+        <span class="mistake-icon">🚨</span>
+        <h4>Mistake 2: Deploying to production without testing</h4>
+      </div>
+      <div class="mistake-body">
+        <p>Skipping the test environment to save time caused a production outage. The fix was trivial — but real users couldn't sign in while it was broken.</p>
+        <div class="mistake-fix">Fix: Test → Verify → Approve → Prod. This order is non-negotiable. Speed isn't worth a production outage.</div>
+      </div>
+    </div>
+
+    <div class="mistake-card">
+      <div class="mistake-header">
+        <span class="mistake-icon">🚨</span>
+        <h4>Mistake 3: Trusting AI's "it's done" without verifying</h4>
+      </div>
+      <div class="mistake-body">
+        <p>Multiple times, Claude Code declared a feature complete when the deploy had failed, the feature had a bug, or the wrong URL was being tested.</p>
+        <div class="mistake-fix">Fix: Open the browser. Sign in. Click the thing. Read the console. What you see with your own eyes is done. Nothing else is.</div>
+      </div>
+    </div>
+
+    <div class="mistake-card">
+      <div class="mistake-header">
+        <span class="mistake-icon">🚨</span>
+        <h4>Mistake 4: Writing code instead of briefs</h4>
+      </div>
+      <div class="mistake-body">
+        <p>When the architect starts writing specific code in briefs, they create implementation bugs that Claude Code faithfully copies. A 30-line JavaScript function in a brief had a scope bug that took hours to diagnose.</p>
+        <div class="mistake-fix">Fix: Describe outcomes, not implementations. 2 sentences, not 30 lines of code.</div>
+      </div>
+    </div>
+
+    <div class="mistake-card">
+      <div class="mistake-header">
+        <span class="mistake-icon">🚨</span>
+        <h4>Mistake 5: Exposing API tokens in chat</h4>
+      </div>
+      <div class="mistake-body">
+        <p>Two separate times, Cloudflare API tokens were accidentally displayed in plain text in chat and required immediate rotation. One was caused by asking Claude Code to show the token value to confirm it was loaded.</p>
+        <div class="mistake-fix">Fix: Tokens live in .env files. Read them silently. Show first 4 chars max to confirm. Rotate immediately if exposed.</div>
+      </div>
+    </div>
+
+    <div class="mistake-card">
+      <div class="mistake-header">
+        <span class="mistake-icon">🚨</span>
+        <h4>Mistake 6: Silent fallbacks masking real failures</h4>
+      </div>
+      <div class="mistake-body">
+        <p>A missing input field caused the AI to receive null data and respond with generic business names ("Venture Clarity") instead of the user's real business name. No error was thrown, so the bug went undetected.</p>
+        <div class="mistake-fix">Fix: If data is missing, throw an error and halt. Never substitute placeholder data for real data silently.</div>
+      </div>
+    </div>
+
+    <div class="mistake-card">
+      <div class="mistake-header">
+        <span class="mistake-icon">🚨</span>
+        <h4>Mistake 7: Using dynamic routes where static routes are required</h4>
+      </div>
+      <div class="mistake-body">
+        <p>The framework (Astro on Cloudflare Pages) has specific routing rules that weren't followed, causing pages to redirect to the homepage instead of loading. The rule was in CLAUDE.md the entire time.</p>
+        <div class="mistake-fix">Fix: Understand your framework's routing model before creating any new page. Document it in CLAUDE.md so you never forget.</div>
+      </div>
+    </div>
+
+    <div class="mistake-card">
+      <div class="mistake-header">
+        <span class="mistake-icon">🚨</span>
+        <h4>Mistake 8: Bundling multiple changes in one deploy</h4>
+      </div>
+      <div class="mistake-body">
+        <p>Deploying 5 features at once made it impossible to tell which one broke production when something went wrong. The rollback and re-deploy cycle cost more time than deploying them separately would have.</p>
+        <div class="mistake-fix">Fix: One change, one deploy, one verification. Then move to the next. The overhead is worth it every time.</div>
+      </div>
+    </div>
+
+    <div class="mistake-card">
+      <div class="mistake-header">
+        <span class="mistake-icon">🚨</span>
+        <h4>Mistake 9: Duplicate environment variables</h4>
+      </div>
+      <div class="mistake-body">
+        <p>A leftover placeholder URL in .env.production silently overrode the correct URL. Production pointed at a non-existent server and all API calls failed.</p>
+        <div class="mistake-fix">Fix: After every env file change, grep for duplicates. Two entries with the same key = guaranteed to be wrong.</div>
+      </div>
+    </div>
+
+    <div class="mistake-card">
+      <div class="mistake-header">
+        <span class="mistake-icon">🚨</span>
+        <h4>Mistake 10: Using bash instead of PowerShell on Windows</h4>
+      </div>
+      <div class="mistake-body">
+        <p>Claude Code defaulted to bash commands which don't work on Windows, causing deploy commands to fail with cryptic path errors ("C:codetextos-web: No such file or directory").</p>
+        <div class="mistake-fix">Fix: Document your OS in CLAUDE.md. Windows uses PowerShell with backslash paths. Never assume bash.</div>
+      </div>
+    </div>
+
+    <div class="mistake-card">
+      <div class="mistake-header">
+        <span class="mistake-icon">🚨</span>
+        <h4>Mistake 11: Reporting preview URLs instead of canonical URLs</h4>
+      </div>
+      <div class="mistake-body">
+        <p>Every Cloudflare Pages deploy creates a hash preview URL (abc12345.pages.dev) AND updates the canonical URL (yourapp.pages.dev). Claude Code kept reporting the hash URL, leading to confusion about whether the canonical URL was actually updated.</p>
+        <div class="mistake-fix">Fix: Only two URLs matter: test canonical and production. Hash preview URLs are irrelevant — never report them.</div>
+      </div>
+    </div>
+
+    <div class="mistake-card">
+      <div class="mistake-header">
+        <span class="mistake-icon">🚨</span>
+        <h4>Mistake 12: Working past exhaustion</h4>
+      </div>
+      <div class="mistake-body">
+        <p>Sessions that ran past midnight produced the most bugs and the most wasted time. A fresh 2-hour morning session consistently accomplished more than an exhausted 5-hour night session.</p>
+        <div class="mistake-fix">Fix: When you're exhausted, stop. Commit your work, write a handoff note, sleep. Fresh eyes fix in minutes what tired eyes miss for hours.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- QUICK REFERENCE -->
+  <div id="reference">
+    <div class="section-header">
+      <span class="section-number">Appendix C</span>
+      <h2>Quick Reference Card</h2>
+      <p>Keep this page open during every build session.</p>
+    </div>
+
+    <div class="quick-ref">
+      <h3>Deploy Commands</h3>
+      <div class="ref-grid">
+        <div class="ref-item">
+          <div class="ref-label">Load Auth Token (PowerShell)</div>
+          <div class="ref-value">$env:CLOUDFLARE_API_TOKEN = (Get-Content ".env" | Where-Object { $_ -match "^CLOUDFLARE_API_TOKEN=" } | ForEach-Object { $_ -replace "^CLOUDFLARE_API_TOKEN=", "" })</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-label">Verify Auth</div>
+          <div class="ref-value">npx wrangler whoami</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-label">Deploy to Test</div>
+          <div class="ref-value">npm run deploy:test</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-label">Deploy to Production</div>
+          <div class="ref-value">npm run build && npx wrangler pages deploy dist --project-name your-app</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-label">Check Node Version</div>
+          <div class="ref-value">node --version (must be v22+)</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-label">Rollback</div>
+          <div class="ref-value">npx wrangler rollback</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-ref">
+      <h3>The Rules That Matter Most</h3>
+      <div class="ref-grid">
+        <div class="ref-item">
+          <div class="ref-label">Before Any Brief</div>
+          <div class="ref-value">Search project knowledge. Read CLAUDE.md. Find existing patterns.</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-label">Deploy Order</div>
+          <div class="ref-value">Test → Verify → Approve → Production. No exceptions.</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-label">Security</div>
+          <div class="ref-value">Never paste tokens in chat. Never. Rotate immediately if exposed.</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-label">Verification</div>
+          <div class="ref-value">Open browser. Sign in. Click the feature. Read console. Then it's done.</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-label">Data Rules</div>
+          <div class="ref-value">No silent fallbacks. If data is missing, fail loudly. No placeholder data in production.</div>
+        </div>
+        <div class="ref-item">
+          <div class="ref-label">Roles</div>
+          <div class="ref-value">You = Architect (WHAT). Claude Code = Implementer (HOW). Never swap.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-ref">
+      <h3>The Brief Checklist</h3>
+      <ul class="checklist">
+        <li><span class="check-box"></span>What is the outcome? (1 sentence, no code)</li>
+        <li><span class="check-box"></span>Which files should be touched?</li>
+        <li><span class="check-box"></span>Is there an existing pattern to follow?</li>
+        <li><span class="check-box"></span>What should NOT be touched?</li>
+        <li><span class="check-box"></span>How will I verify it worked?</li>
+        <li><span class="check-box"></span>Did I research before writing this?</li>
+      </ul>
+    </div>
+
+    <!-- DEMO PREP -->
+    <h2 class="section-title">Demo Preparation</h2>
+    <p class="lead">Your 3-minute demo at 3:30pm. Prepare this now, before you start building.</p>
+
+    <div class="exercise-card">
+      <div class="exercise-header">
+        <div>
+          <span class="exercise-num">Exercise 03 of 04</span>
+          <h3>Plan Your Demo (Now)</h3>
+        </div>
+        <span class="exercise-time">10 minutes</span>
+      </div>
+      <ol class="exercise-steps">
+        <li>Write one sentence: what does your app do and who is it for?</li>
+        <li>What is the single most impressive thing you'll show? (the main feature)</li>
+        <li>What went wrong today and how did you fix it? (everyone loves a war story)</li>
+        <li>What's the first thing you'll build next after today?</li>
+        <li>Open your app in the browser now and confirm everything works before the demo</li>
+      </ol>
+    </div>
+
+    <div class="exercise-card">
+      <div class="exercise-header">
+        <div>
+          <span class="exercise-num">Exercise 04 of 04</span>
+          <h3>Final Deploy to Production</h3>
+        </div>
+        <span class="exercise-time">20 minutes</span>
+      </div>
+      <ol class="exercise-steps">
+        <li>Verify everything works on your test environment one final time</li>
+        <li>Run the deploy ritual: load token → wrangler whoami → npm run build → deploy to prod</li>
+        <li>Open your production URL and verify the same things you verified on test</li>
+        <li>Share your production URL in the class chat — you're live</li>
+        <li>Take a screenshot for your portfolio. You shipped a real app today.</li>
+      </ol>
+    </div>
+
+    <!-- PASSWORD ACCESS -->
+    <div class="password-box">
+      <h3>Class Resource Portal</h3>
+      <p>Access the full course materials, code templates, brief library, and ongoing community updates</p>
+      <div class="password-reveal" id="pw-reveal" onclick="document.getElementById('pw-reveal').textContent = 'VIBE2026'">
+        ● ● ● ● ● ● ● ●
+      </div>
+      <div class="password-hint">Click to reveal · textos.ai/vibe-course</div>
+    </div>
+
+    <div class="spacer"></div>
+  </div>
+
+</div><!-- end content -->
+
+<!-- FOOTER -->
+<footer class="course-footer">
+  <div class="footer-col">
+    <h4>What You Built Today</h4>
+    <ul>
+      <li>A live production application</li>
+      <li>A test and production environment</li>
+      <li>A GitHub repository with version history</li>
+      <li>A CLAUDE.md that documents your architecture</li>
+      <li>A deploy pipeline you own</li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>What Comes Next</h4>
+    <ul>
+      <li>User authentication (sign in / sign out)</li>
+      <li>A database to store user data</li>
+      <li>AI-powered features (Claude API)</li>
+      <li>Payment processing (Stripe)</li>
+      <li>Email (SendGrid)</li>
+      <li>Your first real user</li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Keep Building</h4>
+    <ul>
+      <li>Daily sessions of 2–3 hours beat marathon sessions</li>
+      <li>Every session starts by reading CLAUDE.md</li>
+      <li>Research before every brief. Every time.</li>
+      <li>Deploy to test first. Always.</li>
+      <li>When stuck: stop, sleep, start fresh</li>
+      <li>textos.ai — the app built using this course</li>
+    </ul>
+  </div>
+</footer>
+
+<div class="footer-bottom">
+  <p>Vibe Coding Mastery · Built from 3 weeks building TextOS · Rob Gaudet 2026</p>
+  <p>Confidential — Class Use Only</p>
+</div>
+
+<script>
+document.getElementById('pw-reveal').addEventListener('click', function() {
+  this.style.letterSpacing = '0.3em';
+  this.style.fontSize = '22px';
+});
+</script>
+
+</body>
+</html>
