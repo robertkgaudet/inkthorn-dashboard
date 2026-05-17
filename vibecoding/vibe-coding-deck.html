@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vibe Coding Mastery — Presentation Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #070711; --surface: rgba(20,10,40,0.9); --border: rgba(168,85,247,0.2);
+      --pink: #ff2d87; --cyan: #00f5ff; --purple: #a855f7;
+      --gold: #f0b840; --green: #3ddc84; --red: #f87171;
+      --text: #f0f0ff; --muted: #9090c0;
+      --fd: 'Orbitron', monospace; --fb: 'Space Grotesk', sans-serif; --fm: 'JetBrains Mono', monospace;
+    }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--fb); }
+
+    /* Grid BG */
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(168,85,247,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: grid-drift 40s linear infinite;
+    }
+    @keyframes grid-drift { from { background-position: 0 0, 0 0; } to { background-position: 0 60px, 60px 0; } }
+
+    /* Deck container */
+    #deck { position: relative; z-index: 1; width: 100vw; height: 100vh; overflow: hidden; }
+
+    /* Slides */
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      padding: 60px 80px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: translateX(60px);
+      overflow: hidden;
+    }
+    .slide.active { opacity: 1; pointer-events: all; transform: translateX(0); }
+    .slide.exit-left { opacity: 0; transform: translateX(-60px); }
+    @media (max-width: 768px) { .slide { padding: 40px 24px; } }
+
+    /* Nav bar */
+    #nav-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 28px;
+      background: rgba(7,7,17,0.94); backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+    }
+    #nav-bar .brand { font-family: var(--fd); font-size: 0.68rem; font-weight: 900; color: var(--cyan); letter-spacing: 0.12em; text-decoration: none; }
+    #nav-bar .brand span { color: var(--pink); }
+    .nav-controls { display: flex; align-items: center; gap: 12px; }
+    .nav-btn {
+      background: none; border: 1px solid var(--border); color: var(--text); cursor: pointer;
+      width: 34px; height: 34px; border-radius: 7px; font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .nav-btn:hover { border-color: var(--cyan); background: rgba(0,245,255,0.06); }
+    .nav-btn:disabled { opacity: 0.3; cursor: default; }
+    #slide-counter { font-family: var(--fm); font-size: 0.75rem; color: var(--muted); min-width: 52px; text-align: center; }
+    #progress-dots { display: flex; gap: 5px; flex-wrap: wrap; max-width: 280px; justify-content: center; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: all 0.3s; cursor: pointer; }
+    .dot.active { background: var(--cyan); box-shadow: 0 0 6px var(--cyan); }
+
+    /* Shared slide elements */
+    .eyebrow { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 0.7rem; }
+    .slide-title { font-family: var(--fd); font-weight: 900; line-height: 1.05; margin-bottom: 1rem; }
+    .slide-sub { color: var(--muted); line-height: 1.6; }
+    .tag {
+      display: inline-block; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.25rem 0.7rem; border-radius: 3px; border: 1px solid var(--border);
+      color: var(--muted); margin-right: 0.4rem; margin-bottom: 0.4rem;
+    }
+    .tag.cyan { border-color: rgba(0,245,255,0.35); color: var(--cyan); }
+    .tag.gold { border-color: rgba(240,184,64,0.35); color: var(--gold); }
+    .tag.pink { border-color: rgba(255,45,135,0.35); color: var(--pink); }
+    .tag.green { border-color: rgba(61,220,132,0.35); color: var(--green); }
+
+    /* ── SLIDE 1 — COVER ── */
+    #s1 { text-align: center; }
+    #s1 .slide-title { font-size: clamp(2.8rem, 7vw, 5.5rem); background: linear-gradient(135deg, var(--cyan), var(--purple), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    #s1 .slide-title span { display: block; }
+    .cover-stats { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+    .c-stat { text-align: center; }
+    .c-stat-num { font-family: var(--fd); font-size: 2.2rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .c-stat-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+
+    /* ── SLIDE 2 — WHAT IS VIBE CODING ── */
+    #s2 { text-align: center; }
+    #s2 .slide-title { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--text); }
+    .quote-block {
+      max-width: 680px; margin: 1.5rem auto;
+      background: var(--surface); border: 1px solid rgba(0,245,255,0.2);
+      border-left: 3px solid var(--cyan);
+      border-radius: 8px; padding: 1.2rem 1.6rem; text-align: left;
+    }
+    .quote-block p { font-size: 0.95rem; font-style: italic; color: var(--text); line-height: 1.6; }
+    .quote-block cite { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem; display: block; }
+
+    /* ── SLIDE 3 — OLD VS NEW ── */
+    #s3 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; width: 100%; max-width: 860px; }
+    .col-card { border-radius: 10px; padding: 1.4rem 1.6rem; }
+    .col-card.dark { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); }
+    .col-card.glow { background: rgba(0,245,255,0.05); border: 1px solid rgba(0,245,255,0.25); }
+    .col-card h3 { font-family: var(--fd); font-size: 0.75rem; font-weight: 900; letter-spacing: 0.12em; margin-bottom: 1rem; }
+    .col-card h3.muted { color: var(--muted); }
+    .col-card h3.cyan { color: var(--cyan); }
+    .item-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .item-list li { font-size: 0.82rem; color: var(--text); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.45; }
+    .item-list li.bad::before { content: '✕'; color: var(--red); flex-shrink: 0; font-weight: 700; }
+    .item-list li.good::before { content: '✓'; color: var(--green); flex-shrink: 0; font-weight: 700; }
+
+    /* ── SLIDE 4 — 3 PILLARS ── */
+    #s4 .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; width: 100%; max-width: 860px; }
+    .pillar {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.6rem;
+    }
+    .pillar-num { font-family: var(--fd); font-size: 2.4rem; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 0.6rem; }
+    .pillar h3 { font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; }
+    .pillar p { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── SLIDE 5 — TOOLS ── */
+    #s5 { justify-content: flex-start; padding-top: 70px; }
+    .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; width: 100%; max-width: 820px; }
+    .tool-row {
+      display: flex; align-items: center; gap: 0.8rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 7px; padding: 0.75rem 1rem;
+    }
+    .tool-name { font-size: 0.82rem; font-weight: 700; color: var(--text); min-width: 110px; }
+    .tool-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.4; flex: 1; }
+    .tool-cost { font-family: var(--fm); font-size: 0.68rem; color: var(--green); white-space: nowrap; }
+
+    /* ── SLIDE 6 — CLAUDE.MD ── */
+    #s6 { text-align: center; }
+    .code-box {
+      background: rgba(0,0,0,0.55); border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 8px; padding: 1.2rem 1.4rem; font-family: var(--fm);
+      font-size: 0.75rem; color: #b0b8ff; line-height: 1.75;
+      text-align: left; max-width: 680px; width: 100%; margin: 1rem auto 0;
+      overflow: hidden;
+    }
+    .code-box .hl { color: var(--cyan); }
+    .code-box .cm { color: var(--muted); opacity: 0.7; }
+    .code-box .gd { color: var(--green); }
+    .code-box .rd { color: var(--red); }
+
+    /* ── SLIDE 7 — TWO ROLES ── */
+    #s7 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; width: 100%; max-width: 820px; }
+    .role-card { border-radius: 10px; padding: 1.6rem; }
+    .role-card.arch { background: rgba(0,245,255,0.05); border: 1px solid rgba(0,245,255,0.3); }
+    .role-card.impl { background: rgba(255,45,135,0.05); border: 1px solid rgba(255,45,135,0.3); }
+    .role-label { font-family: var(--fd); font-size: 0.7rem; font-weight: 900; letter-spacing: 0.12em; margin-bottom: 0.3rem; }
+    .role-label.cyan { color: var(--cyan); }
+    .role-label.pink { color: var(--pink); }
+    .role-handle { font-size: 0.72rem; color: var(--muted); margin-bottom: 1rem; }
+    .never-box {
+      margin-top: 1rem; padding-top: 0.8rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.72rem; color: var(--red);
+    }
+    .never-box strong { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 0.25rem; }
+
+    /* ── SLIDE 8 — BRIEF ANATOMY ── */
+    #s8 { justify-content: flex-start; padding-top: 70px; text-align: left; align-items: flex-start; }
+    #s8 .slide-title { font-size: clamp(1.4rem, 3vw, 2rem); }
+
+    /* ── SLIDE 9 — TWO ENVIRONMENTS ── */
+    #s9 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; width: 100%; max-width: 780px; }
+    .env-card { border-radius: 10px; padding: 1.4rem 1.6rem; }
+    .env-card.test { background: rgba(61,220,132,0.07); border: 1px solid rgba(61,220,132,0.3); }
+    .env-card.prod { background: rgba(240,184,64,0.07); border: 1px solid rgba(240,184,64,0.3); }
+    .env-label { font-family: var(--fd); font-size: 0.68rem; font-weight: 900; letter-spacing: 0.12em; margin-bottom: 0.25rem; }
+    .env-label.green { color: var(--green); }
+    .env-label.gold { color: var(--gold); }
+    .env-url { font-family: var(--fm); font-size: 0.72rem; color: var(--muted); margin-bottom: 1rem; }
+
+    /* ── SLIDE 10 — DEPLOY RITUAL ── */
+    #s10 { justify-content: flex-start; padding-top: 65px; text-align: left; align-items: flex-start; }
+    .steps-list { display: flex; flex-direction: column; gap: 0.55rem; width: 100%; max-width: 800px; }
+    .step-row { display: flex; gap: 1rem; align-items: flex-start; }
+    .step-badge {
+      flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--fd); font-size: 0.65rem; font-weight: 900;
+      background: rgba(168,85,247,0.15); border: 1px solid var(--purple); color: var(--purple);
+    }
+    .step-badge.green { background: rgba(61,220,132,0.15); border-color: var(--green); color: var(--green); }
+    .step-badge.red { background: rgba(248,113,113,0.15); border-color: var(--red); color: var(--red); }
+    .step-content { flex: 1; }
+    .step-title { font-size: 0.82rem; font-weight: 700; color: var(--text); }
+    .step-cmd { font-family: var(--fm); font-size: 0.72rem; color: var(--cyan); margin-top: 0.2rem; }
+    .step-note { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+
+    /* ── SLIDE 11 — 5 PRACTICES ── */
+    #s11 { justify-content: flex-start; padding-top: 65px; text-align: left; align-items: flex-start; }
+    .practice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; width: 100%; max-width: 840px; }
+    .practice-item {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.9rem 1rem;
+    }
+    .practice-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .practice-text h4 { font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem; }
+    .practice-text p { font-size: 0.73rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── SLIDE 12 — DEBUGGING ── */
+    #s12 { justify-content: flex-start; padding-top: 65px; text-align: left; align-items: flex-start; }
+
+    /* ── SLIDE 13 — 15 LESSONS ── */
+    #s13 { justify-content: flex-start; padding-top: 65px; align-items: flex-start; }
+    .lessons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; width: 100%; max-width: 860px; }
+    .lesson-chip {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 7px; padding: 0.75rem 0.9rem;
+    }
+    .lesson-chip .ln { font-family: var(--fm); font-size: 0.62rem; color: var(--gold); margin-bottom: 0.3rem; }
+    .lesson-chip h4 { font-size: 0.75rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+
+    /* ── SLIDE 14 — 12 MISTAKES ── */
+    #s14 { justify-content: flex-start; padding-top: 65px; align-items: flex-start; }
+    .mistakes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; width: 100%; max-width: 860px; }
+    .mistake-chip {
+      background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.2);
+      border-radius: 7px; padding: 0.75rem 0.9rem;
+    }
+    .mistake-chip .mn { font-family: var(--fm); font-size: 0.62rem; color: var(--red); margin-bottom: 0.3rem; }
+    .mistake-chip h4 { font-size: 0.73rem; font-weight: 700; color: var(--text); line-height: 1.35; }
+    .mistake-chip p { font-size: 0.68rem; color: var(--muted); line-height: 1.4; margin-top: 0.3rem; }
+
+    /* ── SLIDE 15 — QUICK REF ── */
+    #s15 { justify-content: flex-start; padding-top: 65px; align-items: flex-start; }
+    .ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; width: 100%; max-width: 840px; }
+    .ref-item { background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 0.85rem 1rem; }
+    .ref-item .rl { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+    .ref-item .rv { font-family: var(--fm); font-size: 0.73rem; color: var(--cyan); line-height: 1.5; word-break: break-word; }
+
+    /* ── SLIDE 16 — CLOSING ── */
+    #s16 { text-align: center; }
+    #s16 .slide-title { font-size: clamp(2rem, 5vw, 4rem); background: linear-gradient(135deg, var(--green), var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .closing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; width: 100%; max-width: 780px; margin-top: 1.5rem; }
+    .closing-col { background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 1.2rem; }
+    .closing-col h3 { font-family: var(--fd); font-size: 0.65rem; font-weight: 900; letter-spacing: 0.1em; color: var(--cyan); margin-bottom: 0.8rem; }
+    .closing-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .closing-col ul li { font-size: 0.74rem; color: var(--muted); line-height: 1.4; display: flex; gap: 0.4rem; }
+    .closing-col ul li::before { content: '▸'; color: var(--purple); flex-shrink: 0; }
+
+    /* Notice/warning box */
+    .notice {
+      display: flex; gap: 0.75rem; align-items: flex-start; max-width: 680px; width: 100%;
+      background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.3);
+      border-radius: 7px; padding: 0.9rem 1.1rem; margin-top: 1rem;
+    }
+    .notice.cyan { background: rgba(0,245,255,0.06); border-color: rgba(0,245,255,0.25); }
+    .notice.gold { background: rgba(240,184,64,0.06); border-color: rgba(240,184,64,0.25); }
+    .notice p { font-size: 0.78rem; color: var(--text); line-height: 1.55; }
+    .notice .ni { font-size: 1rem; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<div id="deck">
+
+  <!-- ══ SLIDE 1 — COVER ══ -->
+  <div class="slide active" id="s1">
+    <p class="eyebrow" style="color:var(--pink)">Day Training Course · 2026 Edition</p>
+    <h1 class="slide-title">
+      <span>VIBE CODING</span>
+      <span style="-webkit-text-fill-color:var(--gold);color:var(--gold)">MASTERY</span>
+    </h1>
+    <p class="slide-sub" style="max-width:580px;text-align:center;margin-top:0.8rem;">Build a real production app with AI — without writing a single line of code yourself. Based on 3 weeks building TextOS from zero to launch.</p>
+    <div class="cover-stats">
+      <div class="c-stat"><div class="c-stat-num">7</div><div class="c-stat-label">Hours Training</div></div>
+      <div class="c-stat"><div class="c-stat-num">25</div><div class="c-stat-label">Students / Class</div></div>
+      <div class="c-stat"><div class="c-stat-num">1</div><div class="c-stat-label">App Built Today</div></div>
+      <div class="c-stat"><div class="c-stat-num">0</div><div class="c-stat-label">Lines of Code Written</div></div>
+    </div>
+    <div style="margin-top:2rem;">
+      <span class="tag cyan">Claude + Claude Code</span>
+      <span class="tag gold">TextOS · textos.ai</span>
+      <span class="tag">Rob Gaudet · 2026</span>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 2 — WHAT IS VIBE CODING ══ -->
+  <div class="slide" id="s2">
+    <p class="eyebrow" style="color:var(--cyan)">Module 01</p>
+    <h2 class="slide-title" style="font-size:clamp(1.8rem,4vw,2.8rem);color:var(--text);">What Is Vibe Coding?</h2>
+    <p class="slide-sub" style="max-width:620px;text-align:center;">Using AI to build production software by describing <em>what</em> you want — not <em>how</em> to build it. You become the architect. AI handles the implementation.</p>
+    <div class="quote-block">
+      <p>"I built TextOS in 5 days — sitting under an oak tree at lunch with my wife using only my laptop and Claude. No app. Just text. That's exactly what I'm selling."</p>
+      <cite>Rob Gaudet, Founder of TextOS</cite>
+    </div>
+    <div class="notice cyan" style="margin-top:1rem;">
+      <span class="ni">⚡</span>
+      <p>The shift isn't technical skill — it's <strong>architectural thinking</strong>. Your judgment, taste, and product vision is the most valuable part of the equation.</p>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 3 — OLD VS NEW ══ -->
+  <div class="slide" id="s3">
+    <p class="eyebrow" style="color:var(--purple)">Module 01 — The Shift</p>
+    <h2 class="slide-title" style="font-size:clamp(1.6rem,3.5vw,2.4rem);color:var(--text);margin-bottom:1.2rem;">How Building Software Changed</h2>
+    <div class="two-col">
+      <div class="col-card dark">
+        <h3 class="muted">2022 — The Old Way</h3>
+        <ul class="item-list">
+          <li class="bad">Hire a developer or learn to code yourself</li>
+          <li class="bad">Months on basic infrastructure</li>
+          <li class="bad">$50K–$200K before first user</li>
+          <li class="bad">Technical debt from day one</li>
+          <li class="bad">Ideas die in the vision-to-execution gap</li>
+        </ul>
+      </div>
+      <div class="col-card glow">
+        <h3 class="cyan">2026 — The Vibe Coding Way</h3>
+        <ul class="item-list">
+          <li class="good">You describe the outcome. AI writes the code.</li>
+          <li class="good">Production infrastructure in hours</li>
+          <li class="good">$0–$500 before first user</li>
+          <li class="good">Architecture stays in your head + docs</li>
+          <li class="good">Build speed limited by clarity, not code</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 4 — 3 PILLARS ══ -->
+  <div class="slide" id="s4">
+    <p class="eyebrow" style="color:var(--gold)">Module 01 — Foundation</p>
+    <h2 class="slide-title" style="font-size:clamp(1.5rem,3.5vw,2.4rem);color:var(--text);margin-bottom:1.2rem;">The 3 Things That Make It Work</h2>
+    <div class="three-col">
+      <div class="pillar" style="border-color:rgba(0,245,255,0.25);">
+        <div class="pillar-num" style="color:var(--cyan);">01</div>
+        <h3>Architectural Thinking</h3>
+        <p>You must understand WHAT you're building well enough to describe it. The more clearly you think, the better the output.</p>
+      </div>
+      <div class="pillar" style="border-color:rgba(240,184,64,0.25);">
+        <div class="pillar-num" style="color:var(--gold);">02</div>
+        <h3>Research Before Code</h3>
+        <p>Always understand the existing system before changing it. The biggest mistakes come from skipping research and guessing.</p>
+      </div>
+      <div class="pillar" style="border-color:rgba(61,220,132,0.25);">
+        <div class="pillar-num" style="color:var(--green);">03</div>
+        <h3>Verify Everything</h3>
+        <p>AI claims it's done. Often it isn't. Verify in the browser, logs, and database — not just by reading the AI's response.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 5 — TOOLS ══ -->
+  <div class="slide" id="s5">
+    <p class="eyebrow" style="color:var(--cyan)">Module 02 — Pre-Class Setup</p>
+    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2rem);color:var(--text);margin-bottom:1rem;">Tools & Setup</h2>
+    <div class="tools-grid">
+      <div class="tool-row" style="border-color:rgba(0,245,255,0.25);">
+        <div>
+          <div class="tool-name">Claude.ai</div>
+          <div class="tool-desc">The Architect — where you think, plan, write briefs</div>
+        </div>
+        <div class="tool-cost">FREE / $20/mo</div>
+      </div>
+      <div class="tool-row" style="border-color:rgba(255,45,135,0.25);">
+        <div>
+          <div class="tool-name">Claude Code</div>
+          <div class="tool-desc">The Implementer — writes and runs the actual code</div>
+        </div>
+        <div class="tool-cost">Usage-based</div>
+      </div>
+      <div class="tool-row">
+        <div>
+          <div class="tool-name">VS Code</div>
+          <div class="tool-desc">Editor where Claude Code runs as an extension</div>
+        </div>
+        <div class="tool-cost">FREE</div>
+      </div>
+      <div class="tool-row">
+        <div>
+          <div class="tool-name">GitHub</div>
+          <div class="tool-desc">Version control — Claude Code pushes here automatically</div>
+        </div>
+        <div class="tool-cost">FREE</div>
+      </div>
+      <div class="tool-row" style="border-color:rgba(240,184,64,0.25);">
+        <div>
+          <div class="tool-name">Cloudflare</div>
+          <div class="tool-desc">Hosting, domains, databases, edge functions — best free tier</div>
+        </div>
+        <div class="tool-cost">FREE / $5/mo</div>
+      </div>
+      <div class="tool-row" style="border-color:rgba(168,85,247,0.25);">
+        <div>
+          <div class="tool-name">Supabase</div>
+          <div class="tool-desc">Database + auth — Postgres with a dashboard you can read</div>
+        </div>
+        <div class="tool-cost">FREE tier</div>
+      </div>
+      <div class="tool-row">
+        <div>
+          <div class="tool-name">Node.js v22+</div>
+          <div class="tool-desc">Required by deployment tools — must be v22 or higher</div>
+        </div>
+        <div class="tool-cost">FREE</div>
+      </div>
+    </div>
+    <div class="notice gold" style="margin-top:0.8rem;max-width:820px;">
+      <span class="ni">⚠️</span>
+      <p>Install everything and create all accounts the evening before class. Setup takes ~45 minutes. Don't show up without this done.</p>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 6 — CLAUDE.MD ══ -->
+  <div class="slide" id="s6">
+    <p class="eyebrow" style="color:var(--pink)">Module 02 — Most Important File</p>
+    <h2 class="slide-title" style="font-size:clamp(1.5rem,3.5vw,2.4rem);color:var(--text);">The CLAUDE.md File</h2>
+    <p class="slide-sub" style="max-width:640px;text-align:center;">Every project gets one. Claude Code reads it at the start of every session. It's your architecture, rules, and roles — all in one place.</p>
+    <div class="code-box">
+<span class="hl">## ROLES</span>
+Claude (claude.ai) = ARCHITECT — writes briefs, defines outcomes
+Claude Code = IMPLEMENTER — writes code, deploys, verifies
+
+<span class="hl">## ROUTING RULES</span>  <span class="cm">← prevents the #1 source of wasted hours</span>
+Document the exact routing patterns your framework uses.
+
+<span class="hl">## DEPLOY PATTERN</span>
+<span class="gd">Test → Verify → Approve → Prod.</span> NEVER skip test.
+
+<span class="hl">## SECURITY RULES</span>
+<span class="rd">Never display token values.</span> Read from .env only.
+Show first 4 chars max to confirm loading.
+
+<span class="hl">## DAILY CHECKLIST</span>
+☐ Read CLAUDE.md in all repos
+☐ Check for existing components before building new ones
+☐ Run auth check before deploying</div>
+  </div>
+
+  <!-- ══ SLIDE 7 — TWO ROLES ══ -->
+  <div class="slide" id="s7">
+    <p class="eyebrow" style="color:var(--cyan)">Morning Session — 9:30 AM</p>
+    <h2 class="slide-title" style="font-size:clamp(1.5rem,3.5vw,2.4rem);color:var(--text);margin-bottom:1.2rem;">The Two Roles — The Most Important Concept</h2>
+    <div class="two-col">
+      <div class="role-card arch">
+        <div class="role-label cyan">CLAUDE (claude.ai)</div>
+        <div class="role-handle">You — The Architect</div>
+        <ul class="item-list">
+          <li class="good">Write briefs specifying WHAT and WHY</li>
+          <li class="good">Define constraints + patterns to follow</li>
+          <li class="good">Reference existing working code as the pattern</li>
+          <li class="good">Decide when something is good enough to ship</li>
+        </ul>
+        <div class="never-box">
+          <strong>🚫 Never</strong>
+          Write specific function bodies, line-by-line fixes, or copy-paste code blocks
+        </div>
+      </div>
+      <div class="role-card impl">
+        <div class="role-label pink">CLAUDE CODE (CLI)</div>
+        <div class="role-handle">The Implementer</div>
+        <ul class="item-list">
+          <li class="good">Figures out HOW to implement the brief</li>
+          <li class="good">Writes and tests the actual code</li>
+          <li class="good">Deploys to test environment first</li>
+          <li class="good">Reports what was done + what to verify</li>
+        </ul>
+        <div class="never-box">
+          <strong>🚫 Never</strong>
+          Implement without understanding the existing architecture first
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 8 — BRIEFS ══ -->
+  <div class="slide" id="s8">
+    <p class="eyebrow" style="color:var(--gold)">Morning Session — 9:45 AM</p>
+    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2rem);color:var(--text);">Writing Briefs That Work</h2>
+    <p class="slide-sub" style="margin-bottom:0.8rem;">Good briefs produce good code. Vague briefs produce confused code. Rushed briefs produce wasted hours.</p>
+    <div class="code-box" style="max-width:100%;">
+<span class="hl">WHAT:</span>       One sentence — the outcome, not the implementation
+            "Add a live badge to the nav that pulses green when a task is running"
+
+<span class="hl">FILES:</span>      Exact file paths — limits scope
+            src/pages/business/live.astro
+
+<span class="hl">PATTERN:</span>    Reference existing working code
+            "Same animation as the pulsing dot in builder.astro ~line 847"
+
+<span class="hl">DO NOT:</span>     Explicit exclusions prevent accidents
+            "Do not modify builder.astro, manage.astro, or any other page"
+
+<span class="hl">VERIFY BY:</span>  How to confirm it worked
+            "After test deploy, confirm badge appears and pulses when tasks run"</div>
+    <div class="notice gold" style="margin-top:0.8rem;max-width:100%;">
+      <span class="ni">💡</span>
+      <p><strong>2 sentences, not 30 lines of code.</strong> Describe outcomes, not implementations. That's it.</p>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 9 — TWO ENVIRONMENTS ══ -->
+  <div class="slide" id="s9">
+    <p class="eyebrow" style="color:var(--green)">Module 03 — Architecture</p>
+    <h2 class="slide-title" style="font-size:clamp(1.5rem,3.5vw,2.4rem);color:var(--text);margin-bottom:1.2rem;">Two Environments — Never Mix Them</h2>
+    <div class="two-col">
+      <div class="env-card test">
+        <div class="env-label green">TEST ENVIRONMENT</div>
+        <div class="env-url">your-app-test.pages.dev</div>
+        <ul class="item-list">
+          <li class="good">All deployments go here first</li>
+          <li class="good">No real charges, no real data</li>
+          <li class="good">Stripe in test mode (fake cards)</li>
+          <li class="good">Where you verify before going live</li>
+          <li class="good">Your test account only</li>
+        </ul>
+      </div>
+      <div class="env-card prod">
+        <div class="env-label gold">PRODUCTION ENVIRONMENT</div>
+        <div class="env-url">app.yourdomain.com</div>
+        <ul class="item-list">
+          <li class="good">Only after test is verified</li>
+          <li class="good">Real users, real data, real money</li>
+          <li class="bad" style="color:var(--text)">Requires your explicit approval</li>
+          <li class="bad" style="color:var(--text)">NEVER deploy without testing first</li>
+          <li class="bad" style="color:var(--text)">If it breaks here, users are affected</li>
+        </ul>
+      </div>
+    </div>
+    <div class="notice" style="margin-top:1rem;max-width:780px;">
+      <span class="ni">🔥</span>
+      <p>A single typo in a .env file took down production for 2 hours. The fix was one line. Test first. Always.</p>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 10 — DEPLOY RITUAL ══ -->
+  <div class="slide" id="s10">
+    <p class="eyebrow" style="color:var(--purple)">Afternoon Session — 2:45 PM</p>
+    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2rem);color:var(--text);">The Deploy Ritual — Do This In Order Every Time</h2>
+    <div class="steps-list">
+      <div class="step-row">
+        <div class="step-badge green">1</div>
+        <div class="step-content">
+          <div class="step-title">Pre-deploy auth check</div>
+          <div class="step-cmd">npx wrangler whoami &nbsp;&nbsp; node --version</div>
+          <div class="step-note">Confirms token is loaded. Must be Node v22+. Skip this = mystery failures.</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-badge green">2</div>
+        <div class="step-content">
+          <div class="step-title">Deploy to TEST</div>
+          <div class="step-cmd">npm run deploy:test</div>
+          <div class="step-note">Open test URL. Sign in as real user. Click the feature. Check console. Test mobile.</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-badge green">3</div>
+        <div class="step-content">
+          <div class="step-title">Get approval (yourself or teammate)</div>
+          <div class="step-note">"I verified X, Y, Z on test. Approving for production." — then and only then.</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-badge green">4</div>
+        <div class="step-content">
+          <div class="step-title">Deploy to PRODUCTION</div>
+          <div class="step-cmd">npm run build &nbsp;&nbsp; npx wrangler pages deploy dist --project-name your-app</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-badge green">5</div>
+        <div class="step-content">
+          <div class="step-title">Verify on production</div>
+          <div class="step-note">Same checks as test. Verify nothing else broke. Then it's done.</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-badge red">✕</div>
+        <div class="step-content">
+          <div class="step-title" style="color:var(--red)">NEVER: Deploy to prod without testing. Trust "it works". Bundle multiple changes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 11 — 5 PRACTICES ══ -->
+  <div class="slide" id="s11">
+    <p class="eyebrow" style="color:var(--cyan)">Afternoon Session — 1:00 PM</p>
+    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2rem);color:var(--text);">Building Real Features — The 5 Rules</h2>
+    <div class="practice-grid">
+      <div class="practice-item" style="border-color:rgba(61,220,132,0.25);">
+        <div class="practice-icon">🔍</div>
+        <div class="practice-text">
+          <h4>Research First, Always</h4>
+          <p>Search project knowledge. Read CLAUDE.md. Find existing patterns. This rule would have saved 7 hours on a routing problem that was already documented.</p>
+        </div>
+      </div>
+      <div class="practice-item" style="border-color:rgba(240,184,64,0.25);">
+        <div class="practice-icon">1️⃣</div>
+        <div class="practice-text">
+          <h4>One Thing At a Time</h4>
+          <p>Never bundle multiple changes in one deploy. One feature, one brief, one deploy. Verify it works. Then move to the next.</p>
+        </div>
+      </div>
+      <div class="practice-item" style="border-color:rgba(0,245,255,0.25);">
+        <div class="practice-icon">✅</div>
+        <div class="practice-text">
+          <h4>Test Then Prod — No Exceptions</h4>
+          <p>"It worked in test" is the only green light for production. Never deploy directly to prod to save time.</p>
+        </div>
+      </div>
+      <div class="practice-item" style="border-color:rgba(168,85,247,0.25);">
+        <div class="practice-icon">👁</div>
+        <div class="practice-text">
+          <h4>Verify In The Real Environment</h4>
+          <p>Open the browser. Sign in. Click the thing. Read the console. Only what you verify with your own eyes counts as done.</p>
+        </div>
+      </div>
+      <div class="practice-item" style="border-color:rgba(248,113,113,0.25);" style="grid-column:span 2">
+        <div class="practice-icon">🚫</div>
+        <div class="practice-text">
+          <h4>No Fallbacks, No Placeholder Data</h4>
+          <p>If data is missing, fail loudly. Never substitute "Your Business" or "Venture Clarity" for real data. Silent failures hide real bugs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 12 — DEBUGGING ══ -->
+  <div class="slide" id="s12">
+    <p class="eyebrow" style="color:var(--red)">Afternoon Session — 1:45 PM</p>
+    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2rem);color:var(--text);">When Things Break — The Debugging Brief</h2>
+    <div class="code-box" style="max-width:100%;margin-top:0.5rem;">
+<span class="hl">STEP 1 — DO NOT FIX ANYTHING YET</span>
+Read the exact error message. Paste it here: [error text]
+Read the file where the error occurs. Show me lines X–Y.
+
+<span class="hl">STEP 2 — TRACE THE CODE PATH</span>
+What function called what function caused this error?
+Show me the exact call chain.
+
+<span class="hl">STEP 3 — GREP BEFORE FIXING</span>
+Search the entire codebase for similar patterns.
+How many places have the same potential issue?
+
+<span class="hl">STEP 4 — ONLY THEN FIX</span>
+Fix the root cause, not the symptom.
+Show me the diff before applying it.
+Deploy to test and verify the error is gone.</div>
+    <div class="notice gold" style="margin-top:0.8rem;max-width:100%;">
+      <span class="ni">💡</span>
+      <p>The most expensive debugging session (7+ hours) was caused by skipping Step 1. We guessed at solutions and eventually found a single routing config line — already documented in CLAUDE.md. Research before fix. Every time.</p>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 13 — 15 LESSONS ══ -->
+  <div class="slide" id="s13">
+    <p class="eyebrow" style="color:var(--gold)">Appendix A</p>
+    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2rem);color:var(--text);">15 Lessons From The Real Build</h2>
+    <div class="lessons-grid">
+      <div class="lesson-chip"><div class="ln">L01</div><h4>Research is the job — before any code</h4></div>
+      <div class="lesson-chip"><div class="ln">L02</div><h4>Architecture lives in CLAUDE.md — always</h4></div>
+      <div class="lesson-chip"><div class="ln">L03</div><h4>AI claims "done" before it's done — verify</h4></div>
+      <div class="lesson-chip"><div class="ln">L04</div><h4>Tokens get exposed in worst moments — rotate fast</h4></div>
+      <div class="lesson-chip"><div class="ln">L05</div><h4>Silent failures are worse than crashes</h4></div>
+      <div class="lesson-chip"><div class="ln">L06</div><h4>Design vision first — saves 20 hours of code-first iterations</h4></div>
+      <div class="lesson-chip"><div class="ln">L07</div><h4>Mobile first — test at 390px before every ship</h4></div>
+      <div class="lesson-chip"><div class="ln">L08</div><h4>Session context resets — CLAUDE.md carries you forward</h4></div>
+      <div class="lesson-chip"><div class="ln">L09</div><h4>Never make the founder the deploy bottleneck</h4></div>
+      <div class="lesson-chip"><div class="ln">L10</div><h4>Data-driven beats hardcoded — always</h4></div>
+      <div class="lesson-chip"><div class="ln">L11</div><h4>Speed comes from clarity, not typing</h4></div>
+      <div class="lesson-chip"><div class="ln">L12</div><h4>Wrangler auth fails silently — always run whoami</h4></div>
+      <div class="lesson-chip"><div class="ln">L13</div><h4>Model choice is a business decision — Sonnet vs Haiku</h4></div>
+      <div class="lesson-chip"><div class="ln">L14</div><h4>Duplicate env vars will wreck production</h4></div>
+      <div class="lesson-chip"><div class="ln">L15</div><h4>30 years of architecture compounds at AI speed</h4></div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 14 — 12 MISTAKES ══ -->
+  <div class="slide" id="s14">
+    <p class="eyebrow" style="color:var(--red)">Appendix B</p>
+    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2rem);color:var(--text);">The 12 Biggest Mistakes</h2>
+    <div class="mistakes-grid">
+      <div class="mistake-chip"><div class="mn">M01</div><h4>Skipping research and guessing at solutions</h4><p>Fix: Read CLAUDE.md first. No exceptions.</p></div>
+      <div class="mistake-chip"><div class="mn">M02</div><h4>Deploying to production without testing</h4><p>Fix: Test → Verify → Approve → Prod. Always.</p></div>
+      <div class="mistake-chip"><div class="mn">M03</div><h4>Trusting AI's "it's done" without verifying</h4><p>Fix: Open browser. Click the thing. Then it's done.</p></div>
+      <div class="mistake-chip"><div class="mn">M04</div><h4>Writing code instead of briefs</h4><p>Fix: Outcomes, not implementations. 2 sentences.</p></div>
+      <div class="mistake-chip"><div class="mn">M05</div><h4>Exposing API tokens in chat</h4><p>Fix: .env files only. Rotate immediately if exposed.</p></div>
+      <div class="mistake-chip"><div class="mn">M06</div><h4>Silent fallbacks masking real failures</h4><p>Fix: No placeholder data. Fail loudly.</p></div>
+      <div class="mistake-chip"><div class="mn">M07</div><h4>Dynamic routes where static routes required</h4><p>Fix: Know your framework's routing model cold.</p></div>
+      <div class="mistake-chip"><div class="mn">M08</div><h4>Bundling multiple changes in one deploy</h4><p>Fix: One change, one deploy, one verification.</p></div>
+      <div class="mistake-chip"><div class="mn">M09</div><h4>Duplicate environment variables</h4><p>Fix: Grep for dupes after every env change.</p></div>
+      <div class="mistake-chip"><div class="mn">M10</div><h4>Using bash instead of PowerShell on Windows</h4><p>Fix: Document your OS in CLAUDE.md.</p></div>
+      <div class="mistake-chip"><div class="mn">M11</div><h4>Reporting preview URLs instead of canonical</h4><p>Fix: Only two URLs matter: test and prod.</p></div>
+      <div class="mistake-chip"><div class="mn">M12</div><h4>Working past exhaustion</h4><p>Fix: Fresh 2-hour session beats exhausted 5-hour session.</p></div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 15 — QUICK REF ══ -->
+  <div class="slide" id="s15">
+    <p class="eyebrow" style="color:var(--cyan)">Appendix C — Keep This Open</p>
+    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2rem);color:var(--text);">Quick Reference Card</h2>
+    <div class="ref-grid">
+      <div class="ref-item">
+        <div class="rl">Load Auth Token (PowerShell)</div>
+        <div class="rv">$env:CLOUDFLARE_API_TOKEN = (Get-Content ".env" | Where-Object { $_ -match "^CLOUDFLARE_API_TOKEN=" } | ForEach-Object { $_ -replace "^CLOUDFLARE_API_TOKEN=", "" })</div>
+      </div>
+      <div class="ref-item">
+        <div class="rl">Verify Auth</div>
+        <div class="rv">npx wrangler whoami</div>
+      </div>
+      <div class="ref-item">
+        <div class="rl">Deploy to Test</div>
+        <div class="rv">npm run deploy:test</div>
+      </div>
+      <div class="ref-item">
+        <div class="rl">Deploy to Production</div>
+        <div class="rv">npm run build && npx wrangler pages deploy dist --project-name your-app</div>
+      </div>
+      <div class="ref-item">
+        <div class="rl">Before Any Brief</div>
+        <div class="rv" style="color:var(--gold);">Search knowledge. Read CLAUDE.md. Find existing patterns.</div>
+      </div>
+      <div class="ref-item">
+        <div class="rl">Roles</div>
+        <div class="rv" style="color:var(--text);">You = Architect (WHAT) &nbsp; Claude Code = Implementer (HOW)</div>
+      </div>
+      <div class="ref-item">
+        <div class="rl">Security</div>
+        <div class="rv" style="color:var(--red);">NEVER paste tokens in chat. Rotate immediately if exposed.</div>
+      </div>
+      <div class="ref-item">
+        <div class="rl">Brief Checklist</div>
+        <div class="rv" style="color:var(--text);font-family:var(--fb);font-size:0.72rem;line-height:1.6;">☐ Outcome in 1 sentence &nbsp; ☐ Files to touch &nbsp; ☐ Pattern to follow &nbsp; ☐ Do NOT touch &nbsp; ☐ Verify by</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 16 — CLOSING ══ -->
+  <div class="slide" id="s16">
+    <p class="eyebrow" style="color:var(--green)">You Shipped It</p>
+    <h2 class="slide-title">WHAT YOU BUILT TODAY</h2>
+    <div class="closing-grid">
+      <div class="closing-col">
+        <h3>What You Built</h3>
+        <ul>
+          <li>A live production application</li>
+          <li>Test + production environments</li>
+          <li>A GitHub repo with version history</li>
+          <li>A CLAUDE.md that documents your architecture</li>
+          <li>A deploy pipeline you own</li>
+        </ul>
+      </div>
+      <div class="closing-col">
+        <h3>What Comes Next</h3>
+        <ul>
+          <li>User authentication (sign in / out)</li>
+          <li>A database to store user data</li>
+          <li>AI-powered features (Claude API)</li>
+          <li>Payment processing (Stripe)</li>
+          <li>Email (SendGrid)</li>
+          <li>Your first real user</li>
+        </ul>
+      </div>
+      <div class="closing-col">
+        <h3>Rules To Live By</h3>
+        <ul>
+          <li>Daily 2–3h beats marathon sessions</li>
+          <li>Every session starts with CLAUDE.md</li>
+          <li>Research before every brief. Every time.</li>
+          <li>Deploy to test first. Always.</li>
+          <li>When stuck: stop, sleep, start fresh</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:1.5rem;">
+      <span class="tag cyan">textos.ai</span>
+      <span class="tag gold">Built with this course</span>
+      <span class="tag">Rob Gaudet · New Orleans · 2026</span>
+    </div>
+  </div>
+
+</div><!-- #deck -->
+
+<!-- NAV BAR -->
+<div id="nav-bar">
+  <a href="https://trustlight.ai/vibecoding/" class="brand">VIBE<span>CODING</span></a>
+  <div class="nav-controls">
+    <button class="nav-btn" id="btn-prev" onclick="goSlide(-1)" disabled>◀</button>
+    <span id="slide-counter">1 / 16</span>
+    <button class="nav-btn" id="btn-next" onclick="goSlide(1)">▶</button>
+  </div>
+  <div id="progress-dots"></div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  // Build dots
+  const dotsEl = document.getElementById('progress-dots');
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => jumpSlide(i);
+    dotsEl.appendChild(d);
+  });
+
+  function updateDots() {
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function goSlide(dir) {
+    const next = current + dir;
+    if (next < 0 || next >= total) return;
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit-left');
+    setTimeout(() => slides[current].classList.remove('exit-left'), 400);
+    current = next;
+    slides[current].classList.add('active');
+    document.getElementById('slide-counter').textContent = (current + 1) + ' / ' + total;
+    document.getElementById('btn-prev').disabled = current === 0;
+    document.getElementById('btn-next').disabled = current === total - 1;
+    updateDots();
+  }
+
+  function jumpSlide(i) {
+    if (i === current) return;
+    slides[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    document.getElementById('slide-counter').textContent = (current + 1) + ' / ' + total;
+    document.getElementById('btn-prev').disabled = current === 0;
+    document.getElementById('btn-next').disabled = current === total - 1;
+    updateDots();
+  }
+
+  // Keyboard nav
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') goSlide(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goSlide(-1);
+  });
+
+  // Touch/swipe
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) goSlide(dx < 0 ? 1 : -1);
+  });
+</script>
+</body>
+</html>
