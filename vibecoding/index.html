@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vibe Coding Lab — Rob Gaudet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #070711;
+      --surface:  rgba(20,10,40,0.85);
+      --border:   rgba(168,85,247,0.2);
+      --pink:     #ff2d87;
+      --cyan:     #00f5ff;
+      --purple:   #a855f7;
+      --gold:     #f0b840;
+      --green:    #3ddc84;
+      --text:     #f0f0ff;
+      --muted:    #9090c0;
+      --fd:       'Orbitron', monospace;
+      --fb:       'Space Grotesk', sans-serif;
+      --fm:       'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--fb);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* Grid BG */
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(168,85,247,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(168,85,247,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(7,7,17,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-family: var(--fd);
+      font-size: 0.75rem; font-weight: 900;
+      color: var(--cyan); letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--pink); }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links a.active { color: var(--pink); }
+
+    /* MAIN */
+    main {
+      position: relative; z-index: 1;
+      max-width: 900px; margin: 0 auto;
+      padding: 7rem 2rem 6rem;
+    }
+
+    /* PAGE HEADER */
+    .page-header { margin-bottom: 3.5rem; text-align: center; }
+    .page-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 0.8rem;
+    }
+    .page-title {
+      font-family: var(--fd);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900; line-height: 1.1;
+      background: linear-gradient(135deg, var(--cyan), var(--purple), var(--pink));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 1rem;
+    }
+    .page-subtitle {
+      color: var(--muted); font-size: 1rem; max-width: 580px; margin: 0 auto;
+    }
+    .page-meta {
+      display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .meta-tag {
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 0.8rem; border-radius: 3px;
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .meta-tag.cyan { border-color: rgba(0,245,255,0.3); color: var(--cyan); }
+    .meta-tag.gold { border-color: rgba(240,184,64,0.3); color: var(--gold); }
+
+    /* DOWNLOAD BAR */
+    .download-bar {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+      gap: 1rem;
+      background: var(--surface);
+      border: 1px solid rgba(0,245,255,0.2);
+      border-radius: 8px; padding: 1rem 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .download-bar-left { display: flex; align-items: center; gap: 0.75rem; }
+    .download-icon { font-size: 1.4rem; }
+    .download-label { font-size: 0.85rem; color: var(--text); }
+    .download-label small { display: block; font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+    .download-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #000; font-weight: 700; font-size: 0.75rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; padding: 0.6rem 1.2rem; border-radius: 5px;
+      transition: opacity 0.2s; white-space: nowrap;
+    }
+    .download-btn:hover { opacity: 0.85; }
+
+    /* SECTION */
+    .doc-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .doc-section.highlight-cyan { border-color: rgba(0,245,255,0.3); }
+    .doc-section.highlight-pink { border-color: rgba(255,45,135,0.3); }
+    .doc-section.highlight-gold { border-color: rgba(240,184,64,0.3); }
+    .doc-section.highlight-green { border-color: rgba(61,220,132,0.3); }
+
+    .section-label {
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .section-label.cyan { color: var(--cyan); }
+    .section-label.pink { color: var(--pink); }
+    .section-label.gold { color: var(--gold); }
+    .section-label.green { color: var(--green); }
+    .section-label.purple { color: var(--purple); }
+
+    .section-title {
+      font-family: var(--fd);
+      font-size: 1.1rem; font-weight: 700;
+      margin-bottom: 1.2rem; color: var(--text);
+    }
+
+    /* ROLE SPLIT */
+    .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 0.5rem; }
+    .role-card {
+      border-radius: 8px; padding: 1.4rem;
+      border: 1px solid var(--border);
+    }
+    .role-card.architect { border-color: rgba(0,245,255,0.3); background: rgba(0,245,255,0.04); }
+    .role-card.implementer { border-color: rgba(255,45,135,0.3); background: rgba(255,45,135,0.04); }
+    .role-name {
+      font-family: var(--fd); font-size: 0.75rem; font-weight: 900;
+      letter-spacing: 0.12em; margin-bottom: 0.4rem;
+    }
+    .role-name.cyan { color: var(--cyan); }
+    .role-name.pink { color: var(--pink); }
+    .role-handle { font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem; }
+    .role-duties { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .role-duties li {
+      font-size: 0.82rem; color: var(--text);
+      display: flex; gap: 0.5rem; align-items: flex-start;
+    }
+    .role-duties li::before { content: '▸'; flex-shrink: 0; color: var(--muted); }
+    .role-never {
+      margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem; color: rgba(255,45,135,0.9);
+    }
+    .role-never strong { display: block; margin-bottom: 0.3rem; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* STEPS */
+    .step-list { display: flex; flex-direction: column; gap: 1rem; }
+    .step-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .step-num {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(168,85,247,0.15); border: 1px solid var(--purple);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--fd); font-size: 0.7rem; font-weight: 900; color: var(--purple);
+    }
+    .step-body { flex: 1; }
+    .step-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+    .step-sub { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+
+    /* RULE ITEMS */
+    .rule-list { display: flex; flex-direction: column; gap: 0.7rem; }
+    .rule-item { display: flex; gap: 0.75rem; align-items: flex-start; }
+    .rule-dot {
+      flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%;
+      margin-top: 0.35rem;
+    }
+    .rule-dot.red { background: #f87171; }
+    .rule-dot.green { background: var(--green); }
+    .rule-dot.gold { background: var(--gold); }
+    .rule-dot.cyan { background: var(--cyan); }
+    .rule-text { font-size: 0.83rem; color: var(--text); line-height: 1.55; }
+    .rule-text strong { color: var(--gold); }
+
+    /* CHECKLIST */
+    .checklist { display: flex; flex-direction: column; gap: 0.5rem; }
+    .checklist-item { display: flex; align-items: center; gap: 0.75rem; }
+    .check-box {
+      flex-shrink: 0; width: 18px; height: 18px; border-radius: 3px;
+      border: 1px solid var(--purple); background: rgba(168,85,247,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; color: var(--purple);
+    }
+    .checklist-item span { font-size: 0.83rem; color: var(--text); font-family: var(--fm); }
+
+    /* CODE BLOCK */
+    .code-block {
+      background: rgba(0,0,0,0.4); border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 6px; padding: 1.2rem 1.4rem;
+      font-family: var(--fm); font-size: 0.78rem; color: #aaf;
+      line-height: 1.7; overflow-x: auto; margin-top: 1rem;
+    }
+    .code-block .cmd { color: var(--cyan); }
+    .code-block .arg { color: var(--gold); }
+    .code-block .comment { color: var(--muted); }
+
+    /* NOTICE */
+    .notice {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      background: rgba(255,45,135,0.07); border: 1px solid rgba(255,45,135,0.25);
+      border-radius: 6px; padding: 1rem 1.2rem; margin-top: 1.2rem;
+    }
+    .notice-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .notice-text { font-size: 0.82rem; color: var(--text); line-height: 1.55; }
+
+    /* FOOTER */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center; padding: 2.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted); font-size: 0.75rem;
+    }
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .role-grid { grid-template-columns: 1fr; }
+      .doc-section { padding: 1.5rem; }
+      main { padding: 6rem 1.2rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://trustlight.ai" class="nav-brand">TRUST<span>LIGHT</span></a>
+  <div class="nav-links">
+    <a href="https://trustlight.ai/trustlight-blueprint">Blueprint</a>
+    <a href="https://trustlight.ai/vibecoding/" class="active">Vibe Coding</a>
+    <a href="https://trustlight.ai/playbook.html">Playbook</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <p class="page-eyebrow">Rob Gaudet — Architecture Lab</p>
+    <h1 class="page-title">VIBE CODING LAB</h1>
+    <p class="page-subtitle">How I build with AI. Architecture docs, mental models, role definitions — the stuff behind the builds.</p>
+    <div class="page-meta">
+      <span class="meta-tag cyan">Claude + Claude Code</span>
+      <span class="meta-tag gold">Course in Progress</span>
+      <span class="meta-tag">TextOS · Reyla · Stability</span>
+    </div>
+  </div>
+
+  <!-- DOWNLOAD BAR -->
+  <div class="download-bar">
+    <div class="download-bar-left">
+      <span class="download-icon">📄</span>
+      <div class="download-label">
+        CLAUDE.md Architecture Doc — Roles, Review Protocol & Rules
+        <small>claude-roles-architecture.md · May 2026</small>
+      </div>
+    </div>
+    <a href="/vibecoding/claude-roles-architecture.md" download="claude-roles-architecture.md" class="download-btn">
+      ↓ Download
+    </a>
+  </div>
+
+  <!-- SECTION 1: ROLES -->
+  <div class="doc-section highlight-cyan">
+    <p class="section-label cyan">Architecture Document — May 2026</p>
+    <h2 class="section-title">CLAUDE vs CLAUDE CODE — Role Definitions</h2>
+    <p style="font-size:0.85rem; color:var(--muted); margin-bottom:1.5rem;">
+      The most important rule in AI-assisted development: keep the architect and the implementer separate. Claude thinks and plans. Claude Code builds and ships.
+    </p>
+    <div class="role-grid">
+      <div class="role-card architect">
+        <div class="role-name cyan">CLAUDE</div>
+        <div class="role-handle">claude.ai — The Architect</div>
+        <ul class="role-duties">
+          <li>Write briefs that specify WHAT to build and WHY</li>
+          <li>Define constraints and patterns to follow</li>
+          <li>Reference existing working code as the pattern</li>
+          <li>Define how to verify success</li>
+        </ul>
+        <div class="role-never">
+          <strong>🚫 Never</strong>
+          Write specific function bodies, line-by-line fixes, or copy-paste code blocks
+        </div>
+      </div>
+      <div class="role-card implementer">
+        <div class="role-name pink">CLAUDE CODE</div>
+        <div class="role-handle">claude code CLI — The Implementer</div>
+        <ul class="role-duties">
+          <li>Figure out HOW to implement the brief</li>
+          <li>Write the actual code</li>
+          <li>Run, test, and verify the implementation</li>
+          <li>Deploy and report results</li>
+        </ul>
+        <div class="role-never">
+          <strong>🚫 Never</strong>
+          Implement without understanding the existing architecture first
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: DAILY REVIEW -->
+  <div class="doc-section highlight-gold">
+    <p class="section-label gold">Protocol — Run Once Per 24 Hours</p>
+    <h2 class="section-title">Daily Architecture Review</h2>
+    <p style="font-size:0.85rem; color:var(--muted); margin-bottom:1.5rem;">
+      At the start of each day or new session, Claude Code must orient itself before touching a single file.
+    </p>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Read CLAUDE.md in both repos</div>
+          <div class="step-sub">textos-web and textos-agent — both, every time</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Review key codebase areas for changes</div>
+          <div class="step-sub">Components, scripts, layouts, API patterns, Supabase queries, auth patterns, nav, _redirects, env vars</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Ask the five questions before writing any code</div>
+          <div class="step-sub">Does a component exist? A function? What's the routing pattern? Are there shared styles? Is there an existing data access pattern?</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">When uncertain — READ the working implementation first</div>
+          <div class="step-sub">Never assume. Always verify.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: RESEARCH BEFORE CODE -->
+  <div class="doc-section highlight-pink">
+    <p class="section-label pink">Non-Negotiable Protocol</p>
+    <h2 class="section-title">Research Before Code</h2>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num" style="border-color:var(--pink); color:var(--pink); background:rgba(255,45,135,0.1);">1</div>
+        <div class="step-body">
+          <div class="step-title">Search for existing patterns</div>
+          <div class="step-sub">Does a similar feature already exist? Read it fully before writing anything new.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="border-color:var(--pink); color:var(--pink); background:rgba(255,45,135,0.1);">2</div>
+        <div class="step-body">
+          <div class="step-title">Understand architecture constraints</div>
+          <div class="step-sub">Read <code style="font-family:var(--fm); color:var(--cyan);">public/_redirects</code> before creating new pages. Read <code style="font-family:var(--fm); color:var(--cyan);">wrangler.toml</code> before touching worker config.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="border-color:var(--pink); color:var(--pink); background:rgba(255,45,135,0.1);">3</div>
+        <div class="step-body">
+          <div class="step-title">Identify reusable elements</div>
+          <div class="step-sub">Components, functions, styles, API calls, auth patterns. If it exists, use it. Never reinvent.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="border-color:var(--pink); color:var(--pink); background:rgba(255,45,135,0.1);">4</div>
+        <div class="step-body">
+          <div class="step-title">Only THEN write code</div>
+          <div class="step-sub">Implementing without researching = wasted time. Rob's time is the most valuable resource.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: KEY RULES -->
+  <div class="doc-section">
+    <p class="section-label purple">Architecture Rules — Memorize These</p>
+    <h2 class="section-title">Key Architecture Rules</h2>
+
+    <p style="font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:0.75rem; margin-top:0.5rem;">Routing — Non-Negotiable</p>
+    <div class="rule-list" style="margin-bottom:1.5rem;">
+      <div class="rule-item">
+        <div class="rule-dot green"></div>
+        <div class="rule-text">All <code style="font-family:var(--fm);">/business/{slug}/*</code> pages use static prerendered pages + <code style="font-family:var(--fm);">_redirects</code> rewrites + slug from localStorage</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot red"></div>
+        <div class="rule-text"><strong>NEVER</strong> use dynamic <code style="font-family:var(--fm);">[slug]</code> routes under <code style="font-family:var(--fm);">/business/</code></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot red"></div>
+        <div class="rule-text"><strong>NEVER</strong> use <code style="font-family:var(--fm);">prerender = false</code> under <code style="font-family:var(--fm);">/business/</code></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot red"></div>
+        <div class="rule-text"><strong>NEVER</strong> use <code style="font-family:var(--fm);">_routes.json</code> includes for <code style="font-family:var(--fm);">/business/*</code> patterns</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--cyan); margin-bottom:0.75rem;">Script Pattern for Standalone Pages</p>
+    <div class="rule-list" style="margin-bottom:1.5rem;">
+      <div class="rule-item">
+        <div class="rule-dot cyan"></div>
+        <div class="rule-text">Supabase CDN via <code style="font-family:var(--fm);">is:inline</code> script in <code style="font-family:var(--fm);">&lt;head&gt;</code></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot cyan"></div>
+        <div class="rule-text">Env vars via <code style="font-family:var(--fm);">define:vars</code> block → expose as window globals</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot cyan"></div>
+        <div class="rule-text">Main script as plain <code style="font-family:var(--fm);">&lt;script&gt;</code> (not <code style="font-family:var(--fm);">type="module"</code>)</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot red"></div>
+        <div class="rule-text"><strong>No ES module imports</strong> inside <code style="font-family:var(--fm);">define:vars</code> blocks</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:0.75rem;">Deploy Pattern</p>
+    <div class="rule-list">
+      <div class="rule-item">
+        <div class="rule-dot gold"></div>
+        <div class="rule-text">Always test first: <code style="font-family:var(--fm);">npm run deploy:test</code></div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot gold"></div>
+        <div class="rule-text">Verify at <code style="font-family:var(--fm);">https://textos-web-test.pages.dev</code> before touching prod</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot red"></div>
+        <div class="rule-text"><strong>Never</strong> deploy to prod without Rob's explicit approval</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: DAILY CHECKLIST -->
+  <div class="doc-section highlight-green">
+    <p class="section-label green">Run at Start of Every Session</p>
+    <h2 class="section-title">Daily Checklist</h2>
+    <div class="checklist">
+      <div class="checklist-item">
+        <div class="check-box" style="border-color:var(--green); color:var(--green);">☐</div>
+        <span>Read CLAUDE.md in both repos</span>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box" style="border-color:var(--green); color:var(--green);">☐</div>
+        <span>Check for new components in src/components/</span>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box" style="border-color:var(--green); color:var(--green);">☐</div>
+        <span>Check for new scripts in src/scripts/</span>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box" style="border-color:var(--green); color:var(--green);">☐</div>
+        <span>Check public/_redirects for current routing rules</span>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box" style="border-color:var(--green); color:var(--green);">☐</div>
+        <span>Check wrangler.toml for current env/binding config</span>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box" style="border-color:var(--green); color:var(--green);">☐</div>
+        <span>Confirm CLOUDFLARE_API_TOKEN is loadable from .env</span>
+      </div>
+      <div class="checklist-item">
+        <div class="check-box" style="border-color:var(--green); color:var(--green);">☐</div>
+        <span>Run npx wrangler whoami before any deploy</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>Vibe Coding Lab — <a href="https://trustlight.ai">TrustLight.ai</a> · Rob Gaudet · New Orleans</p>
+  <p style="margin-top:0.4rem; opacity:0.5;">Building products with AI. This is how the sausage gets made.</p>
+</footer>
+
+</body>
+</html>
