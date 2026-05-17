@@ -19,7 +19,6 @@
       --text2:    #334155;
       --muted:    #64748B;
       --light:    #F1F5F9;
-
       --blue:     #2563EB;
       --blue-lt:  #EFF6FF;
       --blue-md:  #BFDBFE;
@@ -34,8 +33,12 @@
       --red-md:   #FECACA;
       --purple:   #7C3AED;
       --purple-lt:#F5F3FF;
-      --slate:    #475569;
-
+      --orange:   #EA580C;
+      --orange-lt:#FFF7ED;
+      --orange-md:#FED7AA;
+      --teal:     #0D9488;
+      --teal-lt:  #F0FDFA;
+      --teal-md:  #99F6E4;
       --ff: 'Inter', sans-serif;
       --fm: 'JetBrains Mono', monospace;
       --radius: 10px;
@@ -43,300 +46,269 @@
       --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
     }
 
-    html, body {
-      width: 100%; height: 100%; overflow: hidden;
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--ff);
-    }
+    html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); color:var(--text); font-family:var(--ff); }
+    #deck { position:relative; width:100vw; height:100vh; overflow:hidden; }
 
-    /* ── Deck ── */
-    #deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
-
-    /* ── Slides ── */
     .slide {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      padding: 56px 72px 80px;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.35s ease, transform 0.35s ease;
-      transform: translateX(48px);
-      overflow: hidden;
-      background: var(--bg);
+      position:absolute; inset:0;
+      display:flex; flex-direction:column; justify-content:center; align-items:center;
+      padding:56px 72px 80px;
+      opacity:0; pointer-events:none;
+      transition:opacity 0.35s ease, transform 0.35s ease;
+      transform:translateX(48px);
+      overflow:hidden;
+      background:var(--bg);
     }
-    .slide.active  { opacity: 1; pointer-events: all; transform: translateX(0); }
-    .slide.exit-left { opacity: 0; transform: translateX(-48px); }
-    @media (max-width: 768px) { .slide { padding: 36px 24px 76px; } }
+    .slide.active   { opacity:1; pointer-events:all; transform:translateX(0); }
+    .slide.exit-left{ opacity:0; transform:translateX(-48px); }
+    @media (max-width:768px){ .slide{ padding:36px 24px 76px; } }
 
-    /* ── Slide accent bar (top) ── */
     .slide::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 4px;
-      background: linear-gradient(90deg, var(--blue), var(--purple), var(--amber));
+      content:''; position:absolute; top:0; left:0; right:0; height:4px;
+      background:linear-gradient(90deg, var(--blue), var(--purple), var(--amber));
     }
 
-    /* ── Nav bar ── */
+    /* NAV BAR */
     #nav-bar {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 28px;
-      background: var(--white);
-      border-top: 1px solid var(--border);
-      box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+      position:fixed; bottom:0; left:0; right:0; z-index:100;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 28px;
+      background:var(--white); border-top:1px solid var(--border);
+      box-shadow:0 -2px 8px rgba(0,0,0,0.06);
     }
-    .brand {
-      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--blue);
-      text-decoration: none;
-    }
-    .nav-controls { display: flex; align-items: center; gap: 10px; }
+    .brand { font-size:0.72rem; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:var(--blue); text-decoration:none; }
+    .nav-controls { display:flex; align-items:center; gap:10px; }
     .nav-btn {
-      background: var(--white); border: 1px solid var(--border2);
-      color: var(--text2); cursor: pointer;
-      width: 32px; height: 32px; border-radius: 7px; font-size: 0.8rem;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.15s; box-shadow: var(--shadow);
+      background:var(--white); border:1px solid var(--border2); color:var(--text2); cursor:pointer;
+      width:32px; height:32px; border-radius:7px; font-size:0.8rem;
+      display:flex; align-items:center; justify-content:center; transition:all 0.15s; box-shadow:var(--shadow);
     }
-    .nav-btn:hover:not(:disabled) { border-color: var(--blue); color: var(--blue); }
-    .nav-btn:disabled { opacity: 0.35; cursor: default; }
-    #slide-counter { font-family: var(--fm); font-size: 0.72rem; color: var(--muted); min-width: 48px; text-align: center; }
-    #progress-dots { display: flex; gap: 5px; flex-wrap: wrap; max-width: 260px; justify-content: center; }
-    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border2); transition: all 0.25s; cursor: pointer; }
-    .dot.active { background: var(--blue); transform: scale(1.25); }
+    .nav-btn:hover:not(:disabled){ border-color:var(--blue); color:var(--blue); }
+    .nav-btn:disabled{ opacity:0.35; cursor:default; }
+    #slide-counter{ font-family:var(--fm); font-size:0.72rem; color:var(--muted); min-width:52px; text-align:center; }
+    #progress-dots{ display:flex; gap:4px; flex-wrap:wrap; max-width:300px; justify-content:center; }
+    .dot{ width:6px; height:6px; border-radius:50%; background:var(--border2); transition:all 0.25s; cursor:pointer; }
+    .dot.active{ background:var(--blue); transform:scale(1.3); }
 
-    /* ── Shared ── */
-    .eyebrow {
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; margin-bottom: 0.5rem;
-      color: var(--blue);
-    }
-    .slide-title {
-      font-weight: 800; line-height: 1.1; color: var(--text);
-    }
-    .slide-sub { color: var(--muted); line-height: 1.65; font-size: 0.95rem; }
+    /* SHARED */
+    .eyebrow { font-size:0.65rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:0.5rem; color:var(--blue); }
+    .slide-title { font-weight:800; line-height:1.1; color:var(--text); }
+    .slide-sub { color:var(--muted); line-height:1.65; font-size:0.95rem; }
 
-    .badge {
-      display: inline-block; font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.25rem 0.75rem; border-radius: 100px;
-      margin-right: 0.4rem; margin-bottom: 0.4rem;
-      border: 1px solid var(--border2); color: var(--muted); background: var(--white);
-    }
-    .badge.blue   { background: var(--blue-lt);   color: var(--blue);   border-color: var(--blue-md);   }
-    .badge.amber  { background: var(--amber-lt);  color: var(--amber);  border-color: var(--amber-md);  }
-    .badge.green  { background: var(--green-lt);  color: var(--green);  border-color: var(--green-md);  }
-    .badge.purple { background: var(--purple-lt); color: var(--purple); border-color: #C4B5FD; }
+    .badge { display:inline-block; font-size:0.65rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.25rem 0.75rem; border-radius:100px; margin-right:0.4rem; margin-bottom:0.4rem; border:1px solid var(--border2); color:var(--muted); background:var(--white); }
+    .badge.blue   { background:var(--blue-lt);   color:var(--blue);   border-color:var(--blue-md); }
+    .badge.amber  { background:var(--amber-lt);  color:var(--amber);  border-color:var(--amber-md); }
+    .badge.green  { background:var(--green-lt);  color:var(--green);  border-color:var(--green-md); }
+    .badge.purple { background:var(--purple-lt); color:var(--purple); border-color:#C4B5FD; }
 
-    /* card base */
-    .card {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.2rem 1.4rem;
-      box-shadow: var(--shadow);
-    }
+    .notice { display:flex; gap:0.75rem; align-items:flex-start; border-radius:8px; padding:0.85rem 1.1rem; font-size:0.82rem; line-height:1.55; width:100%; max-width:760px; }
+    .notice.blue   { background:var(--blue-lt);   border:1px solid var(--blue-md);   color:var(--text2); }
+    .notice.amber  { background:var(--amber-lt);  border:1px solid var(--amber-md);  color:var(--text2); }
+    .notice.red    { background:var(--red-lt);    border:1px solid var(--red-md);    color:var(--text2); }
+    .notice.green  { background:var(--green-lt);  border:1px solid var(--green-md);  color:var(--text2); }
+    .notice .ni    { font-size:1rem; flex-shrink:0; margin-top:1px; }
 
-    /* notice box */
-    .notice {
-      display: flex; gap: 0.75rem; align-items: flex-start;
-      border-radius: 8px; padding: 0.85rem 1.1rem;
-      font-size: 0.82rem; line-height: 1.55;
-      width: 100%; max-width: 760px;
-    }
-    .notice.blue   { background: var(--blue-lt);   border: 1px solid var(--blue-md);   color: var(--text2); }
-    .notice.amber  { background: var(--amber-lt);  border: 1px solid var(--amber-md);  color: var(--text2); }
-    .notice.red    { background: var(--red-lt);    border: 1px solid var(--red-md);    color: var(--text2); }
-    .notice.green  { background: var(--green-lt);  border: 1px solid var(--green-md);  color: var(--text2); }
-    .notice .ni    { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .item-list { list-style:none; display:flex; flex-direction:column; gap:0.5rem; }
+    .item-list li { font-size:0.82rem; color:var(--text2); display:flex; gap:0.6rem; align-items:flex-start; line-height:1.45; }
+    .item-list li.good::before { content:'✓'; color:var(--green); flex-shrink:0; font-weight:700; }
+    .item-list li.bad::before  { content:'✕'; color:var(--red);   flex-shrink:0; font-weight:700; }
 
-    /* item lists */
-    .item-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .item-list li {
-      font-size: 0.82rem; color: var(--text2);
-      display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.45;
-    }
-    .item-list li.good::before { content: '✓'; color: var(--green); flex-shrink: 0; font-weight: 700; }
-    .item-list li.bad::before  { content: '✕'; color: var(--red);   flex-shrink: 0; font-weight: 700; }
-    .item-list li.bullet::before { content: '·'; color: var(--blue); flex-shrink: 0; font-weight: 900; font-size: 1rem; margin-top: -1px; }
+    .code-box { background:#0F172A; border-radius:8px; padding:1.1rem 1.3rem; font-family:var(--fm); font-size:0.73rem; line-height:1.8; text-align:left; width:100%; overflow:hidden; }
+    .code-box .hl { color:#60A5FA; }
+    .code-box .gd { color:#34D399; }
+    .code-box .rd { color:#F87171; }
+    .code-box .cm { color:#64748B; }
+    .code-box .wh { color:#E2E8F0; }
 
-    /* code block */
-    .code-box {
-      background: #0F172A; border-radius: 8px;
-      padding: 1.1rem 1.3rem; font-family: var(--fm);
-      font-size: 0.73rem; line-height: 1.8;
-      text-align: left; width: 100%;
-      overflow: hidden;
-    }
-    .code-box .hl { color: #60A5FA; }   /* blue */
-    .code-box .gd { color: #34D399; }   /* green */
-    .code-box .rd { color: #F87171; }   /* red */
-    .code-box .cm { color: #64748B; }   /* gray comment */
-    .code-box .wh { color: #E2E8F0; }   /* white */
+    .slide-num { position:absolute; bottom:52px; right:72px; font-family:var(--fm); font-size:0.65rem; color:var(--border2); font-weight:600; letter-spacing:0.08em; }
+    #s1 .slide-num, #s20 .slide-num { color:rgba(255,255,255,0.12); }
 
     /* ══ SLIDE 1 — COVER ══ */
-    #s1 { background: #0F172A; }
-    #s1::before { display: none; }
-    #s1 .eyebrow  { color: #60A5FA; }
-    #s1 .slide-title { color: #F8FAFC; font-size: clamp(2.6rem, 7vw, 5.2rem); text-align: center; }
-    #s1 .slide-title em { color: #F59E0B; font-style: normal; display: block; }
-    #s1 .slide-sub { color: #94A3B8; text-align: center; max-width: 560px; }
-    .cover-rule { width: 60px; height: 4px; background: #2563EB; border-radius: 2px; margin: 1.2rem auto; }
-    .cover-stats { display: flex; gap: 0; margin-top: 2rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
-    .c-stat { flex: 1; text-align: center; padding: 1.1rem 0.5rem; border-right: 1px solid rgba(255,255,255,0.08); }
-    .c-stat:last-child { border-right: none; }
-    .c-stat-num   { font-size: 2rem; font-weight: 900; color: #F59E0B; line-height: 1; }
-    .c-stat-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #64748B; margin-top: 0.3rem; }
+    #s1 { background:#0F172A; }
+    #s1::before { display:none; }
+    #s1 .eyebrow { color:#60A5FA; }
+    #s1 .slide-title { color:#F8FAFC; font-size:clamp(2.6rem,7vw,5.2rem); text-align:center; }
+    #s1 .slide-title em { color:#F59E0B; font-style:normal; display:block; }
+    #s1 .slide-sub { color:#94A3B8; text-align:center; max-width:560px; }
+    .cover-rule { width:60px; height:4px; background:#2563EB; border-radius:2px; margin:1.2rem auto; }
+    .cover-stats { display:flex; gap:0; margin-top:2rem; border:1px solid rgba(255,255,255,0.1); border-radius:10px; overflow:hidden; }
+    .c-stat { flex:1; text-align:center; padding:1.1rem 0.5rem; border-right:1px solid rgba(255,255,255,0.08); }
+    .c-stat:last-child { border-right:none; }
+    .c-stat-num   { font-size:2rem; font-weight:900; color:#F59E0B; line-height:1; }
+    .c-stat-label { font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:#64748B; margin-top:0.3rem; }
 
     /* ══ SLIDE 2 — WHAT IS VIBE CODING ══ */
-    #s2 { text-align: center; }
-    #s2 .slide-title { font-size: clamp(1.6rem, 3.5vw, 2.6rem); }
-    .quote-block {
-      max-width: 640px; width: 100%; margin: 1.2rem auto 0;
-      background: var(--white); border: 1px solid var(--border);
-      border-left: 4px solid var(--blue);
-      border-radius: 0 8px 8px 0; padding: 1.1rem 1.4rem; text-align: left;
-      box-shadow: var(--shadow);
+    #s2 { text-align:center; }
+    #s2 .slide-title { font-size:clamp(1.6rem,3.5vw,2.6rem); }
+    .quote-block { max-width:640px; width:100%; margin:1.2rem auto 0; background:var(--white); border:1px solid var(--border); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:1.1rem 1.4rem; text-align:left; box-shadow:var(--shadow); }
+    .quote-block p    { font-size:0.92rem; color:var(--text2); line-height:1.6; font-style:italic; }
+    .quote-block cite { font-size:0.7rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--blue); margin-top:0.5rem; display:block; font-style:normal; }
+
+    /* ══ SLIDES 3–6 — NEW ARCHITECTURE SLIDES ══ */
+
+    /* S3 — How a Website Works */
+    #s3 { justify-content:flex-start; padding-top:52px; align-items:flex-start; }
+    .web-flow { display:flex; align-items:stretch; gap:0; width:100%; max-width:860px; margin-top:0.6rem; }
+    .web-step { flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; }
+    .web-step-icon { width:52px; height:52px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin:0 auto 0.5rem; flex-shrink:0; }
+    .web-step-num  { font-family:var(--fm); font-size:0.6rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem; }
+    .web-step-title{ font-size:0.78rem; font-weight:700; color:var(--text); margin-bottom:0.25rem; }
+    .web-step-desc { font-size:0.7rem; color:var(--muted); line-height:1.45; padding:0 0.3rem; }
+    .web-arrow { display:flex; align-items:center; padding:0 4px; color:var(--border2); font-size:1.1rem; flex-shrink:0; padding-top:26px; }
+    .web-terms { display:grid; grid-template-columns:repeat(3,1fr); gap:0.6rem; width:100%; max-width:860px; margin-top:0.9rem; }
+    .web-term { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.7rem 0.9rem; box-shadow:var(--shadow); }
+    .web-term .wt-label { font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--blue); margin-bottom:0.25rem; }
+    .web-term p { font-size:0.73rem; color:var(--text2); line-height:1.5; }
+
+    /* S4 — Full Stack Layers */
+    #s4 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
+    .stack-wrap { display:flex; gap:1.2rem; width:100%; max-width:880px; align-items:flex-start; }
+    .stack-layers { display:flex; flex-direction:column; gap:0.35rem; flex:1; }
+    .stack-layer {
+      display:flex; align-items:center; gap:0.9rem;
+      border-radius:8px; padding:0.65rem 1rem;
+      border:1px solid transparent;
     }
-    .quote-block p    { font-size: 0.92rem; color: var(--text2); line-height: 1.6; font-style: italic; }
-    .quote-block cite { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); margin-top: 0.5rem; display: block; font-style: normal; }
+    .layer-icon  { font-size:1.1rem; flex-shrink:0; width:28px; text-align:center; }
+    .layer-body  { flex:1; }
+    .layer-name  { font-size:0.78rem; font-weight:700; color:var(--text); }
+    .layer-tagline { font-size:0.7rem; color:var(--muted); line-height:1.4; margin-top:0.1rem; }
+    .layer-tool  { font-family:var(--fm); font-size:0.64rem; font-weight:600; padding:0.15rem 0.5rem; border-radius:4px; white-space:nowrap; flex-shrink:0; }
 
-    /* ══ SLIDE 3 — OLD VS NEW ══ */
-    #s3 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%; max-width: 820px; }
-    .col-card { border-radius: var(--radius); padding: 1.4rem 1.6rem; box-shadow: var(--shadow); }
-    .col-card.old  { background: var(--white); border: 1px solid var(--border); }
-    .col-card.new  { background: var(--blue-lt); border: 1px solid var(--blue-md); }
-    .col-card h3   { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
-    .col-card.old h3 { color: var(--muted); }
-    .col-card.new h3 { color: var(--blue); border-color: var(--blue-md); }
+    /* S5 — Cloudflare */
+    #s5 { justify-content:flex-start; padding-top:52px; align-items:flex-start; }
+    .cf-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; width:100%; max-width:860px; margin-top:0.6rem; }
+    .cf-card { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.9rem 1.1rem; box-shadow:var(--shadow); display:flex; gap:0.75rem; align-items:flex-start; }
+    .cf-icon { font-size:1.2rem; flex-shrink:0; margin-top:1px; }
+    .cf-card h4 { font-size:0.82rem; font-weight:700; color:var(--text); margin-bottom:0.2rem; }
+    .cf-card p  { font-size:0.73rem; color:var(--muted); line-height:1.5; }
+    .cf-vs { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; width:100%; max-width:860px; margin-top:0.6rem; }
+    .cf-vs-col { border-radius:8px; padding:0.8rem 1rem; }
+    .cf-vs-col h4 { font-size:0.7rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.5rem; }
 
-    /* ══ SLIDE 4 — 3 PILLARS ══ */
-    #s4 .three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; width: 100%; max-width: 840px; }
-    .pillar {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.6rem; box-shadow: var(--shadow);
-    }
-    .pillar-num { font-size: 2.2rem; font-weight: 900; line-height: 1; margin-bottom: 0.6rem; }
-    .pillar h3  { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
-    .pillar p   { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+    /* S6 — Supabase */
+    #s6 { justify-content:flex-start; padding-top:52px; align-items:flex-start; }
+    .sb-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; width:100%; max-width:860px; margin-top:0.6rem; }
+    .sb-card { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.9rem 1.1rem; box-shadow:var(--shadow); }
+    .sb-card .sc-label { font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.35rem; }
+    .sb-card h4 { font-size:0.82rem; font-weight:700; color:var(--text); margin-bottom:0.3rem; }
+    .sb-card p  { font-size:0.73rem; color:var(--muted); line-height:1.5; }
 
-    /* ══ SLIDE 5 — TOOLS ══ */
-    #s5 { justify-content: flex-start; padding-top: 52px; }
-    .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; width: 100%; max-width: 820px; }
-    .tool-row {
-      display: flex; align-items: center; gap: 0.8rem;
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: 8px; padding: 0.7rem 1rem; box-shadow: var(--shadow);
-    }
-    .tool-name  { font-size: 0.82rem; font-weight: 700; color: var(--text); min-width: 100px; }
-    .tool-desc  { font-size: 0.75rem; color: var(--muted); line-height: 1.4; flex: 1; }
-    .tool-cost  { font-family: var(--fm); font-size: 0.67rem; font-weight: 600; color: var(--green); white-space: nowrap; background: var(--green-lt); padding: 0.2rem 0.5rem; border-radius: 4px; }
+    /* ══ SLIDE 7 — OLD VS NEW ══ */
+    #s7 .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; max-width:820px; }
+    .col-card { border-radius:var(--radius); padding:1.4rem 1.6rem; box-shadow:var(--shadow); }
+    .col-card.old { background:var(--white); border:1px solid var(--border); }
+    .col-card.new { background:var(--blue-lt); border:1px solid var(--blue-md); }
+    .col-card h3  { font-size:0.72rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem; padding-bottom:0.6rem; border-bottom:1px solid var(--border); }
+    .col-card.old h3 { color:var(--muted); }
+    .col-card.new h3 { color:var(--blue); border-color:var(--blue-md); }
 
-    /* ══ SLIDE 6 — CLAUDE.MD ══ */
-    #s6 { text-align: center; }
-    #s6 .slide-title { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+    /* ══ SLIDE 8 — 3 PILLARS ══ */
+    #s8 .three-col { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; width:100%; max-width:840px; }
+    .pillar { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:1.6rem; box-shadow:var(--shadow); }
+    .pillar-num { font-size:2.2rem; font-weight:900; line-height:1; margin-bottom:0.6rem; }
+    .pillar h3  { font-size:0.9rem; font-weight:700; color:var(--text); margin-bottom:0.5rem; }
+    .pillar p   { font-size:0.78rem; color:var(--muted); line-height:1.55; }
 
-    /* ══ SLIDE 7 — TWO ROLES ══ */
-    #s7 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%; max-width: 820px; }
-    .role-card { border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }
-    .role-card.arch { background: var(--blue-lt);   border: 2px solid var(--blue-md);  }
-    .role-card.impl { background: var(--purple-lt); border: 2px solid #C4B5FD; }
-    .role-label { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.2rem; }
-    .role-label.blue   { color: var(--blue);   }
-    .role-label.purple { color: var(--purple); }
-    .role-handle { font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
-    .never-box { margin-top: 0.9rem; padding: 0.7rem 0.9rem; background: var(--red-lt); border: 1px solid var(--red-md); border-radius: 6px; font-size: 0.74rem; color: var(--red); line-height: 1.4; }
-    .never-box strong { display: block; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
+    /* ══ SLIDE 9 — TOOLS ══ */
+    #s9 { justify-content:flex-start; padding-top:52px; }
+    .tools-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; width:100%; max-width:820px; }
+    .tool-row { display:flex; align-items:center; gap:0.8rem; background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.7rem 1rem; box-shadow:var(--shadow); }
+    .tool-name { font-size:0.82rem; font-weight:700; color:var(--text); min-width:100px; }
+    .tool-desc { font-size:0.75rem; color:var(--muted); line-height:1.4; flex:1; }
+    .tool-cost { font-family:var(--fm); font-size:0.67rem; font-weight:600; color:var(--green); white-space:nowrap; background:var(--green-lt); padding:0.2rem 0.5rem; border-radius:4px; }
 
-    /* ══ SLIDE 8 — BRIEFS ══ */
-    #s8 { justify-content: flex-start; padding-top: 52px; align-items: flex-start; }
-    #s8 .slide-title { font-size: clamp(1.3rem, 2.5vw, 1.9rem); }
+    /* ══ SLIDE 10 — CLAUDE.MD ══ */
+    #s10 { text-align:center; }
+    #s10 .slide-title { font-size:clamp(1.5rem,3vw,2.2rem); }
 
-    /* ══ SLIDE 9 — TWO ENVIRONMENTS ══ */
-    #s9 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%; max-width: 780px; }
-    .env-card { border-radius: var(--radius); padding: 1.4rem 1.6rem; box-shadow: var(--shadow); }
-    .env-card.test { background: var(--green-lt); border: 2px solid var(--green-md); }
-    .env-card.prod { background: var(--amber-lt); border: 2px solid var(--amber-md); }
-    .env-label { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.2rem; }
-    .env-label.green { color: var(--green); }
-    .env-label.amber { color: var(--amber); }
-    .env-url { font-family: var(--fm); font-size: 0.72rem; font-weight: 600; color: var(--muted); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.07); }
+    /* ══ SLIDE 11 — TWO ROLES ══ */
+    #s11 .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; max-width:820px; }
+    .role-card { border-radius:var(--radius); padding:1.5rem; box-shadow:var(--shadow); }
+    .role-card.arch { background:var(--blue-lt); border:2px solid var(--blue-md); }
+    .role-card.impl { background:var(--purple-lt); border:2px solid #C4B5FD; }
+    .role-label { font-size:0.65rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.2rem; }
+    .role-label.blue   { color:var(--blue); }
+    .role-label.purple { color:var(--purple); }
+    .role-handle { font-size:0.78rem; font-weight:600; color:var(--muted); margin-bottom:1rem; padding-bottom:0.75rem; border-bottom:1px solid var(--border); }
+    .never-box { margin-top:0.9rem; padding:0.7rem 0.9rem; background:var(--red-lt); border:1px solid var(--red-md); border-radius:6px; font-size:0.74rem; color:var(--red); line-height:1.4; }
+    .never-box strong { display:block; font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.25rem; }
 
-    /* ══ SLIDE 10 — DEPLOY RITUAL ══ */
-    #s10 { justify-content: flex-start; padding-top: 52px; align-items: flex-start; }
-    .steps-list { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; max-width: 800px; }
-    .step-row { display: flex; gap: 1rem; align-items: flex-start; background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 1rem; box-shadow: var(--shadow); }
-    .step-badge {
-      flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.72rem; font-weight: 800;
-    }
-    .step-badge.green  { background: var(--green-lt); color: var(--green); border: 1.5px solid var(--green-md); }
-    .step-badge.red    { background: var(--red-lt);   color: var(--red);   border: 1.5px solid var(--red-md); }
-    .step-title { font-size: 0.82rem; font-weight: 700; color: var(--text); }
-    .step-cmd   { font-family: var(--fm); font-size: 0.7rem; color: var(--blue); margin-top: 0.15rem; }
-    .step-note  { font-size: 0.72rem; color: var(--muted); margin-top: 0.1rem; }
+    /* ══ SLIDE 12 — BRIEFS ══ */
+    #s12 { justify-content:flex-start; padding-top:52px; align-items:flex-start; }
+    #s12 .slide-title { font-size:clamp(1.3rem,2.5vw,1.9rem); }
 
-    /* ══ SLIDE 11 — 5 PRACTICES ══ */
-    #s11 { justify-content: flex-start; padding-top: 52px; align-items: flex-start; }
-    .practice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; width: 100%; max-width: 840px; }
-    .practice-item {
-      display: flex; gap: 0.75rem; align-items: flex-start;
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: 8px; padding: 0.85rem 1rem; box-shadow: var(--shadow);
-    }
-    .practice-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-    .practice-text h4 { font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
-    .practice-text p  { font-size: 0.73rem; color: var(--muted); line-height: 1.5; }
+    /* ══ SLIDE 13 — TWO ENVIRONMENTS ══ */
+    #s13 .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; max-width:780px; }
+    .env-card { border-radius:var(--radius); padding:1.4rem 1.6rem; box-shadow:var(--shadow); }
+    .env-card.test { background:var(--green-lt); border:2px solid var(--green-md); }
+    .env-card.prod { background:var(--amber-lt); border:2px solid var(--amber-md); }
+    .env-label { font-size:0.65rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.2rem; }
+    .env-label.green { color:var(--green); }
+    .env-label.amber { color:var(--amber); }
+    .env-url { font-family:var(--fm); font-size:0.72rem; font-weight:600; color:var(--muted); margin-bottom:1rem; padding-bottom:0.75rem; border-bottom:1px solid rgba(0,0,0,0.07); }
 
-    /* ══ SLIDE 12 — DEBUGGING ══ */
-    #s12 { justify-content: flex-start; padding-top: 52px; align-items: flex-start; }
+    /* ══ SLIDE 14 — DEPLOY RITUAL ══ */
+    #s14 { justify-content:flex-start; padding-top:52px; align-items:flex-start; }
+    .steps-list { display:flex; flex-direction:column; gap:0.5rem; width:100%; max-width:800px; }
+    .step-row { display:flex; gap:1rem; align-items:flex-start; background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.75rem 1rem; box-shadow:var(--shadow); }
+    .step-badge { flex-shrink:0; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.72rem; font-weight:800; }
+    .step-badge.green { background:var(--green-lt); color:var(--green); border:1.5px solid var(--green-md); }
+    .step-badge.red   { background:var(--red-lt);   color:var(--red);   border:1.5px solid var(--red-md); }
+    .step-title { font-size:0.82rem; font-weight:700; color:var(--text); }
+    .step-cmd   { font-family:var(--fm); font-size:0.7rem; color:var(--blue); margin-top:0.15rem; }
+    .step-note  { font-size:0.72rem; color:var(--muted); margin-top:0.1rem; }
 
-    /* ══ SLIDE 13 — 15 LESSONS ══ */
-    #s13 { justify-content: flex-start; padding-top: 52px; align-items: flex-start; }
-    .lessons-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.5rem; width: 100%; max-width: 860px; }
-    .lesson-chip { background: var(--white); border: 1px solid var(--border); border-radius: 7px; padding: 0.7rem 0.9rem; box-shadow: var(--shadow); }
-    .lesson-chip .ln { font-family: var(--fm); font-size: 0.6rem; font-weight: 600; color: var(--blue); margin-bottom: 0.25rem; }
-    .lesson-chip h4  { font-size: 0.74rem; font-weight: 600; color: var(--text2); line-height: 1.35; }
+    /* ══ SLIDE 15 — 5 PRACTICES ══ */
+    #s15 { justify-content:flex-start; padding-top:52px; align-items:flex-start; }
+    .practice-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; width:100%; max-width:840px; }
+    .practice-item { display:flex; gap:0.75rem; align-items:flex-start; background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.85rem 1rem; box-shadow:var(--shadow); }
+    .practice-icon { font-size:1.1rem; flex-shrink:0; margin-top:1px; }
+    .practice-text h4 { font-size:0.82rem; font-weight:700; color:var(--text); margin-bottom:0.2rem; }
+    .practice-text p  { font-size:0.73rem; color:var(--muted); line-height:1.5; }
 
-    /* ══ SLIDE 14 — 12 MISTAKES ══ */
-    #s14 { justify-content: flex-start; padding-top: 52px; align-items: flex-start; }
-    .mistakes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.5rem; width: 100%; max-width: 860px; }
-    .mistake-chip { background: var(--red-lt); border: 1px solid var(--red-md); border-radius: 7px; padding: 0.7rem 0.9rem; }
-    .mistake-chip .mn { font-family: var(--fm); font-size: 0.6rem; font-weight: 600; color: var(--red); margin-bottom: 0.25rem; }
-    .mistake-chip h4  { font-size: 0.73rem; font-weight: 700; color: var(--text); line-height: 1.35; margin-bottom: 0.25rem; }
-    .mistake-chip p   { font-size: 0.67rem; color: var(--green); font-weight: 600; line-height: 1.4; }
+    /* ══ SLIDE 16 — DEBUGGING ══ */
+    #s16 { justify-content:flex-start; padding-top:52px; align-items:flex-start; }
 
-    /* ══ SLIDE 15 — QUICK REF ══ */
-    #s15 { justify-content: flex-start; padding-top: 52px; align-items: flex-start; }
-    .ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; width: 100%; max-width: 840px; }
-    .ref-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; box-shadow: var(--shadow); }
-    .ref-item .rl  { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; }
-    .ref-item .rv  { font-family: var(--fm); font-size: 0.72rem; color: var(--blue); line-height: 1.55; word-break: break-word; }
-    .ref-item .rv.red    { color: var(--red); font-family: var(--ff); font-size: 0.76rem; font-weight: 600; }
-    .ref-item .rv.amber  { color: var(--amber); font-family: var(--ff); font-size: 0.76rem; }
-    .ref-item .rv.normal { color: var(--text2); font-family: var(--ff); font-size: 0.76rem; }
+    /* ══ SLIDE 17 — 15 LESSONS ══ */
+    #s17 { justify-content:flex-start; padding-top:52px; align-items:flex-start; }
+    .lessons-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem; width:100%; max-width:860px; }
+    .lesson-chip { background:var(--white); border:1px solid var(--border); border-radius:7px; padding:0.7rem 0.9rem; box-shadow:var(--shadow); }
+    .lesson-chip .ln { font-family:var(--fm); font-size:0.6rem; font-weight:600; color:var(--blue); margin-bottom:0.25rem; }
+    .lesson-chip h4  { font-size:0.74rem; font-weight:600; color:var(--text2); line-height:1.35; }
 
-    /* ══ SLIDE 16 — CLOSING ══ */
-    #s16 { background: #0F172A; }
-    #s16::before { display: none; }
-    #s16 .eyebrow { color: #34D399; }
-    #s16 .slide-title { color: #F8FAFC; font-size: clamp(1.8rem, 4vw, 3.2rem); text-align: center; }
-    .closing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.9rem; width: 100%; max-width: 800px; margin-top: 1.4rem; }
-    .closing-col { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 1.2rem; }
-    .closing-col h3 { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #60A5FA; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .closing-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-    .closing-col ul li { font-size: 0.74rem; color: #94A3B8; line-height: 1.4; display: flex; gap: 0.4rem; }
-    .closing-col ul li::before { content: '→'; color: #3B82F6; flex-shrink: 0; }
+    /* ══ SLIDE 18 — 12 MISTAKES ══ */
+    #s18 { justify-content:flex-start; padding-top:52px; align-items:flex-start; }
+    .mistakes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem; width:100%; max-width:860px; }
+    .mistake-chip { background:var(--red-lt); border:1px solid var(--red-md); border-radius:7px; padding:0.7rem 0.9rem; }
+    .mistake-chip .mn { font-family:var(--fm); font-size:0.6rem; font-weight:600; color:var(--red); margin-bottom:0.25rem; }
+    .mistake-chip h4  { font-size:0.73rem; font-weight:700; color:var(--text); line-height:1.35; margin-bottom:0.25rem; }
+    .mistake-chip p   { font-size:0.67rem; color:var(--green); font-weight:600; line-height:1.4; }
 
-    /* Slide number watermark */
-    .slide-num {
-      position: absolute; bottom: 52px; right: 72px;
-      font-family: var(--fm); font-size: 0.65rem; color: var(--border2);
-      font-weight: 600; letter-spacing: 0.08em;
-    }
-    #s1 .slide-num, #s16 .slide-num { color: rgba(255,255,255,0.12); }
+    /* ══ SLIDE 19 — QUICK REF ══ */
+    #s19 { justify-content:flex-start; padding-top:52px; align-items:flex-start; }
+    .ref-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; width:100%; max-width:840px; }
+    .ref-item { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.85rem 1rem; box-shadow:var(--shadow); }
+    .ref-item .rl  { font-size:0.62rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:0.35rem; }
+    .ref-item .rv  { font-family:var(--fm); font-size:0.72rem; color:var(--blue); line-height:1.55; word-break:break-word; }
+    .ref-item .rv.red    { color:var(--red);   font-family:var(--ff); font-size:0.76rem; font-weight:600; }
+    .ref-item .rv.amber  { color:var(--amber); font-family:var(--ff); font-size:0.76rem; }
+    .ref-item .rv.normal { color:var(--text2); font-family:var(--ff); font-size:0.76rem; }
+
+    /* ══ SLIDE 20 — CLOSING ══ */
+    #s20 { background:#0F172A; }
+    #s20::before { display:none; }
+    #s20 .eyebrow { color:#34D399; }
+    #s20 .slide-title { color:#F8FAFC; font-size:clamp(1.8rem,4vw,3.2rem); text-align:center; }
+    .closing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.9rem; width:100%; max-width:800px; margin-top:1.4rem; }
+    .closing-col { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius); padding:1.2rem; }
+    .closing-col h3 { font-size:0.65rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#60A5FA; margin-bottom:0.8rem; padding-bottom:0.5rem; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .closing-col ul { list-style:none; display:flex; flex-direction:column; gap:0.4rem; }
+    .closing-col ul li { font-size:0.74rem; color:#94A3B8; line-height:1.4; display:flex; gap:0.4rem; }
+    .closing-col ul li::before { content:'→'; color:#3B82F6; flex-shrink:0; }
   </style>
 </head>
 <body>
-
 <div id="deck">
 
   <!-- ══ SLIDE 1 — COVER ══ -->
@@ -356,7 +328,7 @@
       <span class="badge amber">TextOS · textos.ai</span>
       <span class="badge">Rob Gaudet · 2026</span>
     </div>
-    <div class="slide-num">1 / 16</div>
+    <div class="slide-num">1 / 20</div>
   </div>
 
   <!-- ══ SLIDE 2 — WHAT IS VIBE CODING ══ -->
@@ -372,11 +344,226 @@
       <span class="ni">💡</span>
       <p>This isn't about technical skill — it's about <strong>architectural thinking</strong>. Your judgment, taste, and product vision is the most valuable part of the equation. AI just does what you tell it.</p>
     </div>
-    <div class="slide-num">2 / 16</div>
+    <div class="slide-num">2 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 3 — OLD VS NEW ══ -->
+  <!-- ══ SLIDE 3 — HOW A WEBSITE ACTUALLY WORKS ══ -->
   <div class="slide" id="s3">
+    <p class="eyebrow">Module 01 — Technical Foundation</p>
+    <h2 class="slide-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);">How a Website Actually Works</h2>
+    <p class="slide-sub" style="margin-bottom:0.7rem;max-width:760px;">Every time you visit a website, a small miracle happens in under a second. Here's exactly what's going on behind the scenes.</p>
+
+    <div class="web-flow">
+      <div class="web-step">
+        <div class="web-step-icon" style="background:#EFF6FF;">🧑‍💻</div>
+        <div class="web-step-num" style="color:var(--blue);">Step 1</div>
+        <div class="web-step-title">You Type a URL</div>
+        <div class="web-step-desc">You type <em>textos.ai</em> in your browser. That's a human-readable address — like a street address for a computer.</div>
+      </div>
+      <div class="web-arrow">→</div>
+      <div class="web-step">
+        <div class="web-step-icon" style="background:#F5F3FF;">📖</div>
+        <div class="web-step-num" style="color:var(--purple);">Step 2</div>
+        <div class="web-step-title">DNS Lookup</div>
+        <div class="web-step-desc">DNS translates the name into an IP address (like 104.21.8.43). Think of it as the internet's phone book — names to numbers.</div>
+      </div>
+      <div class="web-arrow">→</div>
+      <div class="web-step">
+        <div class="web-step-icon" style="background:#FFF7ED;">🌐</div>
+        <div class="web-step-num" style="color:var(--orange);">Step 3</div>
+        <div class="web-step-title">Request Travels</div>
+        <div class="web-step-desc">Your request hops across the internet in milliseconds, reaching the nearest server that hosts the site — often Cloudflare.</div>
+      </div>
+      <div class="web-arrow">→</div>
+      <div class="web-step">
+        <div class="web-step-icon" style="background:#ECFDF5;">🖥️</div>
+        <div class="web-step-num" style="color:var(--green);">Step 4</div>
+        <div class="web-step-title">Web Server Responds</div>
+        <div class="web-step-desc">A web server — a computer that never turns off — receives your request and sends back files: HTML, CSS, and JavaScript.</div>
+      </div>
+      <div class="web-arrow">→</div>
+      <div class="web-step">
+        <div class="web-step-icon" style="background:#FFFBEB;">🎨</div>
+        <div class="web-step-num" style="color:var(--amber);">Step 5</div>
+        <div class="web-step-title">Browser Renders</div>
+        <div class="web-step-desc">Your browser reads those files and paints the page you see. This whole process typically takes under 200 milliseconds.</div>
+      </div>
+    </div>
+
+    <div class="web-terms">
+      <div class="web-term">
+        <div class="wt-label">HTML — Structure</div>
+        <p>The skeleton of the page. Defines what's on it: headings, paragraphs, buttons, images. Like the walls and rooms of a building.</p>
+      </div>
+      <div class="web-term">
+        <div class="wt-label">CSS — Style</div>
+        <p>The paint, furniture, and lighting. CSS makes things look the way they look — colors, fonts, spacing, layout, animations.</p>
+      </div>
+      <div class="web-term">
+        <div class="wt-label">JavaScript — Behavior</div>
+        <p>The light switches and elevators. JS makes the page interactive — handles clicks, loads data, updates content without reloading.</p>
+      </div>
+    </div>
+    <div class="slide-num">3 / 20</div>
+  </div>
+
+  <!-- ══ SLIDE 4 — THE FULL STACK: ALL 6 LAYERS ══ -->
+  <div class="slide" id="s4">
+    <p class="eyebrow">Module 01 — Technical Foundation</p>
+    <h2 class="slide-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);margin-bottom:0.7rem;">The Full Stack — Every Layer of a Modern Web App</h2>
+    <p class="slide-sub" style="margin-bottom:0.7rem;max-width:760px;">A real application has six distinct layers. Each does a specific job. When you know them, you can direct AI to build any of them.</p>
+
+    <div class="stack-layers" style="max-width:860px;width:100%;">
+      <div class="stack-layer" style="background:#EFF6FF;border-color:var(--blue-md);">
+        <div class="layer-icon">🎨</div>
+        <div class="layer-body">
+          <div class="layer-name">UX / Interface Layer</div>
+          <div class="layer-tagline">What users see and interact with — HTML structure, CSS styling, JavaScript behavior. This is the only layer users ever experience directly.</div>
+        </div>
+        <div class="layer-tool" style="background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md);">Astro Framework</div>
+      </div>
+      <div class="stack-layer" style="background:#F5F3FF;border-color:#C4B5FD;">
+        <div class="layer-icon">🗺️</div>
+        <div class="layer-body">
+          <div class="layer-name">Routing Layer</div>
+          <div class="layer-tagline">Maps URLs to pages. When a user visits /dashboard, routing says "show them the dashboard." Without routing, every URL would show the same blank page.</div>
+        </div>
+        <div class="layer-tool" style="background:var(--purple-lt);color:var(--purple);border:1px solid #C4B5FD;">Astro + _redirects</div>
+      </div>
+      <div class="stack-layer" style="background:#FFF7ED;border-color:var(--orange-md);">
+        <div class="layer-icon">⚙️</div>
+        <div class="layer-body">
+          <div class="layer-name">Backend / API Layer</div>
+          <div class="layer-tagline">The brains — processes form submissions, calls the AI, handles payments, enforces business logic. Invisible to users, essential to everything.</div>
+        </div>
+        <div class="layer-tool" style="background:var(--orange-lt);color:var(--orange);border:1px solid var(--orange-md);">Cloudflare Workers</div>
+      </div>
+      <div class="stack-layer" style="background:#FEF2F2;border-color:var(--red-md);">
+        <div class="layer-icon">🔐</div>
+        <div class="layer-body">
+          <div class="layer-name">Authentication Layer</div>
+          <div class="layer-tagline">The bouncer — knows who you are and what you're allowed to see. Handles sign-up, login, logout, "forgot password," and keeps each user's data private.</div>
+        </div>
+        <div class="layer-tool" style="background:var(--red-lt);color:var(--red);border:1px solid var(--red-md);">Supabase Auth</div>
+      </div>
+      <div class="stack-layer" style="background:#ECFDF5;border-color:var(--green-md);">
+        <div class="layer-icon">🗄️</div>
+        <div class="layer-body">
+          <div class="layer-name">Database Layer</div>
+          <div class="layer-tagline">The permanent memory. Anything that needs to survive a page refresh — user data, posts, settings, transactions — lives here in structured tables.</div>
+        </div>
+        <div class="layer-tool" style="background:var(--green-lt);color:var(--green);border:1px solid var(--green-md);">Supabase / Postgres</div>
+      </div>
+      <div class="stack-layer" style="background:#FFFBEB;border-color:var(--amber-md);">
+        <div class="layer-icon">🌍</div>
+        <div class="layer-body">
+          <div class="layer-name">Hosting / CDN Layer</div>
+          <div class="layer-tagline">Where your files live and how they reach users globally. CDN = Content Delivery Network. Copies of your app sit on servers near every user on earth.</div>
+        </div>
+        <div class="layer-tool" style="background:var(--amber-lt);color:var(--amber);border:1px solid var(--amber-md);">Cloudflare Pages</div>
+      </div>
+    </div>
+    <div class="slide-num">4 / 20</div>
+  </div>
+
+  <!-- ══ SLIDE 5 — CLOUDFLARE: YOUR APP'S FRONT DOOR ══ -->
+  <div class="slide" id="s5">
+    <p class="eyebrow">Module 01 — Technical Foundation</p>
+    <h2 class="slide-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);">Cloudflare — The Internet's Front Door</h2>
+    <p class="slide-sub" style="margin-bottom:0.6rem;max-width:760px;">When someone visits your app, the very first computer they connect to is likely a Cloudflare server — not your origin server. That's by design, and it's a superpower.</p>
+
+    <div class="cf-grid">
+      <div class="cf-card">
+        <div class="cf-icon">🌐</div>
+        <div>
+          <h4>Global Edge Network</h4>
+          <p>Cloudflare operates 300+ data centers in 100+ countries. When your user in Tokyo visits your site, they hit a Cloudflare server in Tokyo — not one in Virginia. Result: sub-100ms load times anywhere on earth.</p>
+        </div>
+      </div>
+      <div class="cf-card">
+        <div class="cf-icon">📄</div>
+        <div>
+          <h4>Cloudflare Pages — Static File Hosting</h4>
+          <p>Your HTML, CSS, and JavaScript files are deployed to every edge location automatically. Free SSL certificate included. One deploy command puts your app live globally in under 60 seconds.</p>
+        </div>
+      </div>
+      <div class="cf-card">
+        <div class="cf-icon">⚡</div>
+        <div>
+          <h4>Cloudflare Workers — Serverless Backend</h4>
+          <p>Run backend code (your API, AI calls, payment processing) directly at the edge — no traditional server to manage, no server bills to pay. Code runs in 0ms cold start time.</p>
+        </div>
+      </div>
+      <div class="cf-card">
+        <div class="cf-icon">🛡️</div>
+        <div>
+          <h4>Security Included, Free</h4>
+          <p>Automatic DDoS protection, SSL/TLS certificates, Web Application Firewall, bot filtering. Enterprise-grade security that would cost thousands/month elsewhere — free on Cloudflare's free tier.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cf-vs">
+      <div class="cf-vs-col" style="background:var(--red-lt);border:1px solid var(--red-md);">
+        <h4 style="color:var(--red);">AWS / Azure / Traditional Cloud</h4>
+        <ul class="item-list">
+          <li class="bad">$50–$200/month for equivalent infrastructure</li>
+          <li class="bad">Complex configuration, IAM roles, VPCs</li>
+          <li class="bad">Cold starts, provisioning time, scaling setup</li>
+          <li class="bad">SSL certificates require manual renewal</li>
+        </ul>
+      </div>
+      <div class="cf-vs-col" style="background:var(--green-lt);border:1px solid var(--green-md);">
+        <h4 style="color:var(--green);">Cloudflare — What We Use</h4>
+        <ul class="item-list">
+          <li class="good">Free tier covers everything you need to launch</li>
+          <li class="good">One config file, one deploy command</li>
+          <li class="good">Instant global deploy, 0ms cold starts</li>
+          <li class="good">SSL auto-managed, always current</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-num">5 / 20</div>
+  </div>
+
+  <!-- ══ SLIDE 6 — SUPABASE: YOUR DATABASE & LOGIN SYSTEM ══ -->
+  <div class="slide" id="s6">
+    <p class="eyebrow">Module 01 — Technical Foundation</p>
+    <h2 class="slide-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);">Supabase — Your Database &amp; Login System</h2>
+    <p class="slide-sub" style="margin-bottom:0.6rem;max-width:760px;">Think of Supabase as two things in one: a spreadsheet in the cloud that thousands of users can read and write to simultaneously, plus a complete login system — all managed through a visual dashboard.</p>
+
+    <div class="sb-grid">
+      <div class="sb-card">
+        <div class="sc-label" style="color:var(--green);">🗄️ The Database</div>
+        <h4>PostgreSQL — Industry Standard</h4>
+        <p>Postgres is the same database engine used by Instagram, Reddit, Shopify, and Airbnb. It's been battle-tested for 30+ years and can scale from 10 users to 100 million. Supabase wraps it with a visual table editor that looks like Google Sheets — you can see your data without writing any code.</p>
+      </div>
+      <div class="sb-card">
+        <div class="sc-label" style="color:var(--blue);">🔐 Authentication</div>
+        <h4>Complete Identity System, Built In</h4>
+        <p>Sign up, sign in, sign out, "forgot password," magic links, and social login (Google, GitHub, Apple) — all ready to use. Without Supabase, building just the login system would take weeks. With Supabase, it's enabled in an afternoon.</p>
+      </div>
+      <div class="sb-card">
+        <div class="sc-label" style="color:var(--purple);">🔒 Row Level Security</div>
+        <h4>Each User Sees Only Their Data</h4>
+        <p>RLS is a database rule that enforces privacy automatically. User A's posts are invisible to User B — not because of code you write, but because the database itself enforces it. This is how multi-user apps work safely at scale.</p>
+      </div>
+      <div class="sb-card">
+        <div class="sc-label" style="color:var(--amber);">⚡ Auto-Generated API</div>
+        <h4>Your Database Becomes an API Instantly</h4>
+        <p>The moment you create a table in Supabase, a REST API for that table is automatically generated. Your app can read, write, update, and delete data without you having to write any server code to handle it.</p>
+      </div>
+    </div>
+
+    <div class="notice blue" style="margin-top:0.7rem;max-width:860px;">
+      <span class="ni">💡</span>
+      <p><strong>The big picture:</strong> Supabase handles everything about "who is this user and what data belongs to them." Cloudflare handles everything about "how does the app reach the user." Together, they replace what used to require a full-time DevOps engineer.</p>
+    </div>
+    <div class="slide-num">6 / 20</div>
+  </div>
+
+  <!-- ══ SLIDE 7 — HOW BUILDING SOFTWARE CHANGED ══ -->
+  <div class="slide" id="s7">
     <p class="eyebrow">Module 01 — The Shift</p>
     <h2 class="slide-title" style="font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:1.1rem;">How Building Software Changed</h2>
     <div class="two-col">
@@ -405,11 +592,11 @@
       <span class="ni">⚠️</span>
       <p><strong>Important:</strong> Vibe coding is not "ask AI to build everything and hope." You are still the decision-maker. AI handles implementation. You handle vision and judgment.</p>
     </div>
-    <div class="slide-num">3 / 16</div>
+    <div class="slide-num">7 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 4 — 3 PILLARS ══ -->
-  <div class="slide" id="s4">
+  <!-- ══ SLIDE 8 — 3 PILLARS ══ -->
+  <div class="slide" id="s8">
     <p class="eyebrow">Module 01 — Core Principles</p>
     <h2 class="slide-title" style="font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:1.1rem;">The 3 Things That Make It Work</h2>
     <div class="three-col">
@@ -429,11 +616,11 @@
         <p>AI claims it's done. Often it isn't. Verify in the browser, logs, and database — not just by reading the AI's response.</p>
       </div>
     </div>
-    <div class="slide-num">4 / 16</div>
+    <div class="slide-num">8 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 5 — TOOLS ══ -->
-  <div class="slide" id="s5">
+  <!-- ══ SLIDE 9 — TOOLS ══ -->
+  <div class="slide" id="s9">
     <p class="eyebrow">Module 02 — Pre-Class Setup</p>
     <h2 class="slide-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);margin-bottom:0.9rem;">Required Tools &amp; Setup</h2>
     <div class="tools-grid">
@@ -454,7 +641,7 @@
         <div class="tool-cost">FREE</div>
       </div>
       <div class="tool-row" style="border-left:3px solid var(--amber);">
-        <div><div class="tool-name">Cloudflare</div><div class="tool-desc">Hosting, domains, databases, edge functions — best free tier</div></div>
+        <div><div class="tool-name">Cloudflare</div><div class="tool-desc">Hosting, CDN, backend Workers — global, fast, free to start</div></div>
         <div class="tool-cost">FREE / $5mo</div>
       </div>
       <div class="tool-row" style="border-left:3px solid var(--green);">
@@ -470,11 +657,11 @@
       <span class="ni">⏰</span>
       <p>Install everything and create all accounts <strong>the evening before class.</strong> Setup takes ~45 minutes. Do not arrive without this done.</p>
     </div>
-    <div class="slide-num">5 / 16</div>
+    <div class="slide-num">9 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 6 — CLAUDE.MD ══ -->
-  <div class="slide" id="s6">
+  <!-- ══ SLIDE 10 — CLAUDE.MD ══ -->
+  <div class="slide" id="s10">
     <p class="eyebrow">Module 02 — Most Important File In Your Project</p>
     <h2 class="slide-title" style="font-size:clamp(1.5rem,3vw,2.2rem);text-align:center;">The CLAUDE.md File</h2>
     <p class="slide-sub" style="max-width:600px;text-align:center;margin-top:0.4rem;margin-bottom:0.8rem;">Every project gets one. Claude Code reads it at the start of every session. It defines your architecture, rules, and roles — all in one place.</p>
@@ -497,11 +684,11 @@
 <span class="wh">☐  Read CLAUDE.md in all repos before touching any code
 ☐  Check for existing components before building new ones
 ☐  Run auth verification before every deploy</span></div>
-    <div class="slide-num">6 / 16</div>
+    <div class="slide-num">10 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 7 — TWO ROLES ══ -->
-  <div class="slide" id="s7">
+  <!-- ══ SLIDE 11 — TWO ROLES ══ -->
+  <div class="slide" id="s11">
     <p class="eyebrow">Morning Session — 9:30 AM · The Most Important Concept</p>
     <h2 class="slide-title" style="font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:1.1rem;">The Two Roles — Architect vs. Implementer</h2>
     <div class="two-col">
@@ -536,11 +723,11 @@
         </div>
       </div>
     </div>
-    <div class="slide-num">7 / 16</div>
+    <div class="slide-num">11 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 8 — BRIEFS ══ -->
-  <div class="slide" id="s8">
+  <!-- ══ SLIDE 12 — BRIEFS ══ -->
+  <div class="slide" id="s12">
     <p class="eyebrow">Morning Session — 9:45 AM</p>
     <h2 class="slide-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);">Writing Briefs That Actually Work</h2>
     <p class="slide-sub" style="margin-bottom:0.8rem;max-width:700px;">Good briefs produce good code. Vague briefs produce confused code. Rushed briefs produce wasted hours. This template eliminates all three.</p>
@@ -563,11 +750,11 @@
       <span class="ni">✅</span>
       <p><strong>2 sentences — not 30 lines of code.</strong> Describe outcomes, not implementations. That is the entire skill.</p>
     </div>
-    <div class="slide-num">8 / 16</div>
+    <div class="slide-num">12 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 9 — TWO ENVIRONMENTS ══ -->
-  <div class="slide" id="s9">
+  <!-- ══ SLIDE 13 — TWO ENVIRONMENTS ══ -->
+  <div class="slide" id="s13">
     <p class="eyebrow">Module 03 — Architecture</p>
     <h2 class="slide-title" style="font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:1.1rem;">Two Environments — Never Mix Them</h2>
     <div class="two-col">
@@ -598,11 +785,11 @@
       <span class="ni">🔥</span>
       <p>A single typo in a configuration file took down production for 2 hours. The fix was one line. The lesson: <strong>test first, every single time.</strong></p>
     </div>
-    <div class="slide-num">9 / 16</div>
+    <div class="slide-num">13 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 10 — DEPLOY RITUAL ══ -->
-  <div class="slide" id="s10">
+  <!-- ══ SLIDE 14 — DEPLOY RITUAL ══ -->
+  <div class="slide" id="s14">
     <p class="eyebrow">Afternoon Session — 2:45 PM</p>
     <h2 class="slide-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);">The Deploy Ritual — Follow This Order Every Time</h2>
     <div class="steps-list">
@@ -650,11 +837,11 @@
         </div>
       </div>
     </div>
-    <div class="slide-num">10 / 16</div>
+    <div class="slide-num">14 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 11 — 5 PRACTICES ══ -->
-  <div class="slide" id="s11">
+  <!-- ══ SLIDE 15 — 5 PRACTICES ══ -->
+  <div class="slide" id="s15">
     <p class="eyebrow">Afternoon Session — 1:00 PM</p>
     <h2 class="slide-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);">Building Real Features — The 5 Non-Negotiable Rules</h2>
     <div class="practice-grid">
@@ -694,11 +881,11 @@
         </div>
       </div>
     </div>
-    <div class="slide-num">11 / 16</div>
+    <div class="slide-num">15 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 12 — DEBUGGING ══ -->
-  <div class="slide" id="s12">
+  <!-- ══ SLIDE 16 — DEBUGGING ══ -->
+  <div class="slide" id="s16">
     <p class="eyebrow">Afternoon Session — 1:45 PM</p>
     <h2 class="slide-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);">When Things Break — The Debugging Brief Formula</h2>
     <div class="code-box" style="max-width:100%;margin-top:0.6rem;">
@@ -722,11 +909,11 @@ Deploy to test and verify the error is completely resolved.</span></div>
       <span class="ni">📖</span>
       <p><strong>Real story:</strong> A 7-hour debugging session was caused by skipping Step 1. We guessed at solutions and deployed 15+ times. The answer was a single line in a config file — already documented in CLAUDE.md. <strong>Research before fix. Every time.</strong></p>
     </div>
-    <div class="slide-num">12 / 16</div>
+    <div class="slide-num">16 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 13 — 15 LESSONS ══ -->
-  <div class="slide" id="s13">
+  <!-- ══ SLIDE 17 — 15 LESSONS ══ -->
+  <div class="slide" id="s17">
     <p class="eyebrow">Appendix A — Lessons From The Real Build</p>
     <h2 class="slide-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);margin-bottom:0.8rem;">15 Lessons We Learned Building TextOS</h2>
     <div class="lessons-grid">
@@ -746,11 +933,11 @@ Deploy to test and verify the error is completely resolved.</span></div>
       <div class="lesson-chip"><div class="ln">L14</div><h4>Duplicate environment variables will break production</h4></div>
       <div class="lesson-chip"><div class="ln">L15</div><h4>30 years of architecture compounds at AI speed</h4></div>
     </div>
-    <div class="slide-num">13 / 16</div>
+    <div class="slide-num">17 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 14 — 12 MISTAKES ══ -->
-  <div class="slide" id="s14">
+  <!-- ══ SLIDE 18 — 12 MISTAKES ══ -->
+  <div class="slide" id="s18">
     <p class="eyebrow">Appendix B — Learn From Our Mistakes</p>
     <h2 class="slide-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);margin-bottom:0.8rem;">The 12 Biggest Mistakes — All From The Real Build</h2>
     <div class="mistakes-grid">
@@ -767,11 +954,11 @@ Deploy to test and verify the error is completely resolved.</span></div>
       <div class="mistake-chip"><div class="mn">M11</div><h4>Reporting preview URLs instead of canonical ones</h4><p>Fix: Only test URL and prod URL matter.</p></div>
       <div class="mistake-chip"><div class="mn">M12</div><h4>Working past exhaustion</h4><p>Fix: Stop. Commit. Sleep. Start fresh.</p></div>
     </div>
-    <div class="slide-num">14 / 16</div>
+    <div class="slide-num">18 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 15 — QUICK REF ══ -->
-  <div class="slide" id="s15">
+  <!-- ══ SLIDE 19 — QUICK REF ══ -->
+  <div class="slide" id="s19">
     <p class="eyebrow">Appendix C — Keep This Open During Every Session</p>
     <h2 class="slide-title" style="font-size:clamp(1.4rem,2.5vw,1.9rem);margin-bottom:0.8rem;">Quick Reference Card</h2>
     <div class="ref-grid">
@@ -808,11 +995,11 @@ Deploy to test and verify the error is completely resolved.</span></div>
         <div class="rv normal" style="font-size:0.74rem;line-height:1.65;">☐ Outcome in 1 sentence &nbsp; ☐ Files to touch &nbsp; ☐ Pattern to follow &nbsp; ☐ Do NOT touch &nbsp; ☐ How to verify</div>
       </div>
     </div>
-    <div class="slide-num">15 / 16</div>
+    <div class="slide-num">19 / 20</div>
   </div>
 
-  <!-- ══ SLIDE 16 — CLOSING ══ -->
-  <div class="slide" id="s16">
+  <!-- ══ SLIDE 20 — CLOSING ══ -->
+  <div class="slide" id="s20">
     <p class="eyebrow">You Shipped It</p>
     <h2 class="slide-title" style="text-align:center;">What You Built Today</h2>
     <div class="closing-grid">
@@ -853,7 +1040,7 @@ Deploy to test and verify the error is completely resolved.</span></div>
       <span class="badge amber">Built using this exact course</span>
       <span class="badge">Rob Gaudet · New Orleans · 2026</span>
     </div>
-    <div class="slide-num">16 / 16</div>
+    <div class="slide-num">20 / 20</div>
   </div>
 
 </div><!-- #deck -->
@@ -863,7 +1050,7 @@ Deploy to test and verify the error is completely resolved.</span></div>
   <a href="https://trustlight.ai/vibecoding/" class="brand">← Vibe Coding Lab</a>
   <div class="nav-controls">
     <button class="nav-btn" id="btn-prev" onclick="goSlide(-1)" disabled>◀</button>
-    <span id="slide-counter">1 / 16</span>
+    <span id="slide-counter">1 / 20</span>
     <button class="nav-btn" id="btn-next" onclick="goSlide(1)">▶</button>
   </div>
   <div id="progress-dots"></div>
