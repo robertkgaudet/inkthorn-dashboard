@@ -49,7 +49,7 @@
     .slide {
       position:absolute; inset:0;
       display:flex; flex-direction:column; justify-content:center; align-items:center;
-      padding:52px 72px 76px;
+      padding:48px 80px 76px;
       opacity:0; pointer-events:none;
       transition:opacity 0.35s ease, transform 0.35s ease;
       transform:translateX(48px);
@@ -314,6 +314,95 @@
     .closing-col ul { list-style:none; display:flex; flex-direction:column; gap:0.38rem; }
     .closing-col ul li { font-size:0.72rem; color:#94A3B8; line-height:1.4; display:flex; gap:0.38rem; }
     .closing-col ul li::before { content:'→'; color:#3B82F6; flex-shrink:0; }
+
+    /* ══════════════════════════════════════
+       FULL-BLEED STRETCH — remove max-width caps, scale up text
+    ══════════════════════════════════════ */
+    .slide-inner,
+    .agenda-grid, .agenda-appendix,
+    .web-flow, .web-terms,
+    .stack-layers,
+    .cf-grid, .cf-vs,
+    .sb-grid,
+    .tools-grid,
+    .two-col, .three-col,
+    .practice-grid, .steps-list,
+    .ref-grid,
+    .lessons-grid, .mistakes-grid,
+    .closing-grid,
+    .quote-block, .notice, .code-box {
+      max-width: 100% !important;
+    }
+
+    /* Scale slide titles */
+    .slide-title { font-size: clamp(1.8rem, 3.5vw, 3rem) !important; }
+    #s1 .slide-title { font-size: clamp(2.8rem, 7vw, 5.5rem) !important; }
+
+    /* Scale body text across cards */
+    .eyebrow          { font-size: 0.82rem; }
+    .slide-sub        { font-size: 1.05rem; }
+    .item-list li     { font-size: 0.92rem; }
+    .notice           { font-size: 0.9rem; }
+
+    /* Agenda */
+    .agenda-body h4   { font-size: 1rem; }
+    .agenda-body p    { font-size: 0.84rem; }
+    .agenda-num       { font-size: 0.72rem; }
+
+    /* Web flow */
+    .web-step-title   { font-size: 0.92rem; }
+    .web-step-desc    { font-size: 0.8rem; }
+    .web-term p       { font-size: 0.85rem; }
+    .wt-label         { font-size: 0.7rem; }
+
+    /* Stack */
+    .layer-name       { font-size: 0.92rem; }
+    .layer-tagline    { font-size: 0.82rem; }
+
+    /* CF / Supabase cards */
+    .cf-card h4, .sb-card h4 { font-size: 0.95rem; }
+    .cf-card p,  .sb-card p  { font-size: 0.84rem; }
+    .sc-label                { font-size: 0.68rem; }
+
+    /* Tools */
+    .tool-name        { font-size: 0.92rem; }
+    .tool-desc        { font-size: 0.84rem; }
+
+    /* Col cards (old vs new) */
+    .col-card h3      { font-size: 0.78rem; }
+
+    /* Pillars */
+    .pillar h3        { font-size: 1rem; }
+    .pillar p         { font-size: 0.88rem; }
+    .pillar-num       { font-size: 2.4rem; }
+
+    /* Roles */
+    .role-handle      { font-size: 0.9rem; }
+    .never-box        { font-size: 0.82rem; }
+
+    /* Practices */
+    .practice-text h4 { font-size: 0.92rem; }
+    .practice-text p  { font-size: 0.82rem; }
+
+    /* Deploy steps */
+    .step-title       { font-size: 0.92rem; }
+    .step-cmd         { font-size: 0.76rem; }
+    .step-note        { font-size: 0.82rem; }
+
+    /* Lessons / Mistakes */
+    .lesson-chip h4   { font-size: 0.85rem; }
+    .mistake-chip h4  { font-size: 0.84rem; }
+    .mistake-chip p   { font-size: 0.78rem; }
+
+    /* Quick ref */
+    .ref-item .rv     { font-size: 0.84rem; }
+    .ref-item .rl     { font-size: 0.68rem; }
+
+    /* Code box */
+    .code-box         { font-size: 0.78rem; }
+
+    /* Closing */
+    .closing-col ul li { font-size: 0.85rem; }
 
     /* ══════════════════════════════════════
        RESPONSIVE — MOBILE (≤640px)
