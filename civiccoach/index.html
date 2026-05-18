@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CivicCoach — Political Coaching Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0B0F1A;
+      --bg2:      #111827;
+      --bg3:      #1A2236;
+      --border:   rgba(255,255,255,0.08);
+      --border2:  rgba(255,255,255,0.14);
+      --text:     #F1F5F9;
+      --text2:    #94A3B8;
+      --muted:    #64748B;
+      --gold:     #F59E0B;
+      --gold-lt:  rgba(245,158,11,0.12);
+      --gold-md:  rgba(245,158,11,0.3);
+      --blue:     #3B82F6;
+      --blue-lt:  rgba(59,130,246,0.1);
+      --blue-md:  rgba(59,130,246,0.25);
+      --red:      #EF4444;
+      --green:    #10B981;
+      --green-lt: rgba(16,185,129,0.1);
+      --r: 12px;
+    }
+
+    html, body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+
+    /* ── SCREENS ── */
+    .screen { display: none; min-height: 100vh; }
+    .screen.active { display: flex; flex-direction: column; }
+
+    /* ── HEADER ── */
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(11,15,26,0.92); backdrop-filter: blur(12px);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-mark { width: 32px; height: 32px; background: linear-gradient(135deg, var(--gold), #E07B00); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    .logo-name { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
+    .logo-tagline { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .step-indicator { display: flex; align-items: center; gap: 6px; }
+    .step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border2); transition: all 0.3s; }
+    .step-dot.done { background: var(--gold); border-color: var(--gold); }
+    .step-dot.active { background: transparent; border: 2px solid var(--gold); transform: scale(1.2); }
+
+    /* ── HERO ── */
+    .hero {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 80px 40px; text-align: center;
+    }
+    .hero-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.08; color: var(--text); margin-bottom: 1.2rem; }
+    .hero-title span { color: var(--gold); }
+    .hero-sub { font-size: 1.05rem; color: var(--text2); max-width: 520px; line-height: 1.7; margin-bottom: 3rem; }
+
+    .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; max-width: 700px; width: 100%; }
+    .path-card {
+      background: var(--bg2); border: 1px solid var(--border2); border-radius: 16px;
+      padding: 2rem 1.75rem; cursor: pointer; transition: all 0.25s; text-align: left;
+      position: relative; overflow: hidden;
+    }
+    .path-card::before { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.25s; border-radius: 16px; }
+    .path-card.office::before { background: linear-gradient(135deg, rgba(245,158,11,0.08), transparent); }
+    .path-card.issue::before  { background: linear-gradient(135deg, rgba(59,130,246,0.08), transparent); }
+    .path-card:hover { transform: translateY(-3px); }
+    .path-card.office:hover { border-color: var(--gold); box-shadow: 0 8px 32px rgba(245,158,11,0.15); }
+    .path-card.office:hover::before { opacity: 1; }
+    .path-card.issue:hover  { border-color: var(--blue); box-shadow: 0 8px 32px rgba(59,130,246,0.15); }
+    .path-card.issue:hover::before  { opacity: 1; }
+    .path-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+    .path-label { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.35rem; }
+    .path-card.office .path-label { color: var(--gold); }
+    .path-card.issue  .path-label { color: var(--blue); }
+    .path-title { font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; }
+    .path-desc  { font-size: 0.82rem; color: var(--text2); line-height: 1.6; }
+    .path-arrow { position: absolute; bottom: 1.25rem; right: 1.25rem; font-size: 1.1rem; opacity: 0.3; transition: all 0.2s; }
+    .path-card:hover .path-arrow { opacity: 1; transform: translate(3px, -3px); }
+
+    /* ── QUESTIONNAIRE ── */
+    .q-screen { flex: 1; display: flex; flex-direction: column; padding: 60px 40px; max-width: 720px; margin: 0 auto; width: 100%; }
+    .q-header { margin-bottom: 2.5rem; }
+    .q-path-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 100px; margin-bottom: 1rem; }
+    .q-path-badge.office { background: var(--gold-lt); color: var(--gold); border: 1px solid var(--gold-md); }
+    .q-path-badge.issue  { background: var(--blue-lt);  color: var(--blue);  border: 1px solid var(--blue-md); }
+    .q-title { font-size: 1.6rem; font-weight: 800; color: var(--text); margin-bottom: 0.4rem; line-height: 1.2; }
+    .q-subtitle { font-size: 0.87rem; color: var(--text2); line-height: 1.6; }
+
+    .progress-bar-wrap { height: 4px; background: var(--bg3); border-radius: 2px; margin-bottom: 2.5rem; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold), #E07B00); border-radius: 2px; transition: width 0.4s ease; }
+
+    .question-block { animation: fadeUp 0.3s ease; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    .q-num { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .q-text { font-size: 1.15rem; font-weight: 700; color: var(--text); line-height: 1.45; margin-bottom: 1.4rem; }
+    .q-subtext { font-size: 0.8rem; color: var(--text2); margin-top: -1rem; margin-bottom: 1.4rem; line-height: 1.5; }
+
+    .options-grid { display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 2rem; }
+    .option-btn {
+      display: flex; align-items: center; gap: 1rem; background: var(--bg2); border: 1px solid var(--border2);
+      border-radius: 10px; padding: 1rem 1.2rem; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%;
+      color: var(--text2); font-size: 0.88rem; font-family: 'Inter', sans-serif; line-height: 1.45;
+    }
+    .option-btn:hover { border-color: var(--gold-md); color: var(--text); background: var(--bg3); }
+    .option-btn.selected { border-color: var(--gold); background: var(--gold-lt); color: var(--text); }
+    .option-check { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; transition: all 0.2s; }
+    .option-btn.selected .option-check { background: var(--gold); border-color: var(--gold); color: #000; }
+    .option-text strong { display: block; font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.1rem; }
+
+    .text-input {
+      width: 100%; background: var(--bg2); border: 1px solid var(--border2); border-radius: 10px;
+      padding: 1rem 1.2rem; color: var(--text); font-size: 0.9rem; font-family: 'Inter', sans-serif;
+      resize: vertical; min-height: 100px; line-height: 1.6; transition: border-color 0.2s; outline: none;
+      margin-bottom: 1.5rem;
+    }
+    .text-input:focus { border-color: var(--gold); }
+    .text-input::placeholder { color: var(--muted); }
+
+    .q-nav { display: flex; align-items: center; justify-content: space-between; }
+    .btn-back { background: transparent; border: 1px solid var(--border2); color: var(--text2); padding: 0.75rem 1.4rem; border-radius: 8px; cursor: pointer; font-size: 0.84rem; font-family: 'Inter', sans-serif; font-weight: 600; transition: all 0.2s; }
+    .btn-back:hover { border-color: var(--border2); color: var(--text); }
+    .btn-next { background: linear-gradient(135deg, var(--gold), #D97706); color: #000; padding: 0.75rem 1.8rem; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-family: 'Inter', sans-serif; font-weight: 800; border: none; transition: all 0.2s; }
+    .btn-next:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(245,158,11,0.3); }
+    .btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* ── RESULTS ── */
+    .results-screen { flex: 1; display: flex; flex-direction: column; }
+    .results-hero { background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%); padding: 60px 40px 50px; text-align: center; border-bottom: 1px solid var(--border); }
+    .results-eyebrow { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 0.75rem; }
+    .results-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; color: var(--text); margin-bottom: 0.75rem; }
+    .results-sub { font-size: 0.95rem; color: var(--text2); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+    .results-body { max-width: 860px; margin: 0 auto; padding: 48px 40px 80px; width: 100%; }
+
+    .guide-section { margin-bottom: 2.5rem; }
+    .guide-section-label { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .guide-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .insight-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--r); padding: 1.4rem 1.6rem; margin-bottom: 0.75rem; }
+    .insight-card h4 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+    .insight-card p  { font-size: 0.84rem; color: var(--text2); line-height: 1.65; }
+
+    .phases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .phase-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--r); padding: 1.4rem; position: relative; overflow: hidden; }
+    .phase-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .phase-card:nth-child(1)::before { background: var(--gold); }
+    .phase-card:nth-child(2)::before { background: var(--blue); }
+    .phase-card:nth-child(3)::before { background: var(--green); }
+    .phase-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--border2); line-height: 1; margin-bottom: 0.5rem; }
+    .phase-title { font-size: 0.85rem; font-weight: 800; color: var(--text); margin-bottom: 0.3rem; }
+    .phase-duration { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.85rem; padding-bottom: 0.7rem; border-bottom: 1px solid var(--border); }
+    .phase-items { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .phase-items li { font-size: 0.78rem; color: var(--text2); display: flex; gap: 0.5rem; line-height: 1.4; }
+    .phase-items li::before { content: '→'; color: var(--gold); flex-shrink: 0; font-size: 0.7rem; margin-top: 1px; }
+
+    .warning-block { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: var(--r); padding: 1.2rem 1.4rem; display: flex; gap: 0.85rem; margin-bottom: 0.75rem; }
+    .warning-block .wi { font-size: 1.1rem; flex-shrink: 0; }
+    .warning-block h4 { font-size: 0.88rem; font-weight: 700; color: var(--red); margin-bottom: 0.25rem; }
+    .warning-block p  { font-size: 0.8rem; color: var(--text2); line-height: 1.55; }
+
+    .resources-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .resource-item { background: var(--bg2); border: 1px solid var(--border2); border-radius: 8px; padding: 1rem 1.1rem; display: flex; gap: 0.75rem; align-items: flex-start; }
+    .resource-item .ri { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .resource-item h4 { font-size: 0.84rem; font-weight: 700; color: var(--text); margin-bottom: 0.15rem; }
+    .resource-item p  { font-size: 0.74rem; color: var(--text2); line-height: 1.5; }
+
+    .cta-block { background: linear-gradient(135deg, var(--gold-lt), rgba(245,158,11,0.05)); border: 1px solid var(--gold-md); border-radius: 16px; padding: 2.5rem; text-align: center; margin-top: 2rem; }
+    .cta-block h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--text); margin-bottom: 0.6rem; }
+    .cta-block p  { font-size: 0.88rem; color: var(--text2); line-height: 1.65; max-width: 460px; margin: 0 auto 1.5rem; }
+    .btn-cta { background: linear-gradient(135deg, var(--gold), #D97706); color: #000; padding: 0.9rem 2.4rem; border-radius: 10px; cursor: pointer; font-size: 0.95rem; font-family: 'Inter', sans-serif; font-weight: 800; border: none; transition: all 0.2s; display: inline-block; }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,158,11,0.35); }
+
+    @media (max-width: 640px) {
+      header { padding: 14px 18px; }
+      .hero { padding: 48px 18px; }
+      .path-grid { grid-template-columns: 1fr; }
+      .q-screen { padding: 40px 18px; }
+      .phases-grid { grid-template-columns: 1fr; }
+      .resources-grid { grid-template-columns: 1fr; }
+      .results-body { padding: 32px 18px 60px; }
+      .results-hero { padding: 40px 18px 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ SCREEN 1: LANDING ══ -->
+<div class="screen active" id="screen-landing">
+  <header>
+    <div class="logo">
+      <div class="logo-mark">⚖️</div>
+      <div>
+        <div class="logo-name">CivicCoach</div>
+        <div class="logo-tagline">Political Coaching Platform</div>
+      </div>
+    </div>
+    <div class="step-indicator">
+      <div class="step-dot active" id="dot-1"></div>
+      <div class="step-dot" id="dot-2"></div>
+      <div class="step-dot" id="dot-3"></div>
+    </div>
+  </header>
+  <div class="hero">
+    <p class="hero-eyebrow">Your Political Journey Starts Here</p>
+    <h1 class="hero-title">What do you want<br>to <span>accomplish?</span></h1>
+    <p class="hero-sub">Answer a few questions and we'll build you a personalized roadmap. No jargon. No fluff. Just a clear path forward.</p>
+    <div class="path-grid">
+      <div class="path-card office" onclick="choosePath('office')">
+        <span class="path-icon">🏛️</span>
+        <div class="path-label">Path A</div>
+        <div class="path-title">I'm Running for Office</div>
+        <div class="path-desc">You're considering a campaign — local, state, or federal. Get a roadmap built for candidates.</div>
+        <div class="path-arrow">↗</div>
+      </div>
+      <div class="path-card issue" onclick="choosePath('issue')">
+        <span class="path-icon">📣</span>
+        <div class="path-label">Path B</div>
+        <div class="path-title">I'm Advocating for an Issue</div>
+        <div class="path-desc">You have a cause — policy reform, community change, legislation. Turn it into real impact.</div>
+        <div class="path-arrow">↗</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 2: QUESTIONNAIRE ══ -->
+<div class="screen" id="screen-questions">
+  <header>
+    <div class="logo">
+      <div class="logo-mark">⚖️</div>
+      <div>
+        <div class="logo-name">CivicCoach</div>
+        <div class="logo-tagline">Political Coaching Platform</div>
+      </div>
+    </div>
+    <div class="step-indicator">
+      <div class="step-dot done" id="dot-q1"></div>
+      <div class="step-dot active" id="dot-q2"></div>
+      <div class="step-dot" id="dot-q3"></div>
+    </div>
+  </header>
+  <div class="q-screen">
+    <div class="q-header">
+      <div class="q-path-badge" id="path-badge">⚡ Running for Office</div>
+      <h2 class="q-title" id="q-section-title">Tell us about your campaign</h2>
+      <p class="q-subtitle" id="q-section-sub">These answers shape your personalized roadmap. Be honest — there are no wrong answers here.</p>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill" style="width: 14%"></div>
+    </div>
+    <div class="question-block" id="question-container"></div>
+    <div class="q-nav">
+      <button class="btn-back" id="btn-back" onclick="prevQuestion()">← Back</button>
+      <button class="btn-next" id="btn-next" onclick="nextQuestion()">Continue →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 3: RESULTS ══ -->
+<div class="screen" id="screen-results">
+  <header>
+    <div class="logo">
+      <div class="logo-mark">⚖️</div>
+      <div>
+        <div class="logo-name">CivicCoach</div>
+        <div class="logo-tagline">Political Coaching Platform</div>
+      </div>
+    </div>
+    <div class="step-indicator">
+      <div class="step-dot done"></div>
+      <div class="step-dot done"></div>
+      <div class="step-dot done" style="background:var(--gold);border-color:var(--gold);"></div>
+    </div>
+  </header>
+  <div class="results-screen">
+    <div class="results-hero">
+      <div class="results-eyebrow">✓ Your Guide Is Ready</div>
+      <h1 class="results-title" id="results-title">Your Campaign Roadmap</h1>
+      <p class="results-sub" id="results-sub">Based on your answers, here's what we recommend. This is your starting framework — built around where you are today.</p>
+    </div>
+    <div class="results-body" id="results-body"></div>
+  </div>
+</div>
+
+<script>
+  // ── STATE ──
+  let selectedPath = null;
+  let answers = {};
+  let currentQ = 0;
+
+  // ── QUESTION BANKS ──
+
+  const officeQuestions = [
+    {
+      id: 'office_level',
+      text: 'What level of office are you considering?',
+      type: 'options',
+      options: [
+        { value: 'local', label: 'Local Office', desc: 'City council, school board, sheriff, judge' },
+        { value: 'state_leg', label: 'State Legislature', desc: 'State house or state senate' },
+        { value: 'statewide', label: 'Statewide Office', desc: 'Governor, attorney general, secretary of state' },
+        { value: 'federal', label: 'Federal Office', desc: 'U.S. House, Senate, or President' },
+      ]
+    },
+    {
+      id: 'experience',
+      text: 'What's your political experience level?',
+      type: 'options',
+      options: [
+        { value: 'none', label: 'First-Time Candidate', desc: 'Never run for anything before' },
+        { value: 'some', label: 'Some Experience', desc: 'Volunteered, worked on campaigns, or held appointive roles' },
+        { value: 'prior', label: 'Prior Candidate', desc: 'Run before — won or lost' },
+        { value: 'incumbent', label: 'Incumbent', desc: 'Currently in office, seeking re-election' },
+      ]
+    },
+    {
+      id: 'timeline',
+      text: 'When is your target election?',
+      type: 'options',
+      options: [
+        { value: 'under6', label: 'Under 6 months', desc: 'Filing deadline is approaching or already filed' },
+        { value: '6to12', label: '6–12 months out', desc: 'Exploratory phase, building toward announcement' },
+        { value: '1to2yr', label: '1–2 years out', desc: 'Planning ahead for next election cycle' },
+        { value: 'unsure', label: 'Still deciding', desc: 'Weighing whether to run at all' },
+      ]
+    },
+    {
+      id: 'top_concern',
+      text: 'What's your biggest challenge right now?',
+      type: 'options',
+      options: [
+        { value: 'fundraising', label: 'Fundraising', desc: 'Building a donor base and raising money' },
+        { value: 'message', label: 'Message & Platform', desc: 'Defining what I stand for and how to say it' },
+        { value: 'team', label: 'Building a Team', desc: 'Finding staff, volunteers, and advisors' },
+        { value: 'visibility', label: 'Name Recognition', desc: 'Getting known in the community' },
+        { value: 'opposition', label: 'Navigating Opposition', desc: 'Facing an incumbent or well-funded opponent' },
+      ]
+    },
+    {
+      id: 'community',
+      text: 'Briefly: why do you want to run? What's driving you?',
+      subtext: 'This isn't going on a website — it's just for us to tailor your guide. A few honest sentences is perfect.',
+      type: 'text',
+      placeholder: 'e.g. My neighborhood has been ignored for years. Schools are underfunded, businesses are leaving, and nobody in office is listening. I've been showing up to city council for two years with no results — so I decided to become the result...'
+    },
+    {
+      id: 'resources',
+      text: 'What resources do you have right now?',
+      type: 'options',
+      options: [
+        { value: 'early', label: 'Starting from scratch', desc: 'No team, minimal funds, just me and a vision' },
+        { value: 'some_net', label: 'Network, no money yet', desc: 'Strong community connections, but fundraising not started' },
+        { value: 'funded', label: 'Some early funding', desc: 'Friends/family donations, PAC interest, or personal funds' },
+        { value: 'strong', label: 'Well-resourced', desc: 'Staff, donors, endorsements already in place' },
+      ]
+    },
+    {
+      id: 'party',
+      text: 'Are you running with a party affiliation?',
+      type: 'options',
+      options: [
+        { value: 'dem', label: 'Democrat', desc: '' },
+        { value: 'rep', label: 'Republican', desc: '' },
+        { value: 'ind', label: 'Independent / Third Party', desc: '' },
+        { value: 'nonpart', label: 'Nonpartisan Race', desc: 'No party on ballot (common for local offices)' },
+      ]
+    },
+  ];
+
+  const issueQuestions = [
+    {
+      id: 'issue_type',
+      text: 'What category best describes your issue?',
+      type: 'options',
+      options: [
+        { value: 'local_policy', label: 'Local Policy Change', desc: 'Zoning, policing, local ordinances, budget allocation' },
+        { value: 'state_leg', label: 'State Legislation', desc: 'Passing, blocking, or amending a state law' },
+        { value: 'federal_pol', label: 'Federal Policy', desc: 'Congressional legislation, federal agency rules' },
+        { value: 'community', label: 'Community / Social Issue', desc: 'Changing norms, raising awareness, shifting culture' },
+      ]
+    },
+    {
+      id: 'issue_stage',
+      text: 'Where are you in your advocacy journey?',
+      type: 'options',
+      options: [
+        { value: 'idea', label: 'Just an idea', desc: 'Passionate about an issue but haven't started organizing' },
+        { value: 'early', label: 'Early organizing', desc: 'Building a base, talking to people, starting to mobilize' },
+        { value: 'active', label: 'Active campaign', desc: 'Coalition exists, meetings are happening, some wins' },
+        { value: 'stalled', label: 'Stalled or stuck', desc: 'Hit resistance — need new strategy or momentum' },
+      ]
+    },
+    {
+      id: 'opposition',
+      text: 'Who or what is opposing you?',
+      type: 'options',
+      options: [
+        { value: 'none', label: 'No clear opposition yet', desc: 'Early stage, haven't engaged the system' },
+        { value: 'indiff', label: 'Indifference / apathy', desc: 'Nobody's against it — they just don't care yet' },
+        { value: 'political', label: 'Political opposition', desc: 'Elected officials, parties, or bureaucracies blocking change' },
+        { value: 'industry', label: 'Industry / money', desc: 'Corporate interests, lobbyists, or well-funded opposition' },
+      ]
+    },
+    {
+      id: 'goal',
+      text: 'What does success look like for you?',
+      type: 'options',
+      options: [
+        { value: 'law', label: 'A law passed or repealed', desc: 'Legislative or regulatory change at some level' },
+        { value: 'awareness', label: 'Mass public awareness', desc: 'Change how people think and talk about this' },
+        { value: 'local_win', label: 'A local win first', desc: 'One community, one policy — prove the model' },
+        { value: 'movement', label: 'A sustained movement', desc: 'Building an organization that outlasts any one fight' },
+      ]
+    },
+    {
+      id: 'issue_detail',
+      text: 'Describe the issue and what change you want to see.',
+      subtext: 'Be as specific as you can. The clearer your target, the better your roadmap.',
+      type: 'text',
+      placeholder: 'e.g. We have no sidewalks on the school bus routes in my district. Three kids have been hit by cars in the last five years. I want the city to fund a safe routes to school program in the next budget cycle...'
+    },
+    {
+      id: 'coalition',
+      text: 'What resources does your coalition have?',
+      type: 'options',
+      options: [
+        { value: 'solo', label: 'Just me right now', desc: 'No formal group or coalition yet' },
+        { value: 'small', label: 'Small but committed', desc: 'A core group of 5–25 people' },
+        { value: 'org', label: 'Established organization', desc: 'Nonprofit, club, or civic org with members + budget' },
+        { value: 'broad', label: 'Broad coalition', desc: 'Multiple organizations, leaders, community-wide support' },
+      ]
+    },
+    {
+      id: 'timeline',
+      text: 'What's your urgency level?',
+      type: 'options',
+      options: [
+        { value: 'urgent', label: 'Crisis / urgent', desc: 'Something is happening now that requires immediate action' },
+        { value: 'cycle', label: 'Tied to a cycle', desc: 'Budget deadline, election, legislative session, or hearing' },
+        { value: 'longterm', label: 'Long-term change', desc: 'Structural issue — expect a multi-year campaign' },
+        { value: 'unsure', label: 'Not sure yet', desc: 'Still figuring out what timeline is realistic' },
+      ]
+    },
+  ];
+
+  // ── ROUTING ──
+  function choosePath(path) {
+    selectedPath = path;
+    answers = {};
+    currentQ = 0;
+
+    document.getElementById('screen-landing').classList.remove('active');
+    document.getElementById('screen-questions').classList.add('active');
+
+    const badge = document.getElementById('path-badge');
+    if (path === 'office') {
+      badge.className = 'q-path-badge office';
+      badge.textContent = '🏛️ Running for Office';
+      document.getElementById('q-section-title').textContent = 'Tell us about your campaign';
+    } else {
+      badge.className = 'q-path-badge issue';
+      badge.textContent = '📣 Advocating for an Issue';
+      document.getElementById('q-section-title').textContent = 'Tell us about your cause';
+    }
+
+    renderQuestion();
+  }
+
+  function getQuestions() {
+    return selectedPath === 'office' ? officeQuestions : issueQuestions;
+  }
+
+  function renderQuestion() {
+    const qs = getQuestions();
+    const q = qs[currentQ];
+    const total = qs.length;
+    const pct = ((currentQ + 1) / (total + 1)) * 100;
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    document.getElementById('btn-back').style.visibility = currentQ === 0 ? 'hidden' : 'visible';
+    document.getElementById('btn-next').disabled = !answers[q.id];
+    document.getElementById('btn-next').textContent = currentQ === total - 1 ? 'Build My Guide →' : 'Continue →';
+
+    let html = `<div class="q-num">Question ${currentQ + 1} of ${total}</div>`;
+    html += `<div class="q-text">${q.text}</div>`;
+    if (q.subtext) html += `<div class="q-subtext">${q.subtext}</div>`;
+
+    if (q.type === 'options') {
+      html += `<div class="options-grid">`;
+      q.options.forEach(opt => {
+        const sel = answers[q.id] === opt.value ? ' selected' : '';
+        html += `<button class="option-btn${sel}" onclick="selectOption('${q.id}', '${opt.value}', this)">
+          <div class="option-check">${sel ? '✓' : ''}</div>
+          <div class="option-text"><strong>${opt.label}</strong>${opt.desc ? opt.desc : ''}</div>
+        </button>`;
+      });
+      html += `</div>`;
+    } else {
+      const saved = answers[q.id] || '';
+      html += `<textarea class="text-input" id="text-input-${q.id}" placeholder="${q.placeholder || ''}" oninput="handleText('${q.id}', this)">${saved}</textarea>`;
+    }
+
+    const container = document.getElementById('question-container');
+    container.innerHTML = html;
+    container.classList.remove('question-block');
+    void container.offsetWidth;
+    container.classList.add('question-block');
+
+    if (q.type === 'text' && saved) {
+      document.getElementById('btn-next').disabled = false;
+    }
+  }
+
+  function selectOption(qId, value, el) {
+    answers[qId] = value;
+    document.querySelectorAll('.option-btn').forEach(b => {
+      b.classList.remove('selected');
+      b.querySelector('.option-check').textContent = '';
+    });
+    el.classList.add('selected');
+    el.querySelector('.option-check').textContent = '✓';
+    document.getElementById('btn-next').disabled = false;
+  }
+
+  function handleText(qId, el) {
+    answers[qId] = el.value.trim();
+    document.getElementById('btn-next').disabled = el.value.trim().length < 5;
+  }
+
+  function nextQuestion() {
+    const qs = getQuestions();
+    if (currentQ < qs.length - 1) {
+      currentQ++;
+      renderQuestion();
+    } else {
+      buildResults();
+    }
+  }
+
+  function prevQuestion() {
+    if (currentQ > 0) {
+      currentQ--;
+      renderQuestion();
+    }
+  }
+
+  // ── RESULTS BUILDER ──
+  function buildResults() {
+    document.getElementById('screen-questions').classList.remove('active');
+    document.getElementById('screen-results').classList.add('active');
+
+    if (selectedPath === 'office') buildOfficeResults();
+    else buildIssueResults();
+  }
+
+  function buildOfficeResults() {
+    const a = answers;
+    document.getElementById('results-title').textContent = 'Your Campaign Roadmap';
+    document.getElementById('results-sub').textContent =
+      'Based on your answers, here\'s a personalized guide to your campaign. Use this as your operating framework from day one.';
+
+    const levelLabels = { local: 'Local Office', state_leg: 'State Legislature', statewide: 'Statewide Office', federal: 'Federal Office' };
+    const concernLabels = { fundraising: 'Fundraising', message: 'Message & Platform', team: 'Building a Team', visibility: 'Name Recognition', opposition: 'Handling Opposition' };
+
+    let phases;
+    if (a.timeline === 'under6') {
+      phases = [
+        { title: 'Emergency Sprint', dur: 'Now — 4 Weeks', items: ['File paperwork immediately if not done', 'Lock in your top 3 donors for seed money', 'Announce publicly on social media', 'Book first 5 community appearances', 'Identify your 1-sentence core message'] },
+        { title: 'Door-to-Door Phase', dur: 'Weeks 4–10', items: ['500+ voter contacts per week minimum', 'Earned media: local press, radio, community events', 'Finalize literature and signage', 'Recruit and train volunteer team', 'Daily fundraising calls — no exceptions'] },
+        { title: 'Final Stretch', dur: 'Last 3 Weeks', items: ['GOTV operation fully activated', 'Absentee and early vote outreach priority', 'Surrogates making calls and knocking doors', 'Social media every day — video performs best', 'Election Day operation: rides, polls, results'] },
+      ];
+    } else if (a.timeline === 'unsure') {
+      phases = [
+        { title: 'Exploration Phase', dur: 'Now — 60 Days', items: ['Run a kitchen table — talk to 50 trusted people', 'Get a legal/compliance consult before deciding', 'Assess the field: who else might run?', 'Test your message informally in community settings', 'Identify one advisor who\'s run a campaign before'] },
+        { title: 'Decision Phase', dur: 'Day 60–90', items: ['Commit or don\'t — indecision is the worst position', 'If running: file paperwork, open bank account', 'If not: choose a role — volunteer, endorser, donor', 'Lock in your "kitchen cabinet" of 5–8 advisors', 'Set a public announcement date'] },
+        { title: 'Launch Phase', dur: 'Day 90 onward', items: ['Public announcement event or video', 'First fundraising ask within 48 hours of announcement', 'Website and social profiles live Day 1', 'Editorial board meeting request', 'Voter contact operation begins immediately'] },
+      ];
+    } else {
+      phases = [
+        { title: 'Foundation', dur: 'First 90 Days', items: ['File campaign paperwork and open bank account', 'Build your kitchen cabinet of 5–8 close advisors', 'Identify your top 25 potential donors, call each one', 'Define your 3 core issues — no more than 3', 'Launch simple website + social profiles'] },
+        { title: 'Build & Grow', dur: 'Months 3–9', items: ['500+ voter contacts per month', 'Monthly fundraising events, not just online asks', 'Seek editorial endorsements from local press', 'Join every relevant civic org and show up', 'Track all donor contacts in a simple spreadsheet'] },
+        { title: 'Final Campaign', dur: 'Last 90 Days', items: ['Shift to GOTV — every resource goes here', 'Paid media if budget allows (digital first)', 'Surrogate program: who's talking for you?', 'Debate prep: 5 mock sessions minimum', 'Election Day operation: 1 captain per precinct'] },
+      ];
+    }
+
+    const warnings = [];
+    if (a.experience === 'none') {
+      warnings.push({ title: 'First-Time Candidate Warning', text: 'Most first-time candidates underestimate what a campaign takes. Hire or recruit one person who has run a winning campaign before — even locally. Their experience is worth 100 enthusiastic volunteers.' });
+    }
+    if (a.resources === 'early') {
+      warnings.push({ title: 'Underfunded Campaign Risk', text: 'Starting with no resources is hard but doable at the local level. Priority one: 3–5 seed donors who will write checks today. Momentum attracts money. Do something publicly first, then ask.' });
+    }
+    if (a.party === 'ind') {
+      warnings.push({ title: 'Independent Candidate Reality', text: 'Running without party support means building your own infrastructure from scratch. Ballot access requirements are often more demanding. Get a compliance attorney on day one.' });
+    }
+
+    const body = document.getElementById('results-body');
+    body.innerHTML = `
+
+      <div class="guide-section">
+        <div class="guide-section-label">Your Situation at a Glance</div>
+        <div class="insight-card">
+          <h4>🏛️ ${levelLabels[a.office_level] || 'Campaign'} — ${a.experience === 'incumbent' ? 'Incumbent' : a.experience === 'none' ? 'First-Time Candidate' : 'Experienced Candidate'}</h4>
+          <p>You're ${a.timeline === 'unsure' ? 'still deciding' : 'running'} ${a.timeline === 'under6' ? 'in an active race right now' : a.timeline === '6to12' ? 'with 6–12 months until election day' : a.timeline === 'unsure' ? '' : 'with 1–2 years to build'}. Your most pressing challenge is <strong>${concernLabels[a.top_concern] || 'building your campaign'}.</strong> ${a.resources === 'strong' ? 'You have strong resources — use that advantage to move fast.' : a.resources === 'early' ? 'You\'re starting lean — that\'s doable, but focus and prioritization are non-negotiable.' : 'Build systematically and don\'t skip steps.'}</p>
+        </div>
+      </div>
+
+      <div class="guide-section">
+        <div class="guide-section-label">Your 3-Phase Roadmap</div>
+        <div class="phases-grid">
+          ${phases.map((p, i) => `
+            <div class="phase-card">
+              <div class="phase-num">0${i+1}</div>
+              <div class="phase-title">${p.title}</div>
+              <div class="phase-duration">${p.dur}</div>
+              <ul class="phase-items">
+                ${p.items.map(item => `<li>${item}</li>`).join('')}
+              </ul>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="guide-section">
+        <div class="guide-section-label">Your Priority Focus: ${concernLabels[a.top_concern] || ''}</div>
+        ${getPriorityInsight(a.top_concern)}
+      </div>
+
+      ${warnings.length ? `
+        <div class="guide-section">
+          <div class="guide-section-label">Watch Out For</div>
+          ${warnings.map(w => `
+            <div class="warning-block">
+              <div class="wi">⚠️</div>
+              <div><h4>${w.title}</h4><p>${w.text}</p></div>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+
+      <div class="guide-section">
+        <div class="guide-section-label">Essential Resources</div>
+        <div class="resources-grid">
+          <div class="resource-item"><div class="ri">📋</div><div><h4>FEC.gov / State Election Site</h4><p>Filing deadlines, contribution limits, disclosure requirements. Get compliant on day one.</p></div></div>
+          <div class="resource-item"><div class="ri">💰</div><div><h4>NGP VAN / NationBuilder</h4><p>Industry-standard voter file and fundraising CRM. Even local campaigns benefit from real data.</p></div></div>
+          <div class="resource-item"><div class="ri">📖</div><div><h4>The Win Lab / Campaign School</h4><p>Training programs specifically for first-time and underrepresented candidates. Highly recommended.</p></div></div>
+          <div class="resource-item"><div class="ri">⚖️</div><div><h4>Campaign Finance Attorney</h4><p>One consultation upfront prevents compliance violations that can sink a campaign. Non-negotiable.</p></div></div>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <h3>Ready for Your Next Step?</h3>
+        <p>This guide is your foundation. A real coach will help you go deeper — stress-test your message, prep for debates, and build the fundraising operation that wins.</p>
+        <button class="btn-cta" onclick="alert('Coaching intake form coming soon!')">Book a Strategy Session →</button>
+      </div>
+    `;
+  }
+
+  function getPriorityInsight(concern) {
+    const insights = {
+      fundraising: `<div class="insight-card"><h4>💰 Fundraising First Principles</h4><p>Fundraising is asking people who believe in you to put money behind that belief. The #1 rule: ask in person before you ask by email. Call your top 25 contacts personally before you launch any digital fundraising. Set a goal for your first 30 days — $5K for local, $25K+ for state — and hit it before you do anything else. That early momentum is proof-of-concept for every donor who comes after.</p></div>`,
+      message: `<div class="insight-card"><h4>📢 Building a Message That Sticks</h4><p>Your message lives at the intersection of your values, your community's needs, and your opponent's weakness. It answers three questions: Why you? Why now? Why this race? Write it in one sentence. Test it on 20 strangers. If they can repeat it back accurately, you've got a message. If they look confused, rewrite it. No campaign survives without a clear, repeatable core message.</p></div>`,
+      team: `<div class="insight-card"><h4>🤝 Building Your Campaign Team</h4><p>You need four people before you announce: a campaign manager, a treasurer, a communications lead, and a finance director. You probably can't afford all four full-time — compensate with equity in the victory and strong volunteer deputies. The one you cannot skip: someone who has run a winning campaign before, even locally. That institutional knowledge is irreplaceable.</p></div>`,
+      visibility: `<div class="insight-card"><h4>👁️ Building Name Recognition Fast</h4><p>You build name ID by showing up — everywhere, all the time. Farmers markets, church parking lots, community meetings, local sporting events. Your goal: 1,000 personal introductions in your first 90 days. Earned media (press coverage) multiplies this. Pitch your local paper, radio station, and TV news with a compelling story angle. Real presence beats ads for authenticity.</p></div>`,
+      opposition: `<div class="insight-card"><h4>⚔️ Running Against an Incumbent or Well-Funded Opponent</h4><p>Incumbents have advantages: name ID, donor lists, and a record. You beat them by making the race about the future, not their record. Define the contrast early and repeat it relentlessly. Do not let them define you first. Grassroots ground game consistently beats outspent challengers in local races — 1,000 doors matter more than one TV ad.</p></div>`,
+    };
+    return insights[concern] || `<div class="insight-card"><h4>🎯 Stay Focused</h4><p>Pick one priority per week and go deep on it. Campaigns are won by consistency over brilliance.</p></div>`;
+  }
+
+  function buildIssueResults() {
+    const a = answers;
+    document.getElementById('results-title').textContent = 'Your Advocacy Roadmap';
+    document.getElementById('results-sub').textContent =
+      'Here\'s your personalized framework for turning your issue into real change. Advocacy wins are built on strategy, relationships, and sustained pressure.';
+
+    const goalLabels = { law: 'Legislative Victory', awareness: 'Public Awareness', local_win: 'Local Win First', movement: 'Sustained Movement' };
+    const levelLabels = { local_policy: 'Local Policy', state_leg: 'State Legislation', federal_pol: 'Federal Policy', community: 'Community Change' };
+
+    const phases = [
+      {
+        title: 'Frame & Research',
+        dur: 'First 30 Days',
+        items: [
+          'Write a one-page problem statement — data + story',
+          'Identify decision-makers: who actually has the power to say yes?',
+          'Map your coalition: who agrees with you? Who benefits?',
+          'Find the opposition: who benefits from the status quo?',
+          'Research past attempts — what was tried, what failed, why?',
+        ]
+      },
+      {
+        title: 'Build & Pressure',
+        dur: 'Months 2–6',
+        items: [
+          'Recruit coalition partners — orgs, faith communities, businesses',
+          'Secure a champion inside the system (elected official, agency head)',
+          'Generate earned media: op-eds, local news, social content',
+          'Mobilize your base: petitions, calls, public testimony',
+          a.opposition === 'industry' ? 'Expose the financial interests opposing you — follow the money' : 'Sustain pressure through consistent public presence',
+        ]
+      },
+      {
+        title: 'Win & Hold',
+        dur: 'Month 6 onward',
+        items: [
+          a.goal === 'law' ? 'Move your bill or ordinance through the formal process' : 'Document and amplify every incremental win',
+          'Celebrate visible milestones to keep coalition energized',
+          'Watch for implementation — policy wins mean nothing without enforcement',
+          a.goal === 'movement' ? 'Build a durable organization: 501c3, leadership pipeline, budget' : 'Lock in your win before declaring victory',
+          'Document your strategy for replication in other communities',
+        ]
+      }
+    ];
+
+    const warnings = [];
+    if (a.issue_stage === 'stalled') {
+      warnings.push({ title: 'Campaign Stalled — Common Causes', text: 'Stalled advocacy usually means one of three things: wrong decision-maker targeted, coalition too small to create political cost, or message that only preaches to the choir. Diagnose which one first — then adjust strategy, not just effort.' });
+    }
+    if (a.coalition === 'solo') {
+      warnings.push({ title: 'Solo Advocates Rarely Win Alone', text: 'You need at least three other organizations to create the appearance of a real movement. Start with whoever shares your issue — even partial allies. A diverse coalition (not just your friends) signals legitimacy to decision-makers.' });
+    }
+    if (a.opposition === 'industry') {
+      warnings.push({ title: 'Facing Funded Opposition', text: 'Industry opposition brings lobbyists, lawyers, and donor relationships. Your advantage is authenticity and numbers. Make it politically costly to side with industry over constituents. Elected officials fear voters, not donors, when the spotlight is on.' });
+    }
+
+    const body = document.getElementById('results-body');
+    body.innerHTML = `
+
+      <div class="guide-section">
+        <div class="guide-section-label">Your Situation at a Glance</div>
+        <div class="insight-card">
+          <h4>📣 ${levelLabels[a.issue_type] || 'Advocacy Campaign'} — Goal: ${goalLabels[a.goal] || 'Make Change'}</h4>
+          <p>You're in the <strong>${a.issue_stage === 'idea' ? 'idea stage' : a.issue_stage === 'early' ? 'early organizing phase' : a.issue_stage === 'active' ? 'active campaign phase' : 'rebuilding phase'}</strong> with ${a.coalition === 'solo' ? 'no formal coalition yet' : a.coalition === 'small' ? 'a small committed group' : a.coalition === 'org' ? 'an established organization' : 'a broad coalition'}. Your timeline is ${a.timeline === 'urgent' ? 'urgent — action required now' : a.timeline === 'cycle' ? 'tied to a specific deadline or cycle' : a.timeline === 'longterm' ? 'long-term, structural change' : 'still being determined'}. ${a.opposition === 'none' ? 'No formal opposition yet — use this window to build before resistance forms.' : a.opposition === 'indiff' ? 'Your challenge is indifference — you need a compelling story, not more data.' : a.opposition === 'political' ? 'Political opposition means you need to create electoral consequences.' : 'Industry opposition means you need to create reputational and political costs.'}</p>
+        </div>
+      </div>
+
+      <div class="guide-section">
+        <div class="guide-section-label">Your 3-Phase Roadmap</div>
+        <div class="phases-grid">
+          ${phases.map((p, i) => `
+            <div class="phase-card">
+              <div class="phase-num">0${i+1}</div>
+              <div class="phase-title">${p.title}</div>
+              <div class="phase-duration">${p.dur}</div>
+              <ul class="phase-items">
+                ${p.items.map(item => `<li>${item}</li>`).join('')}
+              </ul>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="guide-section">
+        <div class="guide-section-label">The Power Map</div>
+        <div class="insight-card">
+          <h4>🗺️ Who Actually Has the Power to Give You What You Want?</h4>
+          <p>Before anything else, answer this: who is the single decision-maker who can say yes? Not who influences them — who pulls the trigger. For local policy, it might be the city council vote. For state law, it's the committee chair. For community change, it's the institution or cultural leader. Every tactic you run should be designed to either directly pressure that person or change the political environment around them.</p>
+        </div>
+        <div class="insight-card">
+          <h4>⚡ The Theory of Change</h4>
+          <p>Advocacy wins when decision-makers believe it costs more politically to say no than to say yes. Your job is to make that calculation true. That means visible public support, credible coalition, earned media pressure, and — if necessary — real electoral consequences for those who block you.</p>
+        </div>
+      </div>
+
+      ${warnings.length ? `
+        <div class="guide-section">
+          <div class="guide-section-label">Watch Out For</div>
+          ${warnings.map(w => `
+            <div class="warning-block">
+              <div class="wi">⚠️</div>
+              <div><h4>${w.title}</h4><p>${w.text}</p></div>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+
+      <div class="guide-section">
+        <div class="guide-section-label">Essential Resources</div>
+        <div class="resources-grid">
+          <div class="resource-item"><div class="ri">📋</div><div><h4>Advocacy Toolkit (Congressional)</h4><p>Every elected official's office has a constituent services and constituent meetings process. Use it. Staff meetings count — don't wait for the boss.</p></div></div>
+          <div class="resource-item"><div class="ri">🎙️</div><div><h4>Public Testimony Training</h4><p>Your 2-minute public comment is your most powerful formal tool. Train your coalition members to give compelling, disciplined testimony.</p></div></div>
+          <div class="resource-item"><div class="ri">📰</div><div><h4>Op-Ed Strategy</h4><p>A well-placed op-ed in your local paper moves more political needle than 100 social media posts. Pitch the editorial page 60 days before your key vote or decision moment.</p></div></div>
+          <div class="resource-item"><div class="ri">🤝</div><div><h4>Unexpected Allies</h4><p>Who agrees with you for different reasons? Business groups, faith communities, veterans' orgs, and medical associations often share issue positions across political lines. Find them.</p></div></div>
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <h3>Turn Your Issue Into a Win</h3>
+        <p>This roadmap gets you started. A strategy session digs into your specific situation — power map, message testing, coalition gaps, and a week-by-week action plan.</p>
+        <button class="btn-cta" onclick="alert('Coaching intake form coming soon!')">Book a Strategy Session →</button>
+      </div>
+    `;
+  }
+</script>
+</body>
+</html>
