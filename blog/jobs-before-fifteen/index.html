@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jobs Before Fifteen (And the Offshore Year) — Rob Gaudet</title>
+  <meta name="description" content="Before I was 15, I'd already had a full career. From selling neighbors' newspapers back to them at age 3 to working offshore oil rigs after high school — here's what Gen X work ethic actually looked like." />
+  <meta property="og:title" content="Jobs Before Fifteen (And the Offshore Year)" />
+  <meta property="og:description" content="Before I was 15, I'd already had a full career. No permission. No safety net. Just figuring it out." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://inkthorn.ai/blog/jobs-before-fifteen/" />
+  <meta name="author" content="Rob Gaudet" />
+  <meta name="article:published_time" content="2026-04-11" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Jobs Before Fifteen (And the Offshore Year)",
+    "description": "Rob Gaudet traces his working life from age 3 — selling newspapers back to neighbors — through offshore oil rigs, paper routes, frame shops, and fast food. A portrait of Gen X work ethic before anyone called it that.",
+    "author": { "@type": "Person", "name": "Rob Gaudet", "url": "https://inkthorn.ai" },
+    "datePublished": "2026-04-11",
+    "publisher": { "@type": "Organization", "name": "InkThorn", "url": "https://inkthorn.ai" },
+    "mainEntityOfPage": "https://inkthorn.ai/blog/jobs-before-fifteen/",
+    "keywords": ["Gen X", "work ethic", "childhood jobs", "offshore", "Louisiana", "Cajun Navy", "Rob Gaudet"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { max-width: 100%; overflow-x: hidden; }
+    :root {
+      --bg: #0a0a12; --surface: #11111f; --border: rgba(255,255,255,0.07);
+      --pink: #ff2d87; --cyan: #00f5ff; --purple: #b44fff; --gold: #f0b840;
+      --white: #ffffff; --gray: rgba(255,255,255,0.6); --gray-lt: rgba(255,255,255,0.4);
+    }
+    body { background: var(--bg); color: var(--white); font-family: 'Space Grotesk', system-ui, sans-serif; line-height: 1.75; }
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(0,245,255,0.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0,245,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,18,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { width: 36px; }
+    .nav-logo-text { font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 900; color: var(--cyan); letter-spacing: 0.1em; }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--gray); text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-back { font-size: 0.85rem; font-weight: 600; color: var(--cyan); text-decoration: none; }
+    .nav-back:hover { text-decoration: underline; }
+
+    /* ARTICLE LAYOUT */
+    .article-wrap { position: relative; z-index: 1; max-width: 740px; margin: 0 auto; padding: 64px 24px 96px; }
+
+    /* HEADER */
+    .article-header { margin-bottom: 48px; }
+    .article-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .article-tag {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 999px;
+      background: rgba(0,245,255,0.1); color: var(--cyan); border: 1px solid rgba(0,245,255,0.2);
+    }
+    .article-date { font-size: 0.82rem; color: var(--gray-lt); }
+    .article-header h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900; line-height: 1.15; color: var(--white); margin-bottom: 20px;
+    }
+    .article-header h1 span { color: var(--pink); }
+    .article-lede { font-size: 1.15rem; color: rgba(255,255,255,0.75); line-height: 1.65; margin-bottom: 28px; font-weight: 400; }
+    .article-byline { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .byline-avatar {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; color: white;
+    }
+    .byline-name { font-weight: 700; font-size: 0.9rem; color: var(--white); }
+    .byline-title { font-size: 0.78rem; color: var(--gray-lt); }
+
+    /* BODY */
+    .article-body { margin-top: 48px; }
+    .article-body h2 {
+      font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 900;
+      color: var(--white); margin: 56px 0 16px; line-height: 1.2;
+    }
+    .article-body p { font-size: 1.02rem; color: rgba(255,255,255,0.8); margin-bottom: 22px; line-height: 1.75; }
+    .article-body p strong { color: var(--white); font-weight: 700; }
+    .article-body p em { color: var(--cyan); font-style: italic; }
+    .article-body ul { margin: 0 0 24px 24px; }
+    .article-body ul li { color: rgba(255,255,255,0.75); margin-bottom: 10px; font-size: 1.02rem; line-height: 1.65; }
+
+    /* TIMELINE */
+    .timeline { margin: 32px 0 40px; padding: 0; list-style: none; }
+    .timeline li {
+      display: flex; gap: 20px; padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline li:last-child { border-bottom: none; }
+    .timeline-age {
+      font-family: 'Orbitron', monospace; font-size: 0.82rem; font-weight: 700;
+      color: var(--gold); min-width: 64px; padding-top: 2px; letter-spacing: 0.06em;
+    }
+    .timeline-content { font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.65; }
+
+    /* PULLQUOTE */
+    .pullquote {
+      margin: 40px 0; padding: 28px 32px;
+      border-left: 4px solid var(--pink);
+      background: rgba(255,45,135,0.06);
+      border-radius: 0 12px 12px 0;
+    }
+    .pullquote p {
+      font-family: 'Playfair Display', serif; font-size: 1.35rem; font-style: italic;
+      color: var(--white); margin: 0; line-height: 1.5;
+    }
+    .pullquote cite { display: block; margin-top: 12px; font-size: 0.82rem; color: var(--gray-lt); font-style: normal; }
+
+    /* CTA BOX */
+    .cta-box {
+      margin: 56px 0 0;
+      background: var(--surface);
+      border: 1px solid rgba(0,245,255,0.2);
+      border-radius: 16px;
+      padding: 32px 36px;
+      text-align: center;
+    }
+    .cta-box h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--white); margin-bottom: 12px; }
+    .cta-box p { font-size: 0.92rem; color: var(--gray); margin-bottom: 24px; line-height: 1.6; }
+    .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-pink { background: var(--pink); color: white; padding: 12px 28px; border-radius: 999px; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: opacity 0.15s; }
+    .btn-pink:hover { opacity: 0.85; }
+    .btn-outline-cyan { background: transparent; color: var(--cyan); border: 1.5px solid var(--cyan); padding: 12px 28px; border-radius: 999px; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: all 0.15s; }
+    .btn-outline-cyan:hover { background: rgba(0,245,255,0.1); }
+
+    /* FOOTER */
+    footer {
+      position: relative; z-index: 1; border-top: 1px solid var(--border);
+      padding: 32px 24px; text-align: center; font-size: 0.82rem; color: var(--gray-lt);
+    }
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+      .article-wrap { padding: 40px 16px 64px; }
+      .pullquote { padding: 20px 20px; }
+      .cta-box { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="../../assets/inkthorn-mascot.png" alt="InkThorn" />
+        <span class="nav-logo-text">INKTHORN</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/crustacean">Crustacean</a></li>
+      </ul>
+      <a href="/blog" class="nav-back">← Back to Blog</a>
+    </div>
+  </nav>
+
+  <article class="article-wrap">
+
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="article-tag">Gen X</span>
+        <span class="article-tag" style="background: rgba(240,184,64,0.1); color: var(--gold); border-color: rgba(240,184,64,0.25);">Work Ethic</span>
+        <span class="article-date">April 11, 2026</span>
+      </div>
+      <h1>Jobs Before Fifteen<br><span>(And the Offshore Year)</span></h1>
+      <p class="article-lede">Before I was 15, I'd already had a full career. No permission slip. No guidance counselor. No one explaining the steps. Just a kid who needed things done and figured out how to do them.</p>
+      <div class="article-byline">
+        <div class="byline-avatar">RG</div>
+        <div>
+          <div class="byline-name">Rob Gaudet</div>
+          <div class="byline-title">Founder · Cajun Navy · TextOS</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="article-body">
+
+      <p>People ask where the work ethic comes from. They want a neat answer — a mentor, a moment, a turning point. There wasn't one. There was just a long series of situations where nobody else was going to handle it, so I did.</p>
+
+      <p>Here's the actual timeline.</p>
+
+      <h2>The Early Jobs</h2>
+
+      <ul class="timeline">
+        <li>
+          <span class="timeline-age">Age 3</span>
+          <span class="timeline-content">Used to pick up neighbors' newspapers from their driveways and knock on their doors and try to sell them back. First sales job. No shame, no fear.</span>
+        </li>
+        <li>
+          <span class="timeline-age">Age 8</span>
+          <span class="timeline-content">Parents divorced. Grass at mom's house was a foot tall. She asked me to mow it. I walked a mile to my grandmother's house alone, borrowed her lawn mower, and pushed it all the way back. The grass was so tall the mower kept dying. I figured out on my own to only mow half the deck width so I could keep moving. Nobody taught me that. I worked it out.</span>
+        </li>
+        <li>
+          <span class="timeline-age">Age 10</span>
+          <span class="timeline-content">Signed <em>myself</em> up to play soccer at the YMCA. Paid for it myself. Bought my own cleats. Rode my bike to weekday practices and Saturday morning games. That was 46 years ago. I still play soccer every week.</span>
+        </li>
+        <li>
+          <span class="timeline-age">Age 13</span>
+          <span class="timeline-content">Paper route. Bike with a loaded paper bag over my shoulders — papers front and back. Had to memorize every house on the route. Took two weeks. Until I had it memorized, I stopped in front of every house and checked the address list. Once a month, went door-to-door collecting money. Kept a percentage.</span>
+        </li>
+        <li>
+          <span class="timeline-age">Soon after</span>
+          <span class="timeline-content">Parents' friend asked if I could work at Orange Julius in Acadiana Mall. Did that for a few months.</span>
+        </li>
+        <li>
+          <span class="timeline-age">Age 15</span>
+          <span class="timeline-content">School ski trip. Five kids in the family — parents couldn't afford it. I had to pay for it myself. A friend got me a job at Wendy's. Worked long enough to pay for the trip, then quit. She then got me a job at a frame shop where I worked every day after school and weekends for over a year. Then: Chess King as a salesperson. All before graduation.</span>
+        </li>
+      </ul>
+
+      <div class="pullquote">
+        <p>The grass was so tall the mower kept dying. I figured out on my own to only mow half the deck width so I could keep moving. Nobody taught me that. I worked it out.</p>
+        <cite>— Rob Gaudet, age 8</cite>
+      </div>
+
+      <h2>The Pattern No One Named</h2>
+
+      <p>Looking back, the through-line is obvious. Every single time, the situation required something and I found a way to supply it. Nobody handed me a job description. Nobody explained the system. I just moved toward whatever needed doing.</p>
+
+      <p>At 3, I understood that people valued their newspaper and I had one. At 8, I understood that a lawn mower problem was an engineering problem — if it keeps dying, change your approach. At 13, I understood that a paper route was a memory problem before it was a logistics problem.</p>
+
+      <p>This is what they now call a <strong>growth mindset</strong>. We called it Saturday.</p>
+
+      <div class="pullquote">
+        <p>Five kids in the family. Parents couldn't afford the ski trip. So I paid for it myself. That's not exceptional — that's just what you did.</p>
+        <cite>— Rob Gaudet</cite>
+      </div>
+
+      <h2>The Offshore Year</h2>
+
+      <p>After high school, a girlfriend's dad got me a job offshore. I flew on helicopters to oil rigs. Worked in the kitchen and maintained the bunkhouse. Seven different rigs over a year — two weeks out, one week home.</p>
+
+      <p>Made real money for the first time. Real, physical, consequence-having money. Not tip jar money or envelope-stuffing money. A paycheck that reflected 80-hour weeks in a place where the floor moved under you.</p>
+
+      <p>I showed my dad my paycheck. He decided I needed to pay rent.</p>
+
+      <p>I was heartbroken for about 15 seconds.</p>
+
+      <p>Then I got my own apartment. I have never lived at home again.</p>
+
+      <div class="pullquote">
+        <p>I was heartbroken for 15 seconds — then got my own apartment. I've never lived at home again.</p>
+        <cite>— Rob Gaudet</cite>
+      </div>
+
+      <h2>What It Actually Taught Me</h2>
+
+      <p>Every generation has its version of this story. The specifics vary — paper routes became gig apps, Orange Julius became DoorDash, offshore became remote contract work. But the core transaction is the same: you have a need, the world has a mechanism, and you figure out how to work the mechanism.</p>
+
+      <p>What the jobs actually taught me wasn't how to stock a frame shop or how to work a kitchen on a rig. They taught me that <strong>problems are solvable</strong> — not because someone will solve them for you, but because the tools are usually right there if you look at the problem directly enough.</p>
+
+      <p>The mower kept dying. So I changed my approach. That logic has applied to every significant thing I've done since — from building the original Tea Party Patriots website in four days to founding the Cajun Navy during a disaster with no playbook and no budget.</p>
+
+      <p>You figure it out. You keep moving. The deck width changes. You adapt.</p>
+
+      <p>That's it. That's the whole thing.</p>
+
+    </div>
+
+    <div class="cta-box">
+      <h3>More dispatches from the edge →</h3>
+      <p>Gen X work ethic, political history, technology, and whatever else is worth writing down. No algorithm. No newsletter cadence. Just when something needs to be said.</p>
+      <div class="cta-buttons">
+        <a href="/blog/" class="btn-pink">← All Posts</a>
+        <a href="/blog/tea-party-origin-story/" class="btn-outline-cyan">Next: Tea Party Origin Story →</a>
+      </div>
+    </div>
+
+  </article>
+
+  <footer>
+    <p>© 2026 Rob Gaudet · <a href="/blog">Blog</a> · <a href="/">InkThorn Dashboard</a> · <a href="/crustacean">Crustacean</a></p>
+    <p style="margin-top:8px;">Built with <a href="https://openclaw.ai" target="_blank">OpenClaw</a> · New Orleans, Louisiana 🦞</p>
+  </footer>
+
+</body>
+</html>
