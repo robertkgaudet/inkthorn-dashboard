@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vibe Coding Mastery — Presentation Deck</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -36,37 +36,37 @@
       --orange-md: #FED7AA;
       --ff: 'Inter', sans-serif;
       --fm: 'JetBrains Mono', monospace;
+      --fp: 'Playfair Display', serif;
       --r:  10px;
       --sh: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
     }
 
     html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); color:var(--text); font-family:var(--ff); }
 
-    /* ── Deck ── */
     #deck { position:relative; width:100vw; height:100vh; }
 
-    /* ── Slides ── */
     .slide {
       position:absolute; inset:0;
-      display:flex; flex-direction:column; justify-content:center; align-items:center;
-      padding:48px 80px 76px;
+      display:flex; flex-direction:column; justify-content:flex-start; align-items:center;
+      padding:52px 80px 76px;
       opacity:0; pointer-events:none;
       transition:opacity 0.35s ease, transform 0.35s ease;
       transform:translateX(48px);
       overflow-y:auto; overflow-x:hidden;
       background:var(--bg);
     }
-    .slide.active   { opacity:1; pointer-events:all; transform:translateX(0); }
-    .slide.exit-left{ opacity:0; transform:translateX(-48px); }
+    .slide.active    { opacity:1; pointer-events:all; transform:translateX(0); }
+    .slide.exit-left { opacity:0; transform:translateX(-48px); }
+    .slide.centered  { justify-content:center; align-items:center; text-align:center; }
 
-    /* Top accent bar */
+    /* top accent bar */
     .slide::before {
       content:''; position:sticky; top:0; left:0; right:0; height:4px; flex-shrink:0;
       background:linear-gradient(90deg, var(--blue), var(--purple), var(--amber));
       display:block; width:100%; z-index:10;
     }
 
-    /* ── Nav bar ── */
+    /* ── NAV BAR ── */
     #nav-bar {
       position:fixed; bottom:0; left:0; right:0; z-index:100;
       display:flex; align-items:center; justify-content:space-between;
@@ -80,15 +80,18 @@
     .nav-btn { background:var(--white); border:1px solid var(--border2); color:var(--text2); cursor:pointer; width:30px; height:30px; border-radius:6px; font-size:0.75rem; display:flex; align-items:center; justify-content:center; transition:all 0.15s; box-shadow:var(--sh); }
     .nav-btn:hover:not(:disabled){ border-color:var(--blue); color:var(--blue); }
     .nav-btn:disabled{ opacity:0.35; cursor:default; }
-    #slide-counter{ font-family:var(--fm); font-size:0.7rem; color:var(--muted); min-width:46px; text-align:center; }
-    #progress-dots{ display:flex; gap:4px; flex-wrap:wrap; max-width:200px; justify-content:center; }
+    #slide-counter{ font-family:var(--fm); font-size:0.7rem; color:var(--muted); min-width:52px; text-align:center; }
+    #progress-dots{ display:flex; gap:4px; flex-wrap:wrap; max-width:260px; justify-content:center; }
     .dot{ width:5px; height:5px; border-radius:50%; background:var(--border2); transition:all 0.25s; cursor:pointer; flex-shrink:0; }
     .dot.active{ background:var(--blue); transform:scale(1.35); }
+    .dot.hands-on-dot { background:#FDE68A; }
+    .dot.module-dot   { background:#C4B5FD; }
 
-    /* ── Shared helpers ── */
-    .eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:0.45rem; color:var(--blue); }
+    /* ── SHARED HELPERS ── */
+    .eyebrow { font-size:0.7rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:0.5rem; color:var(--blue); }
     .slide-title { font-weight:800; line-height:1.1; color:var(--text); }
-    .slide-sub { color:var(--muted); line-height:1.65; font-size:0.9rem; }
+    .slide-sub   { color:var(--muted); line-height:1.65; font-size:0.92rem; }
+    .slide-num   { font-family:var(--fm); font-size:0.6rem; color:var(--border2); font-weight:600; letter-spacing:0.08em; align-self:flex-end; margin-top:0.5rem; }
 
     .badge { display:inline-block; font-size:0.6rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.22rem 0.65rem; border-radius:100px; margin:0.2rem 0.3rem 0.2rem 0; border:1px solid var(--border2); color:var(--muted); background:var(--white); }
     .badge.blue   { background:var(--blue-lt);   color:var(--blue);   border-color:var(--blue-md); }
@@ -96,7 +99,7 @@
     .badge.green  { background:var(--green-lt);  color:var(--green);  border-color:var(--green-md); }
     .badge.purple { background:var(--purple-lt); color:var(--purple); border-color:#C4B5FD; }
 
-    .notice { display:flex; gap:0.65rem; align-items:flex-start; border-radius:8px; padding:0.8rem 1rem; font-size:0.79rem; line-height:1.55; width:100%; }
+    .notice { display:flex; gap:0.65rem; align-items:flex-start; border-radius:8px; padding:0.8rem 1rem; font-size:0.82rem; line-height:1.55; width:100%; }
     .notice.blue   { background:var(--blue-lt);   border:1px solid var(--blue-md);   color:var(--text2); }
     .notice.amber  { background:var(--amber-lt);  border:1px solid var(--amber-md);  color:var(--text2); }
     .notice.red    { background:var(--red-lt);    border:1px solid var(--red-md);    color:var(--text2); }
@@ -104,31 +107,158 @@
     .notice .ni    { font-size:0.95rem; flex-shrink:0; margin-top:1px; }
 
     .item-list { list-style:none; display:flex; flex-direction:column; gap:0.45rem; }
-    .item-list li { font-size:0.8rem; color:var(--text2); display:flex; gap:0.55rem; align-items:flex-start; line-height:1.45; }
+    .item-list li { font-size:0.82rem; color:var(--text2); display:flex; gap:0.55rem; align-items:flex-start; line-height:1.45; }
     .item-list li.good::before { content:'✓'; color:var(--green); flex-shrink:0; font-weight:700; }
     .item-list li.bad::before  { content:'✕'; color:var(--red);   flex-shrink:0; font-weight:700; }
+    .item-list li.arrow::before{ content:'→'; color:var(--blue);  flex-shrink:0; font-weight:700; }
 
-    .code-box { background:#0F172A; border-radius:8px; padding:1rem 1.2rem; font-family:var(--fm); font-size:0.7rem; line-height:1.8; text-align:left; width:100%; overflow-x:auto; }
+    .code-box { background:#0F172A; border-radius:8px; padding:1rem 1.2rem; font-family:var(--fm); font-size:0.72rem; line-height:1.8; text-align:left; width:100%; overflow-x:auto; }
     .code-box .hl { color:#60A5FA; }
     .code-box .gd { color:#34D399; }
     .code-box .rd { color:#F87171; }
     .code-box .cm { color:#64748B; }
     .code-box .wh { color:#E2E8F0; }
 
-    /* inner scroll wrapper for content-heavy slides */
-    .slide-inner { width:100%; max-width:900px; display:flex; flex-direction:column; align-items:center; gap:0; }
+    /* ══════════════════════════
+       MODULE HEADER SLIDES
+    ══════════════════════════ */
+    .slide.module-header {
+      background: #0F172A;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .slide.module-header::before {
+      background: linear-gradient(90deg, var(--blue), var(--purple), var(--amber));
+    }
+    .module-kicker {
+      font-family: var(--fm); font-size:0.65rem; font-weight:700; letter-spacing:0.2em;
+      text-transform:uppercase; color:#475569; margin-bottom:0.5rem;
+    }
+    .module-number {
+      font-family: var(--fp); font-size: clamp(4rem,10vw,7rem); font-weight:900;
+      line-height:1; color:rgba(255,255,255,0.06); letter-spacing:-0.03em;
+      position:absolute; right:80px; top:50%; transform:translateY(-60%);
+      pointer-events:none; user-select:none;
+    }
+    .module-title {
+      font-family: var(--fp); font-size:clamp(2rem,4.5vw,3.2rem); font-weight:900;
+      color:#F8FAFC; line-height:1.1; margin-bottom:1rem; max-width:680px;
+    }
+    .module-sub {
+      font-size:0.92rem; color:#64748B; line-height:1.7; max-width:540px; margin-bottom:2rem;
+    }
+    .module-learns { display:flex; flex-direction:column; gap:0.6rem; max-width:540px; margin-bottom:2rem; }
+    .module-learn-item {
+      display:flex; gap:0.75rem; align-items:flex-start;
+      background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);
+      border-radius:8px; padding:0.7rem 0.9rem;
+    }
+    .module-learn-item .ml-icon { font-size:0.9rem; flex-shrink:0; margin-top:1px; }
+    .module-learn-item p { font-size:0.8rem; color:#94A3B8; line-height:1.45; }
+    .module-app-badge {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.25);
+      border-radius:8px; padding:0.65rem 1rem; font-size:0.78rem; color:#F59E0B; line-height:1.45;
+    }
+    .module-app-badge strong { font-weight:800; }
 
-    /* slide number */
-    .slide-num { font-family:var(--fm); font-size:0.6rem; color:var(--border2); font-weight:600; letter-spacing:0.08em; align-self:flex-end; margin-top:0.4rem; }
-    #s1 .slide-num, #s22 .slide-num { color:rgba(255,255,255,0.12); }
+    /* ══════════════════════════
+       HANDS-ON SLIDES
+    ══════════════════════════ */
+    .slide.hands-on {
+      background: #1C1108;
+      justify-content: flex-start;
+    }
+    .slide.hands-on::before {
+      background: linear-gradient(90deg, #D97706, #F59E0B, #FCD34D);
+    }
+    .ho-header {
+      display:flex; align-items:center; gap:0.75rem; margin-bottom:1.5rem; width:100%;
+    }
+    .ho-label {
+      font-size:0.62rem; font-weight:800; letter-spacing:0.18em; text-transform:uppercase;
+      background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3);
+      border-radius:100px; padding:0.28rem 0.85rem; color:#F59E0B;
+    }
+    .ho-time {
+      font-family:var(--fm); font-size:0.62rem; color:#78350F; background:rgba(245,158,11,0.1);
+      border:1px solid rgba(245,158,11,0.18); border-radius:100px; padding:0.28rem 0.7rem;
+    }
+    .ho-title {
+      font-family:var(--fp); font-size:clamp(1.5rem,3.2vw,2.2rem); font-weight:900;
+      color:#FEF3C7; line-height:1.1; margin-bottom:0.5rem;
+    }
+    .ho-subtitle { font-size:0.88rem; color:#92400E; line-height:1.6; margin-bottom:1.5rem; }
 
-    /* ══ SLIDE 1 — COVER ══ */
-    #s1 { background:#0F172A; justify-content:center; }
-    #s1::before { background:linear-gradient(90deg,#2563EB,#7C3AED,#D97706); }
-    #s1 .eyebrow  { color:#60A5FA; }
-    #s1 .slide-title { color:#F8FAFC; font-size:clamp(2.4rem,7vw,5rem); text-align:center; }
-    #s1 .slide-title em { color:#F59E0B; font-style:normal; display:block; }
-    #s1 .slide-sub { color:#94A3B8; text-align:center; max-width:520px; }
+    .ho-steps { display:flex; flex-direction:column; gap:0.6rem; width:100%; margin-bottom:1.5rem; }
+    .ho-step {
+      display:flex; gap:0.85rem; align-items:flex-start;
+      background:rgba(255,255,255,0.04); border:1px solid rgba(245,158,11,0.15);
+      border-radius:10px; padding:0.85rem 1rem;
+    }
+    .ho-step-num {
+      width:26px; height:26px; border-radius:50%; background:rgba(245,158,11,0.2);
+      border:1.5px solid rgba(245,158,11,0.4); display:flex; align-items:center;
+      justify-content:center; font-family:var(--fm); font-size:0.68rem; font-weight:800;
+      color:#F59E0B; flex-shrink:0;
+    }
+    .ho-step-body h4 { font-size:0.88rem; font-weight:700; color:#FEF3C7; margin-bottom:0.2rem; }
+    .ho-step-body p  { font-size:0.78rem; color:#92400E; line-height:1.5; }
+    .ho-step-body .step-hint { font-family:var(--fm); font-size:0.7rem; color:#D97706; margin-top:0.3rem; }
+
+    .ho-deliverable {
+      background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2);
+      border-radius:10px; padding:0.9rem 1.1rem; width:100%; margin-bottom:1.4rem;
+      display:flex; gap:0.75rem; align-items:flex-start;
+    }
+    .ho-deliverable .hd-icon { font-size:1.1rem; flex-shrink:0; }
+    .ho-deliverable h4 { font-size:0.84rem; font-weight:700; color:#F59E0B; margin-bottom:0.2rem; }
+    .ho-deliverable p  { font-size:0.78rem; color:#92400E; line-height:1.5; }
+
+    /* Progress tracker */
+    .build-tracker { width:100%; padding-top:0.5rem; border-top:1px solid rgba(245,158,11,0.12); }
+    .bt-label { font-size:0.6rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#78350F; margin-bottom:0.6rem; }
+    .bt-steps { display:flex; gap:0.35rem; flex-wrap:wrap; }
+    .bt-step {
+      display:flex; align-items:center; gap:0.3rem; font-size:0.65rem; font-weight:600;
+      padding:0.25rem 0.6rem; border-radius:100px;
+      background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); color:#44403C;
+    }
+    .bt-step.done    { background:rgba(16,185,129,0.12); border-color:rgba(16,185,129,0.25); color:#34D399; }
+    .bt-step.current { background:rgba(245,158,11,0.18); border-color:rgba(245,158,11,0.4); color:#F59E0B; font-weight:800; }
+
+    /* ══════════════════════════
+       CONCLUSION SLIDES
+    ══════════════════════════ */
+    .slide.conclusion { background: #F0F9FF; }
+    .slide.conclusion::before { background: linear-gradient(90deg, var(--blue), #0EA5E9); }
+    .conclusion-header { display:flex; align-items:center; gap:0.75rem; margin-bottom:1.2rem; width:100%; }
+    .conclusion-label {
+      font-size:0.62rem; font-weight:800; letter-spacing:0.18em; text-transform:uppercase;
+      background:var(--blue-lt); border:1px solid var(--blue-md);
+      border-radius:100px; padding:0.28rem 0.85rem; color:var(--blue);
+    }
+    .conclusion-title { font-size:clamp(1.3rem,2.5vw,1.8rem); font-weight:800; color:var(--text); margin-bottom:1rem; }
+    .key-takeaways { display:flex; flex-direction:column; gap:0.6rem; width:100%; margin-bottom:1.2rem; }
+    .takeaway {
+      display:flex; gap:0.85rem; align-items:flex-start;
+      background:var(--white); border:1px solid var(--blue-md);
+      border-left:4px solid var(--blue); border-radius:0 8px 8px 0;
+      padding:0.8rem 1rem;
+    }
+    .takeaway .tk-num { font-family:var(--fm); font-size:0.65rem; font-weight:700; color:var(--blue); flex-shrink:0; min-width:22px; }
+    .takeaway p { font-size:0.84rem; color:var(--text2); line-height:1.5; }
+    .takeaway strong { color:var(--text); }
+
+    /* ══════════════════════════
+       COVER SLIDE
+    ══════════════════════════ */
+    #s-cover { background:#0F172A; justify-content:center; }
+    #s-cover::before { background:linear-gradient(90deg,#2563EB,#7C3AED,#D97706); }
+    #s-cover .eyebrow  { color:#60A5FA; }
+    #s-cover .slide-title { color:#F8FAFC; font-size:clamp(2.4rem,7vw,5rem); text-align:center; }
+    #s-cover .slide-title em { color:#F59E0B; font-style:normal; display:block; }
+    #s-cover .slide-sub { color:#94A3B8; text-align:center; max-width:520px; }
     .cover-rule { width:56px; height:4px; background:#2563EB; border-radius:2px; margin:1rem auto; }
     .cover-stats { display:flex; gap:0; margin-top:1.5rem; border:1px solid rgba(255,255,255,0.1); border-radius:10px; overflow:hidden; width:100%; max-width:480px; }
     .c-stat { flex:1; text-align:center; padding:1rem 0.5rem; border-right:1px solid rgba(255,255,255,0.08); }
@@ -136,76 +266,22 @@
     .c-stat-num   { font-size:1.9rem; font-weight:900; color:#F59E0B; line-height:1; }
     .c-stat-label { font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:#64748B; margin-top:0.25rem; }
 
-    /* ══ SLIDE 2 — AGENDA ══ */
-    #s2 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
-    .agenda-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; max-width:860px; margin-top:0.6rem; }
+    /* ── Agenda ── */
+    #s-agenda { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
+    .agenda-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; margin-top:0.6rem; }
     .agenda-col { background:var(--white); border:1px solid var(--border); border-radius:var(--r); padding:1.2rem 1.4rem; box-shadow:var(--sh); }
     .agenda-col-header { font-size:0.65rem; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; padding-bottom:0.7rem; margin-bottom:0.8rem; border-bottom:2px solid; display:flex; align-items:center; gap:0.5rem; }
     .agenda-col-header.am { color:var(--blue);  border-color:var(--blue); }
     .agenda-col-header.pm { color:var(--amber); border-color:var(--amber); }
-    .agenda-item { display:flex; gap:0.7rem; align-items:flex-start; padding:0.5rem 0; border-bottom:1px solid var(--border); }
+    .agenda-item { display:flex; gap:0.7rem; align-items:flex-start; padding:0.45rem 0; border-bottom:1px solid var(--border); }
     .agenda-item:last-child { border-bottom:none; }
-    .agenda-num { font-family:var(--fm); font-size:0.62rem; font-weight:700; color:var(--muted); min-width:28px; padding-top:1px; flex-shrink:0; }
+    .agenda-num { font-family:var(--fm); font-size:0.6rem; font-weight:700; color:var(--muted); min-width:28px; padding-top:1px; flex-shrink:0; }
     .agenda-body h4 { font-size:0.8rem; font-weight:700; color:var(--text); line-height:1.3; }
-    .agenda-body p  { font-size:0.7rem; color:var(--muted); margin-top:0.1rem; line-height:1.4; }
-    .agenda-appendix { width:100%; max-width:860px; margin-top:0.6rem; background:var(--white); border:1px solid var(--border); border-radius:var(--r); padding:0.9rem 1.4rem; box-shadow:var(--sh); display:flex; gap:2rem; flex-wrap:wrap; }
-    .appendix-label { font-size:0.62rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:0.35rem; }
-    .appendix-items { display:flex; gap:0.5rem; flex-wrap:wrap; }
-    .appendix-tag { font-size:0.72rem; color:var(--text2); font-weight:600; background:var(--bg); border:1px solid var(--border); border-radius:5px; padding:0.2rem 0.6rem; }
+    .agenda-body p  { font-size:0.68rem; color:var(--muted); margin-top:0.1rem; line-height:1.4; }
+    .agenda-ho-badge { display:inline-block; font-size:0.55rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; background:#FFFBEB; border:1px solid #FDE68A; border-radius:100px; padding:0.12rem 0.45rem; color:var(--amber); margin-left:0.35rem; vertical-align:middle; }
 
-    /* ══ SLIDE 3 — WHAT IS VIBE CODING ══ */
-    #s3 { text-align:center; }
-    #s3 .slide-title { font-size:clamp(1.6rem,3.5vw,2.5rem); }
-    .quote-block { max-width:620px; width:100%; margin:1rem auto 0; background:var(--white); border:1px solid var(--border); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:1rem 1.3rem; text-align:left; box-shadow:var(--sh); }
-    .quote-block p    { font-size:0.88rem; color:var(--text2); line-height:1.6; font-style:italic; }
-    .quote-block cite { font-size:0.67rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--blue); margin-top:0.45rem; display:block; font-style:normal; }
-
-    /* ══ SLIDES 4–7 — ARCHITECTURE FOUNDATION ══ */
-
-    /* S4 — How a Website Works */
-    #s4 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
-    .web-flow { display:flex; align-items:flex-start; gap:0; width:100%; max-width:860px; margin-top:0.6rem; }
-    .web-step { flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; }
-    .web-step-icon  { width:48px; height:48px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin:0 auto 0.4rem; flex-shrink:0; }
-    .web-step-num   { font-family:var(--fm); font-size:0.58rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.25rem; }
-    .web-step-title { font-size:0.75rem; font-weight:700; color:var(--text); margin-bottom:0.2rem; }
-    .web-step-desc  { font-size:0.67rem; color:var(--muted); line-height:1.45; padding:0 0.25rem; }
-    .web-arrow { display:flex; align-items:center; color:var(--border2); font-size:1rem; flex-shrink:0; padding-top:24px; padding:24px 3px 0; }
-    .web-terms { display:grid; grid-template-columns:repeat(3,1fr); gap:0.55rem; width:100%; max-width:860px; margin-top:0.75rem; }
-    .web-term { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.65rem 0.85rem; box-shadow:var(--sh); }
-    .web-term .wt-label { font-size:0.6rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--blue); margin-bottom:0.22rem; }
-    .web-term p { font-size:0.7rem; color:var(--text2); line-height:1.5; }
-
-    /* S5 — Full Stack Layers */
-    #s5 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
-    .stack-layers { display:flex; flex-direction:column; gap:0.32rem; width:100%; max-width:860px; margin-top:0.6rem; }
-    .stack-layer { display:flex; align-items:center; gap:0.85rem; border-radius:8px; padding:0.6rem 1rem; border:1px solid transparent; }
-    .layer-icon    { font-size:1.05rem; flex-shrink:0; width:26px; text-align:center; }
-    .layer-name    { font-size:0.78rem; font-weight:700; color:var(--text); min-width:160px; }
-    .layer-tagline { font-size:0.69rem; color:var(--muted); line-height:1.4; flex:1; }
-    .layer-tool    { font-family:var(--fm); font-size:0.62rem; font-weight:600; padding:0.15rem 0.5rem; border-radius:4px; white-space:nowrap; flex-shrink:0; }
-
-    /* S6 — Cloudflare */
-    #s6 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
-    .cf-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; width:100%; max-width:860px; margin-top:0.55rem; }
-    .cf-card { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.85rem 1rem; box-shadow:var(--sh); display:flex; gap:0.7rem; align-items:flex-start; }
-    .cf-icon { font-size:1.1rem; flex-shrink:0; margin-top:1px; }
-    .cf-card h4 { font-size:0.79rem; font-weight:700; color:var(--text); margin-bottom:0.18rem; }
-    .cf-card p  { font-size:0.7rem; color:var(--muted); line-height:1.5; }
-    .cf-vs { display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; width:100%; max-width:860px; margin-top:0.55rem; }
-    .cf-vs-col { border-radius:8px; padding:0.75rem 1rem; }
-    .cf-vs-col h4 { font-size:0.68rem; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.45rem; }
-
-    /* S7 — Supabase */
-    #s7 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
-    .sb-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; width:100%; max-width:860px; margin-top:0.55rem; }
-    .sb-card { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.85rem 1rem; box-shadow:var(--sh); }
-    .sb-card .sc-label { font-size:0.6rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem; }
-    .sb-card h4 { font-size:0.79rem; font-weight:700; color:var(--text); margin-bottom:0.25rem; }
-    .sb-card p  { font-size:0.7rem; color:var(--muted); line-height:1.5; }
-
-    /* ══ SLIDES 8–9 — MODULE 01 ══ */
-    #s8 .two-col, #s12 .two-col, #s14 .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; max-width:820px; }
+    /* ── Two col utility ── */
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; }
     .col-card { border-radius:var(--r); padding:1.3rem 1.5rem; box-shadow:var(--sh); }
     .col-card.old { background:var(--white); border:1px solid var(--border); }
     .col-card.new { background:var(--blue-lt); border:1px solid var(--blue-md); }
@@ -213,25 +289,56 @@
     .col-card.old h3 { color:var(--muted); }
     .col-card.new h3 { color:var(--blue); border-color:var(--blue-md); }
 
-    #s9 .three-col { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; width:100%; max-width:840px; }
+    /* ── Three col pillars ── */
+    .three-col { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; width:100%; }
     .pillar { background:var(--white); border:1px solid var(--border); border-radius:var(--r); padding:1.5rem; box-shadow:var(--sh); }
     .pillar-num { font-size:2rem; font-weight:900; line-height:1; margin-bottom:0.55rem; }
     .pillar h3  { font-size:0.87rem; font-weight:700; color:var(--text); margin-bottom:0.45rem; }
-    .pillar p   { font-size:0.76rem; color:var(--muted); line-height:1.55; }
+    .pillar p   { font-size:0.78rem; color:var(--muted); line-height:1.55; }
 
-    /* ══ SLIDE 10 — TOOLS ══ */
-    #s10 { justify-content:flex-start; padding-top:48px; }
-    .tools-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; width:100%; max-width:820px; }
+    /* ── Web flow ── */
+    .web-flow { display:flex; align-items:flex-start; gap:0; width:100%; margin-top:0.6rem; }
+    .web-step { flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; }
+    .web-step-icon  { width:48px; height:48px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin:0 auto 0.4rem; flex-shrink:0; }
+    .web-step-num   { font-family:var(--fm); font-size:0.58rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.25rem; }
+    .web-step-title { font-size:0.78rem; font-weight:700; color:var(--text); margin-bottom:0.2rem; }
+    .web-step-desc  { font-size:0.68rem; color:var(--muted); line-height:1.45; padding:0 0.25rem; }
+    .web-arrow { display:flex; align-items:center; color:var(--border2); font-size:1rem; flex-shrink:0; padding:24px 3px 0; }
+    .web-terms { display:grid; grid-template-columns:repeat(3,1fr); gap:0.55rem; width:100%; margin-top:0.75rem; }
+    .web-term { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.65rem 0.85rem; box-shadow:var(--sh); }
+    .web-term .wt-label { font-size:0.6rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--blue); margin-bottom:0.22rem; }
+    .web-term p { font-size:0.72rem; color:var(--text2); line-height:1.5; }
+
+    /* ── Stack layers ── */
+    .stack-layers { display:flex; flex-direction:column; gap:0.32rem; width:100%; margin-top:0.6rem; }
+    .stack-layer { display:flex; align-items:center; gap:0.85rem; border-radius:8px; padding:0.6rem 1rem; border:1px solid transparent; }
+    .layer-icon    { font-size:1.05rem; flex-shrink:0; width:26px; text-align:center; }
+    .layer-name    { font-size:0.8rem; font-weight:700; color:var(--text); min-width:160px; }
+    .layer-tagline { font-size:0.7rem; color:var(--muted); line-height:1.4; flex:1; }
+    .layer-tool    { font-family:var(--fm); font-size:0.62rem; font-weight:600; padding:0.15rem 0.5rem; border-radius:4px; white-space:nowrap; flex-shrink:0; }
+
+    /* ── Tools grid ── */
+    .tools-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; width:100%; }
     .tool-row { display:flex; align-items:center; gap:0.75rem; background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.65rem 0.9rem; box-shadow:var(--sh); }
-    .tool-name { font-size:0.79rem; font-weight:700; color:var(--text); min-width:95px; }
-    .tool-desc { font-size:0.72rem; color:var(--muted); line-height:1.4; flex:1; }
+    .tool-name { font-size:0.82rem; font-weight:700; color:var(--text); min-width:95px; }
+    .tool-desc { font-size:0.74rem; color:var(--muted); line-height:1.4; flex:1; }
     .tool-cost { font-family:var(--fm); font-size:0.64rem; font-weight:600; color:var(--green); white-space:nowrap; background:var(--green-lt); padding:0.18rem 0.45rem; border-radius:4px; }
 
-    /* ══ SLIDE 11 — CLAUDE.MD ══ */
-    #s11 { text-align:center; }
-    #s11 .slide-title { font-size:clamp(1.4rem,3vw,2.1rem); }
+    /* ── Cloudflare ── */
+    .cf-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; width:100%; margin-top:0.55rem; }
+    .cf-card { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.85rem 1rem; box-shadow:var(--sh); display:flex; gap:0.7rem; align-items:flex-start; }
+    .cf-icon { font-size:1.1rem; flex-shrink:0; margin-top:1px; }
+    .cf-card h4 { font-size:0.82rem; font-weight:700; color:var(--text); margin-bottom:0.18rem; }
+    .cf-card p  { font-size:0.72rem; color:var(--muted); line-height:1.5; }
 
-    /* ══ SLIDE 12 — TWO ROLES ══ */
+    /* ── Supabase ── */
+    .sb-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; width:100%; margin-top:0.55rem; }
+    .sb-card { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.85rem 1rem; box-shadow:var(--sh); }
+    .sb-card .sc-label { font-size:0.6rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem; }
+    .sb-card h4 { font-size:0.82rem; font-weight:700; color:var(--text); margin-bottom:0.25rem; }
+    .sb-card p  { font-size:0.72rem; color:var(--muted); line-height:1.5; }
+
+    /* ── Roles ── */
     .role-card { border-radius:var(--r); padding:1.4rem; box-shadow:var(--sh); }
     .role-card.arch { background:var(--blue-lt);   border:2px solid var(--blue-md); }
     .role-card.impl { background:var(--purple-lt); border:2px solid #C4B5FD; }
@@ -239,15 +346,52 @@
     .role-label.blue   { color:var(--blue); }
     .role-label.purple { color:var(--purple); }
     .role-handle { font-size:0.76rem; font-weight:600; color:var(--muted); margin-bottom:0.9rem; padding-bottom:0.7rem; border-bottom:1px solid var(--border); }
-    .never-box { margin-top:0.85rem; padding:0.65rem 0.85rem; background:var(--red-lt); border:1px solid var(--red-md); border-radius:6px; font-size:0.71rem; color:var(--red); line-height:1.4; }
+    .never-box { margin-top:0.85rem; padding:0.65rem 0.85rem; background:var(--red-lt); border:1px solid var(--red-md); border-radius:6px; font-size:0.73rem; color:var(--red); line-height:1.4; }
     .never-box strong { display:block; font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.22rem; }
 
-    /* ══ SLIDE 13 — BRIEFS ══ */
-    #s13 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
-    #s13 .slide-title { font-size:clamp(1.2rem,2.5vw,1.8rem); }
+    /* ── Steps list ── */
+    .steps-list { display:flex; flex-direction:column; gap:0.45rem; width:100%; }
+    .step-row { display:flex; gap:0.9rem; align-items:flex-start; background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.7rem 0.9rem; box-shadow:var(--sh); }
+    .step-badge { flex-shrink:0; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:800; }
+    .step-badge.green { background:var(--green-lt); color:var(--green); border:1.5px solid var(--green-md); }
+    .step-badge.red   { background:var(--red-lt);   color:var(--red);   border:1.5px solid var(--red-md); }
+    .step-title { font-size:0.82rem; font-weight:700; color:var(--text); }
+    .step-cmd   { font-family:var(--fm); font-size:0.68rem; color:var(--blue); margin-top:0.12rem; word-break:break-all; }
+    .step-note  { font-size:0.71rem; color:var(--muted); margin-top:0.08rem; }
 
-    /* ══ SLIDES 14 — ENVIRONMENTS ══ */
-    #s22 { }
+    /* ── Practice grid ── */
+    .practice-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; width:100%; }
+    .practice-item { display:flex; gap:0.7rem; align-items:flex-start; background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.8rem 0.95rem; box-shadow:var(--sh); }
+    .practice-icon { font-size:1.05rem; flex-shrink:0; margin-top:1px; }
+    .practice-text h4 { font-size:0.82rem; font-weight:700; color:var(--text); margin-bottom:0.18rem; }
+    .practice-text p  { font-size:0.72rem; color:var(--muted); line-height:1.5; }
+
+    /* ── Lessons/mistakes ── */
+    .lessons-grid  { display:grid; grid-template-columns:repeat(3,1fr); gap:0.45rem; width:100%; }
+    .mistakes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.45rem; width:100%; }
+    .lesson-chip  { background:var(--white); border:1px solid var(--border); border-radius:7px; padding:0.65rem 0.85rem; box-shadow:var(--sh); }
+    .mistake-chip { background:var(--red-lt); border:1px solid var(--red-md); border-radius:7px; padding:0.65rem 0.85rem; }
+    .lesson-chip  .ln { font-family:var(--fm); font-size:0.58rem; font-weight:600; color:var(--blue); margin-bottom:0.2rem; }
+    .mistake-chip .mn { font-family:var(--fm); font-size:0.58rem; font-weight:600; color:var(--red);  margin-bottom:0.2rem; }
+    .lesson-chip  h4  { font-size:0.74rem; font-weight:600; color:var(--text2); line-height:1.35; }
+    .mistake-chip h4  { font-size:0.72rem; font-weight:700; color:var(--text);  line-height:1.35; margin-bottom:0.22rem; }
+    .mistake-chip p   { font-size:0.65rem; color:var(--green); font-weight:600; line-height:1.4; }
+
+    /* ── Quick ref ── */
+    .ref-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; width:100%; }
+    .ref-item { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.8rem 0.95rem; box-shadow:var(--sh); }
+    .ref-item .rl  { font-size:0.6rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:0.3rem; }
+    .ref-item .rv  { font-family:var(--fm); font-size:0.72rem; color:var(--blue); line-height:1.55; word-break:break-word; }
+    .ref-item .rv.red    { color:var(--red);   font-family:var(--ff); font-size:0.76rem; font-weight:600; }
+    .ref-item .rv.amber  { color:var(--amber); font-family:var(--ff); font-size:0.76rem; }
+    .ref-item .rv.normal { color:var(--text2); font-family:var(--ff); font-size:0.76rem; }
+
+    /* ── Quote block ── */
+    .quote-block { max-width:100%; width:100%; margin:1rem 0; background:var(--white); border:1px solid var(--border); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:1rem 1.3rem; box-shadow:var(--sh); }
+    .quote-block p    { font-size:0.9rem; color:var(--text2); line-height:1.6; font-style:italic; }
+    .quote-block cite { font-size:0.67rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--blue); margin-top:0.45rem; display:block; font-style:normal; }
+
+    /* ── Env cards ── */
     .env-card { border-radius:var(--r); padding:1.3rem 1.5rem; box-shadow:var(--sh); }
     .env-card.test { background:var(--green-lt); border:2px solid var(--green-md); }
     .env-card.prod { background:var(--amber-lt); border:2px solid var(--amber-md); }
@@ -256,1006 +400,1170 @@
     .env-label.amber { color:var(--amber); }
     .env-url { font-family:var(--fm); font-size:0.7rem; font-weight:600; color:var(--muted); margin-bottom:0.9rem; padding-bottom:0.7rem; border-bottom:1px solid rgba(0,0,0,0.07); }
 
-    /* ══ SLIDE 15 — DEPLOY RITUAL ══ */
-    #s22 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
-    .steps-list { display:flex; flex-direction:column; gap:0.45rem; width:100%; max-width:800px; }
-    .step-row { display:flex; gap:0.9rem; align-items:flex-start; background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.7rem 0.9rem; box-shadow:var(--sh); }
-    .step-badge { flex-shrink:0; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:800; }
-    .step-badge.green { background:var(--green-lt); color:var(--green); border:1.5px solid var(--green-md); }
-    .step-badge.red   { background:var(--red-lt);   color:var(--red);   border:1.5px solid var(--red-md); }
-    .step-title { font-size:0.79rem; font-weight:700; color:var(--text); }
-    .step-cmd   { font-family:var(--fm); font-size:0.67rem; color:var(--blue); margin-top:0.12rem; word-break:break-all; }
-    .step-note  { font-size:0.69rem; color:var(--muted); margin-top:0.08rem; }
+    /* ── Lunch / break slide ── */
+    .slide.break-slide { background:#0F172A; justify-content:center; }
+    .slide.break-slide::before { background: linear-gradient(90deg, #059669, #10B981, #34D399); }
+    .break-title { font-family:var(--fp); font-size:clamp(2rem,5vw,3.5rem); font-weight:900; color:#F8FAFC; margin-bottom:0.8rem; text-align:center; }
+    .break-sub   { font-size:1rem; color:#64748B; text-align:center; max-width:420px; line-height:1.7; }
 
-    /* ══ SLIDE 16 — 5 PRACTICES ══ */
-    #s22 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
-    .practice-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; width:100%; max-width:840px; }
-    .practice-item { display:flex; gap:0.7rem; align-items:flex-start; background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.8rem 0.95rem; box-shadow:var(--sh); }
-    .practice-icon { font-size:1.05rem; flex-shrink:0; margin-top:1px; }
-    .practice-text h4 { font-size:0.79rem; font-weight:700; color:var(--text); margin-bottom:0.18rem; }
-    .practice-text p  { font-size:0.7rem; color:var(--muted); line-height:1.5; }
-
-    /* ══ SLIDE 17 — DEBUGGING ══ */
-    #s22 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
-
-    /* ══ SLIDE 18 — 15 LESSONS ══ */
-    #s22 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
-    .lessons-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.45rem; width:100%; max-width:860px; }
-    .lesson-chip { background:var(--white); border:1px solid var(--border); border-radius:7px; padding:0.65rem 0.85rem; box-shadow:var(--sh); }
-    .lesson-chip .ln { font-family:var(--fm); font-size:0.58rem; font-weight:600; color:var(--blue); margin-bottom:0.2rem; }
-    .lesson-chip h4  { font-size:0.72rem; font-weight:600; color:var(--text2); line-height:1.35; }
-
-    /* ══ SLIDE 19 — 12 MISTAKES ══ */
-    #s22 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
-    .mistakes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.45rem; width:100%; max-width:860px; }
-    .mistake-chip { background:var(--red-lt); border:1px solid var(--red-md); border-radius:7px; padding:0.65rem 0.85rem; }
-    .mistake-chip .mn { font-family:var(--fm); font-size:0.58rem; font-weight:600; color:var(--red); margin-bottom:0.2rem; }
-    .mistake-chip h4  { font-size:0.71rem; font-weight:700; color:var(--text); line-height:1.35; margin-bottom:0.22rem; }
-    .mistake-chip p   { font-size:0.65rem; color:var(--green); font-weight:600; line-height:1.4; }
-
-    /* ══ SLIDE 20 — QUICK REF ══ */
-    #s22 { justify-content:flex-start; padding-top:48px; align-items:flex-start; }
-    .ref-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.55rem; width:100%; max-width:840px; }
-    .ref-item { background:var(--white); border:1px solid var(--border); border-radius:8px; padding:0.8rem 0.95rem; box-shadow:var(--sh); }
-    .ref-item .rl  { font-size:0.6rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:0.3rem; }
-    .ref-item .rv  { font-family:var(--fm); font-size:0.7rem; color:var(--blue); line-height:1.55; word-break:break-word; }
-    .ref-item .rv.red    { color:var(--red);   font-family:var(--ff); font-size:0.74rem; font-weight:600; }
-    .ref-item .rv.amber  { color:var(--amber); font-family:var(--ff); font-size:0.74rem; }
-    .ref-item .rv.normal { color:var(--text2); font-family:var(--ff); font-size:0.74rem; }
-
-    /* ══ SLIDE 21 — CLOSING ══ */
-    #s22 { background:#0F172A; justify-content:center; }
-    #s21::before { background:linear-gradient(90deg,#2563EB,#7C3AED,#D97706); }
-    #s21 .eyebrow { color:#34D399; }
-    #s21 .slide-title { color:#F8FAFC; font-size:clamp(1.7rem,4vw,3rem); text-align:center; }
-    .closing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.85rem; width:100%; max-width:800px; margin-top:1.2rem; }
+    /* ── Closing slide ── */
+    #s-closing { background:#0F172A; justify-content:center; }
+    #s-closing::before { background:linear-gradient(90deg,#2563EB,#7C3AED,#D97706); }
+    #s-closing .slide-title { color:#F8FAFC; font-size:clamp(1.7rem,4vw,3rem); text-align:center; }
+    .closing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.85rem; width:100%; max-width:900px; margin-top:1.2rem; }
     .closing-col { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:var(--r); padding:1.1rem; }
     .closing-col h3 { font-size:0.62rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#60A5FA; margin-bottom:0.7rem; padding-bottom:0.45rem; border-bottom:1px solid rgba(255,255,255,0.08); }
     .closing-col ul { list-style:none; display:flex; flex-direction:column; gap:0.38rem; }
-    .closing-col ul li { font-size:0.72rem; color:#94A3B8; line-height:1.4; display:flex; gap:0.38rem; }
+    .closing-col ul li { font-size:0.74rem; color:#94A3B8; line-height:1.4; display:flex; gap:0.38rem; }
     .closing-col ul li::before { content:'→'; color:#3B82F6; flex-shrink:0; }
 
-    /* ══════════════════════════════════════
-       FULL-BLEED STRETCH — remove max-width caps, scale up text
-    ══════════════════════════════════════ */
-    .slide-inner,
-    .agenda-grid, .agenda-appendix,
-    .web-flow, .web-terms,
-    .stack-layers,
-    .cf-grid, .cf-vs,
-    .sb-grid,
-    .tools-grid,
-    .two-col, .three-col,
-    .practice-grid, .steps-list,
-    .ref-grid,
-    .lessons-grid, .mistakes-grid,
-    .closing-grid,
-    .quote-block, .notice, .code-box {
-      max-width: 100% !important;
-    }
+    /* ── Slide num ── */
+    #s-cover .slide-num, #s-closing .slide-num { color:rgba(255,255,255,0.12); }
+    .slide.module-header .slide-num { color:rgba(255,255,255,0.12); }
+    .slide.hands-on .slide-num { color:rgba(245,158,11,0.25); }
+    .slide.break-slide .slide-num { color:rgba(255,255,255,0.12); }
 
-    /* Scale slide titles */
-    .slide-title { font-size: clamp(1.8rem, 3.5vw, 3rem) !important; }
-    #s1 .slide-title { font-size: clamp(2.8rem, 7vw, 5.5rem) !important; }
-
-    /* Scale body text across cards */
-    .eyebrow          { font-size: 0.82rem; }
-    .slide-sub        { font-size: 1.05rem; }
-    .item-list li     { font-size: 0.92rem; }
-    .notice           { font-size: 0.9rem; }
-
-    /* Agenda */
-    .agenda-body h4   { font-size: 1rem; }
-    .agenda-body p    { font-size: 0.84rem; }
-    .agenda-num       { font-size: 0.72rem; }
-
-    /* Web flow */
-    .web-step-title   { font-size: 0.92rem; }
-    .web-step-desc    { font-size: 0.8rem; }
-    .web-term p       { font-size: 0.85rem; }
-    .wt-label         { font-size: 0.7rem; }
-
-    /* Stack */
-    .layer-name       { font-size: 0.92rem; }
-    .layer-tagline    { font-size: 0.82rem; }
-
-    /* CF / Supabase cards */
-    .cf-card h4, .sb-card h4 { font-size: 0.95rem; }
-    .cf-card p,  .sb-card p  { font-size: 0.84rem; }
-    .sc-label                { font-size: 0.68rem; }
-
-    /* Tools */
-    .tool-name        { font-size: 0.92rem; }
-    .tool-desc        { font-size: 0.84rem; }
-
-    /* Col cards (old vs new) */
-    .col-card h3      { font-size: 0.78rem; }
-
-    /* Pillars */
-    .pillar h3        { font-size: 1rem; }
-    .pillar p         { font-size: 0.88rem; }
-    .pillar-num       { font-size: 2.4rem; }
-
-    /* Roles */
-    .role-handle      { font-size: 0.9rem; }
-    .never-box        { font-size: 0.82rem; }
-
-    /* Practices */
-    .practice-text h4 { font-size: 0.92rem; }
-    .practice-text p  { font-size: 0.82rem; }
-
-    /* Deploy steps */
-    .step-title       { font-size: 0.92rem; }
-    .step-cmd         { font-size: 0.76rem; }
-    .step-note        { font-size: 0.82rem; }
-
-    /* Lessons / Mistakes */
-    .lesson-chip h4   { font-size: 0.85rem; }
-    .mistake-chip h4  { font-size: 0.84rem; }
-    .mistake-chip p   { font-size: 0.78rem; }
-
-    /* Quick ref */
-    .ref-item .rv     { font-size: 0.84rem; }
-    .ref-item .rl     { font-size: 0.68rem; }
-
-    /* Code box */
-    .code-box         { font-size: 0.78rem; }
-
-    /* Closing */
-    .closing-col ul li { font-size: 0.85rem; }
-
-    /* ══════════════════════════════════════
-       RESPONSIVE — MOBILE (≤640px)
-    ══════════════════════════════════════ */
-    @media (max-width: 640px) {
-
-      /* Slides: top-aligned, scrollable, tighter padding */
-      .slide {
-        justify-content: flex-start;
-        padding: 44px 18px 72px;
-        align-items: flex-start;
-      }
-      /* Keep centered slides centered on mobile */
-      #s1, #s22 { justify-content:center; align-items:center; }
-      #s3, #s11 { align-items:center; }
-
-      .slide-sub { font-size:0.82rem; }
-
-      /* Cover */
-      #s1 .slide-title { font-size:2.6rem; }
-      .cover-stats { flex-wrap:wrap; max-width:100%; }
-      .c-stat { flex:1 1 45%; border-right:none; border-bottom:1px solid rgba(255,255,255,0.08); }
-      .c-stat:nth-child(odd) { border-right:1px solid rgba(255,255,255,0.08); }
-      .c-stat:nth-last-child(-n+2) { border-bottom:none; }
-
-      /* Agenda */
-      .agenda-grid { grid-template-columns:1fr; }
-      .agenda-appendix { gap:0.75rem; }
-
-      /* Architecture flows */
+    /* ── Responsive ── */
+    @media (max-width:640px) {
+      .slide { padding:44px 18px 72px; justify-content:flex-start; }
+      #s-cover, #s-closing, .slide.module-header, .slide.break-slide { justify-content:center; align-items:center; }
+      .agenda-grid, .two-col, .three-col, .cf-grid, .sb-grid, .tools-grid, .ref-grid, .practice-grid { grid-template-columns:1fr; }
       .web-flow { flex-direction:column; gap:0.5rem; }
-      .web-step { flex-direction:row; align-items:flex-start; text-align:left; gap:0.75rem; }
-      .web-step-icon { margin:0; flex-shrink:0; width:40px; height:40px; font-size:1.1rem; }
-      .web-step-num  { font-size:0.55rem; }
       .web-arrow { display:none; }
       .web-terms { grid-template-columns:1fr; }
-
-      /* Stack layers */
-      .layer-name { min-width:unset; }
-      .layer-tool { display:none; }
-
-      /* Two-column grids → single column */
-      .cf-grid,
-      .cf-vs,
-      .sb-grid,
-      .tools-grid,
-      .ref-grid,
-      .practice-grid,
-      #s8 .two-col,
-      #s12 .two-col,
-      #s14 .two-col { grid-template-columns:1fr; }
-
-      /* Three-column grids → single column */
-      #s9 .three-col { grid-template-columns:1fr; }
-
-      /* Lessons/mistakes → 2 columns (tight but readable) */
-      .lessons-grid { grid-template-columns:1fr 1fr; }
-      .mistakes-grid{ grid-template-columns:1fr 1fr; }
-
-      /* Closing grid */
+      .lessons-grid, .mistakes-grid { grid-template-columns:1fr 1fr; }
       .closing-grid { grid-template-columns:1fr; }
-
-      /* Practice full-span */
-      .practice-item[style*="grid-column"] { grid-column:span 1 !important; }
-
-      /* Pillar grid */
-      #s9 .three-col { grid-template-columns:1fr; }
-
-      /* Code boxes */
-      .code-box { font-size:0.62rem; padding:0.8rem; }
-
-      /* Nav bar */
       #progress-dots { display:none; }
-      .brand { font-size:0.6rem; }
     }
-
-    /* ══ TABLET (641–900px) ══ */
     @media (min-width:641px) and (max-width:900px) {
       .slide { padding:48px 36px 76px; }
-      .lessons-grid { grid-template-columns:repeat(2,1fr); }
-      .mistakes-grid{ grid-template-columns:repeat(2,1fr); }
-      .web-terms { grid-template-columns:1fr 1fr; }
-      #s9 .three-col { grid-template-columns:1fr 1fr; }
-      .closing-grid { grid-template-columns:1fr 1fr; }
+      .three-col, .closing-grid { grid-template-columns:1fr 1fr; }
+      .lessons-grid, .mistakes-grid { grid-template-columns:1fr 1fr; }
     }
   </style>
 </head>
 <body>
 <div id="deck">
 
-  <!-- ══ SLIDE 1 — COVER ══ -->
-  <div class="slide active" id="s1">
-    <p class="eyebrow">Day Training Course · 2026 Edition</p>
-    <h1 class="slide-title">Vibe Coding<br><em>Mastery</em></h1>
-    <div class="cover-rule"></div>
-    <p class="slide-sub">Build a real production application with AI — without writing a single line of code. Based on 3 weeks building TextOS from zero to launch.</p>
-    <div class="cover-stats">
-      <div class="c-stat"><div class="c-stat-num">7</div><div class="c-stat-label">Hours Training</div></div>
-      <div class="c-stat"><div class="c-stat-num">25</div><div class="c-stat-label">Students / Class</div></div>
-      <div class="c-stat"><div class="c-stat-num">1</div><div class="c-stat-label">App Built Today</div></div>
-      <div class="c-stat"><div class="c-stat-num">0</div><div class="c-stat-label">Lines of Code</div></div>
-    </div>
-    <div style="margin-top:1.5rem;">
-      <span class="badge blue">Claude + Claude Code</span>
-      <span class="badge amber">TextOS · textos.ai</span>
-      <span class="badge">Rob Gaudet · 2026</span>
-    </div>
-    <div class="slide-num">1 / 22</div>
+<!-- ══════════════════════════════════════════
+     SLIDE 1 — COVER
+══════════════════════════════════════════ -->
+<div class="slide centered" id="s-cover">
+  <p class="eyebrow">Day Training Course · 2026 Edition</p>
+  <h1 class="slide-title">Vibe Coding<br><em>Mastery</em></h1>
+  <div class="cover-rule"></div>
+  <p class="slide-sub">Build a real production app with AI — without writing a single line of code. By end of day, you'll have a live URL.</p>
+  <div class="cover-stats">
+    <div class="c-stat"><div class="c-stat-num">7</div><div class="c-stat-label">Modules</div></div>
+    <div class="c-stat"><div class="c-stat-num">7</div><div class="c-stat-label">Hands-On Tasks</div></div>
+    <div class="c-stat"><div class="c-stat-num">1</div><div class="c-stat-label">App Built Today</div></div>
+    <div class="c-stat"><div class="c-stat-num">0</div><div class="c-stat-label">Lines of Code</div></div>
   </div>
-
-  <!-- ══ SLIDE 2 — AGENDA ══ -->
-  <div class="slide" id="s2">
-    <p class="eyebrow">Full Day Overview</p>
-    <h2 class="slide-title" style="font-size:clamp(1.4rem,2.8vw,2rem);margin-bottom:0.15rem;">What We're Covering Today</h2>
-    <p class="slide-sub" style="margin-bottom:0.6rem;">Seven hours. Two sessions. One working app deployed to the internet by 4pm.</p>
-
-    <div class="agenda-grid">
-      <div class="agenda-col">
-        <div class="agenda-col-header am">☀️ Morning Session — 9:00 AM to 12:00 PM</div>
-        <div class="agenda-item">
-          <div class="agenda-num">M-01</div>
-          <div class="agenda-body"><h4>The Vibe Coding Mindset</h4><p>What it is, why it works now, and the shift from coder to architect</p></div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-num">M-02</div>
-          <div class="agenda-body"><h4>How the Web Actually Works</h4><p>URLs, DNS, web servers, HTML/CSS/JS — explained simply</p></div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-num">M-03</div>
-          <div class="agenda-body"><h4>The Full Stack, Explained</h4><p>All 6 layers: UX, routing, backend, auth, database, hosting</p></div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-num">M-04</div>
-          <div class="agenda-body"><h4>Your Toolset &amp; Setup</h4><p>Cloudflare, Supabase, Claude, GitHub — what each one does</p></div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-num">M-05</div>
-          <div class="agenda-body"><h4>The Two Roles: Architect vs. Implementer</h4><p>The most important concept in the entire course</p></div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-num">M-06</div>
-          <div class="agenda-body"><h4>Writing Briefs That Work</h4><p>The template that turns your ideas into working code</p></div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-num">M-07</div>
-          <div class="agenda-body"><h4>Your First Deploy</h4><p>From blank project to live URL — hands-on before lunch</p></div>
-        </div>
-      </div>
-
-      <div class="agenda-col">
-        <div class="agenda-col-header pm">🌇 Afternoon Session — 1:00 PM to 4:00 PM</div>
-        <div class="agenda-item">
-          <div class="agenda-num">A-01</div>
-          <div class="agenda-body"><h4>Building Your Core Feature</h4><p>Apply the brief → deploy → verify cycle to your real app</p></div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-num">A-02</div>
-          <div class="agenda-body"><h4>When Things Break: Debugging</h4><p>The 4-step debugging brief that solves every problem</p></div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-num">A-03</div>
-          <div class="agenda-body"><h4>The Deploy Ritual</h4><p>Test → Verify → Approve → Production — non-negotiable order</p></div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-num">A-04</div>
-          <div class="agenda-body"><h4>Polish &amp; Ship to Production</h4><p>Final deploy. Your app is live. Real URL, real world.</p></div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-num">A-05</div>
-          <div class="agenda-body"><h4>Demo Showcase</h4><p>3 minutes each — what you built, how, what's next</p></div>
-        </div>
-        <div class="agenda-item" style="border-bottom:none;padding-bottom:0;">
-          <div class="agenda-num" style="color:var(--amber);">REF</div>
-          <div class="agenda-body"><h4>Reference Material (Take Home)</h4><p>15 real lessons · 12 biggest mistakes · Quick reference card</p></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="agenda-appendix">
-      <div>
-        <div class="appendix-label">Exercises Today</div>
-        <div class="appendix-items">
-          <span class="appendix-tag">✏️ Write Your First Brief</span>
-          <span class="appendix-tag">🔧 Break &amp; Fix</span>
-          <span class="appendix-tag">🚀 Final Deploy to Production</span>
-          <span class="appendix-tag">🎤 Demo Your App</span>
-        </div>
-      </div>
-      <div>
-        <div class="appendix-label">You Leave With</div>
-        <div class="appendix-items">
-          <span class="appendix-tag">✅ Live production app</span>
-          <span class="appendix-tag">✅ GitHub repo</span>
-          <span class="appendix-tag">✅ Your own CLAUDE.md</span>
-          <span class="appendix-tag">✅ Deploy pipeline</span>
-        </div>
-      </div>
-    </div>
-    <div class="slide-num">2 / 22</div>
+  <div style="margin-top:1.5rem;">
+    <span class="badge blue">Claude + Claude Code</span>
+    <span class="badge amber">TextOS · textos.ai</span>
+    <span class="badge">Rob Gaudet · 2026</span>
   </div>
+  <div class="slide-num">1</div>
+</div>
 
-  <!-- ══ SLIDE 3 — WHAT IS VIBE CODING ══ -->
-  <div class="slide" id="s3">
-    <p class="eyebrow">Module M-01 — Foundation</p>
-    <h2 class="slide-title" style="font-size:clamp(1.6rem,3.5vw,2.5rem);text-align:center;">What Is Vibe Coding?</h2>
-    <p class="slide-sub" style="max-width:580px;text-align:center;margin-top:0.55rem;">Using AI to build production software by describing <strong>what</strong> you want — not <em>how</em> to build it. You become the architect. AI handles the implementation.</p>
-    <div class="quote-block">
-      <p>"I built TextOS in 5 days — sitting under an oak tree at lunch with my wife using only my laptop and Claude. No app. Just text. That's exactly what I'm selling."</p>
-      <cite>Rob Gaudet — Founder, TextOS</cite>
+<!-- ══════════════════════════════════════════
+     SLIDE 2 — AGENDA
+══════════════════════════════════════════ -->
+<div class="slide" id="s-agenda">
+  <p class="eyebrow">Full Day Overview</p>
+  <h2 class="slide-title" style="font-size:clamp(1.4rem,2.8vw,2rem);margin-bottom:0.15rem;">What We're Building Toward</h2>
+  <p class="slide-sub" style="margin-bottom:0.6rem;">Every module ends with a hands-on task. By lunch you have a live URL. By 4pm you have a finished app.</p>
+  <div class="agenda-grid">
+    <div class="agenda-col">
+      <div class="agenda-col-header am">☀️ Morning — 9:00 AM to 12:00 PM</div>
+      <div class="agenda-item"><div class="agenda-num">M-01</div><div class="agenda-body"><h4>The Vibe Coding Mindset<span class="agenda-ho-badge">🛠 Task</span></h4><p>Name your app + write your one-sentence why</p></div></div>
+      <div class="agenda-item"><div class="agenda-num">M-02</div><div class="agenda-body"><h4>How the Web Actually Works<span class="agenda-ho-badge">🛠 Task</span></h4><p>Map your app's pages and request flow</p></div></div>
+      <div class="agenda-item"><div class="agenda-num">M-03</div><div class="agenda-body"><h4>The Full Stack, Explained<span class="agenda-ho-badge">🛠 Task</span></h4><p>Fill in your app's technology stack</p></div></div>
+      <div class="agenda-item"><div class="agenda-num">M-04</div><div class="agenda-body"><h4>Your Toolset &amp; Setup<span class="agenda-ho-badge">🛠 Task</span></h4><p>Verify every tool is installed and working</p></div></div>
+      <div class="agenda-item"><div class="agenda-num">M-05</div><div class="agenda-body"><h4>Two Roles + CLAUDE.md<span class="agenda-ho-badge">🛠 Task</span></h4><p>Create your project's CLAUDE.md file</p></div></div>
+      <div class="agenda-item"><div class="agenda-num">M-06</div><div class="agenda-body"><h4>Writing Briefs That Work<span class="agenda-ho-badge">🛠 Task</span></h4><p>Write your first real brief for your landing page</p></div></div>
+      <div class="agenda-item" style="border-bottom:none;"><div class="agenda-num">M-07</div><div class="agenda-body"><h4>Your First Deploy 🚀<span class="agenda-ho-badge">🛠 Task</span></h4><p>You're live on the internet before lunch</p></div></div>
     </div>
-    <div class="notice blue" style="margin-top:0.85rem;max-width:620px;">
-      <span class="ni">💡</span>
-      <p>This isn't about technical skill — it's about <strong>architectural thinking</strong>. Your judgment, taste, and product vision is the most valuable part. AI just does what you tell it.</p>
+    <div class="agenda-col">
+      <div class="agenda-col-header pm">🌇 Afternoon — 1:00 PM to 4:00 PM</div>
+      <div class="agenda-item"><div class="agenda-num">A-01</div><div class="agenda-body"><h4>Building Core Features<span class="agenda-ho-badge">🛠 Task</span></h4><p>Add your app's main feature using the brief cycle</p></div></div>
+      <div class="agenda-item"><div class="agenda-num">A-02</div><div class="agenda-body"><h4>When Things Break<span class="agenda-ho-badge">🛠 Task</span></h4><p>Break something on purpose — then fix it</p></div></div>
+      <div class="agenda-item"><div class="agenda-num">A-03</div><div class="agenda-body"><h4>Polish &amp; Ship to Production<span class="agenda-ho-badge">🛠 Task</span></h4><p>Final deploy — your complete app is live</p></div></div>
+      <div class="agenda-item" style="border-bottom:none;padding-bottom:0;"><div class="agenda-num" style="color:var(--amber);">REF</div><div class="agenda-body"><h4>Appendix (Take Home)</h4><p>15 real lessons · 12 biggest mistakes · Quick reference card</p></div></div>
     </div>
-    <div style="margin-top:0.85rem;">
-      <span class="badge blue">Claude + Claude Code</span>
-      <span class="badge amber">Built TextOS in 5 days</span>
-      <span class="badge green">$0 infrastructure cost</span>
-    </div>
-    <div class="slide-num">3 / 22</div>
   </div>
+  <div class="slide-num">2</div>
+</div>
 
-  <!-- ══ SLIDE 4 — HOW A WEBSITE ACTUALLY WORKS ══ -->
-  <div class="slide" id="s4">
-    <p class="eyebrow">Module M-02 — How the Web Works</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">How a Website Actually Works</h2>
-    <p class="slide-sub" style="margin-bottom:0.65rem;max-width:760px;">Every time you visit a website, a small miracle happens in under a second. Here's exactly what's happening behind the scenes.</p>
 
-    <div class="web-flow" style="max-width:860px;width:100%;">
-      <div class="web-step">
-        <div class="web-step-icon" style="background:#EFF6FF;">🧑‍💻</div>
-        <div>
-          <div class="web-step-num" style="color:var(--blue);">Step 1</div>
-          <div class="web-step-title">You Type a URL</div>
-          <div class="web-step-desc">You type <em>textos.ai</em> — a human-readable address, like a street address for a computer.</div>
-        </div>
-      </div>
-      <div class="web-arrow">→</div>
-      <div class="web-step">
-        <div class="web-step-icon" style="background:#F5F3FF;">📖</div>
-        <div>
-          <div class="web-step-num" style="color:var(--purple);">Step 2</div>
-          <div class="web-step-title">DNS Lookup</div>
-          <div class="web-step-desc">DNS translates the name to an IP address (104.21.8.43). The internet's phone book — names to numbers.</div>
-        </div>
-      </div>
-      <div class="web-arrow">→</div>
-      <div class="web-step">
-        <div class="web-step-icon" style="background:#FFF7ED;">🌐</div>
-        <div>
-          <div class="web-step-num" style="color:var(--orange);">Step 3</div>
-          <div class="web-step-title">Request Travels</div>
-          <div class="web-step-desc">Your request hops across the internet in milliseconds, reaching the nearest Cloudflare server.</div>
-        </div>
-      </div>
-      <div class="web-arrow">→</div>
-      <div class="web-step">
-        <div class="web-step-icon" style="background:#ECFDF5;">🖥️</div>
-        <div>
-          <div class="web-step-num" style="color:var(--green);">Step 4</div>
-          <div class="web-step-title">Server Responds</div>
-          <div class="web-step-desc">A web server — a computer that never turns off — sends back files: HTML, CSS, and JavaScript.</div>
-        </div>
-      </div>
-      <div class="web-arrow">→</div>
-      <div class="web-step">
-        <div class="web-step-icon" style="background:#FFFBEB;">🎨</div>
-        <div>
-          <div class="web-step-num" style="color:var(--amber);">Step 5</div>
-          <div class="web-step-title">Browser Renders</div>
-          <div class="web-step-desc">Your browser reads those files and paints what you see. Under 200ms, start to finish.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="web-terms" style="max-width:860px;width:100%;">
-      <div class="web-term">
-        <div class="wt-label">HTML — Structure</div>
-        <p>The skeleton of the page. Defines what's on it: headings, paragraphs, buttons, images. Like the walls and rooms of a building.</p>
-      </div>
-      <div class="web-term">
-        <div class="wt-label">CSS — Style</div>
-        <p>The paint and furniture. Colors, fonts, spacing, layout, animations. CSS makes things look the way they look.</p>
-      </div>
-      <div class="web-term">
-        <div class="wt-label">JavaScript — Behavior</div>
-        <p>The light switches and elevators. Handles clicks, loads data, updates content — makes the page interactive.</p>
-      </div>
-    </div>
-    <div class="slide-num">4 / 22</div>
+<!-- ════════════════════════════════════
+     MODULE M-01
+════════════════════════════════════ -->
+<div class="slide module-header">
+  <div class="module-number">01</div>
+  <div class="module-kicker">Module M-01</div>
+  <div class="module-title">The Vibe Coding<br>Mindset</div>
+  <div class="module-sub">The entire game changes when you stop thinking like a programmer and start thinking like an architect.</div>
+  <div class="module-learns">
+    <div class="module-learn-item"><span class="ml-icon">🧠</span><p>What vibe coding actually is — and why it works now when it didn't before</p></div>
+    <div class="module-learn-item"><span class="ml-icon">🔀</span><p>How the role of the builder shifted from coder to architect in 2024</p></div>
+    <div class="module-learn-item"><span class="ml-icon">⚡</span><p>The 3 principles that separate good vibe coders from frustrated ones</p></div>
   </div>
+  <div class="module-app-badge">🛠️ <strong>Your task:</strong> Name your app + write your one-sentence "why"</div>
+  <div class="slide-num">3</div>
+</div>
 
-  <!-- ══ SLIDE 5 — THE FULL STACK ══ -->
-  <div class="slide" id="s5">
-    <p class="eyebrow">Module M-03 — The Full Stack</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);margin-bottom:0.55rem;">Every Layer of a Modern Web App</h2>
-    <p class="slide-sub" style="margin-bottom:0.6rem;max-width:760px;">A real application has six distinct layers. Each does a specific job. When you understand them, you can direct AI to build any of them precisely.</p>
-
-    <div class="stack-layers">
-      <div class="stack-layer" style="background:#EFF6FF;border-color:var(--blue-md);">
-        <div class="layer-icon">🎨</div>
-        <div class="layer-name">UX / Interface Layer</div>
-        <div class="layer-tagline">What users see and click — HTML structure, CSS styling, JavaScript behavior. The only layer users experience directly.</div>
-        <div class="layer-tool" style="background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md);">Astro</div>
-      </div>
-      <div class="stack-layer" style="background:#F5F3FF;border-color:#C4B5FD;">
-        <div class="layer-icon">🗺️</div>
-        <div class="layer-name">Routing Layer</div>
-        <div class="layer-tagline">Maps URLs to pages. When a user visits /dashboard, routing says "show them the dashboard." Without this, every URL shows a blank page.</div>
-        <div class="layer-tool" style="background:var(--purple-lt);color:var(--purple);border:1px solid #C4B5FD;">Astro + _redirects</div>
-      </div>
-      <div class="stack-layer" style="background:#FFF7ED;border-color:var(--orange-md);">
-        <div class="layer-icon">⚙️</div>
-        <div class="layer-name">Backend / API Layer</div>
-        <div class="layer-tagline">The brains — processes form submissions, calls AI, handles payments, enforces business rules. Invisible to users, essential to everything.</div>
-        <div class="layer-tool" style="background:var(--orange-lt);color:var(--orange);border:1px solid var(--orange-md);">Cloudflare Workers</div>
-      </div>
-      <div class="stack-layer" style="background:#FEF2F2;border-color:var(--red-md);">
-        <div class="layer-icon">🔐</div>
-        <div class="layer-name">Authentication Layer</div>
-        <div class="layer-tagline">The bouncer — knows who you are and what you can see. Handles sign-up, login, logout, "forgot password," and keeps each user's data private.</div>
-        <div class="layer-tool" style="background:var(--red-lt);color:var(--red);border:1px solid var(--red-md);">Supabase Auth</div>
-      </div>
-      <div class="stack-layer" style="background:#ECFDF5;border-color:var(--green-md);">
-        <div class="layer-icon">🗄️</div>
-        <div class="layer-name">Database Layer</div>
-        <div class="layer-tagline">Permanent memory. Anything that must survive a page refresh — user data, posts, settings, transactions — lives here in structured tables.</div>
-        <div class="layer-tool" style="background:var(--green-lt);color:var(--green);border:1px solid var(--green-md);">Supabase / Postgres</div>
-      </div>
-      <div class="stack-layer" style="background:#FFFBEB;border-color:var(--amber-md);">
-        <div class="layer-icon">🌍</div>
-        <div class="layer-name">Hosting / CDN Layer</div>
-        <div class="layer-tagline">Where your files live and how they reach users globally. CDN = Content Delivery Network. Copies of your app sit near every user on earth.</div>
-        <div class="layer-tool" style="background:var(--amber-lt);color:var(--amber);border:1px solid var(--amber-md);">Cloudflare Pages</div>
-      </div>
-    </div>
-    <div class="slide-num">5 / 22</div>
+<div class="slide centered" id="s-m01-a">
+  <p class="eyebrow">Module M-01 — What Is Vibe Coding?</p>
+  <h2 class="slide-title" style="font-size:clamp(1.6rem,3.5vw,2.5rem);">Using AI to build production software<br>by describing <em style="font-style:normal;color:var(--blue);">what</em> you want — not <em style="font-style:normal;color:var(--red);">how</em> to build it.</h2>
+  <div class="quote-block" style="margin-top:1.2rem;">
+    <p>"I built TextOS in 5 days — sitting under an oak tree at lunch with my wife using only my laptop and Claude. No app. Just text. That's exactly what I'm selling."</p>
+    <cite>Rob Gaudet — Founder, TextOS</cite>
   </div>
-
-  <!-- ══ SLIDE 6 — CLOUDFLARE ══ -->
-  <div class="slide" id="s6">
-    <p class="eyebrow">Module M-04 — Your Toolset</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">Cloudflare — The Internet's Front Door</h2>
-    <p class="slide-sub" style="margin-bottom:0.55rem;max-width:760px;">When someone visits your app, the very first computer they reach is a Cloudflare server — not yours. That's intentional, and it's a superpower.</p>
-
-    <div class="cf-grid">
-      <div class="cf-card">
-        <div class="cf-icon">🌐</div>
-        <div>
-          <h4>Global Edge Network</h4>
-          <p>300+ data centers in 100+ countries. A user in Tokyo hits a Cloudflare server in Tokyo — not one in Virginia. Result: sub-100ms load times anywhere on earth.</p>
-        </div>
-      </div>
-      <div class="cf-card">
-        <div class="cf-icon">📄</div>
-        <div>
-          <h4>Cloudflare Pages — Static Hosting</h4>
-          <p>Your HTML, CSS, and JS files deploy to every edge location automatically. Free SSL included. One command puts your app live globally in under 60 seconds.</p>
-        </div>
-      </div>
-      <div class="cf-card">
-        <div class="cf-icon">⚡</div>
-        <div>
-          <h4>Cloudflare Workers — Serverless Backend</h4>
-          <p>Run backend code (API calls, AI, payments) at the edge with no server to manage and no server bill to pay. Zero millisecond cold start time.</p>
-        </div>
-      </div>
-      <div class="cf-card">
-        <div class="cf-icon">🛡️</div>
-        <div>
-          <h4>Security Free of Charge</h4>
-          <p>DDoS protection, SSL/TLS, Web Application Firewall, bot filtering — all automatic and free. Enterprise security that costs thousands/month elsewhere.</p>
-        </div>
-      </div>
-    </div>
-    <div class="cf-vs">
-      <div class="cf-vs-col" style="background:var(--red-lt);border:1px solid var(--red-md);">
-        <h4 style="color:var(--red);">AWS / Azure / Traditional Cloud</h4>
-        <ul class="item-list">
-          <li class="bad">$50–$200/month minimum for similar infrastructure</li>
-          <li class="bad">Complex config — IAM roles, VPCs, load balancers</li>
-          <li class="bad">Cold starts, provisioning delays, scaling setup required</li>
-        </ul>
-      </div>
-      <div class="cf-vs-col" style="background:var(--green-lt);border:1px solid var(--green-md);">
-        <h4 style="color:var(--green);">Cloudflare — What We Use</h4>
-        <ul class="item-list">
-          <li class="good">Free tier covers everything you need to launch</li>
-          <li class="good">One config file, one deploy command, done</li>
-          <li class="good">Instant global deploy, zero cold starts</li>
-        </ul>
-      </div>
-    </div>
-    <div class="slide-num">6 / 22</div>
+  <div class="notice blue" style="margin-top:0.85rem;max-width:700px;">
+    <span class="ni">💡</span>
+    <p>This isn't about technical skill — it's about <strong>architectural thinking</strong>. Your judgment, taste, and product vision is the most valuable part. AI just does what you tell it.</p>
   </div>
+  <div class="slide-num">4</div>
+</div>
 
-  <!-- ══ SLIDE 7 — SUPABASE ══ -->
-  <div class="slide" id="s7">
-    <p class="eyebrow">Module M-04 — Your Toolset</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">Supabase — Your Database &amp; Login System</h2>
-    <p class="slide-sub" style="margin-bottom:0.55rem;max-width:760px;">Think of Supabase as two things: a spreadsheet in the cloud that thousands of users can read and write simultaneously, plus a complete login system — managed through a visual dashboard.</p>
-
-    <div class="sb-grid">
-      <div class="sb-card">
-        <div class="sc-label" style="color:var(--green);">🗄️ The Database</div>
-        <h4>PostgreSQL — Industry Standard</h4>
-        <p>The same database used by Instagram, Reddit, Shopify, and Airbnb. Battle-tested for 30+ years. Supabase wraps it with a visual table editor that looks like Google Sheets — see your data without writing any code.</p>
-      </div>
-      <div class="sb-card">
-        <div class="sc-label" style="color:var(--blue);">🔐 Authentication</div>
-        <h4>Complete Identity System, Built In</h4>
-        <p>Sign up, sign in, sign out, "forgot password," magic links, and social login (Google, GitHub, Apple) — all ready to go. Without Supabase, building just the login takes weeks. With it, an afternoon.</p>
-      </div>
-      <div class="sb-card">
-        <div class="sc-label" style="color:var(--purple);">🔒 Row Level Security</div>
-        <h4>Each User Sees Only Their Data</h4>
-        <p>A database rule that enforces privacy automatically. User A's data is invisible to User B — not because of code you wrote, but because the database itself enforces it. This is how multi-user apps work safely.</p>
-      </div>
-      <div class="sb-card">
-        <div class="sc-label" style="color:var(--amber);">⚡ Auto-Generated API</div>
-        <h4>Your Database Becomes an API Instantly</h4>
-        <p>Create a table in Supabase and a REST API for that table is automatically generated. Your app can read, write, update, and delete data with no server code required on your end.</p>
-      </div>
+<div class="slide" id="s-m01-b">
+  <p class="eyebrow">Module M-01 — The Shift</p>
+  <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2.1rem);margin-bottom:1rem;">How Building Software Changed</h2>
+  <div class="two-col">
+    <div class="col-card old">
+      <h3>2022 — The Old Way</h3>
+      <ul class="item-list">
+        <li class="bad">Hire a developer or learn to code yourself</li>
+        <li class="bad">Months building basic infrastructure</li>
+        <li class="bad">$50K–$200K before your first user</li>
+        <li class="bad">Technical debt from day one</li>
+        <li class="bad">Great ideas die in the vision-to-execution gap</li>
+      </ul>
     </div>
-
-    <div class="notice blue" style="margin-top:0.65rem;max-width:860px;">
-      <span class="ni">💡</span>
-      <p><strong>The big picture:</strong> Supabase = "who is this user and what data belongs to them." Cloudflare = "how does the app reach the user." Together, they replace what used to require a full-time DevOps engineer.</p>
+    <div class="col-card new">
+      <h3>2026 — The Vibe Coding Way</h3>
+      <ul class="item-list">
+        <li class="good">Describe the outcome. AI writes the code.</li>
+        <li class="good">Production infrastructure in hours</li>
+        <li class="good">$0–$500 before your first user</li>
+        <li class="good">Architecture stays in your head and docs</li>
+        <li class="good">Build speed limited by clarity, not code</li>
+      </ul>
     </div>
-    <div class="slide-num">7 / 22</div>
   </div>
-
-  <!-- ══ SLIDE 8 — OLD VS NEW ══ -->
-  <div class="slide" id="s8">
-    <p class="eyebrow">Module M-01 — The Shift</p>
-    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2.1rem);margin-bottom:1rem;">How Building Software Changed</h2>
-    <div class="two-col">
-      <div class="col-card old">
-        <h3>2022 — The Old Way</h3>
-        <ul class="item-list">
-          <li class="bad">Hire a developer or learn to code yourself</li>
-          <li class="bad">Months building basic infrastructure</li>
-          <li class="bad">$50K–$200K before your first user</li>
-          <li class="bad">Technical debt from day one</li>
-          <li class="bad">Great ideas die in the vision-to-execution gap</li>
-        </ul>
-      </div>
-      <div class="col-card new">
-        <h3>2026 — The Vibe Coding Way</h3>
-        <ul class="item-list">
-          <li class="good">You describe the outcome. AI writes the code.</li>
-          <li class="good">Production infrastructure in hours</li>
-          <li class="good">$0–$500 before your first user</li>
-          <li class="good">Architecture stays in your head and docs</li>
-          <li class="good">Build speed limited by clarity, not code</li>
-        </ul>
-      </div>
-    </div>
-    <div class="notice amber" style="margin-top:0.85rem;max-width:820px;">
-      <span class="ni">⚠️</span>
-      <p><strong>Important:</strong> Vibe coding is not "ask AI to build everything and hope." You are still the decision-maker. AI handles implementation. You handle vision and judgment.</p>
-    </div>
-    <div class="slide-num">8 / 22</div>
+  <div class="notice amber" style="margin-top:0.85rem;">
+    <span class="ni">⚠️</span>
+    <p><strong>Important:</strong> Vibe coding is not "ask AI to build everything and hope." You are still the decision-maker. AI handles implementation. You handle vision and judgment.</p>
   </div>
+  <div class="slide-num">5</div>
+</div>
 
-  <!-- ══ SLIDE 9 — 3 PILLARS ══ -->
-  <div class="slide" id="s9">
-    <p class="eyebrow">Module M-01 — Core Principles</p>
-    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2.1rem);margin-bottom:1rem;">The 3 Things That Make It Work</h2>
-    <div class="three-col">
-      <div class="pillar" style="border-top:4px solid var(--blue);">
-        <div class="pillar-num" style="color:var(--blue);">01</div>
-        <h3>Architectural Thinking</h3>
-        <p>You must understand <em>what</em> you're building well enough to describe it precisely. The more clearly you think, the better the AI output.</p>
-      </div>
-      <div class="pillar" style="border-top:4px solid var(--amber);">
-        <div class="pillar-num" style="color:var(--amber);">02</div>
-        <h3>Research Before Code</h3>
-        <p>Always understand the existing system before changing it. The biggest mistakes come from skipping research and guessing at solutions.</p>
-      </div>
-      <div class="pillar" style="border-top:4px solid var(--green);">
-        <div class="pillar-num" style="color:var(--green);">03</div>
-        <h3>Verify Everything</h3>
-        <p>AI claims it's done. Often it isn't. Verify in the browser, logs, and database — not just by reading the AI's response.</p>
-      </div>
+<div class="slide" id="s-m01-c">
+  <p class="eyebrow">Module M-01 — Core Principles</p>
+  <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2.1rem);margin-bottom:1rem;">The 3 Principles That Make It Work</h2>
+  <div class="three-col">
+    <div class="pillar" style="border-top:4px solid var(--blue);">
+      <div class="pillar-num" style="color:var(--blue);">01</div>
+      <h3>Architectural Thinking</h3>
+      <p>You must understand <em>what</em> you're building well enough to describe it precisely. The more clearly you think, the better the AI output. Clarity is the skill.</p>
     </div>
-    <div class="slide-num">9 / 22</div>
+    <div class="pillar" style="border-top:4px solid var(--amber);">
+      <div class="pillar-num" style="color:var(--amber);">02</div>
+      <h3>Research Before Code</h3>
+      <p>Always understand the existing system before changing it. The biggest mistakes come from skipping research and guessing at solutions.</p>
+    </div>
+    <div class="pillar" style="border-top:4px solid var(--green);">
+      <div class="pillar-num" style="color:var(--green);">03</div>
+      <h3>Verify Everything</h3>
+      <p>AI claims it's done. Often it isn't. Verify in the browser, logs, and database — not just by reading the AI's response.</p>
+    </div>
   </div>
+  <div class="slide-num">6</div>
+</div>
 
-  <!-- ══ SLIDE 10 — TOOLS ══ -->
-  <div class="slide" id="s10">
-    <p class="eyebrow">Module M-04 — Pre-Class Setup</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);margin-bottom:0.8rem;">Required Tools &amp; Setup</h2>
-    <div class="tools-grid">
-      <div class="tool-row" style="border-left:3px solid var(--blue);">
-        <div><div class="tool-name">Claude.ai</div><div class="tool-desc">The Architect — where you think, plan, and write briefs</div></div>
-        <div class="tool-cost">FREE / $20mo</div>
-      </div>
-      <div class="tool-row" style="border-left:3px solid var(--purple);">
-        <div><div class="tool-name">Claude Code</div><div class="tool-desc">The Implementer — writes and executes the actual code</div></div>
-        <div class="tool-cost">Usage-based</div>
-      </div>
-      <div class="tool-row">
-        <div><div class="tool-name">VS Code</div><div class="tool-desc">Editor where Claude Code runs as a built-in extension</div></div>
-        <div class="tool-cost">FREE</div>
-      </div>
-      <div class="tool-row">
-        <div><div class="tool-name">GitHub</div><div class="tool-desc">Version control — Claude Code pushes code here automatically</div></div>
-        <div class="tool-cost">FREE</div>
-      </div>
-      <div class="tool-row" style="border-left:3px solid var(--amber);">
-        <div><div class="tool-name">Cloudflare</div><div class="tool-desc">Hosting, CDN, serverless backend — global, fast, free to start</div></div>
-        <div class="tool-cost">FREE / $5mo</div>
-      </div>
-      <div class="tool-row" style="border-left:3px solid var(--green);">
-        <div><div class="tool-name">Supabase</div><div class="tool-desc">Database + authentication — Postgres with a visual dashboard</div></div>
-        <div class="tool-cost">FREE tier</div>
-      </div>
-      <div class="tool-row">
-        <div><div class="tool-name">Node.js v22+</div><div class="tool-desc">Required by deploy tools — must be v22 or higher</div></div>
-        <div class="tool-cost">FREE</div>
-      </div>
-    </div>
-    <div class="notice amber" style="margin-top:0.65rem;max-width:820px;">
-      <span class="ni">⏰</span>
-      <p>Install everything and create all accounts <strong>the evening before class.</strong> Setup takes ~45 minutes. Do not arrive without this done.</p>
-    </div>
-    <div class="slide-num">10 / 22</div>
+<!-- M-01 HANDS-ON -->
+<div class="slide hands-on">
+  <div class="ho-header">
+    <span class="ho-label">🛠️ Hands-On — M-01</span>
+    <span class="ho-time">⏱ 10 minutes</span>
   </div>
+  <div class="ho-title">Define Your App</div>
+  <div class="ho-subtitle">Before you write a single brief or touch Claude Code, you need to know what you're building and why. This is the foundation everything else rests on.</div>
+  <div class="ho-steps">
+    <div class="ho-step">
+      <div class="ho-step-num">1</div>
+      <div class="ho-step-body">
+        <h4>Name your app</h4>
+        <p>Pick a working name — it doesn't have to be final. Write it at the top of a notes doc. This is your project name.</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">2</div>
+      <div class="ho-step-body">
+        <h4>Write your one-sentence "what"</h4>
+        <p>Complete this: "My app lets [who] do [what] so that [result]."</p>
+        <div class="step-hint">e.g. "My app lets local restaurant owners track their daily specials so customers always know what's available."</div>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">3</div>
+      <div class="ho-step-body">
+        <h4>Write your one-sentence "why"</h4>
+        <p>Why does this need to exist? What problem does it solve that isn't already solved well?</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">4</div>
+      <div class="ho-step-body">
+        <h4>Name your single target user</h4>
+        <p>One person, not a segment. "A 32-year-old restaurant owner in New Orleans who isn't tech-savvy." Get specific.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ho-deliverable">
+    <div class="hd-icon">📄</div>
+    <div><h4>Your Deliverable</h4><p>A notes doc with: app name · one-sentence what · one-sentence why · one-sentence target user. Share with your neighbor and get feedback.</p></div>
+  </div>
+  <div class="build-tracker">
+    <div class="bt-label">App Build Progress</div>
+    <div class="bt-steps">
+      <div class="bt-step current">💡 App Concept</div>
+      <div class="bt-step">🗺️ Site Map</div>
+      <div class="bt-step">🔧 Stack Setup</div>
+      <div class="bt-step">📄 CLAUDE.md</div>
+      <div class="bt-step">✏️ First Brief</div>
+      <div class="bt-step">🚀 First Deploy</div>
+      <div class="bt-step">⚡ Core Feature</div>
+      <div class="bt-step">🎉 Shipped</div>
+    </div>
+  </div>
+  <div class="slide-num">7</div>
+</div>
 
-  <!-- ══ SLIDE 11 — CLAUDE.MD ══ -->
-  <div class="slide" id="s11">
-    <p class="eyebrow">Module M-04 — Most Important File In Your Project</p>
-    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2.1rem);text-align:center;">The CLAUDE.md File</h2>
-    <p class="slide-sub" style="max-width:580px;text-align:center;margin-top:0.4rem;margin-bottom:0.75rem;">Every project gets one. Claude Code reads it at the start of every session. It defines your architecture, rules, and roles — all in one place.</p>
-    <div class="code-box" style="max-width:660px;">
+
+<!-- ════════════════════════════════════
+     MODULE M-02
+════════════════════════════════════ -->
+<div class="slide module-header">
+  <div class="module-number">02</div>
+  <div class="module-kicker">Module M-02</div>
+  <div class="module-title">How the Web<br>Actually Works</div>
+  <div class="module-sub">You don't need to build the plumbing — but you need to know it exists. This is the mental model that makes every brief you write 10x more precise.</div>
+  <div class="module-learns">
+    <div class="module-learn-item"><span class="ml-icon">🌐</span><p>What actually happens in the millisecond between typing a URL and seeing a page</p></div>
+    <div class="module-learn-item"><span class="ml-icon">🧱</span><p>What HTML, CSS, and JavaScript each do — explained without jargon</p></div>
+    <div class="module-learn-item"><span class="ml-icon">🗺️</span><p>How to think about your app as a set of pages and flows</p></div>
+  </div>
+  <div class="module-app-badge">🛠️ <strong>Your task:</strong> Map your app's pages and what each one does</div>
+  <div class="slide-num">8</div>
+</div>
+
+<div class="slide" id="s-m02-a">
+  <p class="eyebrow">Module M-02 — The Request Flow</p>
+  <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">How a Website Actually Works</h2>
+  <p class="slide-sub" style="margin-bottom:0.65rem;">Every time you visit a website, a small miracle happens in under a second.</p>
+  <div class="web-flow">
+    <div class="web-step">
+      <div class="web-step-icon" style="background:#EFF6FF;">🧑‍💻</div>
+      <div><div class="web-step-num" style="color:var(--blue);">Step 1</div><div class="web-step-title">You Type a URL</div><div class="web-step-desc">A human-readable address — like a street address for a computer.</div></div>
+    </div>
+    <div class="web-arrow">→</div>
+    <div class="web-step">
+      <div class="web-step-icon" style="background:#F5F3FF;">📖</div>
+      <div><div class="web-step-num" style="color:var(--purple);">Step 2</div><div class="web-step-title">DNS Lookup</div><div class="web-step-desc">Translates the name to an IP address. The internet's phone book.</div></div>
+    </div>
+    <div class="web-arrow">→</div>
+    <div class="web-step">
+      <div class="web-step-icon" style="background:#FFF7ED;">🌐</div>
+      <div><div class="web-step-num" style="color:var(--orange);">Step 3</div><div class="web-step-title">Request Travels</div><div class="web-step-desc">Hops across the internet, reaching the nearest Cloudflare server.</div></div>
+    </div>
+    <div class="web-arrow">→</div>
+    <div class="web-step">
+      <div class="web-step-icon" style="background:#ECFDF5;">🖥️</div>
+      <div><div class="web-step-num" style="color:var(--green);">Step 4</div><div class="web-step-title">Server Responds</div><div class="web-step-desc">Sends back files: HTML, CSS, and JavaScript.</div></div>
+    </div>
+    <div class="web-arrow">→</div>
+    <div class="web-step">
+      <div class="web-step-icon" style="background:#FFFBEB;">🎨</div>
+      <div><div class="web-step-num" style="color:var(--amber);">Step 5</div><div class="web-step-title">Browser Renders</div><div class="web-step-desc">Reads the files and paints what you see. Under 200ms start to finish.</div></div>
+    </div>
+  </div>
+  <div class="web-terms">
+    <div class="web-term"><div class="wt-label">HTML — Structure</div><p>The skeleton. Headings, paragraphs, buttons, images. Like the walls and rooms of a building.</p></div>
+    <div class="web-term"><div class="wt-label">CSS — Style</div><p>The paint and furniture. Colors, fonts, spacing, layout. Makes things look the way they look.</p></div>
+    <div class="web-term"><div class="wt-label">JavaScript — Behavior</div><p>The light switches and elevators. Handles clicks, loads data, makes pages interactive.</p></div>
+  </div>
+  <div class="slide-num">9</div>
+</div>
+
+<!-- M-02 HANDS-ON -->
+<div class="slide hands-on">
+  <div class="ho-header">
+    <span class="ho-label">🛠️ Hands-On — M-02</span>
+    <span class="ho-time">⏱ 10 minutes</span>
+  </div>
+  <div class="ho-title">Map Your App's Pages</div>
+  <div class="ho-subtitle">Every app is a set of pages. Before you build anything, you need to know what those pages are and what each one does.</div>
+  <div class="ho-steps">
+    <div class="ho-step">
+      <div class="ho-step-num">1</div>
+      <div class="ho-step-body">
+        <h4>List your pages</h4>
+        <p>Write down every page your app needs. Most apps have 3–6. Don't overthink it — just list them.</p>
+        <div class="step-hint">e.g. Home · Sign Up · Dashboard · Settings · About</div>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">2</div>
+      <div class="ho-step-body">
+        <h4>Write one sentence per page</h4>
+        <p>What does a user do on that page? What's the goal of that page?</p>
+        <div class="step-hint">e.g. "Dashboard: Shows the user their saved specials and lets them add a new one."</div>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">3</div>
+      <div class="ho-step-body">
+        <h4>Draw the flow</h4>
+        <p>On paper or in a notes doc: where does a new user start? What's the path to their first "win" in the app?</p>
+        <div class="step-hint">Home → Sign Up → Dashboard → Add First Item → 🎉</div>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">4</div>
+      <div class="ho-step-body">
+        <h4>Circle your MVP page</h4>
+        <p>If you could only build ONE page today, which one delivers the most value? Circle it. That's what you're deploying this morning.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ho-deliverable">
+    <div class="hd-icon">🗺️</div>
+    <div><h4>Your Deliverable</h4><p>A simple sitemap — list of pages with one sentence each + a user flow arrow diagram. Your MVP page is identified and circled.</p></div>
+  </div>
+  <div class="build-tracker">
+    <div class="bt-label">App Build Progress</div>
+    <div class="bt-steps">
+      <div class="bt-step done">💡 App Concept</div>
+      <div class="bt-step current">🗺️ Site Map</div>
+      <div class="bt-step">🔧 Stack Setup</div>
+      <div class="bt-step">📄 CLAUDE.md</div>
+      <div class="bt-step">✏️ First Brief</div>
+      <div class="bt-step">🚀 First Deploy</div>
+      <div class="bt-step">⚡ Core Feature</div>
+      <div class="bt-step">🎉 Shipped</div>
+    </div>
+  </div>
+  <div class="slide-num">10</div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     MODULE M-03
+════════════════════════════════════ -->
+<div class="slide module-header">
+  <div class="module-number">03</div>
+  <div class="module-kicker">Module M-03</div>
+  <div class="module-title">The Full Stack,<br>Explained</div>
+  <div class="module-sub">A production app has six layers. Each does a specific job. When you understand them, you can direct AI to build any of them precisely.</div>
+  <div class="module-learns">
+    <div class="module-learn-item"><span class="ml-icon">🏗️</span><p>The 6 layers of a modern web app — from pixels to database</p></div>
+    <div class="module-learn-item"><span class="ml-icon">🔧</span><p>Which tool handles which layer in your stack</p></div>
+    <div class="module-learn-item"><span class="ml-icon">📋</span><p>How to map your own app's stack before you build</p></div>
+  </div>
+  <div class="module-app-badge">🛠️ <strong>Your task:</strong> Fill in your app's complete technology stack</div>
+  <div class="slide-num">11</div>
+</div>
+
+<div class="slide" id="s-m03-a">
+  <p class="eyebrow">Module M-03 — The Full Stack</p>
+  <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);margin-bottom:0.55rem;">Every Layer of a Modern Web App</h2>
+  <p class="slide-sub" style="margin-bottom:0.6rem;">Six distinct layers. Each does a specific job. When you write a brief, you're targeting exactly one of these.</p>
+  <div class="stack-layers">
+    <div class="stack-layer" style="background:#EFF6FF;border-color:var(--blue-md);">
+      <div class="layer-icon">🎨</div>
+      <div class="layer-name">UX / Interface Layer</div>
+      <div class="layer-tagline">What users see and click — HTML, CSS, JavaScript. The only layer users experience directly.</div>
+      <div class="layer-tool" style="background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-md);">Astro</div>
+    </div>
+    <div class="stack-layer" style="background:#F5F3FF;border-color:#C4B5FD;">
+      <div class="layer-icon">🗺️</div>
+      <div class="layer-name">Routing Layer</div>
+      <div class="layer-tagline">Maps URLs to pages. Without this, every URL shows a blank page.</div>
+      <div class="layer-tool" style="background:var(--purple-lt);color:var(--purple);border:1px solid #C4B5FD;">Astro + _redirects</div>
+    </div>
+    <div class="stack-layer" style="background:#FFF7ED;border-color:var(--orange-md);">
+      <div class="layer-icon">⚙️</div>
+      <div class="layer-name">Backend / API Layer</div>
+      <div class="layer-tagline">The brains — processes form submissions, calls AI, handles payments, enforces business rules.</div>
+      <div class="layer-tool" style="background:var(--orange-lt);color:var(--orange);border:1px solid var(--orange-md);">Cloudflare Workers</div>
+    </div>
+    <div class="stack-layer" style="background:#FEF2F2;border-color:var(--red-md);">
+      <div class="layer-icon">🔐</div>
+      <div class="layer-name">Authentication Layer</div>
+      <div class="layer-tagline">The bouncer — handles sign-up, login, logout, and keeps each user's data private.</div>
+      <div class="layer-tool" style="background:var(--red-lt);color:var(--red);border:1px solid var(--red-md);">Supabase Auth</div>
+    </div>
+    <div class="stack-layer" style="background:#ECFDF5;border-color:var(--green-md);">
+      <div class="layer-icon">🗄️</div>
+      <div class="layer-name">Database Layer</div>
+      <div class="layer-tagline">Permanent memory. Anything that must survive a page refresh lives here in structured tables.</div>
+      <div class="layer-tool" style="background:var(--green-lt);color:var(--green);border:1px solid var(--green-md);">Supabase / Postgres</div>
+    </div>
+    <div class="stack-layer" style="background:#FFFBEB;border-color:var(--amber-md);">
+      <div class="layer-icon">🌍</div>
+      <div class="layer-name">Hosting / CDN Layer</div>
+      <div class="layer-tagline">Where your files live. CDN = copies of your app sit near every user on earth.</div>
+      <div class="layer-tool" style="background:var(--amber-lt);color:var(--amber);border:1px solid var(--amber-md);">Cloudflare Pages</div>
+    </div>
+  </div>
+  <div class="slide-num">12</div>
+</div>
+
+<!-- M-03 HANDS-ON -->
+<div class="slide hands-on">
+  <div class="ho-header">
+    <span class="ho-label">🛠️ Hands-On — M-03</span>
+    <span class="ho-time">⏱ 10 minutes</span>
+  </div>
+  <div class="ho-title">Fill In Your Stack</div>
+  <div class="ho-subtitle">Copy the six layers and write exactly what technology will handle each one in your specific app. This becomes a section in your CLAUDE.md.</div>
+  <div class="ho-steps">
+    <div class="ho-step">
+      <div class="ho-step-num">1</div>
+      <div class="ho-step-body">
+        <h4>Copy this template into your notes doc</h4>
+        <div class="step-hint">UX Layer: __________ | Routing: __________ | Backend: __________ | Auth: __________ | Database: __________ | Hosting: __________</div>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">2</div>
+      <div class="ho-step-body">
+        <h4>Fill in each blank</h4>
+        <p>Most of you will use the same tools we just covered: Astro, Cloudflare Workers, Supabase, Cloudflare Pages. That's fine — it's a proven stack.</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">3</div>
+      <div class="ho-step-body">
+        <h4>For each layer: answer "what does it store or handle?"</h4>
+        <p>e.g. "Database: stores user profiles, daily specials, and business locations."</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">4</div>
+      <div class="ho-step-body">
+        <h4>Mark any layer you're NOT using as "N/A — MVP doesn't need this yet"</h4>
+        <p>A static landing page needs zero auth and zero database. That's fine for today's first deploy.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ho-deliverable">
+    <div class="hd-icon">🏗️</div>
+    <div><h4>Your Deliverable</h4><p>A completed stack map for your specific app. This goes directly into your CLAUDE.md in the next module.</p></div>
+  </div>
+  <div class="build-tracker">
+    <div class="bt-label">App Build Progress</div>
+    <div class="bt-steps">
+      <div class="bt-step done">💡 App Concept</div>
+      <div class="bt-step done">🗺️ Site Map</div>
+      <div class="bt-step current">🔧 Stack Setup</div>
+      <div class="bt-step">📄 CLAUDE.md</div>
+      <div class="bt-step">✏️ First Brief</div>
+      <div class="bt-step">🚀 First Deploy</div>
+      <div class="bt-step">⚡ Core Feature</div>
+      <div class="bt-step">🎉 Shipped</div>
+    </div>
+  </div>
+  <div class="slide-num">13</div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     MODULE M-04
+════════════════════════════════════ -->
+<div class="slide module-header">
+  <div class="module-number">04</div>
+  <div class="module-kicker">Module M-04</div>
+  <div class="module-title">Your Toolset<br>&amp; Setup</div>
+  <div class="module-sub">Four tools. That's all. Claude, Claude Code, Cloudflare, and Supabase. Together they replace what used to require a full-time DevOps engineer.</div>
+  <div class="module-learns">
+    <div class="module-learn-item"><span class="ml-icon">⚡</span><p>What each tool does and why you're using it instead of the alternatives</p></div>
+    <div class="module-learn-item"><span class="ml-icon">☁️</span><p>How Cloudflare replaces $200/month of AWS infrastructure for free</p></div>
+    <div class="module-learn-item"><span class="ml-icon">🗄️</span><p>How Supabase gives you a database, login system, and API in one dashboard</p></div>
+  </div>
+  <div class="module-app-badge">🛠️ <strong>Your task:</strong> Verify every tool is installed — nothing proceeds until everything is green</div>
+  <div class="slide-num">14</div>
+</div>
+
+<div class="slide" id="s-m04-a">
+  <p class="eyebrow">Module M-04 — Required Tools</p>
+  <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);margin-bottom:0.8rem;">Your Complete Toolset</h2>
+  <div class="tools-grid">
+    <div class="tool-row" style="border-left:3px solid var(--blue);">
+      <div><div class="tool-name">Claude.ai</div><div class="tool-desc">The Architect — where you think, plan, and write briefs</div></div>
+      <div class="tool-cost">FREE / $20mo</div>
+    </div>
+    <div class="tool-row" style="border-left:3px solid var(--purple);">
+      <div><div class="tool-name">Claude Code</div><div class="tool-desc">The Implementer — writes and executes the actual code</div></div>
+      <div class="tool-cost">Usage-based</div>
+    </div>
+    <div class="tool-row">
+      <div><div class="tool-name">VS Code</div><div class="tool-desc">Editor where Claude Code runs as a built-in extension</div></div>
+      <div class="tool-cost">FREE</div>
+    </div>
+    <div class="tool-row">
+      <div><div class="tool-name">GitHub</div><div class="tool-desc">Version control — Claude Code pushes code here automatically</div></div>
+      <div class="tool-cost">FREE</div>
+    </div>
+    <div class="tool-row" style="border-left:3px solid var(--amber);">
+      <div><div class="tool-name">Cloudflare</div><div class="tool-desc">Hosting, CDN, serverless backend — global, fast, free to start</div></div>
+      <div class="tool-cost">FREE / $5mo</div>
+    </div>
+    <div class="tool-row" style="border-left:3px solid var(--green);">
+      <div><div class="tool-name">Supabase</div><div class="tool-desc">Database + authentication — Postgres with a visual dashboard</div></div>
+      <div class="tool-cost">FREE tier</div>
+    </div>
+    <div class="tool-row">
+      <div><div class="tool-name">Node.js v22+</div><div class="tool-desc">Required by deploy tools — must be v22 or higher</div></div>
+      <div class="tool-cost">FREE</div>
+    </div>
+  </div>
+  <div class="notice amber" style="margin-top:0.65rem;">
+    <span class="ni">⏰</span>
+    <p>This should have been installed the evening before class. If not, install now. Don't proceed until everything is verified.</p>
+  </div>
+  <div class="slide-num">15</div>
+</div>
+
+<div class="slide" id="s-m04-b">
+  <p class="eyebrow">Module M-04 — Cloudflare</p>
+  <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">Cloudflare — The Internet's Front Door</h2>
+  <p class="slide-sub" style="margin-bottom:0.55rem;">When someone visits your app, the very first computer they reach is a Cloudflare server. That's intentional, and it's a superpower.</p>
+  <div class="cf-grid">
+    <div class="cf-card"><div class="cf-icon">🌐</div><div><h4>Global Edge Network</h4><p>300+ data centers. A user in Tokyo hits a Cloudflare server in Tokyo, not Virginia. Sub-100ms load times anywhere on earth.</p></div></div>
+    <div class="cf-card"><div class="cf-icon">📄</div><div><h4>Pages — Static Hosting</h4><p>Your HTML/CSS/JS deploys to every edge location automatically. Free SSL. One command puts your app live globally in 60 seconds.</p></div></div>
+    <div class="cf-card"><div class="cf-icon">⚡</div><div><h4>Workers — Serverless Backend</h4><p>Run backend code at the edge — no server to manage, no server bill. Zero cold start time.</p></div></div>
+    <div class="cf-card"><div class="cf-icon">🛡️</div><div><h4>Security — Free</h4><p>DDoS protection, SSL/TLS, WAF, bot filtering — all automatic and free. Enterprise security that costs thousands elsewhere.</p></div></div>
+  </div>
+  <div class="notice green" style="margin-top:0.65rem;">
+    <span class="ni">✅</span>
+    <p>AWS equivalent: $50–$200/month minimum. Cloudflare: $0 to start. This is why we use it.</p>
+  </div>
+  <div class="slide-num">16</div>
+</div>
+
+<div class="slide" id="s-m04-c">
+  <p class="eyebrow">Module M-04 — Supabase</p>
+  <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">Supabase — Database &amp; Login in One Dashboard</h2>
+  <p class="slide-sub" style="margin-bottom:0.55rem;">A spreadsheet in the cloud that thousands of users can read and write simultaneously — plus a complete login system.</p>
+  <div class="sb-grid">
+    <div class="sb-card"><div class="sc-label" style="color:var(--green);">🗄️ The Database</div><h4>PostgreSQL — Industry Standard</h4><p>The same database used by Instagram, Reddit, Airbnb. Supabase wraps it with a visual table editor that looks like Google Sheets.</p></div>
+    <div class="sb-card"><div class="sc-label" style="color:var(--blue);">🔐 Authentication</div><h4>Complete Identity System, Built In</h4><p>Sign up, sign in, forgot password, magic links, and social login (Google, GitHub) — all ready. Without Supabase, building login takes weeks. With it, an afternoon.</p></div>
+    <div class="sb-card"><div class="sc-label" style="color:var(--purple);">🔒 Row Level Security</div><h4>Each User Sees Only Their Data</h4><p>A database rule that enforces privacy automatically. User A's data is invisible to User B — not because of code you wrote, but because the database enforces it.</p></div>
+    <div class="sb-card"><div class="sc-label" style="color:var(--amber);">⚡ Auto-Generated API</div><h4>Database Becomes an API Instantly</h4><p>Create a table and a REST API for that table is automatically generated. Read, write, update, and delete data with no server code required.</p></div>
+  </div>
+  <div class="slide-num">17</div>
+</div>
+
+<!-- M-04 HANDS-ON -->
+<div class="slide hands-on">
+  <div class="ho-header">
+    <span class="ho-label">🛠️ Hands-On — M-04</span>
+    <span class="ho-time">⏱ 15 minutes</span>
+  </div>
+  <div class="ho-title">Setup Verification Checklist</div>
+  <div class="ho-subtitle">Nothing gets built until everything is confirmed working. Go through this checklist. Every item must be green before you move on.</div>
+  <div class="ho-steps">
+    <div class="ho-step">
+      <div class="ho-step-num">1</div>
+      <div class="ho-step-body">
+        <h4>Verify Claude + Claude Code</h4>
+        <p>Claude.ai: open a new conversation, type "hello." Claude Code in VS Code: open a project folder, run a simple prompt. Both should respond.</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">2</div>
+      <div class="ho-step-body">
+        <h4>Verify Node + Wrangler</h4>
+        <div class="step-hint">node --version → must show v22 or higher<br>npx wrangler whoami → must show your Cloudflare email</div>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">3</div>
+      <div class="ho-step-body">
+        <h4>Create your GitHub repo</h4>
+        <p>Name it after your app. Initialize with a README. Clone it locally. This is your project home for the day.</p>
+        <div class="step-hint">git clone [your-repo-url] && cd [repo-name]</div>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">4</div>
+      <div class="ho-step-body">
+        <h4>Create your Supabase project</h4>
+        <p>supabase.com → New Project → name it after your app. Copy the Project URL and anon key into a .env file. Don't lose these.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ho-deliverable">
+    <div class="hd-icon">✅</div>
+    <div><h4>Your Deliverable</h4><p>Every item checked: Claude responds ✓ · wrangler whoami shows your email ✓ · GitHub repo cloned locally ✓ · Supabase project created with .env file ✓</p></div>
+  </div>
+  <div class="build-tracker">
+    <div class="bt-label">App Build Progress</div>
+    <div class="bt-steps">
+      <div class="bt-step done">💡 App Concept</div>
+      <div class="bt-step done">🗺️ Site Map</div>
+      <div class="bt-step current">🔧 Stack Setup</div>
+      <div class="bt-step">📄 CLAUDE.md</div>
+      <div class="bt-step">✏️ First Brief</div>
+      <div class="bt-step">🚀 First Deploy</div>
+      <div class="bt-step">⚡ Core Feature</div>
+      <div class="bt-step">🎉 Shipped</div>
+    </div>
+  </div>
+  <div class="slide-num">18</div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     MODULE M-05
+════════════════════════════════════ -->
+<div class="slide module-header">
+  <div class="module-number">05</div>
+  <div class="module-kicker">Module M-05</div>
+  <div class="module-title">Two Roles &amp;<br>CLAUDE.md</div>
+  <div class="module-sub">The most important concept in the entire course. If you only take one thing from today, this is it.</div>
+  <div class="module-learns">
+    <div class="module-learn-item"><span class="ml-icon">🏗️</span><p>The Architect vs. Implementer split — why blurring this costs you hours</p></div>
+    <div class="module-learn-item"><span class="ml-icon">🗂️</span><p>How to use three Claude Projects to keep each role focused</p></div>
+    <div class="module-learn-item"><span class="ml-icon">📄</span><p>The CLAUDE.md file — how to write the operating manual that Claude Code reads every session</p></div>
+  </div>
+  <div class="module-app-badge">🛠️ <strong>Your task:</strong> Create your project's CLAUDE.md from the template</div>
+  <div class="slide-num">19</div>
+</div>
+
+<div class="slide" id="s-m05-a">
+  <p class="eyebrow">Module M-05 — The Most Important Concept</p>
+  <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2.1rem);margin-bottom:1rem;">The Two Roles — Architect vs. Implementer</h2>
+  <div class="two-col">
+    <div class="role-card arch">
+      <div class="role-label blue">You — via Claude.ai</div>
+      <div class="role-handle">The Architect</div>
+      <ul class="item-list">
+        <li class="good">Write briefs specifying WHAT to build and WHY</li>
+        <li class="good">Define constraints and patterns to follow</li>
+        <li class="good">Reference existing working code as the pattern</li>
+        <li class="good">Make all product decisions</li>
+        <li class="good">Decide when something is good enough to ship</li>
+      </ul>
+      <div class="never-box"><strong>🚫 Never</strong>Write specific function bodies, line-by-line fixes, or paste code blocks in your briefs.</div>
+    </div>
+    <div class="role-card impl">
+      <div class="role-label purple">Claude Code — AI's Role</div>
+      <div class="role-handle">The Implementer</div>
+      <ul class="item-list">
+        <li class="good">Figures out HOW to implement your brief</li>
+        <li class="good">Writes and tests the actual code</li>
+        <li class="good">Deploys to the test environment first</li>
+        <li class="good">Reports what was done and what to verify</li>
+        <li class="good">Never makes product decisions on its own</li>
+      </ul>
+      <div class="never-box"><strong>🚫 Never</strong>Implement anything without understanding the existing architecture first.</div>
+    </div>
+  </div>
+  <div class="slide-num">20</div>
+</div>
+
+<div class="slide" id="s-m05-b">
+  <p class="eyebrow">Module M-05 — Most Important File In Your Project</p>
+  <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2.1rem);text-align:center;margin-bottom:0.6rem;">The CLAUDE.md File</h2>
+  <p class="slide-sub" style="text-align:center;max-width:580px;margin:0 auto 0.85rem;">Every project gets one. Claude Code reads it at the start of every session. It defines your architecture, rules, and roles — all in one place.</p>
+  <div class="code-box">
+<span class="hl">## APP</span>
+<span class="wh">[App name] — [one sentence description]</span>
+
 <span class="hl">## ROLES</span>
-<span class="wh">Claude (claude.ai)  = ARCHITECT  — writes briefs, defines outcomes</span>
-<span class="wh">Claude Code (CLI)   = IMPLEMENTER — writes code, deploys, verifies</span>
+<span class="wh">Claude (claude.ai)  = ARCHITECT  — writes briefs, defines outcomes
+Claude Code (CLI)   = IMPLEMENTER — writes code, deploys, verifies</span>
+
+<span class="hl">## STACK</span>
+<span class="wh">UX: Astro  |  Routing: Astro + _redirects  |  Backend: CF Workers
+Auth: Supabase  |  DB: Supabase/Postgres  |  Hosting: CF Pages</span>
 
 <span class="hl">## ROUTING RULES</span>  <span class="cm">← prevents the #1 source of wasted hours</span>
-<span class="wh">Document the exact routing patterns your framework uses here.</span>
+<span class="wh">[Document your exact routing patterns here — copy from Astro docs]</span>
 
 <span class="hl">## DEPLOY PATTERN</span>
 <span class="gd">Test → Verify → Approve → Prod.   NEVER skip the test step.</span>
 
 <span class="hl">## SECURITY RULES</span>
 <span class="rd">Never display token values in output. Read from .env only.</span>
-<span class="wh">Show first 4 characters max to confirm a token was loaded.</span>
 
 <span class="hl">## DAILY CHECKLIST</span>
-<span class="wh">☐  Read CLAUDE.md in all repos before touching any code
+<span class="wh">☐  Read CLAUDE.md before touching any code
 ☐  Check for existing components before building new ones
 ☐  Run auth verification before every deploy</span></div>
-    <div class="slide-num">11 / 22</div>
+  <div class="slide-num">21</div>
+</div>
+
+<!-- M-05 HANDS-ON -->
+<div class="slide hands-on">
+  <div class="ho-header">
+    <span class="ho-label">🛠️ Hands-On — M-05</span>
+    <span class="ho-time">⏱ 15 minutes</span>
   </div>
-
-  <!-- ══ SLIDE 12 — TWO ROLES ══ -->
-  <div class="slide" id="s12">
-    <p class="eyebrow">Morning — M-05 · The Most Important Concept</p>
-    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2.1rem);margin-bottom:1rem;">The Two Roles — Architect vs. Implementer</h2>
-    <div class="two-col">
-      <div class="role-card arch">
-        <div class="role-label blue">Claude.ai — Your Role</div>
-        <div class="role-handle">The Architect</div>
-        <ul class="item-list">
-          <li class="good">Write briefs specifying WHAT to build and WHY</li>
-          <li class="good">Define constraints and patterns to follow</li>
-          <li class="good">Reference existing working code as the pattern</li>
-          <li class="good">Make all product decisions</li>
-          <li class="good">Decide when something is good enough to ship</li>
-        </ul>
-        <div class="never-box">
-          <strong>🚫 Never</strong>
-          Write specific function bodies, line-by-line fixes, or paste code blocks in your briefs.
-        </div>
-      </div>
-      <div class="role-card impl">
-        <div class="role-label purple">Claude Code — AI's Role</div>
-        <div class="role-handle">The Implementer</div>
-        <ul class="item-list">
-          <li class="good">Figures out HOW to implement your brief</li>
-          <li class="good">Writes and tests the actual code</li>
-          <li class="good">Deploys to the test environment first</li>
-          <li class="good">Reports what was done and what to verify</li>
-          <li class="good">Never makes product decisions on its own</li>
-        </ul>
-        <div class="never-box">
-          <strong>🚫 Never</strong>
-          Implement anything without understanding the existing architecture first.
-        </div>
+  <div class="ho-title">Create Your CLAUDE.md</div>
+  <div class="ho-subtitle">This file is the operating manual for your project. Claude Code reads it every session. Build it now from your notes from the last three modules.</div>
+  <div class="ho-steps">
+    <div class="ho-step">
+      <div class="ho-step-num">1</div>
+      <div class="ho-step-body">
+        <h4>Create CLAUDE.md in your repo root</h4>
+        <div class="step-hint">touch CLAUDE.md</div>
       </div>
     </div>
-    <div class="slide-num">12 / 22</div>
+    <div class="ho-step">
+      <div class="ho-step-num">2</div>
+      <div class="ho-step-body">
+        <h4>Fill in the template from the previous slide</h4>
+        <p>Use your app name, your one-sentence description, and your stack map from M-03. Copy the deploy pattern and security rules exactly as shown.</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">3</div>
+      <div class="ho-step-body">
+        <h4>Add your routing rules section</h4>
+        <p>Ask Claude (claude.ai, not Claude Code): "I'm using Astro with Cloudflare Pages. What are the exact routing rules I need to document in my CLAUDE.md?"</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">4</div>
+      <div class="ho-step-body">
+        <h4>Commit it to GitHub</h4>
+        <div class="step-hint">git add CLAUDE.md && git commit -m "Add CLAUDE.md" && git push</div>
+      </div>
+    </div>
   </div>
-
-  <!-- ══ SLIDE 13 — PROJECT CONTEXTS ══ -->
-  <div class="slide" id="s13">
-    <p class="eyebrow">Morning — M-05 Extension · How The Pros Work</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">One Project, Three Specialized Contexts</h2>
-    <p class="slide-sub" style="margin-bottom:0.7rem;max-width:760px;">Don't use one Claude chat for everything. Use Claude Projects to create separate, persistent contexts for each role in your build. Each context stays deep in its domain and never gets confused by the others.</p>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.7rem;width:100%;max-width:880px;">
-
-      <!-- UX Context -->
-      <div style="background:var(--purple-lt);border:2px solid #C4B5FD;border-radius:10px;padding:1.2rem;box-shadow:var(--sh);">
-        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.6rem;">
-          <div style="width:32px;height:32px;background:#7C3AED;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">🎨</div>
-          <div>
-            <div style="font-size:0.6rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);">Claude Project</div>
-            <div style="font-size:0.82rem;font-weight:800;color:var(--text);">UX Chat</div>
-          </div>
-        </div>
-        <div style="font-size:0.7rem;font-weight:700;color:var(--purple);margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.08em;">Context Loaded:</div>
-        <ul class="item-list" style="margin-bottom:0.7rem;">
-          <li class="good" style="font-size:0.72rem;">Brand guidelines + color system</li>
-          <li class="good" style="font-size:0.72rem;">All existing page designs</li>
-          <li class="good" style="font-size:0.72rem;">Component library patterns</li>
-          <li class="good" style="font-size:0.72rem;">User personas and flows</li>
-        </ul>
-        <div style="background:rgba(124,58,237,0.08);border:1px solid #C4B5FD;border-radius:6px;padding:0.55rem 0.7rem;font-size:0.7rem;color:var(--purple);line-height:1.5;">
-          <strong>Asks it:</strong> "How should the dashboard header look? What's the right visual hierarchy for the pricing page?"
-        </div>
-      </div>
-
-      <!-- Architect Context -->
-      <div style="background:var(--blue-lt);border:2px solid var(--blue-md);border-radius:10px;padding:1.2rem;box-shadow:var(--sh);">
-        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.6rem;">
-          <div style="width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">🏗️</div>
-          <div>
-            <div style="font-size:0.6rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);">Claude Project</div>
-            <div style="font-size:0.82rem;font-weight:800;color:var(--text);">Architect Chat</div>
-          </div>
-        </div>
-        <div style="font-size:0.7rem;font-weight:700;color:var(--blue);margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.08em;">Context Loaded:</div>
-        <ul class="item-list" style="margin-bottom:0.7rem;">
-          <li class="good" style="font-size:0.72rem;">CLAUDE.md from all repos</li>
-          <li class="good" style="font-size:0.72rem;">Database schema + API patterns</li>
-          <li class="good" style="font-size:0.72rem;">Routing rules + deploy config</li>
-          <li class="good" style="font-size:0.72rem;">Full system architecture docs</li>
-        </ul>
-        <div style="background:rgba(37,99,235,0.07);border:1px solid var(--blue-md);border-radius:6px;padding:0.55rem 0.7rem;font-size:0.7rem;color:var(--blue);line-height:1.5;">
-          <strong>Asks it:</strong> "How should the payment webhook integrate with auth? Write me a brief for the developer."
-        </div>
-      </div>
-
-      <!-- Claude Code Context -->
-      <div style="background:var(--green-lt);border:2px solid var(--green-md);border-radius:10px;padding:1.2rem;box-shadow:var(--sh);">
-        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.6rem;">
-          <div style="width:32px;height:32px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">💻</div>
-          <div>
-            <div style="font-size:0.6rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);">VS Code Extension</div>
-            <div style="font-size:0.82rem;font-weight:800;color:var(--text);">Claude Code</div>
-          </div>
-        </div>
-        <div style="font-size:0.7rem;font-weight:700;color:var(--green);margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.08em;">Context Loaded:</div>
-        <ul class="item-list" style="margin-bottom:0.7rem;">
-          <li class="good" style="font-size:0.72rem;">Live codebase — all files</li>
-          <li class="good" style="font-size:0.72rem;">Reads CLAUDE.md on every session</li>
-          <li class="good" style="font-size:0.72rem;">Can run, test, and deploy</li>
-          <li class="good" style="font-size:0.72rem;">Only gets briefs — writes the code</li>
-        </ul>
-        <div style="background:rgba(5,150,105,0.07);border:1px solid var(--green-md);border-radius:6px;padding:0.55rem 0.7rem;font-size:0.7rem;color:var(--green);line-height:1.5;">
-          <strong>Gives it:</strong> Architect's brief. Nothing else. It figures out the HOW.
-        </div>
-      </div>
-    </div>
-
-    <!-- Flow diagram -->
-    <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.8rem;width:100%;max-width:880px;background:var(--white);border:1px solid var(--border);border-radius:8px;padding:0.7rem 1rem;box-shadow:var(--sh);flex-wrap:wrap;">
-      <div style="font-size:0.72rem;font-weight:700;color:var(--purple);">🎨 UX Chat</div>
-      <div style="font-size:0.75rem;color:var(--muted);">designs it</div>
-      <div style="color:var(--border2);font-size:1rem;">→</div>
-      <div style="font-size:0.72rem;font-weight:700;color:var(--blue);">🏗️ Architect Chat</div>
-      <div style="font-size:0.75rem;color:var(--muted);">specifies it</div>
-      <div style="color:var(--border2);font-size:1rem;">→</div>
-      <div style="font-size:0.72rem;font-weight:700;color:var(--green);">💻 Claude Code</div>
-      <div style="font-size:0.75rem;color:var(--muted);">builds and ships it</div>
-      <div style="color:var(--border2);font-size:1rem;">→</div>
-      <div style="font-size:0.72rem;font-weight:700;color:var(--amber);">🌐 Live on the internet</div>
-      <div style="margin-left:auto;font-size:0.7rem;color:var(--muted);font-style:italic;">No human wrote a single line of code</div>
-    </div>
-
-    <div class="notice blue" style="margin-top:0.65rem;max-width:880px;">
-      <span class="ni">💡</span>
-      <p><strong>Why this works:</strong> Each context stays expert in its domain. The UX chat never gets confused by database schemas. The architect never gets distracted by color choices. Claude Code never has to make product decisions. Separation of concerns — applied to AI.</p>
-    </div>
-    <div class="slide-num">13 / 22</div>
+  <div class="ho-deliverable">
+    <div class="hd-icon">📄</div>
+    <div><h4>Your Deliverable</h4><p>CLAUDE.md committed and pushed to your GitHub repo. Open it in VS Code and read it once — if you can explain every line to your neighbor, it's ready.</p></div>
   </div>
+  <div class="build-tracker">
+    <div class="bt-label">App Build Progress</div>
+    <div class="bt-steps">
+      <div class="bt-step done">💡 App Concept</div>
+      <div class="bt-step done">🗺️ Site Map</div>
+      <div class="bt-step done">🔧 Stack Setup</div>
+      <div class="bt-step current">📄 CLAUDE.md</div>
+      <div class="bt-step">✏️ First Brief</div>
+      <div class="bt-step">🚀 First Deploy</div>
+      <div class="bt-step">⚡ Core Feature</div>
+      <div class="bt-step">🎉 Shipped</div>
+    </div>
+  </div>
+  <div class="slide-num">22</div>
+</div>
 
-  <!-- ══ SLIDE 14 — BRIEFS ══ -->
-  <div class="slide" id="s14">
-    <p class="eyebrow">Morning — M-06</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">Writing Briefs That Actually Work</h2>
-    <p class="slide-sub" style="margin-bottom:0.75rem;max-width:700px;">Good briefs produce good code. Vague briefs produce confused code. Rushed briefs produce wasted hours. This template eliminates all three.</p>
-    <div class="code-box" style="max-width:100%;">
+
+<!-- ════════════════════════════════════
+     MODULE M-06
+════════════════════════════════════ -->
+<div class="slide module-header">
+  <div class="module-number">06</div>
+  <div class="module-kicker">Module M-06</div>
+  <div class="module-title">Writing Briefs<br>That Work</div>
+  <div class="module-sub">Good briefs produce good code. Vague briefs produce confused code. This template eliminates both.</div>
+  <div class="module-learns">
+    <div class="module-learn-item"><span class="ml-icon">✏️</span><p>The five-part brief template that works for any feature</p></div>
+    <div class="module-learn-item"><span class="ml-icon">✅</span><p>Side-by-side: what a bad brief looks like vs. what a good one looks like</p></div>
+    <div class="module-learn-item"><span class="ml-icon">🎯</span><p>The single most important thing to include — and what to never include</p></div>
+  </div>
+  <div class="module-app-badge">🛠️ <strong>Your task:</strong> Write your first real brief — the landing page for your app</div>
+  <div class="slide-num">23</div>
+</div>
+  <div class="code-box">
 <span class="hl">WHAT:</span>       <span class="wh">One sentence — the outcome, not the implementation</span>
-            <span class="cm">"Add a live badge to the nav that pulses when a task is running"</span>
+<span class="cm">            "Add a success toast after the contact form submits"</span>
 
-<span class="hl">FILES:</span>      <span class="wh">Exact file paths only — limits scope and prevents accidents</span>
-            <span class="cm">src/pages/business/live.astro</span>
+<span class="hl">FILES:</span>      <span class="wh">Exact file paths — limits scope, prevents accidents</span>
+<span class="cm">            src/pages/contact.astro only</span>
 
 <span class="hl">PATTERN:</span>    <span class="wh">Reference existing working code in the project</span>
-            <span class="cm">"Same animation as the pulsing dot in builder.astro around line 847"</span>
+<span class="cm">            "Same toast as dashboard.astro around line 234"</span>
 
-<span class="hl">DO NOT:</span>     <span class="wh">Explicit exclusions — prevents Claude Code touching the wrong files</span>
-            <span class="cm">"Do not modify builder.astro, manage.astro, or any other page"</span>
+<span class="hl">DO NOT:</span>     <span class="wh">Explicit exclusions — prevents touching the wrong files</span>
+<span class="cm">            "Do not modify any other page or shared component"</span>
 
-<span class="hl">VERIFY BY:</span>  <span class="wh">How you will confirm it worked — in your own words</span>
-            <span class="cm">"After test deploy, badge appears in nav and pulses when a task runs"</span></div>
-    <div class="notice green" style="margin-top:0.75rem;max-width:100%;">
-      <span class="ni">✅</span>
-      <p><strong>2 sentences — not 30 lines of code.</strong> Describe outcomes, not implementations. That is the entire skill.</p>
-    </div>
-    <div class="slide-num">14 / 22</div>
+<span class="hl">VERIFY BY:</span>  <span class="wh">How you confirm it worked — in your own words</span>
+<span class="cm">            "Submit form on test URL, see green toast appear for 3s"</span></div>
+  <div class="notice green" style="margin-top:0.75rem;">
+    <span class="ni">✅</span>
+    <p><strong>5–8 lines max. Not 30.</strong> Describe outcomes, not implementations. That is the entire skill.</p>
   </div>
+  <div class="slide-num">24</div>
+</div>
 
-  <!-- ══ SLIDE 14 — TWO ENVIRONMENTS ══ -->
-  <div class="slide" id="s15">
-    <p class="eyebrow">Module M-07 — First Deploy</p>
-    <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2.1rem);margin-bottom:1rem;">Two Environments — Never Mix Them</h2>
-    <div class="two-col">
-      <div class="env-card test">
-        <div class="env-label green">Test Environment</div>
-        <div class="env-url">your-app-test.pages.dev</div>
-        <ul class="item-list">
-          <li class="good">All deployments go here first — no exceptions</li>
-          <li class="good">No real charges, no real user data</li>
-          <li class="good">Stripe in test mode (fake payment cards)</li>
-          <li class="good">This is where you verify before going live</li>
-          <li class="good">Only your test account can access it</li>
-        </ul>
-      </div>
-      <div class="env-card prod">
-        <div class="env-label amber">Production Environment</div>
-        <div class="env-url">app.yourdomain.com</div>
-        <ul class="item-list">
-          <li class="good">Only after test environment is fully verified</li>
-          <li class="good">Real users, real data, real transactions</li>
-          <li class="bad">Requires your explicit approval every time</li>
-          <li class="bad">Never deploy here without testing first</li>
-          <li class="bad">If it breaks here, real users are affected</li>
-        </ul>
-      </div>
+<!-- M-06 b: Good vs Bad -->
+<div class="slide" id="s-m06-b">
+  <p class="eyebrow">Module M-06 — Good vs. Bad Brief</p>
+  <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2rem);margin-bottom:1rem;">Side by Side — What Good Looks Like</h2>
+  <div class="two-col">
+    <div class="col-card old">
+      <h3>❌ Bad Brief</h3>
+      <ul class="item-list" style="margin-bottom:0.75rem;">
+        <li class="bad">"Make it look better" — no outcome, no files, no standard</li>
+        <li class="bad">"Fix the login page" — which problem? What does fixed mean?</li>
+        <li class="bad">"Add this code: [pastes 40 lines]" — you are the implementer now</li>
+        <li class="bad">"Make it like Stripe's dashboard" — no pattern in your codebase</li>
+        <li class="bad">"Do whatever you think is best" — no constraints = no control</li>
+      </ul>
+      <div class="notice red" style="font-size:0.78rem;"><span class="ni">💸</span><p>These cost you hours of back-and-forth and rework.</p></div>
     </div>
-    <div class="notice red" style="margin-top:0.85rem;max-width:820px;">
-      <span class="ni">🔥</span>
-      <p>A single typo in a config file took down production for 2 hours. The fix was one line. The lesson: <strong>test first, every single time.</strong></p>
+    <div class="col-card new">
+      <h3>✅ Good Brief</h3>
+      <ul class="item-list" style="margin-bottom:0.75rem;">
+        <li class="good"><strong>WHAT:</strong> Add a success toast notification after form submit</li>
+        <li class="good"><strong>FILES:</strong> src/pages/contact.astro only</li>
+        <li class="good"><strong>PATTERN:</strong> Same toast as dashboard.astro line 234</li>
+        <li class="good"><strong>DO NOT:</strong> Touch any other page or shared component</li>
+        <li class="good"><strong>VERIFY:</strong> Submit form on test URL, see green toast for 3s</li>
+      </ul>
+      <div class="notice green" style="font-size:0.78rem;"><span class="ni">⚡</span><p>Done right in one pass. Every time.</p></div>
     </div>
-    <div class="slide-num">15 / 22</div>
   </div>
+  <div class="slide-num">25</div>
+</div>
 
-  <!-- ══ SLIDE 15 — DEPLOY RITUAL ══ -->
-  <div class="slide" id="s16">
-    <p class="eyebrow">Afternoon — A-03</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">The Deploy Ritual — Follow This Order Every Time</h2>
-    <div class="steps-list">
-      <div class="step-row">
-        <div class="step-badge green">1</div>
-        <div style="flex:1">
-          <div class="step-title">Pre-deploy authentication check</div>
-          <div class="step-cmd">npx wrangler whoami &nbsp;&nbsp; node --version</div>
-          <div class="step-note">Confirms your API token is loaded. Node must be v22+. Skip this and you get mystery failures.</div>
-        </div>
-      </div>
-      <div class="step-row">
-        <div class="step-badge green">2</div>
-        <div style="flex:1">
-          <div class="step-title">Deploy to the TEST environment</div>
-          <div class="step-cmd">npm run deploy:test</div>
-          <div class="step-note">Open the test URL. Sign in. Click the feature. Check the console. Test at mobile width (390px).</div>
-        </div>
-      </div>
-      <div class="step-row">
-        <div class="step-badge green">3</div>
-        <div style="flex:1">
-          <div class="step-title">Give explicit approval to go to production</div>
-          <div class="step-note">"I verified X, Y, and Z on test. Approving for production." — Write it down. Only then proceed.</div>
-        </div>
-      </div>
-      <div class="step-row">
-        <div class="step-badge green">4</div>
-        <div style="flex:1">
-          <div class="step-title">Deploy to PRODUCTION</div>
-          <div class="step-cmd">npm run build &amp;&amp; npx wrangler pages deploy dist --project-name your-app</div>
-        </div>
-      </div>
-      <div class="step-row">
-        <div class="step-badge green">5</div>
-        <div style="flex:1">
-          <div class="step-title">Verify on production — same checks as test</div>
-          <div class="step-note">Confirm the feature works AND nothing else broke. Then it's done.</div>
-        </div>
-      </div>
-      <div class="step-row" style="background:var(--red-lt);border-color:var(--red-md);">
-        <div class="step-badge red">✕</div>
-        <div style="flex:1">
-          <div class="step-title" style="color:var(--red);">Never: deploy to prod without testing · trust AI's "it works" · bundle multiple changes</div>
-        </div>
+<!-- M-06 HANDS-ON -->
+<div class="slide hands-on">
+  <div class="ho-header">
+    <span class="ho-label">🛠️ Hands-On — M-06</span>
+    <span class="ho-time">⏱ 15 minutes</span>
+  </div>
+  <div class="ho-title">Write Your First Real Brief</div>
+  <div class="ho-subtitle">Target: the landing page for your app. This is the page that explains what your app does and has a sign-up button. Write the brief now — you hand it to Claude Code in the next module.</div>
+  <div class="ho-steps">
+    <div class="ho-step">
+      <div class="ho-step-num">1</div>
+      <div class="ho-step-body">
+        <h4>Open Claude.ai — paste your CLAUDE.md</h4>
+        <p>Ask: "Help me think through what my landing page needs — headline, subhead, CTA, feature highlights. My app is: [your one-sentence description]."</p>
       </div>
     </div>
-    <div class="slide-num">16 / 22</div>
-  </div>
-
-  <!-- ══ SLIDE 16 — 5 PRACTICES ══ -->
-  <div class="slide" id="s17">
-    <p class="eyebrow">Afternoon — A-01</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">Building Real Features — The 5 Non-Negotiable Rules</h2>
-    <div class="practice-grid">
-      <div class="practice-item" style="border-left:3px solid var(--blue);">
-        <div class="practice-icon">🔍</div>
-        <div class="practice-text">
-          <h4>Research First, Always</h4>
-          <p>Read CLAUDE.md and search project knowledge before writing any brief. This rule alone would have saved 7 hours on a routing problem that was already documented.</p>
-        </div>
-      </div>
-      <div class="practice-item" style="border-left:3px solid var(--amber);">
-        <div class="practice-icon">1️⃣</div>
-        <div class="practice-text">
-          <h4>One Change at a Time</h4>
-          <p>Never bundle multiple features in one deploy. One feature, one brief, one deploy. Verify it works. Then move to the next.</p>
-        </div>
-      </div>
-      <div class="practice-item" style="border-left:3px solid var(--green);">
-        <div class="practice-icon">✅</div>
-        <div class="practice-text">
-          <h4>Test Before Production — Always</h4>
-          <p>"It worked in test" is the only acceptable green light for production. Never deploy directly to prod to save time.</p>
-        </div>
-      </div>
-      <div class="practice-item" style="border-left:3px solid var(--purple);">
-        <div class="practice-icon">👁</div>
-        <div class="practice-text">
-          <h4>Verify With Your Own Eyes</h4>
-          <p>Open the browser. Sign in. Click the thing. Read the console. Only what you see with your own eyes counts as done.</p>
-        </div>
-      </div>
-      <div class="practice-item" style="border-left:3px solid var(--red);grid-column:span 2;">
-        <div class="practice-icon">🚫</div>
-        <div class="practice-text">
-          <h4>No Fallbacks, No Placeholder Data</h4>
-          <p>If data is missing, fail loudly. Never substitute "Your Business" for a real business name. Silent failures hide real bugs and mislead real users.</p>
-        </div>
+    <div class="ho-step">
+      <div class="ho-step-num">2</div>
+      <div class="ho-step-body">
+        <h4>Use the content to write a 5-part brief</h4>
+        <div class="step-hint">WHAT · FILES · PATTERN · DO NOT · VERIFY BY</div>
       </div>
     </div>
-    <div class="slide-num">17 / 22</div>
+    <div class="ho-step">
+      <div class="ho-step-num">3</div>
+      <div class="ho-step-body">
+        <h4>Keep it to 5–8 lines total</h4>
+        <p>If it is longer than 8 lines, it is trying to do too much. Split it into two briefs.</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">4</div>
+      <div class="ho-step-body">
+        <h4>Read it out loud to your neighbor</h4>
+        <p>Can they tell exactly what will be built? If not, rewrite it until it is crystal clear.</p>
+      </div>
+    </div>
   </div>
+  <div class="ho-deliverable">
+    <div class="hd-icon">✏️</div>
+    <div><h4>Your Deliverable</h4><p>A complete 5-part brief for your landing page saved as <code style="font-family:monospace;font-size:0.78rem;color:#D97706;">briefs/landing-page.md</code> in your repo. Ready to hand to Claude Code.</p></div>
+  </div>
+  <div class="build-tracker">
+    <div class="bt-label">App Build Progress</div>
+    <div class="bt-steps">
+      <div class="bt-step done">💡 App Concept</div>
+      <div class="bt-step done">🗺️ Site Map</div>
+      <div class="bt-step done">🔧 Stack Setup</div>
+      <div class="bt-step done">📄 CLAUDE.md</div>
+      <div class="bt-step current">✏️ First Brief</div>
+      <div class="bt-step">🚀 First Deploy</div>
+      <div class="bt-step">⚡ Core Feature</div>
+      <div class="bt-step">🎉 Shipped</div>
+    </div>
+  </div>
+  <div class="slide-num">26</div>
+</div>
 
-  <!-- ══ SLIDE 17 — DEBUGGING ══ -->
-  <div class="slide" id="s18">
-    <p class="eyebrow">Afternoon — A-02</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">When Things Break — The Debugging Brief Formula</h2>
-    <div class="code-box" style="max-width:100%;margin-top:0.55rem;">
+
+<!-- ══ MODULE M-07 ══ -->
+<div class="slide module-header">
+  <div class="module-number">07</div>
+  <div class="module-kicker">Module M-07</div>
+  <div class="module-title">Your First<br>Deploy 🚀</div>
+  <div class="module-sub">Before lunch, you will have a live URL on the internet. Not a simulation. Real.</div>
+  <div class="module-learns">
+    <div class="module-learn-item"><span class="ml-icon">🧪</span><p>Test vs. production — why you never skip test</p></div>
+    <div class="module-learn-item"><span class="ml-icon">📋</span><p>The deploy ritual — the five-step checklist that never changes</p></div>
+    <div class="module-learn-item"><span class="ml-icon">🌐</span><p>Your first real deploy to a public URL</p></div>
+  </div>
+  <div class="module-app-badge">🛠️ <strong>Your task:</strong> Run your brief through Claude Code → test → verify → go live</div>
+  <div class="slide-num">27</div>
+</div>
+
+<div class="slide" id="s-m07-a">
+  <p class="eyebrow">Module M-07 — Two Environments</p>
+  <h2 class="slide-title" style="font-size:clamp(1.4rem,3vw,2.1rem);margin-bottom:1rem;">Two Environments — Never Mix Them</h2>
+  <div class="two-col">
+    <div class="env-card test">
+      <div class="env-label green">Test Environment</div>
+      <div class="env-url">your-app-test.pages.dev</div>
+      <ul class="item-list">
+        <li class="good">All deployments go here first — no exceptions</li>
+        <li class="good">No real charges, no real user data</li>
+        <li class="good">Stripe in test mode (fake payment cards)</li>
+        <li class="good">Only your test account can access it</li>
+      </ul>
+    </div>
+    <div class="env-card prod">
+      <div class="env-label amber">Production Environment</div>
+      <div class="env-url">app.yourdomain.com</div>
+      <ul class="item-list">
+        <li class="good">Only after test is fully verified</li>
+        <li class="good">Real users, real data, real transactions</li>
+        <li class="bad">Requires your explicit approval every time</li>
+        <li class="bad">If it breaks here, real users are affected</li>
+      </ul>
+    </div>
+  </div>
+  <div class="notice red" style="margin-top:0.85rem;">
+    <span class="ni">🔥</span>
+    <p>A typo in a config file took down production for 2 hours. The fix was one line. <strong>Test first. Every single time.</strong></p>
+  </div>
+  <div class="slide-num">28</div>
+</div>
+
+<div class="slide" id="s-m07-b">
+  <p class="eyebrow">Module M-07 — The Deploy Ritual</p>
+  <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">Follow This Order Every Time</h2>
+  <div class="steps-list">
+    <div class="step-row">
+      <div class="step-badge green">1</div>
+      <div style="flex:1"><div class="step-title">Pre-deploy auth check</div><div class="step-cmd">npx wrangler whoami &nbsp;&nbsp; node --version</div><div class="step-note">Confirms your API token is loaded. Node must be v22+.</div></div>
+    </div>
+    <div class="step-row">
+      <div class="step-badge green">2</div>
+      <div style="flex:1"><div class="step-title">Deploy to TEST</div><div class="step-cmd">npm run deploy:test</div><div class="step-note">Open the URL. Click the feature. Check the console. Test at 390px mobile width.</div></div>
+    </div>
+    <div class="step-row">
+      <div class="step-badge green">3</div>
+      <div style="flex:1"><div class="step-title">Give explicit approval</div><div class="step-note">"I verified X, Y, and Z on test. Approving for production." — Say it out loud. Write it down.</div></div>
+    </div>
+    <div class="step-row">
+      <div class="step-badge green">4</div>
+      <div style="flex:1"><div class="step-title">Deploy to PRODUCTION</div><div class="step-cmd">npm run build &amp;&amp; npx wrangler pages deploy dist --project-name your-app</div></div>
+    </div>
+    <div class="step-row">
+      <div class="step-badge green">5</div>
+      <div style="flex:1"><div class="step-title">Verify on production</div><div class="step-note">Same checks as test. Confirm feature works AND nothing else broke.</div></div>
+    </div>
+    <div class="step-row" style="background:var(--red-lt);border-color:var(--red-md);">
+      <div class="step-badge red">✕</div>
+      <div style="flex:1"><div class="step-title" style="color:var(--red);">Never: deploy to prod without testing · trust AI's "it works" · bundle multiple changes</div></div>
+    </div>
+  </div>
+  <div class="slide-num">29</div>
+</div>
+
+<!-- M-07 HANDS-ON -->
+<div class="slide hands-on">
+  <div class="ho-header">
+    <span class="ho-label">🛠️ Hands-On — M-07</span>
+    <span class="ho-time">⏱ 20 minutes</span>
+  </div>
+  <div class="ho-title">You're Going Live 🚀</div>
+  <div class="ho-subtitle">Take your landing page brief and run it through the full cycle: brief → Claude Code → test deploy → verify → production. By the end of this, you have a real public URL.</div>
+  <div class="ho-steps">
+    <div class="ho-step">
+      <div class="ho-step-num">1</div>
+      <div class="ho-step-body">
+        <h4>Open Claude Code in VS Code — paste your brief</h4>
+        <p>Start with: "Read CLAUDE.md. Then implement this brief:" and paste your landing-page.md.</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">2</div>
+      <div class="ho-step-body">
+        <h4>Let Claude Code build — do not interrupt</h4>
+        <p>Watch what it does. If it gets stuck, paste the error and say "read CLAUDE.md first, then diagnose."</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">3</div>
+      <div class="ho-step-body">
+        <h4>Deploy to test and verify</h4>
+        <div class="step-hint">npm run deploy:test</div>
+        <p>Open the URL. Check on mobile. Is it what you described? If not — write a correction brief. Do not paste code.</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">4</div>
+      <div class="ho-step-body">
+        <h4>Deploy to production</h4>
+        <p>Say out loud: "I verified [X] on test. Approving for production." Then deploy.</p>
+        <div class="step-hint">npm run build && npx wrangler pages deploy dist --project-name [your-app]</div>
+      </div>
+    </div>
+  </div>
+  <div class="ho-deliverable">
+    <div class="hd-icon">🌐</div>
+    <div><h4>Your Deliverable</h4><p>A live production URL. Share it in the group chat. Your app is on the internet. You built it this morning.</p></div>
+  </div>
+  <div class="build-tracker">
+    <div class="bt-label">App Build Progress</div>
+    <div class="bt-steps">
+      <div class="bt-step done">💡 App Concept</div>
+      <div class="bt-step done">🗺️ Site Map</div>
+      <div class="bt-step done">🔧 Stack Setup</div>
+      <div class="bt-step done">📄 CLAUDE.md</div>
+      <div class="bt-step done">✏️ First Brief</div>
+      <div class="bt-step current">🚀 First Deploy</div>
+      <div class="bt-step">⚡ Core Feature</div>
+      <div class="bt-step">🎉 Shipped</div>
+    </div>
+  </div>
+  <div class="slide-num">30</div>
+</div>
+
+<!-- LUNCH -->
+<div class="slide break-slide centered">
+  <p style="font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#34D399;margin-bottom:0.75rem;">You Earned It</p>
+  <div class="break-title">🍽️ Lunch Break</div>
+  <p class="break-sub" style="color:#475569;margin-top:0.75rem;">12:00 PM — 1:00 PM<br><br>Your app is live. Come back at 1pm ready to build your core feature.</p>
+  <div class="slide-num">31</div>
+</div>
+
+<!-- ══ A-01 ══ -->
+<div class="slide module-header">
+  <div class="module-number" style="font-size:clamp(3rem,8vw,6rem);">A-01</div>
+  <div class="module-kicker">Afternoon — A-01</div>
+  <div class="module-title">Building Your<br>Core Feature</div>
+  <div class="module-sub">Morning was infrastructure. Afternoon is product. Apply the cycle to the feature that makes your app actually useful.</div>
+  <div class="module-learns">
+    <div class="module-learn-item"><span class="ml-icon">🔄</span><p>The brief → build → deploy → verify cycle as a repeating rhythm</p></div>
+    <div class="module-learn-item"><span class="ml-icon">🎯</span><p>The 5 non-negotiable rules for building real features</p></div>
+    <div class="module-learn-item"><span class="ml-icon">📱</span><p>Mobile-first verification — why 390px is non-negotiable before every ship</p></div>
+  </div>
+  <div class="module-app-badge">🛠️ <strong>Your task:</strong> Add your app's core feature using the full brief cycle</div>
+  <div class="slide-num">32</div>
+</div>
+
+<div class="slide" id="s-a01-a">
+  <p class="eyebrow">Afternoon — A-01 · The 5 Rules</p>
+  <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">5 Non-Negotiable Rules for Building Real Features</h2>
+  <div class="practice-grid">
+    <div class="practice-item" style="border-left:3px solid var(--blue);">
+      <div class="practice-icon">🔍</div>
+      <div class="practice-text"><h4>Research First, Always</h4><p>Read CLAUDE.md before any brief. This rule alone would have saved 7 hours on a routing problem already documented.</p></div>
+    </div>
+    <div class="practice-item" style="border-left:3px solid var(--amber);">
+      <div class="practice-icon">1️⃣</div>
+      <div class="practice-text"><h4>One Change at a Time</h4><p>Never bundle multiple features in one deploy. One feature, one brief, one deploy. Verify. Then next.</p></div>
+    </div>
+    <div class="practice-item" style="border-left:3px solid var(--green);">
+      <div class="practice-icon">✅</div>
+      <div class="practice-text"><h4>Test Before Production — Always</h4><p>"It worked in test" is the only acceptable green light for production. Never skip to save time.</p></div>
+    </div>
+    <div class="practice-item" style="border-left:3px solid var(--purple);">
+      <div class="practice-icon">👁</div>
+      <div class="practice-text"><h4>Verify With Your Own Eyes</h4><p>Open the browser. Sign in. Click the thing. Read the console. Only what you see counts as done.</p></div>
+    </div>
+    <div class="practice-item" style="border-left:3px solid var(--red);grid-column:span 2;">
+      <div class="practice-icon">🚫</div>
+      <div class="practice-text"><h4>No Fallbacks, No Placeholder Data</h4><p>If data is missing, fail loudly. Never show "Your Business" instead of real data. Silent failures hide real bugs.</p></div>
+    </div>
+  </div>
+  <div class="slide-num">33</div>
+</div>
+
+<!-- A-01 HANDS-ON -->
+<div class="slide hands-on">
+  <div class="ho-header">
+    <span class="ho-label">🛠️ Hands-On — A-01</span>
+    <span class="ho-time">⏱ 45 minutes</span>
+  </div>
+  <div class="ho-title">Build Your Core Feature</div>
+  <div class="ho-subtitle">This is the feature that makes your app actually useful — not just a pretty landing page. Write the brief, run the cycle, deploy it live.</div>
+  <div class="ho-steps">
+    <div class="ho-step">
+      <div class="ho-step-num">1</div>
+      <div class="ho-step-body">
+        <h4>Pick your one core feature</h4>
+        <p>From your sitemap: the single most important feature. Without it, the app is just a brochure.</p>
+        <div class="step-hint">e.g. "User can submit a daily special" · "Dashboard shows saved items" · "Contact form sends email"</div>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">2</div>
+      <div class="ho-step-body">
+        <h4>Write the brief in Claude.ai first</h4>
+        <p>5-part template. Include specific file paths. Reference your landing page as the design pattern.</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">3</div>
+      <div class="ho-step-body">
+        <h4>Run the full cycle</h4>
+        <p>Brief → Claude Code → test deploy → verify desktop + mobile → production deploy.</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">4</div>
+      <div class="ho-step-body">
+        <h4>If time allows: run a second cycle</h4>
+        <p>Add the next feature from your sitemap. Same process. One at a time.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ho-deliverable">
+    <div class="hd-icon">⚡</div>
+    <div><h4>Your Deliverable</h4><p>Your core feature is live on your production URL. When you click the main thing your app does — it works. Share the URL.</p></div>
+  </div>
+  <div class="build-tracker">
+    <div class="bt-label">App Build Progress</div>
+    <div class="bt-steps">
+      <div class="bt-step done">💡 App Concept</div>
+      <div class="bt-step done">🗺️ Site Map</div>
+      <div class="bt-step done">🔧 Stack Setup</div>
+      <div class="bt-step done">📄 CLAUDE.md</div>
+      <div class="bt-step done">✏️ First Brief</div>
+      <div class="bt-step done">🚀 First Deploy</div>
+      <div class="bt-step current">⚡ Core Feature</div>
+      <div class="bt-step">🎉 Shipped</div>
+    </div>
+  </div>
+  <div class="slide-num">34</div>
+</div>
+
+<!-- ══ A-02 ══ -->
+<div class="slide module-header">
+  <div class="module-number" style="font-size:clamp(3rem,8vw,6rem);">A-02</div>
+  <div class="module-kicker">Afternoon — A-02</div>
+  <div class="module-title">When Things<br>Break</div>
+  <div class="module-sub">Everything breaks. The developers who ship fastest are the ones who debug fastest. Here's the formula.</div>
+  <div class="module-learns">
+    <div class="module-learn-item"><span class="ml-icon">🔬</span><p>The 4-step debugging brief that solves every problem</p></div>
+    <div class="module-learn-item"><span class="ml-icon">📖</span><p>Why reading the error message is 80% of the fix</p></div>
+    <div class="module-learn-item"><span class="ml-icon">🧪</span><p>How to intentionally break something — so you learn to fix it fast</p></div>
+  </div>
+  <div class="module-app-badge">🛠️ <strong>Your task:</strong> Break something on purpose — use the formula to fix it</div>
+  <div class="slide-num">35</div>
+</div>
+
+<div class="slide" id="s-a02-a">
+  <p class="eyebrow">Afternoon — A-02</p>
+  <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);">The Debugging Brief Formula</h2>
+  <div class="code-box" style="margin-top:0.55rem;">
 <span class="hl">STEP 1 — DO NOT FIX ANYTHING YET</span>
 <span class="wh">Read the exact error message. Paste it here in full: [error text]
 Read the file where the error occurs. Show me lines X through Y.</span>
@@ -1270,154 +1578,260 @@ How many places have the same potential problem?</span>
 
 <span class="hl">STEP 4 — ONLY THEN APPLY A FIX</span>
 <span class="wh">Fix the root cause — not the symptom.
-Show me the exact changes (diff) before applying anything.
+Show me the exact diff before applying anything.
 Deploy to test and verify the error is completely resolved.</span></div>
-    <div class="notice amber" style="margin-top:0.75rem;max-width:100%;">
-      <span class="ni">📖</span>
-      <p><strong>Real story:</strong> A 7-hour debugging session was caused by skipping Step 1. We guessed at solutions and deployed 15+ times. The answer was a single line in a config file — already documented in CLAUDE.md. <strong>Research before fix. Every time.</strong></p>
-    </div>
-    <div class="slide-num">18 / 22</div>
+  <div class="notice amber" style="margin-top:0.75rem;">
+    <span class="ni">📖</span>
+    <p><strong>Real story:</strong> A 7-hour session came from skipping Step 1. We deployed 15+ times guessing. The answer was one line — documented in CLAUDE.md. <strong>Research before fix. Every time.</strong></p>
   </div>
+  <div class="slide-num">36</div>
+</div>
 
-  <!-- ══ SLIDE 18 — 15 LESSONS ══ -->
-  <div class="slide" id="s19">
-    <p class="eyebrow">Appendix A — Lessons From The Real Build</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);margin-bottom:0.7rem;">15 Lessons We Learned Building TextOS</h2>
-    <div class="lessons-grid">
-      <div class="lesson-chip"><div class="ln">L01</div><h4>Research is the job — before any code, always</h4></div>
-      <div class="lesson-chip"><div class="ln">L02</div><h4>Architecture lives in CLAUDE.md — every decision</h4></div>
-      <div class="lesson-chip"><div class="ln">L03</div><h4>AI claims "done" before it's done — always verify</h4></div>
-      <div class="lesson-chip"><div class="ln">L04</div><h4>API tokens get exposed — rotate them fast</h4></div>
-      <div class="lesson-chip"><div class="ln">L05</div><h4>Silent failures are worse than crashes</h4></div>
-      <div class="lesson-chip"><div class="ln">L06</div><h4>Design vision first saves 20 hours of iteration</h4></div>
-      <div class="lesson-chip"><div class="ln">L07</div><h4>Mobile first — test at 390px before every ship</h4></div>
-      <div class="lesson-chip"><div class="ln">L08</div><h4>Session context resets — CLAUDE.md is your memory</h4></div>
-      <div class="lesson-chip"><div class="ln">L09</div><h4>Never make the founder the deploy bottleneck</h4></div>
-      <div class="lesson-chip"><div class="ln">L10</div><h4>Data-driven beats hardcoded — always</h4></div>
-      <div class="lesson-chip"><div class="ln">L11</div><h4>Speed comes from clarity, not from typing faster</h4></div>
-      <div class="lesson-chip"><div class="ln">L12</div><h4>Wrangler auth fails silently — always run whoami first</h4></div>
-      <div class="lesson-chip"><div class="ln">L13</div><h4>Model choice is a business decision — Sonnet vs. Haiku</h4></div>
-      <div class="lesson-chip"><div class="ln">L14</div><h4>Duplicate environment variables will break production</h4></div>
-      <div class="lesson-chip"><div class="ln">L15</div><h4>30 years of architecture compounds at AI speed</h4></div>
-    </div>
-    <div class="slide-num">19 / 22</div>
+<!-- A-02 HANDS-ON -->
+<div class="slide hands-on">
+  <div class="ho-header">
+    <span class="ho-label">🛠️ Hands-On — A-02</span>
+    <span class="ho-time">⏱ 20 minutes</span>
   </div>
+  <div class="ho-title">Break It. Then Fix It.</div>
+  <div class="ho-subtitle">Intentionally create a known error, then solve it with the formula. You know what's broken because you broke it — which means you can measure whether the formula works.</div>
+  <div class="ho-steps">
+    <div class="ho-step">
+      <div class="ho-step-num">1</div>
+      <div class="ho-step-body">
+        <h4>Pick one intentional break</h4>
+        <div class="step-hint">A) Remove your Supabase URL from .env and reload<br>B) Delete one closing HTML tag from your landing page<br>C) Rename a CSS class in HTML but not the stylesheet</div>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">2</div>
+      <div class="ho-step-body">
+        <h4>Deploy the broken version to test</h4>
+        <p>Copy the exact error message from the browser console. Write it down word for word.</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">3</div>
+      <div class="ho-step-body">
+        <h4>Use the debugging formula — all 4 steps</h4>
+        <p>Do not skip to Step 4 even though you know the answer. Go through all steps. Build the muscle memory.</p>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">4</div>
+      <div class="ho-step-body">
+        <h4>Fix, verify on test, deploy to production</h4>
+        <p>Full deploy ritual back to production once confirmed fixed.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ho-deliverable">
+    <div class="hd-icon">🔧</div>
+    <div><h4>Your Deliverable</h4><p>A 3-sentence incident report: what broke · what caused it · how you found it. This is how real teams build institutional knowledge.</p></div>
+  </div>
+  <div class="build-tracker">
+    <div class="bt-label">App Build Progress</div>
+    <div class="bt-steps">
+      <div class="bt-step done">💡 App Concept</div>
+      <div class="bt-step done">🗺️ Site Map</div>
+      <div class="bt-step done">🔧 Stack Setup</div>
+      <div class="bt-step done">📄 CLAUDE.md</div>
+      <div class="bt-step done">✏️ First Brief</div>
+      <div class="bt-step done">🚀 First Deploy</div>
+      <div class="bt-step done">⚡ Core Feature</div>
+      <div class="bt-step current">🐛 Debug Cycle</div>
+    </div>
+  </div>
+  <div class="slide-num">37</div>
+</div>
 
-  <!-- ══ SLIDE 19 — 12 MISTAKES ══ -->
-  <div class="slide" id="s20">
-    <p class="eyebrow">Appendix B — Learn From Our Mistakes</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);margin-bottom:0.7rem;">The 12 Biggest Mistakes — All From The Real Build</h2>
-    <div class="mistakes-grid">
-      <div class="mistake-chip"><div class="mn">M01</div><h4>Skipping research and guessing at solutions</h4><p>Fix: Read CLAUDE.md first. Always.</p></div>
-      <div class="mistake-chip"><div class="mn">M02</div><h4>Deploying to production without testing</h4><p>Fix: Test → Verify → Approve → Prod.</p></div>
-      <div class="mistake-chip"><div class="mn">M03</div><h4>Trusting AI's "it's done" without verifying</h4><p>Fix: Open the browser. Click the thing.</p></div>
-      <div class="mistake-chip"><div class="mn">M04</div><h4>Writing code in briefs instead of outcomes</h4><p>Fix: 2 sentences, not 30 lines of code.</p></div>
-      <div class="mistake-chip"><div class="mn">M05</div><h4>Exposing API tokens in chat or documents</h4><p>Fix: .env files only. Rotate if exposed.</p></div>
-      <div class="mistake-chip"><div class="mn">M06</div><h4>Silent fallbacks masking real data failures</h4><p>Fix: No placeholder data. Fail loudly.</p></div>
-      <div class="mistake-chip"><div class="mn">M07</div><h4>Dynamic routes where static routes are required</h4><p>Fix: Know your framework's routing model.</p></div>
-      <div class="mistake-chip"><div class="mn">M08</div><h4>Bundling multiple changes in one deploy</h4><p>Fix: One change, one deploy, one check.</p></div>
-      <div class="mistake-chip"><div class="mn">M09</div><h4>Duplicate environment variables</h4><p>Fix: Grep for duplicates after every change.</p></div>
-      <div class="mistake-chip"><div class="mn">M10</div><h4>Using bash commands on a Windows machine</h4><p>Fix: Document your OS in CLAUDE.md.</p></div>
-      <div class="mistake-chip"><div class="mn">M11</div><h4>Reporting preview URLs instead of canonical ones</h4><p>Fix: Only test URL and prod URL matter.</p></div>
-      <div class="mistake-chip"><div class="mn">M12</div><h4>Working past exhaustion</h4><p>Fix: Stop. Commit. Sleep. Start fresh.</p></div>
-    </div>
-    <div class="slide-num">20 / 22</div>
+<!-- ══ A-03 ══ -->
+<div class="slide module-header">
+  <div class="module-number" style="font-size:clamp(3rem,8vw,6rem);">A-03</div>
+  <div class="module-kicker">Afternoon — A-03</div>
+  <div class="module-title">Polish &amp; Ship<br>to Production</div>
+  <div class="module-sub">Final deploy. No more building — polish, verify, and ship your complete app. You're done building for today.</div>
+  <div class="module-learns">
+    <div class="module-learn-item"><span class="ml-icon">✨</span><p>What "done" actually means for a vibe coding project</p></div>
+    <div class="module-learn-item"><span class="ml-icon">🎤</span><p>The 3-minute demo format: what you built, how, what's next</p></div>
+    <div class="module-learn-item"><span class="ml-icon">🗺️</span><p>Your roadmap for what to build after today</p></div>
   </div>
+  <div class="module-app-badge">🛠️ <strong>Your task:</strong> Final polish, final deploy, prepare your 3-minute demo</div>
+  <div class="slide-num">38</div>
+</div>
 
-  <!-- ══ SLIDE 20 — QUICK REF ══ -->
-  <div class="slide" id="s21">
-    <p class="eyebrow">Appendix C — Keep This Open During Every Session</p>
-    <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);margin-bottom:0.7rem;">Quick Reference Card</h2>
-    <div class="ref-grid">
-      <div class="ref-item">
-        <div class="rl">Load Auth Token (PowerShell)</div>
-        <div class="rv">$env:CLOUDFLARE_API_TOKEN = (Get-Content ".env" | Where-Object { $_ -match "^CLOUDFLARE_API_TOKEN=" } | ForEach-Object { $_ -replace "^CLOUDFLARE_API_TOKEN=", "" })</div>
-      </div>
-      <div class="ref-item">
-        <div class="rl">Verify Authentication</div>
-        <div class="rv">npx wrangler whoami</div>
-      </div>
-      <div class="ref-item">
-        <div class="rl">Deploy to Test</div>
-        <div class="rv">npm run deploy:test</div>
-      </div>
-      <div class="ref-item">
-        <div class="rl">Deploy to Production</div>
-        <div class="rv">npm run build &amp;&amp; npx wrangler pages deploy dist --project-name your-app</div>
-      </div>
-      <div class="ref-item">
-        <div class="rl">Before Writing Any Brief</div>
-        <div class="rv amber">Search knowledge. Read CLAUDE.md. Find existing patterns first.</div>
-      </div>
-      <div class="ref-item">
-        <div class="rl">The Two Roles</div>
-        <div class="rv normal">You = Architect (WHAT &amp; WHY) · Claude Code = Implementer (HOW)</div>
-      </div>
-      <div class="ref-item">
-        <div class="rl">Security Rule</div>
-        <div class="rv red">Never paste API tokens in chat. Rotate immediately if exposed.</div>
-      </div>
-      <div class="ref-item">
-        <div class="rl">Brief Checklist</div>
-        <div class="rv normal" style="font-size:0.72rem;line-height:1.65;">☐ Outcome in 1 sentence &nbsp; ☐ Files to touch &nbsp; ☐ Pattern to follow &nbsp; ☐ Do NOT touch &nbsp; ☐ How to verify</div>
+<!-- A-03 HANDS-ON -->
+<div class="slide hands-on">
+  <div class="ho-header">
+    <span class="ho-label">🛠️ Hands-On — A-03 · FINAL</span>
+    <span class="ho-time">⏱ 30 minutes</span>
+  </div>
+  <div class="ho-title">Ship Your Complete App 🎉</div>
+  <div class="ho-subtitle">One polish pass. Final deploy. Prep your 3-minute demo. This is the finish line.</div>
+  <div class="ho-steps">
+    <div class="ho-step">
+      <div class="ho-step-num">1</div>
+      <div class="ho-step-body">
+        <h4>One polish brief — one deploy</h4>
+        <p>Look at your app fresh. Pick one thing that looks wrong or feels unfinished. Write a brief, fix it, deploy it. Done.</p>
       </div>
     </div>
-    <div class="slide-num">21 / 22</div>
+    <div class="ho-step">
+      <div class="ho-step-num">2</div>
+      <div class="ho-step-body">
+        <h4>Final production deploy — full ritual</h4>
+        <div class="step-hint">auth check → test → verify → explicit approval → production</div>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">3</div>
+      <div class="ho-step-body">
+        <h4>Prep your 3-minute demo</h4>
+        <div class="step-hint">1. What does your app do and who is it for?<br>2. Show one thing that works — live, in the browser<br>3. What are you building next?</div>
+      </div>
+    </div>
+    <div class="ho-step">
+      <div class="ho-step-num">4</div>
+      <div class="ho-step-body">
+        <h4>Update CLAUDE.md with today's lessons</h4>
+        <p>Add any routing rules, gotchas, or architecture decisions made today. Future-you will thank you.</p>
+      </div>
+    </div>
   </div>
+  <div class="ho-deliverable">
+    <div class="hd-icon">🎉</div>
+    <div><h4>Your Deliverable</h4><p>A complete, live, production app at a real URL. CLAUDE.md updated. 3-minute demo ready. You built this today without writing a single line of code.</p></div>
+  </div>
+  <div class="build-tracker">
+    <div class="bt-label">App Build Progress</div>
+    <div class="bt-steps">
+      <div class="bt-step done">💡 App Concept</div>
+      <div class="bt-step done">🗺️ Site Map</div>
+      <div class="bt-step done">🔧 Stack Setup</div>
+      <div class="bt-step done">📄 CLAUDE.md</div>
+      <div class="bt-step done">✏️ First Brief</div>
+      <div class="bt-step done">🚀 First Deploy</div>
+      <div class="bt-step done">⚡ Core Feature</div>
+      <div class="bt-step done" style="background:rgba(16,185,129,0.2);border-color:rgba(16,185,129,0.4);color:#34D399;">🎉 Shipped</div>
+    </div>
+  </div>
+  <div class="slide-num">39</div>
+</div>
 
-  <!-- ══ SLIDE 21 — CLOSING ══ -->
-  <div class="slide" id="s22">
-    <p class="eyebrow">You Shipped It</p>
-    <h2 class="slide-title">What You Built Today</h2>
-    <div class="closing-grid">
-      <div class="closing-col">
-        <h3>What You Built</h3>
-        <ul>
-          <li>A live production application</li>
-          <li>Test + production environments</li>
-          <li>A GitHub repo with version history</li>
-          <li>A CLAUDE.md documenting your architecture</li>
-          <li>A deploy pipeline you own and control</li>
-        </ul>
-      </div>
-      <div class="closing-col">
-        <h3>What Comes Next</h3>
-        <ul>
-          <li>User authentication (sign in / sign out)</li>
-          <li>A database to store real user data</li>
-          <li>AI-powered features via Claude API</li>
-          <li>Payment processing with Stripe</li>
-          <li>Email delivery with SendGrid</li>
-          <li>Your first real user</li>
-        </ul>
-      </div>
-      <div class="closing-col">
-        <h3>Rules to Live By</h3>
-        <ul>
-          <li>Daily 2–3h sessions beat marathon sessions</li>
-          <li>Every session starts by reading CLAUDE.md</li>
-          <li>Research before every brief. Every time.</li>
-          <li>Deploy to test first. No exceptions.</li>
-          <li>When stuck: stop, commit, sleep, start fresh</li>
-        </ul>
-      </div>
-    </div>
-    <div style="margin-top:1.4rem;">
-      <span class="badge blue">textos.ai</span>
-      <span class="badge amber">Built using this exact course</span>
-      <span class="badge">Rob Gaudet · New Orleans · 2026</span>
-    </div>
-    <div class="slide-num">22 / 22</div>
+<!-- APPENDIX A -->
+<div class="slide" id="s-lessons">
+  <p class="eyebrow">Appendix A — Lessons From The Real Build</p>
+  <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);margin-bottom:0.7rem;">15 Lessons We Learned Building TextOS</h2>
+  <div class="lessons-grid">
+    <div class="lesson-chip"><div class="ln">L01</div><h4>Research is the job — before any code, always</h4></div>
+    <div class="lesson-chip"><div class="ln">L02</div><h4>Architecture lives in CLAUDE.md — every decision</h4></div>
+    <div class="lesson-chip"><div class="ln">L03</div><h4>AI claims "done" before it's done — always verify</h4></div>
+    <div class="lesson-chip"><div class="ln">L04</div><h4>API tokens get exposed — rotate them fast</h4></div>
+    <div class="lesson-chip"><div class="ln">L05</div><h4>Silent failures are worse than crashes</h4></div>
+    <div class="lesson-chip"><div class="ln">L06</div><h4>Design vision first saves 20 hours of iteration</h4></div>
+    <div class="lesson-chip"><div class="ln">L07</div><h4>Mobile first — test at 390px before every ship</h4></div>
+    <div class="lesson-chip"><div class="ln">L08</div><h4>Session context resets — CLAUDE.md is your memory</h4></div>
+    <div class="lesson-chip"><div class="ln">L09</div><h4>Never make the founder the deploy bottleneck</h4></div>
+    <div class="lesson-chip"><div class="ln">L10</div><h4>Data-driven beats hardcoded — always</h4></div>
+    <div class="lesson-chip"><div class="ln">L11</div><h4>Speed comes from clarity, not from typing faster</h4></div>
+    <div class="lesson-chip"><div class="ln">L12</div><h4>Wrangler auth fails silently — always run whoami first</h4></div>
+    <div class="lesson-chip"><div class="ln">L13</div><h4>Model choice is a business decision — Sonnet vs. Haiku</h4></div>
+    <div class="lesson-chip"><div class="ln">L14</div><h4>Duplicate environment variables will break production</h4></div>
+    <div class="lesson-chip"><div class="ln">L15</div><h4>30 years of architecture compounds at AI speed</h4></div>
   </div>
+  <div class="slide-num">40</div>
+</div>
+
+<!-- APPENDIX B -->
+<div class="slide" id="s-mistakes">
+  <p class="eyebrow">Appendix B — Learn From Our Mistakes</p>
+  <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);margin-bottom:0.7rem;">The 12 Biggest Mistakes — All From The Real Build</h2>
+  <div class="mistakes-grid">
+    <div class="mistake-chip"><div class="mn">M01</div><h4>Skipping research and guessing at solutions</h4><p>Fix: Read CLAUDE.md first. Always.</p></div>
+    <div class="mistake-chip"><div class="mn">M02</div><h4>Deploying to production without testing</h4><p>Fix: Test → Verify → Approve → Prod.</p></div>
+    <div class="mistake-chip"><div class="mn">M03</div><h4>Trusting AI's "it's done" without verifying</h4><p>Fix: Open the browser. Click the thing.</p></div>
+    <div class="mistake-chip"><div class="mn">M04</div><h4>Writing code in briefs instead of outcomes</h4><p>Fix: 2 sentences, not 30 lines of code.</p></div>
+    <div class="mistake-chip"><div class="mn">M05</div><h4>Exposing API tokens in chat or documents</h4><p>Fix: .env files only. Rotate if exposed.</p></div>
+    <div class="mistake-chip"><div class="mn">M06</div><h4>Silent fallbacks masking real data failures</h4><p>Fix: No placeholder data. Fail loudly.</p></div>
+    <div class="mistake-chip"><div class="mn">M07</div><h4>Dynamic routes where static routes required</h4><p>Fix: Know your framework's routing model.</p></div>
+    <div class="mistake-chip"><div class="mn">M08</div><h4>Bundling multiple changes in one deploy</h4><p>Fix: One change, one deploy, one check.</p></div>
+    <div class="mistake-chip"><div class="mn">M09</div><h4>Duplicate environment variables</h4><p>Fix: Grep for duplicates after every change.</p></div>
+    <div class="mistake-chip"><div class="mn">M10</div><h4>Using bash commands on Windows</h4><p>Fix: Document your OS in CLAUDE.md.</p></div>
+    <div class="mistake-chip"><div class="mn">M11</div><h4>Reporting preview URLs instead of canonical ones</h4><p>Fix: Only test URL and prod URL matter.</p></div>
+    <div class="mistake-chip"><div class="mn">M12</div><h4>Working past exhaustion on a hard problem</h4><p>Fix: Stop. Commit. Sleep. Start fresh.</p></div>
+  </div>
+  <div class="slide-num">41</div>
+</div>
+
+<!-- APPENDIX C -->
+<div class="slide" id="s-ref">
+  <p class="eyebrow">Appendix C — Keep This Open During Every Session</p>
+  <h2 class="slide-title" style="font-size:clamp(1.3rem,2.5vw,1.85rem);margin-bottom:0.7rem;">Quick Reference Card</h2>
+  <div class="ref-grid">
+    <div class="ref-item"><div class="rl">Load Auth Token (PowerShell)</div><div class="rv">$env:CLOUDFLARE_API_TOKEN = (Get-Content ".env" | Where-Object { $_ -match "^CLOUDFLARE_API_TOKEN=" } | ForEach-Object { $_ -replace "^CLOUDFLARE_API_TOKEN=", "" })</div></div>
+    <div class="ref-item"><div class="rl">Verify Authentication</div><div class="rv">npx wrangler whoami</div></div>
+    <div class="ref-item"><div class="rl">Deploy to Test</div><div class="rv">npm run deploy:test</div></div>
+    <div class="ref-item"><div class="rl">Deploy to Production</div><div class="rv">npm run build &amp;&amp; npx wrangler pages deploy dist --project-name your-app</div></div>
+    <div class="ref-item"><div class="rl">Before Writing Any Brief</div><div class="rv amber">Search knowledge. Read CLAUDE.md. Find existing patterns first.</div></div>
+    <div class="ref-item"><div class="rl">The Two Roles</div><div class="rv normal">You = Architect (WHAT &amp; WHY) · Claude Code = Implementer (HOW)</div></div>
+    <div class="ref-item"><div class="rl">Security Rule</div><div class="rv red">Never paste API tokens in chat. Rotate immediately if exposed.</div></div>
+    <div class="ref-item"><div class="rl">Brief Checklist</div><div class="rv normal" style="font-size:0.72rem;line-height:1.65;">☐ Outcome in 1 sentence &nbsp; ☐ Files to touch &nbsp; ☐ Pattern to follow &nbsp; ☐ Do NOT touch &nbsp; ☐ How to verify</div></div>
+  </div>
+  <div class="slide-num">42</div>
+</div>
+
+<!-- CLOSING -->
+<div class="slide centered" id="s-closing">
+  <p class="eyebrow" style="color:#34D399;">You Built a Production App Today</p>
+  <h2 class="slide-title" style="color:#F8FAFC;font-size:clamp(1.7rem,4vw,3rem);background:#0F172A;">What You Leave With</h2>
+  <div class="closing-grid">
+    <div class="closing-col">
+      <h3>What You Built</h3>
+      <ul>
+        <li>A live production application</li>
+        <li>Test + production environments</li>
+        <li>A GitHub repo with version history</li>
+        <li>A CLAUDE.md documenting your architecture</li>
+        <li>A deploy pipeline you own and control</li>
+      </ul>
+    </div>
+    <div class="closing-col">
+      <h3>What Comes Next</h3>
+      <ul>
+        <li>User authentication (sign in / sign out)</li>
+        <li>A database for real user data</li>
+        <li>AI-powered features via Claude API</li>
+        <li>Payment processing with Stripe</li>
+        <li>Email delivery with SendGrid</li>
+        <li>Your first real user</li>
+      </ul>
+    </div>
+    <div class="closing-col">
+      <h3>Rules to Live By</h3>
+      <ul>
+        <li>Daily 2–3h sessions beat marathons</li>
+        <li>Every session starts by reading CLAUDE.md</li>
+        <li>Research before every brief. Every time.</li>
+        <li>Deploy to test first. No exceptions.</li>
+        <li>When stuck: stop, commit, sleep, start fresh</li>
+      </ul>
+    </div>
+  </div>
+  <div style="margin-top:1.4rem;">
+    <span class="badge blue">textos.ai</span>
+    <span class="badge amber">Built using this exact course</span>
+    <span class="badge">Rob Gaudet · New Orleans · 2026</span>
+  </div>
+  <div class="slide-num">43</div>
+</div>
 
 </div><!-- #deck -->
 
-<!-- NAV BAR -->
 <div id="nav-bar">
   <a href="https://trustlight.ai/vibecoding/" class="brand">← Vibe Coding Lab</a>
   <div class="nav-controls">
     <button class="nav-btn" id="btn-prev" onclick="goSlide(-1)" disabled>◀</button>
-    <span id="slide-counter">1 / 22</span>
+    <span id="slide-counter">1 / 43</span>
     <button class="nav-btn" id="btn-next" onclick="goSlide(1)">▶</button>
   </div>
   <div id="progress-dots"></div>
@@ -1429,9 +1843,12 @@ Deploy to test and verify the error is completely resolved.</span></div>
   let current  = 0;
 
   const dotsEl = document.getElementById('progress-dots');
-  slides.forEach((_, i) => {
+  slides.forEach((s, i) => {
     const d = document.createElement('div');
-    d.className = 'dot' + (i === 0 ? ' active' : '');
+    let cls = 'dot';
+    if (s.classList.contains('module-header')) cls += ' module-dot';
+    if (s.classList.contains('hands-on'))      cls += ' hands-on-dot';
+    d.className = cls + (i === 0 ? ' active' : '');
     d.onclick = () => jumpSlide(i);
     dotsEl.appendChild(d);
   });
@@ -1441,7 +1858,6 @@ Deploy to test and verify the error is completely resolved.</span></div>
     document.getElementById('btn-prev').disabled = current === 0;
     document.getElementById('btn-next').disabled = current === total - 1;
     document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
-    // Reset scroll on slide change
     slides[current].scrollTop = 0;
   }
 
@@ -1470,7 +1886,7 @@ Deploy to test and verify the error is completely resolved.</span></div>
   });
 
   let tx = 0;
-  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive:true });
   document.addEventListener('touchend',   e => {
     const dx = e.changedTouches[0].clientX - tx;
     if (Math.abs(dx) > 45) goSlide(dx < 0 ? 1 : -1);
