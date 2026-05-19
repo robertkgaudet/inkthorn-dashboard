@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>TextOS — The Text-Only App Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="No downloads. No logins. Just text. TextOS is the text-only app store — every app does one thing, and you use it by texting. No password. Ever." />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="text message apps, no password app, SMS productivity, TextOS, text to note, AI text assistant, no login apps" />
+  <meta name="author" content="TextOS" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="TextOS" />
+  <meta property="og:title" content="TextOS — The Text-Only App Store" />
+  <meta property="og:description" content="No downloads. No logins. Just text. Every TextOS app does one thing — you use it by texting. No password. Ever." />
+  <meta property="og:image" content="https://textos.ai/textos-og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://textos.ai" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@textosai" />
+  <meta name="twitter:title" content="TextOS — The Text-Only App Store" />
+  <meta name="twitter:description" content="No downloads. No logins. Just text. Every TextOS app does one thing — you use it by texting." />
+  <meta name="twitter:image" content="https://textos.ai/textos-og.png" />
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "TextOS",
+    "description": "TextOS is the text-only app store. Every app does one thing and you use it by texting. No app to install. No account to create. No password. Ever.",
+    "url": "https://textos.ai",
+    "brand": { "@type": "Brand", "name": "TextOS" },
+    "offers": {
+      "@type": "AggregateOffer",
+      "lowPrice": "0",
+      "highPrice": "9.99",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:      #080e1a;
+      --bg2:     #0d1626;
+      --bg3:     #111f35;
+      --bg4:     #0a1220;
+      --cyan:    #00e5ff;
+      --pink:    #ff2d78;
+      --purple:  #a855f7;
+      --amber:   #f59e0b;
+      --green:   #10b981;
+      --white:   #f0f6ff;
+      --gray:    #8899bb;
+      --gray-lt: #c8d6e8;
+      --border:  rgba(0,229,255,0.12);
+      --border2: rgba(0,229,255,0.22);
+      --glow-cyan: 0 0 40px rgba(0,229,255,0.35);
+      --glow-pink: 0 0 40px rgba(255,45,120,0.35);
+      --mono: 'JetBrains Mono', 'Courier New', monospace;
+      --logo-font: 'Orbitron', monospace;
+      --radius-bubble: 18px;
+    }
+
+    body {
+      font-family: var(--mono);
+      font-size: 15px;
+      line-height: 1.75;
+      background: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.2); border-radius: 2px; }
+
+    /* ─── UTILITIES ─── */
+    .cyan  { color: var(--cyan); text-shadow: 0 0 20px rgba(0,229,255,0.4); }
+    .pink  { color: var(--pink); }
+    .muted { color: var(--gray); }
+    a      { color: inherit; text-decoration: none; }
+
+    /* ─── NAV ─── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,14,26,0.96);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: var(--logo-font);
+      font-weight: 900;
+      font-size: 1.35rem;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+    .nav-logo img { width: 34px; height: 34px; border-radius: 6px; object-fit: cover; }
+    .nav-logo .os { color: var(--cyan); text-shadow: 0 0 16px rgba(0,229,255,0.5); }
+    .nav-tag {
+      background: rgba(0,229,255,0.07);
+      border: 1px solid rgba(0,229,255,0.2);
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 5px 14px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .nav-tag::before { content: '> '; opacity: 0.5; }
+
+    /* ─── HERO ─── */
+    .hero {
+      text-align: center;
+      padding: 88px 24px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -180px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse, rgba(0,229,255,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Badge */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,229,255,0.07);
+      border: 1px solid rgba(0,229,255,0.25);
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 8px 20px;
+      border-radius: 4px;
+      margin-bottom: 40px;
+    }
+    .hero-badge::before { content: '// '; opacity: 0.5; }
+    .pulse-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      animation: pulse 1.6s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.7)} }
+
+    /* Hero H1 */
+    h1 {
+      font-family: var(--mono);
+      font-size: clamp(2.2rem, 6vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+    }
+    .cursor-blink {
+      display: inline-block;
+      width: 0.5ch;
+      height: 1em;
+      background: var(--cyan);
+      vertical-align: text-bottom;
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+      box-shadow: 0 0 10px rgba(0,229,255,0.6);
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .hero-sub {
+      font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+      color: var(--gray-lt);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      line-height: 1.85;
+      font-weight: 400;
+    }
+    .hero-sub strong { color: var(--white); font-weight: 600; }
+
+    /* Use case pills */
+    .use-strip {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+      padding: 0 16px;
+    }
+    .use-pill {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 0.78rem;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      font-family: var(--mono);
+    }
+    .use-pill:hover {
+      border-color: rgba(0,229,255,0.3);
+      color: var(--white);
+      background: rgba(0,229,255,0.04);
+    }
+
+    /* CTA button */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--cyan);
+      color: #080e1a;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      padding: 16px 36px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--glow-cyan);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 56px rgba(0,229,255,0.55); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--gray);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      padding: 10px 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      text-decoration: none;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.25); color: var(--white); }
+
+    /* Trust bar */
+    .trust-bar {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .trust-item {
+      color: var(--gray);
+      font-size: 0.72rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--cyan);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-label::before { content: '// '; opacity: 0.5; }
+    .section h2 {
+      font-family: var(--mono);
+      font-size: clamp(1.4rem, 3.2vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    .section-intro {
+      color: var(--gray-lt);
+      font-size: 0.95rem;
+      max-width: 660px;
+      margin-bottom: 44px;
+      line-height: 1.85;
+    }
+    .section-intro strong { color: var(--white); font-weight: 600; }
+
+    /* ─── APP STORE CARDS (SMS bubble style) ─── */
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .app-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .app-card:hover { transform: translateY(-2px); border-color: rgba(0,229,255,0.25); }
+    .app-card.live { border-color: rgba(0,229,255,0.2); }
+
+    .app-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .app-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .status-badge {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+    .status-live {
+      background: rgba(0,229,255,0.1);
+      border: 1px solid rgba(0,229,255,0.3);
+      color: var(--cyan);
+    }
+    .status-soon {
+      background: rgba(136,153,187,0.08);
+      border: 1px solid rgba(136,153,187,0.2);
+      color: var(--gray);
+    }
+
+    /* SMS conversation within card */
+    .sms-thread {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sms-sender-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      padding: 0 4px;
+    }
+    .sms-sender-label.right { text-align: right; }
+
+    .bubble {
+      max-width: 88%;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+    /* Received (app/InkThorn) — left */
+    .bubble-received {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-bubble) var(--radius-bubble) var(--radius-bubble) 4px;
+      color: var(--gray-lt);
+      align-self: flex-start;
+    }
+    /* Sent (user) — right */
+    .bubble-sent {
+      background: rgba(0,229,255,0.12);
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: var(--radius-bubble) var(--radius-bubble) 4px var(--radius-bubble);
+      color: var(--white);
+      align-self: flex-end;
+      text-align: right;
+    }
+    .bubble-sent .bubble-prefix { color: var(--cyan); font-weight: 600; }
+
+    .bubble-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .bubble-wrap.sent { align-items: flex-end; }
+    .bubble-wrap.received { align-items: flex-start; }
+
+    .app-desc {
+      font-size: 0.8rem;
+      color: var(--gray);
+      line-height: 1.6;
+      padding: 0 2px;
+    }
+
+    /* ─── SCENARIO CARDS ─── */
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .scenario-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .scenario-card:hover { transform: translateY(-2px); }
+    .scenario-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--card-color, var(--cyan));
+      opacity: 0.6;
+    }
+    .scenario-card.pink-accent  { --card-color: var(--pink); }
+    .scenario-card.purple-accent { --card-color: var(--purple); }
+    .scenario-card.amber-accent  { --card-color: var(--amber); }
+    .scenario-card.green-accent  { --card-color: var(--green); }
+
+    .sc-icon { font-size: 1.8rem; margin-bottom: 14px; }
+    .sc-title {
+      font-weight: 700;
+      color: var(--white);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .sc-body {
+      color: var(--gray);
+      font-size: 0.8rem;
+      line-height: 1.7;
+    }
+
+    /* Mini SMS example in scenario cards */
+    .sc-sms {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .sc-sms .bubble {
+      font-size: 0.76rem;
+      padding: 9px 12px;
+    }
+
+    /* ─── FULL SMS THREAD ─── */
+    .sms-phone-wrap {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .sms-phone {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(0,229,255,0.08), 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .sms-phone-bar {
+      background: var(--bg3);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sms-avatar {
+      width: 36px; height: 36px;
+      background: rgba(0,229,255,0.1);
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .sms-contact-name {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--white);
+    }
+    .sms-contact-sub {
+      font-size: 0.62rem;
+      color: var(--gray);
+    }
+    .sms-online {
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      margin-left: auto;
+      flex-shrink: 0;
+      box-shadow: 0 0 6px rgba(16,185,129,0.6);
+    }
+
+    .sms-body {
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 360px;
+    }
+    .sms-timestamp {
+      text-align: center;
+      font-size: 0.6rem;
+      color: var(--gray);
+      letter-spacing: 0.06em;
+    }
+
+    .sms-msg {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sms-msg.sent  { align-items: flex-end; }
+    .sms-msg.recv  { align-items: flex-start; }
+
+    .sms-msg .bubble {
+      font-size: 0.85rem;
+      line-height: 1.65;
+    }
+    .sms-msg.sent .bubble {
+      background: rgba(0,229,255,0.15);
+      border: 1px solid rgba(0,229,255,0.3);
+      border-radius: 18px 18px 4px 18px;
+      color: var(--white);
+      max-width: 82%;
+    }
+    .sms-msg.recv .bubble {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 18px 18px 18px 4px;
+      color: var(--gray-lt);
+      max-width: 82%;
+    }
+
+    /* Typing indicator */
+    .typing-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 18px 18px 18px 4px;
+      width: fit-content;
+    }
+    .typing-dots span {
+      width: 6px; height: 6px;
+      background: var(--gray);
+      border-radius: 50%;
+      animation: dot-bounce 1.2s ease-in-out infinite;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dot-bounce { 0%,60%,100%{transform:translateY(0);opacity:0.4} 30%{transform:translateY(-5px);opacity:1} }
+
+    .sms-input-bar {
+      background: var(--bg3);
+      border-top: 1px solid var(--border);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sms-input-field {
+      flex: 1;
+      background: var(--bg4);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 9px 16px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    .sms-send-btn {
+      width: 32px; height: 32px;
+      background: var(--cyan);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem;
+      color: #080e1a;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(0,229,255,0.4);
+    }
+
+    /* ─── PROBLEMS ─── */
+    .problem-list { display: flex; flex-direction: column; gap: 16px; }
+    .problem-card {
+      background: var(--bg2);
+      border: 1px solid rgba(255,45,120,0.15);
+      border-radius: 10px;
+      padding: 26px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .problem-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--pink), transparent);
+    }
+    .prob-num {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--pink);
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+    }
+    .prob-title {
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      line-height: 1.35;
+    }
+    .prob-body {
+      color: var(--gray);
+      font-size: 0.84rem;
+      line-height: 1.75;
+    }
+
+    /* ─── HINT BLOCK ─── */
+    .hint-block {
+      background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(0,229,255,0.02));
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 12px;
+      padding: 40px 48px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .hint-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      color: var(--cyan);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hint-eyebrow::before { content: '// '; opacity: 0.5; }
+    .hint-text {
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.6;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+    .hint-text em { color: var(--cyan); font-style: normal; }
+
+    /* ─── TWO COL ─── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .two-col-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .stat-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--cyan);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      color: var(--gray);
+      font-size: 0.72rem;
+      line-height: 1.35;
+    }
+
+    /* ─── META PROOF ─── */
+    .meta-proof {
+      background: linear-gradient(135deg, rgba(0,229,255,0.04), rgba(255,45,120,0.03));
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 14px;
+      padding: 40px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+    .meta-proof::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--pink));
+    }
+
+    /* ─── PRICING ─── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .pricing-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-card.featured {
+      border-color: rgba(0,229,255,0.3);
+      box-shadow: var(--glow-cyan);
+    }
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .pricing-card.free::before { background: rgba(136,153,187,0.4); }
+    .pricing-card.pro::before  { background: linear-gradient(90deg, var(--cyan), var(--purple)); }
+
+    .pricing-tier {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .pricing-tier.t-free { color: var(--gray); }
+    .pricing-tier.t-pro  { color: var(--cyan); }
+
+    .pricing-price {
+      font-family: var(--mono);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+    .pricing-price sup {
+      font-size: 1rem;
+      vertical-align: top;
+      margin-top: 4px;
+    }
+    .pricing-cadence {
+      font-size: 0.72rem;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 28px;
+    }
+    .pricing-features li {
+      font-size: 0.8rem;
+      color: var(--gray-lt);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--cyan);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .pricing-features li.muted-feature { color: var(--gray); }
+    .pricing-features li.muted-feature::before { color: var(--gray); content: '·'; }
+
+    .btn-cta-free {
+      display: block;
+      text-align: center;
+      background: var(--cyan);
+      color: #080e1a;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 13px 20px;
+      border-radius: 4px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: var(--glow-cyan);
+    }
+    .btn-cta-free:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,229,255,0.5); }
+
+    .btn-cta-pro {
+      display: block;
+      text-align: center;
+      background: transparent;
+      color: var(--gray);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      padding: 13px 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-cta-pro:hover { border-color: rgba(255,255,255,0.25); color: var(--white); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--gray);
+      font-size: 0.75rem;
+      border-top: 1px solid var(--border);
+      line-height: 1.8;
+    }
+    footer a { color: var(--gray); transition: color 0.2s; }
+    footer a:hover { color: var(--cyan); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 860px) {
+      .two-col { grid-template-columns: 1fr; gap: 28px; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 14px 18px; }
+      .nav-tag { font-size: 0.55rem; padding: 4px 10px; }
+      .hero { padding: 64px 18px 48px; }
+      h1 { letter-spacing: -0.01em; }
+      .hint-block { padding: 28px 22px; }
+      .section { padding: 48px 18px; }
+      .problem-card { padding: 20px; }
+      .meta-proof { padding: 28px 24px; }
+      .app-grid { grid-template-columns: 1fr; }
+      .scenario-grid { grid-template-columns: 1fr; }
+      .two-col-stats { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .use-strip { gap: 7px; }
+      .use-pill { font-size: 0.72rem; padding: 7px 12px; }
+      .trust-bar { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="https://textos.ai/textos-logo.png" alt="TextOS" />
+    Text<span class="os">OS</span>
+  </a>
+  <span class="nav-tag">APP STORE — NOW OPEN</span>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-badge">
+    <div class="pulse-dot"></div>
+    🗂️ The Text-Only App Store — Now Open
+  </div>
+
+  <h1>
+    No Downloads. No Logins.<br>
+    <span class="cyan">Just Text.<span class="cursor-blink"></span></span>
+  </h1>
+
+  <p class="hero-sub">
+    Every TextOS app does one thing — and you use it by texting.
+    No app to install. No account to remember. No password.
+    <strong>Ever.</strong> Just text a number and you're in.
+  </p>
+
+  <div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:24px;">
+    <a href="#apps" class="btn-primary">Browse the App Store →</a>
+    <a href="https://inkthorn.ai/notes.html" class="btn-secondary">Try InkThorn Free</a>
+  </div>
+
+  <div class="trust-bar">
+    <span class="trust-item">🔒 No credit card to browse</span>
+    <span class="trust-item">⚡ Start using in seconds</span>
+    <span class="trust-item">💬 Works on any phone that can text</span>
+    <span class="trust-item">🇺🇸 Built in New Orleans</span>
+    <span class="trust-item">✋ Text STOP anytime</span>
+  </div>
+
+  <!-- USE CASE PILLS -->
+  <div class="use-strip" style="margin-top:40px;">
+    <div class="use-pill">📝 Text a note to InkThorn</div>
+    <div class="use-pill">⏰ Text a reminder</div>
+    <div class="use-pill">💸 Text an expense</div>
+    <div class="use-pill">🎬 Text your script for a teleprompter</div>
+    <div class="use-pill">✅ Text your habit check-in</div>
+    <div class="use-pill">📅 Text your day plan</div>
+    <div class="use-pill">💡 Text an idea before it's gone</div>
+    <div class="use-pill">🔑 No password. Ever.</div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ═══ APP STORE ═══ -->
+<div class="section" id="apps">
+  <div class="section-label">TextOS App Store</div>
+  <h2>Simple Apps. Delivered by Text.</h2>
+  <p class="section-intro">Every app does one thing. You use it by texting. Pick one and start now.</p>
+
+  <div class="app-grid">
+
+    <!-- InkThorn Notes — LIVE -->
+    <div class="app-card live">
+      <div class="app-card-header">
+        <div class="app-name">🦞 InkThorn Notes</div>
+        <span class="status-badge status-live">● Live</span>
+      </div>
+      <div class="app-desc">Your personal note-filer. Grumpy but reliable.</div>
+      <div class="sms-thread">
+        <div class="bubble-wrap received">
+          <div class="sms-sender-label">InkThorn</div>
+          <div class="bubble bubble-received">Ready to file. What do you want to remember?</div>
+        </div>
+        <div class="bubble-wrap sent">
+          <div class="sms-sender-label right">You</div>
+          <div class="bubble bubble-sent">I need to remember...</div>
+        </div>
+        <div class="bubble-wrap received">
+          <div class="bubble bubble-received">Filed. You're welcome.</div>
+        </div>
+      </div>
+      <a href="https://inkthorn.ai/notes.html" class="btn-cta-free" style="margin-top:4px;">Try InkThorn Free →</a>
+    </div>
+
+    <!-- RemindMe — Coming Soon -->
+    <div class="app-card">
+      <div class="app-card-header">
+        <div class="app-name">⏰ RemindMe</div>
+        <span class="status-badge status-soon">Coming Soon</span>
+      </div>
+      <div class="app-desc">Text a reminder. It texts you back.</div>
+      <div class="sms-thread">
+        <div class="bubble-wrap sent">
+          <div class="sms-sender-label right">You</div>
+          <div class="bubble bubble-sent">Remind me to call the dentist tomorrow at 9am</div>
+        </div>
+        <div class="bubble-wrap received">
+          <div class="sms-sender-label">RemindMe</div>
+          <div class="bubble bubble-received">Set. I'll text you at 9:00 AM tomorrow. Don't ignore it this time.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SpendSnap — Coming Soon -->
+    <div class="app-card">
+      <div class="app-card-header">
+        <div class="app-name">💸 SpendSnap</div>
+        <span class="status-badge status-soon">Coming Soon</span>
+      </div>
+      <div class="app-desc">Log expenses by text. Running total always ready.</div>
+      <div class="sms-thread">
+        <div class="bubble-wrap sent">
+          <div class="sms-sender-label right">You</div>
+          <div class="bubble bubble-sent">Spent $47 at Rouses on groceries</div>
+        </div>
+        <div class="bubble-wrap received">
+          <div class="sms-sender-label">SpendSnap</div>
+          <div class="bubble bubble-received">Logged. Groceries: $47. This month's total: $312.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ScriptReady — Coming Soon -->
+    <div class="app-card">
+      <div class="app-card-header">
+        <div class="app-name">🎬 ScriptReady</div>
+        <span class="status-badge status-soon">Coming Soon</span>
+      </div>
+      <div class="app-desc">Text your script. Get a teleprompter link.</div>
+      <div class="sms-thread">
+        <div class="bubble-wrap sent">
+          <div class="sms-sender-label right">You</div>
+          <div class="bubble bubble-sent">Here's my script for today's video...</div>
+        </div>
+        <div class="bubble-wrap received">
+          <div class="sms-sender-label">ScriptReady</div>
+          <div class="bubble bubble-received">Teleprompter ready → textos.ai/tp/a7x2k</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DayDone — Coming Soon -->
+    <div class="app-card">
+      <div class="app-card-header">
+        <div class="app-name">✅ DayDone</div>
+        <span class="status-badge status-soon">Coming Soon</span>
+      </div>
+      <div class="app-desc">Text your habits. Track your streaks.</div>
+      <div class="sms-thread">
+        <div class="bubble-wrap sent">
+          <div class="sms-sender-label right">You</div>
+          <div class="bubble bubble-sent">Did my workout and drank 8 glasses of water</div>
+        </div>
+        <div class="bubble-wrap received">
+          <div class="sms-sender-label">DayDone</div>
+          <div class="bubble bubble-received">Workout: 🔥 14-day streak. Water: ✓. Keep going.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TaxJar — Coming Soon -->
+    <div class="app-card">
+      <div class="app-card-header">
+        <div class="app-name">🧾 TaxJar</div>
+        <span class="status-badge status-soon">Coming Soon</span>
+      </div>
+      <div class="app-desc">Log 1099 income. Know what you owe the IRS.</div>
+      <div class="sms-thread">
+        <div class="bubble-wrap sent">
+          <div class="sms-sender-label right">You</div>
+          <div class="bubble bubble-sent">Got paid $2,500 from client X</div>
+        </div>
+        <div class="bubble-wrap received">
+          <div class="sms-sender-label">TaxJar</div>
+          <div class="bubble bubble-received">Logged. 1099 YTD: $18,400. Estimated owed: ~$4,100. Don't spend it all.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ═══ HOW IT WORKS (SCENARIO CARDS) ═══ -->
+<div class="section">
+  <div class="section-label">How It Works</div>
+  <h2>One Text. One Thing Done.</h2>
+  <p class="section-intro">TextOS is a new kind of platform. You text it what you need — and it makes it happen. <strong>No learning curve. No app to install. No account to remember.</strong></p>
+
+  <div class="scenario-grid">
+
+    <!-- Card 1: InkThorn Notes -->
+    <div class="scenario-card">
+      <div class="sc-icon">🦞</div>
+      <div class="sc-title">Text a Note to InkThorn</div>
+      <div class="sc-body">InkThorn is your personal note-filer — a curmudgeonly lobster in a top hat who grumbles but never forgets. Text him anything. He files it, categorizes it, and makes it searchable. Unlimited capture is free.</div>
+      <div class="sc-sms">
+        <div class="bubble-wrap sent">
+          <div class="bubble bubble-sent">InkThorn, remember: call the contractor about the roof, and I had an idea about the podcast format</div>
+        </div>
+        <div class="bubble-wrap received">
+          <div class="bubble bubble-received">Filed. Both of them. Don't text me again tonight.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="scenario-card pink-accent">
+      <div class="sc-icon">📅</div>
+      <div class="sc-title">Text Your Day Plan</div>
+      <div class="sc-body">Text your priorities in the morning. Ask what's on your schedule. Log what you finished. TextOS tracks your day, your week, and your open loops — and surfaces what matters when you need it.</div>
+      <div class="sc-sms">
+        <div class="bubble-wrap sent">
+          <div class="bubble bubble-sent">What do I need to do today?</div>
+        </div>
+        <div class="bubble-wrap received">
+          <div class="bubble bubble-received">3 open items from yesterday. 1 reminder at 2pm. 2 ideas you said you'd follow up on. Want the list?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="scenario-card purple-accent">
+      <div class="sc-icon">⏰</div>
+      <div class="sc-title">Text a Reminder</div>
+      <div class="sc-body">No alarm app. No calendar invite. Just text what you want to remember and when. TextOS texts you back at the right moment. Works for one-time reminders and recurring ones.</div>
+      <div class="sc-sms">
+        <div class="bubble-wrap sent">
+          <div class="bubble bubble-sent">Remind me to take my meds every day at 8am</div>
+        </div>
+        <div class="bubble-wrap received">
+          <div class="bubble bubble-received">Done. Daily at 8 AM. Text STOP anytime to cancel.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="scenario-card amber-accent">
+      <div class="sc-icon">💸</div>
+      <div class="sc-title">Text an Expense</div>
+      <div class="sc-body">Log what you spent as soon as you spend it. No app to open, no form to fill out. SpendSnap keeps a running total by category. Ask for your monthly summary anytime.</div>
+      <div class="sc-sms">
+        <div class="bubble-wrap sent">
+          <div class="bubble bubble-sent">$18 lunch at Domilise's, work meal</div>
+        </div>
+        <div class="bubble-wrap received">
+          <div class="bubble bubble-received">Logged under Work Meals. This month: $247 in that category.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="scenario-card green-accent">
+      <div class="sc-icon">✅</div>
+      <div class="sc-title">Text Your Habit Check-In</div>
+      <div class="sc-body">Track what you're building. Text your daily check-in whenever it fits your schedule. DayDone tracks streaks, spots gaps, and nudges you when you're about to break one.</div>
+      <div class="sc-sms">
+        <div class="bubble-wrap sent">
+          <div class="bubble bubble-sent">Walked 30 min, no sugar, read for 20 min</div>
+        </div>
+        <div class="bubble-wrap received">
+          <div class="bubble bubble-received">3 for 3. Walk streak: 9 days. No sugar: 4 days. Reading: new streak started today.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="scenario-card pink-accent">
+      <div class="sc-icon">🔑</div>
+      <div class="sc-title">No More Passwords. Ever.</div>
+      <div class="sc-body">Your phone number is already your identity. You don't log in to TextOS. You don't reset a password. You don't create an account. You just text. That's the whole login flow.</div>
+      <div class="sc-sms">
+        <div class="bubble-wrap received">
+          <div class="bubble bubble-received" style="font-size:0.72rem;color:var(--gray);">The old way: username → password → forgot password → reset link → 2FA → try again → give up</div>
+        </div>
+        <div class="bubble-wrap sent">
+          <div class="bubble bubble-sent">TextOS: just text. You're in.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ═══ SMS THREAD — CONVERSATION FLOW ═══ -->
+<div class="section" style="padding-top:64px;">
+  <div class="section-label">See It In Action</div>
+  <h2>This Is What Using TextOS Looks Like.</h2>
+  <p class="section-intro">A real conversation with InkThorn Notes — the first TextOS app. This is the entire interface. Your existing text app. Nothing else.</p>
+
+  <div class="sms-phone-wrap">
+    <div class="sms-phone">
+      <!-- Phone status bar -->
+      <div class="sms-phone-bar">
+        <div class="sms-avatar">🦞</div>
+        <div>
+          <div class="sms-contact-name">InkThorn</div>
+          <div class="sms-contact-sub">TextOS App · Note Filer</div>
+        </div>
+        <div class="sms-online"></div>
+      </div>
+
+      <!-- Thread body -->
+      <div class="sms-body">
+        <div class="sms-timestamp">Today, 7:42 AM</div>
+
+        <div class="sms-msg sent">
+          <div class="bubble">I need to remember three things: pick up the dry cleaning, the idea I had about the podcast, and that book recommendation from Sarah — Demon Copperhead</div>
+        </div>
+
+        <div class="sms-msg recv">
+          <div class="bubble">Filed. Three notes.<br><br>
+            'Dry cleaning' → Tasks.<br>
+            'Podcast idea' → Ideas.<br>
+            'Demon Copperhead' → Ideas.<br><br>
+            Don't make this a habit.
+          </div>
+        </div>
+
+        <div class="sms-timestamp" style="margin-top:4px;">Today, 7:43 AM</div>
+
+        <div class="sms-msg sent">
+          <div class="bubble">Show me my ideas</div>
+        </div>
+
+        <div class="sms-msg recv">
+          <div class="bubble">You have 7 ideas. Most recent: your podcast format thought from 10 minutes ago. Oldest: that 'start a newsletter' idea from 3 weeks ago.<br><br>Still waiting on that one.</div>
+        </div>
+
+        <!-- Typing indicator -->
+        <div class="sms-msg recv" style="margin-top:4px;">
+          <div class="typing-dots">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Input bar -->
+      <div class="sms-input-bar">
+        <div class="sms-input-field">Text InkThorn anything...</div>
+        <div class="sms-send-btn">↑</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ═══ PROBLEMS ═══ -->
+<div class="section">
+  <div class="section-label">The Problems We're Fixing</div>
+  <h2>You've Accepted These as Normal.<br><span class="pink">They Aren't.</span></h2>
+  <p class="section-intro">The internet was built for engineers and handed to everyone else. These are the daily frustrations that hundreds of millions of people have just stopped noticing.</p>
+
+  <div class="problem-list">
+    <div class="problem-card">
+      <div class="prob-num">// PROBLEM 01</div>
+      <div class="prob-title">You Have 300 Passwords and You're One Breach Away From Losing Everything</div>
+      <div class="prob-body">The average person manages 300+ passwords. They reuse them because they have no choice. Every week brings another breach, another reset email, another hour lost on something that should not exist. The web forces you to maintain a secret identity just to use it.</div>
+    </div>
+    <div class="problem-card">
+      <div class="prob-num">// PROBLEM 02</div>
+      <div class="prob-title">You're Paying for 12 Platforms and Fully Using Maybe 2</div>
+      <div class="prob-body">Website builder. Email tool. Social scheduler. Design app. Note-taker. Scheduling tool. Each with its own login, learning curve, and monthly bill demanding your attention. The average household spends $273/month on subscriptions and can't name half of them.</div>
+    </div>
+    <div class="problem-card">
+      <div class="prob-num">// PROBLEM 03</div>
+      <div class="prob-title">Publishing One Blog Post Requires Six Different Apps</div>
+      <div class="prob-body">Write in Google Docs. Copy to WordPress. Find an image in Canva. Upload it. Add SEO. Schedule in Buffer. Share in Hootsuite. Six apps, six logins, forty-five minutes — for one post that took ten minutes to write. The infrastructure has become more work than the actual thing.</div>
+    </div>
+    <div class="problem-card">
+      <div class="prob-num">// PROBLEM 04</div>
+      <div class="prob-title">Your Ideas Disappear Before You Can Do Anything With Them</div>
+      <div class="prob-body">Voice memos nobody transcribes. Notes in apps you forgot you had. Emails to yourself. Ideas you were sure you'd remember. The friction between having a thought and capturing it is just high enough that most great ideas never make it anywhere. They evaporate.</div>
+    </div>
+    <div class="problem-card">
+      <div class="prob-num">// PROBLEM 05</div>
+      <div class="prob-title">Building a Website Still Requires Either Money, Time, or a Nephew Who "Knows Computers"</div>
+      <div class="prob-body">The internet has been around for 30 years. Having a web presence still requires hiring a designer, learning a platform, or calling in a favor. Most small businesses, artists, and everyday people either have no website or have one that embarrasses them. This is not a skill problem. It is a tool problem.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ═══ HINT ═══ -->
+<div class="section" style="padding-bottom:32px;">
+  <div class="hint-block">
+    <div class="hint-eyebrow">What We Built</div>
+    <div class="hint-text">
+      One platform. One interface you already know how to use.
+      <em>Everything done by text.</em>
+      And for the first time — no password required. Ever.
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ═══ FOUNDER CREDIBILITY ═══ -->
+<div class="section" style="padding-top:64px;padding-bottom:48px;overflow:hidden;">
+  <div class="two-col">
+
+    <!-- LEFT -->
+    <div>
+      <div class="section-label" style="margin-bottom:16px;">Who's Behind This</div>
+      <h2>I've Spent 30 Years<br><span class="cyan">Building Things That Work.</span></h2>
+      <p style="color:var(--gray);font-size:0.88rem;line-height:1.85;margin-bottom:16px;">I'm Rob Gaudet. I'm a software architect, an AI practitioner, and someone who has spent years talking to hundreds of thousands of people about how technology actually works — and why most of it is failing them.</p>
+      <p style="color:var(--gray);font-size:0.88rem;line-height:1.85;margin-bottom:16px;">I'm not a marketer who discovered AI last year. I build systems. I've been doing it for three decades. And I've spent the last few years watching AI go from a technical curiosity to something that can genuinely change what's possible — <strong style="color:var(--white);">for anyone, not just engineers.</strong></p>
+      <p style="color:var(--gray);font-size:0.88rem;line-height:1.85;">TextOS exists because I kept having the same conversation — with friends, followers, strangers at events — where someone would say <em style="color:var(--white);">"I wish I could do what you do, but I don't know how."</em> This is the answer to that.</p>
+    </div>
+
+    <!-- RIGHT -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="two-col-stats">
+        <div class="stat-box">
+          <span class="stat-num">100M+</span>
+          <div class="stat-label">Content views across platforms</div>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">500K+</span>
+          <div class="stat-label">Engaged followers — real people, not bots</div>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">30 yrs</span>
+          <div class="stat-label">Building production software systems</div>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">1,000+</span>
+          <div class="stat-label">Live broadcasts on AI & technology</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(0,229,255,0.04);border:1px solid rgba(0,229,255,0.15);border-left:3px solid var(--cyan);border-radius:0 8px 8px 0;padding:20px 24px;">
+        <div style="font-family:var(--mono);font-size:0.6rem;color:var(--cyan);letter-spacing:0.1em;margin-bottom:10px;">// WHY I'M BUILDING THIS</div>
+        <p style="color:var(--white);font-size:0.86rem;line-height:1.8;font-style:italic;">"The tools I use every day to run my business, build my brand, and publish my ideas — they're not available to most people. Not because the technology doesn't exist. Because nobody's made it simple enough. That's the only thing TextOS is trying to fix."</p>
+        <div style="margin-top:14px;color:var(--gray);font-size:0.75rem;">— Rob Gaudet, Founder · New Orleans, Louisiana</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ═══ META PROOF ═══ -->
+<div class="section" style="padding-top:64px;padding-bottom:48px;">
+  <div class="meta-proof">
+    <div class="section-label" style="margin-bottom:16px;">You're Looking at the Proof</div>
+    <div style="font-size:clamp(1rem,2.2vw,1.35rem);font-weight:700;color:var(--white);line-height:1.5;margin-bottom:16px;">
+      This page was built using TextOS.<br>
+      <span class="cyan">In under 15 minutes. From a text conversation.</span>
+    </div>
+    <p style="color:var(--gray);font-size:0.88rem;line-height:1.85;max-width:680px;margin-bottom:20px;">The concept, the copy, the structure, the branding, the problems list, the conversation examples — all of it started as ideas I texted to my TextOS agent. Not typed into a form. Not dragged into a template. <strong style="color:var(--white);">Texted.</strong> Back and forth, the way you'd talk to someone who actually knows what they're doing.</p>
+    <p style="color:var(--gray);font-size:0.88rem;line-height:1.85;max-width:680px;margin-bottom:28px;">When you try InkThorn, you're not just getting early access to a product — <strong style="color:var(--white);">you're getting access to the exact workflow I used to build this.</strong></p>
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:38px;height:38px;background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">👤</div>
+        <div>
+          <div style="color:var(--white);font-weight:700;font-size:0.88rem;">Rob Gaudet</div>
+          <div style="color:var(--gray);font-size:0.72rem;">Founder, TextOS · Built this page by text</div>
+        </div>
+      </div>
+      <div style="background:rgba(0,229,255,0.07);border:1px solid rgba(0,229,255,0.2);border-radius:4px;padding:7px 14px;font-size:0.62rem;color:var(--cyan);letter-spacing:0.08em;">⏱ UNDER 15 MINUTES</div>
+      <div style="background:rgba(255,45,120,0.07);border:1px solid rgba(255,45,120,0.2);border-radius:4px;padding:7px 14px;font-size:0.62rem;color:var(--pink);letter-spacing:0.08em;">💬 BUILT BY TEXT</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ═══ PRICING ═══ -->
+<div class="section" id="pricing" style="text-align:center;">
+  <div class="section-label" style="text-align:center;margin-bottom:12px;">Pricing</div>
+  <h2 style="margin-bottom:12px;">Simple Pricing.<br><span class="cyan">Start Free.</span></h2>
+  <p class="section-intro" style="margin:0 auto 44px;">No credit card to try. No account to create. Text STOP anytime.</p>
+
+  <div class="pricing-grid" style="margin:0 auto;">
+
+    <!-- FREE -->
+    <div class="pricing-card free">
+      <div class="pricing-tier t-free">// FREE</div>
+      <div class="pricing-price">$0</div>
+      <div class="pricing-cadence">forever, no card required</div>
+      <ul class="pricing-features">
+        <li>InkThorn Notes — unlimited capture</li>
+        <li>Up to 3 note categories</li>
+        <li>Retrieve notes by texting</li>
+        <li>Works on any SMS-capable phone</li>
+        <li class="muted-feature">AI features (Pro)</li>
+        <li class="muted-feature">Export &amp; backups (Pro)</li>
+        <li class="muted-feature">All other apps (Pro)</li>
+      </ul>
+      <a href="https://inkthorn.ai/notes.html" class="btn-cta-free">Try InkThorn Free →</a>
+    </div>
+
+    <!-- PRO -->
+    <div class="pricing-card pro featured">
+      <div class="pricing-tier t-pro">// PRO</div>
+      <div class="pricing-price"><sup>$</sup>9<span style="font-size:1.2rem;">.99</span></div>
+      <div class="pricing-cadence">per month · cancel by texting STOP</div>
+      <ul class="pricing-features">
+        <li>Everything in Free</li>
+        <li>All TextOS apps included</li>
+        <li>AI features across all apps</li>
+        <li>Unlimited categories &amp; storage</li>
+        <li>Export &amp; backups</li>
+        <li>Priority access to new apps</li>
+        <li>Text STOP anytime to cancel</li>
+      </ul>
+      <a href="#" class="btn-cta-pro" style="border-color:rgba(0,229,255,0.25);color:var(--gray-lt);">TextOS Pro — Coming Soon</a>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>TextOS · textos.ai · © 2026</p>
+  <p style="margin-top:6px;font-size:0.7rem;">Built in New Orleans, Louisiana. Text STOP anytime to cancel any TextOS service.</p>
+  <div style="margin-top:16px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
+    <a href="/journal/">// BUILD JOURNAL</a>
+    <a href="/textos.html">// PRODUCT VISION</a>
+    <a href="/founder.html">// WHY I BUILT THIS</a>
+  </div>
+</footer>
+
+<script>
+  // Pass referral param to any Stripe links via client_reference_id
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref');
+    if (ref) {
+      sessionStorage.setItem('textos_ref', ref);
+      const stripeLinks = document.querySelectorAll('a[href*="buy.stripe.com"]');
+      stripeLinks.forEach(function(link) {
+        link.href = link.href + '?client_reference_id=' + encodeURIComponent(ref);
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
