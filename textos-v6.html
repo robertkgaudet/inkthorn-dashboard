@@ -894,6 +894,272 @@
       .use-pill { font-size: 0.72rem; padding: 7px 12px; }
       .trust-bar { gap: 12px; }
     }
+
+    /* ─── APP STORE REDESIGN ─── */
+    .as-search {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .as-search input {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      padding: 13px 16px 13px 46px;
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--gray);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .as-search input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 2px rgba(0,229,255,0.12);
+    }
+    .as-search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    /* Category Tabs */
+    .as-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 32px;
+      scrollbar-width: none;
+    }
+    .as-tabs::-webkit-scrollbar { display: none; }
+    .as-tab {
+      flex-shrink: 0;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 7px 18px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--gray);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .as-tab:hover { border-color: rgba(0,229,255,0.3); color: var(--white); }
+    .as-tab.active {
+      background: var(--cyan);
+      border-color: var(--cyan);
+      color: #080e1a;
+      font-weight: 700;
+    }
+
+    /* Featured Banner */
+    .as-featured {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(0,229,255,0.07) 0%, rgba(0,229,255,0.02) 100%);
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .as-featured::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), rgba(0,229,255,0.15));
+    }
+    .as-featured-icon {
+      width: 110px;
+      height: 110px;
+      background: var(--bg3);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.4rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 32px rgba(0,229,255,0.28), inset 0 0 0 1px rgba(0,229,255,0.18);
+    }
+    .as-featured-body { flex: 1; min-width: 0; }
+    .as-featured-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: var(--cyan);
+      text-transform: uppercase;
+      margin-bottom: 7px;
+      opacity: 0.85;
+    }
+    .as-featured-name {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+      line-height: 1.15;
+    }
+    .as-featured-tagline {
+      color: var(--gray-lt);
+      font-size: 0.88rem;
+      margin-bottom: 12px;
+    }
+    .as-featured-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .as-stars { color: var(--amber); font-size: 0.88rem; letter-spacing: 1px; }
+    .as-rating-num { color: var(--gray-lt); font-size: 0.82rem; font-weight: 600; }
+    .as-rating-count { color: var(--gray); font-size: 0.75rem; }
+    .as-price-tag {
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.28);
+      color: var(--green);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .as-featured-open {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--cyan);
+      color: #080e1a;
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      padding: 13px 30px;
+      border-radius: 8px;
+      box-shadow: var(--glow-cyan);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .as-featured-open:hover { transform: translateY(-2px); box-shadow: 0 0 48px rgba(0,229,255,0.55); }
+
+    /* App Store Grid */
+    .as-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .as-card {
+      background: var(--bg2);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: background 0.2s;
+    }
+    .as-card:hover { background: var(--bg3); }
+    .as-card-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.85rem;
+      flex-shrink: 0;
+    }
+    /* Icon tints */
+    .icon-cyan   { background: rgba(0,229,255,0.09);   box-shadow: inset 0 0 0 1px rgba(0,229,255,0.2); }
+    .icon-amber  { background: rgba(245,158,11,0.09);  box-shadow: inset 0 0 0 1px rgba(245,158,11,0.2); }
+    .icon-green  { background: rgba(16,185,129,0.09);  box-shadow: inset 0 0 0 1px rgba(16,185,129,0.2); }
+    .icon-pink   { background: rgba(255,45,120,0.09);  box-shadow: inset 0 0 0 1px rgba(255,45,120,0.2); }
+    .icon-purple { background: rgba(168,85,247,0.09);  box-shadow: inset 0 0 0 1px rgba(168,85,247,0.2); }
+
+    .as-card-body { flex: 1; min-width: 0; }
+    .as-card-name {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 2px;
+    }
+    .as-card-sub {
+      color: var(--gray);
+      font-size: 0.72rem;
+      line-height: 1.4;
+      margin-bottom: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .as-card-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.67rem;
+    }
+    .as-card-stars { color: var(--amber); letter-spacing: 0.5px; }
+    .as-card-rnum { color: var(--gray-lt); font-weight: 600; }
+    .as-card-price { color: var(--gray); }
+
+    .as-btn {
+      flex-shrink: 0;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 7px 15px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      display: inline-block;
+    }
+    .as-btn-open {
+      background: rgba(0,229,255,0.12);
+      border: 1px solid rgba(0,229,255,0.35);
+      color: var(--cyan);
+    }
+    .as-btn-open:hover { background: rgba(0,229,255,0.22); }
+    .as-btn-notify {
+      background: rgba(136,153,187,0.08);
+      border: 1px solid rgba(136,153,187,0.18);
+      color: var(--gray);
+    }
+    .as-btn-notify:hover { border-color: rgba(136,153,187,0.38); color: var(--white); }
+
+    /* More Coming Soon footer */
+    .as-more {
+      text-align: center;
+      padding: 22px;
+      font-size: 0.82rem;
+      color: rgba(0,229,255,0.45);
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 640px) {
+      .as-grid { grid-template-columns: 1fr; }
+      .as-featured { flex-direction: column; text-align: center; padding: 22px 20px; }
+      .as-featured-meta { justify-content: center; }
+      .as-featured-icon { width: 80px; height: 80px; font-size: 2.4rem; }
+      .as-card-sub { white-space: normal; }
+    }
   </style>
 </head>
 <body>
@@ -959,146 +1225,152 @@
   <h2>Simple Apps. Delivered by Text.</h2>
   <p class="section-intro">Every app does one thing. You use it by texting. Pick one and start now.</p>
 
-  <div class="app-grid">
+  <!-- Search Bar -->
+  <div class="as-search">
+    <span class="as-search-icon">🔍</span>
+    <input type="text" placeholder="Search apps..." readonly tabindex="-1" />
+  </div>
 
-    <!-- InkThorn Notes — LIVE -->
-    <div class="app-card live">
-      <div class="app-card-header">
-        <div class="app-name">🦞 InkThorn Notes</div>
-        <span class="status-badge status-live">● Live</span>
+  <!-- Category Tabs -->
+  <div class="as-tabs">
+    <div class="as-tab active">All</div>
+    <div class="as-tab">Productivity</div>
+    <div class="as-tab">Finance</div>
+    <div class="as-tab">Health</div>
+    <div class="as-tab">Content</div>
+    <div class="as-tab">Business</div>
+  </div>
+
+  <!-- Featured App Banner -->
+  <div class="as-featured">
+    <div class="as-featured-icon">🦞</div>
+    <div class="as-featured-body">
+      <div class="as-featured-label">✦ Featured App</div>
+      <div class="as-featured-name">InkThorn Notes</div>
+      <div class="as-featured-tagline">Your grumpy personal note-filer</div>
+      <div class="as-featured-meta">
+        <span class="as-stars">★★★★★</span>
+        <span class="as-rating-num">4.8</span>
+        <span class="as-rating-count">124 ratings</span>
+        <span class="as-price-tag">Free</span>
       </div>
-      <div class="app-desc">Your personal note-filer. Grumpy but reliable.</div>
-      <div class="sms-thread">
-        <div class="bubble-wrap received">
-          <div class="sms-sender-label">InkThorn</div>
-          <div class="bubble bubble-received">Ready to file. What do you want to remember?</div>
-        </div>
-        <div class="bubble-wrap sent">
-          <div class="sms-sender-label right">You</div>
-          <div class="bubble bubble-sent">I need to remember...</div>
-        </div>
-        <div class="bubble-wrap received">
-          <div class="bubble bubble-received">Filed. You're welcome.</div>
+      <a href="https://inkthorn.ai/notes.html" class="as-featured-open">OPEN →</a>
+    </div>
+  </div>
+
+  <!-- App Grid -->
+  <div class="as-grid">
+
+    <!-- 1. InkThorn Notes -->
+    <div class="as-card">
+      <div class="as-card-icon icon-cyan">🦞</div>
+      <div class="as-card-body">
+        <div class="as-card-name">InkThorn Notes</div>
+        <div class="as-card-sub">Your grumpy personal note-filer</div>
+        <div class="as-card-rating">
+          <span class="as-card-stars">★★★★★</span>
+          <span class="as-card-rnum">4.8</span>
+          <span class="as-card-price">· Free</span>
         </div>
       </div>
-      <a href="https://inkthorn.ai/notes.html" class="btn-cta-free" style="margin-top:4px;">Try InkThorn Free →</a>
+      <a href="https://inkthorn.ai/notes.html" class="as-btn as-btn-open">OPEN</a>
     </div>
 
-    <!-- RemindMe — Coming Soon -->
-    <div class="app-card">
-      <div class="app-card-header">
-        <div class="app-name">⏰ RemindMe</div>
-        <span class="status-badge status-soon">Coming Soon</span>
-      </div>
-      <div class="app-desc">Text a reminder. It texts you back.</div>
-      <div class="sms-thread">
-        <div class="bubble-wrap sent">
-          <div class="sms-sender-label right">You</div>
-          <div class="bubble bubble-sent">Remind me to call the dentist tomorrow at 9am</div>
-        </div>
-        <div class="bubble-wrap received">
-          <div class="sms-sender-label">RemindMe</div>
-          <div class="bubble bubble-received">Set. I'll text you at 9:00 AM tomorrow. Don't ignore it this time.</div>
+    <!-- 2. RemindMe -->
+    <div class="as-card">
+      <div class="as-card-icon icon-amber">⏰</div>
+      <div class="as-card-body">
+        <div class="as-card-name">RemindMe</div>
+        <div class="as-card-sub">Text it. Get reminded.</div>
+        <div class="as-card-rating">
+          <span class="as-card-stars">★★★★☆</span>
+          <span class="as-card-rnum">4.5</span>
+          <span class="as-card-price">· Coming Soon</span>
         </div>
       </div>
+      <span class="as-btn as-btn-notify">NOTIFY</span>
     </div>
 
-    <!-- SpendSnap — Coming Soon -->
-    <div class="app-card">
-      <div class="app-card-header">
-        <div class="app-name">💸 SpendSnap</div>
-        <span class="status-badge status-soon">Coming Soon</span>
-      </div>
-      <div class="app-desc">Log expenses by text. Running total always ready.</div>
-      <div class="sms-thread">
-        <div class="bubble-wrap sent">
-          <div class="sms-sender-label right">You</div>
-          <div class="bubble bubble-sent">Spent $47 at Rouses on groceries</div>
-        </div>
-        <div class="bubble-wrap received">
-          <div class="sms-sender-label">SpendSnap</div>
-          <div class="bubble bubble-received">Logged. Groceries: $47. This month's total: $312.</div>
+    <!-- 3. SpendSnap -->
+    <div class="as-card">
+      <div class="as-card-icon icon-green">💸</div>
+      <div class="as-card-body">
+        <div class="as-card-name">SpendSnap</div>
+        <div class="as-card-sub">Log expenses by text</div>
+        <div class="as-card-rating">
+          <span class="as-card-stars">★★★★★</span>
+          <span class="as-card-rnum">4.9</span>
+          <span class="as-card-price">· Coming Soon</span>
         </div>
       </div>
+      <span class="as-btn as-btn-notify">NOTIFY</span>
     </div>
 
-    <!-- ScriptReady — Coming Soon -->
-    <div class="app-card">
-      <div class="app-card-header">
-        <div class="app-name">🎬 ScriptReady</div>
-        <span class="status-badge status-soon">Coming Soon</span>
-      </div>
-      <div class="app-desc">Text your script. Get a teleprompter link.</div>
-      <div class="sms-thread">
-        <div class="bubble-wrap sent">
-          <div class="sms-sender-label right">You</div>
-          <div class="bubble bubble-sent">Here's my script for today's video...</div>
-        </div>
-        <div class="bubble-wrap received">
-          <div class="sms-sender-label">ScriptReady</div>
-          <div class="bubble bubble-received">Teleprompter ready → textos.ai/tp/a7x2k</div>
+    <!-- 4. ScriptReady -->
+    <div class="as-card">
+      <div class="as-card-icon icon-pink">🎬</div>
+      <div class="as-card-body">
+        <div class="as-card-name">ScriptReady</div>
+        <div class="as-card-sub">Teleprompter in a text</div>
+        <div class="as-card-rating">
+          <span class="as-card-stars">★★★★☆</span>
+          <span class="as-card-rnum">4.6</span>
+          <span class="as-card-price">· Coming Soon</span>
         </div>
       </div>
+      <span class="as-btn as-btn-notify">NOTIFY</span>
     </div>
 
-    <!-- DayDone — Coming Soon -->
-    <div class="app-card">
-      <div class="app-card-header">
-        <div class="app-name">✅ DayDone</div>
-        <span class="status-badge status-soon">Coming Soon</span>
-      </div>
-      <div class="app-desc">Text your habits. Track your streaks.</div>
-      <div class="sms-thread">
-        <div class="bubble-wrap sent">
-          <div class="sms-sender-label right">You</div>
-          <div class="bubble bubble-sent">Did my workout and drank 8 glasses of water</div>
-        </div>
-        <div class="bubble-wrap received">
-          <div class="sms-sender-label">DayDone</div>
-          <div class="bubble bubble-received">Workout: 🔥 14-day streak. Water: ✓. Keep going.</div>
+    <!-- 5. DayDone -->
+    <div class="as-card">
+      <div class="as-card-icon icon-purple">✅</div>
+      <div class="as-card-body">
+        <div class="as-card-name">DayDone</div>
+        <div class="as-card-sub">Text your habits. Keep your streaks.</div>
+        <div class="as-card-rating">
+          <span class="as-card-stars">★★★★★</span>
+          <span class="as-card-rnum">4.7</span>
+          <span class="as-card-price">· Coming Soon</span>
         </div>
       </div>
+      <span class="as-btn as-btn-notify">NOTIFY</span>
     </div>
 
-    <!-- TaxJar — Coming Soon -->
-    <div class="app-card">
-      <div class="app-card-header">
-        <div class="app-name">🧾 TaxJar</div>
-        <span class="status-badge status-soon">Coming Soon</span>
-      </div>
-      <div class="app-desc">Log 1099 income. Know what you owe the IRS.</div>
-      <div class="sms-thread">
-        <div class="bubble-wrap sent">
-          <div class="sms-sender-label right">You</div>
-          <div class="bubble bubble-sent">Got paid $2,500 from client X</div>
-        </div>
-        <div class="bubble-wrap received">
-          <div class="sms-sender-label">TaxJar</div>
-          <div class="bubble bubble-received">Logged. 1099 YTD: $18,400. Estimated owed: ~$4,100. Don't spend it all.</div>
+    <!-- 6. TaxJar -->
+    <div class="as-card">
+      <div class="as-card-icon icon-amber">🧾</div>
+      <div class="as-card-body">
+        <div class="as-card-name">TaxJar</div>
+        <div class="as-card-sub">Know what you owe. Always.</div>
+        <div class="as-card-rating">
+          <span class="as-card-stars">★★★★☆</span>
+          <span class="as-card-rnum">4.4</span>
+          <span class="as-card-price">· Coming Soon</span>
         </div>
       </div>
+      <span class="as-btn as-btn-notify">NOTIFY</span>
     </div>
 
-    <!-- SiteBuilder — Coming Soon -->
-    <div class="app-card">
-      <div class="app-card-header">
-        <div class="app-name">🌐 SiteBuilder</div>
-        <span class="status-badge status-soon">Coming Soon</span>
-      </div>
-      <div class="app-desc">Spin up a website in under a minute. Describe your business — TextOS builds it, styles it, and puts it live. Update anything by texting.</div>
-      <div class="sms-thread">
-        <div class="bubble-wrap sent">
-          <div class="sms-sender-label right">You</div>
-          <div class="bubble bubble-sent">I run a dog grooming business in New Orleans called Paws &amp; Polish</div>
-        </div>
-        <div class="bubble-wrap received">
-          <div class="sms-sender-label">SiteBuilder</div>
-          <div class="bubble bubble-received">Done. Your site is live at pawsandpolish.textos.ai — logo, services, contact form. Under 60 seconds.</div>
+    <!-- 7. SiteBuilder -->
+    <div class="as-card">
+      <div class="as-card-icon icon-cyan">🌐</div>
+      <div class="as-card-body">
+        <div class="as-card-name">SiteBuilder</div>
+        <div class="as-card-sub">Live website in under 60 seconds</div>
+        <div class="as-card-rating">
+          <span class="as-card-stars">★★★★★</span>
+          <span class="as-card-rnum">5.0</span>
+          <span class="as-card-price">· Coming Soon</span>
         </div>
       </div>
+      <span class="as-btn as-btn-notify">NOTIFY</span>
     </div>
 
   </div>
+
+  <!-- More Coming Soon -->
+  <div class="as-more">// 93 more apps in development<span class="cursor-blink" style="width:0.4ch;height:0.85em;margin-left:6px;vertical-align:middle;"></span></div>
+
 </div>
 
 <hr class="divider" />
@@ -1451,6 +1723,19 @@
     <a href="/founder.html">// WHY I BUILT THIS</a>
   </div>
 </footer>
+
+<script>
+  // App Store category tab switching
+  (function() {
+    var tabs = document.querySelectorAll('.as-tab');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        tabs.forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+      });
+    });
+  })();
+</script>
 
 <script>
   // Pass referral param to any Stripe links via client_reference_id
