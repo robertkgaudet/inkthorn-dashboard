@@ -1304,14 +1304,28 @@
     }
     document.getElementById('signoutBtn').classList.remove('hidden');
 
-    // Show Telegram section
+    // Show Telegram section only if not yet connected
     const section = document.getElementById('telegramSection');
-    section.classList.remove('hidden');
     const code = payload.link_code || '';
     document.getElementById('linkCodeDisplay').textContent = code;
     if (code) {
       const deepLink = `https://t.me/InkThornBot?start=${code}`;
       document.getElementById('telegramDeepLink').href = deepLink;
+    }
+    // Check if Telegram already linked via /api/me
+    try {
+      const meRes = await apiFetch('/api/me');
+      if (meRes.ok) {
+        const me = await meRes.json();
+        if (!me.telegram_chat_id) {
+          section.classList.remove('hidden');
+        }
+        // If telegram_chat_id exists, section stays hidden (already connected)
+      } else {
+        section.classList.remove('hidden');
+      }
+    } catch {
+      section.classList.remove('hidden');
     }
   }
 
