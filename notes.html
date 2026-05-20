@@ -1270,14 +1270,22 @@
     document.getElementById('loginOverlay').classList.add('hidden');
   }
 
-  // Check for token in URL hash (post-OAuth redirect)
+  // Check for token in URL query param or hash (post-OAuth redirect)
   function checkHashToken() {
+    // Check query param first (?token=...)
+    const params = new URLSearchParams(window.location.search);
+    const qToken = params.get('token');
+    if (qToken) {
+      setToken(qToken);
+      history.replaceState(null, '', window.location.pathname);
+      return qToken;
+    }
+    // Fallback: check hash (#token=...)
     const hash = window.location.hash;
     if (hash.startsWith('#token=')) {
       const token = hash.slice(7);
       if (token) {
         setToken(token);
-        // Clean URL
         history.replaceState(null, '', window.location.pathname);
         return token;
       }
