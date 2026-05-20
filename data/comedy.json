@@ -1,39 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-05-19T23:23:11.763Z",
+  "updated": "2026-05-20T13:54:46.957Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-05-19",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "Comedy Beast",
-      "url": "https://504comedy.com/event/41/comedybeast",
-      "venue": "The Howlin' Wolf",
-      "type": "Stand-up",
-      "cost": "$5",
-      "repeat": "Every Tuesday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-19",
-      "time": "8:30pm",
-      "time_sort": 2030,
-      "title": "Open Gym Comedy Open Mic",
-      "url": "https://504comedy.com/event/1321/open-gym-comedy-open-mic",
-      "venue": "Sports Drink",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Tuesday",
-      "start_dt": "2026-05-19T20:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-05-20",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -43,11 +15,11 @@
       "type": "Open Mic",
       "cost": "FREE",
       "repeat": "Every Wednesday",
-      "start_dt": "2026-05-19T21:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-20",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -61,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-20",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -75,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-20",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -89,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-20",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -103,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-05-21",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -117,7 +89,21 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
+      "date": "2026-05-21",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Sexy Bing-oh!",
+      "url": "https://504comedy.com/event/1369/sexy-bingoh",
+      "venue": "Sports Drink",
+      "type": "Storytelling",
+      "cost": "FREE",
+      "repeat": "Thu May 21 2026",
+      "start_dt": "2026-05-21T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Tomorrow",
       "date": "2026-05-21",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -131,7 +117,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-05-21",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -145,7 +131,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-05-21",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -159,7 +145,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-05-21",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -173,7 +159,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-05-21",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -187,7 +173,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-05-21",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -338,50 +324,44 @@
       "cost": "FREE",
       "repeat": "Every Monday",
       "start_dt": "2026-05-25T21:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Tuesday",
+      "date": "2026-05-26",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Comedy Beast",
+      "url": "https://504comedy.com/event/41/comedybeast",
+      "venue": "The Howlin' Wolf",
+      "type": "Stand-up",
+      "cost": "$5",
+      "repeat": "Every Tuesday",
+      "start_dt": "2026-05-25T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Tuesday",
+      "date": "2026-05-26",
+      "time": "8:30pm",
+      "time_sort": 2030,
+      "title": "Open Gym Comedy Open Mic",
+      "url": "https://504comedy.com/event/1321/open-gym-comedy-open-mic",
+      "venue": "Sports Drink",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Tuesday",
+      "start_dt": "2026-05-26T20:30-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-05-19",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-19",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "Comedy Beast",
-          "url": "https://504comedy.com/event/41/comedybeast",
-          "venue": "The Howlin' Wolf",
-          "type": "Stand-up",
-          "cost": "$5",
-          "repeat": "Every Tuesday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-19",
-          "time": "8:30pm",
-          "time_sort": 2030,
-          "title": "Open Gym Comedy Open Mic",
-          "url": "https://504comedy.com/event/1321/open-gym-comedy-open-mic",
-          "venue": "Sports Drink",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Tuesday",
-          "start_dt": "2026-05-19T20:30-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-05-20",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-20",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -391,11 +371,11 @@
           "type": "Open Mic",
           "cost": "FREE",
           "repeat": "Every Wednesday",
-          "start_dt": "2026-05-19T21:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-20",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -409,7 +389,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-20",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -423,7 +403,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-20",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -437,7 +417,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-20",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -452,12 +432,12 @@
       ]
     },
     {
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-05-21",
       "events": [
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-05-21",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -471,7 +451,21 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
+          "date": "2026-05-21",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Sexy Bing-oh!",
+          "url": "https://504comedy.com/event/1369/sexy-bingoh",
+          "venue": "Sports Drink",
+          "type": "Storytelling",
+          "cost": "FREE",
+          "repeat": "Thu May 21 2026",
+          "start_dt": "2026-05-21T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Tomorrow",
           "date": "2026-05-21",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -485,7 +479,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-05-21",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -499,7 +493,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-05-21",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -513,7 +507,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-05-21",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -527,7 +521,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-05-21",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -541,7 +535,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-05-21",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -716,6 +710,40 @@
           "cost": "FREE",
           "repeat": "Every Monday",
           "start_dt": "2026-05-25T21:30-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-05-26",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Tuesday",
+          "date": "2026-05-26",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Comedy Beast",
+          "url": "https://504comedy.com/event/41/comedybeast",
+          "venue": "The Howlin' Wolf",
+          "type": "Stand-up",
+          "cost": "$5",
+          "repeat": "Every Tuesday",
+          "start_dt": "2026-05-25T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Tuesday",
+          "date": "2026-05-26",
+          "time": "8:30pm",
+          "time_sort": 2030,
+          "title": "Open Gym Comedy Open Mic",
+          "url": "https://504comedy.com/event/1321/open-gym-comedy-open-mic",
+          "venue": "Sports Drink",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Tuesday",
+          "start_dt": "2026-05-26T20:30-05:00"
         }
       ]
     }
