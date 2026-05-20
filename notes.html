@@ -1658,6 +1658,25 @@
     await loadNotesFromAPI();
     renderNotes();
     startTimestampTicker();
+    startLiveSync();
+  }
+
+  // Live sync — poll for new notes every 3 seconds
+  function startLiveSync() {
+    setInterval(async () => {
+      const token = getToken();
+      if (!token) return;
+      try {
+        const res = await apiFetch('/api/notes');
+        if (!res.ok) return;
+        const fresh = await res.json();
+        // Only re-render if something changed
+        if (JSON.stringify(fresh) !== JSON.stringify(notesCache)) {
+          notesCache = fresh;
+          renderNotes();
+        }
+      } catch {}
+    }, 3000);
   }
 
   init();
