@@ -1293,7 +1293,7 @@
     return null;
   }
 
-  function applyUserToUI(payload) {
+  async function applyUserToUI(payload) {
     currentUser = payload;
     // Show user info in header
     document.getElementById('headerUserName').textContent = payload.name || payload.email || '';
