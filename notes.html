@@ -1153,6 +1153,7 @@
   </div>
 
   <!-- ═══════════════ TELEGRAM SECTION ═══════════════ -->
+  <!-- Telegram: not connected -->
   <div class="telegram-section hidden" id="telegramSection">
     <h3>✈️ Connect Telegram</h3>
     <p>Send notes to InkThorn directly from Telegram — just message @InkThornBot. He'll grumble about it, but he'll file them.</p>
@@ -1164,6 +1165,15 @@
       ✈️ Open @InkThornBot →
     </a>
     <p style="margin-top: 12px; font-size: 0.78rem; opacity: 0.6;">Click the link above, then hit Start. InkThorn will connect your account automatically.</p>
+  </div>
+
+  <!-- Telegram: connected -->
+  <div class="telegram-section hidden" id="telegramConnectedSection" style="flex-direction: row; align-items: center; justify-content: space-between; gap: 12px;">
+    <div style="display:flex; align-items: center; gap: 10px;">
+      <span style="font-size: 1.2rem;">✅</span>
+      <span style="font-size: 0.92rem; color: var(--cream-dim);">Telegram connected — <span style="color: var(--gold);">@InkThornBot</span></span>
+    </div>
+    <button onclick="disconnectTelegram()" style="background: none; border: 1px solid rgba(192,57,43,0.4); color: var(--red); border-radius: 6px; padding: 6px 14px; font-size: 0.8rem; cursor: pointer; white-space: nowrap; transition: all 0.2s;" onmouseover="this.style.background='rgba(192,57,43,0.12)'" onmouseout="this.style.background='none'">Disconnect</button>
   </div>
 
 </div>
@@ -1317,10 +1327,11 @@
       const meRes = await apiFetch('/api/me');
       if (meRes.ok) {
         const me = await meRes.json();
-        if (!me.telegram_chat_id) {
+        if (me.telegram_chat_id) {
+          document.getElementById('telegramConnectedSection').classList.remove('hidden');
+        } else {
           section.classList.remove('hidden');
         }
-        // If telegram_chat_id exists, section stays hidden (already connected)
       } else {
         section.classList.remove('hidden');
       }
@@ -1598,6 +1609,19 @@
   // ═══════════════════════════════════════════
   //  TELEGRAM CONNECT
   // ═══════════════════════════════════════════
+
+  async function disconnectTelegram() {
+    if (!confirm('Disconnect Telegram? InkThorn will be relieved. Briefly.')) return;
+    try {
+      const res = await apiFetch('/api/disconnect-telegram', { method: 'POST' });
+      if (res.ok) {
+        document.getElementById('telegramConnectedSection').classList.add('hidden');
+        document.getElementById('telegramSection').classList.remove('hidden');
+      }
+    } catch (err) {
+      console.error('Disconnect error:', err);
+    }
+  }
 
   function copyLinkCode() {
     const code = document.getElementById('linkCodeDisplay').textContent;
