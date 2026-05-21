@@ -849,7 +849,7 @@
       <div class="lock-icon">🔒</div>
       <h3>Full Report Locked</h3>
       <p>Unlock 2 more pain points + a complete app idea synthesis — including the B2B pitch you'd use to sell it to business owners.</p>
-      <button class="unlock-btn" onclick="scrollToPricing()">Unlock Full Report →</button>
+      <button class="unlock-btn" onclick="startCheckout()">Get Full Access $29/mo →</button>
     </div>
   </div>
 
@@ -1124,7 +1124,63 @@
     }
   };
 
-  function runAnalysis() {
+  // ── API Config ──
+  const API_BASE = 'https://inkthorn-notes.rgaudet2023.workers.dev';
+
+  // ── Pro badge ──
+  function updateProBadge() {
+    const token = localStorage.getItem('research_token');
+    let badge = document.getElementById('pro-nav-badge');
+    if (token) {
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.id = 'pro-nav-badge';
+        badge.style.cssText = 'font-size:0.65rem;background:rgba(0,245,255,0.15);border:1px solid var(--cyan);color:var(--cyan);border-radius:4px;padding:2px 7px;font-weight:700;letter-spacing:0.1em;margin-left:8px;';
+        badge.textContent = 'PRO';
+        document.querySelector('.nav-logo')?.appendChild(badge);
+      }
+    } else if (badge) {
+      badge.remove();
+    }
+  }
+
+  // ── On page load: handle ?session=xxx&metro=xxx&trade=xxx ──
+  async function handlePageLoad() {
+    updateProBadge();
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session');
+    const metroParam = params.get('metro');
+    const tradeParam = params.get('trade');
+
+    if (sessionId) {
+      try {
+        const res = await fetch(`${API_BASE}/api/research/session?checkout_session_id=${encodeURIComponent(sessionId)}`);
+        if (res.ok) {
+          const { token } = await res.json();
+          if (token) {
+            localStorage.setItem('research_token', token);
+            updateProBadge();
+          }
+        }
+      } catch (e) {
+        console.warn('Session verify failed:', e);
+      }
+
+      // Clean URL
+      const cleanUrl = window.location.pathname;
+      window.history.replaceState({}, '', cleanUrl);
+
+      // Auto-run scan if metro/trade provided
+      if (metroParam && tradeParam) {
+        document.getElementById('metro-input').value = metroParam;
+        document.getElementById('trade-select').value = tradeParam;
+        setTimeout(() => runAnalysis(), 400);
+        return;
+      }
+    }
+  }
+
+  async function runAnalysis() {
     const metro = document.getElementById('metro-input').value.trim();
     const trade = document.getElementById('trade-select').value;
 
@@ -1155,50 +1211,146 @@
       'Generating app idea synthesis...',
     ];
 
-    let i = 0;
+    let stepIdx = 0;
     const interval = setInterval(() => {
-      if (i < steps.length) {
-        document.getElementById('loading-steps').textContent = steps[i];
-        i++;
+      if (stepIdx < steps.length) {
+        document.getElementById('loading-steps').textContent = steps[stepIdx];
+        stepIdx++;
       }
     }, 700);
 
-    setTimeout(() => {
-      clearInterval(interval);
-      document.getElementById('loading-section').style.display = 'none';
-      showResults(metro, trade);
-      document.getElementById('run-btn').disabled = false;
-    }, 4500);
+    // Call real API (with fallback to DEMO_DATA)
+    let data = null;
+    try {
+      const sessionToken = localStorage.getItem('research_token') || undefined;
+      const res = await fetch(`${API_BASE}/api/research/scan`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ metro, trade, sessionToken }),
+      });
+      if (res.ok) {
+        data = await res.json();
+      }
+    } catch (e) {
+      console.warn('API call failed, using demo data:', e);
+    }
+
+    clearInterval(interval);
+
+    // If API failed, fall back to DEMO_DATA
+    if (!data) {
+      const demo = DEMO_DATA[trade];
+      if (demo) {
+        data = {
+          title: demo.title + ' — ' + metro,
+          metro,
+          trade,
+          reviewCount: demo.reviewCount,
+          businessCount: demo.businessCount,
+          isPro: false,
+          painPoints: demo.freePains.map(p => ({
+            title: p.title,
+            severity: p.badge,
+            description: p.desc,
+            reviewExcerpt: p.sample,
+            icon: p.icon,
+          })),
+        };
+      }
+    }
+
+    document.getElementById('loading-section').style.display = 'none';
+    document.getElementById('run-btn').disabled = false;
+
+    if (data) showResults(data);
   }
 
-  function showResults(metro, trade) {
-    const data = DEMO_DATA[trade];
-    if (!data) return;
+  function severityClass(sev) {
+    if (!sev) return 'badge-medium';
+    const s = sev.toUpperCase();
+    if (s === 'CRITICAL') return 'badge-critical';
+    if (s === 'HIGH') return 'badge-high';
+    return 'badge-medium';
+  }
 
-    const tradeName = document.getElementById('trade-select').options[document.getElementById('trade-select').selectedIndex].text.replace(/^[^\s]+ /, '');
+  function showResults(data) {
+    const isPro = data.isPro || false;
+    const points = data.painPoints || [];
 
-    document.getElementById('results-title').textContent = data.title + ' — ' + metro;
+    document.getElementById('results-title').textContent = data.title || `${data.trade} — ${data.metro}`;
     document.getElementById('results-sub').textContent =
-      'Analyzed ' + data.reviewCount + ' low-rated reviews across ' + data.businessCount + ' businesses · Top recurring pain points';
+      `Analyzed ${data.reviewCount || '?'} low-rated reviews across ${data.businessCount || '?'} businesses · Top recurring pain points`;
+    document.getElementById('results-badge').textContent = isPro ? 'PRO REPORT' : 'FREE REPORT';
+    if (isPro) {
+      document.getElementById('results-badge').style.background = 'rgba(0,245,255,0.15)';
+      document.getElementById('results-badge').style.borderColor = 'rgba(0,245,255,0.4)';
+    }
 
-    // Render free pain cards
+    // Render visible pain cards
     const container = document.getElementById('free-pain-cards');
     container.innerHTML = '';
-    data.freePains.forEach((p, idx) => {
+
+    points.forEach((p, idx) => {
       const card = document.createElement('div');
       card.className = 'pain-card fade-in';
-      card.style.animationDelay = (idx * 0.1) + 's';
+      card.style.animationDelay = (idx * 0.08) + 's';
+
+      let extraHtml = '';
+      if (isPro && p.appIdea) {
+        extraHtml += `
+          <details class="pro-extra" style="margin-top:12px;">
+            <summary style="cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--purple);letter-spacing:0.05em;list-style:none;display:flex;align-items:center;gap:6px;">
+              <span>🚀</span> App Idea
+            </summary>
+            <div style="margin-top:8px;padding:10px 12px;background:rgba(157,78,221,0.08);border-radius:6px;border-left:3px solid var(--purple);font-size:0.82rem;color:#ccc;line-height:1.6;">
+              ${p.appIdea}
+            </div>
+          </details>`;
+      }
+      if (isPro && p.b2bPitch) {
+        extraHtml += `
+          <details class="pro-extra" style="margin-top:8px;">
+            <summary style="cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--cyan);letter-spacing:0.05em;list-style:none;display:flex;align-items:center;gap:6px;">
+              <span>💼</span> B2B Pitch Script
+            </summary>
+            <div style="margin-top:8px;padding:10px 12px;background:rgba(0,245,255,0.06);border-radius:6px;border-left:3px solid var(--cyan);font-size:0.82rem;color:#ccc;line-height:1.6;font-style:italic;">
+              ${p.b2bPitch}
+            </div>
+          </details>`;
+      }
+
       card.innerHTML = `
-        <div class="pain-icon">${p.icon}</div>
+        <div class="pain-icon">${p.icon || '💬'}</div>
         <div class="pain-body">
           <h3>Pain Point #${idx + 1} — ${p.title}</h3>
-          <p>${p.desc}</p>
-          <div class="pain-sample">${p.sample}</div>
+          <p>${p.description}</p>
+          <div class="pain-sample">${p.reviewExcerpt || ''}</div>
+          ${extraHtml}
         </div>
-        <span class="pain-badge ${p.badgeClass}">${p.badge}</span>
+        <span class="pain-badge ${severityClass(p.severity)}">${p.severity || 'HIGH'}</span>
       `;
       container.appendChild(card);
     });
+
+    // Show/hide locked section
+    const lockedSection = document.querySelector('.locked-section');
+    if (isPro) {
+      if (lockedSection) lockedSection.style.display = 'none';
+    } else {
+      if (lockedSection) lockedSection.style.display = '';
+      // Update locked card previews if we have them
+      if (data.lockedPoints && data.lockedPoints.length) {
+        const lockedBlur = document.querySelector('.locked-blur');
+        if (lockedBlur) {
+          const lockedCards = lockedBlur.querySelectorAll('.locked-card');
+          data.lockedPoints.forEach((lp, i) => {
+            if (lockedCards[i]) {
+              lockedCards[i].querySelector('h3').textContent = `💬 Pain Point #${points.length + i + 1} — ${lp.title}`;
+            }
+          });
+        }
+      }
+    }
 
     const section = document.getElementById('results-section');
     section.style.display = 'block';
@@ -1210,9 +1362,62 @@
     document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
   }
 
+  // ── Pricing / Checkout buttons ──
+  async function startCheckout() {
+    const metro = document.getElementById('metro-input').value.trim() || '';
+    const trade = document.getElementById('trade-select').value || '';
+    try {
+      const res = await fetch(`${API_BASE}/api/research/checkout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ metro, trade }),
+      });
+      if (res.ok) {
+        const { checkout_url } = await res.json();
+        if (checkout_url) {
+          window.location.href = checkout_url;
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn('Checkout failed:', e);
+    }
+    // Fallback
+    alert('Unable to start checkout. Please try again.');
+  }
+
+  // Wire up all unlock/pro buttons
+  document.addEventListener('DOMContentLoaded', () => {
+    handlePageLoad();
+
+    // Nav CTA
+    const navCta = document.querySelector('.nav-cta');
+    if (navCta) {
+      navCta.addEventListener('click', (e) => {
+        e.preventDefault();
+        startCheckout();
+      });
+    }
+
+    // Pro pricing button
+    const proBtn = document.getElementById('pro-btn');
+    if (proBtn) {
+      proBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        startCheckout();
+      });
+    }
+
+    // Unlock button (in locked overlay)
+    const unlockBtn = document.querySelector('.unlock-btn');
+    if (unlockBtn) {
+      unlockBtn.onclick = startCheckout;
+    }
+  });
+
   // Keyboard shortcut
   document.addEventListener('keydown', e => {
-    if (e.key === 'Enter') runAnalysis();
+    if (e.key === 'Enter' && document.activeElement !== document.querySelector('.unlock-btn')) runAnalysis();
   });
 </script>
 
