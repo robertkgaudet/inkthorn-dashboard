@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Review Intelligence — App Idea Research Tool | InkThorn</title>
+  <meta name="description" content="Find high-value app ideas hidden in negative reviews for home service businesses. Turn 1-star reviews into your next SaaS product." />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink: #ff2d78;
+      --cyan: #00f5ff;
+      --purple: #9d4edd;
+      --gold: #ffd700;
+      --bg: #07070f;
+      --surface: #0f0f1e;
+      --surface2: #161628;
+      --border: rgba(0,245,255,0.15);
+      --text: #e8e8f0;
+      --muted: #7a7a9a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── GRID BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7,7,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 36px;
+      width: 36px;
+      object-fit: contain;
+    }
+
+    .nav-logo span {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-badge {
+      font-size: 0.7rem;
+      color: var(--pink);
+      border: 1px solid var(--pink);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 80px 2rem 60px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(255,45,120,0.12);
+      border: 1px solid rgba(255,45,120,0.35);
+      color: var(--pink);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff 0%, var(--cyan) 60%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .hero p strong {
+      color: var(--cyan);
+      -webkit-text-fill-color: var(--cyan);
+    }
+
+    /* ── SEARCH CARD ── */
+    .search-card {
+      position: relative;
+      z-index: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      max-width: 720px;
+      margin: 0 auto 60px;
+      box-shadow: 0 0 60px rgba(0,245,255,0.06);
+    }
+
+    .search-card h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--cyan);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 14px;
+      align-items: end;
+    }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .field input, .field select {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+
+    .field input:focus, .field select:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(0,245,255,0.08);
+    }
+
+    .field input::placeholder { color: var(--muted); }
+
+    .field select option {
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    .run-btn {
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #07070f;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .run-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(0,245,255,0.3);
+    }
+    .run-btn:active { transform: translateY(0); }
+    .run-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .search-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-section {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto 70px;
+      padding: 0 2rem;
+    }
+
+    .section-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 600px) { .steps { grid-template-columns: 1fr; } }
+
+    .step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .step-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--cyan);
+      opacity: 0.3;
+      margin-bottom: 10px;
+    }
+
+    .step h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── LOADING ── */
+    #loading-section {
+      display: none;
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto 60px;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .loading-pulse {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 30px;
+    }
+
+    .loading-dots span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: dot-pulse 1.4s ease-in-out infinite;
+    }
+    .loading-dots span:nth-child(2) { animation-delay: 0.2s; background: var(--purple); }
+    .loading-dots span:nth-child(3) { animation-delay: 0.4s; background: var(--pink); }
+
+    @keyframes dot-pulse {
+      0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+      40% { transform: scale(1.2); opacity: 1; }
+    }
+
+    .loading-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem;
+      color: var(--cyan);
+      letter-spacing: 0.1em;
+    }
+
+    #loading-steps {
+      margin-top: 16px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+      min-height: 1.4em;
+    }
+
+    /* ── RESULTS ── */
+    #results-section {
+      display: none;
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto 80px;
+      padding: 0 2rem;
+    }
+
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .results-meta h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .results-meta span {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .results-badge {
+      background: rgba(0,245,255,0.1);
+      border: 1px solid rgba(0,245,255,0.25);
+      color: var(--cyan);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.06em;
+    }
+
+    /* pain point cards */
+    .pain-cards {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .pain-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .pain-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .pain-body {}
+    .pain-body h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .pain-body p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .pain-sample {
+      margin-top: 10px;
+      background: rgba(255,45,120,0.06);
+      border-left: 3px solid var(--pink);
+      padding: 8px 12px;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.82rem;
+      color: #bbb;
+      font-style: italic;
+    }
+
+    .pain-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .badge-critical {
+      background: rgba(255,45,120,0.15);
+      color: var(--pink);
+      border: 1px solid rgba(255,45,120,0.3);
+    }
+    .badge-high {
+      background: rgba(255,165,0,0.12);
+      color: #ffa500;
+      border: 1px solid rgba(255,165,0,0.3);
+    }
+    .badge-medium {
+      background: rgba(157,78,221,0.12);
+      color: var(--purple);
+      border: 1px solid rgba(157,78,221,0.3);
+    }
+
+    /* locked section */
+    .locked-section {
+      position: relative;
+      margin-top: 8px;
+    }
+
+    .locked-blur {
+      filter: blur(6px);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .lock-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(7,7,15,0.7);
+      border-radius: 12px;
+      z-index: 10;
+      gap: 16px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .lock-icon { font-size: 2.5rem; }
+
+    .lock-overlay h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .lock-overlay p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      max-width: 340px;
+      line-height: 1.6;
+    }
+
+    .unlock-btn {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      border: none;
+      padding: 13px 32px;
+      border-radius: 8px;
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .unlock-btn:hover {
+      opacity: 0.9;
+      box-shadow: 0 6px 24px rgba(255,45,120,0.4);
+      transform: translateY(-1px);
+    }
+
+    .locked-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin-bottom: 12px;
+    }
+    .locked-card h3 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+    .locked-card p { font-size: 0.82rem; color: var(--muted); }
+
+    /* app idea card */
+    .idea-card {
+      background: linear-gradient(135deg, rgba(157,78,221,0.08), rgba(0,245,255,0.05));
+      border: 1px solid rgba(157,78,221,0.3);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 12px;
+    }
+    .idea-card h3 { font-size: 0.82rem; color: var(--purple); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+    .idea-card h4 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
+    .idea-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── PRICING SECTION ── */
+    .pricing-section {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto 80px;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
+    .pricing-section h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--text), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .pricing-section > p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 500px) { .pricing-cards { grid-template-columns: 1fr; } }
+
+    .price-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      text-align: left;
+    }
+
+    .price-card.featured {
+      border-color: var(--cyan);
+      box-shadow: 0 0 30px rgba(0,245,255,0.08);
+    }
+
+    .price-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .price-card.featured .price-label { color: var(--cyan); }
+
+    .price-amount {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .price-amount span {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 400;
+    }
+
+    .price-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .price-features {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .price-features li {
+      font-size: 0.83rem;
+      color: var(--text);
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .price-features li::before { content: '✓'; color: var(--cyan); font-weight: 700; }
+    .price-features li.locked-feat::before { content: '🔒'; font-size: 0.8rem; }
+    .price-features li.locked-feat { color: var(--muted); }
+
+    .price-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 11px;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .price-btn-free {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .price-btn-free:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    .price-btn-pro {
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      border: none;
+      color: #07070f;
+      font-weight: 800;
+    }
+    .price-btn-pro:hover {
+      opacity: 0.9;
+      box-shadow: 0 4px 20px rgba(0,245,255,0.3);
+      transform: translateY(-1px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 32px 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    footer a { color: var(--cyan); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── UTIL ── */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      margin: 0 auto 60px;
+      border-radius: 2px;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="inkthorn-mascot-small.png" alt="InkThorn" />
+    <span>InkThorn</span>
+    <div class="nav-badge">Research</div>
+  </a>
+  <a href="#pricing" class="nav-cta">Get Full Access</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">🔍 Review Intelligence Engine</div>
+  <h1>Find the App Idea Hidden in Every 1-Star Review</h1>
+  <p>
+    Negative reviews aren't just complaints. They're <strong>validated pain points</strong> from real customers who cared enough to say something. We turn them into your next product.
+  </p>
+</section>
+
+<!-- SEARCH CARD -->
+<div class="search-card">
+  <h2>⚡ Run a Research Scan</h2>
+  <div class="form-row">
+    <div class="field">
+      <label>Metro Area</label>
+      <input type="text" id="metro-input" placeholder="e.g. New Orleans, LA" value="" />
+    </div>
+    <div class="field">
+      <label>Trade Category</label>
+      <select id="trade-select">
+        <option value="">— Select a trade —</option>
+        <option value="plumbers">🔧 Plumbers</option>
+        <option value="hvac">❄️ HVAC</option>
+        <option value="electricians">⚡ Electricians</option>
+        <option value="roofers">🏠 Roofers</option>
+        <option value="garage-door">🚪 Garage Door</option>
+        <option value="locksmith">🔑 Locksmiths</option>
+        <option value="pest-control">🐛 Pest Control</option>
+      </select>
+    </div>
+    <button class="run-btn" id="run-btn" onclick="runAnalysis()">RUN SCAN</button>
+  </div>
+  <p class="search-note">Free scan includes 3 pain points · Full report unlocked with Pro access</p>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-section" id="how-section">
+  <div class="section-label">How it works</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>We Scan the Reviews</h3>
+      <p>We pull 1-star and 2-star reviews from Yelp, Google, and BBB for real businesses in your chosen metro.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>We Find the Patterns</h3>
+      <p>Our AI clusters complaints into recurring pain points — the problems that show up again and again.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>We Name the Product</h3>
+      <p>Each pain point maps to an app concept — with both the customer angle and the B2B pitch.</p>
+    </div>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div id="loading-section">
+  <div class="loading-pulse">
+    <div class="loading-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="loading-label" id="loading-label">SCANNING REVIEWS...</div>
+  </div>
+  <div id="loading-steps">Searching Yelp and Google for low-rated businesses in your area...</div>
+</div>
+
+<!-- RESULTS -->
+<div id="results-section">
+
+  <div class="results-header">
+    <div class="results-meta">
+      <h2 id="results-title">Plumbers — New Orleans, LA</h2>
+      <span id="results-sub">Analyzed 47 low-rated reviews across 8 businesses · Top recurring pain points</span>
+    </div>
+    <div class="results-badge" id="results-badge">FREE REPORT</div>
+  </div>
+
+  <!-- FREE PAIN POINTS -->
+  <div class="pain-cards" id="free-pain-cards">
+    <!-- populated by JS -->
+  </div>
+
+  <!-- LOCKED SECTION -->
+  <div class="locked-section">
+    <div class="locked-blur">
+      <div class="locked-card">
+        <h3>💬 Pain Point #4 — [Unlocked in Pro]</h3>
+        <p>Lorem ipsum dolor sit amet, recurring complaint about customer experience and trust. Multiple businesses share this exact pattern across reviews. The app opportunity is clear and monetizable.</p>
+      </div>
+      <div class="locked-card">
+        <h3>💬 Pain Point #5 — [Unlocked in Pro]</h3>
+        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Customers report this failure consistently at the most critical moment of the service relationship.</p>
+      </div>
+      <div class="idea-card">
+        <h3>🚀 App Idea Synthesis</h3>
+        <h4>The Complete Product Roadmap</h4>
+        <p>Based on all 5 pain points, here is a specific app concept including target user, core features, pricing model, and your B2B sales pitch to local business owners. This is the section that turns research into a business.</p>
+      </div>
+    </div>
+    <div class="lock-overlay">
+      <div class="lock-icon">🔒</div>
+      <h3>Full Report Locked</h3>
+      <p>Unlock 2 more pain points + a complete app idea synthesis — including the B2B pitch you'd use to sell it to business owners.</p>
+      <button class="unlock-btn" onclick="scrollToPricing()">Unlock Full Report →</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- DIVIDER -->
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <h2>Choose Your Access</h2>
+  <p>One tool. One insight. Could be your next product idea.</p>
+  <div class="pricing-cards">
+    <div class="price-card">
+      <div class="price-label">Free</div>
+      <div class="price-amount">$0</div>
+      <div class="price-desc">Try any market scan and see the top 3 pain points.</div>
+      <ul class="price-features">
+        <li>Unlimited scans</li>
+        <li>Top 3 pain points</li>
+        <li>Real review excerpts</li>
+        <li class="locked-feat">Full pain point list</li>
+        <li class="locked-feat">App idea synthesis</li>
+        <li class="locked-feat">B2B sales pitch</li>
+        <li class="locked-feat">Export to PDF</li>
+      </ul>
+      <a href="#" class="price-btn price-btn-free" onclick="return false;">You're on Free</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-label">Pro — Most Popular</div>
+      <div class="price-amount">$29 <span>/ month</span></div>
+      <div class="price-desc">Full reports for every trade, every market. Unlimited.</div>
+      <ul class="price-features">
+        <li>Unlimited scans</li>
+        <li>All pain points (5–8)</li>
+        <li>Real review excerpts</li>
+        <li>App idea synthesis</li>
+        <li>B2B pitch scripts</li>
+        <li>Export to PDF</li>
+        <li>New markets weekly</li>
+      </ul>
+      <a href="#" class="price-btn price-btn-pro" id="pro-btn">Get Full Access →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built by <a href="/">InkThorn</a> · New Orleans, LA · <a href="mailto:hello@inkthorn.ai">hello@inkthorn.ai</a></p>
+</footer>
+
+<!-- ── DATA + LOGIC ── -->
+<script>
+  // ── DEMO DATA for each trade ──
+  const DEMO_DATA = {
+    plumbers: {
+      title: "Plumbers",
+      reviewCount: 47,
+      businessCount: 8,
+      freePains: [
+        {
+          icon: "📞",
+          title: "No-Show, No-Call",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "The single most common complaint across plumbing reviews: the technician schedules a window, the customer waits all day, and nobody shows up — and nobody calls. This isn't a bad tech problem, it's a communication system problem.",
+          sample: '"Scheduled between 10am-2pm. Called at 3pm — went to voicemail. Never showed, never called back. This is the second time." — Yelp, 1★'
+        },
+        {
+          icon: "💰",
+          title: "Surprise Pricing at the Door",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Customers are quoted one price on the phone, then hit with a dramatically higher number once the tech is in the house. At that point they feel trapped — the pipe is already open, they can't say no. Multiple reviews use the word 'scam' or 'fraud.'",
+          sample: '"Quoted $180 on the phone. Tech shows up and says it\'ll be $490 \'once he looked at it.\' I was literally holding a wrench in my hand already." — Google, 1★'
+        },
+        {
+          icon: "🔁",
+          title: "Same Problem Returns Within Weeks",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Customers pay for a fix, and the issue comes back in days or weeks. No warranty explanation was given, no follow-up call, no accountability. The business treats it as a new job; the customer feels robbed.",
+          sample: '"Paid $340 to fix a leak. Three weeks later same leak. Called back — they want to charge me again. Completely unbelievable." — Yelp, 1★'
+        }
+      ]
+    },
+    hvac: {
+      title: "HVAC",
+      reviewCount: 52,
+      businessCount: 9,
+      freePains: [
+        {
+          icon: "🌡️",
+          title: "Emergency Calls During Heat Waves — Ignored",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "HVAC failures during peak summer heat generate the most furious reviews. Customers call during genuine emergencies — elderly relatives in 95° heat — and get put on a multi-day waitlist or simply not called back. This is the highest emotional intensity category.",
+          sample: '"My 78-year-old mother has no AC in July New Orleans heat. Called 6 times over 2 days. Not one callback. This is dangerous, not just inconvenient." — Google, 1★'
+        },
+        {
+          icon: "📋",
+          title: "Tech Upsells Parts You Don't Need",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "A recurring trust-destroyer: tech diagnoses a failing capacitor, replaces it for $400, system fails again the next day, second tech says the first part was fine and something else needed replacing. Customers suspect (often correctly) that techs upsell unnecessary parts.",
+          sample: '"First tech said it was the capacitor — $380. Didn\'t fix it. Second tech said the capacitor was fine all along. Someone is lying." — Yelp, 1★'
+        },
+        {
+          icon: "📅",
+          title: "Maintenance Plan — Never Delivers",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Customers sign annual maintenance contracts and never receive the promised seasonal tune-ups. When they call to schedule, they're told availability is 3-6 weeks out. They paid for priority service and get treated worse than new customers.",
+          sample: '"Paid $299 for the annual plan. Called in April for spring tune-up. Earliest they could come was June. What am I paying for?" — Google, 2★'
+        }
+      ]
+    },
+    electricians: {
+      title: "Electricians",
+      reviewCount: 38,
+      businessCount: 7,
+      freePains: [
+        {
+          icon: "🕐",
+          title: "Hourly Billing Surprises",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Electricians bill by the hour — and customers feel the clock starts running from the moment the truck leaves the shop, not when the tech arrives. Reviews show consistent shock at seeing 2–3 hours billed for what felt like a 45-minute job.",
+          sample: '"Was told $95/hr. Got a bill for 3.5 hours. The job took 45 minutes. He must have driven from Baton Rouge." — Yelp, 1★'
+        },
+        {
+          icon: "🔌",
+          title: "Left Job Incomplete, Won\'t Return Calls",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Electrician starts a panel upgrade or rewire job, collects a deposit, then disappears mid-job. The house is left with exposed wiring, half-installed boxes, or non-functioning circuits. This triggers not just frustration but genuine safety concerns.",
+          sample: '"Paid $800 deposit. Three outlets still not working, junction box exposed. That was six weeks ago. He won\'t answer my calls." — Google, 1★'
+        },
+        {
+          icon: "📜",
+          title: "Permit and Inspection Confusion",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Homeowners don't know when a permit is required. Electricians don't always disclose when they're skipping permits. The customer gets hit with code violations on resale or insurance claims — and has no documentation of who did the work.",
+          sample: '"Sold my house last year and inspector flagged work done by this company 3 years ago as unpermitted. Cost me $2,400 to fix." — Yelp, 2★'
+        }
+      ]
+    },
+    roofers: {
+      title: "Roofers",
+      reviewCount: 61,
+      businessCount: 11,
+      freePains: [
+        {
+          icon: "🌧️",
+          title: "Storm Chasers — Disappeared After Deposit",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "After major weather events, unlicensed contractors flood the market. They collect deposits, do nothing, and vanish. This is the #1 review pattern for roofing in storm-heavy markets like New Orleans. The fraud is industrial-scale.",
+          sample: '"After Ida I gave this company $3,500 deposit. They sent one guy to 'start' then I never saw them again. Phone disconnected." — Google, 1★'
+        },
+        {
+          icon: "💧",
+          title: "New Roof Still Leaks",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Customers pay full price for a new roof installation — often $8K–$20K — and have a leak with the first rainfall. The contractor disputes whether it's their fault, whether flashing was included, or claims the customer had pre-existing damage not covered in the quote.",
+          sample: '"$14,000 for a new roof. First hard rain, water coming through the same corner. They say it\'s the flashing and want another $800. It\'s a brand new roof!" — Yelp, 1★'
+        },
+        {
+          icon: "📊",
+          title: "Insurance Claim Handling — Total Chaos",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Roofers often promise to 'handle the insurance claim.' Then the adjuster comes, the scope doesn't match what the roofer quoted, the roofer blames the insurance company, and the homeowner is left as the messenger between two parties who refuse to talk directly.",
+          sample: '"The roofer told me to 'trust him' with State Farm. Four months later I\'m out $6K because the scope didn\'t match. Nobody is taking responsibility." — Google, 1★'
+        }
+      ]
+    },
+    "garage-door": {
+      title: "Garage Door",
+      reviewCount: 29,
+      businessCount: 6,
+      freePains: [
+        {
+          icon: "🔄",
+          title: "Spring Replacement Upsell Trap",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Customer calls for a simple spring replacement. Tech arrives, quotes $89 for the spring, then adds 'balance adjustment,' 'safety cable,' 'annual tune-up,' and the bill hits $400. This is the most consistent pattern in garage door reviews — the bait-and-switch.",
+          sample: '"Called about a broken spring, saw the $79 ad. Final bill was $387. He added 5 things I never approved." — Yelp, 1★'
+        },
+        {
+          icon: "⏰",
+          title: "Response Time Lies — 'On the Way' for Hours",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Customer calls for emergency service (car trapped in garage, can't get to work). Tech says 'on my way, 20 minutes.' Two hours later, still no arrival. No update. This is the highest-urgency service in this category — the failure is especially painful.",
+          sample: '"Told me 20-30 min. Called back after an hour — 'almost there.' Never came. Had to call a different company." — Google, 1★'
+        },
+        {
+          icon: "🛠️",
+          title: "Same-Day Fix Undone Within a Week",
+          badge: "MEDIUM",
+          badgeClass: "badge-medium",
+          desc: "Tech fixes the door, it works for a few days, then stops again. When the customer calls back, they're told it's a 'different issue' and will be a new charge. No warranty was discussed at time of service.",
+          sample: '"Door worked for 3 days then stopped again. Now they say it\'s a \'different problem.\' How convenient." — Yelp, 2★'
+        }
+      ]
+    },
+    locksmith: {
+      title: "Locksmiths",
+      reviewCount: 44,
+      businessCount: 10,
+      freePains: [
+        {
+          icon: "🎭",
+          title: "Fake Local Listings — Not Actually Local",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "This is the most-documented scam in the entire trades industry. A national call center buys fake Google local listings, quotes $15–35, dispatches a subcontractor who arrives and demands $200–400 in cash. The phone number is disconnected by the next day.",
+          sample: '"Google said 'local locksmith.' Guy showed up, quoted $275 cash for a simple unlock. Refused to give his business name. This is organized crime." — Google, 1★'
+        },
+        {
+          icon: "💵",
+          title: "Quote on Phone vs. Price at Door",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Even among legitimate locksmiths, the phone-to-door price variance is severe. '$75 service call' becomes '$75 + labor + parts + emergency fee' at the door — when you're already locked out and desperate. Customers feel held hostage.",
+          sample: '"$75 on the phone. $240 at my door at 11pm. I was locked out of my house. I had no choice." — Yelp, 1★'
+        },
+        {
+          icon: "⏱️",
+          title: "ETA Lies When You\'re Locked Out",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Customers stranded outside their home or car are told '15 minutes' — and wait for hours. The emotional intensity of lockout situations (late at night, in unsafe areas, with kids in the car) makes ETA lies particularly damaging.",
+          sample: '"Kids in the car, 90 degrees. Told 15 minutes. Waited 2 hours. Dispatcher kept saying \'he\'s almost there.\'" — Google, 1★'
+        }
+      ]
+    },
+    "pest-control": {
+      title: "Pest Control",
+      reviewCount: 35,
+      businessCount: 8,
+      freePains: [
+        {
+          icon: "📝",
+          title: "Annual Contract — Impossible to Cancel",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Customers sign up for monthly or quarterly service, discover the pests are still present, want to cancel — and find themselves in a 12-month contract with a $200 early termination fee. The contract terms were buried or verbally minimized at signup.",
+          sample: '"Signed up, still have roaches, want to cancel. They say I owe $200 to get out of the contract. Nobody told me there was a penalty." — Yelp, 1★'
+        },
+        {
+          icon: "🐜",
+          title: "Treatment Doesn\'t Work — No Accountability",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Customer reports pests still present after treatment. Company says 'it takes time' or 'you have a severe infestation.' Two more visits, still present. Company blames the customer's habits. Customer feels gaslit and out $600.",
+          sample: '"Three treatments, still seeing roaches everywhere. They now say it\'s because my neighbor has them too. This isn\'t my fault — fix it." — Google, 2★'
+        },
+        {
+          icon: "🚪",
+          title: "No-Show Quarterly Visits — Still Charged",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Customers on quarterly service plans are charged for visits that never happened. When they check their account history, half the visits show 'completed' with no one ever entering the property. Billing happens automatically whether service occurred or not.",
+          sample: '"Checked my bank — charged for April service. I was home all day. Nobody came. This has happened twice now." — Yelp, 1★'
+        }
+      ]
+    }
+  };
+
+  function runAnalysis() {
+    const metro = document.getElementById('metro-input').value.trim();
+    const trade = document.getElementById('trade-select').value;
+
+    if (!metro) {
+      document.getElementById('metro-input').focus();
+      document.getElementById('metro-input').style.borderColor = 'var(--pink)';
+      setTimeout(() => document.getElementById('metro-input').style.borderColor = '', 2000);
+      return;
+    }
+    if (!trade) {
+      document.getElementById('trade-select').style.borderColor = 'var(--pink)';
+      setTimeout(() => document.getElementById('trade-select').style.borderColor = '', 2000);
+      return;
+    }
+
+    // Hide how-it-works, show loading
+    document.getElementById('how-section').style.display = 'none';
+    document.getElementById('results-section').style.display = 'none';
+    document.getElementById('loading-section').style.display = 'block';
+    document.getElementById('run-btn').disabled = true;
+
+    const steps = [
+      'Searching Yelp for low-rated businesses in ' + metro + '...',
+      'Pulling 1-star and 2-star review excerpts...',
+      'Scanning Google Business reviews...',
+      'Clustering complaints by pattern...',
+      'Building pain point analysis...',
+      'Generating app idea synthesis...',
+    ];
+
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < steps.length) {
+        document.getElementById('loading-steps').textContent = steps[i];
+        i++;
+      }
+    }, 700);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      document.getElementById('loading-section').style.display = 'none';
+      showResults(metro, trade);
+      document.getElementById('run-btn').disabled = false;
+    }, 4500);
+  }
+
+  function showResults(metro, trade) {
+    const data = DEMO_DATA[trade];
+    if (!data) return;
+
+    const tradeName = document.getElementById('trade-select').options[document.getElementById('trade-select').selectedIndex].text.replace(/^[^\s]+ /, '');
+
+    document.getElementById('results-title').textContent = data.title + ' — ' + metro;
+    document.getElementById('results-sub').textContent =
+      'Analyzed ' + data.reviewCount + ' low-rated reviews across ' + data.businessCount + ' businesses · Top recurring pain points';
+
+    // Render free pain cards
+    const container = document.getElementById('free-pain-cards');
+    container.innerHTML = '';
+    data.freePains.forEach((p, idx) => {
+      const card = document.createElement('div');
+      card.className = 'pain-card fade-in';
+      card.style.animationDelay = (idx * 0.1) + 's';
+      card.innerHTML = `
+        <div class="pain-icon">${p.icon}</div>
+        <div class="pain-body">
+          <h3>Pain Point #${idx + 1} — ${p.title}</h3>
+          <p>${p.desc}</p>
+          <div class="pain-sample">${p.sample}</div>
+        </div>
+        <span class="pain-badge ${p.badgeClass}">${p.badge}</span>
+      `;
+      container.appendChild(card);
+    });
+
+    const section = document.getElementById('results-section');
+    section.style.display = 'block';
+    section.classList.add('fade-in');
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function scrollToPricing() {
+    document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Keyboard shortcut
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter') runAnalysis();
+  });
+</script>
+
+</body>
+</html>
