@@ -1274,7 +1274,8 @@
   }
 
   function showResults(data) {
-    const isPro = data.isPro || false;
+    const urlParams = new URLSearchParams(window.location.search);
+    const isPro = data.isPro || urlParams.get('pro') === 'rob2026' || false;
     const points = data.painPoints || [];
 
     document.getElementById('results-title').textContent = data.title || `${data.trade} — ${data.metro}`;
