@@ -1750,52 +1750,34 @@
       }
     }, 700);
 
-    // Owner bypass — force Pro demo data when ?pro=rob2026 is set
+    // Check for owner Pro bypass
     const ownerBypass = new URLSearchParams(window.location.search).get('pro') === 'rob2026';
+    const proToken = localStorage.getItem('research_token');
 
-    // Call real API (with fallback to DEMO_DATA)
+    // Always use demo data (API not yet returning Pro fields)
     let data = null;
-    if (!ownerBypass) {
-      try {
-        const sessionToken = localStorage.getItem('research_token') || undefined;
-        const res = await fetch(`${API_BASE}/api/research/scan`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ metro, trade, sessionToken }),
-        });
-        if (res.ok) {
-          data = await res.json();
-        }
-      } catch (e) {
-        console.warn('API call failed, using demo data:', e);
-      }
+    const demo = DEMO_DATA[trade];
+    if (demo) {
+      data = {
+        title: demo.title + ' — ' + metro,
+        metro,
+        trade,
+        reviewCount: demo.reviewCount,
+        businessCount: demo.businessCount,
+        isPro: ownerBypass || !!proToken,
+        painPoints: demo.freePains.map(p => ({
+          title: p.title,
+          severity: p.badge,
+          description: p.desc,
+          reviewExcerpt: p.sample,
+          icon: p.icon,
+          appIdea: p.appIdea || null,
+          b2bPitch: p.b2bPitch || null,
+        })),
+      };
     }
 
     clearInterval(interval);
-
-    // If API failed (or owner bypass), fall back to DEMO_DATA
-    if (!data) {
-      const demo = DEMO_DATA[trade];
-      if (demo) {
-        data = {
-          title: demo.title + ' — ' + metro,
-          metro,
-          trade,
-          reviewCount: demo.reviewCount,
-          businessCount: demo.businessCount,
-          isPro: ownerBypass,
-          painPoints: demo.freePains.map(p => ({
-            title: p.title,
-            severity: p.badge,
-            description: p.desc,
-            reviewExcerpt: p.sample,
-            icon: p.icon,
-            appIdea: p.appIdea || null,
-            b2bPitch: p.b2bPitch || null,
-          })),
-        };
-      }
-    }
 
     document.getElementById('loading-section').style.display = 'none';
     document.getElementById('run-btn').disabled = false;
