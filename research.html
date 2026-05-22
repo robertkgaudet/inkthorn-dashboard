@@ -118,18 +118,29 @@
       margin: 0 auto;
     }
 
-    .hero-stars {
-      font-size: 0.9rem;
-      margin-bottom: 14px;
-      color: #f5c542;
-      letter-spacing: 0.05em;
+    .hero-sample-review {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-left: 3px solid var(--pink);
+      border-radius: 8px;
+      padding: 12px 16px;
+      max-width: 520px;
+      text-align: left;
     }
-    .hero-stars span {
+    .hero-review-star {
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .hero-review-text {
+      font-size: 0.82rem;
       color: var(--muted);
-      font-size: 0.8rem;
-      margin-left: 6px;
       font-style: italic;
-      vertical-align: middle;
+      line-height: 1.6;
     }
     .hero-eyebrow {
       display: inline-block;
@@ -875,12 +886,15 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-stars">⭐⭐⭐⭐⭐ <span>Trusted by indie builders and SaaS founders</span></div>
   <div class="hero-eyebrow">🔍 Review Intelligence Engine</div>
   <h1>Find the App Idea Hidden in Every 1-Star Review</h1>
   <p>
     Negative reviews aren't just complaints. They're <strong>validated pain points</strong> from real customers who cared enough to say something. We turn them into your next product.
   </p>
+  <div class="hero-sample-review">
+    <span class="hero-review-star">⭐</span>
+    <span class="hero-review-text">"Showed up 3 hours late, charged double the quote, and the problem came back in a week. Never again." — Google, 1★</span>
+  </div>
 </section>
 
 <!-- SEARCH CARD -->
@@ -1095,6 +1109,1014 @@
           sample: '"Paid $340 to fix a leak. Three weeks later same leak. Called back — they want to charge me again. Completely unbelievable." — Yelp, 1★',
           appIdea: "FixGuard — Service Warranty Manager. A post-job warranty tracking app. Every completed job auto-generates a 30/60/90-day warranty card texted to the customer. If they call back within the window, it\'s flagged as a warranty return — free revisit, logged and tracked. Businesses use it as a differentiator: \'We stand behind our work.\'",
           b2bPitch: "\'I see you have reviews about the same problem coming back and customers feeling like they have to pay twice. What if you could turn that into a selling point? I built a simple warranty tracker — you send it after every job. Customers love it, your callbacks drop, and your reviews go up. Can I show you?\'"
+        }
+      ],
+      proPains: [
+        {
+          icon: '🪠',
+          title: 'Damage Left Behind — Property Damage With No Accountability',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Technicians cause collateral damage — cracked tiles, gouged drywall, broken shut-off valves — and the company refuses to cover repairs. Customers are left filing claims on their own homeowner\'s insurance for damage the plumber caused.',
+          sample: '"They fixed the leak but cracked three floor tiles getting to the pipe. When I called back they said that was \'normal access damage\' and not their problem." — Google, 1★',
+          appIdea: 'SiteShield — Pre/Post Job Photo Documentation App. Technician photos every access point before and after the job. Timestamped, GPS-tagged, and shared instantly with the customer as proof of pre-existing conditions and clean exit.',
+          b2bPitch: '\'Your Google reviews mention damage left behind. I built SiteShield — it auto-documents job sites before and after with timestamped photos so you\'re never on the hook for pre-existing damage. Want to see how it works?\''
+        },
+        {
+          icon: '🔩',
+          title: 'Parts Markup Shock — Marked Up 400% Without Disclosure',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Customers discover after the fact that a $12 hardware store part was billed at $85 or more. No itemized breakdown was provided and the markup was buried in a lump-sum invoice. This triggers chargebacks and scathing reviews.',
+          sample: '"Charged me $90 for a fill valve I found on Amazon for $11. They refused to show me an itemized bill. Never again." — Yelp, 1★',
+          appIdea: 'ClearParts — Transparent Parts Pricing Tool. Pulls real-time distributor pricing and shows customers a fair markup range before installation. Builds trust and pre-empts sticker shock.',
+          b2bPitch: '\'Customers are posting your parts prices side-by-side with Amazon on Google. I built ClearParts — it shows customers a transparent markup so they feel informed, not ripped off. Can I show you a demo?\''
+        },
+        {
+          icon: '📋',
+          title: 'Verbal Quote Trap — Agreed Price Changes at Invoice',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'A technician quotes one price over the phone or in person, then the final invoice is significantly higher with vague line items added. Customers feel deceived and dispute charges, leading to collection headaches and bad reviews.',
+          sample: '"Quoted $350 on the phone, invoice came to $620. When I asked about the difference they said \'that was just an estimate.\' No warning, no call, just a surprise bill." — Google, 1★',
+          appIdea: 'LockRate — Quote-to-Invoice Commitment Platform. Digital quotes require customer approval before any work begins. Change orders trigger real-time alerts and require electronic sign-off.',
+          b2bPitch: '\'Reviews say your quotes don\'t match your invoices. LockRate locks in every quote with digital approval and flags any change before it hits the bill. Want to stop the disputes before they start?\''
+        },
+        {
+          icon: '⏳',
+          title: 'All-Day Wait Window — 8-Hour Arrival Windows Nobody Can Keep',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Customers are given absurdly wide arrival windows like "8am to 5pm" and must take a full day off work. No updates are sent when the tech is running late, and many customers end up canceling or waiting until evening.',
+          sample: '"Took the whole day off work. They showed up at 4:45pm with no warning. I called twice and got \'he\'s on his way.\' This is completely unacceptable." — Google, 1★',
+          appIdea: 'TechTrack — Real-Time Technician ETA App. Uses GPS to give customers a live "Uber-style" view of their tech\'s location and a rolling 30-minute arrival window. Auto-sends SMS updates.',
+          b2bPitch: '\'Your 1-star reviews are full of all-day wait complaints. TechTrack gives your customers a live GPS view of their tech — like Uber for plumbers. Ready to cut those complaints in half?\''
+        },
+        {
+          icon: '🧾',
+          title: 'No Written Warranty — Verbal Guarantees That Vanish',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Technicians promise a 90-day or 1-year labor warranty verbally but provide no written documentation. When customers call back with the same issue, the company has no record of the promise and charges full price again.',
+          sample: '"The tech told me the repair was guaranteed for a year. Six months later, same problem. They said they had no record of any guarantee and wanted to charge me again." — Yelp, 1★',
+          appIdea: 'WarrantyVault — Digital Warranty Issuance & Tracking. Every completed job automatically generates a signed, time-stamped warranty document emailed to the customer and stored in the company\'s CRM.',
+          b2bPitch: '\'Your reviews say your verbal warranties disappear. WarrantyVault auto-generates a signed warranty on every job and stores it in your system so no one gets surprised twice. Want a walkthrough?\''
+        },
+        {
+          icon: '🏠',
+          title: 'Subcontractor Surprise — Unknown Third Parties Showed Up',
+          badge: 'MEDIUM',
+          badgeClass: 'badge-medium',
+          desc: 'Customers hired a named company but unknown subcontractors arrived with different trucks and no company ID. This causes trust issues, especially for customers home alone, and creates liability gaps if something goes wrong.',
+          sample: '"I hired [Company], and two guys in an unmarked van showed up. No shirts, no ID, no company logo. I didn\'t even know who I let into my house." — Google, 1★',
+          appIdea: 'CrewVerify — Technician Identity & Background Check Portal. Customers receive a pre-arrival card with the technician\'s name, photo, background check status, and company affiliation before they knock.',
+          b2bPitch: '\'Customers are complaining about strangers showing up at their homes. CrewVerify sends a tech profile with photo and background status before arrival — so your customers feel safe. Want to see it?\''
+        },
+        {
+          icon: '💧',
+          title: 'Emergency Upcharge Abuse — After-Hours Rates Not Disclosed',
+          badge: 'MEDIUM',
+          badgeClass: 'badge-medium',
+          desc: 'Emergency calls result in invoices 2-3x higher than standard rates, with the surcharge never disclosed during the call. Customers in crisis agree verbally without realizing they\'re committing to premium pricing.',
+          sample: '"Called at 9pm for a burst pipe. They fixed it but charged $800 for what should have been a $250 job. They never once mentioned an emergency rate when I called." — Yelp, 1★',
+          appIdea: 'RateLock — After-Hours Pricing Disclosure Tool. Automatically reads the customer the emergency rate policy and gets a text-based acknowledgment before dispatching any after-hours technician.',
+          b2bPitch: '\'Your after-hours reviews are brutal — customers say they weren\'t warned about emergency rates. RateLock gets digital rate consent before dispatch so no one\'s blindsided. Want to try it free?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '🌡️',
+          title: 'Misdiagnosis Cycle — Wrong Part Ordered, Problem Persists',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Technicians diagnose the wrong component, order expensive parts, and the system still fails after the repair. Customers pay twice — once for the wrong fix and again for the correct diagnosis — with no refund on the first mistake.',
+          sample: '"Tech said it was the capacitor, charged $280. Didn\'t fix it. Next tech said it was actually the compressor relay the whole time. Zero refund for the first wrong call." — Google, 1★',
+          appIdea: 'DiagLog — HVAC Diagnostic Audit Trail App. Every diagnostic step is logged with sensor readings and photos before any part is ordered. If the first repair fails, the data prevents repeat billing for the same root cause.',
+          b2bPitch: '\'Reviews say your techs are guessing and billing twice. DiagLog creates a documented diagnostic trail so misdiagnoses are caught before the wrong part is ordered. Want to protect your margins and your reputation?\''
+        },
+        {
+          icon: '❄️',
+          title: 'Refrigerant Fraud — Charged for Refrigerant That Wasn\'t Added',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Customers are billed for refrigerant top-offs that either weren\'t performed or weren\'t the amount claimed. Without metered proof, customers have no way to verify the charge, and this is one of the top fraud complaints in HVAC.',
+          sample: '"Charged for 3 lbs of refrigerant. Hired a second company a week later who tested the system and found it was never low to begin with. This is straight-up theft." — Yelp, 1★',
+          appIdea: 'RefrigerantProof — Metered Refrigerant Documentation Tool. Tech enters before/after pressure readings and photos the gauge at both readings. Customer gets a signed digital receipt tied to real data.',
+          b2bPitch: '\'Refrigerant fraud is the #1 HVAC scam complaint online and your competitors are getting destroyed by it. RefrigerantProof gives your customers a gauge-verified receipt. Instant trust differentiator — want to see it?\''
+        },
+        {
+          icon: '🔧',
+          title: 'Install and Abandon — No Post-Install Follow-Up or Commissioning',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'New systems are installed and the tech leaves without walking the customer through the thermostat, filter schedule, or warranty registration. Months later the system fails because of an overlooked detail and the warranty is void.',
+          sample: '"Brand new unit installed. Nobody showed me anything. A year later it failed because the filter was never changed — they said the warranty was voided. Nobody told me the filter schedule." — Google, 1★',
+          appIdea: 'CommissionKit — Post-Install Customer Onboarding App. At job completion, tech walks through a digital checklist with the customer: filter size, change schedule, thermostat settings, and warranty registration all confirmed and emailed.',
+          b2bPitch: '\'You\'re losing warranty claims and getting blamed for failures customers caused out of ignorance. CommissionKit walks every customer through their system at install and documents it. No more he-said-she-said — interested?\''
+        },
+        {
+          icon: '📅',
+          title: 'Seasonal Surge Ghosting — Can\'t Get Service When It Matters Most',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'During peak summer and winter demand, call-backs take days and systems fail in extreme heat or cold. Customers who paid for service plans discover those plans don\'t guarantee priority response when they need it most.',
+          sample: '"105 degrees outside, AC went out Friday afternoon. Couldn\'t get anyone to answer until Monday. I\'m a maintenance plan member. What exactly am I paying for?" — Google, 1★',
+          appIdea: 'PriorityLine — Service Plan Member Dispatch App. Automatically queues plan members at the front of emergency dispatch and sends real-time status updates during surge periods so members feel the value they\'re paying for.',
+          b2bPitch: '\'Your maintenance plan reviews are tanking because members can\'t reach you in summer. PriorityLine auto-queues plan holders first and sends status texts so they feel like VIPs instead of forgotten. Want to save those renewals?\''
+        },
+        {
+          icon: '🏷️',
+          title: 'Brand Bait-and-Switch — Spec\'d One Brand, Installed Another',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Customers are quoted and agree on a specific equipment brand and model. The installed unit is a different brand or lower efficiency tier, often because the company ran out of stock or got a better dealer margin on the substitute.',
+          sample: '"Quote said Trane 16 SEER. They installed a Goodman 14 SEER. Same price. When I pushed back they said \'it\'s equivalent.\' It is absolutely not equivalent." — Yelp, 1★',
+          appIdea: 'SpecLock — Equipment Specification Confirmation App. Quote includes model number, SEER rating, and serial range. Any substitution triggers a customer approval request with full spec comparison before installation.',
+          b2bPitch: '\'Customers are discovering brand swaps and posting about it. SpecLock ties every install to the exact equipment spec in the quote and requires approval for any substitution. One tool, zero fraud exposure — want it?\''
+        },
+        {
+          icon: '📄',
+          title: 'Permit Bypass — Work Done Without Required Permits',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'HVAC replacements require permits in most jurisdictions but techs skip them to speed up jobs. Customers discover this during a home sale inspection, triggering costly retroactive permitting or even system removal.',
+          sample: '"Sold my house two years after the install. Inspector flagged no permit was ever pulled. Delayed closing by 3 weeks and cost me $1,400 in retroactive fees. The HVAC company is nowhere to be found." — Google, 1★',
+          appIdea: 'PermitPath — Automated HVAC Permit Tracking Dashboard. Pulls permit requirements by jurisdiction, files applications, and tracks status. Sends customer the final inspection approval tied to their job record.',
+          b2bPitch: '\'Missed HVAC permits are a ticking time bomb for your customers — and for your liability. PermitPath automates permit filing and gives customers a record they can hand to any future buyer. Want to stop the exposure?\''
+        },
+        {
+          icon: '🌬️',
+          title: 'Duct Upsell Pressure — Unnecessary Ductwork Recommended',
+          badge: 'MEDIUM',
+          badgeClass: 'badge-medium',
+          desc: 'Technicians routinely recommend full duct replacement or sealing as part of every service call, regardless of whether ducts are actually the problem. Customers who decline feel pressured and those who accept often see no improvement.',
+          sample: '"Every single time they come out, they say I need new ductwork for $3,500. I\'ve had two other companies inspect my ducts — both said they\'re fine. This company just wants the upsell." — Yelp, 1★',
+          appIdea: 'DuctScan — Duct Integrity Assessment Tool. Runs a documented pressure test and produces a scored report with photos before any duct recommendation is made. Gives customers an objective baseline — not a sales pitch.',
+          b2bPitch: '\'Duct upsell complaints are following your company around online. DuctScan produces a scored pressure test report before any recommendation — so customers trust the data, not a salesperson. Want to see it?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '⚡',
+          title: 'Code Violation Aftermath — Failed Inspection After Work Completed',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Electrical work fails inspection because it was done out of code, forcing homeowners to pay a second electrician to correct the mistakes. The original company either disappears or charges again to fix their own errors.',
+          sample: '"Paid $1,800 for a panel upgrade. It failed inspection twice. The electrician stopped returning calls and I had to hire someone else to fix his work. Total cost was $3,100." — Google, 1★',
+          appIdea: 'CodePass — Pre-Inspection Electrical Compliance Checker. Before the city inspector arrives, the platform walks techs through a jurisdiction-specific checklist and flags likely violations with photo documentation.',
+          b2bPitch: '\'Failed inspections are showing up in your reviews and costing you referrals. CodePass catches code issues before the inspector does — protecting your license and your customer relationship. Want a demo?\''
+        },
+        {
+          icon: '🔌',
+          title: 'Ghost After Install — No Response When Problems Appear',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Newly installed wiring or panels cause circuit issues, flickering lights, or tripped breakers within days of the job. When customers call back, the company is unresponsive or denies any connection to their recent work.',
+          sample: '"Three days after the new panel install, half my house started flickering. Called seven times over two weeks. Never got a callback. Had to call another company and start over." — Yelp, 1★',
+          appIdea: 'PostJobLine — 30-Day Service Response Tracker. Every completed job opens a 30-day callback window. Any customer contact during that window is flagged as a potential warranty issue and auto-escalated to the dispatcher.',
+          b2bPitch: '\'Your reviews mention being ghosted after installs. PostJobLine flags every callback within 30 days as a potential warranty issue so nothing slips through the cracks. Ready to turn callbacks into retention?\''
+        },
+        {
+          icon: '🏷️',
+          title: 'Breaker Label Chaos — Panel Left Unlabeled After Upgrade',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'After panel replacements or additions, breakers are left unlabeled or mislabeled. Customers discover this months later when troubleshooting outages, and incorrect labels create genuine safety risks if someone throws the wrong breaker during an emergency.',
+          sample: '"Brand new 200A panel installed. Not a single breaker was labeled. When I asked the tech he said \'you can figure it out.\' For $2,400 I expect a complete job." — Google, 1★',
+          appIdea: 'PanelMap — Digital Panel Labeling & Documentation Tool. Tech maps every circuit at job completion with a room-by-room diagram. Customer gets a PDF panel map and a QR code sticker for the door.',
+          b2bPitch: '\'Unlabeled panels after installs is a common complaint in your reviews — and a real safety issue. PanelMap creates a professional circuit diagram at job close and hands it to the customer. Takes 10 minutes, prevents lawsuits — interested?\''
+        },
+        {
+          icon: '📱',
+          title: 'Smart Home Botch — Devices Installed That Don\'t Work Together',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Electricians install smart switches, EV chargers, or home automation components without verifying compatibility with existing systems. The result is devices that don\'t pair, apps that won\'t connect, or chargers that won\'t communicate with the car.',
+          sample: '"Paid $900 to have a Level 2 EV charger installed. It won\'t communicate with my car\'s scheduling app. The electrician had no idea what I was talking about and left anyway." — Yelp, 1★',
+          appIdea: 'SmartFit — Smart Device Compatibility Pre-Check Tool. Before any smart device install, the tech runs a compatibility check against the customer\'s existing hub, panel, and devices. Incompatible items are flagged before ordering.',
+          b2bPitch: '\'Smart home installs are driving a wave of new complaints because devices don\'t work together. SmartFit pre-screens compatibility before you order anything — saving callbacks and your reputation. Want to see it?\''
+        },
+        {
+          icon: '🕰️',
+          title: 'Multi-Day Drag — Small Jobs Taking Weeks to Complete',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Jobs quoted as one or two days stretch into weeks as electricians keep promising to return but never show. Customers are left with open walls, exposed wiring, and no timeline.',
+          sample: '"Simple outlet and fixture job. Started three weeks ago, still not done. Every time I call I get \'we\'ll be there tomorrow.\' I have open drywall in my kitchen right now." — Google, 1★',
+          appIdea: 'JobClock — Open Job Completion Tracker. Flags any job that passes its estimated completion date and auto-schedules a return visit. Sends the customer a progress update every 48 hours until the job is marked complete.',
+          b2bPitch: '\'You have reviews with customers complaining about half-finished jobs dragging for weeks. JobClock flags stalled work and auto-books return visits before customers start posting. Want to close more jobs on time?\''
+        },
+        {
+          icon: '🚨',
+          title: 'Safety Hazard Left Open — Exposed Wires or Live Panels Uncovered',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Technicians leave jobs with exposed live wiring, uncovered junction boxes, or open panel knockouts — all genuine fire and electrocution hazards. Customers don\'t discover the danger until they look behind furniture or in the attic.',
+          sample: '"Found an uncovered junction box in my attic with exposed wire nuts — completely live. The electrician signed off that the job was done. This could have burned my house down." — Google, 1★',
+          appIdea: 'SafeClose — Job Closeout Safety Verification App. Before a tech can mark a job complete, they must photo-verify every panel cover, junction box, and wire termination. Open or missing covers block job closure.',
+          b2bPitch: '\'Exposed wiring left behind is showing up in your reviews — and it\'s a liability that could end your business. SafeClose requires photo verification of every safety point before the job closes. One tool, zero exposure — want it?\''
+        },
+        {
+          icon: '💰',
+          title: 'Flat Rate Confusion — Customers Don\'t Know What They\'re Paying For',
+          badge: 'MEDIUM',
+          badgeClass: 'badge-medium',
+          desc: 'Flat-rate pricing is presented as a total without any breakdown of labor versus materials. When customers see the charge, they assume they\'ve been overcharged because they can\'t verify what\'s included.',
+          sample: '"Invoice just said \'electrical service — $475.\' No breakdown of parts or hours. I asked for itemization and was told the price is the price. I have no idea what I paid for." — Yelp, 1★',
+          appIdea: 'ClearBill — Itemized Flat-Rate Invoice Generator. Converts flat-rate jobs into a customer-facing invoice that shows the scope, included materials, and labor allocation.',
+          b2bPitch: '\'Flat-rate confusion is one of your top complaint themes. ClearBill breaks down your flat rates into scope items so customers feel informed, not deceived — and disputes drop. Want to see how it works?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '🏚️',
+          title: 'Interior Damage During Tear-Off — Debris Falls Through Ceiling',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Tear-off debris and foot traffic during re-roofing causes damaged ceilings, light fixtures, and attic insulation. Roofers deny responsibility and homeowners are left with interior repairs not covered by the roofing contract.',
+          sample: '"Shingle debris fell through a vent into my attic and crushed two feet of insulation. A ceiling fan cracked. They said it\'s not their problem — it happened \'during normal work.\'" — Google, 1★',
+          appIdea: 'RoofGuard — Interior Pre-Job Protection Checklist. Before tear-off begins, tech documents the attic, light fixtures, and ceilings with timestamped photos. Any interior damage claim gets resolved against the documented baseline.',
+          b2bPitch: '\'Interior damage complaints are among your worst reviews. RoofGuard documents the home before tear-off so no one can pin pre-existing damage on you — and you can prove it when they try. Want to protect yourself?\''
+        },
+        {
+          icon: '🪣',
+          title: 'Decking Surprise — Hidden Rot Adds Thousands to the Bill',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Rotted decking hidden under old shingles is a legitimate unknown — but the way it\'s handled isn\'t. Customers get mid-job calls for thousands in extra charges with no photos, no itemization, and no choice but to approve or stop mid-project.',
+          sample: '"Called mid-job and told I needed $4,200 in decking replacement. No photos, no explanation, take it or leave it with my house half-open. Total came to $12,000 over the quote." — Yelp, 1★',
+          appIdea: 'DeckDoc — Rotted Decking Discovery Documentation Tool. When rot is found, tech photos every affected board with measurements before any work continues. Customer reviews and approves the scope from their phone before the crew proceeds.',
+          b2bPitch: '\'Mid-job surprise bills for decking are your #1 review killer. DeckDoc photos and documents every discovery and gets digital approval before touching anything — so customers feel informed, not trapped. Want to demo it?\''
+        },
+        {
+          icon: '🧲',
+          title: 'Nail Scatter — Nails Left in Yard, Driveway, and Gutters',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'After re-roofing, leftover nails damage tires, injure pets and kids, and clog gutters. Crews sweep quickly and leave, and companies deny responsibility for flat tires or puncture injuries that happen days later.',
+          sample: '"Got two flat tires in my driveway the week after my roof was done. Found nails in my grass, gutters, and garden beds. They refused to pay for the tires. Absolutely reckless." — Google, 1★',
+          appIdea: 'MagSweep — Post-Job Nail Cleanup Verification App. Job closeout requires documented magnet sweep of driveway, landscaping, and gutters with a checklist and photo verification before crew departure sign-off.',
+          b2bPitch: '\'Nail damage complaints are all over your reviews and they\'re completely preventable. MagSweep makes documented cleanup part of every job closeout so you can prove the yard was swept. Want to eliminate this complaint category?\''
+        },
+        {
+          icon: '📐',
+          title: 'Flashing Failures — Improper Flashing Causing New Leaks',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Chimney, skylight, and valley flashing done incorrectly is the leading cause of leaks after new roof installations. The leaks often appear months later during heavy rain and the company disputes that the new roof caused them.',
+          sample: '"New $14,000 roof. First major rain, water pouring in around the chimney. Roofer says it\'s a \'chimney problem,\' not a roofing problem. This is exactly where the flashing was replaced." — Google, 1★',
+          appIdea: 'FlashCheck — Flashing Installation Photo Verification System. Every flashing point is photographed during installation at each stage. Customer and company both get the timestamped record, making disputed leak origins easy to resolve.',
+          b2bPitch: '\'Flashing leak disputes are destroying your reviews six months after the job. FlashCheck photo-documents every flashing point during install so you can prove your work was right — or catch it before the rain does. Interested?\''
+        },
+        {
+          icon: '📦',
+          title: 'Material Downgrade — Cheaper Shingles Installed Than Quoted',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Customers approve a specific shingle product and grade, but a lower-tier product is installed — sometimes a different manufacturer, shorter warranty, or lower impact resistance. Customers only discover this when they check the packaging left behind.',
+          sample: '"I was quoted and approved CertainTeed Landmark Pro 30-year shingles. I found the boxes in the trash — they were standard Landmark 25-year. They charged the same price." — Yelp, 1★',
+          appIdea: 'MaterialMatch — Roofing Material Verification App. Before install begins, tech scans the product barcode against the approved quote spec. Any mismatch sends an alert and blocks the crew from starting until the discrepancy is resolved.',
+          b2bPitch: '\'Material swaps are getting caught by savvy homeowners who check the trash. MaterialMatch scans the product before it goes on the roof so no one can question what was used. Want to make that conversation go away?\''
+        },
+        {
+          icon: '🌧️',
+          title: 'Rain Delay Abandonment — Roof Left Open During Unexpected Rain',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Crews begin tear-off, hit unexpected weather, and fail to properly tarp the open areas before leaving. Homeowners discover water intrusion damage to insulation, drywall, and belongings after the crew was gone for the day.',
+          sample: '"Crew left at 2pm when it clouded up. Tarp wasn\'t secured. I had water running into my bedroom by 4pm. They didn\'t come back until the next morning. My ceiling is ruined." — Google, 1★',
+          appIdea: 'StormReady — Weather-Aware Roofing Project Manager. Integrates with local weather APIs and alerts crews when rain is predicted within 4 hours. Enforces a tarp-and-secure protocol before any crew can leave an open-deck job.',
+          b2bPitch: '\'Rain damage from unsecured open roofs is one of your most expensive complaint categories. StormReady alerts crews to incoming weather and enforces tarp protocol so you\'re never liable for a rainout. Want to see it?\''
+        },
+        {
+          icon: '🔍',
+          title: 'Warranty Voiding Gotchas — Fine Print That Cancels Coverage',
+          badge: 'MEDIUM',
+          badgeClass: 'badge-medium',
+          desc: 'Workmanship warranties contain obscure conditions that void coverage — like adding a satellite dish, installing solar, or any third-party roof work. Customers don\'t learn about these conditions until they file a claim and get denied.',
+          sample: '"My new roof warranty was voided because I had a plumber go up there to fix a vent pipe. Nowhere in the contract did it say third-party roof access voided the warranty." — Yelp, 1★',
+          appIdea: 'WarrantyAlert — Roofing Warranty Conditions Tracker. At install close, sends the customer a plain-English summary of every warranty condition and sets reminder alerts when they request any future roof access.',
+          b2bPitch: '\'Hidden warranty gotchas are making customers feel cheated when they file claims. WarrantyAlert explains every condition in plain English at close and reminds customers before they do something that voids it. Want to turn warranty into a selling point?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '🌱',
+          title: 'Plant Die-Off — Installed Plants Dead Within 30 Days',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Newly installed plants, sod, or trees die within weeks of installation due to improper planting depth, wrong soil amendment, or failure to establish a watering plan. Companies refuse replacement claims citing homeowner watering failures.',
+          sample: '"$3,800 worth of plants installed in April. Half of them were dead by Memorial Day. Company said it was my fault for not watering them correctly — nobody told me how to water them." — Google, 1★',
+          appIdea: 'PlantGuide — Post-Install Care Instruction App. At job completion, each plant installed is logged with a custom watering, fertilizing, and mulching schedule sent to the customer.',
+          b2bPitch: '\'Dead plant disputes are tanking your reviews and your repeat business. PlantGuide gives every customer a care plan for exactly what was installed — so when something dies, you know whose fault it is. Want to stop the arguments?\''
+        },
+        {
+          icon: '🚜',
+          title: 'Equipment Damage — Trucks and Trailers Destroying Turf and Hardscape',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Heavy equipment, trailers, and trucks leave ruts in lawns, crack driveways, and damage irrigation heads. Crews don\'t report the damage and companies deny it when customers call.',
+          sample: '"Crew drove their trailer across my corner lawn to turn around. Left two 8-inch deep ruts and cracked my driveway apron. Company said it must have been there before." — Yelp, 1★',
+          appIdea: 'TurfDoc — Pre-Visit Property Condition Logger. Crew photos the driveway, lawn edges, and hardscape before any equipment is moved. Timestamped and stored so any damage claim has a clear before/after baseline.',
+          b2bPitch: '\'Equipment damage complaints without proof are killing your close rates on big jobs. TurfDoc logs property condition before any equipment moves — so you can prove it and defend it. Want to run it on your next job?\''
+        },
+        {
+          icon: '⛲',
+          title: 'Irrigation Damage — Sprinkler Lines Cut During Install',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Landscaping crews cut irrigation lines during planting or edging without locating them first. Customers discover the damage when a zone stops working or when water is pooling underground.',
+          sample: '"Landscapers cut through two of my irrigation zones while planting. Didn\'t tell me. I found out when my lawn started dying and a plumber diagnosed severed lines." — Google, 1★',
+          appIdea: 'UtilMap — Irrigation & Utility Pre-Mark Verification App. Before any digging or planting, crew marks and photographs all known irrigation zones, valve boxes, and utility flags.',
+          b2bPitch: '\'Cut irrigation lines are your most expensive surprise liability. UtilMap pre-marks and photos every zone before your crew digs — so you can prove what was and wasn\'t there. Want to close that liability gap?\''
+        },
+        {
+          icon: '📏',
+          title: 'Property Line Disputes — Work Done on Neighbor\'s Land',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Crews trim, remove, or plant on property that isn\'t the client\'s. Neighboring trees are cut, fences are damaged, and plantings are removed, leading to neighbor disputes and legal threats.',
+          sample: '"Your crew trimmed my neighbor\'s ornamental tree without permission. She\'s threatening to sue. Your company said it wasn\'t their responsibility to know where the property line was." — Yelp, 1★',
+          appIdea: 'LineSafe — Property Boundary Verification Tool. Before any removal or planting near boundaries, crew references a GPS-pinned property line overlay and marks a buffer zone.',
+          b2bPitch: '\'Property line mistakes are generating legal threats for landscapers right now. LineSafe creates a GPS boundary buffer that flags work near lines before it happens — not after the neighbor calls. Want to eliminate that exposure?\''
+        },
+        {
+          icon: '🧴',
+          title: 'Chemical Drift — Herbicide Killing Non-Target Plants',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Herbicide or pesticide applications drift in wind conditions and kill ornamental plants, vegetable gardens, or neighboring landscaping. Crews apply in inappropriate conditions and companies deny responsibility.',
+          sample: '"Landscaper sprayed weed killer on a windy day. My entire vegetable garden — $600 in plants — is dead. They deny it was their spray. I have photos of them spraying 20 feet from my garden." — Google, 1★',
+          appIdea: 'SprayLog — Chemical Application Weather & Condition Logger. Before any spray, the app logs wind speed, direction, temperature, and proximity to non-target plants.',
+          b2bPitch: '\'Herbicide drift is a real legal liability and you\'re seeing it in your 1-star reviews. SprayLog documents conditions at time of every application — so you can prove you sprayed correctly or catch a bad call before it kills someone\'s garden. Interested?\''
+        },
+        {
+          icon: '📸',
+          title: 'Design Mismatch — Final Result Looks Nothing Like the Rendering',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Customers approve a rendered landscape design but the installed result looks completely different — wrong plant sizes, missing focal elements, or different hardscape materials.',
+          sample: '"The 3D design showed a lush privacy hedge and a defined stone border. What was installed looks like scattered shrubs and gravel. Same price. This doesn\'t resemble the design at all." — Yelp, 1★',
+          appIdea: 'DesignMatch — Before/After Landscape Verification App. At job completion, crew photos each zone from the same angle as the original rendering. Side-by-side comparison is presented to the customer for approval before final payment is released.',
+          b2bPitch: '\'Design-versus-delivery disputes are your highest-ticket complaint category. DesignMatch compares your installs against the approved design at completion so customers sign off before they post. Want to protect your final payment?\''
+        },
+        {
+          icon: '🧹',
+          title: 'Debris Abandonment — Clippings and Branches Left on Property',
+          badge: 'MEDIUM',
+          badgeClass: 'badge-medium',
+          desc: 'Crews complete mowing, trimming, or tree work but leave clippings scattered on driveways, mulch piles in beds, or brush piles in corners of the yard.',
+          sample: '"They mowed and edged but left grass clippings all over my driveway and porch. Branches from trimming were piled next to my fence. Cleanup is supposed to be included." — Google, 1★',
+          appIdea: 'CleanFinish — Post-Job Cleanup Photo Verification. Before crew departs, a job-close checklist requires a photo of the driveway, porch, beds, and curbside with all debris cleared.',
+          b2bPitch: '\'Debris left behind is your most common complaint and your easiest fix. CleanFinish requires a photo cleanup verification before the crew can leave — so every job looks finished, not forgotten. Want to run it this week?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '🧴',
+          title: 'Wrong Cleaning Products — Surface Damage From Incorrect Chemicals',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Cleaners use harsh chemicals on surfaces they\'re not designed for — bleach on hardwood, abrasives on quartz, or ammonia on natural stone — causing permanent etching, discoloration, or finish damage.',
+          sample: '"They used bleach on my quartz countertop and left a permanent cloudy etch mark. I asked about it and they said it was already there. It was not. $2,200 in damage." — Google, 1★',
+          appIdea: 'SurfaceSafe — Surface Type & Approved Product Matcher. At client onboarding, surface types in each room are logged and approved products are assigned per surface. Cleaners are blocked from using non-approved chemicals.',
+          b2bPitch: '\'Surface damage from wrong chemicals is your most expensive liability. SurfaceSafe matches approved products to surface types and logs what was used in every room — so no one can say they didn\'t know. Want to protect your bond insurance?\''
+        },
+        {
+          icon: '🔑',
+          title: 'Key and Access Security — Client Keys Lost or Misused',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Client keys are lost, duplicated without authorization, or left in vehicles. Clients change locks at their own expense after losing trust in key security, and a single key incident can destroy an entire neighborhood referral network.',
+          sample: '"Found out my cleaner\'s employee made a copy of my house key. I never authorized that. Had to re-key every lock in the house. The company offered me a one-time discount. That\'s it." — Yelp, 1★',
+          appIdea: 'KeyVault — Digital Key & Access Credential Manager. Every client key is logged with a chain-of-custody record. Digital lockbox codes are rotated automatically after each visit.',
+          b2bPitch: '\'A single key security incident can kill your referral business in an entire neighborhood. KeyVault creates a digital chain of custody for every access credential and alerts clients after each use. Want to make security your sales pitch?\''
+        },
+        {
+          icon: '📷',
+          title: 'Missing Valuables — Items Reported Gone After Cleaning',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Small valuables — jewelry, cash, electronics — go missing after cleaning visits. Without documentation of what was in the home before the crew arrived, there\'s no way to prove what happened.',
+          sample: '"$300 in cash from my bedside drawer is gone after cleaning. I know it was there because I just took it out of an envelope. The company said they \'take all accusations seriously\' but nothing came of it." — Google, 1★',
+          appIdea: 'HomeLog — Pre-Visit High-Value Item Documentation App. Before each visit, clients can flag rooms or areas with valuables. Crew receives restricted-access notes and timestamped room entry logs.',
+          b2bPitch: '\'Missing valuables claims are the scariest reviews a cleaning company can get. HomeLog creates a timestamped room entry record and flags sensitive areas before the crew walks in — protecting your team and your reputation. Interested?\''
+        },
+        {
+          icon: '🤧',
+          title: 'Cross-Contamination — Same Rags and Mops Used Everywhere',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Crews reuse the same mop heads and cleaning cloths across bathrooms, kitchens, and living areas without proper sanitization. Clients with allergies, young children, or immunocompromised household members are exposed to cross-contaminated surfaces.',
+          sample: '"Watched the cleaner use the same mop on my bathroom floor and then my kitchen floor without rinsing it. I have a toddler who plays on that floor. Absolutely disgusting." — Yelp, 1★',
+          appIdea: 'ColorCode — Color-Coded Cleaning Protocol Manager. Each home is set up with a color-coded tool kit per zone. Crew tracking app enforces which tools are used in which areas and logs adherence.',
+          b2bPitch: '\'Cross-contamination is your fastest-growing complaint category, especially with health-conscious clients. ColorCode enforces color-coded tool zones per client and creates a documented protocol you can sell as a premium feature. Want to differentiate?\''
+        },
+        {
+          icon: '📱',
+          title: 'No Communication Between Visits — Clients Feel Forgotten',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Clients receive no communication between recurring visits — no confirmation the crew is coming, no summary of what was done, and no way to provide feedback until they post a review.',
+          sample: '"I have no idea if someone is actually coming until they knock on the door. No confirmation, no recap, no communication at all between visits. I feel like I\'m just on a list somewhere." — Google, 1★',
+          appIdea: 'CleanLoop — Recurring Client Communication Platform. Sends automated appointment confirmations 48 hours out, a cleaning summary at departure, and a 24-hour feedback prompt.',
+          b2bPitch: '\'Silent service is killing your retention. CleanLoop sends confirmations, visit summaries, and feedback requests automatically — so clients feel managed, not ignored. Want to cut your monthly cancellation rate?\''
+        },
+        {
+          icon: '⏱️',
+          title: 'Rush Job Cuts — Fewer Hours Than the Client Paid For',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Clients book and pay for 4-hour deep cleans but crews finish in under 2 hours without explanation. Quality suffers and clients feel deceived when they notice obvious missed areas but are still charged the full rate.',
+          sample: '"Paid for a 4-hour deep clean. Crew was in and out in 1 hour 40 minutes. I walked around and could tell — oven untouched, baseboards dirty, ceiling fans not cleaned. Total scam." — Yelp, 1★',
+          appIdea: 'TimeProof — Timed Cleaning Session Tracker. Crew clocks in and out at the client\'s home via GPS-verified app. Time-on-site is logged per zone and shared with the client.',
+          b2bPitch: '\'Short-time complaints are among your most common — and the hardest to refute without data. TimeProof GPS-logs time on-site per zone so clients can see exactly what was done and when. Want to make rushed jobs impossible to hide?\''
+        },
+        {
+          icon: '🐾',
+          title: 'Pet Encounter Liability — Crew Let Pets Out or Caused Injury',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Crew members leave doors open and let pets out, fail to follow pet-containment instructions, or are bitten by animals the client warned them about.',
+          sample: '"My dog got out because the crew left the back door open. Spent four hours searching for her. The company apologized but offered nothing." — Google, 1★',
+          appIdea: 'PetSafe — Pet Protocol & Alert System. At client onboarding, pet details, containment instructions, and photo are stored. Crew receives a pre-visit pet alert and must acknowledge it.',
+          b2bPitch: '\'Pet incidents are your biggest liability outside of theft claims. PetSafe logs pet protocols and requires crew acknowledgment before every visit — so there\'s no excuse for leaving a door open. Want to protect your crew and your clients?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '🪳',
+          title: 'Chemical Smell Lingers for Days — Interior Treatment Fumes',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Interior treatments leave chemical odors that persist for days, affecting residents with asthma, young children, and pets. Technicians don\'t inform customers about ventilation requirements or re-entry wait times.',
+          sample: '"The smell from the interior spray was so strong I had to stay at a hotel for two nights with my kids and dog. Nobody told me about a re-entry time. One of my kids had a breathing reaction." — Google, 1★',
+          appIdea: 'SafeEntry — Chemical Re-Entry Timer & Ventilation Guide. At treatment completion, the app generates a product-specific re-entry timer and ventilation checklist texted to the client.',
+          b2bPitch: '\'Chemical exposure complaints are your highest-risk review category — health incidents can become legal claims. SafeEntry sends a re-entry countdown and safety guide after every interior treatment so clients know exactly when it\'s safe. Want to close that liability?\''
+        },
+        {
+          icon: '📋',
+          title: 'No Treatment Record Provided — Customers Don\'t Know What Was Applied',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Technicians leave without providing documentation of what products were applied, where, and at what concentration. Customers with pets, children, or allergies have no idea what chemicals are in their home.',
+          sample: '"Came home to a door hanger that said \'treated.\' No product names, no areas treated, no concentrations. I have a 6-month-old and two cats. I need to know what\'s in my house." — Yelp, 1★',
+          appIdea: 'TreatLog — Digital Pest Treatment Record System. Every treatment generates a digital report: products used, EPA registration numbers, application zones, and safety data sheet links — sent to the client immediately.',
+          b2bPitch: '\'Customers are going to the EPA website to report you for not disclosing what was applied. TreatLog auto-generates a complete treatment record and sends it to every client at visit close — it\'s the law and a trust builder. Want to get compliant?\''
+        },
+        {
+          icon: '🐀',
+          title: 'Entry Point Left Unclosed — Rodents Return Through Same Hole',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Companies trap and bait for rodents but never identify or seal the entry points. Rodents continue entering through the same gaps and customers pay for repeated visit cycles without ever resolving the root cause.',
+          sample: '"Third treatment in 6 weeks. Still have mice. Finally hired an inspector who found a gap under my cabinet that was never sealed. The pest company never once looked for entry points." — Google, 1★',
+          appIdea: 'SealScan — Entry Point Identification & Documentation Tool. Every rodent job requires a documented scan of potential entry points with photos.',
+          b2bPitch: '\'Repeat rodent calls without entry point work are your top 1-star driver. SealScan makes entry point documentation a required part of every rodent visit — so you fix the problem once instead of billing forever. Want to break the cycle?\''
+        },
+        {
+          icon: '🌿',
+          title: 'Damage to Landscaping — Sprays Killing Ornamental Plants',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Exterior perimeter sprays and broadcast treatments drift onto ornamental plants, shrubs, and vegetable gardens. Customers notice plant die-off days after treatments.',
+          sample: '"My entire front flowerbed is dead after their perimeter spray. I can see the spray pattern on my rose bushes. They said it\'s not possible their product did that. It absolutely is." — Yelp, 1★',
+          appIdea: 'PerimeterSafe — Ornamental Plant Protection Mapper. At first visit, sensitive plants and garden areas are logged on a property map. Crew receives a buffer overlay for exterior applications.',
+          b2bPitch: '\'Exterior spray damage to landscaping is generating real replacement cost disputes. PerimeterSafe maps sensitive plants before every exterior treatment and creates a documented buffer zone. Want to stop paying for dead rose bushes?\''
+        },
+        {
+          icon: '🏷️',
+          title: 'Auto-Renewal Trap — Billed After Cancellation Request',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Annual service contracts auto-renew and credit cards are charged without adequate notice. Customers who thought they canceled are billed again, and the refund process is deliberately difficult.',
+          sample: '"Canceled my service in October. Got charged the annual renewal in January. Took 11 phone calls and a BBB complaint to get a partial refund." — Google, 1★',
+          appIdea: 'RenewalAlert — Service Contract Renewal Notification Manager. Sends 60-day and 30-day renewal alerts with a one-click cancel option.',
+          b2bPitch: '\'Unauthorized renewal billing is your top BBB complaint category. RenewalAlert sends advance notice with a clean cancel option so customers never feel trapped — and you stop the chargebacks that cost you more than the subscription. Want to fix this?\''
+        },
+        {
+          icon: '🔎',
+          title: 'Inspection Upcharge Bait — Free Inspection Leads to Mandatory Services',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Free pest inspections are used to manufacture urgency with alarming findings that require immediate expensive treatment. Customers later discover the "infestation" was minimal or non-existent.',
+          sample: '"Free inspection turned into a high-pressure $800 termite treatment proposal. Got a second opinion — inspector found zero evidence of termites. The first company was making it up." — Yelp, 1★',
+          appIdea: 'TrustInspect — Third-Party Verified Pest Inspection Report. Inspection findings are photo-documented and delivered to the customer as a PDF before any service is recommended.',
+          b2bPitch: '\'The free inspection bait-and-switch is the most-reported pest control scam online. TrustInspect documents findings with photos and standardized ratings — so your proposals are trusted, not suspected. Interested?\''
+        },
+        {
+          icon: '🧪',
+          title: 'Ineffective Product — Generic Pesticides Sold as Premium',
+          badge: 'MEDIUM',
+          badgeClass: 'badge-medium',
+          desc: 'Companies charge premium prices for "professional-grade" treatments but apply the same general-use pesticides available at retail stores at full retail markup.',
+          sample: '"Looked up the product they used after my appointment — it\'s the same Ortho concentrate I can buy at Home Depot for $18. They charged me $175 for the treatment." — Google, 1★',
+          appIdea: 'ProofGrade — Product Transparency & Value Justification Tool. Service report includes the specific product used, why it was chosen, and the professional application advantage over retail alternatives.',
+          b2bPitch: '\'Customers are Googling your products and posting the retail prices. ProofGrade explains what was applied, why it works, and what the professional difference is — so your price feels justified, not exposed. Want to pre-empt that review?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '🔋',
+          title: 'Part Swapping Fraud — Old Parts Not Returned as Requested',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Customers ask to see the old parts but either receive nothing, receive a part that doesn\'t match the vehicle, or suspect the part was never actually replaced.',
+          sample: '"Asked for my old alternator back. What they handed me wasn\'t from a 2018 Camry — wrong housing entirely. Either they didn\'t replace it or they gave me someone else\'s. I paid $480 for I don\'t know what." — Yelp, 1★',
+          appIdea: 'PartProof — Removed Part Documentation System. Tech photos the old part in situ before removal and post-removal with VIN-visible. Customer receives a photo confirmation that their specific part was replaced.',
+          b2bPitch: '\'Parts fraud suspicion is driving more 1-star reviews than bad repairs. PartProof photos the removed part in the vehicle before and after — so customers see exactly what was replaced and trust the invoice. Want to end the suspicion?\''
+        },
+        {
+          icon: '🛞',
+          title: 'Tire Pressure Negligence — New Tires Mounted at Wrong PSI',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'New tires are mounted and balanced but inflated to incorrect pressure — often over 50 PSI when the vehicle calls for 32-35. Customers drive away with handling issues and uneven wear begins immediately.',
+          sample: '"Got four new tires. Within a week my handling felt terrible. Checked the pressure — all four were at 51 PSI. My car calls for 33. The shop mounted them and never calibrated the pressure." — Google, 1★',
+          appIdea: 'TireVerify — Post-Mount Tire Pressure & Torque Confirmation App. At tire install completion, tech logs the final PSI for each tire against the vehicle\'s door-placard spec.',
+          b2bPitch: '\'Tire pressure errors after new installs are a safety liability and a growing complaint category. TireVerify logs final PSI against door-spec before the car leaves the bay — and sends the customer proof. One step, no blowout lawsuits. Want it?\''
+        },
+        {
+          icon: '🪝',
+          title: 'Lien Threats Over Disputes — Cars Held Hostage for Contested Bills',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'When customers dispute unauthorized charges, shops invoke mechanic\'s lien law to hold the vehicle until the full bill is paid. Customers feel extorted and face legal fees to recover their property.',
+          sample: '"Disputed $340 in charges for work I didn\'t authorize. They told me my car wasn\'t leaving until I paid the full $1,100. I had to call a lawyer. They held my car for 6 days." — Yelp, 1★',
+          appIdea: 'AuthoSign — Digital Work Authorization & Dispute Prevention Platform. Every repair requires a line-item digital authorization before work begins. Any additional scope triggers a real-time approval request.',
+          b2bPitch: '\'Lien-threatened customers write the angriest reviews and tell the most people. AuthoSign requires digital approval on every line item before it\'s touched — so you never hold a car over work the customer didn\'t authorize. Want to close that exposure?\''
+        },
+        {
+          icon: '📸',
+          title: 'Phantom Damage — New Dents and Scratches After Service',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Customers pick up their vehicle after service and find new scratches on the door, a cracked trim piece, or a new dent that wasn\'t there at drop-off. Without documented intake photos, shops deny all liability.',
+          sample: '"Dropped off my car for an oil change and picked it up with a cracked rear bumper trim. They said it was there when I brought it in. I checked my drop-off photos — it was not." — Google, 1★',
+          appIdea: 'DropShot — Vehicle Intake Photo Documentation App. At drop-off, tech walks the vehicle and photos all four sides, interior, and undercarriage. Both parties sign off on the condition record digitally.',
+          b2bPitch: '\'Damage disputes are expensive and your word against theirs. DropShot does a photo walk-around at every drop-off and gets the customer\'s digital sign-off — so no one can invent a new scratch after the fact. Want to close that claim?\''
+        },
+        {
+          icon: '🗓️',
+          title: 'Multi-Day Hold Without Updates — Car Gone for a Week, No Status',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Customers drop off their vehicle for a same-day repair and hear nothing for days. No calls about parts delays, no status updates, no ETA.',
+          sample: '"Dropped off Monday for what they said was a same-day job. Called Wednesday, Thursday, and Friday. Got voicemail every time. Showed up Friday afternoon — car was sitting exactly where I left it. No one had touched it." — Yelp, 1★',
+          appIdea: 'ShopPulse — Auto Repair Status Update Automation. Customers receive automated updates when their vehicle moves to each stage: received, in diagnosis, awaiting parts, in repair, quality check, ready.',
+          b2bPitch: '\'Silent multi-day holds are your #1 review driver. ShopPulse sends automated stage updates so customers always know where their car is — without calling you. Want to cut your inbound status calls by 60%?\''
+        },
+        {
+          icon: '🏷️',
+          title: 'Unapproved OEM vs Aftermarket Swap — Spec Downgrade Without Consent',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Customers authorize repairs expecting OEM parts but aftermarket or remanufactured parts are installed without disclosure. The price difference is pocketed by the shop.',
+          sample: '"Authorized a Bosch OEM fuel pump at $290. Found out they used a remanufactured knock-off worth about $60. Charged me the same. My dealer confirmed it was not an OEM part." — Google, 1★',
+          appIdea: 'SpecTrue — Parts Specification Verification App. Every part order is tied to the customer authorization by part number and brand. Any substitution triggers an approval request.',
+          b2bPitch: '\'OEM vs aftermarket swap without consent is being prosecuted as fraud in some states. SpecTrue ties every part install to the exact brand and number the customer approved — so substitutions can\'t happen quietly. Want to protect your license?\''
+        },
+        {
+          icon: '🔐',
+          title: 'TPMS Reset Not Included — Warning Light Still On After Tire Work',
+          badge: 'MEDIUM',
+          badgeClass: 'badge-medium',
+          desc: 'After tire rotations, new tire installs, or sensor replacements, TPMS warning lights are left illuminated because the system was never reset. Customers return to the shop and are charged a second labor fee.',
+          sample: '"TPMS light came on the day after my tire rotation. Called the shop and they said a reset is a separate $35 charge. It should have been done during the rotation. They knew and said nothing." — Yelp, 1★',
+          appIdea: 'ServiceComplete — Post-Repair Warning Light Clearance Checklist. Every tire and brake job includes a required warning light scan at job close.',
+          b2bPitch: '\'Returning customers for TPMS resets you should have done the first time is generating low-effort 1-star reviews. ServiceComplete makes warning light clearance a mandatory job close step — one scan, zero callbacks. Want to run it today?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '💅',
+          title: 'Nail Lifting Within 48 Hours — Gel and Acrylic Delaminating Fast',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Gel and acrylic applications begin lifting, chipping, or separating within 1-2 days due to improper nail prep, skipped primer, or insufficient curing.',
+          sample: '"$75 full set, lifting on three nails by day two. Called to ask for a fix and was told it was because of my \'nail type.\' I\'ve had nails done for 10 years and this has never happened before." — Google, 1★',
+          appIdea: 'NailLog — Application Quality & Retention Tracker. Technician logs prep steps (dehydrator, primer, cure times) per client. A 72-hour follow-up text checks in on retention.',
+          b2bPitch: '\'Early lifting is your most common complaint and it\'s preventable with documentation. NailLog tracks prep steps and follows up at 72 hours — so you catch failures before they become reviews. Want to protect your retention rate?\''
+        },
+        {
+          icon: '🌡️',
+          title: 'Chemical Burns During Waxing — Overheated Wax Causing Skin Damage',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Wax applied at excessive temperature causes first and second-degree burns, especially in sensitive facial areas. Burns are attributed to "sensitive skin" rather than product temperature.',
+          sample: '"Left with a burn mark on my upper lip from a lip wax. My esthetician never tested the temperature. This scarred." — Yelp, 1★',
+          appIdea: 'WaxTemp — Wax Temperature Monitoring & Client Patch Log. Thermometer-integrated pot liner logs wax temperature at application and stores patch test results per client.',
+          b2bPitch: '\'Wax burn complaints can become legal claims — and they\'re showing up in your reviews. WaxTemp logs pot temperature at application and requires patch test records for sensitive areas. Want to close that liability before it closes you?\''
+        },
+        {
+          icon: '💇',
+          title: 'Extension Damage — Natural Hair Broken by Improper Extension Application',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Tape-in, sew-in, or fusion extensions applied incorrectly cause traction alopecia, breakage, and bald patches. Stylists deny the extensions caused the damage.',
+          sample: '"Lost a 2-inch bald patch at my hairline after tape-in extensions. The stylist said my hair was \'already weakened.\' My hair was healthy before I sat in her chair." — Google, 1★',
+          appIdea: 'ExtensionSafe — Pre-Application Hair Integrity Assessment App. Before any extension service, tech documents hair density, scalp health, and breakage points with photos.',
+          b2bPitch: '\'Extension damage complaints are your highest-liability review category and they spread fast. ExtensionSafe documents hair health before application so no one can claim their bald patch came from your chair without evidence. Interested?\''
+        },
+        {
+          icon: '💆',
+          title: 'Sanitation Theater — Visibly Unclean Tools and Surfaces',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Clients observe technicians using tools pulled from drawers without autoclave pouches, reusing files between clients, or cleaning surfaces with the same cloth used on the prior client.',
+          sample: '"Watched the nail tech wipe my station with the same paper towel she used on the last client\'s station and pull tools out of a drawer — not an autoclave bag. I left before she touched me." — Yelp, 1★',
+          appIdea: 'CleanSeal — Sanitation Compliance & Pouch Tracking System. Autoclave cycle logs are stored per tool set with client-visible QR code confirmation.',
+          b2bPitch: '\'Sanitation theater is killing you — clients are watching and posting. CleanSeal gives every tool set a QR-trackable sterilization record clients can scan in the chair. Want to make your sanitation a selling point instead of a complaint?\''
+        },
+        {
+          icon: '🪞',
+          title: 'Brow Asymmetry — Uneven Shaping With No Correction Offered',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Waxed, threaded, or tinted brows come out visibly asymmetrical with no offer to correct before the client leaves. When clients point it out, technicians dismiss a legitimate concern.',
+          sample: '"One brow was noticeably higher than the other. I mentioned it before leaving and was told \'they\'re sisters, not twins.\' That\'s not an acceptable response when someone just paid you $45." — Google, 1★',
+          appIdea: 'BrowCheck — Symmetry Verification Photo Tool. At brow service completion, tech takes a front-facing symmetry photo and presents it to the client for approval before finalizing.',
+          b2bPitch: '\'Brow asymmetry complaints are low-ticket but high-visibility — they drive away their entire friend group. BrowCheck takes a completion photo for client approval before they stand up. Want it?\''
+        },
+        {
+          icon: '⏰',
+          title: 'Double-Booked Chaos — Multiple Clients Waiting, Service Rushed',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Technicians overbook appointments to maximize revenue, leading to rushed services, long waits on arrival, and quality suffering across every client in the stack.',
+          sample: '"Showed up for my 2pm facial to find three clients in the waiting area also with 2pm appointments. My 60-minute facial was done in 35 minutes." — Yelp, 1★',
+          appIdea: 'TrueBook — Anti-Overbooking Appointment Management App. Service time blocks include mandatory transition time and a hard cap on parallel bookings per provider.',
+          b2bPitch: '\'Double-booking complaints are showing up on your reviews and they tell clients your time is more important than theirs. TrueBook enforces service duration blocks and blocks overbooking before it happens. Want to clean up your schedule?\''
+        },
+        {
+          icon: '🧾',
+          title: 'Add-On Ambush — Charges for Services Never Discussed',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'At checkout, clients are charged for add-on treatments they didn\'t request or weren\'t told were extra — cuticle oil, nail art, a scalp treatment, or a "conditioning mask."',
+          sample: '"Booked a $55 manicure. At checkout the total was $82. Three items I didn\'t ask for and wasn\'t told about." — Google, 1★',
+          appIdea: 'CheckoutClear — Pre-Service Price Confirmation App. Before any service begins, client reviews and approves the complete service menu and any add-ons with pricing.',
+          b2bPitch: '\'Checkout surprise charges are your most common complaint and they cost you clients who never mention it — they just don\'t come back. CheckoutClear locks in the price before the service starts. Want to end the checkout ambush for good?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '🧪',
+          title: 'Scalp Chemical Burns — Bleach and Color Left On Too Long',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Bleach and high-lift color developers cause chemical scalp burns when left on past processing time, especially on previously sensitized scalps.',
+          sample: '"Had scabs on my scalp for three weeks after a bleach session. My dermatologist diagnosed it as a second-degree chemical burn. This was not normal." — Google, 1★',
+          appIdea: 'ColorSafe — Chemical Processing Timer & Scalp Sensitivity Tracker. Client records include prior chemical history, scalp sensitivity ratings, and patch test results. Processing timers alert the stylist.',
+          b2bPitch: '\'Chemical burn complaints are showing up in your reviews and they can become medical claims. ColorSafe tracks scalp sensitivity history and enforces processing timers so no client sits too long. Want to protect your license?\''
+        },
+        {
+          icon: '✂️',
+          title: 'Consultation Ignored — Stylist Overrides Client\'s Clear Instructions',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Clients come in with reference photos and specific instructions and the stylist makes their own creative choices anyway. The result is a haircut or color the client never approved.',
+          sample: '"Showed three photos of what I wanted. Got something completely different. When I said something she said \'I thought this would look better on you.\' That\'s not your decision to make." — Yelp, 1★',
+          appIdea: 'StyleLock — Pre-Service Consultation Confirmation App. Client uploads reference photos and notes specific requests. Stylist reviews and acknowledges the plan with a digital sign-off before picking up scissors.',
+          b2bPitch: '\'Stylist creative override is your most common complaint and it drives away clients for good. StyleLock documents the consultation plan and gets mutual sign-off — so your stylist\'s creativity gets channeled, not blamed. Want to protect the relationship?\''
+        },
+        {
+          icon: '🎨',
+          title: 'Toner Disaster — Hair Left Green, Orange, or Yellow',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Bleach sessions without proper toning or incorrect toner selection leave hair with brassy, orange, or greenish tones. When clients return for correction, they\'re charged full price again.',
+          sample: '"Left the salon with hair that was clearly orange, not blonde. She said I needed to come back for a toner at another $65. I already paid $220. This should have been done correctly the first time." — Google, 1★',
+          appIdea: 'ToneRight — Pre-Bleach Level & Toner Planning Tool. Before any lightening service, the app maps the starting level, target level, and required toner formula. Client approves the expected result range.',
+          b2bPitch: '\'Toner complaints after bleach are your most common corrective service driver — and clients resent paying twice. ToneRight maps the expected result before processing and gets client approval on the likely outcome. Want to eliminate the rebooking fight?\''
+        },
+        {
+          icon: '⏳',
+          title: 'Time Estimation Failure — 2-Hour Appointments Running 5+ Hours',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Clients book based on a quoted timeline and end up at the salon hours longer than promised, missing work, childcare, or other obligations.',
+          sample: '"Booked a balayage — told 3 hours. Was there 6 and a half hours. I had to reschedule my kid\'s pickup three times." — Yelp, 1★',
+          appIdea: 'TimeTrue — Accurate Service Duration Estimation Engine. Based on hair length, density, and service type, calculates a realistic time range using historical data from the salon.',
+          b2bPitch: '\'Blown time estimates are creating scheduling chaos for your clients and wrecking your review average. TimeTrue uses your historical data to give honest booking windows — so clients show up prepared, not trapped. Want to run it?\''
+        },
+        {
+          icon: '🪥',
+          title: 'Sanitation Concerns — Reused Capes and Unsanitized Brushes',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Color bowls, brushes, and capes reused between clients without washing spread dye, product buildup, and potentially bacteria.',
+          sample: '"The cape they put on me was clearly wet and stained from the client before me. The color brush still had dried color on it. This is a basic health issue." — Google, 1★',
+          appIdea: 'SalonSan — Station Sanitation Checklist & Turnover Tracker. Between every client, a digital checklist confirms cape swap, tool sanitization, and surface wipe-down with a timestamp.',
+          b2bPitch: '\'Hygiene complaints are the fastest-spreading reputation killers in the salon industry. SalonSan logs every station turnover with a timestamped checklist — and clients can see the last cleaning before they sit. Want to make sanitation your brand?\''
+        },
+        {
+          icon: '💸',
+          title: 'Loyalty Program That Disappears — Points or Perks That Can\'t Be Redeemed',
+          badge: 'MEDIUM',
+          badgeClass: 'badge-medium',
+          desc: 'Salons offer punch cards or digital loyalty points that mysteriously expire or are suddenly "not applicable." Clients feel the program was never intended to be honored.',
+          sample: '"Had 8 punches on my loyalty card — one away from a free service. Was told the program ended three months ago and my card was worthless. No notice, no grandfathering." — Yelp, 1★',
+          appIdea: 'LoyalKeep — Salon Loyalty Program Transparency Manager. Every point balance is visible to the client in real time. Program changes require 90-day notice with grandfathering options for existing balances.',
+          b2bPitch: '\'Expired loyalty points turn your best clients into your loudest critics. LoyalKeep makes every balance visible and requires advance notice for any program changes — so loyalty programs actually build loyalty. Want to fix yours?\''
+        },
+        {
+          icon: '📲',
+          title: 'Booking Confirmation Failure — Appointments Not In the System at Arrival',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Clients book online or by phone, receive no confirmation, and arrive to find no appointment on record. They\'re turned away or offered a different stylist, wasting a trip.',
+          sample: '"Booked online two weeks ago. Received a confirmation email. Showed up and was told there was no appointment under my name. No stylist available." — Google, 1★',
+          appIdea: 'BookProof — Appointment Confirmation & Record Sync System. Every booking generates a confirmation with a unique code tied to the stylist\'s calendar. Sync errors trigger alerts before the appointment date.',
+          b2bPitch: '\'Missing appointment records are turning new clients into one-time visits. BookProof syncs every online booking to your stylist calendar in real time and alerts you to conflicts before the client shows up angry. Want to close that gap?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '🔬',
+          title: 'Breakout Wave — Acne Caused by Service Products',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Facial services using comedogenic products or extraction techniques trigger severe breakout waves 48-72 hours post-treatment. Estheticians attribute breakouts to "purging" regardless of cause.',
+          sample: '"Had a facial Thursday. By Saturday my face was covered in cysts where I never break out. This was a reaction to whatever she put on my face." — Google, 1★',
+          appIdea: 'SkinTrack — Post-Facial Skin Response Monitoring App. 48 and 72-hour follow-up texts ask clients to rate their skin response. Adverse reactions are logged and tied to specific products used.',
+          b2bPitch: '\'Post-facial breakout complaints are one of your top review drivers and they\'re hard to defend without data. SkinTrack follows up at 72 hours and logs product-linked reactions so you can catch a product problem before it becomes a pattern. Interested?\''
+        },
+        {
+          icon: '💡',
+          title: 'Device Burn — LED, Laser, or Microcurrent Causing Skin Damage',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Improper use of esthetic devices — incorrect settings, wrong attachment, or too long on one area — causes burns, hyperpigmentation, or nerve irritation.',
+          sample: '"Left with a rectangular burn mark on my cheek after LED treatment. My esthetician insisted it was \'impossible\' for the device to do that. The shape of the burn is the exact shape of the LED panel." — Yelp, 1★',
+          appIdea: 'DeviceSafe — Esthetic Device Settings & Session Log. Every device session logs the device, attachment, settings, duration, and skin areas treated.',
+          b2bPitch: '\'Device injury complaints are your highest liability category and they\'re difficult to defend without a treatment record. DeviceSafe logs every device setting and session so adverse events have a documented protocol to reference. Want it?\''
+        },
+        {
+          icon: '🌿',
+          title: 'Ingredient Reaction — Undisclosed Allergens in Products Used',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Products containing common allergens — fragrance, essential oils, nuts, latex derivatives — are applied without reviewing client allergy intake forms.',
+          sample: '"I disclosed my nut allergy on my intake form. She used an almond oil massage on my face. I had a reaction within an hour and ended up in urgent care." — Google, 1★',
+          appIdea: 'AllergyAlert — Client Allergy Cross-Reference System. At every appointment, the service menu is cross-referenced against the client\'s allergy profile. Any flagged ingredient is blocked from use.',
+          b2bPitch: '\'Using a product that triggers an allergy you were told about is both a legal and moral failure. AllergyAlert cross-checks every product against the client\'s intake form before you open the bottle. One check, zero ER visits. Want to implement this today?\''
+        },
+        {
+          icon: '🧴',
+          title: 'Product Retail Pressure — Every Visit Ends in a Sales Ambush',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Every facial ends with an aggressive retail product pitch that clients feel they can\'t decline. When clients don\'t buy, the esthetician\'s attitude shifts.',
+          sample: '"Every single visit ends with 20 minutes of hard selling. I\'ve told her multiple times I\'m not interested in retail. The last time I said no, she was noticeably cold during my next facial." — Yelp, 1★',
+          appIdea: 'SoftSell — Client Retail Preference Manager. Client profiles include retail preference settings. Retail recommendations are delivered via post-visit email, not verbally at checkout.',
+          b2bPitch: '\'Hard-sell retail complaints are your most consistent theme — and they\'re driving away clients who were happy with the service. SoftSell moves product suggestions to a post-visit email for clients who prefer it. Want to keep the sale and the client?\''
+        },
+        {
+          icon: '📋',
+          title: 'No Treatment Plan — Same Generic Facial Every Visit',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Clients book for specific skin concerns but receive the same basic facial every visit with no progression, no adjustment for results, and no measurable improvement.',
+          sample: '"I\'ve been coming every 4 weeks for acne scarring for 6 months. Same facial every time. No before/after, no plan, no progress. I finally asked what the plan was and she had no answer." — Google, 1★',
+          appIdea: 'SkinPlan — Progressive Esthetic Treatment Plan Builder. At intake, a goal-based treatment plan is built with measurable milestones. Each visit is logged against the plan and before/after photos track visible progress.',
+          b2bPitch: '\'Clients are paying hundreds per month with no visible plan and no measurable progress — and they\'re noticing. SkinPlan turns your services into a documented journey with photos and milestones. Want to turn your regulars into true believers?\''
+        },
+        {
+          icon: '🧹',
+          title: 'Room Hygiene — Sheets, Headbands, and Implements Not Changed',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Treatment room linens are not changed between clients and disposable implements are reused. Clients who notice report feelings of disgust and cross-contamination concerns.',
+          sample: '"The face cradle still had the impression of the previous client\'s face and strands of someone\'s hair in it. The cotton pads on the tray looked used. I asked to reschedule and left." — Yelp, 1★',
+          appIdea: 'RoomReset — Treatment Room Turnover Verification App. Between every client, a photo checklist confirms linen change, disposable replacement, and surface sanitization.',
+          b2bPitch: '\'A client noticing someone else\'s hair in the face cradle is your worst review moment — and it\'s completely preventable. RoomReset requires a photo-verified room reset between every client. Want it?\''
+        },
+        {
+          icon: '💬',
+          title: 'Overpromising Results — Guaranteed Outcomes That Never Materialize',
+          badge: 'MEDIUM',
+          badgeClass: 'badge-medium',
+          desc: 'Estheticians promise specific, measurable outcomes that don\'t materialize. When clients feel misled, they leave negative reviews citing false promises.',
+          sample: '"Was told my hyperpigmentation would be \'dramatically improved\' after 4 peels. After 4 sessions and $520 later, zero visible change." — Google, 1★',
+          appIdea: 'ResultRange — Evidence-Based Outcome Communication Tool. Replaces outcome promises with a documented range of typical results for each treatment, linked to published efficacy data.',
+          b2bPitch: '\'Overpromised outcomes are your most avoidable legal and reputational risk. ResultRange replaces vague promises with documented result ranges so clients have honest expectations — and you have proof you set them. Want to protect yourself?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '🎭',
+          title: 'Contractual No-Show — MUA Cancels Day-Of Wedding or Event',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'A makeup artist cancels the morning of a major event with no replacement offered and no refund of the deposit. Brides are left scrambling on the most important day of their lives.',
+          sample: '"Makeup artist texted me at 6am the morning of my wedding that she couldn\'t make it. No substitute, no refund of the $400 deposit. I was doing my own makeup an hour before my ceremony." — Google, 1★',
+          appIdea: 'EventGuard — Artist Backup Network & Contract Enforcement Platform. Every booked event is matched with a backup artist who has confirmed availability. If the primary cancels within 48 hours, the backup is auto-notified.',
+          b2bPitch: '\'Day-of cancellations are the nuclear option for a makeup artist\'s reputation. EventGuard pairs every booking with a confirmed backup so no client ever faces their wedding morning without an artist. Want to turn reliability into your biggest differentiator?\''
+        },
+        {
+          icon: '🪞',
+          title: 'Photo vs Reality Gap — Makeup Washes Out On Camera',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Artists apply makeup optimized for in-person viewing but it photographs poorly — flashback from heavy HD powders, washed-out color on camera, or oxidized foundation.',
+          sample: '"My makeup looked gorgeous in the mirror. Every single photo from my engagement party looks like I\'m wearing a white Halloween mask." — Yelp, 1★',
+          appIdea: 'PhotoProof — Camera-Tested Makeup Verification App. At trial and at event application, artist takes test shots under both natural and flash lighting and reviews them with the client.',
+          b2bPitch: '\'Flash photography disasters are a growing complaint category — and clients discover them after the event when it\'s too late. PhotoProof adds a camera test step to every event application so you never ruin someone\'s photos. Interested?\''
+        },
+        {
+          icon: '⏱️',
+          title: 'Timeline Blowout — Running Behind Causes Bridal Party Chaos',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Makeup artists underestimate time per person and fall progressively further behind schedule. The bride receives a rushed application and later members of the bridal party are done during the ceremony or not at all.',
+          sample: '"Booked for 6 people. Artist did two people in 3 hours. I was the bride. I was in the chair until 20 minutes before my ceremony. Two bridesmaids did their own makeup." — Google, 1★',
+          appIdea: 'EventClock — Bridal Party Makeup Timeline Manager. Artist inputs service types per person and the app generates a locked-in per-person schedule with buffer time.',
+          b2bPitch: '\'Timeline failures at weddings are the reviews that spread the fastest. EventClock generates a realistic per-person schedule with buffer time and alerts you if you\'re falling behind — before the ceremony does. Want to make on-time delivery your brand?\''
+        },
+        {
+          icon: '💄',
+          title: 'Unsanitary Kit — Brushes and Products Shared Between Clients',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Artists use the same brushes and dip directly into pots, palettes, and lipsticks between clients without sanitizing. Clients contract eye infections, cold sores, or skin infections.',
+          sample: '"Got a cold sore 4 days after my makeover. I watched the artist use the same lip brush on the client before me without cleaning it." — Yelp, 1★',
+          appIdea: 'KitClean — Makeup Artist Sanitation Protocol Tracker. Before each client, a sanitation checklist is completed: brush cleaned, products decanted, single-use items used for lips/eyes.',
+          b2bPitch: '\'A cold sore complaint from a shared lip brush can end your career and generate a lawsuit. KitClean enforces a documented sanitation checklist before every client so you can prove your kit was clean. Want it?\''
+        },
+        {
+          icon: '🧾',
+          title: 'Rate Creep — Final Invoice Higher Than Quoted Rate',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Artists quote a day-of rate and add travel fees, assistant fees, early-morning fees, or touch-up fees not mentioned during booking. The additions appear at checkout on the event day.',
+          sample: '"Quoted $350 for bridal. Final invoice day-of: $620 with three add-ons I\'d never heard of. Felt completely held hostage on my wedding morning." — Google, 1★',
+          appIdea: 'QuoteFinale — All-In Event Pricing Lock Platform. Quote includes all possible additions (travel, early morning, assistant) calculated at booking. Any scope change requires written approval before the event date.',
+          b2bPitch: '\'Day-of rate surprises are your #1 bridal complaint and they make clients feel extorted. QuoteFinale builds the all-in price at booking so there\'s no checkout ambush on the wedding morning. Want to eliminate that complaint entirely?\''
+        },
+        {
+          icon: '🖌️',
+          title: 'No Trial Honored — Day-Of Looks Different Than Trial',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Brides pay for a trial to establish the exact look, but the day-of application is done by a different artist, with different products, or simply doesn\'t match what was approved.',
+          sample: '"Paid $150 for a trial. Loved it. Wedding day, different artist showed up and did something completely different. The trial was apparently meaningless." — Yelp, 1★',
+          appIdea: 'TrialMatch — Makeup Trial Documentation & Day-Of Replication App. Trial session is fully documented with product names, application notes, and photos from multiple angles. Day-of artist loads the trial profile and replicates.',
+          b2bPitch: '\'Trial-versus-delivery mismatches are your most emotional complaint category. TrialMatch documents every trial detail so any artist can replicate the look precisely. Want to make your trials actually mean something?\''
+        },
+        {
+          icon: '💬',
+          title: 'Communication Blackout — Ghosted After Deposit During Planning Period',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'After a deposit is collected, artists become difficult to reach for months during the planning period. Emails and texts go unanswered for weeks.',
+          sample: '"Paid a $300 deposit in November for a June wedding. Between February and May I sent six emails and three texts. Two replies total." — Google, 1★',
+          appIdea: 'ClientPulse — Event Client Communication Automation. After every booking, automated check-ins are scheduled at 90, 60, and 30 days before the event.',
+          b2bPitch: '\'Ghosting clients after their deposit is how you turn a good experience into a terrible review. ClientPulse automates check-ins at 90, 60, and 30 days so every client feels managed — not forgotten. Want to automate your client communication?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '👁️',
+          title: 'Eye Irritation and Infection — Adhesive Fumes Causing Conjunctivitis',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Cyanoacrylate adhesive fumes cause chemical conjunctivitis when clients aren\'t properly positioned or ventilated during application.',
+          sample: '"Woke up the morning after my lash fill with both eyes swollen shut. Urgent care diagnosed chemical conjunctivitis from adhesive fumes." — Google, 1★',
+          appIdea: 'FumeGuard — Lash Adhesive Ventilation & Positioning Protocol App. Before application begins, tech confirms fan direction, client eye seal, and adhesive cure time based on humidity.',
+          b2bPitch: '\'Adhesive fume eye injuries are showing up in reviews and they can escalate to medical claims fast. FumeGuard logs ventilation positioning and adhesive protocol per client so you can prove correct procedure. Interested?\''
+        },
+        {
+          icon: '🪡',
+          title: 'Natural Lash Destruction — Permanent Loss From Wrong Extension Weight',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Lash extensions applied with excessive weight relative to the natural lash cause permanent follicle damage and traction alopecia.',
+          sample: '"After 8 months of classic lash fills with this tech, my natural lashes are half what they were. Ophthalmologist confirmed traction damage from extensions that were too heavy." — Yelp, 1★',
+          appIdea: 'LashMap — Natural Lash Health Assessment & Extension Weight Calculator. Before initial application, tech documents natural lash length, diameter, and density. Extension weight and length are calculated per zone.',
+          b2bPitch: '\'Permanent natural lash damage complaints are the reviews that follow you forever. LashMap assesses natural lash health before every new set and calculates safe extension weights by zone. Want to protect your clients and your career?\''
+        },
+        {
+          icon: '🪞',
+          title: 'Retention Failure — Lashes Falling Out Within 3-5 Days',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'New lash sets begin shedding within 3-5 days due to improper bonding — wrong adhesive for humidity conditions, oily skin not properly primed, or insufficient cure time.',
+          sample: '"Full set applied Sunday. By Thursday I was down to about half my lashes. Paid $190. Was told it was because of my \'skin type.\'" — Google, 1★',
+          appIdea: 'BondCheck — Adhesive Selection & Humidity Logger. At application start, logs room humidity and temperature and recommends the appropriate adhesive. Cure time is adjusted per conditions.',
+          b2bPitch: '\'Early retention failure is your most common complaint and it\'s almost always an adhesive-condition mismatch. BondCheck selects the right adhesive for current humidity and logs cure time per client. Want to eliminate it?\''
+        },
+        {
+          icon: '🎨',
+          title: 'Brow Tint Bleed — Color Staining Skin Beyond Brow Line',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Brow tinting without proper barrier application bleeds onto surrounding skin, leaving dark stains on the forehead or temples that persist for days.',
+          sample: '"Left the salon with brow tint stained all around my brows onto my forehead — looked like I drew on my face with a marker. It didn\'t fully fade for 5 days. I had a job interview the next morning." — Yelp, 1★',
+          appIdea: 'TintBarrier — Brow Mapping & Barrier Application Verification Tool. Before tinting, tech documents that petroleum barrier was applied. Post-tint photo confirms clean lines before client sees the result.',
+          b2bPitch: '\'Tint bleed complaints hit right when clients have important events — and they have photos of it. TintBarrier catches bleeds in a tech-review photo before the client sits up. Want to stop the embarrassment?\''
+        },
+        {
+          icon: '⚗️',
+          title: 'Brow Lamination Damage — Over-Processed Hair That Breaks Off',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Brow lamination solution left on too long or applied to previously processed brows causes severe over-processing, resulting in brow hairs that snap off.',
+          sample: '"Had brow lamination done. Three days later my brow hairs started breaking off at the root when I brushed them. Lost about 40% of my brow density." — Google, 1★',
+          appIdea: 'LamSafe — Brow Lamination Processing Timer & History Tracker. Client profiles log prior chemical processing. Processing times are adjusted for history. A mandatory timer must complete before neutralizer is applied.',
+          b2bPitch: '\'Over-processed brow lamination is generating some of your most damaging reviews — before-and-after photos of missing brows spread fast. LamSafe tracks client chemical history and enforces processing timers so no brow gets over-cooked. Want it?\''
+        },
+        {
+          icon: '📸',
+          title: 'Portfolio Bait — Work Advertised Is Not What You Get',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Artists market using portfolio photos from heavily filtered posts or work done by other technicians. Clients book based on a style they can\'t replicate.',
+          sample: '"Booked based on her Instagram. Beautiful, natural lash looks in every photo. What I got looked completely different — much heavier, wrong curl, wrong length." — Yelp, 1★',
+          appIdea: 'PortfolioTrue — Client-Verified Work Gallery Manager. After each client service, the tech requests permission to use the photo. Gallery is tagged by lash/brow type, curl, and length.',
+          b2bPitch: '\'Portfolio-versus-reality gaps are destroying new client trust before they even sit down. PortfolioTrue builds a verified gallery tagged by lash type and style so clients find work that actually matches what they want. Want to build it?\''
+        },
+        {
+          icon: '🗓️',
+          title: 'Fill Cadence Mismanagement — Waiting Too Long Creates a Full Set Bill',
+          badge: 'MEDIUM',
+          badgeClass: 'badge-medium',
+          desc: 'Clients arrive for a fill expecting fill pricing but are told they\'ve waited too long and now need a full new set. Clients claim they weren\'t warned about the fill window.',
+          sample: '"Came in at 3.5 weeks for a fill. Was told I needed a full set because I \'waited too long.\' Nobody told me there was a 3-week window. I was charged $180 instead of $75." — Google, 1★',
+          appIdea: 'FillWindow — Lash Fill Deadline Reminder & Policy Communicator. At booking, clients receive the fill cutoff window in the confirmation text. A 5-day reminder before the deadline lets them reschedule.',
+          b2bPitch: '\'Fill-window upcharge surprises at checkout are turning regulars into one-timers. FillWindow communicates the cutoff at booking and sends a reminder before the deadline expires — so clients never arrive surprised. Want to protect your fill revenue?\''
+        }
+      ],
+      proPains: [
+        {
+          icon: '📦',
+          title: 'Scope Creep Billing — Final Invoice Way Beyond Original Agreement',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Service providers add tasks and time to a job without asking and bill for them as completed work. Customers who agreed to a specific scope discover unfamiliar line items on the invoice.',
+          sample: '"Hired for 4 hours of moving help. Invoice included an extra 3 hours of \'packing time\' I never requested. They just started packing things without asking. Total doubled." — Google, 1★',
+          appIdea: 'ScopeGuard — Change Order Authorization Platform. Every task performed outside the original scope triggers a real-time change order request. Client approves or declines via text before the work is done.',
+          b2bPitch: '\'Scope creep billing disputes are driving chargebacks and reviews across every service industry. ScopeGuard requires a digital thumbs-up before any out-of-scope work begins — so your invoice is always expected, never a surprise. Want to demo it?\''
+        },
+        {
+          icon: '🧑‍🔧',
+          title: 'Unlicensed or Uncertified Providers — Credentials Misrepresented',
+          badge: 'CRITICAL',
+          badgeClass: 'badge-critical',
+          desc: 'Businesses represent their providers as licensed, certified, or insured when they are not. Customers discover the misrepresentation after an incident.',
+          sample: '"The \'certified technician\' who came to my house had no license on file with the state licensing board. Turned out the business let their certification lapse two years ago." — Yelp, 1★',
+          appIdea: 'CredVerify — Provider License & Certification Tracker. Stores license numbers, expiration dates, and insurance certificates per provider. Auto-alerts owners before any license lapses.',
+          b2bPitch: '\'Misrepresented credentials are a license and liability bomb — and customers are starting to check. CredVerify tracks every license expiration date and generates a shareable credential card clients can verify. Want to turn transparency into a trust advantage?\''
+        },
+        {
+          icon: '🤝',
+          title: 'Subcontractor Quality Gap — The Person Who Shows Up Is Not the Person You Hired',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Customers hire a business based on the owner\'s reputation but an undertrained subcontractor performs the work. The business hides behind contractor relationships to avoid accountability.',
+          sample: '"Hired based on the owner\'s incredible portfolio and reviews. A sub showed up who clearly had half the experience. When I complained the owner said \'all my staff are trained to my standard.\' No they\'re not." — Google, 1★',
+          appIdea: 'WorkerProfile — Field Provider Portfolio & Rating System. Every provider who performs work has their own profile with their own verified work samples and client ratings.',
+          b2bPitch: '\'The rep-versus-reality gap when subs show up is your most consistent trust destroyer. WorkerProfile gives every field provider their own verified portfolio — so clients book the result, not the face on the website. Want to build provider accountability?\''
+        },
+        {
+          icon: '🗓️',
+          title: 'Reschedule Runaround — Appointment Changed Multiple Times by Provider',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Providers reschedule confirmed appointments multiple times without adequate notice, disrupting customers\' plans repeatedly.',
+          sample: '"Rescheduled three times over six weeks. Always by text the night before. Finally canceled and left this review because I need people to know you can\'t count on this business." — Yelp, 1★',
+          appIdea: 'HoldFirm — Appointment Commitment & Reschedule Policy Enforcer. Appointments include a reschedule policy that limits provider-initiated changes and triggers a customer credit when the provider reschedules within 24 hours.',
+          b2bPitch: '\'Serial reschedules are quietly destroying your booking completion rate. HoldFirm tracks provider-initiated reschedules and auto-triggers a client credit when the threshold is hit — turning a bad experience into a retention move. Interested?\''
+        },
+        {
+          icon: '💻',
+          title: 'Digital Ghost — Business Unresponsive Online After Booking',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Customers book through an online platform or social media DM and receive no response to follow-up questions for days. The silence creates anxiety about whether the service will actually show up.',
+          sample: '"Booked online, got a confirmation email, sent two follow-up messages over 10 days and heard nothing. Called the number on the website — voicemail full." — Google, 1★',
+          appIdea: 'ReplyReady — Multi-Channel Booking Response Automation. Every online booking triggers an automated welcome with the business owner\'s direct contact and a 24-hour response guarantee.',
+          b2bPitch: '\'Online booking silence is killing conversion and generating anxiety-driven cancellations. ReplyReady auto-responds to every booking and escalates unread messages — so no client ever books into a void. Want to fix your response rate?\''
+        },
+        {
+          icon: '🧾',
+          title: 'Receipt-Free Transactions — No Proof of Purchase or Service Record',
+          badge: 'MEDIUM',
+          badgeClass: 'badge-medium',
+          desc: 'Cash and informal service providers complete jobs without issuing any receipt or service record. When problems arise, customers have no documentation.',
+          sample: '"Paid $400 cash for a service. No receipt. When the job had problems and I called back, they claimed the scope was different. Nothing in writing. Completely defenseless." — Yelp, 1★',
+          appIdea: 'CashReceipt — Instant Digital Receipt Generator for Service Pros. For cash and informal transactions, generates a timestamped, scope-and-price receipt texted to both parties immediately at job close.',
+          b2bPitch: '\'No-receipt disputes are your most avoidable liability and the easiest to fix. CashReceipt texts a scope-and-price confirmation to the customer the moment you collect payment — takes 30 seconds and closes every dispute before it starts. Want it?\''
+        },
+        {
+          icon: '⚖️',
+          title: 'Deposit Forfeiture Without Clear Terms — Kept for Reasons Never Disclosed',
+          badge: 'HIGH',
+          badgeClass: 'badge-high',
+          desc: 'Deposits are collected without written terms defining what triggers forfeiture. When customers cancel or reschedule, deposits are withheld under terms the customer was never shown.',
+          sample: '"Lost my $200 deposit because I rescheduled 36 hours before the appointment. The cancellation policy apparently required 48 hours notice. That was never sent to me at any point during booking." — Google, 1★',
+          appIdea: 'DepositClear — Deposit Policy Disclosure & Agreement Platform. Deposit collection requires the customer to review and digitally sign the cancellation and forfeiture policy before payment is processed.',
+          b2bPitch: '\'Deposit forfeiture disputes without signed terms are generating chargebacks that cost you more than the deposit. DepositClear requires policy sign-off before every deposit is collected — so you keep your money and your review score. Want to implement it today?\''
         }
       ]
     },
@@ -1755,17 +2777,21 @@
     const proToken = localStorage.getItem('research_token');
 
     // Always use demo data (API not yet returning Pro fields)
+    const isProUser = ownerBypass || !!proToken;
     let data = null;
     const demo = DEMO_DATA[trade];
     if (demo) {
+      const allPains = isProUser
+        ? [...demo.freePains, ...(demo.proPains || [])]
+        : demo.freePains;
       data = {
         title: demo.title + ' — ' + metro,
         metro,
         trade,
         reviewCount: demo.reviewCount,
         businessCount: demo.businessCount,
-        isPro: ownerBypass || !!proToken,
-        painPoints: demo.freePains.map(p => ({
+        isPro: isProUser,
+        painPoints: allPains.map(p => ({
           title: p.title,
           severity: p.badge,
           description: p.desc,
