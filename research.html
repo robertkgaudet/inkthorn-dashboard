@@ -1768,28 +1768,57 @@
       card.className = 'pain-card fade-in';
       card.style.animationDelay = (idx * 0.08) + 's';
 
+      const isFirstCard = idx === 0;
+      const showFull = isPro || isFirstCard;
+
       let extraHtml = '';
-      if (isPro && p.appIdea) {
-        extraHtml += `
-          <details class="pro-extra" style="margin-top:12px;">
-            <summary style="cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--purple);letter-spacing:0.05em;list-style:none;display:flex;align-items:center;gap:6px;">
-              <span>🚀</span> App Idea
-            </summary>
-            <div style="margin-top:8px;padding:10px 12px;background:rgba(157,78,221,0.08);border-radius:6px;border-left:3px solid var(--purple);font-size:0.82rem;color:#ccc;line-height:1.6;">
-              ${p.appIdea}
-            </div>
-          </details>`;
+      if (p.appIdea) {
+        if (showFull) {
+          extraHtml += `
+            <details class="pro-extra" style="margin-top:12px;">
+              <summary style="cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--purple);letter-spacing:0.05em;list-style:none;display:flex;align-items:center;gap:6px;">
+                <span>🚀</span> App Idea
+              </summary>
+              <div style="margin-top:8px;padding:10px 12px;background:rgba(157,78,221,0.08);border-radius:6px;border-left:3px solid var(--purple);font-size:0.82rem;color:#ccc;line-height:1.6;">
+                ${p.appIdea}
+              </div>
+            </details>`;
+        } else {
+          extraHtml += `
+            <div class="pro-locked-block" style="margin-top:12px;position:relative;border-radius:8px;overflow:hidden;">
+              <div style="padding:10px 12px;background:rgba(157,78,221,0.08);border-radius:6px;border-left:3px solid var(--purple);">
+                <div style="font-size:0.8rem;font-weight:700;color:var(--purple);margin-bottom:6px;">🚀 App Idea</div>
+                <div style="font-size:0.82rem;color:#ccc;line-height:1.6;filter:blur(5px);user-select:none;">${p.appIdea}</div>
+              </div>
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,20,0.55);border-radius:8px;">
+                <button onclick="scrollToPricing()" style="background:var(--purple);color:#fff;border:none;border-radius:6px;padding:7px 18px;font-size:0.78rem;font-weight:700;cursor:pointer;letter-spacing:0.05em;">🔒 Unlock with Pro</button>
+              </div>
+            </div>`;
+        }
       }
-      if (isPro && p.b2bPitch) {
-        extraHtml += `
-          <details class="pro-extra" style="margin-top:8px;">
-            <summary style="cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--cyan);letter-spacing:0.05em;list-style:none;display:flex;align-items:center;gap:6px;">
-              <span>💼</span> B2B Pitch Script
-            </summary>
-            <div style="margin-top:8px;padding:10px 12px;background:rgba(0,245,255,0.06);border-radius:6px;border-left:3px solid var(--cyan);font-size:0.82rem;color:#ccc;line-height:1.6;font-style:italic;">
-              ${p.b2bPitch}
-            </div>
-          </details>`;
+      if (p.b2bPitch) {
+        if (showFull) {
+          extraHtml += `
+            <details class="pro-extra" style="margin-top:8px;">
+              <summary style="cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--cyan);letter-spacing:0.05em;list-style:none;display:flex;align-items:center;gap:6px;">
+                <span>💼</span> B2B Pitch Script
+              </summary>
+              <div style="margin-top:8px;padding:10px 12px;background:rgba(0,245,255,0.06);border-radius:6px;border-left:3px solid var(--cyan);font-size:0.82rem;color:#ccc;line-height:1.6;font-style:italic;">
+                ${p.b2bPitch}
+              </div>
+            </details>`;
+        } else {
+          extraHtml += `
+            <div class="pro-locked-block" style="margin-top:8px;position:relative;border-radius:8px;overflow:hidden;">
+              <div style="padding:10px 12px;background:rgba(0,245,255,0.06);border-radius:6px;border-left:3px solid var(--cyan);">
+                <div style="font-size:0.8rem;font-weight:700;color:var(--cyan);margin-bottom:6px;">💼 B2B Pitch Script</div>
+                <div style="font-size:0.82rem;color:#ccc;line-height:1.6;font-style:italic;filter:blur(5px);user-select:none;">${p.b2bPitch}</div>
+              </div>
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,20,0.55);border-radius:8px;">
+                <button onclick="scrollToPricing()" style="background:var(--cyan);color:#000;border:none;border-radius:6px;padding:7px 18px;font-size:0.78rem;font-weight:700;cursor:pointer;letter-spacing:0.05em;">🔒 Unlock with Pro</button>
+              </div>
+            </div>`;
+        }
       }
 
       card.innerHTML = `
