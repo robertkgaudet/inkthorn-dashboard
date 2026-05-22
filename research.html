@@ -765,13 +765,20 @@
       <label>Trade Category</label>
       <select id="trade-select">
         <option value="">— Select a trade —</option>
-        <option value="plumbers">🔧 Plumbers</option>
+        <option value="plumbers">🔧 Plumbing</option>
         <option value="hvac">❄️ HVAC</option>
-        <option value="electricians">⚡ Electricians</option>
-        <option value="roofers">🏠 Roofers</option>
-        <option value="garage-door">🚪 Garage Door</option>
-        <option value="locksmith">🔑 Locksmiths</option>
-        <option value="pest-control">🐛 Pest Control</option>
+        <option value="electricians">⚡ Electrician</option>
+        <option value="roofers">🏠 Roofing</option>
+        <option value="landscaping">🌿 Landscaping</option>
+        <option value="cleaning">🧹 Cleaning Services</option>
+        <option value="pest-control">🦟 Pest Control</option>
+        <option value="auto-repair">🚗 Auto Repair</option>
+        <option value="beauty">💅 Beauty Services</option>
+        <option value="hair-stylist">👩 Hair Stylist</option>
+        <option value="esthetician">👸 Esthetician / Cosmetologist</option>
+        <option value="makeup-artist">💄 Makeup Artist</option>
+        <option value="lash-brow">💋 Lash &amp; Brow Artist</option>
+        <option value="other">💼 Other</option>
       </select>
     </div>
     <button class="run-btn" id="run-btn" onclick="runAnalysis()">RUN SCAN</button>
@@ -1161,6 +1168,339 @@
           sample: '"Checked my bank — charged for April service. I was home all day. Nobody came. This has happened twice now." — Yelp, 1★',
           appIdea: "VisitVerify — GPS-Confirmed Service Proof. Every completed pest control visit generates a GPS-stamped, time-logged service receipt sent to the customer automatically. Tech checks in on arrival (geofenced to the property), logs what was treated and where, checks out. Customer gets a PDF. Billing only triggers on verified check-in. Ghost visits become impossible.",
           b2bPitch: "\'You have customers saying they were charged for visits that never happened. Even if that\'s a dispatch error, it\'s killing your trust. I built a GPS check-in tool — tech confirms arrival on-site, customer gets an automatic receipt. Billing is tied to check-in. You eliminate ghost billing complaints and have proof for every visit.\'"
+        }
+      ]
+    },
+    landscaping: {
+      title: "Landscaping",
+      reviewCount: 43,
+      businessCount: 9,
+      freePains: [
+        {
+          icon: "📅",
+          title: "Crew Skips Scheduled Visits — No Notice",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Weekly or bi-weekly lawn customers come home to find the yard untouched — no call, no text, no explanation. The company charges for the visit anyway. This is the most common complaint across landscaping reviews.",
+          sample: '"Supposed to come every Friday. Showed up once in three weeks. Still billed me $180. Grass is knee-high." — Google, 1★',
+          appIdea: "LawnLog — Scheduled Visit Tracker. A GPS-verified check-in app for lawn crews. Customer gets a photo-confirmed visit receipt (before/after shots, timestamp, crew member) after every service. Billing only triggers on confirmed visits. Companies use the photo trail to prove they showed up and what condition the yard was in.",
+          b2bPitch: "\'Your top complaint is customers saying crews skip visits but still get billed. That\'s a trust-killer and probably costing you cancellations. I built a photo check-in app — crew snaps before/after, customer gets an automatic receipt. Ghost billing disappears and you have proof of every visit if anyone disputes.\'"
+        },
+        {
+          icon: "💰",
+          title: "Seasonal Cleanup Quote Doubles at Completion",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Customer gets a quote for a one-time cleanup, crew arrives and says the job is bigger than expected, final bill is 2-3x the quote. Customer feels ambushed — they already approved the crew on-site and can\'t undo the work.",
+          sample: '"Quoted $250 for cleanup. They did the work then handed me a $680 bill. Said there was more debris than expected. I never approved that." — Yelp, 1★',
+          appIdea: "GreenQuote — On-Site Scope Lock Tool. A mobile quoting app where the crew lead photos the property before starting, notes scope items, and the customer approves a binding price range before any work begins. If scope expands mid-job, a new approval request is sent. No surprises.",
+          b2bPitch: "\'Price shock at completion is your #1 review pattern. Customers feel ambushed after the work is done. I built a photo-based scope approval tool your crew lead uses before starting — customer approves the price on their phone. Disputes drop to zero because everyone agreed before the first blade turned.\'"
+        },
+        {
+          icon: "🌱",
+          title: "Plants Installed Wrong Season — Die Immediately",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Landscaping crews plant seasonal flowers, shrubs, or trees in the wrong conditions — wrong time of year, wrong soil prep, wrong sun exposure. Plants die within weeks. Company says it\'s the customer\'s fault for not watering properly. Customers feel sold a dead product.",
+          sample: '"They planted $400 worth of flowers in August. All dead in 2 weeks. Told me I watered them wrong. It was 98 degrees." — Google, 2★',
+          appIdea: "PlantRight — Seasonal Planting Advisor. A zip-code-aware app that tells landscapers and customers the optimal planting window for any species in their climate zone. Crews use it to generate a \'planting guarantee\' — if they plant outside the recommended window, the replacement is on them. Customers use it to verify contractor advice.",
+          b2bPitch: "\'You have reviews about plants dying and customers feeling like they wasted money. That\'s a credibility problem that follows you for years online. I built a seasonal planting guide your crew uses at every job — it shows the customer exactly why you\'re planting what you\'re planting, when. Turns skeptics into believers before the plants are even in the ground.\'"
+        }
+      ]
+    },
+    cleaning: {
+      title: "Cleaning Services",
+      reviewCount: 56,
+      businessCount: 11,
+      freePains: [
+        {
+          icon: "🔄",
+          title: "Rotating Crew — Quality Varies Wildly",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Customer books a recurring clean, gets a great crew the first time, then a completely different team every visit. Quality is inconsistent — some crews are thorough, others rush. Customers feel like they\'re gambling each time they book.",
+          sample: '"First clean was amazing. Second crew didn\'t touch the bathrooms. Third crew broke a candle holder and didn\'t say anything. I never know what I\'m getting." — Yelp, 1★',
+          appIdea: "CleanCrew — Preferred Cleaner Matching App. A cleaning service platform where customers rate each crew member after every visit and can request their preferred team. AI matches repeat bookings to high-rated crews who performed well in that home. Companies use it to identify top performers and reduce churn from inconsistent quality.",
+          b2bPitch: "\'Inconsistent crew quality is your most repeated complaint. Customers don\'t hate cleaning services — they hate not knowing what they\'re going to get. I built a crew rating and preferred-match system. Customers rate each visit, best crews get priority booking. Your best people get more work, your churn drops.\'"
+        },
+        {
+          icon: "🏠",
+          title: "Deep Clean That Wasn\'t Deep",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Customer books and pays for a \'deep clean\' at premium price. Crew does a surface clean indistinguishable from a standard visit. Inside of oven, baseboards, grout, behind appliances — all untouched. Customer feels scammed.",
+          sample: '"Paid $320 for a deep clean. The oven was not touched. The baseboards were not touched. The fridge was not touched. This was a regular clean at deep clean prices." — Google, 1★',
+          appIdea: "DeepCheck — Service Standard Verification App. A checklist app tied to each service tier. Deep clean customers see exactly what\'s included — with photos — before booking. After the visit, the crew marks each item complete with a photo. Customer gets a \'what was cleaned\' receipt. If an item is missed, it\'s flagged for a free return visit.",
+          b2bPitch: "\'Your deep clean complaints are expensive — you\'re losing the customer and the reputation hit costs you referrals. I built a photo checklist app your crews use at every deep clean. Customer sees exactly what\'s supposed to happen, gets a receipt of what was done. Deep clean disputes disappear because there\'s documentation.\'"
+        },
+        {
+          icon: "💎",
+          title: "Missing or Damaged Items — No Recourse",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Small items go missing or are broken during cleaning. Customer reports it, company says they\'re not responsible or asks for proof. Without documentation of what was present before the crew arrived, it\'s the customer\'s word against the company\'s.",
+          sample: '"A ring is missing from my jewelry tray. I\'m not accusing anyone but it was there before and gone after. Company said they can\'t do anything without proof." — Yelp, 2★',
+          appIdea: "CleanShield — Pre-Clean Home Inventory App. Before every first clean, customer does a 3-minute phone photo walkthrough of valuables. App timestamps and stores photos securely. If anything goes missing or is damaged, both parties have a baseline record. Companies use it as a trust signal — \'We document before we touch anything.\'",
+          b2bPitch: "\'Missing item complaints are career-enders for cleaning businesses — even one accusation can tank years of reviews. I built a pre-clean photo inventory app. Customer does a quick walkthrough before the first visit, both sides have a record. Your crew is protected from false claims, and customers trust you more because you took the step.\'"
+        }
+      ]
+    },
+    "auto-repair": {
+      title: "Auto Repair",
+      reviewCount: 68,
+      businessCount: 12,
+      freePains: [
+        {
+          icon: "🔧",
+          title: "Approved One Repair, Got a Surprise Bill",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Customer approves a specific repair at a quoted price. Shop calls back mid-job with additional \'discovered\' problems. Customer feels pressured to approve because the car is already apart. Final bill is 2-4x what was discussed.",
+          sample: '"Brought it in for brakes — $280 quoted. They called with a list of 6 other things. Final bill was $1,100. I couldn\'t say no, they already had the car apart." — Google, 1★',
+          appIdea: "AutoApprove — Repair Authorization App. A digital authorization system where shops send itemized repair additions via text with photos of the issue. Customer approves or declines each item from their phone before any work begins. Shops can\'t add to the invoice without a logged customer approval. Eliminates \'I never approved that\' entirely.",
+          b2bPitch: "\'Your most common complaint is customers saying they were charged for work they didn\'t approve. I built a mobile authorization tool — you send a photo of the problem and a price, customer taps approve or decline. You have a logged record. No more disputes, no more chargebacks, no more reviews about being blindsided.\'"
+        },
+        {
+          icon: "🚗",
+          title: "Car Not Fixed — Same Problem Returns",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Customer pays hundreds or thousands for a repair. Problem returns within days or weeks. Shop says it\'s a new issue unrelated to the prior repair. Customer suspects the original problem was never fixed correctly.",
+          sample: '"$900 to fix a transmission issue. Same warning light came on 11 days later. They say it\'s a \'different code.\' This is the same problem." — Yelp, 1★',
+          appIdea: "FixLog — Vehicle Repair History & Warranty Tracker. Every completed repair generates a digital record: what was done, parts used, tech who performed it, and a 30-day warranty. If the same symptom returns within the warranty window, the app flags it as a warranty return — free rediagnosis. Customers own their vehicle\'s repair history forever.",
+          b2bPitch: "\'Customers who feel like their repair didn\'t hold are your most damaging reviewers — they come back angry and go online. I built a repair warranty card that goes out automatically after every job. 30-day guarantee, customer taps one button to activate a return visit. It costs you almost nothing and turns your biggest liability into a selling point.\'"
+        },
+        {
+          icon: "⏱️",
+          title: "Estimated Completion Time — Completely Wrong",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Customer is told their car will be ready by noon. They arrange a ride, show up at noon, and the car won\'t be ready until tomorrow. No call, no update. Customer is stranded.",
+          sample: '"Told me 2pm. Called at 2:30 — not ready, maybe tomorrow. I arranged my whole day around this. Not even a phone call." — Google, 2★',
+          appIdea: "ShopStatus — Real-Time Repair Progress Tracker. A shop management tool where techs update job status (Received → In Queue → In Progress → QC → Ready). Customer gets automatic SMS at each milestone. No more status calls to the shop. Service advisors spend less time on the phone and more time on cars.",
+          b2bPitch: "\'Your reviews show customers upset about completion time promises that weren\'t kept and no updates in between. I built a job status tracker — customer gets an automatic text at every milestone. Your service desk stops taking status calls and customers stop leaving angry reviews. Want to see how it works?\'"
+        }
+      ]
+    },
+    beauty: {
+      title: "Beauty Services",
+      reviewCount: 39,
+      businessCount: 8,
+      freePains: [
+        {
+          icon: "⏰",
+          title: "Late Appointments — No Apology",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Clients show up on time for a beauty appointment and wait 30-45 minutes past their scheduled time with no explanation or acknowledgment. When they complain, staff acts like it\'s normal. Reviews mention feeling disrespected.",
+          sample: '"Had a 2pm appointment. Sat in the chair at 2:47. No apology, no explanation. Just acted like that\'s how it goes. Never coming back." — Yelp, 1★',
+          appIdea: "BeautyQueue — Real-Time Appointment Readiness Tracker. A client-facing app that shows the live status of their appointment slot — On Time, Running 10 min late, Running 20+ min. Clients can choose to wait, reschedule, or get a credit. Studios that use it report higher satisfaction even when running late because clients feel informed instead of ignored.",
+          b2bPitch: "\'Running late isn\'t what kills your reviews — it\'s the silence. Clients feel disrespected when nobody tells them what\'s happening. I built a live wait status tool — client sees on their phone how far behind you\'re running and can choose to wait or reschedule. Kills the surprise, kills the angry review.\'"
+        },
+        {
+          icon: "💇",
+          title: "Result Doesn\'t Match What Was Shown or Promised",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Client brings a reference photo, stylist/artist agrees they can achieve the look, result is completely different — wrong color, wrong shape, poor execution. Client feels misled. Disputes about whether the result is close enough are common.",
+          sample: '"Showed her exactly what I wanted. She said \'yes, absolutely.\' What I got looked nothing like the photo. She said it was \'close enough.\' It wasn\'t." — Google, 1★',
+          appIdea: "StyleMatch — Visual Consultation & Expectation Setter. A pre-appointment app where clients upload reference photos and stylists markup what\'s achievable given the client\'s current hair/skin/features. Both parties confirm the expected result before the appointment begins. No more \'that\'s not what I asked for\' — because the agreement is documented.",
+          b2bPitch: "\'Expectation mismatches are your most expensive complaints — you lose the client, do a redo for free, and get a bad review. I built a visual consultation tool. Client uploads their inspo photo, you markup what\'s actually achievable. Both sides confirm before you start. Disputes about results drop to near zero.\'"
+        },
+        {
+          icon: "💸",
+          title: "Price Quoted vs. Price Charged — Major Gap",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Client gets a price range over the phone or on the website. When they check out, the price is significantly higher due to \'length add-ons,\' \'product fees,\' or \'complexity charges\' that weren\'t disclosed upfront. Clients feel ambushed at checkout.",
+          sample: '"Website says $65 for a cut and color. Checked out at $140. Add-ons I didn\'t know existed. This should be disclosed upfront, not at the register." — Yelp, 2★',
+          appIdea: "BeautyQuote — Transparent Booking Price Estimator. A booking flow add-on that walks clients through their service selections and shows a real price estimate before they confirm — including likely add-ons based on what they selected. No surprises at checkout. Studios embed it on their booking page.",
+          b2bPitch: "\'Price shock at checkout is your most preventable review problem. I built a booking estimator your clients use when they schedule — they see the real price range before they walk in, including any likely add-ons. Checkout surprises disappear and your no-show rate drops because clients know what they\'re committing to.\'"
+        }
+      ]
+    },
+    "hair-stylist": {
+      title: "Hair Stylist",
+      reviewCount: 44,
+      businessCount: 10,
+      freePains: [
+        {
+          icon: "🎨",
+          title: "Color Result Completely Off",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Client asks for a specific color — balayage, highlights, specific tone — and leaves with something dramatically different. Wrong undertone, uneven application, or color that fades within days. This is the highest-frequency complaint in hair reviews.",
+          sample: '"Asked for warm blonde balayage. Left with orange streaks and yellow roots. She said the photo I showed \'wasn\'t realistic for my hair.\' That should have been said before she started." — Google, 1★',
+          appIdea: "ToneMatch — Hair Color Expectation Tool. Before any color service, stylist photographs the client\'s current hair and uses the app to show what the target color will realistically look like on that specific hair. Client approves. If the result doesn\'t match the approved preview, stylist owns the correction. Protects both sides.",
+          b2bPitch: "\'Color complaints are your most expensive problem — corrections take hours and you\'re doing them for free. The root cause is misaligned expectations before you start. I built a color preview tool — you photo the client\'s hair, show a realistic simulation of the target, client approves. No more \'that\'s not what I wanted.\'\'"
+        },
+        {
+          icon: "✂️",
+          title: "Cut Too Short — Ignored Client\'s Instructions",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Client specifies exactly how much to cut — \'just a trim, half an inch.\' Stylist cuts 3-4 inches. When the client reacts, stylist says it \'needed\' to be done or seemed like more. Client feels violated and doesn\'t return.",
+          sample: '"I said half an inch. She took off 4 inches. When I cried she said my ends were damaged and it needed to be done. That was not her decision to make." — Yelp, 1★',
+          appIdea: "CutConsent — Pre-Service Agreement App. Before scissors touch hair, client and stylist use a simple mobile form: target length (with a photo reference), whether to deviate if damage is found (yes/no), and a signed digital consent. If the stylist wants to cut more due to damage, they must send a new approval request before proceeding.",
+          b2bPitch: "\'Cutting more than the client approved is the fastest way to lose them forever — and get a review that follows you for years. I built a 60-second pre-cut consent form. Client sets the boundaries, you have a record. If you find damage mid-cut, you send a new request before proceeding. Protects your reputation on every single service.\'"
+        },
+        {
+          icon: "💔",
+          title: "No-Show or Last-Minute Cancel — No Warning",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Stylist cancels same-day or simply doesn\'t show for a scheduled appointment — no advance notice, no apology, sometimes no response to texts. Client took time off work, arranged childcare, or drove across town. The loss of trust is immediate and permanent.",
+          sample: '"She texted me 45 minutes before my appointment to cancel. I had already gotten a babysitter. This is the second time. Done." — Google, 1★',
+          appIdea: "BookLock — Stylist Reliability Score & Rebooking Tool. Every completed appointment earns the stylist a reliability point. Cancellations within 24 hours deduct points. Clients see each stylist\'s reliability score before booking. Last-minute cancels trigger automatic rebooking options with available stylists at the same location.",
+          b2bPitch: "\'Last-minute cancellations are destroying trust in your business — even one per month compounding over a year creates a pattern clients talk about. I built a reliability scoring system that shows clients your track record upfront and auto-triggers a rebooking option when a cancel happens. You protect your reputation even when life gets in the way.\'"
+        }
+      ]
+    },
+    esthetician: {
+      title: "Esthetician / Cosmetologist",
+      reviewCount: 31,
+      businessCount: 7,
+      freePains: [
+        {
+          icon: "🧴",
+          title: "Skin Reaction After Facial — No Intake Form",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Client has a reaction to a product used during a facial — redness, breakout, rash. When they report it, the esthetician has no record of what was applied or in what order. There was no intake form asking about allergies or sensitivities. Client feels unsafe.",
+          sample: '"Broke out in hives after my facial. She couldn\'t even tell me what products she used. No intake form, no records. I had to go to urgent care." — Yelp, 1★',
+          appIdea: "SkinSafe — Client Intake & Treatment Logger. A digital intake system where clients fill out their skin history, allergies, and sensitivities before every first visit. Esthetician logs every product used per session. If a reaction occurs, both parties have a complete record. Studios use it as a trust signal: \'We document everything we use on your skin.\'",
+          b2bPitch: "\'A skin reaction with no documentation is your biggest liability. You can\'t even tell the client what you used. I built a client intake and treatment log — they fill out their sensitivities before you touch them, you log every product during the session. Protects you legally and builds the kind of trust that turns clients into regulars.\'"
+        },
+        {
+          icon: "📋",
+          title: "Upsell Pressure During Treatment",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Client booked a standard facial and is pitched additional services or expensive products multiple times during the appointment. The sales pressure during a moment of relaxation feels invasive. Reviews describe feeling like they\'re at a car dealership.",
+          sample: '"Every 10 minutes she was recommending something else. $80 serum here, $120 add-on there. I came to relax, not to be sold to while my eyes are closed." — Google, 2★',
+          appIdea: "TreatmentMenu — Pre-Booking Add-On Selector. An add-on recommendation tool that runs before the appointment, not during. Client sees upgrade options and prices when they book, can optionally select or decline. During the session, the esthetician focuses on the approved services only. Sales happen in the booking flow, not on the table.",
+          b2bPitch: "\'Clients who feel sold to during a facial don\'t come back — and they tell their friends. Your upsell opportunity is real, but the timing is wrong. I built a pre-booking add-on tool. Client sees your upgrade menu when they schedule. They opt in before they arrive. Your revenue goes up and nobody feels pressured.\'"
+        },
+        {
+          icon: "🕐",
+          title: "Treatment Shorter Than Booked Time",
+          badge: "MEDIUM",
+          badgeClass: "badge-medium",
+          desc: "Client books a 60-minute facial and is off the table in 40 minutes. When they ask, they\'re told the treatment is \'complete\' or that cleanup time counts toward the hour. Clients feel shorted on what they paid for.",
+          sample: '"Booked a 60-minute facial. Was back in my car at 47 minutes including getting dressed. Nobody told me cleanup time was included in the hour." — Yelp, 2★',
+          appIdea: "TreatTime — Service Duration Transparency Tool. A booking confirmation that shows clients exactly what their time includes — treatment time vs. prep/cleanup — so there\'s no ambiguity. After each session, a service receipt is sent showing actual treatment duration. Studios that guarantee minimum hands-on time display it as a badge.",
+          b2bPitch: "\'Clients who feel shorted on time feel cheated — even if the math works out on your end. I built a booking transparency tool that shows exactly what\'s included in the hour before they book. No surprises, no complaints about time. And if you want to guarantee minimum hands-on time, I can badge that on your profile.\'"
+        }
+      ]
+    },
+    "makeup-artist": {
+      title: "Makeup Artist",
+      reviewCount: 28,
+      businessCount: 6,
+      freePains: [
+        {
+          icon: "💍",
+          title: "Wedding Day Disaster — No Trial, Wrong Look",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Bride skips or is discouraged from a trial, artist doesn\'t match the reference photos, and the result is wrong on the most important day. No time to fix it. These reviews are the most emotionally charged in any category and spread extensively.",
+          sample: '"She said a trial wasn\'t necessary. My wedding photos look nothing like what I asked for. I cried getting ready, not in the good way. I will never forgive myself for trusting this." — Google, 1★',
+          appIdea: "BridalProof — Wedding Makeup Trial & Approval System. A booking flow specifically for bridal clients that requires a trial session before the wedding date can be confirmed. Trial result is photographed and approved by the client. Artist and bride both sign off on the final look. On wedding day, the artist replicates the approved look exactly — no improvisation.",
+          b2bPitch: "\'One wedding day disaster follows you online forever. The root cause is almost always a skipped trial and misaligned expectations. I built a bridal booking system that makes the trial mandatory and documents the approved look. Bride signs off before the wedding date is locked. Your reputation is protected on your highest-stakes jobs.\'"
+        },
+        {
+          icon: "🎨",
+          title: "Foundation Shade Wrong — Visible in Photos",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Artist uses the wrong foundation shade — too light, too orange, or mismatched neck. The error is invisible in the chair but shows up clearly in photos. Client only discovers the problem when they see their photos days or weeks later.",
+          sample: '"The photos came back and I look like I\'m wearing a mask. My face is three shades lighter than my neck. I didn\'t even notice in the mirror. Now these are my wedding photos forever." — Yelp, 1★',
+          appIdea: "ShadeCheck — Lighting-Adjusted Foundation Match Tool. A mobile app that photographs the client\'s skin in natural light, fluorescent light, and flash, and grades the foundation match under each. Artist uses it to confirm the shade photographs correctly — not just looks correct in the chair. Flash photography is simulated before any product is applied.",
+          b2bPitch: "\'Foundation mismatches in photos are silent killers — client looks fine in the chair and devastated in their wedding album. I built a shade-check tool that tests the match under flash and natural light before you finalize. Artists who use it eliminate photo-based complaints entirely and can market \'camera-tested makeup\' as a differentiator.\'"
+        },
+        {
+          icon: "⏰",
+          title: "Artist Late to Bridal Party — Whole Timeline Blown",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Artist arrives 30-60 minutes late to a bridal party booking. With 4-6 people to complete, the ripple effect blows the entire day\'s timeline. Bride is still in the chair when guests arrive. These reviews are detailed, emotional, and highly shared.",
+          sample: '"She was 45 minutes late. We had 5 people. I didn\'t finish until 30 minutes before the ceremony. My maid of honor had to do her own makeup. I\'m still upset." — Google, 1★',
+          appIdea: "EventReady — Multi-Client Appointment Scheduler for Artists. A scheduling tool built specifically for multi-person bookings (bridal parties, prom groups, productions). Artist inputs the number of clients and estimated time per person — app builds a call-time schedule and sends each client their personal slot. Artist arrival time is locked in, with an automated reminder 90 minutes before.",
+          b2bPitch: "\'Being late to a bridal party isn\'t just one bad review — it\'s the whole party leaving reviews. I built a group scheduling tool specifically for multi-person bookings. It locks your arrival time, sends reminders to every client in the party, and builds the full timeline automatically. You show up on time, every time, with a plan.\'"
+        }
+      ]
+    },
+    "lash-brow": {
+      title: "Lash & Brow Artist",
+      reviewCount: 33,
+      businessCount: 8,
+      freePains: [
+        {
+          icon: "😢",
+          title: "Lash Extensions Fell Out Within Days",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Client gets a full set of lash extensions, follows aftercare instructions, and loses 50-70% of them within 3-5 days. Artist says the client must have gotten them wet or used the wrong products. Client has followed every instruction and feels scammed.",
+          sample: '"Full set on Saturday. By Wednesday half were gone. I followed every rule. She said it was my fault. $180 gone in 4 days." — Yelp, 1★',
+          appIdea: "LashLock — Extension Retention Tracker & Guarantee App. After every lash appointment, client receives a digital aftercare card with specific instructions and a 7-day retention guarantee. If extensions fall below a certain threshold within 7 days, client submits a photo, and artist schedules a free fill. Documented aftercare acknowledgment protects the artist from false claims.",
+          b2bPitch: "\'Lash retention complaints are your most common review problem, and they\'re almost impossible to win because it\'s always he-said-she-said. I built an aftercare acknowledgment and retention guarantee system. Client signs the aftercare instructions digitally. If they follow them and lashes fall, they get a free fill. You\'re protected either way.\'"
+        },
+        {
+          icon: "🔴",
+          title: "Brow Shape Wrong — Asymmetrical or Over-Tweezed",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Client asks for a cleanup and the artist takes too much. One brow is noticeably higher or thinner than the other. Artist says brows are \'sisters not twins\' — client feels this dismisses a real technical error. Hair takes weeks to grow back.",
+          sample: '"One brow is clearly higher than the other. She said \'that\'s natural asymmetry.\' My brows were even when I walked in. Now I have to wait 6 weeks for them to grow back." — Google, 1★',
+          appIdea: "BrowMap — Pre-Service Symmetry Tool. Before any brow service, the app photos the client\'s face, maps their natural brow line and symmetry, and generates a brow plan both client and artist approve. During the service, the artist can reference the map. Any deviation from the plan requires a new approval. Asymmetry claims become documentable.",
+          b2bPitch: "\'Brow complaints are the worst kind — client walks in looking one way and leaves looking different, and they have to live with it for weeks. I built a pre-service brow mapping tool. You photo the client\'s face, both sides agree on the plan, you reference it during the service. Shape disputes become nearly impossible when you have a documented starting point.\'"
+        },
+        {
+          icon: "🧪",
+          title: "Allergic Reaction to Adhesive — No Patch Test",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Client develops an allergic reaction — swelling, redness, contact dermatitis — from lash adhesive. No patch test was offered or performed before the full set. Artist says reactions are rare and the client signed a waiver. Client didn\'t understand the risk.",
+          sample: '"My eyes swelled shut the next morning. No patch test was offered. I signed a waiver but nobody told me what it was for. Had to go to the ER." — Yelp, 1★',
+          appIdea: "PatchFirst — Allergy Risk Intake & Consent System. A pre-appointment digital intake that collects allergy and sensitivity history, explains the patch test process, and logs informed consent. If client declines the patch test, they digitally acknowledge the risk in plain language. Artists have a full legal and safety record before any adhesive touches skin.",
+          b2bPitch: "\'An allergic reaction without documentation is your biggest liability as a lash artist — legally and reputationally. I built an intake and consent system that logs allergy history, explains the patch test, and gets informed consent in plain language. If something goes wrong, you have a complete record. If nothing goes wrong, clients trust you more because you asked.\'"
+        }
+      ]
+    },
+    other: {
+      title: "Other Services",
+      reviewCount: 41,
+      businessCount: 9,
+      freePains: [
+        {
+          icon: "📞",
+          title: "No-Show, No Communication",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "The universal failure across every service category: provider doesn\'t show up and doesn\'t call. Customer rearranges their day, makes arrangements, and is left waiting with no explanation. This single issue accounts for the largest share of 1-star reviews across all trades.",
+          sample: '"Had a confirmed appointment. Nobody showed, nobody called. Three texts went unanswered. Found out they double-booked through their own website." — Google, 1★',
+          appIdea: "ShowUp — Appointment Reliability Platform. A lightweight scheduling layer any service provider can add to their booking flow. Providers get automated reminders at 24h and 2h before each appointment. If they can\'t make it, a one-tap reschedule-with-explanation is sent to the client automatically. Client gets real-time status on their appointment.",
+          b2bPitch: "\'No-shows are the easiest problem to solve and the most damaging when left unsolved. I built a 2-tap cancellation and reschedule tool — if something comes up, you send the client an explanation and a rebooking link in 10 seconds. They feel respected even when plans change. That\'s the difference between a 5-star and a 1-star review.\'"
+        },
+        {
+          icon: "💰",
+          title: "Price Changed After the Work Was Done",
+          badge: "CRITICAL",
+          badgeClass: "badge-critical",
+          desc: "Customer agreed to a price up front. At checkout, the total is higher — sometimes significantly. New charges are attributed to scope, time, materials, or fees that weren\'t disclosed before work started. Customer feels trapped.",
+          sample: '"Quoted $150 over the phone. Handed a $290 invoice after the fact. Nobody asked if I approved the extra charges. I had no choice but to pay." — Yelp, 1★',
+          appIdea: "QuoteLock — Binding Estimate & Change Order Tool. A mobile quoting app where providers send a binding estimate before starting. If scope changes mid-job, a change order is sent to the client for approval before the additional work is done. Final invoice can\'t exceed the sum of approved items. Both parties sign digitally.",
+          b2bPitch: "\'Price disputes after completion are your most damaging reviews because they come with the word \'scam.\' I built a quote-lock tool — you send a binding estimate before you start, client approves, and any additions require a separate approval. Final invoice matches what was agreed. Disputes go to zero.\'"
+        },
+        {
+          icon: "🔁",
+          title: "Problem Not Resolved — No Follow-Through",
+          badge: "HIGH",
+          badgeClass: "badge-high",
+          desc: "Provider completes the job, problem persists, customer reaches out, and the provider goes silent or argues the job was completed as agreed. No warranty, no callback, no accountability. Customer feels abandoned after payment was taken.",
+          sample: '"Paid in full, problem is still there. They stopped responding after I sent photos. It\'s been 3 weeks. Small claims court is next." — Google, 1★',
+          appIdea: "JobClose — Service Completion & Satisfaction Sign-Off App. After every job, client receives a completion summary with photos and is asked to confirm satisfaction before the final payment clears. If they report an issue, it opens a resolution ticket — provider has 48 hours to respond before a hold is placed. Both sides have a clear escalation path.",
+          b2bPitch: "\'Customers who feel abandoned after payment are your most dangerous reviewers — they\'re angry AND they feel justified. I built a job sign-off tool. Client approves completion before final payment clears. If they flag an issue, you have 48 hours to respond before a hold activates. It protects you from bad-faith claims and shows good-faith customers you stand behind your work.\'"
         }
       ]
     }
