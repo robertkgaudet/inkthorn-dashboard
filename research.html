@@ -1601,25 +1601,30 @@
       }
     }, 700);
 
+    // Owner bypass — force Pro demo data when ?pro=rob2026 is set
+    const ownerBypass = new URLSearchParams(window.location.search).get('pro') === 'rob2026';
+
     // Call real API (with fallback to DEMO_DATA)
     let data = null;
-    try {
-      const sessionToken = localStorage.getItem('research_token') || undefined;
-      const res = await fetch(`${API_BASE}/api/research/scan`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ metro, trade, sessionToken }),
-      });
-      if (res.ok) {
-        data = await res.json();
+    if (!ownerBypass) {
+      try {
+        const sessionToken = localStorage.getItem('research_token') || undefined;
+        const res = await fetch(`${API_BASE}/api/research/scan`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ metro, trade, sessionToken }),
+        });
+        if (res.ok) {
+          data = await res.json();
+        }
+      } catch (e) {
+        console.warn('API call failed, using demo data:', e);
       }
-    } catch (e) {
-      console.warn('API call failed, using demo data:', e);
     }
 
     clearInterval(interval);
 
-    // If API failed, fall back to DEMO_DATA
+    // If API failed (or owner bypass), fall back to DEMO_DATA
     if (!data) {
       const demo = DEMO_DATA[trade];
       if (demo) {
@@ -1629,7 +1634,7 @@
           trade,
           reviewCount: demo.reviewCount,
           businessCount: demo.businessCount,
-          isPro: false,
+          isPro: ownerBypass,
           painPoints: demo.freePains.map(p => ({
             title: p.title,
             severity: p.badge,
