@@ -563,6 +563,70 @@
     .idea-card h4 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
     .idea-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
 
+    /* ── PRO PREVIEW SECTION ── */
+    .pro-preview-section {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .pro-preview-section h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+    .pro-preview-section > p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+    }
+    .pro-preview-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+    .pro-preview-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .pro-preview-card:first-child { border-top: 3px solid var(--purple); }
+    .pro-preview-card:last-child { border-top: 3px solid var(--cyan); }
+    .pro-preview-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .pro-preview-card:first-child .pro-preview-label { color: var(--purple); }
+    .pro-preview-card:last-child .pro-preview-label { color: var(--cyan); }
+    .pro-preview-trade {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+    .pro-preview-card p {
+      font-size: 0.85rem;
+      color: #ccc;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .pro-preview-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 8px !important;
+    }
+
     /* ── PRICING SECTION ── */
     .pricing-section {
       position: relative;
@@ -864,6 +928,25 @@
 
 <!-- DIVIDER -->
 <div class="divider"></div>
+
+<!-- PRO PREVIEW -->
+<section class="pro-preview-section">
+  <h2>What Pro Actually Looks Like</h2>
+  <p>Every pain point unlocks two things: a specific app concept and the exact pitch to sell it to business owners.</p>
+  <div class="pro-preview-cards">
+    <div class="pro-preview-card">
+      <div class="pro-preview-label">🚀 App Idea Example</div>
+      <div class="pro-preview-trade">From: Plumbing — "No-Show, No-Call"</div>
+      <p><strong>TradeTrack — Real-Time Tech Location App.</strong> A Lyft-style "your tech is on the way" tracker for home service appointments. Customer gets a live map, ETA, and automated SMS updates at dispatch, 30 min out, and arrival. Technician uses a simple driver app. Eliminates the "where are you?" call entirely.</p>
+    </div>
+    <div class="pro-preview-card">
+      <div class="pro-preview-label">💼 B2B Pitch Example</div>
+      <div class="pro-preview-trade">From: Auto Repair — "Approved One Repair, Got a Surprise Bill"</div>
+      <p><em>"Your most common complaint is customers saying they were charged for work they didn't approve. I built a mobile authorization tool — you send a photo of the problem and a price, customer taps approve or decline. You have a logged record. No more disputes, no more chargebacks, no more reviews about being blindsided."</em></p>
+    </div>
+  </div>
+  <p class="pro-preview-note">Every trade. Every market. Every pain point gets this treatment.</p>
+</section>
 
 <!-- PRICING -->
 <section class="pricing-section" id="pricing">
