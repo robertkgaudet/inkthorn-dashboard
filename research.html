@@ -576,6 +576,58 @@
     .idea-card h4 { font-size: 1rem; color: var(--text); margin-bottom: 8px; }
     .idea-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
 
+    /* ── PRO BLOCK BUTTONS ── */
+    .pro-block { position: relative; }
+    .pro-block-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+      border-radius: 6px;
+      padding: 7px 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      margin-bottom: 8px;
+      transition: opacity 0.15s;
+    }
+    .pro-block-btn:hover { opacity: 0.85; }
+    .pro-block-btn-purple { background: rgba(157,78,221,0.18); color: var(--purple); border: 1px solid rgba(157,78,221,0.4); }
+    .pro-block-btn-cyan { background: rgba(0,245,255,0.1); color: var(--cyan); border: 1px solid rgba(0,245,255,0.3); }
+    .pro-block-content {
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: #ccc;
+      line-height: 1.7;
+    }
+    .pro-block-content-purple { background: rgba(157,78,221,0.08); border-left: 3px solid var(--purple); }
+    .pro-block-content-cyan { background: rgba(0,245,255,0.06); border-left: 3px solid var(--cyan); }
+    .pro-block-gate {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10,10,20,0.6);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .unlock-inline-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 9px 22px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: transform 0.1s;
+    }
+    .unlock-inline-btn:hover { transform: scale(1.03); }
+    .unlock-inline-purple { background: var(--purple); color: #fff; }
+    .unlock-inline-cyan { background: var(--cyan); color: #000; }
+
     /* ── PRO PREVIEW SECTION ── */
     .pro-preview-section {
       position: relative;
@@ -1784,52 +1836,53 @@
 
       const isFirstCard = idx === 0;
       const showFull = isPro || isFirstCard;
+      const cardId = `card-${idx}`;
 
       let extraHtml = '';
+
+      // App Idea block
       if (p.appIdea) {
         if (showFull) {
           extraHtml += `
-            <details class="pro-extra" style="margin-top:12px;">
-              <summary style="cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--purple);letter-spacing:0.05em;list-style:none;display:flex;align-items:center;gap:6px;">
-                <span>🚀</span> App Idea
-              </summary>
-              <div style="margin-top:8px;padding:10px 12px;background:rgba(157,78,221,0.08);border-radius:6px;border-left:3px solid var(--purple);font-size:0.82rem;color:#ccc;line-height:1.6;">
+            <div class="pro-block" style="margin-top:14px;">
+              <button class="pro-block-btn pro-block-btn-purple" onclick="toggleBlock('${cardId}-app')">🚀 App Idea</button>
+              <div id="${cardId}-app" class="pro-block-content pro-block-content-purple" style="display:block;">
                 ${p.appIdea}
               </div>
-            </details>`;
+            </div>`;
         } else {
           extraHtml += `
-            <div class="pro-locked-block" style="margin-top:12px;position:relative;border-radius:8px;overflow:hidden;">
-              <div style="padding:10px 12px;background:rgba(157,78,221,0.08);border-radius:6px;border-left:3px solid var(--purple);">
-                <div style="font-size:0.8rem;font-weight:700;color:var(--purple);margin-bottom:6px;">🚀 App Idea</div>
-                <div style="font-size:0.82rem;color:#ccc;line-height:1.6;filter:blur(5px);user-select:none;">${p.appIdea}</div>
+            <div class="pro-block" style="margin-top:14px;position:relative;">
+              <button class="pro-block-btn pro-block-btn-purple" onclick="scrollToPricing()">🚀 App Idea &nbsp;🔒</button>
+              <div class="pro-block-content pro-block-content-purple" style="display:block;filter:blur(5px);user-select:none;pointer-events:none;">
+                ${p.appIdea}
               </div>
-              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,20,0.55);border-radius:8px;">
-                <button onclick="scrollToPricing()" style="background:var(--purple);color:#fff;border:none;border-radius:6px;padding:7px 18px;font-size:0.78rem;font-weight:700;cursor:pointer;letter-spacing:0.05em;">🔒 Unlock with Pro</button>
+              <div class="pro-block-gate" onclick="scrollToPricing()">
+                <button class="unlock-inline-btn unlock-inline-purple">🔒 Unlock with Pro — $29/mo</button>
               </div>
             </div>`;
         }
       }
+
+      // B2B Pitch block
       if (p.b2bPitch) {
         if (showFull) {
           extraHtml += `
-            <details class="pro-extra" style="margin-top:8px;">
-              <summary style="cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--cyan);letter-spacing:0.05em;list-style:none;display:flex;align-items:center;gap:6px;">
-                <span>💼</span> B2B Pitch Script
-              </summary>
-              <div style="margin-top:8px;padding:10px 12px;background:rgba(0,245,255,0.06);border-radius:6px;border-left:3px solid var(--cyan);font-size:0.82rem;color:#ccc;line-height:1.6;font-style:italic;">
+            <div class="pro-block" style="margin-top:10px;">
+              <button class="pro-block-btn pro-block-btn-cyan" onclick="toggleBlock('${cardId}-b2b')">💼 B2B Pitch Script</button>
+              <div id="${cardId}-b2b" class="pro-block-content pro-block-content-cyan" style="display:block;font-style:italic;">
                 ${p.b2bPitch}
               </div>
-            </details>`;
+            </div>`;
         } else {
           extraHtml += `
-            <div class="pro-locked-block" style="margin-top:8px;position:relative;border-radius:8px;overflow:hidden;">
-              <div style="padding:10px 12px;background:rgba(0,245,255,0.06);border-radius:6px;border-left:3px solid var(--cyan);">
-                <div style="font-size:0.8rem;font-weight:700;color:var(--cyan);margin-bottom:6px;">💼 B2B Pitch Script</div>
-                <div style="font-size:0.82rem;color:#ccc;line-height:1.6;font-style:italic;filter:blur(5px);user-select:none;">${p.b2bPitch}</div>
+            <div class="pro-block" style="margin-top:10px;position:relative;">
+              <button class="pro-block-btn pro-block-btn-cyan" onclick="scrollToPricing()">💼 B2B Pitch Script &nbsp;🔒</button>
+              <div class="pro-block-content pro-block-content-cyan" style="display:block;filter:blur(5px);user-select:none;pointer-events:none;font-style:italic;">
+                ${p.b2bPitch}
               </div>
-              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,10,20,0.55);border-radius:8px;">
-                <button onclick="scrollToPricing()" style="background:var(--cyan);color:#000;border:none;border-radius:6px;padding:7px 18px;font-size:0.78rem;font-weight:700;cursor:pointer;letter-spacing:0.05em;">🔒 Unlock with Pro</button>
+              <div class="pro-block-gate" onclick="scrollToPricing()">
+                <button class="unlock-inline-btn unlock-inline-cyan">🔒 Unlock with Pro — $29/mo</button>
               </div>
             </div>`;
         }
@@ -1872,6 +1925,12 @@
     section.style.display = 'block';
     section.classList.add('fade-in');
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function toggleBlock(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
   }
 
   function scrollToPricing() {
