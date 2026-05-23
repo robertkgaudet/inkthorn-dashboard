@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-05-22T23:21:56.748Z",
+  "updated": "2026-05-23T13:32:28.049Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-05-22",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "You're Invited!",
-      "url": "https://504comedy.com/event/1109/youre-invited-at-big-couch-nola",
-      "venue": "Big Couch New Orleans",
-      "type": "Improv",
-      "cost": "$10",
-      "repeat": "Fourth Friday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-22",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "The Comedy Lounge",
-      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-      "venue": "Vino: Fine Wine & Spirits",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Friday",
-      "start_dt": "2026-05-29T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-22",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Snatch Comedy",
-      "url": "https://504comedy.com/event/1366/snatch-comedy",
-      "venue": "Vitality Community Fitness",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Fri May 22 2026",
-      "start_dt": "2026-05-22T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-05-23",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -57,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$20",
       "repeat": "Sat May 23 2026",
-      "start_dt": "2026-05-22T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-23",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-05-24",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-05-24",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -338,64 +296,44 @@
       "cost": "$15",
       "repeat": "Fourth Thursday",
       "start_dt": "2026-05-28T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-05-29",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Benny Feldman",
+      "url": "https://504comedy.com/event/1359/benny-feldman-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Fri May 29 2026",
+      "start_dt": "2026-05-28T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-05-29",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Comedy Lounge",
+      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+      "venue": "Vino: Fine Wine & Spirits",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Friday",
+      "start_dt": "2026-05-29T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-05-22",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-22",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "You're Invited!",
-          "url": "https://504comedy.com/event/1109/youre-invited-at-big-couch-nola",
-          "venue": "Big Couch New Orleans",
-          "type": "Improv",
-          "cost": "$10",
-          "repeat": "Fourth Friday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-22",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "The Comedy Lounge",
-          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-          "venue": "Vino: Fine Wine & Spirits",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Friday",
-          "start_dt": "2026-05-29T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-22",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Snatch Comedy",
-          "url": "https://504comedy.com/event/1366/snatch-comedy",
-          "venue": "Vitality Community Fitness",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Fri May 22 2026",
-          "start_dt": "2026-05-22T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-05-23",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-23",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -405,11 +343,11 @@
           "type": "Stand-up",
           "cost": "$20",
           "repeat": "Sat May 23 2026",
-          "start_dt": "2026-05-22T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-23",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -424,12 +362,12 @@
       ]
     },
     {
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-05-24",
       "events": [
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-05-24",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -443,7 +381,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-05-24",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -716,6 +654,40 @@
           "cost": "$15",
           "repeat": "Fourth Thursday",
           "start_dt": "2026-05-28T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "date": "2026-05-29",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-05-29",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Benny Feldman",
+          "url": "https://504comedy.com/event/1359/benny-feldman-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Fri May 29 2026",
+          "start_dt": "2026-05-28T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-05-29",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Comedy Lounge",
+          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+          "venue": "Vino: Fine Wine & Spirits",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Friday",
+          "start_dt": "2026-05-29T20:00-05:00"
         }
       ]
     }
