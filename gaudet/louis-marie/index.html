@@ -83,12 +83,6 @@
     --dark-bg: #100d08;
     --card-bg: #1e1408;
     --border: #c8a96e;
-    --blue-exile: #1a2a4a;
-    --blue-exile-text: #a0c0f5;
-    --forest-green: #0f1f0f;
-    --forest-text: #90c890;
-    --burgundy: #3a0f0f;
-    --burgundy-text: #f5b0a0;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -104,10 +98,51 @@
     padding: 0 0 80px 0;
   }
 
+  /* ── Hero portrait ── */
+  .hero-portrait-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px 0;
+  }
+
+  .hero-portrait-frame {
+    width: 240px;
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 40px rgba(200,146,42,0.25), 0 8px 40px rgba(0,0,0,0.6);
+    position: relative;
+    background: #2a1f10;
+  }
+
+  .hero-portrait-frame::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(200,169,110,0.3);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-portrait-frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .hero-portrait-caption {
+    text-align: center;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--gold);
+    margin-top: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+  }
+
   /* ── Hero ── */
   .hero {
     text-align: center;
-    padding: 60px 20px 40px;
+    padding: 36px 20px 40px;
     position: relative;
   }
 
@@ -249,7 +284,7 @@
 
   /* ── Main container ── */
   .story-container {
-    max-width: 960px;
+    max-width: 860px;
     margin: 0 auto;
     padding: 40px 20px 20px;
     position: relative;
@@ -301,7 +336,6 @@
     pointer-events: none;
   }
 
-  /* Special card variants */
   .chapter-card.departure {
     background: linear-gradient(145deg, #1a0f0a, #140d06);
     border-color: var(--rust);
@@ -355,77 +389,6 @@
     user-select: none;
   }
 
-  .chapter-inner {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 28px;
-    align-items: start;
-  }
-
-  /* Portrait frame */
-  .portrait-frame {
-    background: #2a1f10;
-    border: 2px solid var(--border);
-    display: block;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-    width: 200px;
-  }
-
-  .portrait-frame::before {
-    content: '';
-    position: absolute;
-    inset: 4px;
-    border: 1px solid rgba(200,169,110,0.3);
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .portrait-photo {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .portrait-silhouette {
-    width: 100%;
-    aspect-ratio: 3/4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    opacity: 0.35;
-  }
-
-  .sil-head { width: 48px; height: 48px; border-radius: 50%; background: var(--sepia); }
-  .sil-body { width: 80px; height: 90px; background: var(--sepia); border-radius: 8px 8px 0 0; }
-
-  .era-label {
-    display: block;
-    text-align: center;
-    font-size: 19px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.85;
-    padding: 6px 0 4px;
-    background: #2a1f10;
-  }
-
-  .portrait-tagline {
-    text-align: center;
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 17px;
-    color: var(--gold);
-    margin-top: 10px;
-    letter-spacing: 0.04em;
-    line-height: 1.5;
-  }
-
-  /* Card content */
   .chapter-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(20px, 3vw, 28px);
@@ -453,13 +416,11 @@
     margin-bottom: 14px;
     font-family: 'Cormorant Garamond', serif;
     white-space: normal;
-    text-align: center;
     line-height: 1.5;
   }
 
   .badge.acadia   { background: #2a1a06; color: #f5ead6; border: 1px solid var(--gold); }
   .badge.deported { background: #3a0a0a; color: #f5c9a0; border: 1px solid var(--rust); }
-  .badge.forest   { background: #0a1a0a; color: #a0e0a0; border: 1px solid #4a7a4a; }
   .badge.prisoner { background: #1a0a0a; color: #e0b0b0; border: 1px solid #7a3a3a; }
   .badge.exile    { background: #0a1020; color: #a0c0f5; border: 1px solid #4a6a9a; }
   .badge.voyage   { background: #0a1418; color: #a0d0e0; border: 1px solid #3a7a8a; }
@@ -481,19 +442,12 @@
     font-size: 20px;
     color: #d4c4a0;
     line-height: 1.85;
-    margin-bottom: 18px;
     font-weight: 400;
   }
 
-  .chapter-text p {
-    margin-bottom: 12px;
-  }
+  .chapter-text p { margin-bottom: 14px; }
+  .chapter-text p:last-child { margin-bottom: 0; }
 
-  .chapter-text p:last-child {
-    margin-bottom: 0;
-  }
-
-  /* Pull quote */
   .pull-quote {
     margin: 18px 0;
     padding: 18px 24px;
@@ -520,76 +474,7 @@
     font-style: normal;
   }
 
-  /* Prompt box (collapsible) */
-  .prompt-box {
-    background: #1a1209;
-    border: 1px solid rgba(200,169,110,0.3);
-    border-radius: 2px;
-    margin-top: 14px;
-    overflow: hidden;
-  }
-
-  .prompt-box summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-    cursor: pointer;
-    list-style: none;
-    user-select: none;
-  }
-
-  .prompt-box summary::-webkit-details-marker { display: none; }
-
-  .prompt-box summary::after {
-    content: '▸';
-    color: var(--gold);
-    font-size: 18px;
-    transition: transform 0.2s;
-    flex-shrink: 0;
-  }
-
-  .prompt-box[open] summary::after { transform: rotate(90deg); }
-
-  .prompt-box .prompt-inner {
-    padding: 0 16px 14px;
-    border-top: 1px solid rgba(200,169,110,0.15);
-  }
-
-  .prompt-title {
-    font-size: 20px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-family: 'Cormorant Garamond', serif;
-  }
-
-  .copy-btn {
-    background: none;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    font-size: 20px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    cursor: pointer;
-    font-family: 'Cormorant Garamond', serif;
-    transition: all 0.2s;
-  }
-
-  .copy-btn:hover { background: var(--gold); color: var(--ink); }
-  .copy-btn.copied { background: #2a4a1a; border-color: #6abf3a; color: #6abf3a; }
-
-  .prompt-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    color: #c8b89a;
-    line-height: 1.65;
-    font-style: italic;
-    margin-top: 12px;
-  }
-
-  /* Divider */
+  /* ── Divider ── */
   .divider {
     text-align: center;
     color: var(--gold);
@@ -653,9 +538,7 @@
     border-bottom: 1px solid rgba(200,169,110,0.12);
   }
 
-  .source-item:last-child {
-    border-bottom: none;
-  }
+  .source-item:last-child { border-bottom: none; }
 
   .source-num {
     font-family: 'Playfair Display', serif;
@@ -668,8 +551,6 @@
     text-align: right;
     padding-top: 2px;
   }
-
-  .source-content {}
 
   .source-name {
     font-family: 'Playfair Display', serif;
@@ -713,32 +594,26 @@
   }
 
   /* ── Responsive ── */
-  @media (max-width: 700px) {
-    .chapter-inner {
-      grid-template-columns: 1fr;
-    }
-
-    .portrait-frame {
-      width: 100%;
-      max-width: 340px;
-      margin: 0 auto;
-    }
-
+  @media (max-width: 600px) {
     .chapter-card { padding: 20px 16px; }
     .chapter-num  { font-size: 36px; top: 14px; right: 14px; }
-
-    .waypoints { gap: 2px; }
+    .hero-portrait-frame { width: 180px; }
     .waypoint-name { font-size: 11px; max-width: 60px; }
     .waypoint-arrow { font-size: 14px; }
-  }
-
-  @media (max-width: 400px) {
-    .chapter-card { padding: 14px 12px; }
-    .portrait-frame { max-width: 280px; }
   }
 </style>
 </head>
 <body>
+
+<!-- ═══════════════════ PORTRAIT ═══════════════════ -->
+<div class="hero-portrait-wrap">
+  <div>
+    <div class="hero-portrait-frame">
+      <img src="../images/gen-05-louis-gaudet.jpg" alt="Louis Gaudet · b. c. 1727 · Beaubassin, Acadia" />
+    </div>
+    <div class="hero-portrait-caption">Louis Gaudet · b. c. 1727 · Beaubassin, Acadia</div>
+  </div>
+</div>
 
 <!-- ═══════════════════ HERO ═══════════════════ -->
 <div class="hero">
@@ -813,31 +688,14 @@
   <div class="chapter-label">Chapter I</div>
   <div class="chapter-card" style="animation-delay:0.05s">
     <div class="chapter-num">I</div>
-    <div class="chapter-inner">
-      <div>
-        <div class="portrait-frame">
-          <div class="portrait-silhouette"><div class="sil-head"></div><div class="sil-body"></div></div>
-          <div class="era-label">c. 1750</div>
-        </div>
-        <div class="portrait-tagline">Prosperous, rooted, and unsuspecting</div>
-        <details class="prompt-box" style="width:100%;margin-top:12px;">
-          <summary><span class="prompt-title">AI Image Prompt</span></summary>
-          <div class="prompt-inner">
-            <div class="prompt-text">An oil painting portrait of a young Acadian farming couple, circa 1752, Tintamarre, Acadia (near present-day Nova Scotia). The man, Louis, age 25: broad squared jaw, heavy straight brow ridge, deep-set dark brown eyes, broad nose with a slightly rounded tip, olive complexion, dark brown hair worn slightly long. The woman, Marie, age 22: warm Acadian French features, dark hair worn in a simple braid, hazel eyes, fair olive complexion, a full warm face with a gentle and strong bearing. Both dressed in modest Acadian working clothes — he in a linen shirt, wool breeches, leather boots; she in a long skirt, linen blouse, and a simple linen cap. They stand together on the edge of a tidal dyke, the vast salt marshland stretching behind them — their farm, their aboteaux, their world. Expression: contented ease and quiet pride. A couple in the full warmth of a life they have built. Oil painting style, warm golden afternoon light, earthy Flemish palette. At the bottom of the image in a consistent serif font, include the caption: "Louis Gaudet &amp; Marie Hébert · Tintamarre, Acadia · c. 1752"</div>
-          </div>
-        </details>
-      </div>
-      <div class="card-content">
-        <div class="chapter-title">The Calm Before the Storm</div>
-        <div class="chapter-dates">1727–1754 · Tintamarre, Acadia</div>
-        <span class="badge acadia">⚜ Established Acadian Settlers</span>
-        <div class="era-blurb">The Chignecto Isthmus was one of the most fertile and prosperous regions in all of Acadia — a community of farms carved from tidal marshland by generations of French settlers who had learned to bend the sea to their will. Louis and Marie were not refugees. They were not struggling. They were home.</div>
-        <div class="chapter-text">
-          <p>Louis Gaudet was born around 1727 in Beaubassin, Acadia — a direct descendant of Jehan Gaudet, who had crossed the Atlantic from France more than a century before. Marie Hébert was born around 1730, the daughter of a prominent local farming family. By the early 1750s, the young couple had married and settled in <strong style="color:#f5ead6;">Tintamarre</strong>, a bustling agricultural community on the Chignecto Isthmus near what is now the Nova Scotia–New Brunswick border.</p>
-          <p>Like generations before them, Louis and Marie were master agriculturalists — engineers of the wetlands. They spent their days constructing <em>aboteaux</em>: complex wooden dike systems fitted with one-way sluice gates that blocked the massive Atlantic tides, draining the salt marshes and creating some of the most fertile farmland in North America. This was not subsistence living. This was abundance, built by hand from the sea itself.</p>
-          <p>In the <strong style="color:#f5ead6;">1752 French Census of Tintamarre</strong>, Louis and Marie are recorded as young, established settlers — not refugees, not struggling newcomers, but a growing household with a home, livestock, and a prosperous future ahead of them. They had built something real. They had no idea that empires were about to collide on their doorstep.</p>
-        </div>
-      </div>
+    <div class="chapter-title">The Calm Before the Storm</div>
+    <div class="chapter-dates">1727–1754 · Tintamarre, Acadia</div>
+    <span class="badge acadia">⚜ Established Acadian Settlers</span>
+    <div class="era-blurb">The Chignecto Isthmus was one of the most fertile and prosperous regions in all of Acadia — a community of farms carved from tidal marshland by generations of French settlers who had learned to bend the sea to their will. Louis and Marie were not refugees. They were not struggling. They were home.</div>
+    <div class="chapter-text">
+      <p>Louis Gaudet was born around 1727 in Beaubassin, Acadia — a direct descendant of Jehan Gaudet, who had crossed the Atlantic from France more than a century before. Marie Hébert was born around 1730, the daughter of a prominent local farming family. By the early 1750s, the young couple had married and settled in <strong style="color:#f5ead6;">Tintamarre</strong>, a bustling agricultural community on the Chignecto Isthmus near what is now the Nova Scotia–New Brunswick border.</p>
+      <p>Like generations before them, Louis and Marie were master agriculturalists — engineers of the wetlands. They spent their days constructing <em>aboteaux</em>: complex wooden dike systems fitted with one-way sluice gates that blocked the massive Atlantic tides, draining the salt marshes and creating some of the most fertile farmland in North America. This was not subsistence living. This was abundance, built by hand from the sea itself.</p>
+      <p>In the <strong style="color:#f5ead6;">1752 French Census of Tintamarre</strong>, Louis and Marie are recorded as young, established settlers — not refugees, not struggling newcomers, but a growing household with a home, livestock, and a prosperous future ahead of them. They had built something real. They had no idea that empires were about to collide on their doorstep.</p>
     </div>
   </div>
 
@@ -847,37 +705,19 @@
   <div class="chapter-label">Chapter II</div>
   <div class="chapter-card departure" style="animation-delay:0.1s">
     <div class="chapter-num">II</div>
-    <div class="chapter-inner">
-      <div>
-        <div class="portrait-frame" style="border-color:var(--rust);">
-          <div class="portrait-silhouette"><div class="sil-head"></div><div class="sil-body"></div></div>
-          <div class="era-label" style="background:#2a0a0a;">1755</div>
-        </div>
-        <div class="portrait-tagline">Torn apart without a goodbye</div>
-        <details class="prompt-box" style="width:100%;margin-top:12px;">
-          <summary><span class="prompt-title">AI Image Prompt</span></summary>
-          <div class="prompt-inner">
-            <div class="prompt-text">A dramatic oil painting depicting the Acadian deportation of 1755. Left half: an Acadian man in his late 20s, Louis Gaudet — broad squared jaw, olive complexion, dark brown hair, deep-set dark eyes — being marched at gunpoint toward the shoreline by British redcoat soldiers. His expression is not defeated but furious and resolute, chin raised, hands forced behind him. Behind him, in the middle distance, his farm burns — thick smoke against a darkening sky. Right half: an Acadian woman, Marie, clutching two small children to her chest in the tree line, watching the scene with desperate eyes full of grief and terrified determination. She is not running yet — she is watching until the last possible moment. The two figures, separated by distance and soldiers, share one last glance across the chaos. The British brigantine ship Two Brothers waits in the harbor behind the soldiers. Mood: rupture, injustice, but not defeat. Dramatic oil painting style, dark palette, firelight and cold harbor light. At the bottom: "The Separation · Tintamarre, Acadia · 1755"</div>
-          </div>
-        </details>
-      </div>
-      <div class="card-content">
-        <div class="chapter-title">The Separation and the Wilderness</div>
-        <div class="chapter-dates">1755–1756 · South Carolina / Camp Espérance, Miramichi</div>
-        <span class="badge deported">⚑ Deported — Families Torn Apart</span>
-        <div class="era-blurb">In June 1755, the British captured Fort Beauséjour. Lieutenant Governor Charles Lawrence issued his decree: all Acadians who refused an unconditional oath to the British Crown would be stripped of everything and deported. What followed was one of the most brutal forced removals in North American history.</div>
-        <div class="chapter-text">
-          <p>The Chignecto region was targeted with calculated efficiency. British soldiers lured the Acadian men into local forts under the pretense of an official announcement — then locked the doors behind them. <strong style="color:#f5ead6;">Louis Gaudet was among those arrested.</strong> He was separated from his wife and children with no opportunity to say goodbye, marched to the shore under armed guard, and forced into the cramped, dark hold of the British brigantine <em><strong style="color:#f5ead6;">Two Brothers</strong></em>. The ship set sail south, eventually depositing Louis as a penniless, hostile refugee in <strong style="color:#f5ead6;">South Carolina</strong>.</p>
-          <p>Behind him, smoke filled the sky. British troops systematically burned every Acadian home, barn, and church to ensure the families had nothing to return to. Left alone with her children, facing starvation or capture, <strong style="color:#f5ead6;">Marie Hébert gathered her young children and fled into the dense northern forests.</strong></p>
-        </div>
-        <div class="pull-quote">
-          <p>"Terrified, freezing, and hunted by British patrols, the refugees resorted to eating hides, carrion, and tree bark. Hundreds died. Marie kept her children alive through sheer force of will."</p>
-        </div>
-        <div class="chapter-text">
-          <p>Marie joined a desperate exodus of thousands of escaping Acadians moving north toward New Brunswick. They eventually established <strong style="color:#f5ead6;">Camp Espérance</strong> — Hope Camp — along the Miramichi River. The winter of 1756–1757 was a waking nightmare. The camp was a barely-functioning refugee settlement, hunted by British patrols, slowly starving.</p>
-          <p>Hundreds of Acadians died of starvation and exposure that winter. Marie was not among them. Neither were her children.</p>
-        </div>
-      </div>
+    <div class="chapter-title">The Separation and the Wilderness</div>
+    <div class="chapter-dates">1755–1756 · South Carolina / Camp Espérance, Miramichi</div>
+    <span class="badge deported">⚑ Deported — Families Torn Apart</span>
+    <div class="era-blurb">In June 1755, the British captured Fort Beauséjour. Lieutenant Governor Charles Lawrence issued his decree: all Acadians who refused an unconditional oath to the British Crown would be stripped of everything and deported. What followed was one of the most brutal forced removals in North American history.</div>
+    <div class="chapter-text">
+      <p>The Chignecto region was targeted with calculated efficiency. British soldiers lured the Acadian men into local forts under the pretense of an official announcement — then locked the doors behind them. <strong style="color:#f5ead6;">Louis Gaudet was among those arrested.</strong> He was separated from his wife and children with no opportunity to say goodbye, marched to the shore under armed guard, and forced into the cramped, dark hold of the British brigantine <em><strong style="color:#f5ead6;">Two Brothers</strong></em>. The ship set sail south, eventually depositing Louis as a penniless, hostile refugee in <strong style="color:#f5ead6;">South Carolina</strong>.</p>
+      <p>Behind him, smoke filled the sky. British troops systematically burned every Acadian home, barn, and church to ensure the families had nothing to return to. Left alone with her children, facing starvation or capture, <strong style="color:#f5ead6;">Marie Hébert gathered her young children and fled into the dense northern forests.</strong></p>
+    </div>
+    <div class="pull-quote">
+      <p>"Terrified, freezing, and hunted by British patrols, the refugees resorted to eating hides, carrion, and tree bark. Hundreds died. Marie kept her children alive through sheer force of will."</p>
+    </div>
+    <div class="chapter-text">
+      <p>Marie joined a desperate exodus of thousands of escaping Acadians moving north toward New Brunswick. They eventually established <strong style="color:#f5ead6;">Camp Espérance</strong> — Hope Camp — along the Miramichi River. The winter of 1756–1757 was a waking nightmare. The camp was a barely-functioning refugee settlement, hunted by British patrols, slowly starving. Hundreds of Acadians died of starvation and exposure that winter. Marie was not among them. Neither were her children.</p>
     </div>
   </div>
 
@@ -887,31 +727,14 @@
   <div class="chapter-label">Chapter III</div>
   <div class="chapter-card reunion" style="animation-delay:0.15s">
     <div class="chapter-num">III</div>
-    <div class="chapter-inner">
-      <div>
-        <div class="portrait-frame" style="border-color:var(--gold);box-shadow:0 0 20px rgba(200,146,42,0.3);">
-          <div class="portrait-silhouette"><div class="sil-head"></div><div class="sil-body"></div></div>
-          <div class="era-label">1756</div>
-        </div>
-        <div class="portrait-tagline">Against every odd, they found each other</div>
-        <details class="prompt-box" style="width:100%;margin-top:12px;">
-          <summary><span class="prompt-title">AI Image Prompt</span></summary>
-          <div class="prompt-inner">
-            <div class="prompt-text">A dramatic and emotionally powerful oil painting of a reunion in the Canadian wilderness, circa 1756. An Acadian man, Louis Gaudet — broad jaw, olive complexion, dark eyes, worn traveling clothes, visibly exhausted from a thousand-mile journey but burning with purpose — emerges from the tree line into a forest clearing. Before him, an Acadian woman, Marie, drops to her knees in the snow with her children clinging to her, her face overwhelmed with disbelief and relief. The forest is dark and vast around them. Snow is on the ground. Other Acadian refugees in the background watch in stunned silence. The mood is raw, tearful, miraculous — the reunion no one believed was possible. Oil painting style, dramatic chiaroscuro lighting — a shaft of cold winter light breaks through the canopy onto the two figures. At the bottom: "The Miraculous Reunion · Miramichi Wilderness · 1756"</div>
-          </div>
-        </details>
-      </div>
-      <div class="card-content">
-        <div class="chapter-title">The Miraculous Reunion &amp; Imprisonment</div>
-        <div class="chapter-dates">1756–1763 · Wilderness / Fort Cumberland, Acadia</div>
-        <span class="badge prisoner">⚔ Fugitives → Prisoners of War</span>
-        <div class="era-blurb">Stranded in South Carolina with no money, no allies, and no path home, Louis Gaudet refused to accept his exile. What he did next was considered suicidal by every rational measure — and he did it anyway.</div>
-        <div class="chapter-text">
-          <p>In 18th-century America, traveling over a thousand miles through hostile British territory, trackless wilderness, and coastal waters back to Canada was not a plan. It was a death wish. Yet Louis — either by escape or negotiated release — made exactly that journey. He navigated the Atlantic frontier and the dense northern woods with a singular, consuming purpose: <strong style="color:#f5ead6;">find his family.</strong></p>
-          <p>Against all mathematical and human probability, he succeeded. Louis made it back to the Canadian wilderness and <strong style="color:#f5ead6;">miraculously reunited with Marie and the children</strong> hiding in the forests near Camp Espérance.</p>
-          <p>Their joy was short-lived. For the next several years, the Gaudet family lived as fugitives — moving constantly from hideout to hideout, fleeing further north toward Restigouche as the British military relentlessly hunted the remaining Acadian resistance. Around <strong style="color:#f5ead6;">1761</strong>, British forces finally captured them. Louis, Marie, and their children were marched back to Chignecto — the very land they once owned — and held as prisoners of war at <strong style="color:#f5ead6;">Fort Cumberland</strong> (the renamed Fort Beauséjour) until the <strong style="color:#f5ead6;">Treaty of Paris in 1763</strong> officially ended the war and forced their release.</p>
-        </div>
-      </div>
+    <div class="chapter-title">The Miraculous Reunion &amp; Imprisonment</div>
+    <div class="chapter-dates">1756–1763 · Wilderness / Fort Cumberland, Acadia</div>
+    <span class="badge prisoner">⚔ Fugitives → Prisoners of War</span>
+    <div class="era-blurb">Stranded in South Carolina with no money, no allies, and no path home, Louis Gaudet refused to accept his exile. What he did next was considered suicidal by every rational measure — and he did it anyway.</div>
+    <div class="chapter-text">
+      <p>In 18th-century America, traveling over a thousand miles through hostile British territory, trackless wilderness, and coastal waters back to Canada was not a plan. It was a death wish. Yet Louis — either by escape or negotiated release — made exactly that journey. He navigated the Atlantic frontier and the dense northern woods with a singular, consuming purpose: <strong style="color:#f5ead6;">find his family.</strong></p>
+      <p>Against all mathematical and human probability, he succeeded. Louis made it back to the Canadian wilderness and <strong style="color:#f5ead6;">miraculously reunited with Marie and the children</strong> hiding in the forests near Camp Espérance.</p>
+      <p>Their joy was short-lived. For the next several years, the Gaudet family lived as fugitives — moving constantly from hideout to hideout, fleeing further north toward Restigouche as the British military relentlessly hunted the remaining Acadian resistance. Around <strong style="color:#f5ead6;">1761</strong>, British forces finally captured them. Louis, Marie, and their children were marched back to Chignecto — the very land they once owned — and held as prisoners of war at <strong style="color:#f5ead6;">Fort Cumberland</strong> (the renamed Fort Beauséjour) until the <strong style="color:#f5ead6;">Treaty of Paris in 1763</strong> officially ended the war and forced their release.</p>
     </div>
   </div>
 
@@ -921,32 +744,15 @@
   <div class="chapter-label">Chapter IV</div>
   <div class="chapter-card exile" style="animation-delay:0.2s">
     <div class="chapter-num">IV</div>
-    <div class="chapter-inner">
-      <div>
-        <div class="portrait-frame" style="border-color:#4a6a9a;">
-          <div class="portrait-silhouette"><div class="sil-head"></div><div class="sil-body"></div></div>
-          <div class="era-label" style="background:#0a1020;">1767–1785</div>
-        </div>
-        <div class="portrait-tagline">Strangers in the land of their ancestors</div>
-        <details class="prompt-box" style="width:100%;margin-top:12px;">
-          <summary><span class="prompt-title">AI Image Prompt</span></summary>
-          <div class="prompt-inner">
-            <div class="prompt-text">A melancholy but dignified oil painting of an Acadian exile family in the port city of Nantes, France, circa 1775. Louis Gaudet, now in his late 40s, sits at a dockside table in their modest French lodgings — broad jaw now lined with age, dark eyes patient and watchful. Beside him, Marie, in her mid-40s, dark hair now touched with silver, mends clothing by candlelight. At her feet, a young boy — François Louis, age 5 or so — sleeps on a folded blanket. The window behind them shows the masts of ships in the harbor of Nantes — ships that go everywhere, but nowhere they truly belong. The room is spare but not hopeless. The mood is one of patient endurance: people who have survived too much to despair, but still carry the long grief of displacement. Late 18th century French domestic scene, warm candlelight against cold stone walls. At the bottom: "The French Exile · Nantes, France · c. 1775"</div>
-          </div>
-        </details>
-      </div>
-      <div class="card-content">
-        <div class="chapter-title">The French Exile</div>
-        <div class="chapter-dates">1763–1785 · Saint Pierre &amp; Miquelon · La Rochelle · Nantes, France</div>
-        <span class="badge exile">⚓ Exiled to Europe — Strangers in France</span>
-        <div class="era-blurb">Released from prison but barred from reclaiming their farms, Louis and Marie found themselves in a wilderness of a different kind — the bureaucratic, indifferent world of 18th century Europe, where they were stateless Acadian refugees with no home and no claim.</div>
-        <div class="chapter-text">
-          <p>Their first stop was the tiny, rocky French-controlled islands of <strong style="color:#f5ead6;">Saint Pierre and Miquelon</strong> off Newfoundland. They fished the cold waters, but the islands quickly became dangerously overcrowded with destitute Acadian refugees, triggering a severe famine.</p>
-          <p>In the autumn of 1767, French and British authorities decided to clear the islands. Once again, Louis and Marie were forced onto a ship — the French vessel <em><strong style="color:#f5ead6;">La Félicité</strong></em>. On <strong style="color:#f5ead6;">November 9, 1767</strong>, the ship arrived at the historic port of <strong style="color:#f5ead6;">La Rochelle, France</strong>.</p>
-          <p>For nearly <strong style="color:#f5ead6;">twenty years</strong>, Louis and Marie lived as impoverished exiles in a France their ancestors had left four generations before. The French government moved them around: in 1773, they participated in an ill-fated agricultural colony in <strong style="color:#f5ead6;">Poitou (Châtellerault)</strong> before eventually settling in the bustling port city of <strong style="color:#f5ead6;">Nantes</strong>.</p>
-          <p>It was during these difficult years of displacement that their son, <strong style="color:#f5ead6;">François Louis Gaudet</strong>, was born — around 1773–1777. He was French by birthplace, Acadian by blood, and Louisiana by destiny. Though the family was safely among French speakers, they were strangers in a European world, always longing for the independent, pastoral life they had lost, always looking west.</p>
-        </div>
-      </div>
+    <div class="chapter-title">The French Exile</div>
+    <div class="chapter-dates">1763–1785 · Saint Pierre &amp; Miquelon · La Rochelle · Nantes, France</div>
+    <span class="badge exile">⚓ Exiled to Europe — Strangers in France</span>
+    <div class="era-blurb">Released from prison but barred from reclaiming their farms, Louis and Marie found themselves in a wilderness of a different kind — the bureaucratic, indifferent world of 18th century Europe, where they were stateless Acadian refugees with no home and no claim.</div>
+    <div class="chapter-text">
+      <p>Their first stop was the tiny, rocky French-controlled islands of <strong style="color:#f5ead6;">Saint Pierre and Miquelon</strong> off Newfoundland. They fished the cold waters, but the islands quickly became dangerously overcrowded with destitute Acadian refugees, triggering a severe famine.</p>
+      <p>In the autumn of 1767, French and British authorities decided to clear the islands. Once again, Louis and Marie were forced onto a ship — the French vessel <em><strong style="color:#f5ead6;">La Félicité</strong></em>. On <strong style="color:#f5ead6;">November 9, 1767</strong>, the ship arrived at the historic port of <strong style="color:#f5ead6;">La Rochelle, France</strong>.</p>
+      <p>For nearly <strong style="color:#f5ead6;">twenty years</strong>, Louis and Marie lived as impoverished exiles in a France their ancestors had left four generations before. The French government moved them around: in 1773, they participated in an ill-fated agricultural colony in <strong style="color:#f5ead6;">Poitou (Châtellerault)</strong> before eventually settling in the bustling port city of <strong style="color:#f5ead6;">Nantes</strong>.</p>
+      <p>It was during these difficult years of displacement that their son, <strong style="color:#f5ead6;">François Louis Gaudet</strong>, was born — around 1773–1777. He was French by birthplace, Acadian by blood, and Louisiana by destiny. Though the family was safely among French speakers, they were strangers in a European world, always longing for the independent, pastoral life they had lost, always looking west.</p>
     </div>
   </div>
 
@@ -956,38 +762,21 @@
   <div class="chapter-label">Chapter V</div>
   <div class="chapter-card voyage" style="animation-delay:0.25s">
     <div class="chapter-num">V</div>
-    <div class="chapter-inner">
-      <div>
-        <div class="portrait-frame" style="border-color:#3a7a8a;">
-          <div class="portrait-silhouette"><div class="sil-head"></div><div class="sil-body"></div></div>
-          <div class="era-label" style="background:#0a1418;">Dec 1785</div>
-        </div>
-        <div class="portrait-tagline">La Caroline · Nantes to New Orleans</div>
-        <details class="prompt-box" style="width:100%;margin-top:12px;">
-          <summary><span class="prompt-title">AI Image Prompt</span></summary>
-          <div class="prompt-inner">
-            <div class="prompt-text">A dramatic seascape painting of the French ship La Caroline arriving at the port of New Orleans, December 17, 1785. The ship, sails full, moves through the brown waters of the Mississippi toward a low Louisiana shoreline lined with cypress trees and Spanish moss. On deck, among dozens of Acadian refugees, stands Louis Gaudet — now in his late 50s, gray beginning in his dark hair and beard, broad and weathered — with Marie at his side, both staring at the approaching shore with an expression of exhausted, disbelieving wonder. Between them, a teenage boy — François Louis, age 12 — stands on his toes, wide eyes drinking in the sight of Louisiana for the first time. The mood is: arrival. Not triumph — something quieter and deeper. After thirty years, they can finally stop moving. Dramatic maritime oil painting style, late afternoon golden light, warm Louisiana sky. At the bottom: "La Caroline arrives at New Orleans · December 17, 1785"</div>
-          </div>
-        </details>
-      </div>
-      <div class="card-content">
-        <div class="chapter-title">The Final Voyage to Louisiana</div>
-        <div class="chapter-dates">September 1784 – December 17, 1785 · Nantes → New Orleans</div>
-        <span class="badge voyage">⛵ La Caroline · The Seven Ships · 1785</span>
-        <div class="era-blurb">By the 1780s, the Spanish government controlling Louisiana had a strategic problem: they needed resilient, skilled settlers to colonize and defend the lower Mississippi River valley. They knew exactly who to call. Spain organized the largest Acadian relocation operation in history — seven ships from French ports to Louisiana.</div>
-        <div class="chapter-text">
-          <p>In <strong style="color:#f5ead6;">September 1784</strong>, Louis and Marie signed their names to a manifest in Nantes, declaring their formal desire to go to Louisiana at the expense of His Spanish Majesty. After thirty years of being pushed across the Atlantic world by forces beyond their control, they were finally choosing their own destination.</p>
-          <p>On <strong style="color:#f5ead6;">December 17, 1785</strong>, after nearly eighty days on the Atlantic Ocean, the ship <em><strong style="color:#f5ead6;">La Caroline</strong></em> arrived at the port of New Orleans. Listed as the <strong style="color:#f5ead6;">4th family on the passenger manifest</strong> was Louis Gaudet — now a veteran survivor in his late 50s, listed as a fisherman and laborer — his faithful wife Marie Hébert, and their children, including <strong style="color:#f5ead6;">young 12-year-old François Louis</strong>.</p>
-          <p>They had crossed the Atlantic twice. They had survived a wilderness winter, a thousand-mile escape on foot, years as prisoners of war, exile in a European city, and eighty days at sea. They had lost everything — their farm, their home, their country — and found each other again across impossible distances.</p>
-        </div>
-        <div class="pull-quote">
-          <p>"Listed as the 4th family aboard La Caroline. After thirty years and two ocean crossings, they had finally arrived at a place they could call home."</p>
-          <cite>— The Seven Ships Passenger Records, 1785</cite>
-        </div>
-        <div class="chapter-text">
-          <p style="margin-top:8px;"><a href="http://www.acadiansingray.com/Appendices-Seven%20Ships'%20Passengers.htm" target="_blank" rel="noopener" style="font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,146,42,0.4);padding-bottom:2px;">🚢 The Seven Ships — Full Passenger Records →</a></p>
-        </div>
-      </div>
+    <div class="chapter-title">The Final Voyage to Louisiana</div>
+    <div class="chapter-dates">September 1784 – December 17, 1785 · Nantes → New Orleans</div>
+    <span class="badge voyage">⛵ La Caroline · The Seven Ships · 1785</span>
+    <div class="era-blurb">By the 1780s, the Spanish government controlling Louisiana had a strategic problem: they needed resilient, skilled settlers to colonize and defend the lower Mississippi River valley. They knew exactly who to call. Spain organized the largest Acadian relocation in history — seven ships from French ports to Louisiana.</div>
+    <div class="chapter-text">
+      <p>In <strong style="color:#f5ead6;">September 1784</strong>, Louis and Marie signed their names to a manifest in Nantes, declaring their formal desire to go to Louisiana at the expense of His Spanish Majesty. After thirty years of being pushed across the Atlantic world by forces beyond their control, they were finally choosing their own destination.</p>
+      <p>On <strong style="color:#f5ead6;">December 17, 1785</strong>, after nearly eighty days on the Atlantic Ocean, the ship <em><strong style="color:#f5ead6;">La Caroline</strong></em> arrived at the port of New Orleans. Listed as the <strong style="color:#f5ead6;">4th family on the passenger manifest</strong> was Louis Gaudet — now a veteran survivor in his late 50s, listed as a fisherman and laborer — his faithful wife Marie Hébert, and their children, including <strong style="color:#f5ead6;">young 12-year-old François Louis</strong>.</p>
+      <p>They had crossed the Atlantic twice. They had survived a wilderness winter, a thousand-mile escape on foot, years as prisoners of war, exile in a European city, and eighty days at sea. They had lost everything — their farm, their home, their country — and found each other again across impossible distances.</p>
+    </div>
+    <div class="pull-quote">
+      <p>"Listed as the 4th family aboard <em>La Caroline</em>. After thirty years and two ocean crossings, they had finally arrived at a place they could call home."</p>
+      <cite>— The Seven Ships Passenger Records, 1785</cite>
+    </div>
+    <div class="chapter-text" style="margin-top:16px;">
+      <p><a href="http://www.acadiansingray.com/Appendices-Seven%20Ships'%20Passengers.htm" target="_blank" rel="noopener" style="font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,146,42,0.4);padding-bottom:2px;">🚢 The Seven Ships — Full Passenger Records →</a></p>
     </div>
   </div>
 
@@ -995,42 +784,23 @@
 
   <!-- ──────────── CHAPTER VI ──────────── -->
   <div class="chapter-label">Chapter VI</div>
-  <div class="chapter-card legacy" style="animation-delay:0.3s; border-color:#5abf5a;">
+  <div class="chapter-card legacy" style="animation-delay:0.3s">
     <div class="chapter-num">VI</div>
-    <div class="chapter-inner">
-      <div>
-        <div class="portrait-frame" style="border-color:#5abf5a;box-shadow:0 0 20px rgba(90,191,90,0.25);">
-          <div class="portrait-silhouette"><div class="sil-head"></div><div class="sil-body"></div></div>
-          <div class="era-label" style="background:#0a160a;">c. 1795</div>
-        </div>
-        <div class="portrait-tagline">Free. On land they owned. Together.</div>
-        <details class="prompt-box" style="width:100%;margin-top:12px;">
-          <summary><span class="prompt-title">AI Image Prompt</span></summary>
-          <div class="prompt-inner">
-            <div class="prompt-text">A warm, golden oil painting of an elderly Acadian couple on their Louisiana bayou farm, circa 1795. Louis Gaudet, now in his late 60s, sits on a wooden porch overlooking Bayou Lafourche — broad jaw deeply lined, white-streaked hair and beard, dark eyes still sharp and present, broad shoulders still carrying their old strength. Marie sits beside him, a shawl around her shoulders, dark hair now fully silver, her hands folded in her lap with the peaceful authority of a woman who has survived everything. Around them: Spanish moss hanging from cypress trees, the slow water of the bayou, vegetable gardens, chickens, grandchildren playing in the yard. Their son François Louis, now a young man in his 20s, works a field in the background. The mood is: complete. Not triumphant — something quieter. The bone-deep peace of people who have come to the end of a very long road and found it beautiful. Golden hour Louisiana light, warm oil painting palette. At the bottom: "Louis Gaudet &amp; Marie Hébert · Bayou Lafourche, Louisiana · c. 1795"</div>
-          </div>
-        </details>
-      </div>
-      <div class="card-content">
-        <div class="chapter-title">Epilogue: A Free People on Free Land</div>
-        <div class="chapter-dates">1785–1803 · Bayou Lafourche, Louisiana</div>
-        <span class="badge free">🌿 Free · Farming · Home at Last</span>
-        <div class="era-blurb">The Spanish government gave the family tools, rations, and tracts of land along the alluvial plains of Bayou Lafourche, near modern-day Thibodaux and Plattenville. The environment was vastly different from the cold marshes of Acadia or the stone streets of Nantes — but the people were the same, and their skills had never faded.</div>
-        <div class="chapter-text">
-          <p>Once again, Louis and Marie cleared the land, tamed the water, and built a homestead. Spanish colonial census records from <strong style="color:#f5ead6;">January 1788</strong> show them successfully settled and farming along the bayou — just three years after their arrival. The same hands that had built aboteaux in Tintamarre were now coaxing crops from the rich Louisiana alluvial soil.</p>
-          <p><strong style="color:#f5ead6;">Marie Hébert</strong> passed away around <strong style="color:#f5ead6;">1801</strong>. <strong style="color:#f5ead6;">Louis Gaudet</strong> followed her in <strong style="color:#f5ead6;">1803</strong>. His plaque still stands at St. Joseph's Cemetery in Thibodaux — a stone marker for a man who crossed an ocean twice and never stopped moving until he found home.</p>
-          <p>After thirty years of being hunted, separated, imprisoned, and exiled across the globe, they died <strong style="color:#f5ead6;">completely free</strong>, surrounded by their children and grandchildren, on land they owned. Their son <strong style="color:#f5ead6;">François Louis</strong> grew up to marry into the local community, ensuring the Gaudet name was permanently woven into the fabric of Louisiana — and every Gaudet in the bayou parishes since traces back to this couple's refusal to be erased.</p>
-        </div>
+    <div class="chapter-title">Epilogue: A Free People on Free Land</div>
+    <div class="chapter-dates">1785–1803 · Bayou Lafourche, Louisiana</div>
+    <span class="badge free">🌿 Free · Farming · Home at Last</span>
+    <div class="era-blurb">The Spanish government gave the family tools, rations, and tracts of land along the alluvial plains of Bayou Lafourche, near modern-day Thibodaux and Plattenville. The environment was vastly different from the cold marshes of Acadia or the stone streets of Nantes — but the people were the same, and their skills had never faded.</div>
+    <div class="chapter-text">
+      <p>Once again, Louis and Marie cleared the land, tamed the water, and built a homestead. Spanish colonial census records from <strong style="color:#f5ead6;">January 1788</strong> show them successfully settled and farming along the bayou — just three years after their arrival. The same hands that had built aboteaux in Tintamarre were now coaxing crops from the rich Louisiana alluvial soil.</p>
+      <p><strong style="color:#f5ead6;">Marie Hébert</strong> passed away around <strong style="color:#f5ead6;">1801</strong>. <strong style="color:#f5ead6;">Louis Gaudet</strong> followed her in <strong style="color:#f5ead6;">1803</strong>. His plaque still stands at St. Joseph's Cemetery in Thibodaux — a stone marker for a man who crossed an ocean twice and never stopped moving until he found home.</p>
+      <p>After thirty years of being hunted, separated, imprisoned, and exiled across the globe, they died <strong style="color:#f5ead6;">completely free</strong>, surrounded by their children and grandchildren, on land they owned. Their son <strong style="color:#f5ead6;">François Louis</strong> grew up to marry into the local community, ensuring the Gaudet name was permanently woven into the fabric of Louisiana — and every Gaudet in the bayou parishes since traces back to this couple's refusal to be erased.</p>
+    </div>
 
-        <!-- Famille Gaudet plaque - same as on parent page -->
-        <div style="margin:18px 0;border:1px solid rgba(90,191,90,0.3);border-radius:2px;overflow:hidden;">
-          <img src="../images/famille-gaudet-plaque.jpg" alt="Famille Gaudet historical monument plaque — Louis Gaudet 1727-1803" style="width:100%;display:block;" onerror="this.style.display='none'" />
-          <div style="padding:12px 16px;background:rgba(90,191,90,0.06);">
-            <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:17px;color:#90c890;line-height:1.7;margin-bottom:6px;">The historical monument plaque at St. Joseph's Cemetery in Thibodaux lists <em>Famille Gaudet</em> with <strong style="color:#f5ead6;">Louis Gaudet 1727–1803</strong> first. Carved in stone. Primary source confirmation.</p>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(90,191,90,0.5);letter-spacing:0.08em;text-transform:uppercase;">Historical Monument Record · Famille Gaudet · St. Joseph's Cemetery, Thibodaux, Louisiana</p>
-          </div>
-        </div>
-
+    <div style="margin:24px 0 0;border:1px solid rgba(90,191,90,0.3);border-radius:2px;overflow:hidden;">
+      <img src="../images/famille-gaudet-plaque.jpg" alt="Famille Gaudet historical monument plaque — Louis Gaudet 1727-1803" style="width:100%;display:block;" />
+      <div style="padding:12px 16px;background:rgba(90,191,90,0.06);">
+        <p style="font-family:'IM Fell English',serif;font-style:italic;font-size:17px;color:#90c890;line-height:1.7;margin-bottom:6px;">The historical monument plaque at St. Joseph's Cemetery in Thibodaux lists <em>Famille Gaudet</em> with <strong style="color:#f5ead6;">Louis Gaudet 1727–1803</strong> first. Carved in stone. Primary source confirmation.</p>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(90,191,90,0.5);letter-spacing:0.08em;text-transform:uppercase;">Historical Monument Record · Famille Gaudet · St. Joseph's Cemetery, Thibodaux, Louisiana</p>
       </div>
     </div>
   </div>
@@ -1046,7 +816,7 @@
 
     <div class="source-item">
       <div class="source-num">1</div>
-      <div class="source-content">
+      <div>
         <div class="source-name">The 1752 Census of Acadia</div>
         <div class="source-desc">Conducted by the French officer Sieur de La Roque, this census provides the primary source record of Louis Gaudet and his family living as established, prosperous residents in Tintamarre — just three years before the deportation.</div>
       </div>
@@ -1054,7 +824,7 @@
 
     <div class="source-item">
       <div class="source-num">2</div>
-      <div class="source-content">
+      <div>
         <div class="source-name">The Belle-Île-en-Mer Declarations (1767)</div>
         <div class="source-desc">Sworn oral genealogies given by Acadian refugees landing in France. These declarations officially linked Louis Gaudet's generation back to the original 17th-century patriarch, Jehan Gaudet — confirming the direct family line across the Atlantic.</div>
       </div>
@@ -1062,7 +832,7 @@
 
     <div class="source-item">
       <div class="source-num">3</div>
-      <div class="source-content">
+      <div>
         <div class="source-name">Albert J. Robichaux's <em>The Acadian Exiles in France</em></div>
         <div class="source-desc">The definitive genealogical multi-volume series tracking the exact parish records — births, marriages, deaths — and the movements of the Gaudet family during their twenty years across La Rochelle, Poitou, and Nantes.</div>
       </div>
@@ -1070,7 +840,7 @@
 
     <div class="source-item">
       <div class="source-num">4</div>
-      <div class="source-content">
+      <div>
         <div class="source-name">The "Seven Ships" Passenger Lists (1785)</div>
         <div class="source-desc">Spanish colonial archival records detailing the names, ages, occupations, and family structures of the Acadians aboard <em>La Caroline</em> as they departed Nantes and arrived in New Orleans. Louis and Marie are listed as the 4th family. <a href="http://www.acadiansingray.com/Appendices-Seven%20Ships'%20Passengers.htm" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,146,42,0.4);">View full passenger records →</a></div>
       </div>
@@ -1078,7 +848,7 @@
 
     <div class="source-item">
       <div class="source-num">5</div>
-      <div class="source-content">
+      <div>
         <div class="source-name">Father Donald J. Hébert's <em>South Louisiana Records</em> &amp; <em>Acadian Church Records</em></div>
         <div class="source-desc">The essential historical collection transcribing the Catholic parish registries of Assumption and Lafourche parishes — documenting the marriages, land records, and deaths of Louis, Marie, and their son François Louis along the bayous of Louisiana.</div>
       </div>
@@ -1097,32 +867,5 @@
   <span style="font-size:17px;opacity:0.6;">An InkThorn Living History · <a href="https://inkthorn.ai" style="color:inherit;text-decoration:none;">inkthorn.ai</a></span>
 </div>
 
-<script>
-  function copyPrompt(btn) {
-    const box = btn.closest('.prompt-box');
-    const promptText = box.querySelector('.prompt-text').innerText;
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(promptText).then(() => showCopied(btn)).catch(() => fallbackCopy(promptText, btn));
-    } else {
-      fallbackCopy(promptText, btn);
-    }
-  }
-
-  function fallbackCopy(text, btn) {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
-    document.body.appendChild(ta);
-    ta.focus(); ta.select();
-    try { document.execCommand('copy'); showCopied(btn); } catch(e) { btn.textContent = 'Failed'; }
-    document.body.removeChild(ta);
-  }
-
-  function showCopied(btn) {
-    btn.textContent = 'Copied!';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
-  }
-</script>
 </body>
 </html>
