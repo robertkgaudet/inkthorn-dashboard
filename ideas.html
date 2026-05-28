@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="refresh" content="0; url=https://textos.ai/ideas.html" />
   <link rel="canonical" href="https://textos.ai/ideas.html" />
 
   <title>Is Your Business Ready for AI? Free AI Readiness Diagnosis | TextOS.ai</title>
@@ -453,12 +452,12 @@
 
       <!-- MODE TOGGLE -->
       <div style="display:flex;gap:8px;margin-bottom:28px;">
-        <button id="modeNew" onclick="setMode('new')" style="flex:1;padding:12px;border-radius:10px;border:2px solid var(--pink);background:rgba(255,45,120,0.15);color:#fff;font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.07em;cursor:pointer;transition:all 0.2s;">💡 NEW IDEA</button>
-        <button id="modeBiz" onclick="setMode('biz')" style="flex:1;padding:12px;border-radius:10px;border:2px solid rgba(255,255,255,0.1);background:transparent;color:var(--muted);font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.07em;cursor:pointer;transition:all 0.2s;">🏢 EXISTING BUSINESS</button>
+        <button id="modeBiz" onclick="setMode('biz')" style="flex:1;padding:12px;border-radius:10px;border:2px solid var(--pink);background:rgba(192,82,40,0.12);color:var(--text);font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.07em;cursor:pointer;transition:all 0.2s;">🏢 EXISTING BUSINESS</button>
+        <button id="modeNew" onclick="setMode('new')" style="flex:1;padding:12px;border-radius:10px;border:2px solid rgba(44,30,12,0.15);background:transparent;color:var(--muted);font-family:'Orbitron',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.07em;cursor:pointer;transition:all 0.2s;">💡 NEW IDEA</button>
       </div>
 
       <!-- NEW IDEA FIELDS -->
-      <div id="fieldsNew">
+      <div id="fieldsNew" style="display:none;">
         <div class="field-group">
           <label>Describe Your Idea (one sentence)</label>
           <textarea id="ideaInput" rows="3" placeholder="e.g. A New Orleans food tour booking app for tourists arriving at the airport…"></textarea>
@@ -495,7 +494,7 @@
       </div>
 
       <!-- EXISTING BUSINESS FIELDS -->
-      <div id="fieldsBiz" style="display:none;">
+      <div id="fieldsBiz">
         <div class="field-group">
           <label>Business Name</label>
           <input type="text" id="bizName" placeholder="e.g. Bayou Brew Coffee Co." />
@@ -577,11 +576,11 @@
         </div>
       </div>
 
-      <button class="btn-primary" id="diagnoseBtn" onclick="diagnoseIdea()">🔬 Diagnose This Idea</button>
+      <button class="btn-primary" id="diagnoseBtn" onclick="diagnoseIdea()">🔬 Diagnose My Business</button>
 
       <!-- DIAGNOSIS OUTPUT -->
       <div class="diagnosis-panel" id="diagnosisPanel">
-        <h3 id="diagnosisTitle">📊 Idea Diagnosis Report</h3>
+        <h3 id="diagnosisTitle">📊 Business Diagnosis Report</h3>
 
         <div class="score-row">
           <span class="score-label">GEO Score</span>
@@ -654,7 +653,7 @@
     })();
 
     // ── MODE TOGGLE ──
-    let currentMode = 'new';
+    let currentMode = 'biz';
 
     function setMode(mode) {
       currentMode = mode;

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TextOS — Command Center</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080e1a; --bg2: #0d1626; --bg3: #111f35;
+      --cyan: #00e5ff; --pink: #ff2d78; --green: #10b981;
+      --amber: #f59e0b; --purple: #a855f7;
+      --white: #f0f6ff; --gray: #8899bb;
+      --border: rgba(0,229,255,0.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100vh; }
+    body { font-family: "Space Grotesk", sans-serif; background: var(--bg); color: var(--white); padding: 28px 16px 60px; font-size: 17px; }
+
+    .container { max-width: 1020px; margin: 0 auto; }
+
+    /* HEADER */
+    .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 10px; }
+    .logo { font-family: "Orbitron", monospace; font-size: 1.3rem; font-weight: 900; color: var(--cyan); text-decoration: none; }
+    .logo span { color: var(--white); }
+    .header-meta { font-family: "Orbitron", monospace; font-size: 0.55rem; color: var(--gray); letter-spacing: 0.1em; text-align: right; }
+
+    /* STATS */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+    .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; text-align: center; }
+    .stat-num { font-family: "Orbitron", monospace; font-size: 1.6rem; font-weight: 900; display: block; margin-bottom: 3px; }
+    .stat-label { font-size: 0.82rem; color: var(--gray); }
+
+    /* WAITLIST */
+    .waitlist-bar { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 28px; }
+    .waitlist-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .waitlist-label { font-family: "Orbitron", monospace; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--gray); text-transform: uppercase; }
+    .waitlist-count { font-family: "Orbitron", monospace; font-size: 1.1rem; font-weight: 900; color: var(--cyan); }
+    .bar-track { background: var(--bg3); border-radius: 4px; height: 6px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--cyan), #0090b8); }
+    .waitlist-goal { font-size: 0.68rem; color: var(--gray); margin-top: 6px; }
+
+    /* GRID LAYOUT */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 8px; }
+
+    /* SECTION PANEL */
+    .panel {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .panel-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--border);
+      font-family: "Orbitron", monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .panel-header.cyan  { color: var(--cyan);   border-left: 3px solid var(--cyan); }
+    .panel-header.pink  { color: var(--pink);   border-left: 3px solid var(--pink); }
+    .panel-header.green { color: var(--green);  border-left: 3px solid var(--green); }
+    .panel-header.amber { color: var(--amber);  border-left: 3px solid var(--amber); }
+    .panel-header.purple{ color: var(--purple); border-left: 3px solid var(--purple); }
+
+    /* LINK LIST */
+    .link-list { list-style: none; padding: 4px 0; }
+    .link-list li { border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .link-list li:last-child { border-bottom: none; }
+    .link-list a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 18px;
+      text-decoration: none;
+      color: rgba(240,246,255,0.82);
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+    .link-list a:hover { background: rgba(255,255,255,0.04); color: #fff; }
+    .link-list a .icon { font-size: 0.9rem; flex-shrink: 0; width: 18px; text-align: center; }
+    .link-list a .title { flex: 1; }
+    .badge {
+      font-family: "Orbitron", monospace; font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.08em; padding: 3px 9px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+    }
+    .b-live   { background: rgba(16,185,129,0.1);  color: var(--green);  border: 1px solid rgba(16,185,129,0.25); }
+    .b-wip    { background: rgba(0,229,255,0.08);  color: var(--cyan);   border: 1px solid rgba(0,229,255,0.2); }
+    .b-soon   { background: rgba(245,158,11,0.08); color: var(--amber);  border: 1px solid rgba(245,158,11,0.2); }
+    .b-new    { background: rgba(255,45,120,0.1);  color: var(--pink);   border: 1px solid rgba(255,45,120,0.25); }
+    .b-priv   { background: rgba(168,85,247,0.08); color: var(--purple); border: 1px solid rgba(168,85,247,0.2); }
+
+    footer { text-align: center; margin-top: 40px; font-family: "Orbitron", monospace; font-size: 0.65rem; color: var(--gray); letter-spacing: 0.1em; opacity: 0.4; }
+
+    @media (max-width: 640px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div style="text-align:center;padding:28px 16px 36px;margin-bottom:8px;">
+    <div style="font-family:'Orbitron',monospace;font-size:0.72rem;letter-spacing:0.18em;color:var(--cyan);text-transform:uppercase;margin-bottom:18px;opacity:0.8;">The same capabilities that used to require</div>
+    <div style="font-family:'Orbitron',monospace;font-size:clamp(1.4rem,4vw,2.4rem);font-weight:900;color:var(--white);line-height:1.25;margin-bottom:18px;">A Team of Lawyers, MBAs,<br>and a C-Suite</div>
+    <div style="font-family:'Orbitron',monospace;font-size:0.72rem;letter-spacing:0.18em;color:var(--cyan);text-transform:uppercase;margin-bottom:0;opacity:0.8;">Is Now Available to Anyone</div>
+  </div>
+
+  <div class="header">
+    <a href="https://textos.ai/landing.html" class="logo">Text<span>OS</span></a>
+    <div class="header-meta"><span style="color:var(--green);">● LIVE</span> &nbsp;·&nbsp; textos.ai &nbsp;·&nbsp; May 2026</div>
+  </div>
+
+  <div class="waitlist-bar">
+    <div class="waitlist-top">
+      <div class="waitlist-label">Waitlist Progress → Goal: 1,000</div>
+      <div class="waitlist-count" id="wl-count">1 subscriber — Morris Kahn, #001 🎉</div>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="wl-bar" style="width:1%"></div></div>
+    <div class="waitlist-goal">Founding member slots: 100 · June 1, 2026 launch · $49 → $9.99/mo</div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><span class="stat-num" style="color:var(--cyan);">June 1</span><div class="stat-label">Launch Date</div></div>
+    <div class="stat-card"><span class="stat-num" style="color:var(--pink);">$49</span><div class="stat-label">Founding Member Price</div></div>
+    <div class="stat-card"><span class="stat-num" style="color:var(--green);">$9.99</span><div class="stat-label">Monthly (locked for life)</div></div>
+    <div class="stat-card"><span class="stat-num" style="color:var(--amber);">May 17</span><div class="stat-label">a16z Deadline</div></div>
+  </div>
+
+  <!-- ══ LAUNCH PLAN SECTIONS ══ -->
+  <style>
+    .launch-section { margin-bottom: 16px; }
+    .lp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-top: 10px; }
+    .lp-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 0.82rem; color: rgba(240,246,255,0.75); line-height: 1.55; }
+    .lp-card strong { color: var(--white); display: block; margin-bottom: 4px; font-size: 0.84rem; }
+    .lp-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .lp-chip { background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; font-size: 0.74rem; color: rgba(240,246,255,0.65); white-space: nowrap; }
+    .lp-chip.in  { border-color: rgba(16,185,129,0.3); color: var(--green); }
+    .lp-chip.out { border-color: rgba(136,153,187,0.25); color: var(--gray); }
+    .lp-table { width: 100%; border-collapse: collapse; font-size: 0.81rem; margin-top: 10px; }
+    .lp-table th { text-align: left; padding: 5px 10px; color: var(--gray); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid var(--border); }
+    .lp-table td { padding: 5px 10px; color: rgba(240,246,255,0.72); border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .lp-table td:first-child { font-size: 1rem; width: 28px; }
+    .lp-badge-name { color: var(--amber); font-weight: 600; }
+    .lp-tier { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 1px 6px; border-radius: 3px; }
+    .t-task { background: rgba(245,158,11,0.12); color: var(--amber); }
+    .t-master { background: rgba(16,185,129,0.12); color: var(--green); }
+    .lp-risk { display: grid; grid-template-columns: 24px 1fr; gap: 8px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.82rem; }
+    .lp-risk:last-child { border-bottom: none; }
+    .lp-risk-n { font-family: "Orbitron", monospace; font-weight: 900; color: var(--amber); font-size: 0.9rem; }
+    .lp-risk-title { color: var(--white); font-weight: 600; margin-bottom: 3px; }
+    .lp-risk-mit { color: var(--gray); }
+    .lp-risk-mit span { color: var(--cyan); }
+    .schedule-rows { margin-top: 10px; }
+    .sched-row { display: grid; grid-template-columns: 72px 1fr; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.82rem; }
+    .sched-row:last-child { border-bottom: none; }
+    .sched-day { color: var(--amber); font-weight: 700; font-size: 0.75rem; line-height: 1.4; }
+    .sched-task { color: rgba(240,246,255,0.72); line-height: 1.5; }
+    .sched-launch { background: rgba(245,158,11,0.08); border-radius: 6px; padding: 6px 10px; }
+    .checklist-grp { font-family: "Orbitron", monospace; font-size: 0.5rem; letter-spacing: 0.12em; color: var(--gray); margin: 10px 0 4px; }
+    .cl-item { display: flex; align-items: flex-start; gap: 8px; font-size: 0.82rem; color: rgba(240,246,255,0.72); padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.03); line-height: 1.45; }
+    .cl-item:last-child { border-bottom: none; }
+    .cl-box { width: 14px; height: 14px; border: 1.5px solid var(--gray); border-radius: 2px; flex-shrink: 0; margin-top: 2px; }
+    .pitch-quote { border-left: 3px solid var(--cyan); padding: 8px 14px; font-size: 0.95rem; color: var(--white); line-height: 1.65; margin: 10px 0; font-style: italic; }
+    .tier-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 10px; margin-top: 10px; }
+    .tier-c { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+    .tier-c-name { font-family: "Orbitron", monospace; font-size: 0.65rem; font-weight: 900; color: var(--amber); margin-bottom: 4px; letter-spacing: 0.08em; }
+    .tier-c-price { font-size: 1.1rem; font-weight: 800; color: var(--white); margin-bottom: 8px; }
+    .tier-c-price span { font-size: 0.72rem; color: var(--gray); font-weight: 400; }
+    .tier-f { font-size: 0.8rem; color: var(--gray); margin-bottom: 3px; display: flex; gap: 5px; }
+    .tier-f::before { content: "—"; color: var(--cyan); }
+    .countdown-hero { background: linear-gradient(135deg, rgba(0,229,255,0.07), rgba(245,158,11,0.07)); border: 1px solid rgba(0,229,255,0.18); border-radius: 10px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+    .cd-label { font-family: "Orbitron", monospace; font-size: 0.5rem; letter-spacing: 0.12em; color: var(--gray); margin-bottom: 2px; }
+    .cd-date  { font-family: "Orbitron", monospace; font-size: 1.3rem; font-weight: 900; color: var(--amber); }
+    .cd-days  { font-family: "Orbitron", monospace; font-size: 1.3rem; font-weight: 900; color: var(--cyan); text-align: right; }
+    .cd-days-lbl { font-size: 0.6rem; color: var(--gray); text-align: right; }
+    @media (max-width: 640px) { .lp-grid { grid-template-columns: 1fr; } .tier-cards { grid-template-columns: 1fr; } }
+  </style>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown-hero">
+    <div><div class="cd-label">TEXTOS LAUNCH TARGET</div><div class="cd-date">MAY 19, 2026</div></div>
+    <div><div class="cd-days" id="cd-days">—</div><div class="cd-days-lbl">DAYS REMAINING</div></div>
+  </div>
+
+  <!-- §1 THE PITCH -->
+  <div class="panel launch-section">
+    <div class="panel-header cyan">📣 §1 — The Pitch</div>
+    <div style="padding: 12px 16px;">
+      <div class="pitch-quote">TextOS generates a remarkable business — strategy, website, brand, launch plan — in 90 minutes. Then it teaches you how to run it.</div>
+      <div style="font-size:0.84rem;color:var(--gray);line-height:1.65;">
+        You bring an idea. TextOS researches you, researches the market, and produces a folio of professional-grade business documents. Every output is something a real business needs — positioning, market sizing, mission, a launchable landing page, a launch announcement, a 30-day content plan, and a cold outreach playbook.<br><br>
+        Then <strong style="color:var(--amber)">Operator School</strong> begins. Each task unlocks a curriculum. Complete lessons, do the work, earn badges. Become a Strategist. Become an Analyst. Become a Founder. Earn your way to <strong style="color:var(--cyan)">Chief Executive Operator</strong>. The agent is your COO. You are the CEO.
+      </div>
+    </div>
+  </div>
+
+  <!-- §2 WHAT'S IN / OUT -->
+  <div class="panel launch-section">
+    <div class="panel-header green">📋 §2 — What's In, What's Out</div>
+    <div style="padding: 10px 16px 14px;">
+      <div style="font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:0.1em;color:var(--green);margin-bottom:6px;">✅ SHIPPING AT LAUNCH</div>
+      <div class="lp-row">
+        <span class="lp-chip in">Builder — folio generation</span>
+        <span class="lp-chip in">Public Business Website (slug.app.textos.ai)</span>
+        <span class="lp-chip in">Manager — V1.5 daily command center</span>
+        <span class="lp-chip in">Operator School — 32 lessons, 3-tier badges</span>
+        <span class="lp-chip in">Stripe Checkout — Founders + Standard</span>
+        <span class="lp-chip in">Magic-link + Google Sign-In</span>
+        <span class="lp-chip in">Homepage — light polish</span>
+      </div>
+      <div style="font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:0.1em;color:var(--gray);margin:10px 0 6px;">🚫 POST-LAUNCH (DEFERRED)</div>
+      <div class="lp-row">
+        <span class="lp-chip out">DayCycle</span>
+        <span class="lp-chip out">Telegram bot</span>
+        <span class="lp-chip out">Mission Dashboard</span>
+        <span class="lp-chip out">Real funnel data</span>
+        <span class="lp-chip out">Cold outreach auto-send</span>
+        <span class="lp-chip out">Hunter / Apollo / SendGrid at scale</span>
+        <span class="lp-chip out">Stripe Connect for user revenue</span>
+        <span class="lp-chip out">Notes / Journal / Blog</span>
+        <span class="lp-chip out">Streak + pace badges</span>
+        <span class="lp-chip out">Timeline · Investor Data Room</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 FOUR SURFACES -->
+  <div class="panel launch-section">
+    <div class="panel-header amber">🖥️ §3 — The Four Surfaces at Launch</div>
+    <div style="padding:10px 16px 14px;">
+      <div class="lp-grid">
+        <div class="lp-card"><strong>Builder <span style="font-size:0.7rem;font-weight:400;color:var(--green);">SHIPPED</span></strong><code style="font-size:0.74rem;color:var(--gray)">/business/{slug}/builder</code><br><br>The workshop. Generates the business folio. Tasks produce playbooks, drafts, plans. User executes externally. V2 wires execution.</div>
+        <div class="lp-card"><strong>Manager <span style="font-size:0.7rem;font-weight:400;color:var(--amber);">V1.5 IN PROGRESS</span></strong><code style="font-size:0.74rem;color:var(--gray)">/business/{slug}/manage</code><br><br>Daily command center. 3-zone layout. Morning line, COO chat, Operator School lesson box, badge progress. The 90-second morning ritual.</div>
+        <div class="lp-card"><strong>Public Site <span style="font-size:0.7rem;font-weight:400;color:var(--cyan);">NEW BUILD</span></strong><code style="font-size:0.74rem;color:var(--gray)">slug.app.textos.ai</code><br><br>The viral artifact. Per-business design (Modern / Bold / Editorial). Calendly embed optional. Schema.org baked in. The shareable artifact.</div>
+        <div class="lp-card"><strong>Operator School <span style="font-size:0.7rem;font-weight:400;color:var(--cyan);">NEW BUILD</span></strong><code style="font-size:0.74rem;color:var(--gray)">/operator-school</code><br><br>32 lessons, 8 task tracks, 3-tier badge ladder. The retention layer. Makes users feel like they're becoming someone every day they show up.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- §4 OPERATOR SCHOOL -->
+  <div class="panel launch-section">
+    <div class="panel-header purple">🎓 §4 — Operator School Architecture</div>
+    <div style="padding:10px 16px 14px;font-size:0.82rem;color:var(--gray);line-height:1.55;margin-bottom:6px;">32 lessons · 8 task tracks · 3-tier badge ladder. Task 1 (Strategist) free for all. All other tracks gated behind Founders or Standard. CEO master badge unlocked when all 8 task badges earned.</div>
+    <div style="padding:0 16px 14px;">
+      <table class="lp-table">
+        <thead><tr><th></th><th>Badge</th><th>Name</th><th>Tier</th></tr></thead>
+        <tbody>
+          <tr><td>🧭</td><td class="lp-badge-name">strategist</td><td>Strategist</td><td><span class="lp-tier t-task">TASK</span></td></tr>
+          <tr><td>🔍</td><td class="lp-badge-name">analyst</td><td>Analyst</td><td><span class="lp-tier t-task">TASK</span></td></tr>
+          <tr><td>🎯</td><td class="lp-badge-name">founder</td><td>Founder</td><td><span class="lp-tier t-task">TASK</span></td></tr>
+          <tr><td>🌐</td><td class="lp-badge-name">web-operator</td><td>Web Operator</td><td><span class="lp-tier t-task">TASK</span></td></tr>
+          <tr><td>📣</td><td class="lp-badge-name">publisher</td><td>Publisher</td><td><span class="lp-tier t-task">TASK</span></td></tr>
+          <tr><td>🪪</td><td class="lp-badge-name">brand-owner</td><td>Brand Owner</td><td><span class="lp-tier t-task">TASK</span></td></tr>
+          <tr><td>📨</td><td class="lp-badge-name">outreach-operator</td><td>Outreach Operator</td><td><span class="lp-tier t-task">TASK</span></td></tr>
+          <tr><td>📅</td><td class="lp-badge-name">channel-operator</td><td>Channel Operator</td><td><span class="lp-tier t-task">TASK</span></td></tr>
+          <tr><td>👑</td><td class="lp-badge-name">ceo</td><td>Chief Executive Operator</td><td><span class="lp-tier t-master">MASTER</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- §5 PUBLIC SITE DIRECTION -->
+  <div class="panel launch-section">
+    <div class="panel-header cyan">🌐 §5 — Public Business Website Direction</div>
+    <div style="padding:10px 16px 14px;">
+      <div style="font-size:0.84rem;color:var(--gray);line-height:1.6;margin-bottom:10px;">Not generic. Not template. Not Bootstrap. Per-business design that makes users feel like they hired an agency. Three templates auto-selected by industry. Lighthouse 90+ on mobile. Static HTML, no JS framework.</div>
+      <div class="lp-grid">
+        <div class="lp-card"><strong>Modern</strong>Soft serif headlines, generous whitespace, single accent color. Default: service businesses, consultants, professional services.</div>
+        <div class="lp-card"><strong>Bold</strong>Heavy display type, high-contrast color blocks. Default: product brands, lifestyle, retail.</div>
+        <div class="lp-card"><strong>Editorial</strong>Magazine-style layout, image-forward. Default: creative, food, hospitality, content businesses.</div>
+      </div>
+      <div style="margin-top:10px;font-size:0.81rem;color:var(--gray);">Required: Calendly embed (optional), Schema.org + llms.txt + sitemap.xml auto-generated, OG + Twitter card, mobile-first responsive. Launch: <code>slug.app.textos.ai</code> — custom domain V1.5.</div>
+    </div>
+  </div>
+
+  <!-- §6 STRIPE + TIERS -->
+  <div class="panel launch-section">
+    <div class="panel-header pink">💳 §6 — Stripe & Tiers</div>
+    <div style="padding:10px 16px 14px;">
+      <div class="tier-cards">
+        <div class="tier-c">
+          <div class="tier-c-name">Free</div>
+          <div class="tier-c-price">$0 <span>forever</span></div>
+          <div class="tier-f">1 business, free build</div>
+          <div class="tier-f">Manager access</div>
+          <div class="tier-f">Public Business Site live</div>
+          <div class="tier-f">Operator School: Task 1 only</div>
+        </div>
+        <div class="tier-c" style="border-color:rgba(245,158,11,0.3);">
+          <div class="tier-c-name" style="color:var(--amber)">Founders</div>
+          <div class="tier-c-price">$49 <span>one-time · 1,000-cohort cap</span></div>
+          <div class="tier-f">All 8 Operator School tracks</div>
+          <div class="tier-f">Up to 5 businesses</div>
+          <div class="tier-f">Founders badge on public site</div>
+          <div class="tier-f">Lifetime feature grandfathering</div>
+        </div>
+        <div class="tier-c">
+          <div class="tier-c-name">Standard</div>
+          <div class="tier-c-price">$29.99 <span>/mo · cancel anytime</span></div>
+          <div class="tier-f">All 8 Operator School tracks</div>
+          <div class="tier-f">Up to 10 businesses</div>
+          <div class="tier-f">All paid tasks post-launch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- §7 BUILD SCHEDULE -->
+  <div class="panel launch-section">
+    <div class="panel-header green">📅 §7 — 14-Day Build Schedule</div>
+    <div style="padding:6px 16px 14px;">
+      <div class="schedule-rows">
+        <div class="sched-row"><div class="sched-day">Day 1<br>May 5</div><div class="sched-task">Manager V1.5 scaffold · Launch plan locked</div></div>
+        <div class="sched-row"><div class="sched-day">Day 2<br>May 6</div><div class="sched-task">Manager V1.5 finishes · Operator School schema spec · Public Site must-haves confirmed</div></div>
+        <div class="sched-row"><div class="sched-day">Day 3<br>May 7</div><div class="sched-task">Operator School schema migration · 32 lesson bodies written · Backend: lesson list, completion, badge earn</div></div>
+        <div class="sched-row"><div class="sched-day">Day 4<br>May 8</div><div class="sched-task">Rob reviews 32 lessons · OS backend complete · OS frontend starts</div></div>
+        <div class="sched-row"><div class="sched-day">Day 5<br>May 9</div><div class="sched-task">Operator School frontend complete · Manager left-rail badges · Public Site design locked</div></div>
+        <div class="sched-row"><div class="sched-day">Day 6<br>May 10</div><div class="sched-task">Public Site build starts — template scaffolding + data binding</div></div>
+        <div class="sched-row"><div class="sched-day">Day 7<br>May 11</div><div class="sched-task">Public Site Modern + Bold templates complete</div></div>
+        <div class="sched-row"><div class="sched-day">Day 8<br>May 12</div><div class="sched-task">Editorial template · Calendly integration · Schema.org + llms.txt auto-gen</div></div>
+        <div class="sched-row"><div class="sched-day">Day 9<br>May 13</div><div class="sched-task">Auto-template-selection · Public Site preview + publish flow in Builder</div></div>
+        <div class="sched-row"><div class="sched-day">Day 10<br>May 14</div><div class="sched-task">Stripe Checkout · Tier gating on Operator School · Founders cap counter live</div></div>
+        <div class="sched-row"><div class="sched-day">Day 11<br>May 15</div><div class="sched-task">E2E test #1: full new-user flow · Bug fixes</div></div>
+        <div class="sched-row"><div class="sched-day">Day 12<br>May 16</div><div class="sched-task">E2E tests #2–4: existing business, task badge, CEO badge · Bug fixes</div></div>
+        <div class="sched-row"><div class="sched-day">Day 13<br>May 17</div><div class="sched-task">Homepage polish · Vocabulary audit · Theme + mobile audit all surfaces</div></div>
+        <div class="sched-row"><div class="sched-day">Day 14<br>May 18</div><div class="sched-task">Buffer day · Launch tweet + outreach list · Alpha cold email list ready</div></div>
+        <div class="sched-row sched-launch"><div class="sched-day" style="color:var(--amber)">🚀<br>May 19</div><div class="sched-task"><strong style="color:var(--amber)">LAUNCH DAY</strong> — Tweet goes out · Cold emails to alpha list · Rob on standby</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- §8 RISKS -->
+  <div class="panel launch-section">
+    <div class="panel-header amber">⚠️ §8 — Risks & Mitigations</div>
+    <div style="padding:6px 16px 14px;">
+      <div class="lp-risk"><div class="lp-risk-n">1</div><div><div class="lp-risk-title">Public Site scope — bigger than 4 days</div><div class="lp-risk-mit"><span>Mitigation:</span> Start with ONE template (Modern). Bold + Editorial ship in V1.1.</div></div></div>
+      <div class="lp-risk"><div class="lp-risk-n">2</div><div><div class="lp-risk-title">32 lessons take longer to write</div><div class="lp-risk-mit"><span>Mitigation:</span> Prioritize Tasks 1, 7, 8 for full polish. Middle tasks ship thinner, polish in V1.1.</div></div></div>
+      <div class="lp-risk"><div class="lp-risk-n">3</div><div><div class="lp-risk-title">Stripe webhook reliability (Cloudflare Workers)</div><div class="lp-risk-mit"><span>Mitigation:</span> Hard test Day 10. Add manual admin unlock endpoint for support path.</div></div></div>
+      <div class="lp-risk"><div class="lp-risk-n">4</div><div><div class="lp-risk-title">tokens.css --text bug on new surfaces</div><div class="lp-risk-mit"><span>Mitigation:</span> Public Site uses minimal theme + hardcoded colors only.</div></div></div>
+      <div class="lp-risk"><div class="lp-risk-n">5</div><div><div class="lp-risk-title">Builder bugs under real-user load</div><div class="lp-risk-mit"><span>Mitigation:</span> Alpha launch is 5–10 users. Public broader launch waits for week 3.</div></div></div>
+    </div>
+  </div>
+
+  <!-- §9 LAUNCH-READY CHECKLIST -->
+  <div class="panel launch-section">
+    <div class="panel-header cyan">✅ §9 — Definition of Launch-Ready</div>
+    <div style="padding:8px 16px 14px;font-size:0.81rem;color:var(--gray);margin-bottom:4px;">All boxes must be checked before May 19 ships. Any unchecked = one-day delay, re-evaluate.</div>
+    <div style="padding:0 16px 14px;">
+      <div class="checklist-grp">USER JOURNEY</div>
+      <div class="cl-item"><div class="cl-box"></div> New user signs up → arrives at Builder</div>
+      <div class="cl-item"><div class="cl-box"></div> Free build → 8 tasks complete in &lt;5 min, documents render, agent named</div>
+      <div class="cl-item"><div class="cl-box"></div> Public Site live at slug.app.textos.ai — remarkable, mobile-responsive</div>
+      <div class="cl-item"><div class="cl-box"></div> Manager → 3-zone render, morning line real, lesson box shows next lesson</div>
+      <div class="cl-item"><div class="cl-box"></div> First lesson → Operator School renders, completes, earns lesson badge</div>
+      <div class="cl-item"><div class="cl-box"></div> Task 1 complete → Strategist badge earned, animation, badge in left rail</div>
+      <div class="cl-item"><div class="cl-box"></div> Task 2 lesson → paywall modal, 2-tier pricing, Founders cap visible</div>
+      <div class="cl-item"><div class="cl-box"></div> Stripe Checkout → returns unlocked</div>
+      <div class="cl-item"><div class="cl-box"></div> 8 task badges → CEO badge + full-page celebration</div>
+
+      <div class="checklist-grp">SYSTEM HEALTH</div>
+      <div class="cl-item"><div class="cl-box"></div> All Cloudflare Workers + Pages deploys green</div>
+      <div class="cl-item"><div class="cl-box"></div> All migrations applied to production Supabase</div>
+      <div class="cl-item"><div class="cl-box"></div> Stripe products live, webhook reliable, tested</div>
+      <div class="cl-item"><div class="cl-box"></div> No JS errors in console on any surface, both themes</div>
+      <div class="cl-item"><div class="cl-box"></div> Lighthouse 90+ on mobile for Public Site templates</div>
+      <div class="cl-item"><div class="cl-box"></div> Vocabulary audit clean (no AI/bot/dashboard/agent in user-facing copy)</div>
+      <div class="cl-item"><div class="cl-box"></div> tokens.css --text bug worked around on every surface</div>
+
+      <div class="checklist-grp">CONTENT</div>
+      <div class="cl-item"><div class="cl-box"></div> All 32 lessons written and reviewed by Rob</div>
+      <div class="cl-item"><div class="cl-box"></div> All 9 badges seeded in DB</div>
+      <div class="cl-item"><div class="cl-box"></div> Homepage tagline updated for launch positioning</div>
+      <div class="cl-item"><div class="cl-box"></div> Cold-email-to-alpha-list drafted, 5 recipients identified</div>
+
+      <div class="checklist-grp">CUT LIST HONORED</div>
+      <div class="cl-item"><div class="cl-box"></div> DayCycle nowhere in nav</div>
+      <div class="cl-item"><div class="cl-box"></div> Mission Dashboard removed from BusinessBar</div>
+      <div class="cl-item"><div class="cl-box"></div> Telegram nowhere in nav</div>
+      <div class="cl-item"><div class="cl-box"></div> No half-finished features visible to users</div>
+    </div>
+  </div>
+  <!-- ══ END LAUNCH PLAN SECTIONS ══ -->
+
+  <div class="grid">
+
+    <!-- PUBLIC PAGES -->
+    <div class="panel">
+      <div class="panel-header cyan">🌐 Public Pages</div>
+      <ul class="link-list">
+        <li><a href="https://textos.ai/landing.html" target="_blank"><span class="icon">🏠</span><span class="title">Landing Page</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/textos.html" target="_blank"><span class="icon">📐</span><span class="title">Product Vision</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/textos-how-it-works.html" target="_blank"><span class="icon">⚙️</span><span class="title">How It Works</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/ideas.html" target="_blank"><span class="icon">🔬</span><span class="title">AI Readiness Diagnosis</span><span class="badge b-new">NEW</span></a></li>
+        <li><a href="https://textos.ai/founder.html" target="_blank"><span class="icon">👤</span><span class="title">Why I Built This (Founder Story)</span><span class="badge b-new">NEW</span></a></li>
+        <li><a href="https://textos.ai/thanks.html" target="_blank"><span class="icon">🎉</span><span class="title">Thank You Page</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/whats-next.html" target="_blank"><span class="icon">🚀</span><span class="title">What's Next</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/textos-concierge.html" target="_blank"><span class="icon">✦</span><span class="title">DayCycle — Concierge</span><span class="badge b-live">LIVE</span></a></li>
+      </ul>
+    </div>
+
+    <!-- PRODUCT & TECH DOCS -->
+    <div class="panel">
+      <div class="panel-header amber">📋 Product & Tech Docs</div>
+      <ul class="link-list">
+        <li><a href="https://textos.ai/textos-prd.html" target="_blank"><span class="icon">📋</span><span class="title">Product Vision & PRD</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/textos-master-prd.html" target="_blank"><span class="icon">📋</span><span class="title">Master PRD — Claude Code Handoff</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/textos-claude-code-brief.html" target="_blank"><span class="icon">🤖</span><span class="title">Claude Code Brief</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/textos-architecture.html" target="_blank"><span class="icon">🏗</span><span class="title">Architecture & Tech Stack</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/textos-business-builder-spec.html" target="_blank"><span class="icon">🏗</span><span class="title">Business Builder Spec</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/textos-gtm.html" target="_blank"><span class="icon">📣</span><span class="title">Go-To-Market Strategy</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/textos-business-dashboard.html" target="_blank"><span class="icon">🏢</span><span class="title">Business Builder Dashboard</span><span class="badge b-live">LIVE</span></a></li>
+      </ul>
+    </div>
+
+    <!-- INVESTOR MATERIALS -->
+    <div class="panel">
+      <div class="panel-header purple">💼 Investor Materials</div>
+      <ul class="link-list">
+        <li><a href="https://textos.ai/textos-pitch-deck.html" target="_blank"><span class="icon">📊</span><span class="title">Pitch Deck (Interactive)</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/textos-investor.html" target="_blank"><span class="icon">💼</span><span class="title">Investor Page</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/textos-exec-summary.html" target="_blank"><span class="icon">📄</span><span class="title">Executive Summary</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://speedrun.a16z.com/apply" target="_blank"><span class="icon">⚡</span><span class="title">a16z Speedrun Apply</span><span class="badge b-soon">DUE MAY 17</span></a></li>
+      </ul>
+    </div>
+
+    <!-- ROB'S TOOLS -->
+    <div class="panel">
+      <div class="panel-header pink">🛠 Rob's Tools</div>
+      <ul class="link-list">
+        <li><a href="https://textos.ai/tasks.html" target="_blank"><span class="icon">✅</span><span class="title">Task List</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://buy.stripe.com/5kQ7sEdJ22QTetYeOZ0oM00" target="_blank"><span class="icon">💳</span><span class="title">Stripe Payment Link</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://formspree.io/f/xgorbvdg" target="_blank"><span class="icon">📋</span><span class="title">Formspree Waitlist</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://dashboard.stripe.com/" target="_blank"><span class="icon">📊</span><span class="title">Stripe Dashboard</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://textos.ai/journal/" target="_blank"><span class="icon">📓</span><span class="title">Build Journal</span><span class="badge b-live">DAILY</span></a></li>
+      </ul>
+    </div>
+
+    <!-- INKTHORN GEO / CRUSTACEAN -->
+    <div class="panel">
+      <div class="panel-header green">🦞 InkThorn Crustacean GEO</div>
+      <ul class="link-list">
+        <li><a href="https://inkthorn.ai/crustacean/dashboard.html" target="_blank"><span class="icon">🗂️</span><span class="title">Leads Dashboard (NOLA · BR · LAF)</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://inkthorn.ai/ideas.html" target="_blank"><span class="icon">🔬</span><span class="title">AI Readiness Diagnosis</span><span class="badge b-new">NEW</span></a></li>
+        <li><a href="https://inkthorn.ai/services.html" target="_blank"><span class="icon">📄</span><span class="title">Services Page</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://inkthorn.ai/crustacean/affiliate.html" target="_blank"><span class="icon">🔗</span><span class="title">Affiliate Program</span><span class="badge b-new">NEW</span></a></li>
+        <li><a href="https://inkthorn.ai/crustacean/affiliate-admin.html" target="_blank"><span class="icon">📊</span><span class="title">Affiliate Admin Tracker</span><span class="badge b-new">NEW</span></a></li>
+        <li><a href="https://inkthorn.ai/crustacean/earnings.html" target="_blank"><span class="icon">💰</span><span class="title">Earnings Calculator</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://inkthorn.ai/crustacean/training.html" target="_blank"><span class="icon">📋</span><span class="title">Sales Training</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://inkthorn.ai/crustacean/scripts.html" target="_blank"><span class="icon">📞</span><span class="title">Daily Call Scripts</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://calendly.com/inkthorn" target="_blank"><span class="icon">📅</span><span class="title">Book a Strategy Call</span><span class="badge b-live">LIVE</span></a></li>
+      </ul>
+    </div>
+
+    <!-- SOCIAL MEDIA -->
+    <div class="panel">
+      <div class="panel-header cyan">📡 Social Media</div>
+      <ul class="link-list">
+        <li><a href="https://x.com/" target="_blank"><span class="icon">𝕏</span><span class="title">X / Twitter</span><span class="badge b-soon">CREATE</span></a></li>
+        <li><a href="https://linkedin.com/company/new" target="_blank"><span class="icon">💼</span><span class="title">LinkedIn Company Page</span><span class="badge b-soon">CREATE</span></a></li>
+        <li><a href="https://instagram.com/" target="_blank"><span class="icon">📸</span><span class="title">Instagram</span><span class="badge b-soon">CREATE</span></a></li>
+        <li><a href="https://facebook.com/pages/create" target="_blank"><span class="icon">👁</span><span class="title">Facebook Page</span><span class="badge b-soon">CREATE</span></a></li>
+        <li><a href="https://tiktok.com/" target="_blank"><span class="icon">🎵</span><span class="title">TikTok</span><span class="badge b-soon">CREATE</span></a></li>
+        <li><a href="https://youtube.com/" target="_blank"><span class="icon">▶️</span><span class="title">YouTube</span><span class="badge b-soon">CREATE</span></a></li>
+        <li><a href="https://buffer.com/" target="_blank"><span class="icon">📡</span><span class="title">Buffer — Social Scheduler</span><span class="badge b-soon">SETUP</span></a></li>
+      </ul>
+    </div>
+
+    <!-- EXTERNAL -->
+    <div class="panel">
+      <div class="panel-header amber">🔗 External Platforms</div>
+      <ul class="link-list">
+        <li><a href="https://trustlight.ai/" target="_blank"><span class="icon">💡</span><span class="title">TrustLight.ai</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://inkthorn.ai/" target="_blank"><span class="icon">🦞</span><span class="title">InkThorn Dashboard</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://stability.org/" target="_blank"><span class="icon">🏛</span><span class="title">Stability.org</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://app.textos.ai" target="_blank"><span class="icon">💬</span><span class="title">app.textos.ai</span><span class="badge b-live">LIVE</span></a></li>
+        <li><a href="https://inkthorn.ai/playbook.html" target="_blank"><span class="icon">📖</span><span class="title">InkThorn Playbook</span><span class="badge b-priv">PRIVATE</span></a></li>
+      </ul>
+    </div>
+
+    <!-- A/B TEST SECTION -->
+    <div class="panel" style="grid-column:1/-1;">
+      <div class="panel-header pink">🧪 A/B Test — AI Diagnosis Page Variants</div>
+      <div style="padding:12px 16px 4px;font-size:0.78rem;color:#8899bb;line-height:1.6;border-bottom:1px solid rgba(0,229,255,0.08);">
+        <strong style="color:#f0f6ff;">How to run the A/B test:</strong>
+        Split your traffic evenly across all 4 URLs below. Use UTM params or a URL rotator (like <a href="https://splitbee.io" target="_blank" style="color:#00e5ff;">Splitbee</a>, <a href="https://vwo.com" target="_blank" style="color:#00e5ff;">VWO free</a>, or manually alternate in ads). 
+        After 100+ visits per variant, compare email capture rates in Formspree — each submission includes a <code style="color:#a855f7;">variant</code> field. The winner is the page with the highest form completion rate.
+      </div>
+      <ul class="link-list">
+        <li><a href="https://textos.ai/ideas.html" target="_blank"><span class="icon">🏁</span><span class="title">Control — Is Your Business Ready for AI?</span><span class="badge b-live">CONTROL</span></a></li>
+        <li><a href="https://textos.ai/ideas-a.html" target="_blank"><span class="icon">🔴</span><span class="title">Variant A — Someone Is Choosing Your Competitor Right Now</span><span class="badge b-new">LOSS AVERSION</span></a></li>
+        <li><a href="https://textos.ai/ideas-b.html" target="_blank"><span class="icon">🔵</span><span class="title">Variant B — The Best Operators Know Their Numbers</span><span class="badge b-wip">IDENTITY</span></a></li>
+        <li><a href="https://textos.ai/ideas-c.html" target="_blank"><span class="icon">🟡</span><span class="title">Variant C — You're Putting In the Work. Why Isn't It Paying Off?</span><span class="badge b-soon">PAIN RELIEF</span></a></li>
+        <li><a href="https://formspree.io/dashboard" target="_blank"><span class="icon">📊</span><span class="title">View Lead Submissions → Formspree Dashboard</span><span class="badge b-live">RESULTS</span></a></li>
+      </ul>
+    </div>
+
+
+    <!-- ICP PROFILES -->
+    <div class="panel" style="grid-column:1/-1;">
+      <div class="panel-header pink">👤 Ideal Customer Profiles</div>
+      <div style="padding:12px 16px 4px;font-size:0.78rem;color:#8899bb;line-height:1.6;border-bottom:1px solid rgba(0,229,255,0.08);">
+        Jobs to be done · When someone with a real idea has already tried and hit a wall, they want something to take the wheel and ship it, so they can find out if the idea is worth pursuing.<br>
+        <strong style="color:#f0f6ff;">Target:</strong> Non-technical people with real ideas who've proven they can't build the system themselves — and are ready to let something else do the assembly.<br>
+        <em style="color:var(--cyan);">"Your idea deserves a real shot."</em>
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+        <strong style="color:#ff2d78;">❌ NOT For:</strong> Developers who use Cursor or Claude Code · Established SMBs who want SEO · Researchers who plan but never act
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:rgba(0,229,255,0.06);">
+
+        <!-- Casey -->
+        <div style="padding:20px 20px 24px;background:#0d1626;">
+          <img src="icp-casey.png" alt="Casey" style="width:100%;border-radius:8px;margin-bottom:14px;object-fit:cover;max-height:200px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:#00e5ff;margin-bottom:10px;">CASEY, 34 — SIDE-HUSTLE LAUNCHER</div>
+          <div style="font-size:0.82rem;color:#8899bb;margin-bottom:12px;">Suburban Atlanta · $72K · 45 min/night</div>
+          <div style="font-size:0.85rem;color:#f0f6ff;line-height:1.6;">
+            <div style="margin-bottom:6px;"><span style="color:#f59e0b;">⚡ Trigger:</span> Former colleague just went full-time on her side business</div>
+            <div style="margin-bottom:6px;"><span style="color:#ff2d78;">💢 Pain:</span> Time scarcity — "I have 45 min after the baby sleeps"</div>
+            <div style="margin-bottom:6px;"><span style="color:#8899bb;">🚫 Objection:</span> "This will take 3 hours to set up and still not work"</div>
+            <div><span style="color:#10b981;">📍 Find her:</span> @codie_sanchez · r/Entrepreneur · Goal Digger podcast</div>
+          </div>
+        </div>
+
+        <!-- Darnell -->
+        <div style="padding:20px 20px 24px;background:#0d1626;">
+          <img src="icp-darnell.png" alt="Darnell" style="width:100%;border-radius:8px;margin-bottom:14px;object-fit:cover;max-height:200px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:#00e5ff;margin-bottom:10px;">DARNELL, 47 — INFORMAL EXPERT GOING INDEPENDENT</div>
+          <div style="font-size:0.82rem;color:#8899bb;margin-bottom:12px;">Houston suburbs · $95K · wants to formalize</div>
+          <div style="font-size:0.85rem;color:#f0f6ff;line-height:1.6;">
+            <div style="margin-bottom:6px;"><span style="color:#f59e0b;">⚡ Trigger:</span> Junior colleague he trained just went independent</div>
+            <div style="margin-bottom:6px;"><span style="color:#ff2d78;">💢 Pain:</span> Decision paralysis — "I don't know what the first step is"</div>
+            <div style="margin-bottom:6px;"><span style="color:#8899bb;">🚫 Objection:</span> "I don't trust a $49 tool to send emails on my behalf"</div>
+            <div><span style="color:#10b981;">📍 Find him:</span> LinkedIn #solopreneur · Smart Passive Income · r/personalfinance</div>
+          </div>
+        </div>
+
+        <!-- Sandra -->
+        <div style="padding:20px 20px 24px;background:#0d1626;">
+          <img src="icp-sandra.png" alt="Sandra" style="width:100%;border-radius:8px;margin-bottom:14px;object-fit:cover;max-height:200px;">
+          <div style="font-family:'Orbitron',monospace;font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:#00e5ff;margin-bottom:10px;">SANDRA, 52 — HOME BUSINESS OWNER GOING ONLINE</div>
+          <div style="font-size:0.82rem;color:#8899bb;margin-bottom:12px;">Pensacola / Houston · $38K → $60K target</div>
+          <div style="font-size:0.85rem;color:#f0f6ff;line-height:1.6;">
+            <div style="margin-bottom:6px;"><span style="color:#f59e0b;">⚡ Trigger:</span> Watches 4 "women over 50 building businesses" videos on Sunday</div>
+            <div style="margin-bottom:6px;"><span style="color:#ff2d78;">💢 Pain:</span> Fear of looking stupid / breaking something</div>
+            <div style="margin-bottom:6px;"><span style="color:#8899bb;">🚫 Objection:</span> "This sounds too good to be true — what's the catch"</div>
+            <div><span style="color:#10b981;">📍 Find her:</span> Facebook Groups (Women Entrepreneurs Over 40) · Amy Porterfield podcast</div>
+          </div>
+        </div>
+
+      </div>
+      <div style="padding:10px 16px;font-size:0.75rem;color:#8899bb;border-top:1px solid rgba(0,229,255,0.08);">
+        Est. 8–15% overlap with active small business owners/side-hustlers [ASSUMED] · Hook: "Nobody's coming to build your business for you. But now something will." · Run as Facebook dark post.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>TEXTOS.AI COMMAND CENTER · INKTHORN AGENT · MAY 2026</footer>
+
+<script>
+  (function() {
+    var target = new Date('2026-05-19T00:00:00-05:00');
+    var diff = Math.ceil((target - new Date()) / 86400000);
+    var el = document.getElementById('cd-days');
+    if (el) el.textContent = diff > 0 ? diff : (diff === 0 ? 'TODAY' : 'LAUNCHED');
+  })();
+
+  const count = 1;
+  const goal = 1000;
+  document.getElementById("wl-count").innerText = count + " subscriber — Morris Kahn, #001 🎉";
+  document.getElementById("wl-bar").style.width = Math.max(1, (count/goal)*100) + "%";
+</script>
+</body>
+</html>
