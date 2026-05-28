@@ -6,309 +6,285 @@
 <title>Vibe Marketing — Rob Gaudet</title>
 <style>
   :root {
-    --bg: #0a0a0f;
-    --card: #111118;
-    --border: #1e1e2e;
-    --accent: #7c3aed;
-    --accent2: #06b6d4;
-    --accent3: #f59e0b;
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --green: #10b981;
-    --pink: #ec4899;
+    --bg: #ffffff;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --accent: #6d28d9;
+    --accent2: #0891b2;
+    --accent3: #d97706;
+    --text: #0f172a;
+    --muted: #475569;
+    --green: #059669;
+    --pink: #be185d;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: var(--bg);
+    background: #f8fafc;
     color: var(--text);
     font-family: 'Segoe UI', system-ui, sans-serif;
     min-height: 100vh;
   }
 
-  /* ── SLIDE DECK ──────────────────────────────────────────────────────── */
   .deck {
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
-    padding: 0 16px 80px;
+    padding: 32px 20px 100px;
   }
 
   .slide {
     background: var(--card);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     border-radius: 20px;
-    padding: 56px 64px;
-    margin: 32px 0;
+    padding: 60px 72px;
+    margin: 0;
     position: relative;
     overflow: hidden;
+    display: none;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    min-height: 520px;
   }
+
+  .slide.active { display: block; }
 
   .slide::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--slide-color, var(--accent)), transparent);
+    height: 6px;
+    background: var(--slide-color, var(--accent));
+    border-radius: 20px 20px 0 0;
   }
 
-  /* Slide number badge */
   .slide-num {
     position: absolute;
-    top: 20px; right: 24px;
-    font-size: 0.75rem;
+    top: 22px; right: 28px;
+    font-size: 0.8rem;
     font-weight: 700;
-    color: var(--muted);
+    color: #94a3b8;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
-  /* Cover slide */
+  /* ── Cover ─────────────────────────────────────────────────────────────── */
   .slide-cover {
     --slide-color: var(--accent);
     text-align: center;
-    padding: 64px;
-    background: linear-gradient(135deg, #0d0d1a 0%, #130d2e 100%);
-  }
-
-  .cover-qr {
-    width: 140px;
-    height: 140px;
-    margin: 0 auto 32px;
-    background: white;
-    border-radius: 12px;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .cover-qr img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    background: linear-gradient(150deg, #1e1b4b 0%, #312e81 50%, #1e3a5f 100%);
+    color: white;
   }
 
   .cover-eyebrow {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: 16px;
+    color: #a5b4fc;
+    margin-bottom: 20px;
   }
 
   .cover-title {
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 16px;
-    background: linear-gradient(135deg, #fff 30%, #a78bfa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: white;
   }
 
   .cover-sub {
-    font-size: 1.1rem;
-    color: var(--muted);
-    margin-bottom: 40px;
+    font-size: 1.2rem;
+    color: #c7d2fe;
+    margin-bottom: 44px;
     line-height: 1.6;
   }
 
-  /* Checklist on cover */
   .checklist {
     display: inline-flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
     text-align: left;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 24px 32px;
-    margin-top: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 28px 36px;
   }
 
   .check-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 0.95rem;
-    color: var(--text);
+    gap: 14px;
+    font-size: 1.05rem;
+    color: #e0e7ff;
+    font-weight: 500;
   }
 
-  .check-item .check-icon {
-    width: 22px;
-    height: 22px;
+  .check-icon {
+    width: 26px; height: 26px;
     border-radius: 50%;
-    background: var(--accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: #4f46e5;
+    display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
+    color: white;
+    font-weight: 800;
   }
 
-  /* Section slides */
+  /* ── Section slides ─────────────────────────────────────────────────────── */
   .slide-eyebrow {
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.8rem;
+    font-weight: 800;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--slide-color, var(--accent));
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
   .slide-title {
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 24px;
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 28px;
+    color: var(--text);
   }
 
   .slide-body {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     color: var(--muted);
-    line-height: 1.75;
+    line-height: 1.8;
   }
 
-  .slide-body p { margin-bottom: 16px; }
+  .slide-body p { margin-bottom: 18px; }
   .slide-body p:last-child { margin-bottom: 0; }
 
-  /* Big stat callout */
+  /* ── Stat cards ─────────────────────────────────────────────────────────── */
   .stat-row {
     display: flex;
-    gap: 24px;
+    gap: 20px;
     margin: 32px 0;
     flex-wrap: wrap;
   }
 
   .stat-card {
-    flex: 1;
-    min-width: 180px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
+    flex: 1; min-width: 160px;
+    background: #f8fafc;
+    border: 2px solid var(--border);
     border-radius: 14px;
     padding: 24px;
     text-align: center;
   }
 
   .stat-number {
-    font-size: 2.8rem;
+    font-size: 3rem;
     font-weight: 900;
     color: var(--slide-color, var(--accent));
     line-height: 1;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .stat-label {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--muted);
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
-  /* Two-column split */
+  /* ── Split columns ──────────────────────────────────────────────────────── */
   .split {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 28px;
     margin: 28px 0;
   }
 
   @media (max-width: 600px) { .split { grid-template-columns: 1fr; } }
 
+  .split-col {
+    background: #f8fafc;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+  }
+
   .split-col h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid;
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid;
   }
 
   .split-col.left h3  { color: var(--pink); border-color: var(--pink); }
   .split-col.right h3 { color: var(--green); border-color: var(--green); }
 
-  .split-col ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+  .split-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
 
   .split-col ul li {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--muted);
-    padding-left: 16px;
+    padding-left: 20px;
     position: relative;
     line-height: 1.5;
   }
 
-  .split-col ul li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--muted);
-  }
+  .split-col ul li::before { content: '→'; position: absolute; left: 0; color: #94a3b8; }
 
-  /* Pill list */
-  .pill-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 24px 0;
-  }
+  /* ── Pills ──────────────────────────────────────────────────────────────── */
+  .pill-list { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0; }
 
   .pill {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: #f1f5f9;
+    border: 2px solid var(--border);
     border-radius: 999px;
-    padding: 8px 18px;
-    font-size: 0.875rem;
+    padding: 10px 20px;
+    font-size: 1rem;
     color: var(--text);
+    font-weight: 500;
   }
 
-  /* Big formula */
+  /* ── Formula ────────────────────────────────────────────────────────────── */
   .formula {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;
     flex-wrap: wrap;
     margin: 36px 0;
     text-align: center;
   }
 
   .formula-part {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: #f8fafc;
+    border: 2px solid var(--border);
     border-radius: 14px;
-    padding: 20px 28px;
+    padding: 22px 28px;
+    border-top: 5px solid var(--slide-color, var(--accent));
   }
 
   .formula-part .fp-label {
-    font-size: 1.3rem;
-    font-weight: 800;
+    font-size: 1.5rem;
+    font-weight: 900;
     color: var(--slide-color, var(--accent));
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   .formula-part .fp-sub {
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     color: var(--muted);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
   }
 
   .formula-op {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 900;
-    color: var(--muted);
+    color: #94a3b8;
   }
 
-  /* ICP profile card */
+  /* ── ICP card ───────────────────────────────────────────────────────────── */
   .icp-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
+    background: #f8fafc;
+    border: 2px solid var(--border);
     border-radius: 16px;
     padding: 28px 32px;
     margin: 24px 0;
@@ -316,93 +292,90 @@
 
   .icp-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
     gap: 20px;
     margin-top: 16px;
   }
 
-  .icp-field { }
   .icp-field .label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--slide-color, var(--accent));
-    font-weight: 700;
-    margin-bottom: 4px;
+    font-weight: 800;
+    margin-bottom: 5px;
   }
+
   .icp-field .value {
-    font-size: 0.95rem;
-    color: var(--text);
+    font-size: 1rem;
+    color: var(--muted);
     line-height: 1.4;
   }
 
-  /* Timeline / day breakdown */
+  /* ── Timeline ───────────────────────────────────────────────────────────── */
   .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+    display: flex; flex-direction: column;
     margin: 28px 0;
     border-radius: 14px;
     overflow: hidden;
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
   }
 
-  .timeline-row {
-    display: flex;
-    align-items: center;
-    gap: 0;
-  }
+  .timeline-row { display: flex; align-items: stretch; }
 
   .timeline-bar {
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 0.95rem;
+    min-height: 72px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900;
+    font-size: 1.1rem;
     color: white;
     flex-shrink: 0;
+    width: 80px;
   }
 
   .timeline-label {
-    padding: 0 24px;
-    font-size: 0.9rem;
+    padding: 0 28px;
+    font-size: 1rem;
     color: var(--muted);
+    display: flex; align-items: center;
+    border-bottom: 1px solid var(--border);
   }
 
-  /* CTA / closer */
+  .timeline-row:last-child .timeline-label { border-bottom: none; }
+
+  /* ── CTA ────────────────────────────────────────────────────────────────── */
   .cta-box {
-    background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(6,182,212,0.1));
-    border: 1px solid rgba(124,58,237,0.3);
+    background: linear-gradient(135deg, #ede9fe, #dbeafe);
+    border: 2px solid #c4b5fd;
     border-radius: 16px;
-    padding: 32px;
+    padding: 36px;
     text-align: center;
     margin-top: 28px;
   }
 
   .cta-box p {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     color: var(--text);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-weight: 600;
   }
 
-  .cta-box small {
-    color: var(--muted);
-    font-size: 0.9rem;
+  .cta-box .cta-big {
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: var(--accent);
+    margin: 10px 0;
   }
 
-  /* Hide all slides by default */
-  .slide { display: none; }
-  .slide.active { display: block; }
+  .cta-box small { color: var(--muted); font-size: 0.95rem; }
 
-  /* Pagination bar */
+  /* ── Pagination ─────────────────────────────────────────────────────────── */
   .pagination {
     position: fixed;
     bottom: 0; left: 0; right: 0;
-    background: rgba(10,10,15,0.95);
+    background: rgba(255,255,255,0.97);
     backdrop-filter: blur(12px);
-    border-top: 1px solid var(--border);
+    border-top: 2px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -412,60 +385,44 @@
   }
 
   .pg-btn {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    color: var(--text);
-    font-size: 0.9rem;
+    background: var(--accent);
+    border: none;
+    color: white;
+    font-size: 1rem;
     font-weight: 700;
-    padding: 10px 24px;
+    padding: 12px 28px;
     border-radius: 10px;
     cursor: pointer;
-    transition: background 0.15s, border-color 0.15s;
+    transition: opacity 0.15s;
     letter-spacing: 0.03em;
   }
 
-  .pg-btn:hover:not(:disabled) {
-    background: rgba(255,255,255,0.14);
-    border-color: rgba(255,255,255,0.25);
-  }
-
-  .pg-btn:disabled {
-    opacity: 0.25;
-    cursor: default;
-  }
+  .pg-btn:hover:not(:disabled) { opacity: 0.85; }
+  .pg-btn:disabled { background: #e2e8f0; color: #94a3b8; cursor: default; }
 
   .pg-counter {
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.95rem;
+    font-weight: 700;
     color: var(--muted);
     min-width: 70px;
     text-align: center;
   }
 
-  .pg-dots {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-  }
+  .pg-dots { display: flex; gap: 7px; align-items: center; }
 
   .pg-dot {
-    width: 7px;
-    height: 7px;
+    width: 9px; height: 9px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.18);
+    background: #cbd5e1;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
-    border: none;
-    padding: 0;
+    border: none; padding: 0;
   }
 
-  .pg-dot.active {
-    background: var(--accent);
-    transform: scale(1.4);
-  }
+  .pg-dot.active { background: var(--accent); transform: scale(1.5); }
 
   @media (max-width: 700px) {
-    .slide { padding: 36px 24px; }
+    .slide { padding: 40px 24px; }
     .pg-dots { display: none; }
     .deck { padding-bottom: 100px; }
   }
@@ -473,17 +430,14 @@
 </head>
 <body>
 
-<!-- pagination injected by JS -->
-
 <div class="deck">
 
-  <!-- ── SLIDE 1: COVER ──────────────────────────────────────────────────── -->
+  <!-- SLIDE 1: COVER -->
   <div class="slide slide-cover" id="s1">
-    <div class="slide-num">01 / 10</div>
-    <div class="cover-eyebrow">Rob Gaudet · NolaCultureCo</div>
+    <div class="slide-num" style="color:#a5b4fc;">01 / 10</div>
+    <div class="cover-eyebrow">Rob Gaudet · Startup Grind New Orleans</div>
     <h1 class="cover-title">Vibe Marketing<br>for Builders</h1>
-    <p class="cover-sub">How to grow an audience, define your customer,<br>and turn volume into revenue — before you even launch.</p>
-
+    <p class="cover-sub">Grow an audience, define your customer,<br>and turn volume into revenue — before you launch.</p>
     <div class="checklist">
       <div class="check-item"><span class="check-icon">✓</span> Distribution vs. Community — know the difference</div>
       <div class="check-item"><span class="check-icon">✓</span> Build your following before you have a product</div>
@@ -494,26 +448,25 @@
     </div>
   </div>
 
-  <!-- ── SLIDE 2: QR / OPENING IMAGE ────────────────────────────────────── -->
-  <div class="slide" style="--slide-color: var(--accent2); text-align: center;" id="s2">
+  <!-- SLIDE 2: QR -->
+  <div class="slide" style="--slide-color: var(--accent2); text-align:center;" id="s2">
     <div class="slide-num">02 / 10</div>
     <div class="slide-eyebrow">Scan to Connect</div>
     <h2 class="slide-title">Start Here</h2>
-    <div style="display:flex; justify-content:center; margin: 32px 0;">
-      <div style="background:white; border-radius:16px; padding:16px; width:220px; height:220px; display:flex; align-items:center; justify-content:center;">
+    <div style="display:flex; justify-content:center; margin:36px 0;">
+      <div style="background:#f8fafc; border:2px solid var(--border); border-radius:16px; padding:20px; width:240px; height:240px; display:flex; align-items:center; justify-content:center;">
         <img src="qr-code.png" alt="QR Code" style="width:100%; height:100%; object-fit:contain;">
       </div>
     </div>
-    <p class="slide-body" style="max-width:520px; margin:0 auto;">Scan this code to follow along, connect, or access resources from this session.</p>
+    <p class="slide-body" style="max-width:520px; margin:0 auto; font-size:1.15rem;">Scan this code to follow along, connect, or access resources from this session.</p>
   </div>
 
-  <!-- ── SLIDE 3: DISTRIBUTION vs COMMUNITY ─────────────────────────────── -->
+  <!-- SLIDE 3: DISTRIBUTION vs COMMUNITY -->
   <div class="slide" style="--slide-color: var(--pink);" id="s3">
     <div class="slide-num">03 / 10</div>
     <div class="slide-eyebrow">The Foundation</div>
     <h2 class="slide-title">Distribution ≠ Community</h2>
     <p class="slide-body">Most builders confuse these two. They are not the same — and mixing them up is expensive.</p>
-
     <div class="split">
       <div class="split-col left">
         <h3>Distribution</h3>
@@ -538,21 +491,18 @@
         </ul>
       </div>
     </div>
-
-    <p class="slide-body" style="margin-top:8px;">Distribution gets you noticed. Community makes you sustainable. Build both — but never mistake one for the other.</p>
+    <p class="slide-body">Distribution gets you noticed. Community makes you sustainable. Build both — never mistake one for the other.</p>
   </div>
 
-  <!-- ── SLIDE 4: BUILD BEFORE YOU HAVE A PRODUCT ───────────────────────── -->
+  <!-- SLIDE 4: BUILD BEFORE PRODUCT -->
   <div class="slide" style="--slide-color: var(--accent2);" id="s4">
     <div class="slide-num">04 / 10</div>
     <div class="slide-eyebrow">Counterintuitive Truth</div>
     <h2 class="slide-title">Build Your Audience<br>Before You Build Your Product</h2>
-
     <div class="slide-body">
       <p>The biggest mistake vibe coders make: they disappear for 6 months to build, then surface with a product and no one to sell it to.</p>
-      <p>Your audience is your first asset. Start documenting the journey <em>now</em> — the ideation, the failures, the breakthroughs. People don't just buy products. They buy into founders they've watched struggle and win.</p>
+      <p>Your audience is your first asset. Start documenting the journey <em>now</em> — the ideation, the failures, the breakthroughs. People don't buy products. They buy into founders they've watched struggle and win.</p>
     </div>
-
     <div class="pill-list">
       <div class="pill">📹 Document the build</div>
       <div class="pill">💬 Share the struggles</div>
@@ -561,82 +511,73 @@
       <div class="pill">👀 Make them feel inside</div>
       <div class="pill">🚀 Launch to warm hands</div>
     </div>
-
-    <div class="icp-card" style="text-align:center; background: rgba(6,182,212,0.06); border-color: rgba(6,182,212,0.2);">
-      <p style="font-size:1.1rem; font-weight:700; color: var(--accent2);">"Your audience should feel like co-founders, not customers."</p>
+    <div class="icp-card" style="text-align:center; border-color:#bae6fd; background:#f0f9ff;">
+      <p style="font-size:1.2rem; font-weight:800; color:var(--accent2);">"Your audience should feel like co-founders, not customers."</p>
     </div>
   </div>
 
-  <!-- ── SLIDE 5: 1/3 OF YOUR DAY ───────────────────────────────────────── -->
+  <!-- SLIDE 5: 1/3 OF YOUR DAY -->
   <div class="slide" style="--slide-color: var(--accent3);" id="s5">
     <div class="slide-num">05 / 10</div>
     <div class="slide-eyebrow">Time Allocation</div>
     <h2 class="slide-title">One Third of Your Day<br>Belongs to Marketing</h2>
-
     <p class="slide-body">If you are vibe coding or building products, you are also a marketer. There is no version of this where the product sells itself at launch. The best builders ship and shout.</p>
-
     <div class="timeline">
       <div class="timeline-row">
-        <div class="timeline-bar" style="width:33%; background: var(--accent);">33%</div>
-        <div class="timeline-label"><strong style="color:var(--text);">Build</strong> — Write code, design, ship features</div>
+        <div class="timeline-bar" style="background:var(--accent);">33%</div>
+        <div class="timeline-label"><strong style="color:var(--text); margin-right:8px;">Build</strong> — Write code, design, ship features</div>
       </div>
       <div class="timeline-row">
-        <div class="timeline-bar" style="width:33%; background: var(--accent3);">33%</div>
-        <div class="timeline-label"><strong style="color:var(--text);">Market</strong> — Post, engage, grow, hook</div>
+        <div class="timeline-bar" style="background:var(--accent3);">33%</div>
+        <div class="timeline-label"><strong style="color:var(--text); margin-right:8px;">Market</strong> — Post, engage, grow, hook</div>
       </div>
       <div class="timeline-row">
-        <div class="timeline-bar" style="width:34%; background: var(--green);">34%</div>
-        <div class="timeline-label"><strong style="color:var(--text);">Sell / Operate</strong> — Talk to users, close deals, iterate</div>
+        <div class="timeline-bar" style="background:var(--green);">34%</div>
+        <div class="timeline-label"><strong style="color:var(--text); margin-right:8px;">Sell / Operate</strong> — Talk to users, close deals, iterate</div>
       </div>
     </div>
-
-    <p class="slide-body">Marketing is not a phase that comes after building. It is a discipline that runs in parallel — every single day.</p>
+    <p class="slide-body">Marketing is not a phase after building. It runs in parallel — every single day.</p>
   </div>
 
-  <!-- ── SLIDE 6: THE FORMULA ────────────────────────────────────────────── -->
+  <!-- SLIDE 6: THE FORMULA -->
   <div class="slide" style="--slide-color: var(--green);" id="s6">
     <div class="slide-num">06 / 10</div>
     <div class="slide-eyebrow">The Secret</div>
-    <h2 class="slide-title">Volume × ICP × Hook<br>= Traction</h2>
-
+    <h2 class="slide-title">Volume × ICP × Hook = Traction</h2>
     <p class="slide-body">There is no viral shortcut. There is only this formula, executed consistently.</p>
-
     <div class="formula">
-      <div class="formula-part" style="--slide-color: var(--accent3);">
+      <div class="formula-part" style="--slide-color:var(--accent3);">
         <div class="fp-label">Volume</div>
         <div class="fp-sub">Post more than feels<br>comfortable</div>
       </div>
       <div class="formula-op">×</div>
-      <div class="formula-part" style="--slide-color: var(--pink);">
+      <div class="formula-part" style="--slide-color:var(--pink);">
         <div class="fp-label">ICP</div>
         <div class="fp-sub">Speak to one person,<br>not everyone</div>
       </div>
       <div class="formula-op">×</div>
-      <div class="formula-part" style="--slide-color: var(--accent2);">
+      <div class="formula-part" style="--slide-color:var(--accent2);">
         <div class="fp-label">Hook</div>
         <div class="fp-sub">Stop the scroll in<br>the first 3 words</div>
       </div>
       <div class="formula-op">=</div>
-      <div class="formula-part" style="--slide-color: var(--green);">
+      <div class="formula-part" style="--slide-color:var(--green);">
         <div class="fp-label">Traction</div>
         <div class="fp-sub">Followers, leads,<br>revenue</div>
       </div>
     </div>
-
-    <p class="slide-body">Miss any one of these three and the formula breaks. Post at high volume to the wrong audience — silence. Perfect hook, wrong ICP — silence. Right ICP, wrong hook — silence.</p>
+    <p class="slide-body">Miss any one element and the formula breaks. All three, every day.</p>
   </div>
 
-  <!-- ── SLIDE 7: ICP DEEP DIVE ──────────────────────────────────────────── -->
+  <!-- SLIDE 7: ICP DEEP DIVE -->
   <div class="slide" style="--slide-color: var(--pink);" id="s7">
     <div class="slide-num">07 / 10</div>
     <div class="slide-eyebrow">Ideal Customer Profile</div>
     <h2 class="slide-title">You Are Not Marketing<br>to Everyone</h2>
-
     <div class="slide-body">
       <p>The single most expensive marketing mistake: trying to speak to everyone. When you talk to everyone, you resonate with no one.</p>
-      <p>Your Ideal Customer Profile (ICP) is not a demographic. It is a <em>person</em> — with a specific problem, a specific budget, a specific fear, and a specific dream. Name them. Know them. Write every post for them.</p>
+      <p>Your ICP is not a demographic. It is a <em>person</em> — with a specific problem, a specific budget, a specific fear, and a specific dream. Name them. Know them. Write every post for them.</p>
     </div>
-
     <div class="stat-row">
       <div class="stat-card">
         <div class="stat-number" style="color:var(--pink);">1</div>
@@ -653,16 +594,14 @@
     </div>
   </div>
 
-  <!-- ── SLIDE 8: ICP PROFILE TEMPLATE ──────────────────────────────────── -->
+  <!-- SLIDE 8: ICP PROFILE TEMPLATE -->
   <div class="slide" style="--slide-color: var(--accent);" id="s8">
     <div class="slide-num">08 / 10</div>
     <div class="slide-eyebrow">Build Your ICP</div>
-    <h2 class="slide-title">Know This Person<br>By Name</h2>
-
-    <p class="slide-body">Fill this out before you write your next post. If you can't answer every field, you don't know your customer yet.</p>
-
+    <h2 class="slide-title">Know This Person By Name</h2>
+    <p class="slide-body">Fill this out before your next post. If you can't answer every field, you don't know your customer yet.</p>
     <div class="icp-card">
-      <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); font-weight:700; margin-bottom:16px;">ICP Profile Template</div>
+      <div style="font-size:0.85rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); font-weight:800; margin-bottom:18px;">ICP Profile Template</div>
       <div class="icp-grid">
         <div class="icp-field"><div class="label">Name (fictional)</div><div class="value">e.g. "Sarah, 34"</div></div>
         <div class="icp-field"><div class="label">Role / Title</div><div class="value">e.g. Freelance designer</div></div>
@@ -676,14 +615,12 @@
     </div>
   </div>
 
-  <!-- ── SLIDE 9: HOOK MASTERY ───────────────────────────────────────────── -->
+  <!-- SLIDE 9: HOOK MASTERY -->
   <div class="slide" style="--slide-color: var(--accent2);" id="s9">
     <div class="slide-num">09 / 10</div>
     <div class="slide-eyebrow">The Hook</div>
     <h2 class="slide-title">You Have 3 Words<br>to Stop the Scroll</h2>
-
-    <p class="slide-body">Nobody reads posts — they scan first lines. Your hook is the only thing standing between your content and the void. Get it wrong and volume doesn't matter. Get it right and your ICP leans in.</p>
-
+    <p class="slide-body">Nobody reads posts — they scan first lines. Your hook is the only thing standing between your content and the void. Get it wrong and volume doesn't matter.</p>
     <div class="pill-list">
       <div class="pill">✅ "I built this in 3 days…"</div>
       <div class="pill">✅ "Nobody talks about this."</div>
@@ -694,37 +631,33 @@
       <div class="pill">❌ "Just launched my new…"</div>
       <div class="pill">❌ "Please check out my…"</div>
     </div>
-
-    <div class="icp-card" style="background: rgba(6,182,212,0.06); border-color: rgba(6,182,212,0.2); margin-top:24px;">
-      <p style="font-size:1rem; color:var(--text); line-height:1.6;"><strong style="color:var(--accent2);">Rule:</strong> Write your hook last. Write the content first, find the most surprising or painful truth inside it, and make that your first line.</p>
+    <div class="icp-card" style="border-color:#bae6fd; background:#f0f9ff; margin-top:24px;">
+      <p style="font-size:1.1rem; color:var(--text); line-height:1.7;"><strong style="color:var(--accent2);">Rule:</strong> Write your hook last. Find the most surprising or painful truth in your content — and make that your first line.</p>
     </div>
   </div>
 
-  <!-- ── SLIDE 10: CLOSER ────────────────────────────────────────────────── -->
+  <!-- SLIDE 10: CLOSER -->
   <div class="slide" style="--slide-color: var(--accent);" id="s10">
     <div class="slide-num">10 / 10</div>
     <div class="slide-eyebrow">Start Today</div>
     <h2 class="slide-title">The Builder Who Markets<br>Wins the Market</h2>
-
     <div class="slide-body">
       <p>You don't need a bigger audience. You don't need a better product. You need to start today — one post, one person in mind, one hook that earns the click.</p>
       <p>The vibe coder who markets wins. Every time.</p>
     </div>
-
     <div class="cta-box">
       <p>Volume + ICP + Hook</p>
-      <p style="font-size:1.5rem; font-weight:900; color: var(--accent); margin: 8px 0;">Run this formula every day.</p>
-      <small>Not when you feel inspired. Every day.</small>
+      <p class="cta-big">Run this formula every day.</p>
+      <small>Not when you feel inspired. Every. Single. Day.</small>
     </div>
-
-    <div style="margin-top:32px; display:flex; justify-content:center; gap:48px; flex-wrap:wrap;">
+    <div style="margin-top:36px; display:flex; justify-content:center; gap:56px; flex-wrap:wrap;">
       <div style="text-align:center;">
-        <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:4px;">Presented by</div>
-        <div style="font-size:1.1rem; font-weight:700;">Rob Gaudet</div>
+        <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em; color:#94a3b8; margin-bottom:6px;">Presented by</div>
+        <div style="font-size:1.2rem; font-weight:800; color:var(--text);">Rob Gaudet</div>
       </div>
       <div style="text-align:center;">
-        <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:4px;">Follow</div>
-        <div style="font-size:1.1rem; font-weight:700;">@robgaudet</div>
+        <div style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.1em; color:#94a3b8; margin-bottom:6px;">Follow</div>
+        <div style="font-size:1.2rem; font-weight:800; color:var(--text);">@robgaudet</div>
       </div>
     </div>
   </div>
@@ -740,16 +673,14 @@
 </div>
 
 <script>
-  const slides = document.querySelectorAll('.slide');
-  const total  = slides.length;
-  let current  = 0;
+  const slides  = document.querySelectorAll('.slide');
+  const total   = slides.length;
+  let current   = 0;
+  const prevBtn  = document.getElementById('pg-prev');
+  const nextBtn  = document.getElementById('pg-next');
+  const counter  = document.getElementById('pg-counter');
+  const dotsWrap = document.getElementById('pg-dots');
 
-  const prevBtn   = document.getElementById('pg-prev');
-  const nextBtn   = document.getElementById('pg-next');
-  const counter   = document.getElementById('pg-counter');
-  const dotsWrap  = document.getElementById('pg-dots');
-
-  // Build dots
   slides.forEach((_, i) => {
     const d = document.createElement('button');
     d.className = 'pg-dot' + (i === 0 ? ' active' : '');
@@ -772,14 +703,11 @@
 
   prevBtn.addEventListener('click', () => goTo(current - 1));
   nextBtn.addEventListener('click', () => goTo(current + 1));
-
-  // Keyboard arrows
   document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
     if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(current - 1);
   });
 
-  // Init
   goTo(0);
 </script>
 </body>
