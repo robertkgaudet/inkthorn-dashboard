@@ -44,6 +44,7 @@
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
       line-height: 1.6;
+      overflow-x: hidden;
       background-image:
         radial-gradient(ellipse at top left, rgba(201,168,76,0.04) 0%, transparent 50%),
         radial-gradient(ellipse at bottom right, rgba(192,57,43,0.04) 0%, transparent 50%);
@@ -368,14 +369,72 @@
 
     /* ─── MOBILE ─── */
     @media (max-width: 700px) {
-      .week-grid { grid-template-columns: repeat(2, 1fr); }
-      .planner-layout { grid-template-columns: 1fr; }
-      .week-strip { overflow-x: auto; }
-      .header-title { font-size: 1.7rem; }
-      .header-mascot { height: 60px; }
+      /* Prevent any horizontal overflow */
+      html, body { overflow-x: hidden; }
+      .app-wrapper { padding: 0 12px 80px; }
+
+      /* Header: stack into two rows */
+      header {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 16px 0 14px;
+      }
+      .header-mascot { height: 48px; }
+      .header-mascot-fallback { height: 48px; width: 48px; font-size: 36px; }
+      .header-title { font-size: 1.4rem; }
+      .header-tagline { font-size: 0.75rem; }
+      /* Actions row: wraps below title row, full width */
+      .header-actions {
+        width: 100%;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .user-name { max-width: 80px; font-size: 0.78rem; }
+      /* Upgrade button: compact on mobile */
+      .header-actions .btn-gold {
+        font-size: 0.78rem;
+        padding: 6px 12px;
+      }
+
+      /* Section nav tabs */
+      .section-nav { gap: 2px; }
+      .section-nav .tab { font-size: 0.75rem; padding: 6px 8px; }
+
+      /* Week grid: 2 columns */
+      .week-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+      /* Truncate preview text strictly */
+      .week-col-preview { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+      .week-col { padding: 10px 8px; min-height: 110px; }
+      .week-col-date { font-size: 1.3rem; }
+
+      /* Week nav row */
+      .week-nav { flex-wrap: wrap; gap: 6px; }
+      .week-nav-title { font-size: 0.85rem; text-align: center; flex: 1; }
+
+      /* Week strip: scrollable */
+      .week-strip { overflow-x: auto; gap: 3px; }
+      .strip-day { min-width: 36px; padding: 5px 3px; font-size: 0.7rem; }
+
+      /* Day header */
+      .day-header { flex-wrap: wrap; gap: 8px; }
+      .day-title { font-size: 1.3rem; }
+
+      /* Input */
       .input-row { flex-direction: column; align-items: stretch; }
       .input-row .btn-gold { width: 100%; justify-content: center; }
-      .modal-card { padding: 28px 20px; }
+      .priority-input-group { flex-wrap: wrap; }
+
+      /* Priority tabs */
+      .priority-tabs { flex-wrap: wrap; gap: 4px; }
+      .priority-tab { font-size: 0.75rem; padding: 4px 10px; }
+
+      /* Planner */
+      .planner-layout { grid-template-columns: 1fr; }
+
+      /* Modal */
+      .modal-card { padding: 24px 16px; }
+      .modal-headline { font-size: 1.15rem; }
     }
 
     /* ─── UTILITY ─── */
