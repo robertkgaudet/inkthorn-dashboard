@@ -1,39 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-05-29T23:26:42.628Z",
+  "updated": "2026-05-30T13:32:43.174Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-05-29",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Benny Feldman",
-      "url": "https://504comedy.com/event/1359/benny-feldman-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Fri May 29 2026",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-29",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "The Comedy Lounge",
-      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-      "venue": "Vino: Fine Wine & Spirits",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Friday",
-      "start_dt": "2026-05-29T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-05-30",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -43,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$25",
       "repeat": "Sat May 30 2026",
-      "start_dt": "2026-05-29T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-30",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -61,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-30",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -75,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-05-31",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-05-31",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -324,50 +296,44 @@
       "cost": "$10",
       "repeat": "Every Thursday",
       "start_dt": "2026-06-04T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-06-05",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "LGBTLOL",
+      "url": "https://504comedy.com/event/1361/lgbtlol-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Fri Jun 05 2026",
+      "start_dt": "2026-06-04T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-06-05",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Comedy Lounge",
+      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+      "venue": "Vino: Fine Wine & Spirits",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Friday",
+      "start_dt": "2026-06-05T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-05-29",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-29",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Benny Feldman",
-          "url": "https://504comedy.com/event/1359/benny-feldman-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Fri May 29 2026",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-29",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "The Comedy Lounge",
-          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-          "venue": "Vino: Fine Wine & Spirits",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Friday",
-          "start_dt": "2026-05-29T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-05-30",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-30",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -377,11 +343,11 @@
           "type": "Stand-up",
           "cost": "$25",
           "repeat": "Sat May 30 2026",
-          "start_dt": "2026-05-29T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-30",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -395,7 +361,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-30",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -410,12 +376,12 @@
       ]
     },
     {
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-05-31",
       "events": [
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-05-31",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -429,7 +395,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-05-31",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -688,6 +654,40 @@
           "cost": "$10",
           "repeat": "Every Thursday",
           "start_dt": "2026-06-04T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "date": "2026-06-05",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-06-05",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "LGBTLOL",
+          "url": "https://504comedy.com/event/1361/lgbtlol-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Fri Jun 05 2026",
+          "start_dt": "2026-06-04T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-06-05",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Comedy Lounge",
+          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+          "venue": "Vino: Fine Wine & Spirits",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Friday",
+          "start_dt": "2026-06-05T20:00-05:00"
         }
       ]
     }
