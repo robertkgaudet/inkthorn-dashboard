@@ -1,146 +1,127 @@
 {
-  "date": "2026-05-29",
-  "generated": "2026-05-29T10:30:03Z",
+  "date": "2026-05-30",
+  "generated": "2026-05-30T10:30:02Z",
   "location": "Napoleon & Magazine, Uptown New Orleans, 70115",
   "mode": "custom",
   "concierge": {
-    "title": "Friday \u2014 Finish Strong",
+    "title": "Saturday \u2014 Recharge",
     "notes": [
       "\ud83c\udfc6 RISE Challenge (Virginia) \u2014 Stability accepted! Complete the application",
       "\ud83c\udfa4 InnovateSouth deck \u2014 finish it, time the pitch (must be under 4 min), upload to Claude for evaluation & improvements",
-      "\u2705 Ship something before 3pm \u2014 don't drift",
-      "\ud83e\uddfe Review week finances: income, expenses, IRS set-aside",
-      "\ud83d\udcf1 TextOS: any user feedback or product notes to capture",
-      "\ud83c\udf7a End of week beer is earned \u2014 Barrel Proof or Cure",
-      "\ud83d\udcd3 Journal: 3 wins from this week"
+      "\u2600\ufe0f No screens before coffee and a walk",
+      "\ud83d\uded2 Restock if needed \u2014 fresh ingredients beat takeout",
+      "\ud83d\udcda Read something that's not a screen (book, magazine)",
+      "\ud83c\udfb6 Check WWOZ / InkThorn for live music tonight",
+      "\ud83c\udf3f Uptown walk \u2014 Napoleon to Audubon, clear the week"
     ]
   },
   "private": [
     "\ud83c\udf39 Date night with Camille tonight \u2014 make it count",
     "\ud83d\udccd Reservation idea: Clancy's \u2014 call ahead",
     "\ud83d\udc8c She loves when you just handle the reservation without being asked",
-    "\ud83d\udc8c Dress up a little \u2014 she notices"
+    "\ud83d\udc8c Dress up a little \u2014 she notices",
+    "\ud83d\udd25 Tonight with Camille: Send a flirty text earlier in the day to set the tone",
+    "\ud83d\udc8b Slow down. Presence over performance."
   ],
   "blocks": [
     {
-      "time": "7:30 AM",
-      "icon": "\ud83c\udfc1",
-      "label": "Friday \u2014 Finish Line",
+      "time": "8:30 AM",
+      "icon": "\u2600\ufe0f",
+      "label": "Slow Start",
       "tips": [
-        "Ship something before 3pm. Don't drift into the weekend.",
-        "One real deliverable. Then you're free."
+        "No screens for 30 minutes. Walk. Coffee. Breathe.",
+        "Uptown on Saturday morning is as good as it gets."
       ],
       "recommendation": null
     },
     {
-      "time": "9:00 AM",
+      "time": "10:00 AM",
+      "icon": "\ud83d\uded2",
+      "label": "Magazine Street Run",
+      "tips": [
+        "Restock for the week. Fresh ingredients beat DoorDash.",
+        "Rouses on Magazine or Whole Foods on Magazine \u2014 your call"
+      ],
+      "recommendation": {
+        "name": "Rouses Market",
+        "address": "5000 Magazine St, New Orleans",
+        "note": "Local grocery chain. Good produce, great deli, very New Orleans."
+      }
+    },
+    {
+      "time": "12:00 PM",
+      "icon": "\ud83c\udf3f",
+      "label": "Audubon Walk",
+      "tips": [
+        "Audubon Park loop is 1.8 miles \u2014 perfect Saturday reset",
+        "Oaks, runners, dogs \u2014 the whole Uptown scene"
+      ],
+      "recommendation": {
+        "name": "Audubon Park",
+        "address": "6500 Magazine St, New Orleans",
+        "note": "10 minutes on foot from Napoleon & Magazine."
+      }
+    },
+    {
+      "time": "2:00 PM",
+      "icon": "\ud83d\udcda",
+      "label": "Read / Rest",
+      "tips": [
+        "Book, not screen. Porch if weather cooperates.",
+        "You process better when you slow down. Trust it."
+      ],
+      "recommendation": null
+    },
+    {
+      "time": "4:00 PM",
       "icon": "\ud83d\udcbb",
-      "label": "Final Build Push",
+      "label": "Light Reyla Review",
       "tips": [
-        "Last hard coding block of the week",
-        "Leave Reyla in a clean state for Monday"
+        "Optional \u2014 an hour max. Prep for Monday, don't grind.",
+        "Saturday is for recharging, not depleting."
       ],
       "recommendation": null
-    },
-    {
-      "time": "11:30 AM",
-      "icon": "\ud83e\uddfe",
-      "label": "Finance Review",
-      "tips": [
-        "Weekly check: income logged, expenses noted, IRS set-aside?",
-        "Check the trailer title transfer status if pending"
-      ],
-      "recommendation": null
-    },
-    {
-      "time": "1:00 PM",
-      "icon": "\ud83e\udd57",
-      "label": "Lunch",
-      "tips": [
-        "Friday lunch is a small reward \u2014 make it good",
-        "No-takeout if still in challenge window"
-      ],
-      "recommendation": null
-    },
-    {
-      "time": "3:00 PM",
-      "icon": "\u2705",
-      "label": "Week Close",
-      "tips": [
-        "Write your 3 wins. Commit and push any open code.",
-        "What moves to Monday? Write it down now."
-      ],
-      "recommendation": null
-    },
-    {
-      "time": "5:30 PM",
-      "icon": "\ud83c\udf7a",
-      "label": "Friday Wind-Down Drink",
-      "tips": [
-        "You earned it. Barrel Proof or Cure.",
-        "Friday on Magazine Street has its own energy."
-      ],
-      "recommendation": {
-        "name": "Barrel Proof",
-        "address": "1201 Magazine St, New Orleans",
-        "note": "Best whiskey bar in the South. 5 minutes from home."
-      }
     },
     {
       "time": "6:00 PM",
       "icon": "\ud83c\udfb5",
-      "label": "Pete Olynciw",
-      "tips": [
-        "Bacchanal (OUTDOORS) \u00b7 Bywater",
-        "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"
-      ],
-      "recommendation": {
-        "name": "Pete Olynciw",
-        "address": "Bacchanal (OUTDOORS)",
-        "note": "Tonight at 6:00 PM. More info: https://wwoz.org/events/1340616"
-      }
-    },
-    {
-      "time": "6:00 PM",
-      "icon": "\ud83c\udfb5",
-      "label": "Palmetto Bug Stompers",
+      "label": "Michael Watson & The Alchemy",
       "tips": [
         "d.b.a. \u00b7 Marigny",
         "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"
       ],
       "recommendation": {
-        "name": "Palmetto Bug Stompers",
+        "name": "Michael Watson & The Alchemy",
         "address": "d.b.a.",
-        "note": "Tonight at 6:00 PM. More info: https://wwoz.org/events/1341886"
+        "note": "Tonight at 6:00 PM. More info: https://wwoz.org/events/1341911"
       }
     },
     {
       "time": "7:00 PM",
-      "icon": "\ud83c\udf39",
-      "label": "Date Night with Camille",
-      "tips": [
-        "Clancy's \u2014 Uptown white tablecloth, classic New Orleans",
-        "She loves when you just handle the reservation without being asked"
-      ],
-      "recommendation": {
-        "name": "Clancy's",
-        "address": "6100 Annunciation St, New Orleans",
-        "note": "Uptown white tablecloth, classic New Orleans"
-      },
-      "_private": true
-    },
-    {
-      "time": "8:00 PM",
       "icon": "\ud83c\udfb6",
-      "label": "Frenchmen Street",
+      "label": "Saturday Night Out",
       "tips": [
-        "Friday night on Frenchmen is an institution",
-        "Walk the street, pick a spot, let New Orleans do its thing"
+        "Frenchmen Street or Uptown \u2014 something live is always on",
+        "Check WWOZ picks from Thursday for tonight"
       ],
       "recommendation": {
         "name": "Frenchmen Street",
         "address": "Frenchmen St, Marigny, New Orleans",
-        "note": "Snug Harbor, d.b.a., The Spotted Cat \u2014 all within 100 feet."
+        "note": "Saturday night in New Orleans. No further explanation needed."
+      }
+    },
+    {
+      "time": "7:00 PM",
+      "icon": "\ud83c\udfb5",
+      "label": "Willie Green III",
+      "tips": [
+        "Bacchanal (OUTDOORS) \u00b7 Bywater",
+        "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"
+      ],
+      "recommendation": {
+        "name": "Willie Green III",
+        "address": "Bacchanal (OUTDOORS)",
+        "note": "Tonight at 7:00 PM. More info: https://wwoz.org/events/1340521"
       }
     }
   ]
