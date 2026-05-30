@@ -149,23 +149,24 @@
     .week-nav-label { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); font-weight: 600; }
     .week-nav-btn { background: none; border: 1px solid var(--border); color: var(--cream-dim); border-radius: var(--radius-sm); padding: 6px 14px; cursor: pointer; font-size: 0.875rem; transition: all 0.15s; }
     .week-nav-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
-    .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+    .week-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; width: 100%; }
     .week-col {
       background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 14px 12px; cursor: pointer; transition: all 0.18s; min-height: 140px;
+      min-width: 0; overflow: hidden;
       background-image: repeating-linear-gradient(transparent, transparent 27px, rgba(201,168,76,0.06) 27px, rgba(201,168,76,0.06) 28px);
     }
     .week-col:hover { border-color: var(--border-hover); transform: translateY(-2px); }
     .week-col.today { border-color: var(--gold); box-shadow: 0 0 20px rgba(201,168,76,0.15); }
-    .week-col-day { font-size: 0.7rem; color: var(--cream-dim); text-transform: uppercase; letter-spacing: 0.08em; }
-    .week-col-date { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--cream); font-weight: 700; line-height: 1; margin: 4px 0 8px; }
+    .week-col-day { font-size: 0.7rem; color: var(--cream-dim); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; overflow: hidden; }
+    .week-col-date { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--cream); font-weight: 700; line-height: 1; margin: 4px 0 8px; }
     .week-col.today .week-col-date { color: var(--gold); }
-    .priority-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+    .priority-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; flex-shrink: 0; }
     .dot-A { background: var(--red); }
     .dot-B { background: var(--gold); }
     .dot-C { background: var(--slate); }
-    .week-col-count { font-size: 0.72rem; color: var(--cream-dim); margin: 6px 0; }
-    .week-col-preview { font-size: 0.75rem; color: var(--cream-dim); opacity: 0.7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 4px; }
+    .week-col-count { font-size: 0.68rem; color: var(--cream-dim); margin: 6px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .week-col-preview { font-size: 0.72rem; color: var(--cream-dim); opacity: 0.7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 4px; max-width: 100%; }
 
     /* ─── WEEK STRIP (day view) ─── */
     .week-strip { display: flex; gap: 4px; margin-bottom: 16px; }
