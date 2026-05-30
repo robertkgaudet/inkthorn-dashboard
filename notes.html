@@ -49,15 +49,13 @@
         radial-gradient(ellipse at bottom right, rgba(192,57,43,0.04) 0%, transparent 50%);
     }
 
-    /* ─── SCROLLBAR ─── */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
 
-    /* ─── LAYOUT ─── */
     .app-wrapper {
-      max-width: 820px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 0 20px 80px;
     }
@@ -74,9 +72,7 @@
       padding: 20px;
       backdrop-filter: blur(6px);
     }
-
     #loginOverlay.hidden { display: none !important; }
-
     .login-card {
       background: var(--surface);
       border: 1px solid var(--border-hover);
@@ -87,933 +83,299 @@
       text-align: center;
       box-shadow: 0 24px 80px rgba(0,0,0,0.7);
     }
-
-    .login-mascot {
-      font-size: 64px;
-      margin-bottom: 20px;
-    }
-
-    .login-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-
-    .login-tagline {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.9rem;
-      color: var(--cream-dim);
-      font-style: italic;
-      margin-bottom: 32px;
-    }
-
+    .login-mascot { font-size: 64px; margin-bottom: 20px; }
+    .login-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 6px; }
+    .login-tagline { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--cream-dim); font-style: italic; margin-bottom: 32px; }
     .btn-google {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #fff;
-      color: #1a1612;
-      border: none;
-      border-radius: 8px;
-      padding: 12px 24px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.18s ease;
-      text-decoration: none;
-      width: 100%;
-      justify-content: center;
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; color: #1a1612; border: none; border-radius: 8px;
+      padding: 12px 24px; font-family: 'Inter', sans-serif; font-size: 0.95rem;
+      font-weight: 600; cursor: pointer; transition: all 0.18s ease;
+      text-decoration: none; width: 100%; justify-content: center;
     }
-
-    .btn-google:hover {
-      background: #f5f5f5;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(255,255,255,0.15);
-    }
-
-    .btn-google svg {
-      flex-shrink: 0;
-    }
-
-    .login-fine-print {
-      margin-top: 20px;
-      font-size: 0.75rem;
-      color: var(--cream-dim);
-      opacity: 0.6;
-      font-style: italic;
-    }
+    .btn-google:hover { background: #f5f5f5; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,255,255,0.15); }
+    .btn-google svg { flex-shrink: 0; }
+    .login-fine-print { margin-top: 20px; font-size: 0.75rem; color: var(--cream-dim); opacity: 0.6; font-style: italic; }
 
     /* ─── HEADER ─── */
     header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 24px 0 20px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 32px;
+      display: flex; align-items: center; gap: 16px;
+      padding: 24px 0 20px; border-bottom: 1px solid var(--border); margin-bottom: 24px;
     }
-
-    .header-mascot {
-      height: 80px;
-      width: auto;
-      flex-shrink: 0;
-      filter: drop-shadow(0 2px 8px rgba(192,57,43,0.3));
-    }
-
-    .header-mascot-fallback {
-      width: 64px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
-      flex-shrink: 0;
-    }
-
-    .header-text {
-      flex: 1;
-    }
-
-    .header-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: -0.5px;
-      line-height: 1.1;
-    }
-
-    .header-tagline {
-      font-size: 0.875rem;
-      color: var(--cream-dim);
-      font-style: italic;
-      margin-top: 4px;
-      font-family: 'Playfair Display', serif;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .user-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 2px solid var(--gold-dim);
-      object-fit: cover;
-    }
-
-    .user-name {
-      font-size: 0.85rem;
-      color: var(--cream-dim);
-      max-width: 120px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .btn-signout {
-      font-size: 0.78rem;
-      color: var(--cream-dim);
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 4px 10px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .btn-signout:hover {
-      border-color: var(--red);
-      color: var(--red);
-    }
+    .header-mascot { height: 80px; width: auto; flex-shrink: 0; filter: drop-shadow(0 2px 8px rgba(192,57,43,0.3)); }
+    .header-mascot-fallback { width: 64px; height: 80px; display: flex; align-items: center; justify-content: center; font-size: 48px; flex-shrink: 0; }
+    .header-text { flex: 1; }
+    .header-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold); letter-spacing: -0.5px; line-height: 1.1; }
+    .header-tagline { font-size: 0.875rem; color: var(--cream-dim); font-style: italic; margin-top: 4px; font-family: 'Playfair Display', serif; }
+    .header-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .user-avatar { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--gold-dim); object-fit: cover; }
+    .user-name { font-size: 0.85rem; color: var(--cream-dim); max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .btn-signout { font-size: 0.78rem; color: var(--cream-dim); background: none; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 4px 10px; cursor: pointer; transition: all 0.15s; }
+    .btn-signout:hover { border-color: var(--red); color: var(--red); }
 
     /* ─── BUTTONS ─── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 9px 18px;
-      border-radius: var(--radius-sm);
-      border: none;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.18s ease;
-      text-decoration: none;
-      white-space: nowrap;
-    }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: var(--radius-sm); border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500; transition: all 0.18s ease; text-decoration: none; white-space: nowrap; }
+    .btn-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%); color: #1a1612; font-weight: 600; }
+    .btn-gold:hover { background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(201,168,76,0.35); }
+    .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+    .btn-ghost { background: transparent; color: var(--cream-dim); border: 1px solid transparent; padding: 7px 12px; }
+    .btn-ghost:hover { color: var(--cream); background: rgba(255,255,255,0.04); }
+    .btn-danger { background: transparent; color: var(--red); border: none; padding: 5px 8px; border-radius: var(--radius-sm); opacity: 0.7; cursor: pointer; }
+    .btn-danger:hover { opacity: 1; background: rgba(192,57,43,0.12); }
+    .btn-locked { background: rgba(37,32,24,0.8); color: var(--cream-dim); border: 1px dashed var(--border); cursor: pointer; opacity: 0.75; }
+    .btn-locked:hover { opacity: 1; border-color: var(--gold-dim); }
+    .btn-upgrade { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%); color: #1a1612; font-weight: 700; font-size: 1rem; padding: 13px 28px; border-radius: var(--radius); width: 100%; }
+    .btn-upgrade:hover { background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.4); }
 
-    .btn-gold {
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
-      color: #1a1612;
-      font-weight: 600;
+    /* ─── SECTION NAV TABS ─── */
+    .section-nav {
+      display: flex; gap: 4px; margin-bottom: 24px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 4px;
     }
-
-    .btn-gold:hover {
-      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(201,168,76,0.35);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--gold);
-      border: 1px solid var(--border);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--gold);
-      background: rgba(201,168,76,0.06);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--cream-dim);
-      border: 1px solid transparent;
-      padding: 7px 12px;
-    }
-
-    .btn-ghost:hover {
-      color: var(--cream);
-      background: rgba(255,255,255,0.04);
-    }
-
-    .btn-danger {
-      background: transparent;
-      color: var(--red);
-      border: none;
-      padding: 5px 8px;
-      border-radius: var(--radius-sm);
-      opacity: 0.7;
-    }
-
-    .btn-danger:hover {
-      opacity: 1;
-      background: rgba(192,57,43,0.12);
-    }
-
-    .btn-locked {
-      background: rgba(37,32,24,0.8);
-      color: var(--cream-dim);
-      border: 1px dashed var(--border);
-      cursor: pointer;
-      opacity: 0.75;
-    }
-
-    .btn-locked:hover {
-      opacity: 1;
-      border-color: var(--gold-dim);
-    }
-
-    .btn-upgrade {
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
-      color: #1a1612;
-      font-weight: 700;
-      font-size: 1rem;
-      padding: 13px 28px;
-      border-radius: var(--radius);
-      width: 100%;
-    }
-
-    .btn-upgrade:hover {
-      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(201,168,76,0.4);
-    }
-
-    /* ─── INPUT SECTION ─── */
-    .input-section {
-      margin-bottom: 28px;
-    }
-
-    .input-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: var(--shadow-card);
-    }
-
-    .input-card textarea {
-      width: 100%;
-      background: rgba(0,0,0,0.2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--cream);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      padding: 14px 16px;
-      resize: vertical;
-      min-height: 100px;
-      outline: none;
-      transition: border-color 0.18s ease;
-    }
-
-    .input-card textarea::placeholder {
-      color: var(--cream-dim);
-      opacity: 0.6;
-      font-style: italic;
-    }
-
-    .input-card textarea:focus {
-      border-color: var(--gold-dim);
-      background: rgba(0,0,0,0.28);
-    }
-
-    .input-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
-
-    .category-select {
-      background: rgba(0,0,0,0.25);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--cream);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
-      padding: 9px 12px;
-      cursor: pointer;
-      outline: none;
-      transition: border-color 0.18s ease;
-    }
-
-    .category-select:focus, .category-select:hover {
-      border-color: var(--gold-dim);
-    }
-
-    .category-select option {
-      background: var(--surface);
-    }
-
-    .ai-suggest-teaser {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      color: var(--cream-dim);
-      font-style: italic;
-      cursor: pointer;
-      padding: 5px 8px;
-      border-radius: var(--radius-sm);
-      transition: background 0.15s;
-      border: 1px dashed transparent;
-    }
-
-    .ai-suggest-teaser:hover {
-      background: rgba(201,168,76,0.06);
-      border-color: var(--border);
-    }
-
-    .ai-suggest-teaser .lock-icon {
-      color: var(--gold);
-      font-size: 0.9rem;
-    }
-
-    /* ─── INKTHORN RESPONSE ─── */
-    .inkthorn-response {
-      display: none;
-      margin-top: 14px;
-      background: rgba(192,57,43,0.08);
-      border: 1px solid rgba(192,57,43,0.25);
-      border-radius: var(--radius-sm);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      animation: slideInDown 0.3s ease;
-    }
-
-    .inkthorn-response.hidden {
-      display: none !important;
-    }
-
-    .response-mascot {
-      font-size: 1.6rem;
-      flex-shrink: 0;
-    }
-
-    .response-text {
-      font-size: 0.9rem;
-      color: var(--cream);
-      font-style: italic;
-      font-family: 'Playfair Display', serif;
-    }
-
-    /* ─── NOTES TOOLBAR ─── */
-    .notes-toolbar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .search-input {
-      flex: 1;
-      min-width: 180px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--cream);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.875rem;
-      padding: 9px 14px 9px 36px;
-      outline: none;
-      transition: border-color 0.18s ease;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23b8ad9a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: 12px center;
-    }
-
-    .search-input::placeholder {
-      color: var(--cream-dim);
-      opacity: 0.6;
-    }
-
-    .search-input:focus {
-      border-color: var(--gold-dim);
-    }
-
-    .export-btn-wrap {
-      position: relative;
-    }
-
-    /* ─── FILTER TABS ─── */
-    .filter-tabs {
-      display: flex;
-      gap: 4px;
-      margin-bottom: 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 4px;
-    }
-
-    .tab {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: var(--cream-dim);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.825rem;
-      font-weight: 500;
-      padding: 7px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: all 0.18s ease;
+    .section-tab {
+      flex: 1; background: transparent; border: none; color: var(--cream-dim);
+      font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500;
+      padding: 8px 12px; border-radius: 5px; cursor: pointer; transition: all 0.18s;
       text-align: center;
     }
+    .section-tab:hover { color: var(--cream); background: rgba(255,255,255,0.04); }
+    .section-tab.active { background: var(--surface-raised); color: var(--gold); box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
 
-    .tab:hover {
-      color: var(--cream);
-      background: rgba(255,255,255,0.04);
+    /* ─── WEEK GRID ─── */
+    .week-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .week-nav-label { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); font-weight: 600; }
+    .week-nav-btn { background: none; border: 1px solid var(--border); color: var(--cream-dim); border-radius: var(--radius-sm); padding: 6px 14px; cursor: pointer; font-size: 0.875rem; transition: all 0.15s; }
+    .week-nav-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+    .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+    .week-col {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 14px 12px; cursor: pointer; transition: all 0.18s; min-height: 140px;
+      background-image: repeating-linear-gradient(transparent, transparent 27px, rgba(201,168,76,0.06) 27px, rgba(201,168,76,0.06) 28px);
     }
+    .week-col:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .week-col.today { border-color: var(--gold); box-shadow: 0 0 20px rgba(201,168,76,0.15); }
+    .week-col-day { font-size: 0.7rem; color: var(--cream-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+    .week-col-date { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--cream); font-weight: 700; line-height: 1; margin: 4px 0 8px; }
+    .week-col.today .week-col-date { color: var(--gold); }
+    .priority-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+    .dot-A { background: var(--red); }
+    .dot-B { background: var(--gold); }
+    .dot-C { background: var(--slate); }
+    .week-col-count { font-size: 0.72rem; color: var(--cream-dim); margin: 6px 0; }
+    .week-col-preview { font-size: 0.75rem; color: var(--cream-dim); opacity: 0.7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 4px; }
 
-    .tab.active {
-      background: var(--surface-raised);
-      color: var(--gold);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    }
+    /* ─── WEEK STRIP (day view) ─── */
+    .week-strip { display: flex; gap: 4px; margin-bottom: 16px; }
+    .strip-day { flex: 1; text-align: center; padding: 6px 4px; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer; font-size: 0.75rem; color: var(--cream-dim); position: relative; transition: all 0.15s; }
+    .strip-day:hover { border-color: var(--border-hover); }
+    .strip-day.active { background: var(--surface-raised); border-color: var(--gold); color: var(--gold); }
+    .strip-day .has-tasks { position: absolute; top: 4px; right: 4px; width: 5px; height: 5px; border-radius: 50%; background: var(--red); }
 
-    .tab-add {
-      flex: none;
-      color: var(--cream-dim);
-      border: 1px dashed var(--border);
-      font-size: 0.8rem;
-      padding: 7px 10px;
-    }
+    /* ─── PRIORITY PILLS ─── */
+    .priority-pill { font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; cursor: pointer; letter-spacing: 0.05em; transition: all 0.15s; }
+    .pill-A { background: rgba(192,57,43,0.2); color: #e57368; border: 1px solid rgba(192,57,43,0.4); }
+    .pill-B { background: rgba(201,168,76,0.2); color: var(--gold); border: 1px solid rgba(201,168,76,0.4); }
+    .pill-C { background: rgba(94,112,128,0.2); color: #8aa4b5; border: 1px solid rgba(94,112,128,0.4); }
+    .pill-null { background: transparent; color: var(--cream-dim); border: 1px dashed var(--border); }
 
-    .tab-add:hover {
-      border-color: var(--gold-dim);
-      color: var(--gold);
+    /* ─── TASK CHECKBOX ─── */
+    .task-checkbox { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 3px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+    .task-checkbox.checked { background: rgba(201,168,76,0.25); border-color: var(--gold); }
+    .task-checkbox.checked::after { content: '✓'; font-size: 0.7rem; color: var(--gold); font-weight: 700; }
+
+    /* ─── NOTE CARD DAY VIEW ─── */
+    .note-card-day {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 14px 14px 14px 18px; display: flex; gap: 12px; align-items: flex-start;
+      position: relative; overflow: hidden; transition: border-color 0.18s, opacity 0.3s;
+      animation: slideInTop 0.3s ease;
     }
+    .note-card-day::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; border-radius: 3px 0 0 3px; }
+    .note-card-day.pri-A::before { background: var(--red); }
+    .note-card-day.pri-B::before { background: var(--gold); }
+    .note-card-day.pri-C::before { background: var(--slate); }
+    .note-card-day.pri-null::before { background: rgba(255,255,255,0.1); }
+    .note-card-day.done-card { opacity: 0.4; }
+    .note-card-day.done-card .note-text-day { text-decoration: line-through; }
+    .note-card-day-body { flex: 1; min-width: 0; }
+    .note-text-day { font-size: 0.925rem; line-height: 1.65; color: var(--cream); word-break: break-word; margin-bottom: 8px; }
+    .note-card-day-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    /* ─── CARRY SECTION ─── */
+    .carry-section { background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.25); border-radius: var(--radius); padding: 16px; margin-bottom: 20px; }
+    .carry-section-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--gold); font-style: italic; margin-bottom: 4px; }
+    .carry-section-sub { font-size: 0.8rem; color: var(--cream-dim); margin-bottom: 14px; }
+    .carry-badge { font-size: 0.68rem; color: var(--gold-dim); background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; padding: 1px 8px; }
+
+    /* ─── PLANNER MODE ─── */
+    .planner-layout { display: grid; grid-template-columns: 220px 1fr; gap: 20px; }
+    .time-blocks-col { border-right: 1px solid var(--border); padding-right: 16px; }
+    .time-block { display: flex; gap: 12px; align-items: flex-start; min-height: 52px; border-bottom: 1px solid rgba(201,168,76,0.08); padding: 8px 0; }
+    .time-label { font-size: 0.75rem; color: var(--slate); width: 48px; flex-shrink: 0; padding-top: 4px; }
+    .time-slot-cards { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .floating-section-title { font-size: 0.75rem; color: var(--cream-dim); text-transform: uppercase; letter-spacing: 0.08em; margin: 16px 0 8px; }
+
+    /* ─── PRIORITY INPUT ─── */
+    .priority-input-group { display: flex; gap: 6px; }
+    .priority-radio { display: none; }
+    .priority-label { padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); color: var(--cream-dim); transition: all 0.15s; }
+    .priority-radio:checked + .priority-label.label-A { background: rgba(192,57,43,0.25); border-color: var(--red); color: #e57368; }
+    .priority-radio:checked + .priority-label.label-B { background: rgba(201,168,76,0.2); border-color: var(--gold); color: var(--gold); }
+    .priority-radio:checked + .priority-label.label-C { background: rgba(94,112,128,0.2); border-color: var(--slate); color: #8aa4b5; }
+    .priority-radio:checked + .priority-label.label-N { background: rgba(255,255,255,0.06); border-color: var(--cream-dim); color: var(--cream); }
+
+    /* ─── DAY VIEW HEADER ─── */
+    .day-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .day-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold); font-weight: 700; }
+    .day-quip { font-family: 'Playfair Display', serif; font-size: 0.875rem; color: var(--cream-dim); font-style: italic; margin-bottom: 20px; }
+    .day-nav-btn { background: none; border: 1px solid var(--border); color: var(--cream-dim); border-radius: var(--radius-sm); padding: 6px 12px; cursor: pointer; font-size: 0.875rem; transition: all 0.15s; }
+    .day-nav-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+    .day-nav-group { display: flex; gap: 6px; align-items: center; }
+    .breadcrumb { font-size: 0.8rem; color: var(--gold-dim); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 16px; transition: color 0.15s; border: none; background: none; font-family: 'Inter', sans-serif; }
+    .breadcrumb:hover { color: var(--gold); }
+
+    /* ─── PLAN WEEK BANNER ─── */
+    .plan-week-banner { background: rgba(192,57,43,0.08); border: 1px solid rgba(192,57,43,0.3); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .plan-week-banner-text { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-style: italic; color: var(--cream); }
+
+    /* ─── PRIORITY DAY TABS ─── */
+    .priority-tabs { display: flex; gap: 4px; margin-bottom: 16px; }
+    .priority-tab { background: transparent; border: 1px solid var(--border); color: var(--cream-dim); font-family: 'Inter', sans-serif; font-size: 0.8rem; padding: 5px 12px; border-radius: 20px; cursor: pointer; transition: all 0.15s; }
+    .priority-tab.active { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
+    .priority-tab.tab-A.active { border-color: var(--red); color: #e57368; background: rgba(192,57,43,0.1); }
+    .priority-tab.tab-done.active { border-color: var(--slate); color: #8aa4b5; background: rgba(94,112,128,0.1); }
+
+    /* ─── LAYOUT TOGGLE ─── */
+    .layout-toggle { background: none; border: 1px solid var(--border); color: var(--cream-dim); border-radius: var(--radius-sm); padding: 6px 12px; cursor: pointer; font-size: 0.8rem; transition: all 0.15s; }
+    .layout-toggle:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+    /* ─── DAY TOOLBAR ─── */
+    .day-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+
+    /* ─── DONE QUIP NOTIFICATION ─── */
+    .done-quip { position: fixed; bottom: 24px; right: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 18px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.875rem; color: var(--cream); z-index: 500; animation: slideUp 0.3s ease; box-shadow: var(--shadow); }
+
+    /* ─── ALL DONE BANNER ─── */
+    .all-done-banner { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.3); border-radius: var(--radius); padding: 14px 20px; margin-bottom: 16px; font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold); font-size: 0.95rem; text-align: center; }
+
+    /* ─── INPUT SECTION ─── */
+    .input-section { margin-bottom: 20px; }
+    .input-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow-card); }
+    .input-card textarea { width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--cream); font-family: 'Inter', sans-serif; font-size: 0.95rem; line-height: 1.6; padding: 14px 16px; resize: vertical; min-height: 80px; outline: none; transition: border-color 0.18s ease; }
+    .input-card textarea::placeholder { color: var(--cream-dim); opacity: 0.6; font-style: italic; }
+    .input-card textarea:focus { border-color: var(--gold-dim); background: rgba(0,0,0,0.28); }
+    .input-row { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+    .category-select { background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--cream); font-family: 'Inter', sans-serif; font-size: 0.875rem; padding: 8px 12px; cursor: pointer; outline: none; transition: border-color 0.18s; }
+    .category-select:focus, .category-select:hover { border-color: var(--gold-dim); }
+    .category-select option { background: var(--surface); }
+    .date-input { background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--cream); font-family: 'Inter', sans-serif; font-size: 0.875rem; padding: 8px 12px; cursor: pointer; outline: none; transition: border-color 0.18s; }
+    .date-input:focus, .date-input:hover { border-color: var(--gold-dim); }
+    .date-input::-webkit-calendar-picker-indicator { filter: invert(0.7); cursor: pointer; }
+
+    /* ─── INKTHORN RESPONSE ─── */
+    .inkthorn-response { display: none; margin-top: 14px; background: rgba(192,57,43,0.08); border: 1px solid rgba(192,57,43,0.25); border-radius: var(--radius-sm); padding: 12px 16px; align-items: center; gap: 12px; animation: slideInDown 0.3s ease; }
+    .inkthorn-response.hidden { display: none !important; }
+    .inkthorn-response.visible { display: flex !important; }
+    .response-mascot { font-size: 1.6rem; flex-shrink: 0; }
+    .response-text { font-size: 0.9rem; color: var(--cream); font-style: italic; font-family: 'Playfair Display', serif; }
+
+    /* ─── NOTES TOOLBAR (ideas/projects/someday) ─── */
+    .notes-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .search-input { flex: 1; min-width: 180px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--cream); font-family: 'Inter', sans-serif; font-size: 0.875rem; padding: 9px 14px 9px 36px; outline: none; transition: border-color 0.18s; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23b8ad9a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: 12px center; }
+    .search-input::placeholder { color: var(--cream-dim); opacity: 0.6; }
+    .search-input:focus { border-color: var(--gold-dim); }
 
     /* ─── NOTES COUNT ─── */
-    .notes-meta {
-      font-size: 0.8rem;
-      color: var(--cream-dim);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    .notes-meta { font-size: 0.8rem; color: var(--cream-dim); margin-bottom: 14px; }
 
-    /* ─── NOTE CARDS ─── */
-    .notes-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .note-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 18px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.18s ease, transform 0.18s ease;
-      animation: slideInTop 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .note-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-1px);
-    }
-
-    .note-card::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: var(--category-color, var(--gold));
-      border-radius: 3px 0 0 3px;
-    }
-
+    /* ─── NOTE CARDS (simple list view) ─── */
+    .notes-list { display: flex; flex-direction: column; gap: 12px; }
+    .note-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; position: relative; overflow: hidden; transition: border-color 0.18s, transform 0.18s; animation: slideInTop 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+    .note-card:hover { border-color: var(--border-hover); transform: translateY(-1px); }
+    .note-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--category-color, var(--gold)); border-radius: 3px 0 0 3px; }
     .note-card.cat-ideas { --category-color: var(--gold); }
     .note-card.cat-tasks { --category-color: var(--red); }
     .note-card.cat-other { --category-color: var(--slate); }
-
-    .note-watermark {
-      position: absolute;
-      bottom: 10px;
-      right: 14px;
-      font-size: 1.4rem;
-      opacity: 0.06;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .note-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .note-text {
-      font-size: 0.925rem;
-      line-height: 1.65;
-      color: var(--cream);
-      flex: 1;
-      padding-right: 8px;
-      word-break: break-word;
-    }
-
-    .note-actions {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex-shrink: 0;
-    }
-
-    .note-footer {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .source-badge {
-      font-size: 0.65rem;
-      color: var(--slate);
-      opacity: 0.7;
-    }
-
-    .category-badge {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 2px 8px;
-      border-radius: 20px;
-    }
-
-    .badge-ideas {
-      background: rgba(201,168,76,0.15);
-      color: var(--gold);
-      border: 1px solid rgba(201,168,76,0.25);
-    }
-
-    .badge-tasks {
-      background: rgba(192,57,43,0.15);
-      color: #e57368;
-      border: 1px solid rgba(192,57,43,0.25);
-    }
-
-    .badge-other {
-      background: rgba(94,112,128,0.15);
-      color: #8aa4b5;
-      border: 1px solid rgba(94,112,128,0.25);
-    }
-
-    .note-time {
-      font-size: 0.75rem;
-      color: var(--cream-dim);
-      opacity: 0.65;
-    }
-
-    .note-export-locked {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.72rem;
-      color: var(--cream-dim);
-      background: none;
-      border: none;
-      cursor: pointer;
-      opacity: 0.5;
-      padding: 4px 6px;
-      border-radius: 4px;
-      transition: opacity 0.15s;
-    }
-
-    .note-export-locked:hover {
-      opacity: 0.8;
-    }
+    .note-watermark { position: absolute; bottom: 10px; right: 14px; font-size: 1.4rem; opacity: 0.06; pointer-events: none; user-select: none; }
+    .note-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+    .note-text { font-size: 0.925rem; line-height: 1.65; color: var(--cream); flex: 1; padding-right: 8px; word-break: break-word; }
+    .note-actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .note-footer { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+    .source-badge { font-size: 0.65rem; color: var(--slate); opacity: 0.7; }
+    .category-badge { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; }
+    .badge-ideas { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.25); }
+    .badge-tasks { background: rgba(192,57,43,0.15); color: #e57368; border: 1px solid rgba(192,57,43,0.25); }
+    .badge-other { background: rgba(94,112,128,0.15); color: #8aa4b5; border: 1px solid rgba(94,112,128,0.25); }
+    .note-time { font-size: 0.75rem; color: var(--cream-dim); opacity: 0.65; }
 
     /* ─── EMPTY STATE ─── */
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--cream-dim);
-    }
-
-    .empty-state .empty-icon {
-      font-size: 3.5rem;
-      margin-bottom: 16px;
-      opacity: 0.5;
-    }
-
-    .empty-state h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      color: var(--cream);
-      margin-bottom: 8px;
-    }
-
-    .empty-state p {
-      font-size: 0.875rem;
-      font-style: italic;
-      opacity: 0.7;
-      max-width: 320px;
-      margin: 0 auto;
-    }
-
-    /* ─── UPGRADE MODAL ─── */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(10, 8, 5, 0.88);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      backdrop-filter: blur(4px);
-    }
-
-    .modal-overlay.open {
-      display: flex;
-      animation: fadeIn 0.2s ease;
-    }
-
-    .modal-card {
-      background: var(--surface);
-      border: 1px solid var(--border-hover);
-      border-radius: 16px;
-      padding: 36px 32px;
-      max-width: 460px;
-      width: 100%;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-      position: relative;
-      animation: slideUp 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: none;
-      border: none;
-      color: var(--cream-dim);
-      font-size: 1.3rem;
-      cursor: pointer;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: all 0.15s;
-    }
-
-    .modal-close:hover {
-      background: rgba(255,255,255,0.06);
-      color: var(--cream);
-    }
-
-    .modal-mascot {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .modal-mascot img {
-      height: 90px;
-      filter: drop-shadow(0 4px 12px rgba(192,57,43,0.4));
-    }
-
-    .modal-mascot .mascot-fallback {
-      font-size: 64px;
-    }
-
-    .modal-headline {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--gold);
-      text-align: center;
-      margin-bottom: 6px;
-    }
-
-    .modal-price {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .modal-price .price-amount {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--cream);
-      font-family: 'Playfair Display', serif;
-    }
-
-    .modal-price .price-period {
-      font-size: 0.875rem;
-      color: var(--cream-dim);
-    }
-
-    .feature-list {
-      list-style: none;
-      margin-bottom: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .feature-list li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-      color: var(--cream);
-    }
-
-    .feature-list li .check {
-      color: var(--gold);
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
-    .modal-fine-print {
-      text-align: center;
-      font-size: 0.75rem;
-      color: var(--cream-dim);
-      opacity: 0.6;
-      font-style: italic;
-      margin-top: 12px;
-    }
-
-    /* ─── TELEGRAM SECTION ─── */
-    .telegram-section {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-top: 28px;
-    }
-
-    .telegram-section h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-
-    .telegram-section p {
-      font-size: 0.875rem;
-      color: var(--cream-dim);
-      margin-bottom: 14px;
-    }
-
-    .link-code-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(0,0,0,0.25);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-    }
-
-    .link-code-text {
-      font-family: monospace;
-      font-size: 1rem;
-      color: var(--gold);
-      flex: 1;
-    }
-
-    .btn-copy {
-      font-size: 0.8rem;
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--cream-dim);
-      border-radius: var(--radius-sm);
-      padding: 4px 10px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .btn-copy:hover {
-      border-color: var(--gold-dim);
-      color: var(--gold);
-    }
-
-    .telegram-deeplink {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 12px;
-      color: var(--gold);
-      text-decoration: none;
-      font-size: 0.875rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 8px 14px;
-      transition: all 0.15s;
-    }
-
-    .telegram-deeplink:hover {
-      border-color: var(--gold);
-      background: rgba(201,168,76,0.06);
-    }
-
-    /* ─── SECTION DIVIDER ─── */
-    .section-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 28px 0;
-    }
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--cream-dim); }
+    .empty-state .empty-icon { font-size: 3.5rem; margin-bottom: 16px; opacity: 0.5; }
+    .empty-state h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--cream); margin-bottom: 8px; }
+    .empty-state p { font-size: 0.875rem; font-style: italic; opacity: 0.7; max-width: 360px; margin: 0 auto; }
 
     /* ─── PRO BADGE ─── */
-    .pro-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
-      color: #1a1612;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 2px 6px;
-      border-radius: 4px;
-      vertical-align: middle;
-      margin-left: 4px;
-    }
+    .pro-badge { display: inline-flex; align-items: center; gap: 3px; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%); color: #1a1612; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; vertical-align: middle; margin-left: 4px; }
 
-    /* ─── TELEGRAM BUTTON ─── */
-    .telegram-locked {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      color: var(--cream-dim);
-      background: none;
-      border: 1px dashed var(--border);
-      cursor: pointer;
-      opacity: 0.6;
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      transition: opacity 0.15s;
-      font-family: 'Inter', sans-serif;
-    }
+    /* ─── UPGRADE MODAL ─── */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,8,5,0.88); z-index: 1000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+    .modal-overlay.open { display: flex; animation: fadeIn 0.2s ease; }
+    .modal-card { background: var(--surface); border: 1px solid var(--border-hover); border-radius: 16px; padding: 36px 32px; max-width: 460px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.7); position: relative; animation: slideUp 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
+    .modal-close { position: absolute; top: 14px; right: 14px; background: none; border: none; color: var(--cream-dim); font-size: 1.3rem; cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.15s; }
+    .modal-close:hover { background: rgba(255,255,255,0.06); color: var(--cream); }
+    .modal-mascot { text-align: center; margin-bottom: 20px; }
+    .modal-mascot img { height: 90px; filter: drop-shadow(0 4px 12px rgba(192,57,43,0.4)); }
+    .modal-mascot .mascot-fallback { font-size: 64px; }
+    .modal-headline { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); text-align: center; margin-bottom: 6px; }
+    .modal-price { text-align: center; margin-bottom: 24px; }
+    .modal-price .price-amount { font-size: 2.2rem; font-weight: 700; color: var(--cream); font-family: 'Playfair Display', serif; }
+    .modal-price .price-period { font-size: 0.875rem; color: var(--cream-dim); }
+    .feature-list { list-style: none; margin-bottom: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .feature-list li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--cream); }
+    .feature-list li .check { color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+    .modal-fine-print { text-align: center; font-size: 0.75rem; color: var(--cream-dim); opacity: 0.6; font-style: italic; margin-top: 12px; }
 
-    .telegram-locked:hover {
-      opacity: 1;
-      border-color: var(--gold-dim);
-    }
+    /* ─── TELEGRAM SECTION ─── */
+    .telegram-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-top: 28px; }
+    .telegram-section h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); margin-bottom: 8px; }
+    .telegram-section p { font-size: 0.875rem; color: var(--cream-dim); margin-bottom: 14px; }
+    .link-code-box { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; }
+    .link-code-text { font-family: monospace; font-size: 1rem; color: var(--gold); flex: 1; }
+    .btn-copy { font-size: 0.8rem; background: none; border: 1px solid var(--border); color: var(--cream-dim); border-radius: var(--radius-sm); padding: 4px 10px; cursor: pointer; transition: all 0.15s; }
+    .btn-copy:hover { border-color: var(--gold-dim); color: var(--gold); }
+    .telegram-deeplink { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; color: var(--gold); text-decoration: none; font-size: 0.875rem; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 14px; transition: all 0.15s; }
+    .telegram-deeplink:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
 
-    /* ─── LOADING STATE ─── */
-    .loading-state {
-      text-align: center;
-      padding: 40px;
-      color: var(--cream-dim);
-      font-style: italic;
-      font-size: 0.9rem;
-    }
+    /* ─── LOADING ─── */
+    .loading-state { text-align: center; padding: 40px; color: var(--cream-dim); font-style: italic; font-size: 0.9rem; }
+    .spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; vertical-align: middle; }
 
-    .spinner {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--border);
-      border-top-color: var(--gold);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin-right: 8px;
-      vertical-align: middle;
-    }
+    /* ─── AI SUGGEST TEASER ─── */
+    .ai-suggest-teaser { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--cream-dim); font-style: italic; cursor: pointer; padding: 5px 8px; border-radius: var(--radius-sm); transition: background 0.15s; border: 1px dashed transparent; }
+    .ai-suggest-teaser:hover { background: rgba(201,168,76,0.06); border-color: var(--border); }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    /* ─── SECTION DIVIDER ─── */
+    .section-divider { height: 1px; background: var(--border); margin: 28px 0; }
 
     /* ─── ANIMATIONS ─── */
-    @keyframes slideInTop {
-      from { opacity: 0; transform: translateY(-16px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @keyframes slideInDown {
-      from { opacity: 0; transform: translateY(-8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes slideInTop { from { opacity: 0; transform: translateY(-16px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes slideInDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     /* ─── MOBILE ─── */
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
+      .week-grid { grid-template-columns: repeat(2, 1fr); }
+      .planner-layout { grid-template-columns: 1fr; }
+      .week-strip { overflow-x: auto; }
       .header-title { font-size: 1.7rem; }
       .header-mascot { height: 60px; }
-      .header-tagline { font-size: 0.78rem; }
       .input-row { flex-direction: column; align-items: stretch; }
       .input-row .btn-gold { width: 100%; justify-content: center; }
-      .notes-toolbar { flex-direction: column; }
-      .search-input { min-width: unset; }
       .modal-card { padding: 28px 20px; }
-      .modal-headline { font-size: 1.25rem; }
     }
 
     /* ─── UTILITY ─── */
@@ -1029,7 +391,6 @@
     <div class="login-mascot"><img src="./inkthorn-mascot.png" alt="InkThorn" style="width:120px;height:auto;" /></div>
     <div class="login-title">InkThorn</div>
     <div class="login-tagline">"He grumbles. He remembers. You don't have to."</div>
-
     <a href="https://inkthorn-notes.rgaudet2023.workers.dev/auth/google" class="btn-google">
       <svg width="18" height="18" viewBox="0 0 24 24">
         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -1039,7 +400,6 @@
       </svg>
       Continue with Google
     </a>
-
     <p class="login-fine-print">Your notes sync across all your devices. InkThorn won't be pleased, but he'll manage.</p>
   </div>
 </div>
@@ -1048,112 +408,35 @@
 
   <!-- ═══════════════ HEADER ═══════════════ -->
   <header>
-    <img
-      src="./inkthorn-mascot.png"
-      alt="InkThorn"
-      class="header-mascot"
-      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-    />
+    <img src="./inkthorn-mascot.png" alt="InkThorn" class="header-mascot"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
     <div class="header-mascot-fallback" style="display:none">🦞</div>
-
     <div class="header-text">
       <div class="header-title">InkThorn</div>
       <div class="header-tagline">"He grumbles. He remembers. You don't have to."</div>
     </div>
-
     <div class="header-actions">
       <span class="user-name" id="headerUserName"></span>
       <img class="user-avatar hidden" id="headerAvatar" src="" alt="User avatar" />
       <button class="btn-signout hidden" id="signoutBtn" onclick="signOut()">Sign out</button>
-      <button class="btn btn-gold" onclick="openUpgradeModal()" title="Unlock InkThorn Pro features">
-        ✦ Upgrade
-      </button>
+      <button class="btn btn-gold" onclick="openUpgradeModal()" title="Unlock InkThorn Pro features">✦ Upgrade</button>
     </div>
   </header>
 
-  <!-- ═══════════════ INPUT SECTION ═══════════════ -->
-  <section class="input-section">
-    <div class="input-card">
-      <textarea
-        id="noteInput"
-        placeholder="What do you need InkThorn to remember?"
-        rows="3"
-        onkeydown="handleInputKeydown(event)"
-      ></textarea>
+  <!-- ═══════════════ SECTION NAV ═══════════════ -->
+  <nav class="section-nav" id="sectionNav">
+    <button class="section-tab active" data-section="daily" onclick="switchSection('daily', this)">📅 Daily</button>
+    <button class="section-tab" data-section="ideas" onclick="switchSection('ideas', this)">💡 Ideas</button>
+    <button class="section-tab" data-section="projects" onclick="switchSection('projects', this)">📋 Projects</button>
+    <button class="section-tab" data-section="someday" onclick="switchSection('someday', this)">🗄 Someday</button>
+  </nav>
 
-      <div class="input-row">
-        <select class="category-select" id="categorySelect" title="File this under…">
-          <option value="ideas">💡 Ideas</option>
-          <option value="tasks">✅ Tasks</option>
-          <option value="other">📁 Other</option>
-        </select>
-
-        <button class="btn btn-gold" onclick="submitNote()" id="tellBtn">
-          Tell InkThorn
-        </button>
-
-        <button
-          class="ai-suggest-teaser telegram-locked"
-          onclick="openUpgradeModal()"
-          title="InkThorn would file this automatically — Pro feature"
-        >
-          <span class="lock-icon">🔒</span>
-          Auto-categorize
-          <span class="pro-badge">PRO</span>
-        </button>
-      </div>
-
-      <!-- InkThorn's grumpy response -->
-      <div class="inkthorn-response hidden" id="inkthornResponse">
-        <div class="response-mascot">🦞</div>
-        <div class="response-text" id="responseText"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════ NOTES TOOLBAR ═══════════════ -->
-  <div class="notes-toolbar">
-    <input
-      type="text"
-      class="search-input"
-      id="searchInput"
-      placeholder="Search InkThorn's files…"
-      oninput="renderNotes()"
-    />
-
-    <button
-      class="btn btn-locked"
-      onclick="openUpgradeModal()"
-      id="exportAllBtn"
-      title="Export all notes — Pro feature"
-    >
-      🔒 Export All <span class="pro-badge">PRO</span>
-    </button>
-  </div>
-
-  <!-- ═══════════════ FILTER TABS ═══════════════ -->
-  <div class="filter-tabs" id="filterTabs">
-    <button class="tab active" data-cat="all" onclick="setFilter('all', this)">All</button>
-    <button class="tab" data-cat="ideas" onclick="setFilter('ideas', this)">💡 Ideas</button>
-    <button class="tab" data-cat="tasks" onclick="setFilter('tasks', this)">✅ Tasks</button>
-    <button class="tab" data-cat="other" onclick="setFilter('other', this)">📁 Other</button>
-    <button class="tab tab-add" onclick="openUpgradeModal()" title="Custom categories — Pro feature">
-      + Add <span class="pro-badge">PRO</span>
-    </button>
-  </div>
-
-  <!-- ═══════════════ NOTES META ═══════════════ -->
-  <div class="notes-meta" id="notesMeta">
-    <span id="notesCount">Loading…</span>
-  </div>
-
-  <!-- ═══════════════ NOTES LIST ═══════════════ -->
-  <div class="notes-list" id="notesList">
+  <!-- ═══════════════ MAIN CONTENT AREA ═══════════════ -->
+  <div id="mainContent">
     <div class="loading-state"><span class="spinner"></span> InkThorn is retrieving your files…</div>
   </div>
 
   <!-- ═══════════════ TELEGRAM SECTION ═══════════════ -->
-  <!-- Telegram: not connected -->
   <div class="telegram-section hidden" id="telegramSection">
     <h3>✈️ Connect Telegram</h3>
     <p>Send notes to InkThorn directly from Telegram — just message @InkThornBot. He'll grumble about it, but he'll file them.</p>
@@ -1161,13 +444,10 @@
       <span class="link-code-text" id="linkCodeDisplay">Loading…</span>
       <button class="btn-copy" onclick="copyLinkCode()">Copy</button>
     </div>
-    <a id="telegramDeepLink" href="#" class="telegram-deeplink" target="_blank" rel="noopener">
-      ✈️ Open @InkThornBot →
-    </a>
+    <a id="telegramDeepLink" href="#" class="telegram-deeplink" target="_blank" rel="noopener">✈️ Open @InkThornBot →</a>
     <p style="margin-top: 12px; font-size: 0.78rem; opacity: 0.6;">Click the link above, then hit Start. InkThorn will connect your account automatically.</p>
   </div>
 
-  <!-- Telegram: connected -->
   <div class="telegram-section hidden" id="telegramConnectedSection" style="flex-direction: row; align-items: center; justify-content: space-between; gap: 12px;">
     <div style="display:flex; align-items: center; gap: 10px;">
       <span style="font-size: 1.2rem;">✅</span>
@@ -1182,23 +462,16 @@
 <div class="modal-overlay" id="upgradeModal" onclick="handleOverlayClick(event)">
   <div class="modal-card">
     <button class="modal-close" onclick="closeUpgradeModal()" title="InkThorn won't like this">✕</button>
-
     <div class="modal-mascot">
-      <img
-        src="./inkthorn-mascot.png"
-        alt="InkThorn"
-        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-      />
+      <img src="./inkthorn-mascot.png" alt="InkThorn"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
       <div class="mascot-fallback" style="display:none">🦞</div>
     </div>
-
     <div class="modal-headline">InkThorn Pro — He Works Harder For You</div>
-
     <div class="modal-price">
       <span class="price-amount">$4.99</span>
       <span class="price-period"> / month</span>
     </div>
-
     <ul class="feature-list">
       <li><span class="check">✦</span> Unlimited notes &amp; custom categories</li>
       <li><span class="check">✦</span> AI auto-categorization (InkThorn grumbles, but he does it)</li>
@@ -1207,517 +480,982 @@
       <li><span class="check">✦</span> InkThorn Pro badge (he pretends not to care)</li>
       <li><span class="check">✦</span> Priority support (he'll answer you… eventually)</li>
     </ul>
-
-    <a href="https://buy.stripe.com/9B67sEawQ77999E7mx0oM01" target="_blank" class="btn btn-upgrade" onclick="closeUpgradeModal()">
-      Upgrade Now →
-    </a>
-
+    <a href="https://buy.stripe.com/9B67sEawQ77999E7mx0oM01" target="_blank" class="btn btn-upgrade" onclick="closeUpgradeModal()">Upgrade Now →</a>
     <div class="modal-fine-print">Cancel anytime. InkThorn will be annoyed but he'll manage.</div>
   </div>
 </div>
 
 <script>
-  // ═══════════════════════════════════════════
-  //  CONFIG
-  // ═══════════════════════════════════════════
+// ═══════════════════════════════════════════
+//  CONFIG
+// ═══════════════════════════════════════════
 
-  const API_BASE = 'https://inkthorn-notes.rgaudet2023.workers.dev';
-  const TOKEN_KEY = 'inkthorn_token';
+const API_BASE = 'https://inkthorn-notes.rgaudet2023.workers.dev';
+const TOKEN_KEY = 'inkthorn_token';
+const META_KEY = 'inkthorn_daytimer_meta';
 
-  const GRUMPY_RESPONSES = [
-    "Filed. Try not to send me anything else tonight.",
-    "Noted. I've seen worse ideas. Not many.",
-    "Done. You owe me a drink.",
-    "Stored. Don't make a habit of this.",
-    "I've filed stranger things. This one's yours now.",
-    "Consider it remembered. Reluctantly.",
-    "Written down. Don't lose sleep over it — I won't.",
-    "Another one. Fine. I'll remember it. You clearly won't."
-  ];
+const GRUMPY_RESPONSES = [
+  "Filed. Try not to send me anything else tonight.",
+  "Noted. I've seen worse ideas. Not many.",
+  "Done. You owe me a drink.",
+  "Stored. Don't make a habit of this.",
+  "I've filed stranger things. This one's yours now.",
+  "Consider it remembered. Reluctantly.",
+  "Written down. Don't lose sleep over it — I won't.",
+  "Another one. Fine. I'll remember it. You clearly won't."
+];
 
-  let currentFilter = 'all';
-  let responseTimeout = null;
-  let notesCache = [];
-  let currentUser = null;
+const DAILY_QUIPS = [
+  "Monday again. InkThorn is unsurprised.",
+  "Tuesday. He finds it adequately unremarkable.",
+  "Wednesday. Halfway through. InkThorn is unimpressed.",
+  "Thursday. A day of grudging momentum.",
+  "Friday. He'll admit it. Almost a decent day.",
+  "Saturday. He considers Saturdays a necessary evil.",
+  "Sunday. Even InkThorn rests. Reluctantly.",
+];
 
-  // ═══════════════════════════════════════════
-  //  AUTH
-  // ═══════════════════════════════════════════
+const INPUT_PLACEHOLDERS = [
+  "What does InkThorn need to remember? Make it worth his time.",
+  "Another task. Very well. Type it.",
+  "He's listening. Grudgingly.",
+  "File something. He has all day. Unfortunately.",
+];
 
-  function getToken() {
-    return localStorage.getItem(TOKEN_KEY);
+const DONE_QUIPS = [
+  "Finally.",
+  "Noted. With satisfaction.",
+  "One less thing for both of us.",
+  "He'll believe it when he sees it stay done.",
+  "Progress. Of a sort."
+];
+
+// ═══════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════
+
+let notesCache = [];
+let currentUser = null;
+let currentSection = 'daily'; // 'daily' | 'ideas' | 'projects' | 'someday'
+let currentView = 'week';     // 'week' | 'day'
+let currentDate = new Date();
+let currentWeekOffset = 0;
+let currentPriorityFilter = 'all';
+let currentLayoutMode = 'list'; // 'list' | 'planner'
+let responseTimeout = null;
+let doneQuipTimeout = null;
+
+// ═══════════════════════════════════════════
+//  LOCAL META SYSTEM
+// ═══════════════════════════════════════════
+
+function getAllMeta() {
+  try { return JSON.parse(localStorage.getItem(META_KEY) || '{}'); } catch { return {}; }
+}
+function getMeta(id) {
+  const all = getAllMeta();
+  return all[id] || { priority: null, done: false, scheduled_date: null, time_slot: null };
+}
+function setMeta(id, patch) {
+  const all = getAllMeta();
+  all[id] = { ...getMeta(id), ...patch };
+  localStorage.setItem(META_KEY, JSON.stringify(all));
+}
+
+// ═══════════════════════════════════════════
+//  AUTH
+// ═══════════════════════════════════════════
+
+function getToken() { return localStorage.getItem(TOKEN_KEY); }
+function setToken(token) { localStorage.setItem(TOKEN_KEY, token); }
+function clearToken() { localStorage.removeItem(TOKEN_KEY); }
+
+function parseJWTPayload(token) {
+  try {
+    const b64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+    return JSON.parse(atob(b64));
+  } catch { return null; }
+}
+
+function signOut() {
+  clearToken();
+  currentUser = null;
+  notesCache = [];
+  showLoginOverlay();
+}
+
+function showLoginOverlay() { document.getElementById('loginOverlay').classList.remove('hidden'); }
+function hideLoginOverlay() { document.getElementById('loginOverlay').classList.add('hidden'); }
+
+function checkHashToken() {
+  const params = new URLSearchParams(window.location.search);
+  const qToken = params.get('token');
+  if (qToken) {
+    setToken(qToken);
+    history.replaceState(null, '', window.location.pathname);
+    return qToken;
   }
-
-  function setToken(token) {
-    localStorage.setItem(TOKEN_KEY, token);
-  }
-
-  function clearToken() {
-    localStorage.removeItem(TOKEN_KEY);
-  }
-
-  function parseJWTPayload(token) {
-    try {
-      const b64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
-      return JSON.parse(atob(b64));
-    } catch {
-      return null;
-    }
-  }
-
-  function signOut() {
-    clearToken();
-    currentUser = null;
-    notesCache = [];
-    showLoginOverlay();
-  }
-
-  function showLoginOverlay() {
-    document.getElementById('loginOverlay').classList.remove('hidden');
-  }
-
-  function hideLoginOverlay() {
-    document.getElementById('loginOverlay').classList.add('hidden');
-  }
-
-  // Check for token in URL query param or hash (post-OAuth redirect)
-  function checkHashToken() {
-    // Check query param first (?token=...)
-    const params = new URLSearchParams(window.location.search);
-    const qToken = params.get('token');
-    if (qToken) {
-      setToken(qToken);
+  const hash = window.location.hash;
+  if (hash.startsWith('#token=')) {
+    const token = hash.slice(7);
+    if (token) {
+      setToken(token);
       history.replaceState(null, '', window.location.pathname);
-      return qToken;
+      return token;
     }
-    // Fallback: check hash (#token=...)
-    const hash = window.location.hash;
-    if (hash.startsWith('#token=')) {
-      const token = hash.slice(7);
-      if (token) {
-        setToken(token);
-        history.replaceState(null, '', window.location.pathname);
-        return token;
-      }
-    }
-    return null;
   }
+  return null;
+}
 
-  async function applyUserToUI(payload) {
-    currentUser = payload;
-    // Show user info in header
-    document.getElementById('headerUserName').textContent = payload.name || payload.email || '';
-    const avatar = document.getElementById('headerAvatar');
-    if (payload.avatar_url) {
-      avatar.src = payload.avatar_url;
-      avatar.classList.remove('hidden');
-    }
-    document.getElementById('signoutBtn').classList.remove('hidden');
+async function applyUserToUI(payload) {
+  currentUser = payload;
+  document.getElementById('headerUserName').textContent = payload.name || payload.email || '';
+  const avatar = document.getElementById('headerAvatar');
+  if (payload.avatar_url) {
+    avatar.src = payload.avatar_url;
+    avatar.classList.remove('hidden');
+  }
+  document.getElementById('signoutBtn').classList.remove('hidden');
 
-    // Show Telegram section only if not yet connected
-    const section = document.getElementById('telegramSection');
-    const code = payload.link_code || '';
-    document.getElementById('linkCodeDisplay').textContent = code;
-    if (code) {
-      const deepLink = `https://t.me/InkThornBot?start=${code}`;
-      document.getElementById('telegramDeepLink').href = deepLink;
-    }
-    // Check if Telegram already linked via /api/me
-    try {
-      const meRes = await apiFetch('/api/me');
-      if (meRes.ok) {
-        const me = await meRes.json();
-        if (me.telegram_chat_id) {
-          document.getElementById('telegramConnectedSection').classList.remove('hidden');
-        } else {
-          section.classList.remove('hidden');
-        }
+  const section = document.getElementById('telegramSection');
+  const code = payload.link_code || '';
+  document.getElementById('linkCodeDisplay').textContent = code;
+  if (code) {
+    document.getElementById('telegramDeepLink').href = `https://t.me/InkThornBot?start=${code}`;
+  }
+  try {
+    const meRes = await apiFetch('/api/me');
+    if (meRes.ok) {
+      const me = await meRes.json();
+      if (me.telegram_chat_id) {
+        document.getElementById('telegramConnectedSection').classList.remove('hidden');
       } else {
         section.classList.remove('hidden');
       }
-    } catch {
+    } else {
       section.classList.remove('hidden');
     }
+  } catch {
+    section.classList.remove('hidden');
   }
+}
 
-  // ═══════════════════════════════════════════
-  //  API CALLS
-  // ═══════════════════════════════════════════
+// ═══════════════════════════════════════════
+//  API
+// ═══════════════════════════════════════════
 
-  async function apiFetch(path, options = {}) {
+async function apiFetch(path, options = {}) {
+  const token = getToken();
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+    ...(options.headers || {}),
+  };
+  const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+  if (res.status === 401) { clearToken(); showLoginOverlay(); throw new Error('Unauthorized'); }
+  return res;
+}
+
+async function loadNotesFromAPI() {
+  try {
+    const res = await apiFetch('/api/notes');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    notesCache = await res.json();
+    return notesCache;
+  } catch (err) {
+    console.error('Failed to load notes:', err);
+    return [];
+  }
+}
+
+async function createNoteAPI(text, category) {
+  const res = await apiFetch('/api/notes', {
+    method: 'POST',
+    body: JSON.stringify({ text, category }),
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+async function deleteNoteAPI(id) {
+  const res = await apiFetch(`/api/notes/${id}`, { method: 'DELETE' });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return true;
+}
+
+// ═══════════════════════════════════════════
+//  UTILITIES
+// ═══════════════════════════════════════════
+
+function escapeHTML(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+    .replace(/\n/g, '<br>');
+}
+
+function relativeTime(isoOrTs) {
+  const ts = typeof isoOrTs === 'number' ? isoOrTs : new Date(isoOrTs).getTime();
+  const now = Date.now();
+  const diff = Math.floor((now - ts) / 1000);
+  if (diff < 5) return 'just now';
+  if (diff < 60) return `${diff}s ago`;
+  const mins = Math.floor(diff / 60);
+  if (mins < 60) return mins === 1 ? '1 minute ago' : `${mins} minutes ago`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs === 1 ? '1 hour ago' : `${hrs} hours ago`;
+  const days = Math.floor(hrs / 24);
+  if (days === 1) return 'yesterday';
+  if (days < 7) return `${days} days ago`;
+  if (days < 14) return 'last week';
+  if (days < 30) return `${Math.floor(days / 7)} weeks ago`;
+  if (days < 60) return 'last month';
+  return `${Math.floor(days / 30)} months ago`;
+}
+
+function startTimestampTicker() {
+  setInterval(() => {
+    document.querySelectorAll('.note-time[data-ts]').forEach(el => {
+      el.textContent = relativeTime(el.dataset.ts);
+    });
+  }, 30000);
+}
+
+function startLiveSync() {
+  setInterval(async () => {
     const token = getToken();
-    const headers = {
-      'Content-Type': 'application/json',
-      ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
-      ...(options.headers || {}),
-    };
-    const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
-    if (res.status === 401) {
-      clearToken();
-      showLoginOverlay();
-      throw new Error('Unauthorized');
-    }
-    return res;
-  }
-
-  async function loadNotesFromAPI() {
+    if (!token) return;
     try {
       const res = await apiFetch('/api/notes');
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const notes = await res.json();
-      notesCache = notes;
-      return notes;
-    } catch (err) {
-      console.error('Failed to load notes:', err);
-      return [];
-    }
-  }
-
-  async function createNoteAPI(text, category) {
-    const res = await apiFetch('/api/notes', {
-      method: 'POST',
-      body: JSON.stringify({ text, category }),
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return res.json();
-  }
-
-  async function deleteNoteAPI(id) {
-    const res = await apiFetch(`/api/notes/${id}`, { method: 'DELETE' });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return true;
-  }
-
-  // ═══════════════════════════════════════════
-  //  RELATIVE TIMESTAMPS
-  // ═══════════════════════════════════════════
-
-  function relativeTime(isoOrTs) {
-    const ts = typeof isoOrTs === 'number' ? isoOrTs : new Date(isoOrTs).getTime();
-    const now = Date.now();
-    const diff = Math.floor((now - ts) / 1000);
-
-    if (diff < 5)   return 'just now';
-    if (diff < 60)  return `${diff}s ago`;
-
-    const mins = Math.floor(diff / 60);
-    if (mins < 60)  return mins === 1 ? '1 minute ago' : `${mins} minutes ago`;
-
-    const hrs = Math.floor(mins / 60);
-    if (hrs < 24)   return hrs === 1 ? '1 hour ago' : `${hrs} hours ago`;
-
-    const days = Math.floor(hrs / 24);
-    if (days === 1) return 'yesterday';
-    if (days < 7)   return `${days} days ago`;
-    if (days < 14)  return 'last week';
-    if (days < 30)  return `${Math.floor(days / 7)} weeks ago`;
-    if (days < 60)  return 'last month';
-    return `${Math.floor(days / 30)} months ago`;
-  }
-
-  function startTimestampTicker() {
-    setInterval(() => {
-      document.querySelectorAll('.note-time[data-ts]').forEach(el => {
-        el.textContent = relativeTime(el.dataset.ts);
-      });
-    }, 30000);
-  }
-
-  // ═══════════════════════════════════════════
-  //  SUBMIT NOTE
-  // ═══════════════════════════════════════════
-
-  async function submitNote() {
-    const input = document.getElementById('noteInput');
-    const categorySelect = document.getElementById('categorySelect');
-    const text = input.value.trim();
-
-    if (!text) {
-      input.focus();
-      input.style.borderColor = 'rgba(192,57,43,0.6)';
-      setTimeout(() => { input.style.borderColor = ''; }, 1200);
-      return;
-    }
-
-    const category = categorySelect.value;
-    const btn = document.getElementById('tellBtn');
-    btn.disabled = true;
-    btn.textContent = 'Filing…';
-
-    try {
-      const note = await createNoteAPI(text, category);
-      notesCache.unshift(note);
-      showInkthornResponse();
-      input.value = '';
-      input.focus();
-      renderNotes();
-
-      if (currentFilter !== 'all' && currentFilter !== category) {
-        setFilter('all', document.querySelector('.tab[data-cat="all"]'));
+      if (!res.ok) return;
+      const fresh = await res.json();
+      if (JSON.stringify(fresh) !== JSON.stringify(notesCache)) {
+        notesCache = fresh;
+        renderCurrentView();
       }
-    } catch (err) {
-      console.error('Failed to save note:', err);
-      input.style.borderColor = 'rgba(192,57,43,0.6)';
-      setTimeout(() => { input.style.borderColor = ''; }, 1500);
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Tell InkThorn';
-    }
-  }
+    } catch {}
+  }, 3000);
+}
 
-  function handleInputKeydown(e) {
-    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
-      e.preventDefault();
-      submitNote();
-    }
-  }
+// ═══════════════════════════════════════════
+//  DATE HELPERS
+// ═══════════════════════════════════════════
 
-  function showInkthornResponse() {
-    const container = document.getElementById('inkthornResponse');
-    const textEl = document.getElementById('responseText');
-    const msg = GRUMPY_RESPONSES[Math.floor(Math.random() * GRUMPY_RESPONSES.length)];
+function dateKey(d) { return d.toISOString().slice(0, 10); }
 
-    textEl.textContent = `"${msg}"`;
-    container.classList.remove('hidden');
-
-    clearTimeout(responseTimeout);
-    responseTimeout = setTimeout(() => {
-      container.classList.add('hidden');
-    }, 6000);
-  }
-
-  // ═══════════════════════════════════════════
-  //  FILTER
-  // ═══════════════════════════════════════════
-
-  function setFilter(cat, tabEl) {
-    currentFilter = cat;
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    if (tabEl) tabEl.classList.add('active');
-    renderNotes();
-  }
-
-  // ═══════════════════════════════════════════
-  //  RENDER NOTES
-  // ═══════════════════════════════════════════
-
-  function renderNotes() {
-    const container = document.getElementById('notesList');
-    const countEl   = document.getElementById('notesCount');
-    const search    = document.getElementById('searchInput').value.trim().toLowerCase();
-
-    let notes = [...notesCache];
-
-    if (currentFilter !== 'all') {
-      notes = notes.filter(n => n.category === currentFilter);
-    }
-
-    if (search) {
-      notes = notes.filter(n => n.text.toLowerCase().includes(search));
-    }
-
-    const total = notesCache.length;
-    if (search || currentFilter !== 'all') {
-      countEl.textContent = `Showing ${notes.length} of ${total} ${total === 1 ? 'note' : 'notes'}`;
-    } else {
-      if (total === 0) {
-        countEl.textContent = "InkThorn is waiting. He's not happy about it.";
-      } else {
-        countEl.textContent = `${total} ${total === 1 ? 'note' : 'notes'} in InkThorn's files`;
-      }
-    }
-
-    if (notes.length === 0) {
-      container.innerHTML = emptyStateHTML(search, currentFilter);
-      return;
-    }
-
-    container.innerHTML = notes.map(noteCardHTML).join('');
-  }
-
-  function emptyStateHTML(search, filter) {
-    if (search) {
-      return `<div class="empty-state"><div class="empty-icon">🔍</div><h3>Nothing Found</h3><p>"I've searched every corner of my ledger. Whatever you're looking for, it isn't here."</p></div>`;
-    }
-    if (filter !== 'all') {
-      const labels = { ideas: 'Ideas', tasks: 'Tasks', other: 'Other' };
-      return `<div class="empty-state"><div class="empty-icon">📂</div><h3>No ${labels[filter] || filter}</h3><p>"The ${labels[filter] || filter} drawer is empty. I find that either a blessing or a failure on your part."</p></div>`;
-    }
-    return `<div class="empty-state"><div class="empty-icon">🦞</div><h3>The Ledger Is Empty</h3><p>"Nothing to file. Nothing to remember. Frankly, I'm not sure whether to be relieved or concerned. Tell me something."</p></div>`;
-  }
-
-  function noteCardHTML(note) {
-    const badgeClass = { ideas: 'badge-ideas', tasks: 'badge-tasks', other: 'badge-other' }[note.category] || 'badge-other';
-    const badgeLabel = { ideas: '💡 Ideas', tasks: '✅ Tasks', other: '📁 Other' }[note.category] || note.category;
-    const catClass = `cat-${note.category}`;
-    const escaped = escapeHTML(note.text);
-    const ts = note.created_at || note.createdAt;
-    const time = relativeTime(ts);
-    const sourceLabel = note.source === 'telegram' ? '✈️ telegram' : '';
-
-    return `
-      <div class="note-card ${catClass}" data-id="${note.id}">
-        <div class="note-watermark">🦞</div>
-        <div class="note-header">
-          <div class="note-text">${escaped}</div>
-          <div class="note-actions">
-            <button class="btn btn-danger" onclick="confirmDelete('${note.id}')" title="Delete this note">🗑</button>
-          </div>
-        </div>
-        <div class="note-footer">
-          <span class="category-badge ${badgeClass}">${badgeLabel}</span>
-          <span class="note-time" data-ts="${ts}">${time}</span>
-          ${sourceLabel ? `<span class="source-badge">${sourceLabel}</span>` : ''}
-        </div>
-      </div>`;
-  }
-
-  function escapeHTML(str) {
-    return str
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;')
-      .replace(/\n/g, '<br>');
-  }
-
-  // ═══════════════════════════════════════════
-  //  DELETE
-  // ═══════════════════════════════════════════
-
-  async function confirmDelete(id) {
-    const card = document.querySelector(`.note-card[data-id="${id}"]`);
-    if (card) {
-      card.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
-      card.style.opacity = '0';
-      card.style.transform = 'translateX(20px) scale(0.97)';
-    }
-
-    try {
-      await deleteNoteAPI(id);
-      notesCache = notesCache.filter(n => n.id !== id);
-    } catch (err) {
-      console.error('Failed to delete note:', err);
-      if (card) { card.style.opacity = '1'; card.style.transform = ''; }
-      return;
-    }
-
-    setTimeout(() => renderNotes(), 230);
-  }
-
-  // ═══════════════════════════════════════════
-  //  TELEGRAM CONNECT
-  // ═══════════════════════════════════════════
-
-  async function disconnectTelegram() {
-    if (!confirm('Disconnect Telegram? InkThorn will be relieved. Briefly.')) return;
-    try {
-      const res = await apiFetch('/api/disconnect-telegram', { method: 'POST' });
-      if (res.ok) {
-        document.getElementById('telegramConnectedSection').classList.add('hidden');
-        document.getElementById('telegramSection').classList.remove('hidden');
-      }
-    } catch (err) {
-      console.error('Disconnect error:', err);
-    }
-  }
-
-  function copyLinkCode() {
-    const code = document.getElementById('linkCodeDisplay').textContent;
-    navigator.clipboard.writeText(code).then(() => {
-      const btn = document.querySelector('.btn-copy');
-      btn.textContent = 'Copied!';
-      setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
-    });
-  }
-
-  // ═══════════════════════════════════════════
-  //  EXPORT (PRO)
-  // ═══════════════════════════════════════════
-
-  function exportAllNotes() {
-    openUpgradeModal();
-  }
-
-  // ═══════════════════════════════════════════
-  //  UPGRADE MODAL
-  // ═══════════════════════════════════════════
-
-  function openUpgradeModal() {
-    document.getElementById('upgradeModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeUpgradeModal() {
-    document.getElementById('upgradeModal').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function handleOverlayClick(e) {
-    if (e.target === document.getElementById('upgradeModal')) {
-      closeUpgradeModal();
-    }
-  }
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeUpgradeModal();
+function getWeekDates(offset = 0) {
+  const today = new Date();
+  const day = today.getDay(); // 0=Sun
+  const mon = new Date(today);
+  mon.setDate(today.getDate() - ((day + 6) % 7) + offset * 7);
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(mon);
+    d.setDate(mon.getDate() + i);
+    return d;
   });
+}
 
-  // ═══════════════════════════════════════════
-  //  INIT
-  // ═══════════════════════════════════════════
+function getNotesForDate(dateStr) {
+  return notesCache.filter(n => {
+    const meta = getMeta(n.id);
+    const scheduled = meta.scheduled_date || n.created_at?.slice(0, 10);
+    return scheduled === dateStr;
+  });
+}
 
-  async function init() {
-    // 1. Check for OAuth token in URL hash
-    const hashToken = checkHashToken();
-    const token = hashToken || getToken();
+function sortByPriority(notes) {
+  const order = { A: 0, B: 1, C: 2, null: 3 };
+  return [...notes].sort((a, b) =>
+    (order[getMeta(a.id).priority] ?? 3) - (order[getMeta(b.id).priority] ?? 3)
+  );
+}
 
-    if (!token) {
-      showLoginOverlay();
-      document.getElementById('notesList').innerHTML = '';
-      document.getElementById('notesCount').textContent = 'Sign in to see your notes.';
-      return;
-    }
+function getDayOfYear(d) {
+  const start = new Date(d.getFullYear(), 0, 0);
+  const diff = d - start;
+  return Math.floor(diff / 86400000);
+}
 
-    // 2. Parse user from JWT (optimistic, no round trip)
-    const payload = parseJWTPayload(token);
-    if (!payload || (payload.exp && Date.now() / 1000 > payload.exp)) {
-      clearToken();
-      showLoginOverlay();
-      return;
-    }
+function getDailyQuip(d) {
+  return DAILY_QUIPS[getDayOfYear(d) % DAILY_QUIPS.length];
+}
 
-    hideLoginOverlay();
-    applyUserToUI(payload);
+function formatFullDate(d) {
+  return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+}
 
-    // 3. Load notes from API
-    document.getElementById('notesList').innerHTML = '<div class="loading-state"><span class="spinner"></span> InkThorn is retrieving your files…</div>';
-    await loadNotesFromAPI();
-    renderNotes();
-    startTimestampTicker();
-    startLiveSync();
+function formatShortDate(d) {
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+const DAY_ABBRS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const DAY_LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
+// ═══════════════════════════════════════════
+//  SECTION NAVIGATION
+// ═══════════════════════════════════════════
+
+function switchSection(section, tabEl) {
+  currentSection = section;
+  document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+  if (tabEl) tabEl.classList.add('active');
+  if (section === 'daily') {
+    currentView = 'week';
+  }
+  renderCurrentView();
+}
+
+function renderCurrentView() {
+  if (currentSection === 'daily') {
+    if (currentView === 'week') renderWeekView();
+    else renderDayView();
+  } else {
+    renderListView();
+  }
+}
+
+// ═══════════════════════════════════════════
+//  WEEK VIEW
+// ═══════════════════════════════════════════
+
+function renderWeekView() {
+  const dates = getWeekDates(currentWeekOffset);
+  const todayKey = dateKey(new Date());
+  const mon = dates[0];
+  const sun = dates[6];
+
+  const monLabel = mon.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const sunLabel = sun.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+  // Sunday after 4pm banner
+  const now = new Date();
+  const isSunday = now.getDay() === 0;
+  const isAfter4pm = now.getHours() >= 16;
+  const showPlanBanner = isSunday && isAfter4pm && currentWeekOffset === 0;
+
+  let html = ``;
+
+  if (showPlanBanner) {
+    html += `
+    <div class="plan-week-banner">
+      <span class="plan-week-banner-text">"InkThorn suggests you sit down and plan. He won't ask twice."</span>
+      <button class="btn btn-gold" onclick="enterDay(new Date())">Sit Down &amp; Plan</button>
+    </div>`;
   }
 
-  // Live sync — poll for new notes every 3 seconds
-  function startLiveSync() {
-    setInterval(async () => {
-      const token = getToken();
-      if (!token) return;
-      try {
-        const res = await apiFetch('/api/notes');
-        if (!res.ok) return;
-        const fresh = await res.json();
-        // Only re-render if something changed
-        if (JSON.stringify(fresh) !== JSON.stringify(notesCache)) {
-          notesCache = fresh;
-          renderNotes();
-        }
-      } catch {}
-    }, 3000);
+  html += `
+  <div class="week-nav">
+    <button class="week-nav-btn" onclick="changeWeek(-1)">← Week</button>
+    <span class="week-nav-label">Week of ${monLabel} – ${sunLabel}</span>
+    <button class="week-nav-btn" onclick="changeWeek(1)">Week →</button>
+  </div>
+  <div class="week-grid">`;
+
+  for (const d of dates) {
+    const dk = dateKey(d);
+    const isToday = dk === todayKey;
+    const dayNotes = getNotesForDate(dk);
+    const undoneNotes = dayNotes.filter(n => !getMeta(n.id).done);
+    const doneCount = dayNotes.filter(n => getMeta(n.id).done).length;
+
+    // Determine priority dot
+    let dotClass = '';
+    if (undoneNotes.some(n => getMeta(n.id).priority === 'A')) dotClass = 'dot-A';
+    else if (undoneNotes.some(n => getMeta(n.id).priority === 'B')) dotClass = 'dot-B';
+    else if (undoneNotes.length > 0) dotClass = 'dot-C';
+
+    const dayName = DAY_ABBRS[d.getDay()];
+    const dateNum = d.getDate();
+    const countText = dayNotes.length > 0
+      ? `${dayNotes.length} note${dayNotes.length !== 1 ? 's' : ''} · ${doneCount} done`
+      : '';
+    const previews = dayNotes.slice(0, 2).map(n =>
+      `<div class="week-col-preview">${escapeHTML(n.text.slice(0, 60))}</div>`
+    ).join('');
+
+    html += `
+    <div class="week-col${isToday ? ' today' : ''}" onclick="enterDay(new Date('${dk}T12:00:00'))">
+      <div class="week-col-day">${dayName}</div>
+      <div class="week-col-date">${dateNum}</div>
+      ${dotClass ? `<span class="priority-dot ${dotClass}"></span>` : ''}
+      ${countText ? `<div class="week-col-count">${countText}</div>` : ''}
+      ${previews}
+    </div>`;
   }
 
-  init();
+  html += `</div>`;
+
+  document.getElementById('mainContent').innerHTML = html;
+}
+
+function changeWeek(delta) {
+  currentWeekOffset += delta;
+  renderWeekView();
+}
+
+function enterDay(d) {
+  currentDate = new Date(d);
+  currentView = 'day';
+  currentPriorityFilter = 'all';
+  renderDayView();
+}
+
+// ═══════════════════════════════════════════
+//  DAY VIEW
+// ═══════════════════════════════════════════
+
+function renderDayView() {
+  const todayKey = dateKey(new Date());
+  const currentKey = dateKey(currentDate);
+  const dates = getWeekDates(currentWeekOffset);
+
+  // Make sure currentDate is in the visible week, else adjust
+  const weekKeys = dates.map(d => dateKey(d));
+  if (!weekKeys.includes(currentKey)) {
+    // Recalculate week offset
+    const today = new Date();
+    const todayDay = today.getDay();
+    const monOfCurrentDate = new Date(currentDate);
+    monOfCurrentDate.setDate(currentDate.getDate() - ((currentDate.getDay() + 6) % 7));
+    const monOfToday = new Date(today);
+    monOfToday.setDate(today.getDate() - ((todayDay + 6) % 7));
+    const diffMs = monOfCurrentDate - monOfToday;
+    currentWeekOffset = Math.round(diffMs / (7 * 86400000));
+  }
+
+  const weekDates = getWeekDates(currentWeekOffset);
+
+  // Week strip
+  let stripHtml = `<div class="week-strip">`;
+  for (const d of weekDates) {
+    const dk = dateKey(d);
+    const isActive = dk === currentKey;
+    const isToday = dk === todayKey;
+    const dayNotes = getNotesForDate(dk);
+    const hasUndone = dayNotes.some(n => !getMeta(n.id).done);
+    const letter = ['M','T','W','T','F','S','S'][weekDates.indexOf(d)];
+    const dateNum = d.getDate();
+    stripHtml += `
+    <div class="strip-day${isActive ? ' active' : ''}" onclick="enterDay(new Date('${dk}T12:00:00'))">
+      <div>${letter}</div>
+      <div style="font-weight:700;font-size:0.85rem;color:${isToday ? 'var(--gold)' : ''}">${dateNum}</div>
+      ${hasUndone ? '<span class="has-tasks"></span>' : ''}
+    </div>`;
+  }
+  stripHtml += `</div>`;
+
+  // Breadcrumb
+  const breadcrumb = `<button class="breadcrumb" onclick="backToWeek()">← This Week</button>`;
+
+  // Day header
+  const title = formatFullDate(currentDate);
+  const quip = getDailyQuip(currentDate);
+
+  const prevDay = new Date(currentDate);
+  prevDay.setDate(prevDay.getDate() - 1);
+  const nextDay = new Date(currentDate);
+  nextDay.setDate(nextDay.getDate() + 1);
+
+  const headerHtml = `
+  <div class="day-header">
+    <div class="day-title">${title}</div>
+    <div class="day-nav-group">
+      <button class="day-nav-btn" onclick="enterDay(new Date('${dateKey(prevDay)}T12:00:00'))">‹</button>
+      <button class="day-nav-btn" onclick="enterDay(new Date('${dateKey(nextDay)}T12:00:00'))">›</button>
+    </div>
+  </div>
+  <div class="day-quip">"${quip}"</div>`;
+
+  // Input section
+  const placeholderIdx = Math.floor(Math.random() * INPUT_PLACEHOLDERS.length);
+  const placeholder = INPUT_PLACEHOLDERS[placeholderIdx];
+  const inputHtml = `
+  <section class="input-section">
+    <div class="input-card">
+      <textarea id="noteInput" placeholder="${placeholder}" rows="3" onkeydown="handleInputKeydown(event)"></textarea>
+      <div class="input-row">
+        <div class="priority-input-group">
+          <input type="radio" name="priority" id="priA" value="A" class="priority-radio">
+          <label for="priA" class="priority-label label-A">A</label>
+          <input type="radio" name="priority" id="priB" value="B" class="priority-radio">
+          <label for="priB" class="priority-label label-B">B</label>
+          <input type="radio" name="priority" id="priC" value="C" class="priority-radio">
+          <label for="priC" class="priority-label label-C">C</label>
+          <input type="radio" name="priority" id="priN" value="null" class="priority-radio" checked>
+          <label for="priN" class="priority-label label-N">None</label>
+        </div>
+        <select class="category-select" id="categorySelect">
+          <option value="ideas">💡 Ideas</option>
+          <option value="tasks" selected>📋 Tasks</option>
+          <option value="other">🗄 Other</option>
+        </select>
+        <input type="date" class="date-input" id="dateInput" value="${currentKey}" />
+        <button class="btn btn-gold" onclick="submitDayNote()" id="fileBtn">File It</button>
+      </div>
+      <div class="inkthorn-response hidden" id="inkthornResponse">
+        <div class="response-mascot">🦞</div>
+        <div class="response-text" id="responseText"></div>
+      </div>
+    </div>
+  </section>`;
+
+  // Toolbar
+  const toolbarHtml = `
+  <div class="day-toolbar">
+    <div class="priority-tabs">
+      <button class="priority-tab${currentPriorityFilter === 'all' ? ' active' : ''}" onclick="setPriorityFilter('all', this)">All</button>
+      <button class="priority-tab tab-A${currentPriorityFilter === 'A' ? ' active' : ''}" onclick="setPriorityFilter('A', this)">A</button>
+      <button class="priority-tab${currentPriorityFilter === 'B' ? ' active' : ''}" onclick="setPriorityFilter('B', this)">B</button>
+      <button class="priority-tab${currentPriorityFilter === 'C' ? ' active' : ''}" onclick="setPriorityFilter('C', this)">C</button>
+      <button class="priority-tab tab-done${currentPriorityFilter === 'done' ? ' active' : ''}" onclick="setPriorityFilter('done', this)">✓ Done</button>
+    </div>
+    <button class="layout-toggle" onclick="toggleLayout()">${currentLayoutMode === 'list' ? '⊞ Planner' : '☰ List'}</button>
+  </div>`;
+
+  // Build notes for this day
+  const allDayNotes = getNotesForDate(currentKey);
+  const todayDateObj = new Date(todayKey + 'T12:00:00');
+
+  // Split: carried (scheduled < today, undone) vs current
+  const isToday = currentKey === todayKey;
+  let carriedNotes = [];
+  let currentNotes = allDayNotes;
+
+  if (isToday) {
+    // Find notes from past days that are undone — carried forward to today
+    carriedNotes = notesCache.filter(n => {
+      const meta = getMeta(n.id);
+      const sched = meta.scheduled_date || n.created_at?.slice(0, 10);
+      return sched && sched < todayKey && !meta.done;
+    });
+    // currentNotes = notes actually scheduled for today
+    currentNotes = allDayNotes;
+  }
+
+  // Apply priority filter
+  function applyFilter(notes) {
+    if (currentPriorityFilter === 'all') return notes;
+    if (currentPriorityFilter === 'done') return notes.filter(n => getMeta(n.id).done);
+    return notes.filter(n => getMeta(n.id).priority === currentPriorityFilter);
+  }
+
+  const filteredCarried = applyFilter(carriedNotes);
+  const filteredCurrent = applyFilter(currentNotes);
+  const sortedCurrent = sortByPriority(filteredCurrent);
+  const sortedCarried = sortByPriority(filteredCarried);
+
+  // All A's done banner
+  const aItems = allDayNotes.filter(n => getMeta(n.id).priority === 'A');
+  const allAsDone = aItems.length > 0 && aItems.every(n => getMeta(n.id).done);
+  const allDoneBanner = allAsDone
+    ? `<div class="all-done-banner">✦ All priority items complete. InkThorn grudgingly approves.</div>`
+    : '';
+
+  let notesHtml = '';
+
+  if (currentLayoutMode === 'list') {
+    notesHtml = renderListMode(sortedCarried, sortedCurrent, currentKey);
+  } else {
+    notesHtml = renderPlannerMode(sortedCarried, sortedCurrent);
+  }
+
+  document.getElementById('mainContent').innerHTML =
+    stripHtml + breadcrumb + headerHtml + inputHtml + toolbarHtml + allDoneBanner + notesHtml;
+}
+
+function renderListMode(carriedNotes, currentNotes, currentKey) {
+  let html = '';
+
+  if (carriedNotes.length > 0) {
+    html += `
+    <div class="carry-section">
+      <div class="carry-section-title">InkThorn's Ledger of Unfinished Business</div>
+      <div class="carry-section-sub">These were supposed to be done. He noticed.</div>
+      <div class="notes-list" style="gap:10px">`;
+    for (const n of carriedNotes) {
+      html += dayNoteCardHTML(n, true);
+    }
+    html += `</div></div>`;
+  }
+
+  if (currentNotes.length === 0 && carriedNotes.length === 0) {
+    html += `<div class="empty-state">
+      <div class="empty-icon">🦞</div>
+      <h3>Nothing scheduled.</h3>
+      <p>"InkThorn finds this suspicious."</p>
+    </div>`;
+  } else if (currentNotes.length > 0) {
+    html += `<div class="notes-list" style="gap:10px">`;
+    for (const n of currentNotes) {
+      html += dayNoteCardHTML(n, false);
+    }
+    html += `</div>`;
+  }
+
+  return html;
+}
+
+function renderPlannerMode(carriedNotes, currentNotes) {
+  const hours = [];
+  for (let h = 7; h <= 21; h++) {
+    const label = h < 12 ? `${h}am` : h === 12 ? '12pm' : `${h-12}pm`;
+    hours.push({ h, label });
+  }
+
+  const scheduled = currentNotes.filter(n => getMeta(n.id).time_slot !== null);
+  const unscheduled = [...carriedNotes, ...currentNotes.filter(n => getMeta(n.id).time_slot === null)];
+
+  let timeBlocksHtml = '';
+  for (const { h, label } of hours) {
+    const slotNotes = scheduled.filter(n => getMeta(n.id).time_slot === h);
+    const cards = slotNotes.map(n => dayNoteCardHTML(n, false)).join('');
+    timeBlocksHtml += `
+    <div class="time-block">
+      <span class="time-label">${label}</span>
+      <div class="time-slot-cards">${cards}</div>
+    </div>`;
+  }
+
+  let floatingHtml = '';
+  if (unscheduled.length > 0) {
+    floatingHtml = `<div class="floating-section-title">Floating Tasks</div>`;
+    for (const n of unscheduled) {
+      floatingHtml += dayNoteCardHTML(n, false);
+    }
+  }
+
+  return `
+  <div class="planner-layout">
+    <div class="time-blocks-col">${timeBlocksHtml}</div>
+    <div>
+      <div class="notes-list" style="gap:10px">
+        ${currentNotes.map(n => dayNoteCardHTML(n, false)).join('')}
+      </div>
+      ${floatingHtml}
+    </div>
+  </div>`;
+}
+
+function dayNoteCardHTML(note, isCarried) {
+  const meta = getMeta(note.id);
+  const pri = meta.priority || 'null';
+  const isDone = meta.done;
+  const ts = note.created_at || note.createdAt;
+
+  const priorityLabels = { A: 'A — Must Do', B: 'B — Should Do', C: 'C — Nice to Do', null: '— Unranked' };
+  const pillClass = { A: 'pill-A', B: 'pill-B', C: 'pill-C', null: 'pill-null' }[pri];
+  const pillLabel = priorityLabels[pri];
+
+  const badgeClass = { ideas: 'badge-ideas', tasks: 'badge-tasks', other: 'badge-other' }[note.category] || 'badge-other';
+  const badgeLabel = { ideas: '💡 Ideas', tasks: '📋 Tasks', other: '🗄 Other' }[note.category] || note.category;
+
+  let carryBadge = '';
+  if (isCarried && meta.scheduled_date) {
+    const cd = new Date(meta.scheduled_date + 'T12:00:00');
+    carryBadge = `<span class="carry-badge">↩ Carried from ${DAY_ABBRS[cd.getDay()]} ${cd.getDate()}</span>`;
+  } else if (isCarried && note.created_at) {
+    const cd = new Date(note.created_at);
+    carryBadge = `<span class="carry-badge">↩ Carried from ${DAY_ABBRS[cd.getDay()]} ${cd.getDate()}</span>`;
+  }
+
+  return `
+  <div class="note-card-day pri-${pri}${isDone ? ' done-card' : ''}" data-id="${note.id}">
+    <div class="task-checkbox${isDone ? ' checked' : ''}" onclick="toggleDone('${note.id}')"></div>
+    <div class="note-card-day-body">
+      <div class="note-text-day">${escapeHTML(note.text)}</div>
+      <div class="note-card-day-footer">
+        <button class="priority-pill ${pillClass}" onclick="cyclePriority('${note.id}')">${pillLabel}</button>
+        <span class="category-badge ${badgeClass}">${badgeLabel}</span>
+        ${carryBadge}
+        <span class="note-time" data-ts="${ts}">${relativeTime(ts)}</span>
+        <button class="btn-danger" onclick="confirmDeleteDay('${note.id}')" title="Delete">🗑</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function backToWeek() {
+  currentView = 'week';
+  renderWeekView();
+}
+
+function setPriorityFilter(filter, btn) {
+  currentPriorityFilter = filter;
+  document.querySelectorAll('.priority-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderDayView();
+}
+
+function toggleLayout() {
+  currentLayoutMode = currentLayoutMode === 'list' ? 'planner' : 'list';
+  renderDayView();
+}
+
+// ═══════════════════════════════════════════
+//  DONE / PRIORITY ACTIONS
+// ═══════════════════════════════════════════
+
+function showDoneQuip() {
+  const el = document.createElement('div');
+  el.className = 'done-quip';
+  el.textContent = `"${DONE_QUIPS[Math.floor(Math.random() * DONE_QUIPS.length)]}"`;
+  document.body.appendChild(el);
+  clearTimeout(doneQuipTimeout);
+  doneQuipTimeout = setTimeout(() => el.remove(), 3500);
+}
+
+function cyclePriority(id) {
+  const cycle = ['A', 'B', 'C', null];
+  const current = getMeta(id).priority;
+  const idx = cycle.indexOf(current);
+  const next = cycle[(idx + 1) % cycle.length];
+  setMeta(id, { priority: next });
+  renderCurrentView();
+}
+
+function toggleDone(id) {
+  const meta = getMeta(id);
+  setMeta(id, { done: !meta.done });
+  if (!meta.done) showDoneQuip();
+  renderCurrentView();
+}
+
+async function confirmDeleteDay(id) {
+  try {
+    await deleteNoteAPI(id);
+    notesCache = notesCache.filter(n => n.id !== id);
+    renderCurrentView();
+  } catch (err) {
+    console.error('Failed to delete:', err);
+  }
+}
+
+// ═══════════════════════════════════════════
+//  DAY SUBMIT
+// ═══════════════════════════════════════════
+
+async function submitDayNote() {
+  const input = document.getElementById('noteInput');
+  const text = input.value.trim();
+  if (!text) {
+    input.focus();
+    input.style.borderColor = 'rgba(192,57,43,0.6)';
+    setTimeout(() => { input.style.borderColor = ''; }, 1200);
+    return;
+  }
+  const category = document.getElementById('categorySelect').value;
+  const dateVal = document.getElementById('dateInput').value;
+  const checkedPri = document.querySelector('input[name="priority"]:checked');
+  const selectedPriority = checkedPri && checkedPri.value !== 'null' ? checkedPri.value : null;
+
+  const btn = document.getElementById('fileBtn');
+  btn.disabled = true;
+  btn.textContent = 'Filing…';
+
+  try {
+    const note = await createNoteAPI(text, category);
+    setMeta(note.id, { priority: selectedPriority, scheduled_date: dateVal });
+    notesCache.unshift(note);
+    showInkthornResponse();
+    input.value = '';
+    // Reset priority to None
+    document.getElementById('priN').checked = true;
+    renderDayView();
+  } catch (err) {
+    console.error('Failed to save note:', err);
+    input.style.borderColor = 'rgba(192,57,43,0.6)';
+    setTimeout(() => { input.style.borderColor = ''; }, 1500);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'File It';
+  }
+}
+
+function handleInputKeydown(e) {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+    e.preventDefault();
+    if (currentSection === 'daily' && currentView === 'day') submitDayNote();
+    else submitNote();
+  }
+}
+
+function showInkthornResponse() {
+  const container = document.getElementById('inkthornResponse');
+  const textEl = document.getElementById('responseText');
+  if (!container || !textEl) return;
+  const msg = GRUMPY_RESPONSES[Math.floor(Math.random() * GRUMPY_RESPONSES.length)];
+  textEl.textContent = `"${msg}"`;
+  container.classList.remove('hidden');
+  container.classList.add('visible');
+  clearTimeout(responseTimeout);
+  responseTimeout = setTimeout(() => {
+    container.classList.add('hidden');
+    container.classList.remove('visible');
+  }, 6000);
+}
+
+// ═══════════════════════════════════════════
+//  IDEAS / PROJECTS / SOMEDAY LIST VIEW
+// ═══════════════════════════════════════════
+
+const CATEGORY_MAP = {
+  ideas: 'ideas',
+  projects: 'tasks',
+  someday: 'other',
+};
+
+const EMPTY_MESSAGES = {
+  ideas: { icon: '💡', title: 'The ideas drawer is empty.', sub: 'He finds creative silence unsettling.' },
+  projects: { icon: '📋', title: 'No projects.', sub: 'Either you\'re done or you haven\'t started. He suspects the latter.' },
+  someday: { icon: '🗄', title: 'The Someday drawer.', sub: 'Where intentions go to rest in peace.' },
+};
+
+let simpleSearchQuery = '';
+
+function renderListView() {
+  const catKey = CATEGORY_MAP[currentSection];
+  const empty = EMPTY_MESSAGES[currentSection];
+  const label = currentSection.charAt(0).toUpperCase() + currentSection.slice(1);
+
+  let filtered = notesCache.filter(n => n.category === catKey);
+  if (simpleSearchQuery) {
+    filtered = filtered.filter(n => n.text.toLowerCase().includes(simpleSearchQuery.toLowerCase()));
+  }
+
+  let html = `
+  <div class="notes-toolbar">
+    <input type="text" class="search-input" placeholder="Search ${label}…"
+      value="${escapeHTML(simpleSearchQuery)}"
+      oninput="simpleSearchQuery=this.value;renderListView()" />
+  </div>
+  <div class="notes-meta">${filtered.length} note${filtered.length !== 1 ? 's' : ''}</div>`;
+
+  if (filtered.length === 0) {
+    html += `
+    <div class="empty-state">
+      <div class="empty-icon">${empty.icon}</div>
+      <h3>${empty.title}</h3>
+      <p>"${empty.sub}"</p>
+    </div>`;
+  } else {
+    html += `<div class="notes-list">` + filtered.map(simpleNoteCardHTML).join('') + `</div>`;
+  }
+
+  document.getElementById('mainContent').innerHTML = html;
+}
+
+function simpleNoteCardHTML(note) {
+  const badgeClass = { ideas: 'badge-ideas', tasks: 'badge-tasks', other: 'badge-other' }[note.category] || 'badge-other';
+  const badgeLabel = { ideas: '💡 Ideas', tasks: '📋 Tasks', other: '🗄 Other' }[note.category] || note.category;
+  const catClass = `cat-${note.category}`;
+  const ts = note.created_at || note.createdAt;
+  const sourceLabel = note.source === 'telegram' ? '✈️ telegram' : '';
+  return `
+  <div class="note-card ${catClass}" data-id="${note.id}">
+    <div class="note-watermark">🦞</div>
+    <div class="note-header">
+      <div class="note-text">${escapeHTML(note.text)}</div>
+      <div class="note-actions">
+        <button class="btn btn-danger" onclick="confirmDeleteSimple('${note.id}')" title="Delete">🗑</button>
+      </div>
+    </div>
+    <div class="note-footer">
+      <span class="category-badge ${badgeClass}">${badgeLabel}</span>
+      <span class="note-time" data-ts="${ts}">${relativeTime(ts)}</span>
+      ${sourceLabel ? `<span class="source-badge">${sourceLabel}</span>` : ''}
+    </div>
+  </div>`;
+}
+
+async function confirmDeleteSimple(id) {
+  const card = document.querySelector(`.note-card[data-id="${id}"]`);
+  if (card) { card.style.opacity = '0'; card.style.transform = 'translateX(20px) scale(0.97)'; card.style.transition = 'all 0.22s'; }
+  try {
+    await deleteNoteAPI(id);
+    notesCache = notesCache.filter(n => n.id !== id);
+  } catch (err) {
+    console.error('Delete failed:', err);
+    if (card) { card.style.opacity = '1'; card.style.transform = ''; }
+    return;
+  }
+  setTimeout(() => renderListView(), 230);
+}
+
+// ═══════════════════════════════════════════
+//  TELEGRAM / MODAL
+// ═══════════════════════════════════════════
+
+async function disconnectTelegram() {
+  if (!confirm('Disconnect Telegram? InkThorn will be relieved. Briefly.')) return;
+  try {
+    const res = await apiFetch('/api/disconnect-telegram', { method: 'POST' });
+    if (res.ok) {
+      document.getElementById('telegramConnectedSection').classList.add('hidden');
+      document.getElementById('telegramSection').classList.remove('hidden');
+    }
+  } catch (err) { console.error('Disconnect error:', err); }
+}
+
+function copyLinkCode() {
+  const code = document.getElementById('linkCodeDisplay').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+
+function openUpgradeModal() {
+  document.getElementById('upgradeModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeUpgradeModal() {
+  document.getElementById('upgradeModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('upgradeModal')) closeUpgradeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeUpgradeModal(); });
+
+// ═══════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════
+
+async function init() {
+  const hashToken = checkHashToken();
+  const token = hashToken || getToken();
+
+  if (!token) {
+    showLoginOverlay();
+    document.getElementById('mainContent').innerHTML = '';
+    return;
+  }
+
+  const payload = parseJWTPayload(token);
+  if (!payload || (payload.exp && Date.now() / 1000 > payload.exp)) {
+    clearToken();
+    showLoginOverlay();
+    return;
+  }
+
+  hideLoginOverlay();
+  applyUserToUI(payload);
+
+  document.getElementById('mainContent').innerHTML =
+    '<div class="loading-state"><span class="spinner"></span> InkThorn is retrieving your files…</div>';
+
+  await loadNotesFromAPI();
+  renderCurrentView();
+  startTimestampTicker();
+  startLiveSync();
+}
+
+init();
 </script>
 </body>
 </html>
