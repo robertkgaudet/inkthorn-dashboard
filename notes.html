@@ -485,7 +485,7 @@
       <span class="user-name" id="headerUserName"></span>
       <img class="user-avatar hidden" id="headerAvatar" src="" alt="User avatar" />
       <button class="btn-signout hidden" id="signoutBtn" onclick="signOut()">Sign out</button>
-      <button class="btn btn-gold" onclick="openUpgradeModal()" title="Unlock InkThorn Pro features">✦ Upgrade</button>
+      <button class="btn btn-gold" onclick="openUpgradeModal(false)" title="Unlock InkThorn Pro features">✦ Upgrade</button>
     </div>
   </header>
 
@@ -515,20 +515,25 @@
         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
       <div class="mascot-fallback" style="display:none">🦞</div>
     </div>
-    <div class="modal-headline">InkThorn Pro — He Works Harder For You</div>
+    <div class="modal-headline" id="modalHeadline">InkThorn Pro — He Works Harder For You</div>
+
+    <!-- Cap message — shown only when limit is hit -->
+    <div id="modalCapMessage" class="hidden" style="background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.3);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:16px;font-family:'Playfair Display',serif;font-style:italic;font-size:0.9rem;color:var(--cream);text-align:center;">
+      "You've filed <strong id="modalNoteCount">30</strong> notes. I've kept every one. But my patience has limits — and apparently, so does the free tier."
+    </div>
+
     <div class="modal-price">
       <span class="price-amount">$4.99</span>
       <span class="price-period"> / month</span>
     </div>
     <ul class="feature-list">
-      <li><span class="check">✦</span> Unlimited notes &amp; custom categories</li>
-      <li><span class="check">✦</span> AI auto-categorization (InkThorn grumbles, but he does it)</li>
-      <li><span class="check">✦</span> Export all notes to Markdown, PDF, or plain text</li>
-      <li><span class="check">✦</span> Send notes to Telegram — instantly</li>
-      <li><span class="check">✦</span> InkThorn Pro badge (he pretends not to care)</li>
-      <li><span class="check">✦</span> Priority support (he'll answer you… eventually)</li>
+      <li><span class="check">✦</span> <strong>Unlimited notes</strong> — InkThorn will remember everything. Reluctantly.</li>
+      <li><span class="check">✦</span> <strong>Weekly export</strong> — pull your week as a clean summary. Markdown, PDF, or plain text.</li>
+      <li><span class="check">✦</span> <strong>Recurring tasks</strong> — "Every Monday" and InkThorn handles it. No excuses.</li>
+      <li><span class="check">✦</span> <strong>Telegram reminders</strong> — he'll message you when A-priority items go unfinished. You won't enjoy it.</li>
+      <li><span class="check">✦</span> AI auto-categorization — he sorts it. You just type.</li>
     </ul>
-    <a href="https://buy.stripe.com/9B67sEawQ77999E7mx0oM01" target="_blank" class="btn btn-upgrade" onclick="closeUpgradeModal()">Upgrade Now →</a>
+    <a href="https://buy.stripe.com/9B67sEawQ77999E7mx0oM01" target="_blank" class="btn btn-upgrade" onclick="closeUpgradeModal()">Upgrade Now — $4.99/mo →</a>
     <div class="modal-fine-print">Cancel anytime. InkThorn will be annoyed but he'll manage.</div>
   </div>
 </div>
@@ -540,6 +545,7 @@
 
 const API_BASE = 'https://inkthorn-notes.rgaudet2023.workers.dev';
 const TOKEN_KEY = 'inkthorn_token';
+const FREE_LIMIT = 30;
 const META_KEY = 'inkthorn_daytimer_meta';
 
 const GRUMPY_RESPONSES = [
@@ -893,6 +899,11 @@ function renderWeekView() {
   <div class="week-quickadd">
     <input type="text" id="weekQuickText" class="week-quickadd-input" placeholder="Quick note for today — InkThorn is waiting." onkeydown="if(event.key==='Enter')weekQuickSubmit()" />
     <button class="btn btn-gold week-quickadd-btn" onclick="weekQuickSubmit()">+ File It</button>
+  </div>
+  <div style="font-size:0.75rem;color:var(--cream-dim);margin-bottom:12px;text-align:right;">
+    ${notesCache.length} / ${FREE_LIMIT} notes
+    ${notesCache.length >= FREE_LIMIT - 5 && notesCache.length < FREE_LIMIT ? `<span style="color:var(--gold);"> — InkThorn is getting impatient.</span>` : ''}
+    ${notesCache.length >= FREE_LIMIT ? `<span style="color:var(--red);"> — He's done. <button onclick="openUpgradeModal(true)" style="background:none;border:none;color:var(--gold);cursor:pointer;font-size:0.75rem;text-decoration:underline;">Upgrade</button></span>` : ''}
   </div>`;
 
   if (showPlanBanner) {
@@ -954,6 +965,7 @@ function changeWeek(delta) {
 }
 
 async function weekQuickSubmit() {
+  if (isAtLimit()) { openUpgradeModal(true); return; }
   const input = document.getElementById('weekQuickText');
   if (!input) return;
   const text = input.value.trim();
@@ -1322,6 +1334,7 @@ async function confirmDeleteDay(id) {
 // ═══════════════════════════════════════════
 
 async function submitDayNote() {
+  if (isAtLimit()) { openUpgradeModal(true); return; }
   const input = document.getElementById('noteInput');
   const text = input.value.trim();
   if (!text) {
@@ -1545,14 +1558,31 @@ function copyLinkCode() {
   });
 }
 
-function openUpgradeModal() {
+function isAtLimit() {
+  return notesCache.length >= FREE_LIMIT;
+}
+
+function openUpgradeModal(capHit) {
+  const headline = document.getElementById('modalHeadline');
+  const capMsg = document.getElementById('modalCapMessage');
+  const countEl = document.getElementById('modalNoteCount');
+  if (capHit) {
+    if (headline) headline.textContent = 'InkThorn Has Run Out of Patience.';
+    if (capMsg) capMsg.classList.remove('hidden');
+    if (countEl) countEl.textContent = FREE_LIMIT;
+  } else {
+    if (headline) headline.textContent = 'InkThorn Pro — He Works Harder For You';
+    if (capMsg) capMsg.classList.add('hidden');
+  }
   document.getElementById('upgradeModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
+
 function closeUpgradeModal() {
   document.getElementById('upgradeModal').classList.remove('open');
   document.body.style.overflow = '';
 }
+
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('upgradeModal')) closeUpgradeModal();
 }
