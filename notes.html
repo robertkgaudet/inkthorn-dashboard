@@ -533,7 +533,7 @@
       <li><span class="check">✦</span> <strong>Telegram reminders</strong> — he'll message you when A-priority items go unfinished. You won't enjoy it.</li>
       <li><span class="check">✦</span> AI auto-categorization — he sorts it. You just type.</li>
     </ul>
-    <a href="https://buy.stripe.com/9B67sEawQ77999E7mx0oM01" target="_blank" class="btn btn-upgrade" onclick="closeUpgradeModal()">Upgrade Now — $4.99/mo →</a>
+    <button class="btn btn-upgrade" onclick="startCheckout()">Upgrade Now — $4.99/mo →</button>
     <div class="modal-fine-print">Cancel anytime. InkThorn will be annoyed but he'll manage.</div>
   </div>
 </div>
@@ -547,6 +547,8 @@ const API_BASE = 'https://inkthorn-notes.rgaudet2023.workers.dev';
 const TOKEN_KEY = 'inkthorn_token';
 const FREE_LIMIT = 30;
 const META_KEY = 'inkthorn_daytimer_meta';
+
+let isPro = false; // set after /api/me loads
 
 const GRUMPY_RESPONSES = [
   "Filed. Try not to send me anything else tonight.",
@@ -1559,7 +1561,43 @@ function copyLinkCode() {
 }
 
 function isAtLimit() {
-  return notesCache.length >= FREE_LIMIT;
+  return !isPro && notesCache.length >= FREE_LIMIT;
+}
+
+function showToast(msg, type, duration) {
+  // Reuse done-quip style for toasts
+  document.querySelectorAll('.done-quip').forEach(e => e.remove());
+  const el = document.createElement('div');
+  el.className = 'done-quip';
+  const color = type === 'error' ? 'var(--red)' : type === 'success' ? 'var(--gold)' : 'var(--cream)';
+  el.innerHTML = `
+    <img src="./inkthorn-mascot.png" alt="InkThorn" style="height:64px;width:auto;margin-bottom:12px;filter:drop-shadow(0 2px 8px rgba(192,57,43,0.4));" onerror="this.style.display='none'" />
+    <div style="color:${color}">"${msg}"</div>
+  `;
+  el.style.cursor = 'pointer';
+  el.title = 'Tap to dismiss';
+  el.onclick = () => el.remove();
+  document.body.appendChild(el);
+  const ms = duration || (type === 'success' ? 6000 : 4000);
+  setTimeout(() => el.remove(), ms);
+}
+
+async function startCheckout() {
+  closeUpgradeModal();
+  showToast('Opening checkout… InkThorn awaits.', 'info');
+  try {
+    const res = await apiFetch('/stripe/checkout', { method: 'POST', body: JSON.stringify({}) });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      showToast('Could not start checkout. Try again.', 'error');
+    }
+  } catch (err) {
+    console.error('startCheckout error:', err);
+    showToast('Checkout failed. InkThorn is displeased.', 'error');
+  }
 }
 
 function openUpgradeModal(capHit) {
@@ -1595,6 +1633,15 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeUpgrade
 
 async function init() {
   const hashToken = checkHashToken();
+
+  // Check for ?upgraded=1 (after Stripe success redirect)
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('upgraded') === '1') {
+    history.replaceState(null, '', window.location.pathname);
+    // Delay toast slightly until app is loaded
+    setTimeout(() => showToast("You've upgraded. He won't say he's impressed. But he is.", 'success', 6000), 1200);
+  }
+
   const token = hashToken || getToken();
 
   if (!token) {
@@ -1615,6 +1662,17 @@ async function init() {
 
   document.getElementById('mainContent').innerHTML =
     '<div class="loading-state"><span class="spinner"></span> InkThorn is retrieving your files…</div>';
+
+  // Fetch fresh pro status from /api/me
+  try {
+    const meRes = await apiFetch('/api/me');
+    if (meRes.ok) {
+      const me = await meRes.json();
+      isPro = !!me.is_pro;
+    }
+  } catch (err) {
+    console.warn('Could not fetch pro status:', err);
+  }
 
   await loadNotesFromAPI();
   renderCurrentView();
