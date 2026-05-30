@@ -1242,14 +1242,15 @@ function toggleLayout() {
 //  DONE / PRIORITY ACTIONS
 // ═══════════════════════════════════════════
 
-function showDoneQuip() {
+function showDoneQuip(quipArray) {
+  const pool = quipArray || DONE_QUIPS;
   // Remove any existing quip first
   document.querySelectorAll('.done-quip').forEach(e => e.remove());
   const el = document.createElement('div');
   el.className = 'done-quip';
   el.innerHTML = `
     <img src="./inkthorn-mascot.png" alt="InkThorn" style="height:64px;width:auto;margin-bottom:12px;filter:drop-shadow(0 2px 8px rgba(192,57,43,0.4));" onerror="this.style.display='none'" />
-    <div>"${DONE_QUIPS[Math.floor(Math.random() * DONE_QUIPS.length)]}"</div>
+    <div>"${pool[Math.floor(Math.random() * pool.length)]}"</div>
   `;
   el.style.cursor = 'pointer';
   el.title = 'Tap to dismiss';
@@ -1335,18 +1336,7 @@ function handleInputKeydown(e) {
 }
 
 function showInkthornResponse() {
-  const container = document.getElementById('inkthornResponse');
-  const textEl = document.getElementById('responseText');
-  if (!container || !textEl) return;
-  const msg = GRUMPY_RESPONSES[Math.floor(Math.random() * GRUMPY_RESPONSES.length)];
-  textEl.textContent = `"${msg}"`;
-  container.classList.remove('hidden');
-  container.classList.add('visible');
-  clearTimeout(responseTimeout);
-  responseTimeout = setTimeout(() => {
-    container.classList.add('hidden');
-    container.classList.remove('visible');
-  }, 6000);
+  showDoneQuip(GRUMPY_RESPONSES);
 }
 
 // ═══════════════════════════════════════════
