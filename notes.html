@@ -841,6 +841,8 @@ const DAY_LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
 function switchSection(section, tabEl) {
   currentSection = section;
+  simpleFilterTab = 'all';
+  simpleSearchQuery = '';
   document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
   if (tabEl) tabEl.classList.add('active');
   if (section === 'daily') {
@@ -1356,6 +1358,8 @@ const EMPTY_MESSAGES = {
 
 let simpleSearchQuery = '';
 
+let simpleFilterTab = 'all'; // 'all' | 'A' | 'B' | 'C' | 'done'
+
 function renderListView() {
   const catKey = CATEGORY_MAP[currentSection];
   const empty = EMPTY_MESSAGES[currentSection];
@@ -1366,13 +1370,48 @@ function renderListView() {
     filtered = filtered.filter(n => n.text.toLowerCase().includes(simpleSearchQuery.toLowerCase()));
   }
 
+  // Apply priority/done filter
+  if (simpleFilterTab === 'done') {
+    filtered = filtered.filter(n => getMeta(n.id).done);
+  } else if (simpleFilterTab === 'all') {
+    // show undone first, then done
+  } else {
+    filtered = filtered.filter(n => getMeta(n.id).priority === simpleFilterTab && !getMeta(n.id).done);
+  }
+
+  // Sort: undone A→B→C→null first, then done
+  filtered = filtered.sort((a, b) => {
+    const ma = getMeta(a.id), mb = getMeta(b.id);
+    if (ma.done !== mb.done) return ma.done ? 1 : -1;
+    const order = { A: 0, B: 1, C: 2, null: 3 };
+    return (order[ma.priority] ?? 3) - (order[mb.priority] ?? 3);
+  });
+
+  const tabDefs = [
+    { key: 'all', label: 'All' },
+    { key: 'A', label: 'A — Must Do' },
+    { key: 'B', label: 'B — Should Do' },
+    { key: 'C', label: 'C — Nice to Do' },
+    { key: 'done', label: '✓ Done' },
+  ];
+
+  const tabsHtml = tabDefs.map(t => {
+    const active = simpleFilterTab === t.key ? 'active' : '';
+    const cls = t.key === 'A' ? 'tab-A' : t.key === 'done' ? 'tab-done' : '';
+    return `<button class="priority-tab ${cls} ${active}" onclick="simpleFilterTab='${t.key}';renderListView()">${t.label}</button>`;
+  }).join('');
+
+  const doneCount = notesCache.filter(n => n.category === catKey && getMeta(n.id).done).length;
+  const totalCount = notesCache.filter(n => n.category === catKey).length;
+
   let html = `
   <div class="notes-toolbar">
     <input type="text" class="search-input" placeholder="Search ${label}…"
       value="${escapeHTML(simpleSearchQuery)}"
       oninput="simpleSearchQuery=this.value;renderListView()" />
   </div>
-  <div class="notes-meta">${filtered.length} note${filtered.length !== 1 ? 's' : ''}</div>`;
+  <div class="priority-tabs" style="margin-bottom:16px">${tabsHtml}</div>
+  <div class="notes-meta">${filtered.length} shown · ${doneCount}/${totalCount} done</div>`;
 
   if (filtered.length === 0) {
     html += `
@@ -1389,30 +1428,57 @@ function renderListView() {
 }
 
 function simpleNoteCardHTML(note) {
+  const meta = getMeta(note.id);
   const badgeClass = { ideas: 'badge-ideas', tasks: 'badge-tasks', other: 'badge-other' }[note.category] || 'badge-other';
   const badgeLabel = { ideas: '💡 Ideas', tasks: '📋 Tasks', other: '🗄 Other' }[note.category] || note.category;
-  const catClass = `cat-${note.category}`;
   const ts = note.created_at || note.createdAt;
   const sourceLabel = note.source === 'telegram' ? '✈️ telegram' : '';
+  const pri = meta.priority;
+  const priClass = pri ? `pri-${pri}` : 'pri-null';
+  const pillLabels = { A: 'A — Must Do', B: 'B — Should Do', C: 'C — Nice to Do', null: '— Unranked' };
+  const pillClass = pri ? `pill-${pri}` : 'pill-null';
+  const doneClass = meta.done ? 'done-card' : '';
+  const checkClass = meta.done ? 'checked' : '';
+  const doneStyle = meta.done ? 'opacity:0.4;' : '';
+
   return `
-  <div class="note-card ${catClass}" data-id="${note.id}">
-    <div class="note-watermark">🦞</div>
-    <div class="note-header">
-      <div class="note-text">${escapeHTML(note.text)}</div>
-      <div class="note-actions">
-        <button class="btn btn-danger" onclick="confirmDeleteSimple('${note.id}')" title="Delete">🗑</button>
+  <div class="note-card-day ${priClass} ${doneClass}" data-id="${note.id}" style="${doneStyle}">
+    <div class="task-checkbox ${checkClass}" onclick="simpleToggleDone('${note.id}')" title="${meta.done ? 'Mark undone' : 'Mark done'}"></div>
+    <div style="flex:1;min-width:0">
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+        <button class="priority-pill ${pillClass}" onclick="simpleCyclePriority('${note.id}')" title="Cycle priority">${pillLabels[pri] ?? '— Unranked'}</button>
+        <span class="category-badge ${badgeClass}">${badgeLabel}</span>
+        ${sourceLabel ? `<span class="source-badge">${sourceLabel}</span>` : ''}
+      </div>
+      <div class="note-text" style="${meta.done ? 'text-decoration:line-through;' : ''}">${escapeHTML(note.text)}</div>
+      <div style="margin-top:8px;">
+        <span class="note-time" data-ts="${ts}">${relativeTime(ts)}</span>
       </div>
     </div>
-    <div class="note-footer">
-      <span class="category-badge ${badgeClass}">${badgeLabel}</span>
-      <span class="note-time" data-ts="${ts}">${relativeTime(ts)}</span>
-      ${sourceLabel ? `<span class="source-badge">${sourceLabel}</span>` : ''}
+    <div class="note-actions">
+      <button class="btn btn-danger" onclick="confirmDeleteSimple('${note.id}')" title="Delete">🗑</button>
     </div>
   </div>`;
 }
 
+function simpleCyclePriority(id) {
+  const cycle = ['A', 'B', 'C', null];
+  const current = getMeta(id).priority;
+  const idx = cycle.indexOf(current);
+  const next = cycle[(idx + 1) % cycle.length];
+  setMeta(id, { priority: next });
+  renderListView();
+}
+
+function simpleToggleDone(id) {
+  const meta = getMeta(id);
+  setMeta(id, { done: !meta.done });
+  if (!meta.done) showDoneQuip();
+  renderListView();
+}
+
 async function confirmDeleteSimple(id) {
-  const card = document.querySelector(`.note-card[data-id="${id}"]`);
+  const card = document.querySelector(`.note-card-day[data-id="${id}"]`);
   if (card) { card.style.opacity = '0'; card.style.transform = 'translateX(20px) scale(0.97)'; card.style.transition = 'all 0.22s'; }
   try {
     await deleteNoteAPI(id);
