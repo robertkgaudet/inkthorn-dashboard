@@ -145,6 +145,12 @@
     .section-tab.active { background: var(--surface-raised); color: var(--gold); box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
 
     /* ─── WEEK GRID ─── */
+    .week-quickadd { display: flex; gap: 10px; margin-bottom: 20px; }
+    .week-quickadd-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--cream); font-family: 'Inter', sans-serif; font-size: 0.925rem; padding: 11px 16px; outline: none; transition: border-color 0.18s; }
+    .week-quickadd-input::placeholder { color: var(--cream-dim); opacity: 0.6; font-style: italic; }
+    .week-quickadd-input:focus { border-color: var(--gold-dim); }
+    .week-quickadd-btn { flex-shrink: 0; }
+    @media (max-width: 700px) { .week-quickadd { flex-direction: column; } .week-quickadd-btn { width: 100%; justify-content: center; } }
     .week-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
     .week-nav-label { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); font-weight: 600; }
     .week-nav-btn { background: none; border: 1px solid var(--border); color: var(--cream-dim); border-radius: var(--radius-sm); padding: 6px 14px; cursor: pointer; font-size: 0.875rem; transition: all 0.15s; }
@@ -882,6 +888,13 @@ function renderWeekView() {
 
   let html = ``;
 
+  // Quick-add bar (always visible on week view)
+  html += `
+  <div class="week-quickadd">
+    <input type="text" id="weekQuickText" class="week-quickadd-input" placeholder="Quick note for today — InkThorn is waiting." onkeydown="if(event.key==='Enter')weekQuickSubmit()" />
+    <button class="btn btn-gold week-quickadd-btn" onclick="weekQuickSubmit()">+ File It</button>
+  </div>`;
+
   if (showPlanBanner) {
     html += `
     <div class="plan-week-banner">
@@ -938,6 +951,24 @@ function renderWeekView() {
 function changeWeek(delta) {
   currentWeekOffset += delta;
   renderWeekView();
+}
+
+async function weekQuickSubmit() {
+  const input = document.getElementById('weekQuickText');
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) { input.focus(); input.style.borderColor = 'rgba(192,57,43,0.6)'; setTimeout(() => { input.style.borderColor = ''; }, 1200); return; }
+  const todayKey = dateKey(new Date());
+  try {
+    const note = await createNoteAPI(text, 'tasks');
+    setMeta(note.id, { scheduled_date: todayKey, priority: null, done: false });
+    notesCache.unshift(note);
+    input.value = '';
+    showDoneQuip(GRUMPY_RESPONSES);
+    renderWeekView();
+  } catch (err) {
+    console.error('Quick add failed:', err);
+  }
 }
 
 function enterDay(d) {
