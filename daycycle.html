@@ -573,25 +573,22 @@ function renderCycle(data, profile) {
     // Neighborhood bar
     + nbhdHtml;
 
-  // Auto-scroll to current block — retry a few times to beat paint timing
+  // Auto-scroll to current block — use getBoundingClientRect for accuracy
   function scrollToCurrent() {
     var scroll = document.getElementById('dc-scroll');
     var current = document.querySelector('.day-block-v.current');
-    if (scroll && current && current.offsetWidth > 0) {
-      scroll.scrollLeft = current.offsetLeft - (scroll.clientWidth / 2) + (current.offsetWidth / 2);
-      return true;
-    }
-    return false;
+    if (!scroll || !current) return false;
+    var scrollRect = scroll.getBoundingClientRect();
+    var currentRect = current.getBoundingClientRect();
+    if (currentRect.width === 0) return false;
+    var targetScrollLeft = scroll.scrollLeft + currentRect.left - scrollRect.left - (scrollRect.width / 2) + (currentRect.width / 2);
+    scroll.scrollLeft = targetScrollLeft;
+    return true;
   }
-  requestAnimationFrame(function() {
-    if (!scrollToCurrent()) {
-      setTimeout(function() {
-        if (!scrollToCurrent()) {
-          setTimeout(scrollToCurrent, 300);
-        }
-      }, 100);
-    }
-  });
+  // Try immediately, then with delays to beat font/layout paint
+  setTimeout(scrollToCurrent, 50);
+  setTimeout(scrollToCurrent, 200);
+  setTimeout(scrollToCurrent, 600);
 
   // Clock tick
   setInterval(function() {
