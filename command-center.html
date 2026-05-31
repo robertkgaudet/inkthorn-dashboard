@@ -3286,7 +3286,7 @@ window._gfitConnect = function() {
 <script>
 // Auth gate — check for token, redirect if missing
 (function() {
-  var token = localStorage.getItem('it_token');
+  var token = localStorage.getItem('inkthorn_token');
   if (!token) { window.location.href = 'notes.html'; return; }
   // Check onboarding complete
   fetch('https://inkthorn-notes.robertkgaudet.workers.dev/api/profile', {
@@ -3770,7 +3770,7 @@ var _conciergeAnchor = null;
 var _conciergePrivate = null;
 
 function fetchConciergeCycle() {
-  var token = localStorage.getItem('it_token');
+  var token = localStorage.getItem('inkthorn_token');
   var headers = token ? { 'Authorization': 'Bearer ' + token } : {};
   // Try authenticated per-user cycle first; fall back to static today-cycle.json for Rob
   var apiUrl = token
