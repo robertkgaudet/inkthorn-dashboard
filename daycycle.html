@@ -573,22 +573,23 @@ function renderCycle(data, profile) {
     // Neighborhood bar
     + nbhdHtml;
 
-  // Auto-scroll to current block — use getBoundingClientRect for accuracy
-  function scrollToCurrent() {
+  // Auto-scroll: center on current block, or first upcoming if none is "current"
+  function scrollToActive() {
     var scroll = document.getElementById('dc-scroll');
-    var current = document.querySelector('.day-block-v.current');
-    if (!scroll || !current) return false;
+    if (!scroll) return false;
+    // Prefer .current, fall back to first non-past block
+    var target = document.querySelector('.day-block-v.current')
+               || document.querySelector('.day-block-v:not(.past)');
+    if (!target) return false;
     var scrollRect = scroll.getBoundingClientRect();
-    var currentRect = current.getBoundingClientRect();
-    if (currentRect.width === 0) return false;
-    var targetScrollLeft = scroll.scrollLeft + currentRect.left - scrollRect.left - (scrollRect.width / 2) + (currentRect.width / 2);
-    scroll.scrollLeft = targetScrollLeft;
+    var targetRect = target.getBoundingClientRect();
+    if (targetRect.width === 0) return false;
+    scroll.scrollLeft = scroll.scrollLeft + targetRect.left - scrollRect.left - (scrollRect.width / 2) + (targetRect.width / 2);
     return true;
   }
-  // Try immediately, then with delays to beat font/layout paint
-  setTimeout(scrollToCurrent, 50);
-  setTimeout(scrollToCurrent, 200);
-  setTimeout(scrollToCurrent, 600);
+  setTimeout(scrollToActive, 50);
+  setTimeout(scrollToActive, 250);
+  setTimeout(scrollToActive, 700);
 
   // Clock tick
   setInterval(function() {
