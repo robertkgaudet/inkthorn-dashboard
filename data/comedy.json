@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-05-30T23:19:39.988Z",
+  "updated": "2026-05-31T13:33:32.256Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-05-30",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Benny Feldman",
-      "url": "https://504comedy.com/event/1360/benny-feldman-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Sat May 30 2026",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-30",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Jokes on Oak",
-      "url": "https://504comedy.com/event/1116/jokes-on-oak",
-      "venue": "Oak St Brewery",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Saturday",
-      "start_dt": "2026-05-30T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-05-30",
-      "time": "8:30pm",
-      "time_sort": 2030,
-      "title": "Bing-Oh",
-      "url": "https://504comedy.com/event/943/bingoh",
-      "venue": "Twelve Mile Limit",
-      "type": "Improv",
-      "cost": "FREE",
-      "repeat": "Last Saturday",
-      "start_dt": "2026-05-30T20:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-05-31",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -57,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$15",
       "repeat": "Every Sunday",
-      "start_dt": "2026-05-30T20:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-05-31",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-06-01",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-06-01",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-06-01",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -117,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-06-01",
       "time": "9:30pm",
       "time_sort": 2130,
@@ -127,7 +85,7 @@
       "type": "Open Mic",
       "cost": "FREE",
       "repeat": "Every Monday",
-      "start_dt": "2026-06-08T21:30-05:00"
+      "start_dt": "2026-07-06T21:30-05:00"
     },
     {
       "category": "comedy",
@@ -183,7 +141,7 @@
       "type": "Open Mic",
       "cost": "FREE",
       "repeat": "Every Wednesday",
-      "start_dt": "2026-06-03T21:00-05:00"
+      "start_dt": "2026-07-08T21:00-05:00"
     },
     {
       "category": "comedy",
@@ -324,64 +282,44 @@
       "cost": "FREE",
       "repeat": "Every Friday",
       "start_dt": "2026-06-05T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-06-06",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "LGBTLOL",
+      "url": "https://504comedy.com/event/1362/lgbtlol-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Sat Jun 06 2026",
+      "start_dt": "2026-06-05T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-06-06",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Jokes on Oak",
+      "url": "https://504comedy.com/event/1116/jokes-on-oak",
+      "venue": "Oak St Brewery",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Saturday",
+      "start_dt": "2026-06-06T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-05-30",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-30",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Benny Feldman",
-          "url": "https://504comedy.com/event/1360/benny-feldman-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Sat May 30 2026",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-30",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Jokes on Oak",
-          "url": "https://504comedy.com/event/1116/jokes-on-oak",
-          "venue": "Oak St Brewery",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Saturday",
-          "start_dt": "2026-05-30T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-05-30",
-          "time": "8:30pm",
-          "time_sort": 2030,
-          "title": "Bing-Oh",
-          "url": "https://504comedy.com/event/943/bingoh",
-          "venue": "Twelve Mile Limit",
-          "type": "Improv",
-          "cost": "FREE",
-          "repeat": "Last Saturday",
-          "start_dt": "2026-05-30T20:30-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-05-31",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-31",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -391,11 +329,11 @@
           "type": "Stand-up",
           "cost": "$15",
           "repeat": "Every Sunday",
-          "start_dt": "2026-05-30T20:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-05-31",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -410,12 +348,12 @@
       ]
     },
     {
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-06-01",
       "events": [
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-06-01",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -429,7 +367,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-06-01",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -443,7 +381,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-06-01",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -457,7 +395,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-06-01",
           "time": "9:30pm",
           "time_sort": 2130,
@@ -467,7 +405,7 @@
           "type": "Open Mic",
           "cost": "FREE",
           "repeat": "Every Monday",
-          "start_dt": "2026-06-08T21:30-05:00"
+          "start_dt": "2026-07-06T21:30-05:00"
         }
       ]
     },
@@ -535,7 +473,7 @@
           "type": "Open Mic",
           "cost": "FREE",
           "repeat": "Every Wednesday",
-          "start_dt": "2026-06-03T21:00-05:00"
+          "start_dt": "2026-07-08T21:00-05:00"
         },
         {
           "category": "comedy",
@@ -688,6 +626,40 @@
           "cost": "FREE",
           "repeat": "Every Friday",
           "start_dt": "2026-06-05T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Saturday",
+      "date": "2026-06-06",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-06-06",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "LGBTLOL",
+          "url": "https://504comedy.com/event/1362/lgbtlol-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Sat Jun 06 2026",
+          "start_dt": "2026-06-05T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-06-06",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Jokes on Oak",
+          "url": "https://504comedy.com/event/1116/jokes-on-oak",
+          "venue": "Oak St Brewery",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Saturday",
+          "start_dt": "2026-06-06T20:00-05:00"
         }
       ]
     }
