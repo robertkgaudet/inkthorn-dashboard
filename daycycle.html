@@ -573,12 +573,23 @@ function renderCycle(data, profile) {
     // Neighborhood bar
     + nbhdHtml;
 
-  // Auto-scroll to current block
-  requestAnimationFrame(function() {
+  // Auto-scroll to current block — retry a few times to beat paint timing
+  function scrollToCurrent() {
     var scroll = document.getElementById('dc-scroll');
     var current = document.querySelector('.day-block-v.current');
-    if (scroll && current) {
+    if (scroll && current && current.offsetWidth > 0) {
       scroll.scrollLeft = current.offsetLeft - (scroll.clientWidth / 2) + (current.offsetWidth / 2);
+      return true;
+    }
+    return false;
+  }
+  requestAnimationFrame(function() {
+    if (!scrollToCurrent()) {
+      setTimeout(function() {
+        if (!scrollToCurrent()) {
+          setTimeout(scrollToCurrent, 300);
+        }
+      }, 100);
     }
   });
 
