@@ -572,7 +572,7 @@ fetch(API + '/api/profile', {
 }).then(function(r) { return r.ok ? r.json() : null; })
   .then(function(p) {
     if (p && p.onboarding_complete) {
-      window.location.href = 'command-center.html';
+      window.location.href = 'daycycle.html';
     }
   }).catch(function() {});
 
@@ -780,7 +780,7 @@ async function submitOnboarding() {
 
   // Wait 2 seconds for drama, then redirect
   setTimeout(function() {
-    window.location.href = 'command-center.html';
+    window.location.href = 'daycycle.html';
   }, 2000);
 }
 </script>

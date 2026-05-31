@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Day Cycle">
+<title>InkThorn — Your Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #16161e;
+    --pink: #ff2d78;
+    --pink2: #ff6ba8;
+    --cyan: #00d4ff;
+    --cyan2: #00aacc;
+    --amber: #c8832a;
+    --text: #f2ede6;
+    --text2: #b8b0a5;
+    --text3: #6e6760;
+    --glass-bg: rgba(22,22,30,0.7);
+    --glass-border: rgba(255,45,120,0.2);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,45,120,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,45,120,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,45,120,0.15);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-brand {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    background: linear-gradient(90deg, #ff2d78, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .header-user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,45,120,0.4);
+    object-fit: cover;
+  }
+  .avatar-placeholder {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,45,120,0.2);
+    border: 1px solid rgba(255,45,120,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--pink);
+  }
+  .header-name {
+    font-size: 0.7rem;
+    color: var(--text2);
+    letter-spacing: 0.05em;
+  }
+  .btn-signout {
+    font-size: 0.6rem;
+    color: var(--text3);
+    cursor: pointer;
+    padding: 3px 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    background: transparent;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .btn-signout:hover { color: var(--pink); border-color: rgba(255,45,120,0.3); }
+
+  /* ─── MAIN WRAP ─── */
+  .wrap {
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 1rem 0 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── DAY CYCLE ─── */
+  .day-cycle-wrap {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    margin: 0.75rem;
+    overflow: hidden;
+  }
+  .day-cycle-header {
+    padding: 0.9rem 1rem 0.7rem;
+    border-bottom: 1px solid rgba(255,45,120,0.1);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .day-cycle-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--pink);
+    text-transform: uppercase;
+  }
+  .day-cycle-now {
+    font-size: 0.68rem;
+    color: var(--text2);
+    margin-top: 3px;
+  }
+  .day-cycle-scroll {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0.75rem 0;
+  }
+  .day-cycle-scroll::-webkit-scrollbar { display: none; }
+  .day-track-wrap { padding: 0 0.75rem; }
+  .day-cards-row {
+    display: flex;
+    gap: 0.6rem;
+    width: max-content;
+  }
+
+  /* ─── BLOCK CARDS ─── */
+  .day-block-v {
+    width: 120px;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 0.65rem 0.6rem;
+    transition: border-color 0.2s;
+    cursor: default;
+  }
+  .day-block-v.current {
+    border-color: rgba(255,45,120,0.5);
+    background: rgba(255,45,120,0.06);
+    box-shadow: 0 0 16px rgba(255,45,120,0.12);
+  }
+  .day-block-v.past {
+    opacity: 0.45;
+  }
+  .bv-icon { font-size: 1.3rem; margin-bottom: 0.3rem; }
+  .bv-time {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--cyan);
+    margin-bottom: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .now-badge {
+    font-size: 0.5rem;
+    background: var(--pink);
+    color: #fff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+  .bv-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+  }
+  .bv-tips { font-size: 0.62rem; color: var(--text2); line-height: 1.5; }
+  .bv-tips .t1 { margin-bottom: 0.2rem; }
+  .bv-tips .t2 { color: var(--text3); }
+
+  /* ─── BELOW PANELS ─── */
+  .below-panels { padding: 0 1rem 0.75rem; }
+
+  /* ─── ANCHOR CARD (concierge notes) ─── */
+  .anchor-card {
+    margin: 0.75rem 0 0.5rem;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(255,45,120,0.05);
+    border: 1px solid rgba(255,45,120,0.2);
+  }
+  .anchor-title {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--pink);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .anchor-note {
+    padding: 3px 0;
+    font-size: 11px;
+    color: rgba(242,237,230,0.85);
+    line-height: 1.6;
+  }
+
+  /* ─── PRIVATE CARD ─── */
+  .private-card {
+    margin: 0 0 4px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,105,180,0.18);
+    background: rgba(255,20,147,0.04);
+    overflow: hidden;
+  }
+  .private-header {
+    padding: 8px 14px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+  .private-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: rgba(255,105,180,0.65);
+    text-transform: uppercase;
+  }
+  .private-hint {
+    font-size: 9px;
+    color: rgba(255,105,180,0.4);
+    letter-spacing: 0.08em;
+    font-style: italic;
+  }
+  .private-content {
+    padding: 2px 14px 12px;
+    filter: blur(8px);
+    transition: filter 0.4s ease;
+    cursor: pointer;
+  }
+  .private-note {
+    padding: 4px 0;
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: rgba(255,182,193,0.92);
+  }
+
+  /* ─── LOADING STATE ─── */
+  .loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    gap: 1rem;
+    color: var(--text2);
+    font-size: 0.85rem;
+  }
+  .spinner {
+    width: 28px;
+    height: 28px;
+    border: 2px solid rgba(255,45,120,0.2);
+    border-top-color: var(--pink);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-sub {
+    font-size: 0.7rem;
+    color: var(--text3);
+    text-align: center;
+    max-width: 240px;
+    line-height: 1.5;
+  }
+
+  /* ─── ERROR STATE ─── */
+  .error-state {
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: rgba(255,44,44,0.06);
+    border: 1px solid rgba(255,44,44,0.2);
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+  .error-state a {
+    color: var(--cyan);
+    text-decoration: none;
+  }
+
+  /* ─── UPGRADE CARD ─── */
+  .upgrade-card {
+    margin: 1rem;
+    padding: 1.5rem 1rem;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255,45,120,0.08), rgba(0,212,255,0.06));
+    border: 1px solid rgba(255,45,120,0.3);
+    text-align: center;
+  }
+  .upgrade-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    background: linear-gradient(90deg, #ff2d78, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+  .upgrade-sub {
+    font-size: 0.78rem;
+    color: var(--text2);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+  .btn-upgrade {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #ff2d78, #cc1155);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 0 20px rgba(255,45,120,0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-upgrade:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 30px rgba(255,45,120,0.5);
+  }
+
+  /* ─── EDIT PROFILE LINK ─── */
+  .footer-links {
+    text-align: center;
+    padding: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  .footer-link {
+    font-size: 0.65rem;
+    color: var(--text3);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .footer-link:hover { color: var(--cyan); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-brand">✦ INKTHORN</div>
+  <div class="header-user">
+    <div class="avatar-placeholder" id="user-avatar">?</div>
+    <span class="header-name" id="user-name">Loading...</span>
+    <button class="btn-signout" onclick="signOut()">Sign out</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div id="cycle-container">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <div>Building your day...</div>
+      <div class="loading-sub">Checking local venues, events, and generating your personalized cycle.</div>
+    </div>
+  </div>
+
+  <div class="footer-links">
+    <a class="footer-link" href="onboarding.html">✏️ Edit profile</a>
+    <a class="footer-link" href="notes.html">📁 Notes</a>
+  </div>
+</div>
+
+<script>
+const API = 'https://inkthorn-notes.robertkgaudet.workers.dev';
+
+// ─── Auth ───────────────────────────────────────────────────────────────────
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const urlToken = params.get('token');
+  if (urlToken) {
+    localStorage.setItem('inkthorn_token', urlToken);
+    history.replaceState(null, '', window.location.pathname);
+  }
+})();
+
+const TOKEN = localStorage.getItem('inkthorn_token');
+if (!TOKEN) { window.location.href = 'notes.html'; }
+
+function signOut() {
+  localStorage.removeItem('inkthorn_token');
+  window.location.href = 'notes.html';
+}
+
+// ─── Load user info ──────────────────────────────────────────────────────────
+fetch(API + '/api/me', { headers: { 'Authorization': 'Bearer ' + TOKEN } })
+  .then(function(r) { return r.ok ? r.json() : null; })
+  .then(function(me) {
+    if (!me) return;
+    const nameEl = document.getElementById('user-name');
+    const avatarEl = document.getElementById('user-avatar');
+    if (nameEl) nameEl.textContent = (me.name || me.email || '').split(' ')[0];
+    if (avatarEl && me.avatar_url) {
+      avatarEl.outerHTML = '<img class="avatar" id="user-avatar" src="' + me.avatar_url + '" alt="">';
+    } else if (avatarEl && me.name) {
+      avatarEl.textContent = me.name.charAt(0).toUpperCase();
+    }
+  }).catch(function() {});
+
+// ─── Time helpers ────────────────────────────────────────────────────────────
+function getBlockStatus(timeStr) {
+  var now = new Date();
+  var parts = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/);
+  if (!parts) return '';
+  var h = parseInt(parts[1]), m = parseInt(parts[2]), ap = parts[3];
+  if (ap === 'PM' && h !== 12) h += 12;
+  if (ap === 'AM' && h === 12) h = 0;
+  var blockMins = h * 60 + m;
+  var nowMins = now.getHours() * 60 + now.getMinutes();
+  if (Math.abs(nowMins - blockMins) < 35) return 'current';
+  if (nowMins > blockMins + 35) return 'past';
+  return '';
+}
+
+function nowLabel() {
+  var now = new Date();
+  return now.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit', hour12:true })
+    + ' · ' + now.toLocaleDateString('en-US', { weekday:'long', month:'short', day:'numeric' });
+}
+
+// ─── Render ──────────────────────────────────────────────────────────────────
+function renderBlock(b) {
+  var status = getBlockStatus(b.time);
+  var nowBadge = status === 'current' ? '<span class="now-badge">● NOW</span>' : '';
+  var recHtml = '';
+  if (b.recommendation) {
+    var rec = b.recommendation;
+    var urlMatch = rec.note && rec.note.match(/https?:\/\/[^\s]+/);
+    var moreLink = urlMatch ? urlMatch[0] : (rec.address ? 'https://www.google.com/search?q=' + encodeURIComponent(rec.name + ' ' + rec.address) : '');
+    var noteClean = rec.note ? rec.note.replace(/https?:\/\/[^\s]+/g, '').trim() : '';
+    recHtml = '<div style="margin-top:6px;font-size:10px;color:#c8832a;border-top:1px solid rgba(200,131,42,0.2);padding-top:4px;">'
+      + '📍 <strong>' + rec.name + '</strong><br>'
+      + '<span style="color:rgba(255,255,255,0.45)">' + noteClean + '</span>'
+      + (moreLink ? '<br><a href="' + moreLink + '" target="_blank" rel="noopener" style="color:#00d4ff;font-size:9px;letter-spacing:0.06em;text-decoration:none;">More info →</a>' : '')
+      + '</div>';
+  }
+  return '<div class="day-block-v ' + status + '">'
+    + '<div class="bv-icon">' + b.icon + '</div>'
+    + '<div class="bv-time">' + b.time + nowBadge + '</div>'
+    + '<div class="bv-label">' + b.label + '</div>'
+    + '<div class="bv-tips"><div class="t1">' + (b.tips[0]||'') + '</div><div class="t2">' + (b.tips[1]||'') + '</div></div>'
+    + recHtml
+    + '</div>';
+}
+
+function renderCycle(data) {
+  var container = document.getElementById('cycle-container');
+
+  // Anchor panel
+  var anchorHtml = '';
+  if (data.concierge && data.concierge.notes && data.concierge.notes.length) {
+    var notesHtml = data.concierge.notes.map(function(n) {
+      return '<div class="anchor-note">' + n + '</div>';
+    }).join('');
+    anchorHtml = '<div class="anchor-card">'
+      + '<div class="anchor-title">✦ ' + (data.concierge.title || 'Today') + '</div>'
+      + notesHtml
+      + '</div>';
+  }
+
+  // Private panel
+  var privateHtml = '';
+  if (data.private && data.private.length) {
+    var pid = 'prv-' + Math.random().toString(36).slice(2,8);
+    var pvNotes = data.private.map(function(n) {
+      return '<div class="private-note">' + n + '</div>';
+    }).join('');
+    privateHtml = '<div class="private-card">'
+      + '<div class="private-header" onclick="togglePrivate(\'' + pid + '\')">'
+      + '<span class="private-label">🔒 Private</span>'
+      + '<span class="private-hint" id="' + pid + '-icon">tap to reveal</span>'
+      + '</div>'
+      + '<div class="private-content" id="' + pid + '" onclick="togglePrivate(\'' + pid + '\')">' + pvNotes + '</div>'
+      + '</div>';
+  }
+
+  // Blocks
+  var blocksHtml = (data.blocks || []).filter(function(b) { return !b._private; }).map(renderBlock).join('');
+
+  container.innerHTML = '<div class="day-cycle-wrap">'
+    + '<div class="day-cycle-header">'
+    + '<div>'
+    + '<div class="day-cycle-title">⚡ YOUR DAY</div>'
+    + '<div class="day-cycle-now" id="dc-now-label">' + nowLabel() + '</div>'
+    + '</div>'
+    + '</div>'
+    + '<div class="day-cycle-scroll" id="dc-scroll">'
+    + '<div id="dc-track"><div class="day-track-wrap"><div class="day-cards-row">' + blocksHtml + '</div></div></div>'
+    + '</div>'
+    + '<div class="below-panels">' + anchorHtml + privateHtml + '</div>'
+    + '</div>';
+
+  // Auto-scroll to current block
+  requestAnimationFrame(function() {
+    var scroll = document.getElementById('dc-scroll');
+    var current = document.querySelector('.day-block-v.current');
+    if (scroll && current) {
+      scroll.scrollLeft = current.offsetLeft - (scroll.clientWidth / 2) + (current.offsetWidth / 2);
+    }
+  });
+
+  // Clock tick
+  setInterval(function() {
+    var el = document.getElementById('dc-now-label');
+    if (el) el.textContent = nowLabel();
+    // Re-render blocks to update NOW badge
+    var track = document.getElementById('dc-track');
+    if (track && data.blocks) {
+      var filtered = (data.blocks || []).filter(function(b) { return !b._private; });
+      track.innerHTML = '<div class="day-track-wrap"><div class="day-cards-row">' + filtered.map(renderBlock).join('') + '</div></div>';
+    }
+  }, 60000);
+}
+
+function togglePrivate(id) {
+  var el = document.getElementById(id);
+  var icon = document.getElementById(id + '-icon');
+  if (!el) return;
+  var blurred = el.style.filter !== 'none' && el.style.filter !== '';
+  if (blurred) {
+    el.style.filter = 'none';
+    if (icon) { icon.textContent = 'tap to hide'; icon.style.color = 'rgba(255,105,180,0.7)'; }
+    if (window._prvTimer) clearTimeout(window._prvTimer);
+    window._prvTimer = setTimeout(function() {
+      el.style.filter = 'blur(8px)';
+      if (icon) { icon.textContent = 'tap to reveal'; icon.style.color = 'rgba(255,105,180,0.4)'; }
+    }, 15000);
+  } else {
+    el.style.filter = 'blur(8px)';
+    if (icon) { icon.textContent = 'tap to reveal'; icon.style.color = 'rgba(255,105,180,0.4)'; }
+    if (window._prvTimer) clearTimeout(window._prvTimer);
+  }
+}
+
+function showUpgrade() {
+  document.getElementById('cycle-container').innerHTML =
+    '<div class="upgrade-card">'
+    + '<div class="upgrade-title">UNLOCK YOUR DAY</div>'
+    + '<div class="upgrade-sub">Your personalized AI day cycle — tailored to your city, your projects, your people, and what\'s happening tonight — is a Pro feature.<br><br>One subscription covers both Day Cycle and InkThorn Notes.</div>'
+    + '<button class="btn-upgrade" onclick="startCheckout()">Unlock for $15/mo →</button>'
+    + '</div>';
+}
+
+function startCheckout() {
+  fetch(API + '/stripe/checkout', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + TOKEN, 'Content-Type': 'application/json' },
+    body: JSON.stringify({})
+  }).then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(d) { if (d && d.url) window.location.href = d.url; })
+    .catch(function() { alert('Could not start checkout. Please try again.'); });
+}
+
+function showError(msg) {
+  document.getElementById('cycle-container').innerHTML =
+    '<div class="error-state">' + msg + '</div>';
+}
+
+// ─── Fetch cycle ─────────────────────────────────────────────────────────────
+fetch(API + '/api/cycle', { headers: { 'Authorization': 'Bearer ' + TOKEN } })
+  .then(function(r) {
+    if (r.status === 402) { showUpgrade(); return null; }
+    if (r.status === 404) {
+      window.location.href = 'onboarding.html';
+      return null;
+    }
+    if (!r.ok) throw new Error('Server error ' + r.status);
+    return r.json();
+  })
+  .then(function(data) {
+    if (!data) return;
+    renderCycle(data);
+  })
+  .catch(function(err) {
+    console.error(err);
+    showError('Something went wrong loading your day cycle.<br><a href="javascript:location.reload()">Try again</a>');
+  });
+</script>
+</body>
+</html>
