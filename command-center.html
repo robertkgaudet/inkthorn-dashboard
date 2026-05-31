@@ -3284,6 +3284,21 @@ window._gfitConnect = function() {
 </div>
 
 <script>
+// Auth gate — check for token, redirect if missing
+(function() {
+  var token = localStorage.getItem('it_token');
+  if (!token) { window.location.href = 'notes.html'; return; }
+  // Check onboarding complete
+  fetch('https://inkthorn-notes.robertkgaudet.workers.dev/api/profile', {
+    headers: { 'Authorization': 'Bearer ' + token }
+  }).then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(profile) {
+      if (!profile || !profile.onboarding_complete) {
+        window.location.href = 'onboarding.html';
+      }
+    }).catch(function() {});
+})();
+
 // ═══ AUTH ═══
 const PASS = 'AAww33!!';
 window.onerror = function(msg, src, line, col, err) {
@@ -3755,10 +3770,20 @@ var _conciergeAnchor = null;
 var _conciergePrivate = null;
 
 function fetchConciergeCycle() {
-  // Always fetch today-cycle.json — AI-generated fresh each day by cron at 5:30am CDT.
-  // No date gate: always render whatever is in the JSON.
-  fetch('today-cycle.json?v=' + Date.now())
-    .then(function(r) { return r.ok ? r.json() : null; })
+  var token = localStorage.getItem('it_token');
+  var headers = token ? { 'Authorization': 'Bearer ' + token } : {};
+  // Try authenticated per-user cycle first; fall back to static today-cycle.json for Rob
+  var apiUrl = token
+    ? 'https://inkthorn-notes.robertkgaudet.workers.dev/api/cycle'
+    : 'today-cycle.json?v=' + Date.now();
+  fetch(apiUrl, { headers: headers })
+    .then(function(r) {
+      if (r.status === 402) {
+        // Not subscribed — fall back to static
+        return fetch('today-cycle.json?v=' + Date.now()).then(function(r2) { return r2.ok ? r2.json() : null; });
+      }
+      return r.ok ? r.json() : null;
+    })
     .then(function(data) {
       if (!data || !data.blocks) return;
       _conciergeBlocks = data.blocks;

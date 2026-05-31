@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InkThorn — Setup Your Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --border: #1e1e2e;
+    --pink: #ff2d78;
+    --cyan: #00f5ff;
+    --purple: #a855f7;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── Progress bar ── */
+  #progress-bar-wrap {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--border);
+    z-index: 100;
+  }
+  #progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    transition: width 0.4s ease;
+    box-shadow: 0 0 8px var(--cyan);
+  }
+
+  /* ── Outer wrapper ── */
+  .onboard-wrap {
+    width: 100%;
+    max-width: 480px;
+    padding: 32px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── Logo ── */
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--cyan);
+    margin-bottom: 32px;
+    margin-top: 24px;
+    text-shadow: 0 0 12px var(--cyan);
+  }
+
+  /* ── Screen ── */
+  .screen {
+    width: 100%;
+    display: none;
+    opacity: 0;
+    animation: fadeIn 0.4s ease forwards;
+  }
+  .screen.active {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Step indicator ── */
+  .step-label {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    background: linear-gradient(135deg, var(--pink), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  /* ── Form elements ── */
+  label {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    margin-top: 18px;
+  }
+  label:first-of-type { margin-top: 0; }
+
+  input[type="text"],
+  input[type="time"],
+  textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    padding: 12px 14px;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input[type="text"]:focus,
+  input[type="time"]:focus,
+  textarea:focus {
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 2px rgba(0,245,255,0.15);
+  }
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  /* ── Radio group ── */
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    font-size: 0.95rem;
+  }
+  .radio-option:hover {
+    border-color: var(--cyan);
+    background: rgba(0,245,255,0.04);
+  }
+  .radio-option.selected {
+    border-color: var(--pink);
+    background: rgba(255,45,120,0.08);
+    box-shadow: 0 0 12px rgba(255,45,120,0.15);
+  }
+  .radio-option input[type="radio"] {
+    display: none;
+  }
+  .radio-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .radio-option.selected .radio-dot {
+    border-color: var(--pink);
+    background: var(--pink);
+    box-shadow: 0 0 6px var(--pink);
+  }
+
+  /* ── Toggle ── */
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .toggle-label { font-size: 0.95rem; }
+  .toggle-switch {
+    position: relative;
+    width: 48px;
+    height: 26px;
+    cursor: pointer;
+  }
+  .toggle-switch input { display: none; }
+  .toggle-track {
+    position: absolute;
+    inset: 0;
+    border-radius: 13px;
+    background: var(--border);
+    transition: background 0.2s;
+  }
+  .toggle-switch input:checked ~ .toggle-track {
+    background: linear-gradient(90deg, var(--pink), var(--purple));
+  }
+  .toggle-thumb {
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.2s;
+  }
+  .toggle-switch input:checked ~ .toggle-thumb {
+    transform: translateX(22px);
+  }
+
+  /* ── Kids count input (conditionally shown) ── */
+  #kids-wrap {
+    display: none;
+    margin-top: 14px;
+  }
+
+  /* ── Interest grid ── */
+  .interest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .interest-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 6px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    font-size: 0.8rem;
+    text-align: center;
+    line-height: 1.2;
+    user-select: none;
+  }
+  .interest-tile .emoji { font-size: 1.4rem; }
+  .interest-tile:hover {
+    border-color: rgba(255,45,120,0.4);
+    background: rgba(255,45,120,0.04);
+  }
+  .interest-tile.selected {
+    border-color: var(--pink);
+    background: rgba(255,45,120,0.1);
+    box-shadow: 0 0 12px rgba(255,45,120,0.2);
+  }
+  .interest-tile.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .interest-count {
+    font-size: 0.8rem;
+    color: var(--cyan);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+
+  .custom-interest-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .custom-interest-row input {
+    flex: 1;
+  }
+
+  /* ── Vibe inputs ── */
+  .vibe-inputs {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .vibe-inputs input { flex: 1; text-align: center; }
+
+  .vibe-examples {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--border);
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  /* ── Buttons ── */
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 32px;
+  }
+  .btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255,45,120,0.3);
+  }
+  .btn-primary:hover { box-shadow: 0 0 28px rgba(255,45,120,0.5); }
+  .btn-secondary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .btn-cta {
+    padding: 16px;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #ff2d78, #7c3aed, #00f5ff);
+    background-size: 200%;
+    animation: gradientShift 3s ease infinite;
+  }
+  @keyframes gradientShift {
+    0%,100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* ── Loading screen ── */
+  #loading-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    gap: 20px;
+  }
+  #loading-screen.active { display: flex; }
+  .loading-emoji {
+    font-size: 3rem;
+    animation: bounce 1s ease infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .loading-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    color: var(--cyan);
+    letter-spacing: 2px;
+  }
+  .loading-sub {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<div id="progress-bar-wrap"><div id="progress-bar" style="width:0%"></div></div>
+
+<div class="onboard-wrap">
+  <div class="logo">🦞 INKTHORN</div>
+
+  <!-- Screen 1: Location -->
+  <div class="screen active" id="screen-1">
+    <div class="step-label">Step 1 of 6</div>
+    <h1>Where do you live?</h1>
+    <p class="subtitle">We'll find local spots, events, and venues near you.</p>
+
+    <label>Your city</label>
+    <input type="text" id="city" placeholder="New Orleans" autocomplete="off">
+
+    <label>Your neighborhood</label>
+    <input type="text" id="neighborhood" placeholder="Uptown, Marigny, etc." autocomplete="off">
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="nextScreen(1)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Screen 2: Work -->
+  <div class="screen" id="screen-2">
+    <div class="step-label">Step 2 of 6</div>
+    <h1>What are you building?</h1>
+    <p class="subtitle">Your projects shape your priorities every day.</p>
+
+    <label>Your role</label>
+    <input type="text" id="role" placeholder="Founder, freelancer, developer..." autocomplete="off">
+
+    <label>Current projects — one per line</label>
+    <textarea id="projects" placeholder="TextOS AI&#10;Reyla&#10;Stability.org"></textarea>
+
+    <label>Work style</label>
+    <div class="radio-group" id="work-style-group">
+      <div class="radio-option" onclick="selectRadio('work_style','morning_builder',this)">
+        <div class="radio-dot"></div> Morning builder
+      </div>
+      <div class="radio-option" onclick="selectRadio('work_style','deep_work_afternoons',this)">
+        <div class="radio-dot"></div> Deep work afternoons
+      </div>
+      <div class="radio-option" onclick="selectRadio('work_style','night_owl',this)">
+        <div class="radio-dot"></div> Night owl
+      </div>
+      <div class="radio-option" onclick="selectRadio('work_style','flexible',this)">
+        <div class="radio-dot"></div> Flexible
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevScreen(2)">← Back</button>
+      <button class="btn btn-primary" onclick="nextScreen(2)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Screen 3: Rhythm -->
+  <div class="screen" id="screen-3">
+    <div class="step-label">Step 3 of 6</div>
+    <h1>What's your daily rhythm?</h1>
+
+    <label>I usually wake up at</label>
+    <input type="text" id="wake_time" placeholder="7:00 AM" value="7:00 AM">
+
+    <label>I usually sleep at</label>
+    <input type="text" id="sleep_time" placeholder="11:00 PM" value="11:00 PM">
+
+    <label style="margin-top:20px">I'm a...</label>
+    <div class="radio-group">
+      <div class="radio-option" onclick="selectRadio('chronotype','morning',this)">
+        <div class="radio-dot"></div> Morning person ☀️
+      </div>
+      <div class="radio-option" onclick="selectRadio('chronotype','night_owl',this)">
+        <div class="radio-dot"></div> Night owl 🌙
+      </div>
+      <div class="radio-option" onclick="selectRadio('chronotype','flexible',this)">
+        <div class="radio-dot"></div> Flexible 🌀
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevScreen(3)">← Back</button>
+      <button class="btn btn-primary" onclick="nextScreen(3)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Screen 4: Your people -->
+  <div class="screen" id="screen-4">
+    <div class="step-label">Step 4 of 6</div>
+    <h1>Who's in your life?</h1>
+    <p class="subtitle">Knowing your people makes your days more intentional.</p>
+
+    <label>Partner's name (optional)</label>
+    <input type="text" id="partner_name" placeholder="Camille..." autocomplete="off">
+
+    <div class="toggle-row" style="margin-top:20px">
+      <span class="toggle-label">Do you have kids?</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="has_kids" onchange="toggleKids(this)">
+        <div class="toggle-track"></div>
+        <div class="toggle-thumb"></div>
+      </label>
+    </div>
+
+    <div id="kids-wrap">
+      <label>How many?</label>
+      <input type="text" id="kids_count" placeholder="2" autocomplete="off">
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevScreen(4)">← Back</button>
+      <button class="btn btn-primary" onclick="nextScreen(4)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Screen 5: Interests -->
+  <div class="screen" id="screen-5">
+    <div class="step-label">Step 5 of 6</div>
+    <h1>What do you love doing?</h1>
+    <p class="subtitle">Pick up to 10 — these shape your evenings and weekends.</p>
+
+    <div class="interest-count" id="interest-count">0 / 10 selected</div>
+
+    <div class="interest-grid" id="interest-grid">
+      <!-- JS fills this -->
+    </div>
+
+    <div class="custom-interest-row">
+      <input type="text" id="custom-interest" placeholder="Add your own interest...">
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevScreen(5)">← Back</button>
+      <button class="btn btn-primary" onclick="nextScreen(5)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Screen 6: Vibe -->
+  <div class="screen" id="screen-6">
+    <div class="step-label">Step 6 of 6</div>
+    <h1>Three words that describe your ideal day.</h1>
+    <p class="subtitle">Not your aspirations — your actual vibe.</p>
+
+    <div class="vibe-inputs">
+      <input type="text" id="vibe1" placeholder="Word 1" maxlength="20">
+      <input type="text" id="vibe2" placeholder="Word 2" maxlength="20">
+      <input type="text" id="vibe3" placeholder="Word 3" maxlength="20">
+    </div>
+    <div class="vibe-examples">focused · active · connected &nbsp;|&nbsp; calm · creative · social</div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevScreen(6)">← Back</button>
+      <button class="btn btn-primary btn-cta" onclick="submitOnboarding()">Build My Day Cycle →</button>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div id="loading-screen">
+    <div class="loading-emoji">🦞</div>
+    <div class="loading-text">BUILDING YOUR DAY...</div>
+    <div class="loading-sub">Generating your first day cycle. Give me a second.</div>
+  </div>
+
+</div>
+
+<script>
+const API = 'https://inkthorn-notes.robertkgaudet.workers.dev';
+const TOKEN = localStorage.getItem('it_token');
+
+// ── Auth check ──
+if (!TOKEN) {
+  window.location.href = 'notes.html';
+}
+
+// ── Check if already onboarded ──
+fetch(API + '/api/profile', {
+  headers: { 'Authorization': 'Bearer ' + TOKEN }
+}).then(function(r) { return r.ok ? r.json() : null; })
+  .then(function(p) {
+    if (p && p.onboarding_complete) {
+      window.location.href = 'command-center.html';
+    }
+  }).catch(function() {});
+
+// ── State ──
+const profile = {
+  city: '', neighborhood: '', lat: null, lng: null,
+  role: '', projects: [], work_style: 'flexible',
+  wake_time: '7:00 AM', sleep_time: '11:00 PM', chronotype: 'morning',
+  partner_name: '', has_kids: false, kids: null,
+  interests: [], vibe_words: [],
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/Chicago',
+  onboarding_complete: false,
+};
+
+const radios = { work_style: null, chronotype: null };
+
+// ── Progress bar ──
+const TOTAL = 6;
+function setProgress(step) {
+  document.getElementById('progress-bar').style.width = ((step / TOTAL) * 100) + '%';
+}
+
+// ── Radio select ──
+function selectRadio(field, value, el) {
+  radios[field] = value;
+  var group = el.parentElement;
+  group.querySelectorAll('.radio-option').forEach(function(o) { o.classList.remove('selected'); });
+  el.classList.add('selected');
+}
+
+// ── Toggle kids ──
+function toggleKids(cb) {
+  document.getElementById('kids-wrap').style.display = cb.checked ? 'block' : 'none';
+}
+
+// ── Interest grid ──
+const INTERESTS = [
+  ['⚽','Soccer'],['🎵','Live Music'],['🎬','Movies'],['💃','Dancing'],['🎧','DJing'],
+  ['🏋️','Gym'],['🧘','Yoga'],['🚴','Cycling'],['🎮','Gaming'],['🍳','Cooking'],
+  ['📚','Reading'],['🎨','Art/Creative'],['🏄','Outdoors'],['🍷','Wine & Spirits'],
+  ['🎯','Poker/Cards'],['✍️','Writing'],['🎤','Karaoke'],['🐕','Dogs'],['🎸','Music (playing)'],
+  ['🧗','Fitness'],['🏈','Football'],['🎾','Tennis'],['🏊','Swimming'],['🎭','Theater'],
+];
+const selectedInterests = new Set();
+
+function buildInterestGrid() {
+  var grid = document.getElementById('interest-grid');
+  INTERESTS.forEach(function(item) {
+    var tile = document.createElement('div');
+    tile.className = 'interest-tile';
+    tile.dataset.label = item[1];
+    tile.innerHTML = '<span class="emoji">' + item[0] + '</span><span>' + item[1] + '</span>';
+    tile.addEventListener('click', function() { toggleInterest(item[1], tile); });
+    grid.appendChild(tile);
+  });
+
+  // Custom interest on Enter
+  document.getElementById('custom-interest').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      var val = this.value.trim();
+      if (val && !selectedInterests.has(val) && selectedInterests.size < 10) {
+        selectedInterests.add(val);
+        var custom = document.createElement('div');
+        custom.className = 'interest-tile selected';
+        custom.dataset.label = val;
+        custom.innerHTML = '<span class="emoji">✨</span><span>' + val + '</span>';
+        custom.addEventListener('click', function() { toggleInterest(val, custom); });
+        grid.appendChild(custom);
+        this.value = '';
+        updateInterestCount();
+      }
+    }
+  });
+}
+
+function toggleInterest(label, tile) {
+  if (selectedInterests.has(label)) {
+    selectedInterests.delete(label);
+    tile.classList.remove('selected');
+  } else {
+    if (selectedInterests.size >= 10) return;
+    selectedInterests.add(label);
+    tile.classList.add('selected');
+  }
+  updateInterestCount();
+  // Dim unselected tiles when max reached
+  var tiles = document.querySelectorAll('.interest-tile');
+  tiles.forEach(function(t) {
+    if (selectedInterests.size >= 10 && !t.classList.contains('selected')) {
+      t.classList.add('disabled');
+    } else {
+      t.classList.remove('disabled');
+    }
+  });
+}
+
+function updateInterestCount() {
+  document.getElementById('interest-count').textContent = selectedInterests.size + ' / 10 selected';
+}
+
+buildInterestGrid();
+
+// ── Current screen tracking ──
+var currentScreen = 1;
+setProgress(1);
+
+// ── Navigate ──
+function showScreen(n) {
+  document.querySelectorAll('.screen').forEach(function(s) {
+    s.classList.remove('active');
+    s.style.display = 'none';
+  });
+  var el = document.getElementById('screen-' + n);
+  el.style.display = 'block';
+  // Force reflow for animation
+  el.offsetHeight;
+  el.classList.add('active');
+  setProgress(n);
+  currentScreen = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+async function nextScreen(from) {
+  if (from === 1) {
+    // Geocode
+    var city = document.getElementById('city').value.trim();
+    var nbhd = document.getElementById('neighborhood').value.trim();
+    if (!city) { alert('Please enter your city.'); return; }
+    profile.city = city;
+    profile.neighborhood = nbhd;
+    try {
+      var q = encodeURIComponent(city + ' ' + nbhd);
+      var res = await fetch('https://nominatim.openstreetmap.org/search?q=' + q + '&format=json&limit=1');
+      var data = await res.json();
+      if (data && data.length > 0) {
+        profile.lat = parseFloat(data[0].lat);
+        profile.lng = parseFloat(data[0].lon);
+      }
+    } catch(e) { /* geocode failure is non-blocking */ }
+    showScreen(2);
+
+  } else if (from === 2) {
+    profile.role = document.getElementById('role').value.trim();
+    var projText = document.getElementById('projects').value.trim();
+    profile.projects = projText ? projText.split('\n').map(function(s) { return s.trim(); }).filter(Boolean) : [];
+    profile.work_style = radios.work_style || 'flexible';
+    showScreen(3);
+
+  } else if (from === 3) {
+    profile.wake_time = document.getElementById('wake_time').value.trim() || '7:00 AM';
+    profile.sleep_time = document.getElementById('sleep_time').value.trim() || '11:00 PM';
+    profile.chronotype = radios.chronotype || 'morning';
+    showScreen(4);
+
+  } else if (from === 4) {
+    profile.partner_name = document.getElementById('partner_name').value.trim() || null;
+    profile.has_kids = document.getElementById('has_kids').checked;
+    if (profile.has_kids) {
+      profile.kids = document.getElementById('kids_count').value.trim() || null;
+    }
+    showScreen(5);
+
+  } else if (from === 5) {
+    profile.interests = Array.from(selectedInterests);
+    showScreen(6);
+  }
+}
+
+function prevScreen(from) {
+  if (from > 1) showScreen(from - 1);
+}
+
+// ── Submit ──
+async function submitOnboarding() {
+  var v1 = document.getElementById('vibe1').value.trim();
+  var v2 = document.getElementById('vibe2').value.trim();
+  var v3 = document.getElementById('vibe3').value.trim();
+  profile.vibe_words = [v1, v2, v3].filter(Boolean);
+  profile.interests = Array.from(selectedInterests);
+  profile.onboarding_complete = true;
+
+  // Show loading
+  document.querySelectorAll('.screen').forEach(function(s) {
+    s.classList.remove('active');
+    s.style.display = 'none';
+  });
+  document.getElementById('loading-screen').classList.add('active');
+  document.getElementById('progress-bar').style.width = '100%';
+
+  try {
+    var res = await fetch(API + '/api/profile', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + TOKEN,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(profile),
+    });
+    if (!res.ok) {
+      console.error('Profile save failed:', await res.text());
+    }
+  } catch(e) {
+    console.error('Profile save error:', e);
+  }
+
+  // Wait 2 seconds for drama, then redirect
+  setTimeout(function() {
+    window.location.href = 'command-center.html';
+  }, 2000);
+}
+</script>
+</body>
+</html>
