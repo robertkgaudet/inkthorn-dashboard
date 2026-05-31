@@ -548,6 +548,17 @@
 
 <script>
 const API = 'https://inkthorn-notes.robertkgaudet.workers.dev';
+
+// ── Grab token from URL if present (OAuth redirect), then save to localStorage ──
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const urlToken = params.get('token');
+  if (urlToken) {
+    localStorage.setItem('inkthorn_token', urlToken);
+    history.replaceState(null, '', window.location.pathname);
+  }
+})();
+
 const TOKEN = localStorage.getItem('inkthorn_token');
 
 // ── Auth check ──
