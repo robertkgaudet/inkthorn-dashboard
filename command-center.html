@@ -3770,28 +3770,39 @@ var _conciergeAnchor = null;
 var _conciergePrivate = null;
 
 function fetchConciergeCycle() {
+  // Always fall back to static today-cycle.json — this is Rob's personal command center
+  function loadStatic() {
+    fetch('today-cycle.json?v=' + Date.now())
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(data) {
+        if (!data || !data.blocks) return;
+        _conciergeBlocks = data.blocks;
+        _conciergeAnchor = data.concierge || null;
+        _conciergePrivate = data.private || null;
+        renderConciergeCycle();
+      })
+      .catch(function() {});
+  }
+
   var token = localStorage.getItem('inkthorn_token');
-  var headers = token ? { 'Authorization': 'Bearer ' + token } : {};
-  // Try authenticated per-user cycle first; fall back to static today-cycle.json for Rob
-  var apiUrl = token
-    ? 'https://inkthorn-notes.robertkgaudet.workers.dev/api/cycle'
-    : 'today-cycle.json?v=' + Date.now();
-  fetch(apiUrl, { headers: headers })
+  if (!token) { loadStatic(); return; }
+
+  // Try API first; fall back to static on any failure
+  fetch('https://inkthorn-notes.rgaudet2023.workers.dev/api/cycle', {
+    headers: { 'Authorization': 'Bearer ' + token }
+  })
     .then(function(r) {
-      if (r.status === 402) {
-        // Not subscribed — fall back to static
-        return fetch('today-cycle.json?v=' + Date.now()).then(function(r2) { return r2.ok ? r2.json() : null; });
-      }
-      return r.ok ? r.json() : null;
+      if (!r.ok) { loadStatic(); return null; }
+      return r.json();
     })
     .then(function(data) {
-      if (!data || !data.blocks) return;
+      if (!data || !data.blocks) { loadStatic(); return; }
       _conciergeBlocks = data.blocks;
       _conciergeAnchor = data.concierge || null;
       _conciergePrivate = data.private || null;
       renderConciergeCycle();
     })
-    .catch(function() {});
+    .catch(function() { loadStatic(); });
 }
 
 function renderConciergeCycle() {
