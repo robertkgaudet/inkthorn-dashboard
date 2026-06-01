@@ -343,6 +343,8 @@ Notes are stored in a `notes` table (not listed here; managed entirely by the Wo
 ## 11. Migration Plan — inkthorn.ai → daycycle.ai
 
 > **Agent instructions:** Complete these tasks in order. Do not skip steps. Confirm each step with Rob before proceeding to the next unless he explicitly says to run the full migration end-to-end.
+>
+> **Credentials:** All API keys, tokens, and secrets are in `SECRETS.md` in the same directory as this file. That file is gitignored and never committed. Read it before starting any task that requires authentication.
 
 ---
 
