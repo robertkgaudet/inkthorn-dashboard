@@ -114,7 +114,7 @@
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
   }
   .day-cycle-wrap::before {
     content:'';
@@ -318,14 +318,18 @@
   /* ─── HAMBURGER MENU ─── */
   .hamburger-btn {
     display: none;
-    background: none;
+    background: rgba(200,131,42,0.1);
     border: 1px solid rgba(200,131,42,0.4);
-    border-radius: 6px;
-    padding: 5px 8px;
+    border-radius: 8px;
+    padding: 7px 11px;
     cursor: pointer;
-    color: var(--amber);
-    font-size: 1rem;
+    color: var(--amber2);
+    font-size: 1.1rem;
     line-height: 1;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
   }
   .view-overlay {
     display: none;
@@ -402,6 +406,7 @@
     .footer { padding: 0.75rem 1rem 1.5rem; }
     .day-type-btns { display: none; }
     .hamburger-btn { display: block; }
+    .day-cycle-header { padding-right: 3rem; }
   }
 </style>
 </head>
@@ -648,8 +653,8 @@ function renderCycle(data, profile, places) {
     + '<button class="day-type-btn" onclick="showDayType(\'weekday\',this)">Weekday</button>'
     + '<button class="day-type-btn" onclick="showDayType(\'weekend\',this)">Weekend</button>'
     + '<button class="day-type-btn" onclick="showDayType(\'vacation\',this)">Vacation</button>'
-    + '<button class="hamburger-btn" onclick="openViewMenu()" title="Change view">☰</button>'
     + '</div>'
+    + '<button class="hamburger-btn" id="hamburger-btn" onclick="openViewMenu()" title="Change view">☰</button>'
     + '</div>'
     + '<div class="day-cycle-scroll" id="dc-scroll">'
     + '<div id="dc-track"><div class="day-track-wrap"><div class="day-cards-row">' + blocksHtml + '</div></div></div>'
