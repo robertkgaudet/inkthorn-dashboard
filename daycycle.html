@@ -384,7 +384,61 @@
     text-align: center;
   }
 
+  /* ─── USER MENU OVERLAY ─── */
+  .user-menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 600;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+  .user-menu-overlay.open { display: flex; }
+  .user-menu-sheet {
+    background: #16161a;
+    border: 1px solid rgba(200,131,42,0.3);
+    border-radius: 0 0 0 16px;
+    min-width: 200px;
+    padding: 1rem 0 0.5rem;
+    margin-top: 52px; /* below nav */
+  }
+  .user-menu-header {
+    padding: 0 1rem 0.75rem;
+    border-bottom: 1px solid rgba(200,131,42,0.1);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .user-menu-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(200,131,42,0.4);
+    object-fit: cover;
+  }
+  .user-menu-avatar-placeholder {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(200,131,42,0.15);
+    border: 1px solid rgba(200,131,42,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; color: var(--amber);
+  }
+  .user-menu-name { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+  .user-menu-item {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.88rem;
+    color: var(--text2);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .user-menu-item:hover { background: rgba(200,131,42,0.08); color: var(--amber2); }
+  .user-menu-item.danger { color: rgba(255,100,100,0.7); }
+  .user-menu-item.danger:hover { background: rgba(255,44,44,0.06); color: #ff6464; }
+
   @media (max-width: 600px) {
+    .nav-desktop-link { display: none !important; }
     .main { padding: 0.75rem 0 3rem; }
     .day-cycle-wrap { border-radius: 0; border-left: none; border-right: none; margin-bottom: 0; padding: 1rem 0.75rem; }
     .day-cycle-title { font-size: 1rem; }
@@ -411,11 +465,13 @@
 <nav class="nav">
   <div class="nav-brand">INKTHORN // DAY CYCLE</div>
   <div class="nav-user">
-    <div class="nav-avatar-placeholder" id="user-avatar">?</div>
     <span class="nav-name" id="user-name">Loading...</span>
-    <a href="onboarding.html" style="font-size:0.6rem;color:var(--amber);text-decoration:none;border:1px solid rgba(200,131,42,0.35);border-radius:4px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">✏️ Profile</a>
-    <a href="notes.html" style="font-size:0.6rem;color:var(--text3);text-decoration:none;border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">📁 Notes</a>
-    <button class="btn-signout" onclick="signOut()">Sign out</button>
+    <!-- Desktop links -->
+    <a href="onboarding.html" class="nav-desktop-link" style="font-size:0.6rem;color:var(--amber);text-decoration:none;border:1px solid rgba(200,131,42,0.35);border-radius:4px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">✏️ Profile</a>
+    <a href="notes.html" class="nav-desktop-link" style="font-size:0.6rem;color:var(--text3);text-decoration:none;border:1px solid rgba(255,255,255,0.1);border-radius:4px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">📁 Notes</a>
+    <button class="btn-signout nav-desktop-link" onclick="signOut()">Sign out</button>
+    <!-- Avatar — tappable on mobile -->
+    <div class="nav-avatar-placeholder" id="user-avatar" onclick="openUserMenu()" style="cursor:pointer;">?</div>
   </div>
 </nav>
 
@@ -460,13 +516,20 @@ fetch(API + '/api/me', { headers: { 'Authorization': 'Bearer ' + TOKEN } })
   .then(function(r) { return r.ok ? r.json() : null; })
   .then(function(me) {
     if (!me) return;
+    var firstName = (me.name || me.email || '').split(' ')[0];
     var nameEl = document.getElementById('user-name');
     var avatarEl = document.getElementById('user-avatar');
-    if (nameEl) nameEl.textContent = (me.name || me.email || '').split(' ')[0];
-    if (me.avatar_url && avatarEl) {
-      avatarEl.outerHTML = '<img class="nav-avatar" id="user-avatar" src="' + me.avatar_url + '" alt="">';
-    } else if (me.name && avatarEl) {
-      avatarEl.textContent = me.name.charAt(0).toUpperCase();
+    var menuNameEl = document.getElementById('menu-name');
+    var menuAvatarEl = document.getElementById('menu-avatar');
+    if (nameEl) nameEl.textContent = firstName;
+    if (menuNameEl) menuNameEl.textContent = me.name || me.email || '';
+    if (me.avatar_url) {
+      if (avatarEl) avatarEl.outerHTML = '<img class="nav-avatar" id="user-avatar" src="' + me.avatar_url + '" alt="" onclick="openUserMenu()" style="cursor:pointer;">';
+      if (menuAvatarEl) menuAvatarEl.outerHTML = '<img class="user-menu-avatar" id="menu-avatar" src="' + me.avatar_url + '" alt="">';
+    } else if (me.name) {
+      var initial = me.name.charAt(0).toUpperCase();
+      if (avatarEl) avatarEl.textContent = initial;
+      if (menuAvatarEl) menuAvatarEl.textContent = initial;
     }
   }).catch(function() {});
 
@@ -809,6 +872,14 @@ fetch(API + '/api/profile', { headers: { 'Authorization': 'Bearer ' + TOKEN } })
     document.getElementById('cycle-container').innerHTML =
       '<div class="error-state">Couldn\'t load your day cycle.<br><a href="javascript:location.reload()">Try again →</a></div>';
   });
+// ─── User menu ───────────────────────────────────────────────────────────────
+function openUserMenu() {
+  document.getElementById('user-menu-overlay').classList.add('open');
+}
+function closeUserMenu() {
+  document.getElementById('user-menu-overlay').classList.remove('open');
+}
+
 // ─── Mobile view menu ────────────────────────────────────────────────────────
 function openViewMenu() {
   document.getElementById('view-overlay').classList.add('open');
@@ -830,6 +901,19 @@ function selectView(type) {
   }
 }
 </script>
+
+<!-- User menu overlay -->
+<div class="user-menu-overlay" id="user-menu-overlay" onclick="closeUserMenu()">
+  <div class="user-menu-sheet" onclick="event.stopPropagation()">
+    <div class="user-menu-header">
+      <div class="user-menu-avatar-placeholder" id="menu-avatar">?</div>
+      <span class="user-menu-name" id="menu-name">Loading...</span>
+    </div>
+    <a href="notes.html" class="user-menu-item">📁 Notes</a>
+    <a href="onboarding.html" class="user-menu-item">✏️ Edit Profile</a>
+    <div class="user-menu-item danger" onclick="signOut()">Sign out</div>
+  </div>
+</div>
 
 <!-- Mobile view picker overlay -->
 <div class="view-overlay" id="view-overlay" onclick="closeViewMenu()">
