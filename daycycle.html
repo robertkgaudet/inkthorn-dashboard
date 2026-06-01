@@ -552,6 +552,10 @@ function renderCycle(data, profile, places) {
   // Neighborhood bar
   var nbhdHtml = buildNeighborhoodBar(profile || {}, places || []);
 
+  // Show below panels for concierge view
+  var belowEl = document.getElementById('dc-below-panels');
+  if (belowEl) belowEl.style.display = '';
+
   container.innerHTML =
     // Day Cycle card
     '<div class="day-cycle-wrap">'
@@ -561,7 +565,10 @@ function renderCycle(data, profile, places) {
     + '<div class="day-cycle-now" id="dc-now-label">' + nowLabel() + (profile && profile.city ? ' · 📍 ' + (profile.neighborhood || profile.city) : '') + '</div>'
     + '</div>'
     + '<div class="day-type-btns">'
-    + '<button class="day-type-btn active" id="btn-concierge">✦ Concierge</button>'
+    + '<button class="day-type-btn active" id="btn-concierge" onclick="showConcierge(this)">✦ Concierge</button>'
+    + '<button class="day-type-btn" onclick="showDayType(\'weekday\',this)">Weekday</button>'
+    + '<button class="day-type-btn" onclick="showDayType(\'weekend\',this)">Weekend</button>'
+    + '<button class="day-type-btn" onclick="showDayType(\'vacation\',this)">Vacation</button>'
     + '</div>'
     + '</div>'
     + '<div class="day-cycle-scroll" id="dc-scroll">'
@@ -598,6 +605,89 @@ function renderCycle(data, profile, places) {
 }
 
 // ─── Fetch profile + cycle ───────────────────────────────────────────────────
+// ─── Static day type data (Weekday / Weekend / Vacation) ────────────────────
+var DAY_DATA = {
+  weekday: [
+    { time:'6:00 AM', icon:'🌅', label:'Wake Up', tips:['Hydrate before coffee','One word: what\'s your intention today?'] },
+    { time:'6:30 AM', icon:'🚿', label:'Shower & Get Ready', tips:['Mental prep time','Rehearse your biggest conversation'] },
+    { time:'7:00 AM', icon:'☕', label:'Coffee & Breakfast', tips:['Review Today\'s Focus','Check overnight messages'] },
+    { time:'7:30 AM', icon:'📋', label:'Day Planning', tips:['3 priorities max — pick them now','Block your deep work window'] },
+    { time:'8:00 AM', icon:'🧠', label:'Deep Work Block #1', tips:['Hardest problem first','Phone down, doors closed'] },
+    { time:'9:00 AM', icon:'📱', label:'Comms Window', tips:['Sweep Telegram + email','Reply to leads now'] },
+    { time:'10:00 AM', icon:'💼', label:'Deep Work Block #2', tips:['Peak cognitive window','Build sprint'] },
+    { time:'11:00 AM', icon:'📞', label:'Calls & Meetings', tips:['Schedule all demos here','Partner calls'] },
+    { time:'12:00 PM', icon:'🥗', label:'Lunch', tips:['Step away from the screen','Eat real food'] },
+    { time:'12:30 PM', icon:'📣', label:'Content Window', tips:['Post to social now (peak reach)','Blog idea? Voice memo it'] },
+    { time:'1:00 PM', icon:'🤝', label:'Business Development', tips:['Follow up leads','Who\'s next in pipeline?'] },
+    { time:'2:00 PM', icon:'🔨', label:'Build / Execute', tips:['Heads-down sprint','Ship something today — anything'] },
+    { time:'3:00 PM', icon:'📊', label:'Admin & Finance', tips:['Review burn rate','Log any transactions'] },
+    { time:'4:00 PM', icon:'✍️', label:'Write & Publish', tips:['Blog draft or social hooks','Capture today\'s insights'] },
+    { time:'5:00 PM', icon:'🏃', label:'Move Your Body', tips:['Walk, gym, anything physical','Detach from screens — mandatory'] },
+    { time:'6:00 PM', icon:'🍳', label:'Cook & Eat', tips:['No takeout challenge is watching you','Cooking = mental reset'] },
+    { time:'7:00 PM', icon:'🌆', label:'Evening Work (Optional)', tips:['Light project work only','Social + networking time'] },
+    { time:'8:00 PM', icon:'🎵', label:'Personal Time', tips:['Music, DJ, creative play','Recharge — you earned this'] },
+    { time:'9:00 PM', icon:'📓', label:'Journal & Review', tips:['What won today?','Update dashboard notes'] },
+    { time:'9:30 PM', icon:'📅', label:'Plan Tomorrow', tips:['Set 3 priorities tonight','Clear your mental queue now'] },
+    { time:'10:00 PM', icon:'😴', label:'Wind Down', tips:['No screens after this point','Let your brain process the day'] },
+    { time:'11:00 PM', icon:'🌙', label:'Sleep', tips:['8 hours = sharper builder tomorrow','Rest is a competitive advantage'] }
+  ],
+  weekend: [
+    { time:'7:00 AM', icon:'🌤️', label:'Easy Wake', tips:['No alarm stress today','Let the day come to you'] },
+    { time:'8:00 AM', icon:'☕', label:'Long Coffee', tips:['Read, reflect, enjoy','Journal if inspired — no pressure'] },
+    { time:'9:00 AM', icon:'🥐', label:'Brunch Vibes', tips:['Go out in your city','Find a spot with good energy'] },
+    { time:'10:00 AM', icon:'🚶', label:'Get Outside', tips:['Walk, park, sunlight','Body and mind need this'] },
+    { time:'11:00 AM', icon:'🛒', label:'Errands / Market', tips:['Farmers market if local','Stock up for the week ahead'] },
+    { time:'12:00 PM', icon:'🍻', label:'Social Lunch', tips:['Meet someone interesting','Best networking = no agenda'] },
+    { time:'1:00 PM', icon:'🎨', label:'Creative Time', tips:['Music, writing, building for fun','What would you do if no one was watching?'] },
+    { time:'2:00 PM', icon:'💡', label:'Light Strategy', tips:['Review the week\'s wins','One big idea to bring into Monday'] },
+    { time:'3:00 PM', icon:'🎶', label:'Music / DJ', tips:['Discovery session','Find new tracks, new energy'] },
+    { time:'4:00 PM', icon:'🌳', label:'Family & Friends', tips:['Be fully present','Put the phone away — actually'] },
+    { time:'6:00 PM', icon:'🍝', label:'Dinner', tips:['Good food is a gift','Cook something worth remembering'] },
+    { time:'7:00 PM', icon:'🎭', label:'Night Out', tips:['Live music, shows, culture','This is why you live here'] },
+    { time:'9:00 PM', icon:'🥂', label:'Late Evening', tips:['Good conversations, good people','Stories worth telling later'] },
+    { time:'11:00 PM', icon:'🌙', label:'Rest Up', tips:['Big week ahead','Recharge fully — no half measures'] }
+  ],
+  vacation: [
+    { time:'8:00 AM', icon:'🌴', label:'Sleep In', tips:['You\'ve earned this — seriously','No alarm. Not negotiable.'] },
+    { time:'9:00 AM', icon:'☀️', label:'Slow Morning', tips:['Coffee + view + nothing else','Let your mind wander'] },
+    { time:'10:00 AM', icon:'🏊', label:'Move & Play', tips:['Beach, pool, hike, swim','Physical joy is the goal'] },
+    { time:'12:00 PM', icon:'🍹', label:'Midday Fuel', tips:['Eat well, eat slow, eat local','No working lunch — ever on vacation'] },
+    { time:'2:00 PM', icon:'🗺️', label:'Explore', tips:['New places generate new ideas','Curiosity is research'] },
+    { time:'4:00 PM', icon:'📖', label:'Read & Think', tips:['Big picture thinking only','Books that shift how you see the world'] },
+    { time:'6:00 PM', icon:'🌅', label:'Golden Hour', tips:['Be present — this moment is the point','No phone. Watch the light.'] },
+    { time:'7:00 PM', icon:'🍽️', label:'Great Dinner', tips:['Eat somewhere you\'ll remember','Good conversation beats good food'] },
+    { time:'9:00 PM', icon:'🌟', label:'Evening', tips:['Stars, music, stories, laughter','Let the mind roam free'] },
+    { time:'11:00 PM', icon:'😴', label:'Rest', tips:['Deep sleep resets everything','Tomorrow is still free'] }
+  ]
+};
+
+var _cycleData = null;   // stores the AI concierge data
+var _cycleProfile = null;
+var _cyclePlaces = null;
+var _activeTab = 'concierge';
+
+function showConcierge(btn) {
+  _activeTab = 'concierge';
+  document.querySelectorAll('.day-type-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  if (_cycleData) renderCycle(_cycleData, _cycleProfile, _cyclePlaces);
+}
+
+function showDayType(type, btn) {
+  _activeTab = type;
+  document.querySelectorAll('.day-type-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var blocks = DAY_DATA[type] || [];
+  var track = document.getElementById('dc-track');
+  if (!track) return;
+  track.innerHTML = '<div class="day-track-wrap"><div class="day-cards-row">' + blocks.map(renderBlock).join('') + '</div></div>';
+  // Hide below panels (concierge notes / private) for non-concierge tabs
+  var below = document.getElementById('dc-below-panels');
+  if (below) below.style.display = 'none';
+  setTimeout(scrollToActive, 100);
+  setTimeout(scrollToActive, 400);
+}
+
 var userProfile = null;
 
 fetch(API + '/api/profile', { headers: { 'Authorization': 'Bearer ' + TOKEN } })
@@ -624,6 +714,10 @@ fetch(API + '/api/profile', { headers: { 'Authorization': 'Bearer ' + TOKEN } })
     lat: data._lat || (userProfile && userProfile.lat) || null,
     lng: data._lng || (userProfile && userProfile.lng) || null,
   });
+  // Store for tab switching
+  _cycleData = data;
+  _cycleProfile = mergedProfile;
+  _cyclePlaces = data._places || [];
   renderCycle(data, mergedProfile, data._places || []);
   })
   .catch(function(err) {
