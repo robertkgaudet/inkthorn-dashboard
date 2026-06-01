@@ -518,7 +518,7 @@ function typeIcon(type) {
 }
 
 // ─── Render full cycle ───────────────────────────────────────────────────────
-function renderCycle(data, profile) {
+function renderCycle(data, profile, places) {
   var container = document.getElementById('cycle-container');
 
   // Anchor (concierge notes)
@@ -550,7 +550,7 @@ function renderCycle(data, profile) {
   var blocksHtml = blocks.map(renderBlock).join('');
 
   // Neighborhood bar
-  var nbhdHtml = buildNeighborhoodBar(profile || {}, []);
+  var nbhdHtml = buildNeighborhoodBar(profile || {}, places || []);
 
   container.innerHTML =
     // Day Cycle card
@@ -617,7 +617,14 @@ fetch(API + '/api/profile', { headers: { 'Authorization': 'Bearer ' + TOKEN } })
   })
   .then(function(data) {
     if (!data) return;
-    renderCycle(data, userProfile);
+    // Merge location data from API response into profile
+  var mergedProfile = Object.assign({}, userProfile, {
+    city: data._city || (userProfile && userProfile.city) || '',
+    neighborhood: data._neighborhood || (userProfile && userProfile.neighborhood) || '',
+    lat: data._lat || (userProfile && userProfile.lat) || null,
+    lng: data._lng || (userProfile && userProfile.lng) || null,
+  });
+  renderCycle(data, mergedProfile, data._places || []);
   })
   .catch(function(err) {
     console.error(err);
