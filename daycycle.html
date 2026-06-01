@@ -694,8 +694,10 @@ function showDayType(type, btn) {
   // Hide below panels (concierge notes / private) for non-concierge tabs
   var below = document.getElementById('dc-below-panels');
   if (below) below.style.display = 'none';
-  setTimeout(scrollToActive, 100);
-  setTimeout(scrollToActive, 400);
+  // Scroll to active card — same logic as concierge
+  setTimeout(scrollToActive, 50);
+  setTimeout(scrollToActive, 250);
+  setTimeout(scrollToActive, 600);
 }
 
 var userProfile = null;
