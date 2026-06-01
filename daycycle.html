@@ -583,6 +583,10 @@ const API = 'https://inkthorn-notes.rgaudet2023.workers.dev';
 var TOKEN = localStorage.getItem('inkthorn_token');
 if (!TOKEN) { window.location.href = 'notes.html'; }
 
+// Week strip state — must be declared before buildWeekStrip() is called
+var _selectedDayKey = null;
+var _weekOffset = 0;
+
 // Build week strip immediately
 buildWeekStrip();
 
@@ -831,14 +835,12 @@ function renderCycle(data, profile, places) {
 
 // ─── Fetch profile + cycle ───────────────────────────────────────────────────
 // ─── Week strip ──────────────────────────────────────────────────────────────
-var _selectedDayKey = null;
-var _weekOffset = 0;
-
 function getMondayOfWeek(offset) {
+  var off = (typeof offset === 'number' && !isNaN(offset)) ? offset : 0;
   var now = new Date();
-  var dow = now.getDay(); // 0=Sun, 1=Mon...
-  var daysToMonday = (dow + 6) % 7; // days since last Monday
-  var ms = now.getTime() - daysToMonday * 86400000 + offset * 7 * 86400000;
+  var dow = now.getDay();
+  var daysToMonday = (dow + 6) % 7;
+  var ms = now.getTime() - daysToMonday * 86400000 + off * 7 * 86400000;
   var monday = new Date(ms);
   monday.setHours(0,0,0,0);
   return monday;
