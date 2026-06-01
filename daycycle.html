@@ -384,6 +384,48 @@
     text-align: center;
   }
 
+  /* ─── WEEK STRIP ─── */
+  .week-strip-wrap {
+    margin: 0.75rem 0.75rem 0;
+    padding: 0.75rem 0.75rem 0.6rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(200,131,42,0.12);
+    border-radius: 12px;
+  }
+  .week-strip {
+    display: flex;
+    gap: 5px;
+  }
+  .strip-day {
+    flex: 1;
+    text-align: center;
+    padding: 7px 4px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.07);
+    cursor: pointer;
+    font-size: 0.7rem;
+    color: var(--text3);
+    position: relative;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .strip-day:hover { border-color: rgba(200,131,42,0.3); color: var(--text2); }
+  .strip-day.today { color: var(--amber2); font-weight: 700; }
+  .strip-day.active { background: rgba(200,131,42,0.12); border-color: var(--amber); color: var(--amber2); }
+  .strip-day .strip-letter { font-size: 0.62rem; letter-spacing: 0.05em; color: inherit; }
+  .strip-day .strip-num { font-weight: 700; font-size: 0.82rem; margin-top: 2px; color: inherit; }
+  .strip-dot {
+    position: absolute;
+    top: 4px; right: 5px;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--amber);
+    opacity: 0.7;
+  }
+  @media (max-width: 600px) {
+    .week-strip-wrap { margin: 0.5rem 0 0; border-radius: 0; border-left: none; border-right: none; }
+  }
+
   /* ─── USER MENU OVERLAY ─── */
   .user-menu-overlay {
     display: none;
@@ -477,6 +519,11 @@
 
 <div class="main">
 
+  <!-- Week strip -->
+  <div class="week-strip-wrap">
+    <div class="week-strip" id="week-strip"></div>
+  </div>
+
   <!-- Loading state shown until cycle loads -->
   <div id="cycle-container">
     <div class="loading-state">
@@ -505,6 +552,9 @@ const API = 'https://inkthorn-notes.rgaudet2023.workers.dev';
 
 var TOKEN = localStorage.getItem('inkthorn_token');
 if (!TOKEN) { window.location.href = 'notes.html'; }
+
+// Build week strip immediately
+buildWeekStrip();
 
 function signOut() {
   localStorage.removeItem('inkthorn_token');
@@ -750,6 +800,56 @@ function renderCycle(data, profile, places) {
 }
 
 // ─── Fetch profile + cycle ───────────────────────────────────────────────────
+// ─── Week strip ──────────────────────────────────────────────────────────────
+var _selectedDayKey = null;
+
+function buildWeekStrip() {
+  var strip = document.getElementById('week-strip');
+  if (!strip) return;
+  var today = new Date();
+  var dow = today.getDay(); // 0=Sun
+  // Start from Monday of this week
+  var monday = new Date(today);
+  monday.setDate(today.getDate() - ((dow + 6) % 7));
+  var letters = ['M','T','W','T','F','S','S'];
+  var todayKey = today.toISOString().slice(0,10);
+  _selectedDayKey = todayKey;
+
+  var html = '';
+  for (var i = 0; i < 7; i++) {
+    var d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    var dk = d.toISOString().slice(0,10);
+    var isToday = dk === todayKey;
+    var isActive = dk === _selectedDayKey;
+    var cls = 'strip-day' + (isToday ? ' today' : '') + (isActive ? ' active' : '');
+    html += '<div class="' + cls + '" data-date="' + dk + '" onclick="selectWeekDay(this)">'
+      + '<div class="strip-letter">' + letters[i] + '</div>'
+      + '<div class="strip-num">' + d.getDate() + '</div>'
+      + (isToday ? '<span class="strip-dot"></span>' : '')
+      + '</div>';
+  }
+  strip.innerHTML = html;
+}
+
+function selectWeekDay(el) {
+  var dk = el.dataset.date;
+  var todayKey = new Date().toISOString().slice(0,10);
+  document.querySelectorAll('.strip-day').forEach(function(d){ d.classList.remove('active'); });
+  el.classList.add('active');
+  _selectedDayKey = dk;
+  // If selected day is today, show the AI concierge cycle
+  // Otherwise show a generic day-type cycle based on the day of week
+  if (dk === todayKey) {
+    showConcierge(document.getElementById('btn-concierge'));
+  } else {
+    var dayOfWeek = new Date(dk + 'T12:00:00').getDay();
+    var isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+    var typeBtn = document.querySelector('.day-type-btn:not(#btn-concierge)');
+    showDayType(isWeekend ? 'weekend' : 'weekday', typeBtn);
+  }
+}
+
 // ─── Static day type data (Weekday / Weekend / Vacation) ────────────────────
 var DAY_DATA = {
   weekday: [
