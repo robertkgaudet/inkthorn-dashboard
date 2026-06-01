@@ -835,10 +835,11 @@ var _selectedDayKey = null;
 var _weekOffset = 0;
 
 function getMondayOfWeek(offset) {
-  var today = new Date();
-  var dow = today.getDay();
-  var monday = new Date(today);
-  monday.setDate(today.getDate() - ((dow + 6) % 7) + (offset * 7));
+  var now = new Date();
+  var dow = now.getDay(); // 0=Sun, 1=Mon...
+  var daysToMonday = (dow + 6) % 7; // days since last Monday
+  var ms = now.getTime() - daysToMonday * 86400000 + offset * 7 * 86400000;
+  var monday = new Date(ms);
   monday.setHours(0,0,0,0);
   return monday;
 }
@@ -852,27 +853,26 @@ function buildWeekStrip() {
   var strip = document.getElementById('week-strip');
   if (!strip) return;
   var today = new Date();
-  var todayKey = today.toISOString().slice(0,10);
+  var todayKey = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
   if (!_selectedDayKey) _selectedDayKey = todayKey;
 
   var monday = getMondayOfWeek(_weekOffset);
-  var sunday = new Date(monday);
-  sunday.setDate(monday.getDate() + 6);
+  var sunday = new Date(monday.getTime() + 6 * 86400000);
 
   // Week label
   var labelEl = document.getElementById('week-label');
   if (labelEl) {
     var monStr = monday.toLocaleDateString('en-US', { month:'short', day:'numeric' });
     var sunStr = sunday.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
-    labelEl.textContent = 'Week of ' + monStr + ' – ' + sunStr;
+    labelEl.textContent = monStr + ' – ' + sunStr;
   }
 
   var letters = ['M','T','W','T','F','S','S'];
   var html = '';
   for (var i = 0; i < 7; i++) {
-    var d = new Date(monday);
-    d.setDate(monday.getDate() + i);
-    var dk = d.toISOString().slice(0,10);
+    var d = new Date(monday.getTime() + i * 86400000);
+    // Use local date parts to avoid timezone shift
+    var dk = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
     var isToday = dk === todayKey;
     var isActive = dk === _selectedDayKey;
     var cls = 'strip-day' + (isToday ? ' today' : '') + (isActive ? ' active' : '');
@@ -887,7 +887,8 @@ function buildWeekStrip() {
 
 function selectWeekDay(el) {
   var dk = el.dataset.date;
-  var todayKey = new Date().toISOString().slice(0,10);
+  var t = new Date();
+  var todayKey = t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0');
   document.querySelectorAll('.strip-day').forEach(function(d){ d.classList.remove('active'); });
   el.classList.add('active');
   _selectedDayKey = dk;
