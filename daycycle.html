@@ -558,7 +558,7 @@ function renderCycle(data, profile, places) {
     + '<div class="day-cycle-header">'
     + '<div>'
     + '<div class="day-cycle-title">⚡ DAY CYCLE</div>'
-    + '<div class="day-cycle-now" id="dc-now-label">' + nowLabel() + '</div>'
+    + '<div class="day-cycle-now" id="dc-now-label">' + nowLabel() + (profile && profile.city ? ' · 📍 ' + (profile.neighborhood || profile.city) : '') + '</div>'
     + '</div>'
     + '<div class="day-type-btns">'
     + '<button class="day-type-btn active" id="btn-concierge">✦ Concierge</button>'
