@@ -392,6 +392,31 @@
     border: 1px solid rgba(200,131,42,0.12);
     border-radius: 12px;
   }
+  .week-nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+  }
+  .week-nav-btn {
+    background: none;
+    border: 1px solid rgba(200,131,42,0.3);
+    color: var(--text3);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .week-nav-btn:hover { border-color: var(--amber); color: var(--amber); }
+  .week-nav-label {
+    font-size: 0.72rem;
+    color: var(--text2);
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
   .week-strip {
     display: flex;
     gap: 5px;
@@ -521,6 +546,11 @@
 
   <!-- Week strip -->
   <div class="week-strip-wrap">
+    <div class="week-nav-row">
+      <button class="week-nav-btn" onclick="changeWeek(-1)">← Week</button>
+      <span class="week-nav-label" id="week-label"></span>
+      <button class="week-nav-btn" onclick="changeWeek(1)">Week →</button>
+    </div>
     <div class="week-strip" id="week-strip"></div>
   </div>
 
@@ -802,19 +832,42 @@ function renderCycle(data, profile, places) {
 // ─── Fetch profile + cycle ───────────────────────────────────────────────────
 // ─── Week strip ──────────────────────────────────────────────────────────────
 var _selectedDayKey = null;
+var _weekOffset = 0;
+
+function getMondayOfWeek(offset) {
+  var today = new Date();
+  var dow = today.getDay();
+  var monday = new Date(today);
+  monday.setDate(today.getDate() - ((dow + 6) % 7) + (offset * 7));
+  monday.setHours(0,0,0,0);
+  return monday;
+}
+
+function changeWeek(dir) {
+  _weekOffset += dir;
+  buildWeekStrip();
+}
 
 function buildWeekStrip() {
   var strip = document.getElementById('week-strip');
   if (!strip) return;
   var today = new Date();
-  var dow = today.getDay(); // 0=Sun
-  // Start from Monday of this week
-  var monday = new Date(today);
-  monday.setDate(today.getDate() - ((dow + 6) % 7));
-  var letters = ['M','T','W','T','F','S','S'];
   var todayKey = today.toISOString().slice(0,10);
-  _selectedDayKey = todayKey;
+  if (!_selectedDayKey) _selectedDayKey = todayKey;
 
+  var monday = getMondayOfWeek(_weekOffset);
+  var sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+
+  // Week label
+  var labelEl = document.getElementById('week-label');
+  if (labelEl) {
+    var monStr = monday.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+    var sunStr = sunday.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+    labelEl.textContent = 'Week of ' + monStr + ' – ' + sunStr;
+  }
+
+  var letters = ['M','T','W','T','F','S','S'];
   var html = '';
   for (var i = 0; i < 7; i++) {
     var d = new Date(monday);
