@@ -566,48 +566,6 @@ if (!TOKEN) {
   window.location.href = 'notes.html';
 }
 
-// ── Load existing profile for editing if present ──
-fetch(API + '/api/profile', {
-  headers: { 'Authorization': 'Bearer ' + TOKEN }
-}).then(function(r) { return r.ok ? r.json() : null; })
-  .then(function(p) {
-    if (!p) return;
-    // Pre-fill all fields with existing profile data
-    if (p.city) { var el = document.getElementById('city'); if(el) el.value = p.city; profile.city = p.city; }
-    if (p.neighborhood) { var el = document.getElementById('neighborhood'); if(el) el.value = p.neighborhood; profile.neighborhood = p.neighborhood; }
-    if (p.lat) profile.lat = p.lat;
-    if (p.lng) profile.lng = p.lng;
-    if (p.role) { var el = document.getElementById('role'); if(el) el.value = p.role; profile.role = p.role; }
-    if (p.projects && p.projects.length) { var el = document.getElementById('projects'); if(el) el.value = p.projects.join('\n'); profile.projects = p.projects; }
-    if (p.work_style) { profile.work_style = p.work_style; document.querySelectorAll('[name="work_style"]').forEach(function(r){ r.checked = r.value === p.work_style; }); }
-    if (p.wake_time) { var el = document.getElementById('wake_time'); if(el) el.value = p.wake_time; profile.wake_time = p.wake_time; }
-    if (p.sleep_time) { var el = document.getElementById('sleep_time'); if(el) el.value = p.sleep_time; profile.sleep_time = p.sleep_time; }
-    if (p.chronotype) { profile.chronotype = p.chronotype; document.querySelectorAll('[name="chronotype"]').forEach(function(r){ r.checked = r.value === p.chronotype; }); }
-    if (p.partner_name) { var el = document.getElementById('partner_name'); if(el) el.value = p.partner_name; profile.partner_name = p.partner_name; }
-    if (p.has_kids) { profile.has_kids = p.has_kids; var el = document.getElementById('has_kids_yes'); if(el) el.checked = true; document.getElementById('kids-count-wrap') && (document.getElementById('kids-count-wrap').style.display = ''); }
-    if (p.interests && p.interests.length) {
-      profile.interests = p.interests;
-      p.interests.forEach(function(interest) {
-        document.querySelectorAll('.interest-tile').forEach(function(tile) {
-          if (tile.dataset.value === interest || tile.dataset.value === interest.toLowerCase().replace(/ /g,'-')) {
-            tile.classList.add('selected');
-          }
-        });
-      });
-      var countEl = document.getElementById('interest-count');
-      if (countEl) countEl.textContent = p.interests.length + ' / 10 selected';
-    }
-    if (p.vibe_words && p.vibe_words.length) {
-      profile.vibe_words = p.vibe_words;
-      ['vibe1','vibe2','vibe3'].forEach(function(id, i) {
-        var el = document.getElementById(id); if(el && p.vibe_words[i]) el.value = p.vibe_words[i];
-      });
-    }
-    // Change button text to "Update My Day Cycle"
-    var btn = document.getElementById('submit-btn');
-    if (btn) btn.textContent = 'Update My Day Cycle →';
-  }).catch(function() {});
-
 // ── State ──
 const profile = {
   city: '', neighborhood: '', lat: null, lng: null,
@@ -620,6 +578,44 @@ const profile = {
 };
 
 const radios = { work_style: null, chronotype: null };
+
+// ── Load existing profile for editing (runs after profile is declared) ──
+fetch(API + '/api/profile', { headers: { 'Authorization': 'Bearer ' + TOKEN } })
+  .then(function(r) { return r.ok ? r.json() : null; })
+  .then(function(p) {
+    if (!p) return;
+    // Pre-fill state
+    if (p.city) { profile.city = p.city; var el = document.getElementById('city'); if(el) el.value = p.city; }
+    if (p.neighborhood) { profile.neighborhood = p.neighborhood; var el = document.getElementById('neighborhood'); if(el) el.value = p.neighborhood; }
+    if (p.lat) profile.lat = p.lat;
+    if (p.lng) profile.lng = p.lng;
+    if (p.role) { profile.role = p.role; var el = document.getElementById('role'); if(el) el.value = p.role; }
+    if (p.projects && p.projects.length) { profile.projects = p.projects; var el = document.getElementById('projects'); if(el) el.value = p.projects.join('\n'); }
+    if (p.work_style) { profile.work_style = p.work_style; radios.work_style = p.work_style; document.querySelectorAll('[name="work_style"]').forEach(function(r){ if(r.value === p.work_style) { r.checked = true; r.closest && r.closest('.radio-option') && r.closest('.radio-option').classList.add('selected'); } }); }
+    if (p.wake_time) { profile.wake_time = p.wake_time; var el = document.getElementById('wake_time'); if(el) el.value = p.wake_time; }
+    if (p.sleep_time) { profile.sleep_time = p.sleep_time; var el = document.getElementById('sleep_time'); if(el) el.value = p.sleep_time; }
+    if (p.chronotype) { profile.chronotype = p.chronotype; radios.chronotype = p.chronotype; document.querySelectorAll('[name="chronotype"]').forEach(function(r){ if(r.value === p.chronotype) { r.checked = true; r.closest && r.closest('.radio-option') && r.closest('.radio-option').classList.add('selected'); } }); }
+    if (p.partner_name) { profile.partner_name = p.partner_name; var el = document.getElementById('partner_name'); if(el) el.value = p.partner_name; }
+    if (p.has_kids) { profile.has_kids = true; var el = document.getElementById('has_kids_yes'); if(el) el.checked = true; var wrap = document.getElementById('kids-count-wrap'); if(wrap) wrap.style.display = ''; }
+    if (p.interests && p.interests.length) {
+      profile.interests = p.interests.slice();
+      selectedInterests = new Set(p.interests);
+      p.interests.forEach(function(val) {
+        document.querySelectorAll('.interest-tile').forEach(function(tile) {
+          if (tile.dataset.value === val || tile.dataset.value === val.toLowerCase().replace(/ /g,'-')) tile.classList.add('selected');
+        });
+      });
+      var countEl = document.getElementById('interest-count');
+      if (countEl) countEl.textContent = p.interests.length + ' / 10 selected';
+    }
+    if (p.vibe_words && p.vibe_words.length) {
+      profile.vibe_words = p.vibe_words.slice();
+      ['vibe1','vibe2','vibe3'].forEach(function(id, i) { var el = document.getElementById(id); if(el && p.vibe_words[i]) el.value = p.vibe_words[i]; });
+    }
+    // Update submit button
+    var btn = document.getElementById('submit-btn');
+    if (btn) btn.textContent = 'Update My Day Cycle →';
+  }).catch(function() {});
 
 // ── Progress bar ──
 const TOTAL = 6;
