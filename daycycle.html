@@ -894,12 +894,26 @@ function selectWeekDay(el) {
   document.querySelectorAll('.strip-day').forEach(function(d){ d.classList.remove('active'); });
   el.classList.add('active');
   _selectedDayKey = dk;
-  // If selected day is today, show the AI concierge cycle
-  // Otherwise show a generic day-type cycle based on the day of week
+
+  // Update the day label to show selected date
+  var labelEl = document.getElementById('dc-now-label');
+  if (labelEl) {
+    if (dk === todayKey) {
+      labelEl.textContent = nowLabel();
+    } else {
+      // Parse date parts directly to avoid timezone issues
+      var parts = dk.split('-');
+      var d = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
+      labelEl.textContent = d.toLocaleDateString('en-US', { weekday:'long', month:'short', day:'numeric', year:'numeric' });
+    }
+  }
+
   if (dk === todayKey) {
     showConcierge(document.getElementById('btn-concierge'));
   } else {
-    var dayOfWeek = new Date(dk + 'T12:00:00').getDay();
+    var parts2 = dk.split('-');
+    var selDate = new Date(parseInt(parts2[0]), parseInt(parts2[1])-1, parseInt(parts2[2]));
+    var dayOfWeek = selDate.getDay();
     var isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
     var typeBtn = document.querySelector('.day-type-btn:not(#btn-concierge)');
     showDayType(isWeekend ? 'weekend' : 'weekday', typeBtn);
