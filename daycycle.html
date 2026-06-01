@@ -315,6 +315,74 @@
   .footer-link { font-size: 0.65rem; color: var(--text3); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
   .footer-link:hover { color: var(--amber); }
 
+  /* ─── HAMBURGER MENU ─── */
+  .hamburger-btn {
+    display: none;
+    background: none;
+    border: 1px solid rgba(200,131,42,0.4);
+    border-radius: 6px;
+    padding: 5px 8px;
+    cursor: pointer;
+    color: var(--amber);
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .view-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .view-overlay.open { display: flex; }
+  .view-sheet {
+    background: #16161a;
+    border: 1px solid rgba(200,131,42,0.3);
+    border-radius: 18px 18px 0 0;
+    width: 100%;
+    max-width: 540px;
+    padding: 1.25rem 1rem 2rem;
+  }
+  .view-sheet-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--text3);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .view-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--text2);
+    transition: all 0.15s;
+    margin-bottom: 0.25rem;
+  }
+  .view-option:hover, .view-option.active { background: rgba(200,131,42,0.1); color: var(--amber2); }
+  .view-option .vo-icon { font-size: 1.2rem; width: 28px; text-align: center; }
+  .view-cancel {
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    color: var(--text3);
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-align: center;
+  }
+
   @media (max-width: 600px) {
     .main { padding: 0.75rem 0 3rem; }
     .day-cycle-wrap { border-radius: 0; border-left: none; border-right: none; margin-bottom: 0; padding: 1rem 0.75rem; }
@@ -333,6 +401,7 @@
     .anchor-card { margin: 0.5rem 0; }
     .footer { padding: 0.75rem 1rem 1.5rem; }
     .day-type-btns { display: none; }
+    .hamburger-btn { display: block; }
   }
 </style>
 </head>
@@ -579,6 +648,7 @@ function renderCycle(data, profile, places) {
     + '<button class="day-type-btn" onclick="showDayType(\'weekday\',this)">Weekday</button>'
     + '<button class="day-type-btn" onclick="showDayType(\'weekend\',this)">Weekend</button>'
     + '<button class="day-type-btn" onclick="showDayType(\'vacation\',this)">Vacation</button>'
+    + '<button class="hamburger-btn" onclick="openViewMenu()" title="Change view">☰</button>'
     + '</div>'
     + '</div>'
     + '<div class="day-cycle-scroll" id="dc-scroll">'
@@ -737,7 +807,48 @@ fetch(API + '/api/profile', { headers: { 'Authorization': 'Bearer ' + TOKEN } })
     document.getElementById('cycle-container').innerHTML =
       '<div class="error-state">Couldn\'t load your day cycle.<br><a href="javascript:location.reload()">Try again →</a></div>';
   });
+// ─── Mobile view menu ────────────────────────────────────────────────────────
+function openViewMenu() {
+  document.getElementById('view-overlay').classList.add('open');
+}
+function closeViewMenu() {
+  document.getElementById('view-overlay').classList.remove('open');
+}
+function selectView(type) {
+  closeViewMenu();
+  // Update active label on hamburger area
+  var label = { concierge:'✦ Concierge', weekday:'Weekday', weekend:'Weekend', vacation:'Vacation' }[type];
+  document.querySelectorAll('.view-option').forEach(function(o){
+    o.classList.toggle('active', o.dataset.view === type);
+  });
+  if (type === 'concierge') {
+    showConcierge(document.getElementById('btn-concierge'));
+  } else {
+    showDayType(type, document.querySelector('.day-type-btn'));
+  }
+}
 </script>
+
+<!-- Mobile view picker overlay -->
+<div class="view-overlay" id="view-overlay" onclick="closeViewMenu()">
+  <div class="view-sheet" onclick="event.stopPropagation()">
+    <div class="view-sheet-title">Choose Your View</div>
+    <div class="view-option active" data-view="concierge" onclick="selectView('concierge')">
+      <span class="vo-icon">✦</span> Concierge — Your personalized AI day
+    </div>
+    <div class="view-option" data-view="weekday" onclick="selectView('weekday')">
+      <span class="vo-icon">💼</span> Weekday — Full structured day
+    </div>
+    <div class="view-option" data-view="weekend" onclick="selectView('weekend')">
+      <span class="vo-icon">🎶</span> Weekend — Rest, explore, recharge
+    </div>
+    <div class="view-option" data-view="vacation" onclick="selectView('vacation')">
+      <span class="vo-icon">🌴</span> Vacation — Slow mornings, golden hours
+    </div>
+    <div class="view-cancel" onclick="closeViewMenu()">Cancel</div>
+  </div>
+</div>
+
 </body>
 </html>
 <!-- rgaudet2023 worker -->
