@@ -591,22 +591,49 @@ fetch(API + '/api/profile', { headers: { 'Authorization': 'Bearer ' + TOKEN } })
     if (p.lng) profile.lng = p.lng;
     if (p.role) { profile.role = p.role; var el = document.getElementById('role'); if(el) el.value = p.role; }
     if (p.projects && p.projects.length) { profile.projects = p.projects; var el = document.getElementById('projects'); if(el) el.value = p.projects.join('\n'); }
-    if (p.work_style) { profile.work_style = p.work_style; radios.work_style = p.work_style; document.querySelectorAll('[name="work_style"]').forEach(function(r){ if(r.value === p.work_style) { r.checked = true; r.closest && r.closest('.radio-option') && r.closest('.radio-option').classList.add('selected'); } }); }
+    if (p.work_style) {
+      profile.work_style = p.work_style;
+      radios.work_style = p.work_style;
+      // Radio options have the value embedded in onclick — match by it
+      document.querySelectorAll('.radio-option').forEach(function(opt) {
+        var onclick = opt.getAttribute('onclick') || '';
+        if (onclick.indexOf("'work_style'") !== -1 && onclick.indexOf("'" + p.work_style + "'") !== -1) {
+          opt.classList.add('selected');
+        }
+      });
+    }
     if (p.wake_time) { profile.wake_time = p.wake_time; var el = document.getElementById('wake_time'); if(el) el.value = p.wake_time; }
     if (p.sleep_time) { profile.sleep_time = p.sleep_time; var el = document.getElementById('sleep_time'); if(el) el.value = p.sleep_time; }
-    if (p.chronotype) { profile.chronotype = p.chronotype; radios.chronotype = p.chronotype; document.querySelectorAll('[name="chronotype"]').forEach(function(r){ if(r.value === p.chronotype) { r.checked = true; r.closest && r.closest('.radio-option') && r.closest('.radio-option').classList.add('selected'); } }); }
+    if (p.chronotype) {
+      profile.chronotype = p.chronotype;
+      radios.chronotype = p.chronotype;
+      document.querySelectorAll('.radio-option').forEach(function(opt) {
+        var onclick = opt.getAttribute('onclick') || '';
+        if (onclick.indexOf("'chronotype'") !== -1 && onclick.indexOf("'" + p.chronotype + "'") !== -1) {
+          opt.classList.add('selected');
+        }
+      });
+    }
     if (p.partner_name) { profile.partner_name = p.partner_name; var el = document.getElementById('partner_name'); if(el) el.value = p.partner_name; }
     if (p.has_kids) { profile.has_kids = true; var el = document.getElementById('has_kids_yes'); if(el) el.checked = true; var wrap = document.getElementById('kids-count-wrap'); if(wrap) wrap.style.display = ''; }
     if (p.interests && p.interests.length) {
       profile.interests = p.interests.slice();
-      selectedInterests = new Set(p.interests);
-      p.interests.forEach(function(val) {
-        document.querySelectorAll('.interest-tile').forEach(function(tile) {
-          if (tile.dataset.value === val || tile.dataset.value === val.toLowerCase().replace(/ /g,'-')) tile.classList.add('selected');
+      // Add to selectedInterests set and visually select matching tiles
+      // Use a small delay to ensure buildInterestGrid() has run first
+      setTimeout(function() {
+        p.interests.forEach(function(val) {
+          selectedInterests.add(val);
+          document.querySelectorAll('.interest-tile').forEach(function(tile) {
+            var label = tile.dataset.label || '';
+            if (label === val || label.toLowerCase() === val.toLowerCase() ||
+                label.toLowerCase().replace(/[^a-z]/g,'') === val.toLowerCase().replace(/[^a-z]/g,'')) {
+              tile.classList.add('selected');
+            }
+          });
         });
-      });
-      var countEl = document.getElementById('interest-count');
-      if (countEl) countEl.textContent = p.interests.length + ' / 10 selected';
+        var countEl = document.getElementById('interest-count');
+        if (countEl) countEl.textContent = p.interests.length + ' / 10 selected';
+      }, 300);
     }
     if (p.vibe_words && p.vibe_words.length) {
       profile.vibe_words = p.vibe_words.slice();
