@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InkThorn — Frontend Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111114;
+    --bg3: #16161a;
+    --amber: #c8832a;
+    --amber2: #e09a40;
+    --amber3: #f5b855;
+    --cyan: #00d4ff;
+    --text: #f2ede6;
+    --text2: #b8b0a5;
+    --text3: #6e6760;
+    --border: rgba(200,131,42,0.2);
+    --border2: rgba(200,131,42,0.1);
+    --code-bg: rgba(0,212,255,0.05);
+    --code-border: rgba(0,212,255,0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(rgba(200,131,42,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,131,42,0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events:none; z-index:0;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: sticky; top:0; z-index:100;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px;
+  }
+  .nav-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem; letter-spacing: 0.14em;
+    color: var(--amber2);
+  }
+  .nav-links { display:flex; gap:1.25rem; }
+  .nav-link {
+    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text3); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--amber); }
+
+  /* ── LAYOUT ── */
+  .page { display: flex; max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index:1; }
+
+  /* ── SIDEBAR TOC ── */
+  .sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    padding: 2.5rem 1.5rem 2.5rem 0;
+    position: sticky;
+    top: 52px;
+    height: calc(100vh - 52px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(200,131,42,0.2) transparent;
+  }
+  .sidebar::-webkit-scrollbar { width: 3px; }
+  .sidebar::-webkit-scrollbar-thumb { background: rgba(200,131,42,0.25); border-radius: 2px; }
+  .toc-label {
+    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text3); margin-bottom: 0.85rem; font-weight: 700;
+  }
+  .toc-item {
+    display: block; font-size: 0.75rem; color: var(--text3);
+    text-decoration: none; padding: 0.28rem 0; line-height: 1.4;
+    transition: color 0.15s; border-left: 2px solid transparent;
+    padding-left: 0.75rem; margin-left: -0.75rem;
+  }
+  .toc-item:hover { color: var(--amber2); border-left-color: rgba(200,131,42,0.4); }
+  .toc-item.sub { padding-left: 1.5rem; margin-left: -0.75rem; font-size: 0.7rem; color: var(--text3); opacity: 0.7; }
+  .toc-divider { border: none; border-top: 1px solid var(--border2); margin: 0.75rem 0; }
+
+  /* ── CONTENT ── */
+  .content {
+    flex: 1;
+    min-width: 0;
+    padding: 3rem 0 6rem 2.5rem;
+    border-left: 1px solid var(--border2);
+  }
+
+  /* ── HERO ── */
+  .doc-hero {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .doc-hero-eyebrow {
+    font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--amber); font-weight: 700; margin-bottom: 0.6rem;
+  }
+  .doc-hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem; letter-spacing: 0.08em;
+    color: var(--text); line-height: 1; margin-bottom: 1rem;
+  }
+  .doc-hero h1 span { color: var(--amber2); }
+  .doc-hero-meta { display:flex; gap:1.5rem; flex-wrap:wrap; }
+  .doc-meta-item { font-size: 0.72rem; color: var(--text3); }
+  .doc-meta-item strong { color: var(--text2); }
+
+  /* ── SECTIONS ── */
+  .section { margin-bottom: 3.5rem; }
+  .section-header {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border2);
+  }
+  .section-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem; color: var(--amber);
+    letter-spacing: 0.1em; opacity: 0.7;
+  }
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; letter-spacing: 0.08em;
+    color: var(--text);
+  }
+  h3 {
+    font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--amber2);
+    margin: 1.75rem 0 0.6rem;
+  }
+
+  p { color: var(--text2); margin-bottom: 0.85rem; }
+  p strong { color: var(--text); }
+  p code, li code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    color: var(--cyan);
+  }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; border-radius: 10px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  thead tr { background: rgba(200,131,42,0.08); }
+  th {
+    padding: 0.65rem 1rem; text-align: left;
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--amber);
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 0.6rem 1rem;
+    color: var(--text2);
+    border-bottom: 1px solid rgba(200,131,42,0.07);
+    vertical-align: top;
+  }
+  td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
+  td code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: var(--cyan);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(200,131,42,0.03); }
+
+  /* ── CODE BLOCKS ── */
+  pre {
+    background: rgba(0,212,255,0.04);
+    border: 1px solid var(--code-border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0 1.5rem;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: #c8e6ff;
+  }
+  pre .comment { color: var(--text3); }
+  pre .key { color: var(--amber2); }
+  pre .str { color: #9eeaa5; }
+  pre .kw { color: var(--cyan); }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.9;
+    color: var(--text2);
+  }
+  .flow .flow-step { color: var(--amber2); font-weight: 700; }
+  .flow .flow-branch { color: var(--cyan); }
+  .flow .flow-end { color: #9eeaa5; }
+
+  /* ── LISTS ── */
+  ul, ol { padding-left: 1.5rem; margin-bottom: 0.85rem; }
+  li { color: var(--text2); margin-bottom: 0.3rem; }
+  li strong { color: var(--text); }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: rgba(200,131,42,0.07);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 8px 8px 0;
+    padding: 0.85rem 1.1rem;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.85rem; color: var(--text2);
+  }
+  .callout strong { color: var(--amber2); }
+
+  .callout-cyan {
+    background: rgba(0,212,255,0.05);
+    border-left-color: var(--cyan);
+  }
+  .callout-cyan strong { color: var(--cyan); }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-block;
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 99px;
+    vertical-align: middle; margin-left: 6px;
+  }
+  .badge-amber { background: rgba(200,131,42,0.2); color: var(--amber2); border: 1px solid rgba(200,131,42,0.35); }
+  .badge-cyan  { background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.25); }
+  .badge-red   { background: rgba(255,80,80,0.1); color: #ff8080; border: 1px solid rgba(255,80,80,0.25); }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align:center; padding: 2rem; font-size: 0.7rem;
+    color: var(--text3); border-top: 1px solid var(--border2);
+    position: relative; z-index:1;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .content { padding: 2rem 0 4rem; border-left: none; }
+    .page { padding: 0 1rem; }
+    .doc-hero h1 { font-size: 2rem; }
+    h2 { font-size: 1.3rem; }
+    .nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">INKTHORN // ARCHITECTURE</div>
+  <div class="nav-links">
+    <a href="https://inkthorn.ai/notes.html" class="nav-link">📁 Notes App</a>
+    <a href="https://inkthorn.ai/daycycle.html" class="nav-link">⚡ Day Cycle</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="toc-label">Contents</div>
+    <a href="#overview" class="toc-item">1. Overview</a>
+    <a href="#hosting" class="toc-item">2. Hosting & Delivery</a>
+    <a href="#auth" class="toc-item">3. Authentication Flow</a>
+    <a href="#notes" class="toc-item">4. notes.html</a>
+    <a href="#notes-design" class="toc-item sub">4.2 Visual Design</a>
+    <a href="#notes-state" class="toc-item sub">4.3 State</a>
+    <a href="#notes-meta" class="toc-item sub">4.4 Local Meta</a>
+    <a href="#notes-views" class="toc-item sub">4.5–4.7 Views</a>
+    <a href="#notes-api" class="toc-item sub">4.8 API Calls</a>
+    <a href="#notes-sync" class="toc-item sub">4.9 Live Sync</a>
+    <a href="#notes-pro" class="toc-item sub">4.10–4.11 Pro / Upgrade</a>
+    <hr class="toc-divider">
+    <a href="#daycycle" class="toc-item">5. daycycle.html</a>
+    <a href="#dc-design" class="toc-item sub">5.2 Visual Design</a>
+    <a href="#dc-flow" class="toc-item sub">5.3 Data Flow</a>
+    <a href="#dc-json" class="toc-item sub">5.4 Cycle JSON</a>
+    <a href="#dc-render" class="toc-item sub">5.5 Timeline Render</a>
+    <a href="#dc-tabs" class="toc-item sub">5.6 View Tabs</a>
+    <a href="#dc-week" class="toc-item sub">5.7 Week Strip</a>
+    <a href="#dc-nbhd" class="toc-item sub">5.8 Neighborhood Bar</a>
+    <a href="#dc-private" class="toc-item sub">5.9 Private Panel</a>
+    <hr class="toc-divider">
+    <a href="#shared" class="toc-item">6. Shared Patterns</a>
+    <a href="#files" class="toc-item">7. Key Files</a>
+    <a href="#worker-api" class="toc-item">8. Worker API</a>
+    <a href="#schema" class="toc-item">9. Supabase Schema</a>
+    <a href="#limitations" class="toc-item">10. Known Limitations</a>
+  </aside>
+
+  <!-- ── CONTENT ── -->
+  <main class="content">
+
+    <!-- HERO -->
+    <div class="doc-hero">
+      <div class="doc-hero-eyebrow">Technical Architecture Document</div>
+      <h1>InkThorn <span>Frontend</span></h1>
+      <div class="doc-hero-meta">
+        <span class="doc-meta-item"><strong>Version</strong> 2026-06-01</span>
+        <span class="doc-meta-item"><strong>Scope</strong> notes.html · daycycle.html</span>
+        <span class="doc-meta-item"><strong>Audience</strong> Development Architects & Engineers</span>
+      </div>
+    </div>
+
+    <!-- 1. OVERVIEW -->
+    <section class="section" id="overview">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2>Overview</h2>
+      </div>
+      <p>InkThorn is a single-tenant personal productivity application delivered as a <strong>static frontend</strong> (GitHub Pages) backed by a <strong>Cloudflare Worker API</strong>. There is no build step, no framework, and no bundler — both pages are self-contained HTML files with embedded CSS and vanilla JavaScript.</p>
+      <p>The two pages share a common auth layer (Google OAuth via the Worker) and a common Supabase-backed data store, but are architecturally independent in terms of rendering and state.</p>
+      <div class="callout callout-cyan">
+        <strong>No framework policy:</strong> State mutations trigger explicit re-render calls. Bundle size is zero. Any engineer can open the file and read it top to bottom with no toolchain.
+      </div>
+    </section>
+
+    <!-- 2. HOSTING -->
+    <section class="section" id="hosting">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2>Hosting & Delivery</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Layer</th><th>Technology</th></tr></thead>
+          <tbody>
+            <tr><td>Frontend host</td><td>GitHub Pages — <code>robertkgaudet/inkthorn-dashboard</code></td></tr>
+            <tr><td>API / Auth backend</td><td>Cloudflare Worker — <code>inkthorn-notes.rgaudet2023.workers.dev</code></td></tr>
+            <tr><td>Database</td><td>Supabase (PostgreSQL)</td></tr>
+            <tr><td>Auth provider</td><td>Google OAuth 2.0</td></tr>
+            <tr><td>Token format</td><td>JWT signed by Worker, stored in <code>localStorage</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Both pages live in the repo root and are served directly as static files. No server-side rendering. All data fetching happens client-side via <code>fetch()</code> calls to the Worker API.</p>
+    </section>
+
+    <!-- 3. AUTH -->
+    <section class="section" id="auth">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>Authentication Flow</h2>
+      </div>
+      <p>Both pages share an identical auth mechanism:</p>
+      <div class="flow">
+        <span class="flow-step">1.</span> User lands on <code>notes.html</code> — the auth entry point<br>
+        <span class="flow-step">2.</span> If no token → login overlay with "Continue with Google"<br>
+        <span class="flow-step">3.</span> Click → redirect to <code>/auth/google</code> on the Worker<br>
+        <span class="flow-step">4.</span> Worker runs OAuth 2.0 PKCE with Google → creates/retrieves Supabase user<br>
+        <span class="flow-step">5.</span> Redirect to <code>notes.html?token=&lt;JWT&gt;</code><br>
+        <span class="flow-step">6.</span> Frontend strips token from URL, stores in <code>localStorage['inkthorn_token']</code><br>
+        <span class="flow-step">7.</span> All subsequent API calls use <code>Authorization: Bearer &lt;token&gt;</code><br><br>
+        <span class="flow-branch">daycycle.html</span> reads the same key. If absent → immediate redirect to <code>notes.html</code>.
+      </div>
+      <div class="callout">
+        <strong>Token expiry:</strong> The JWT payload contains an <code>exp</code> field. On init, both pages base64-decode the payload and reject expired tokens, clearing storage and forcing re-auth.
+      </div>
+    </section>
+
+    <!-- 4. NOTES -->
+    <section class="section" id="notes">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2>notes.html — Note Management App</h2>
+        <span class="badge badge-amber">Auth Entry Point</span>
+      </div>
+
+      <h3 id="notes-design">4.1 Purpose & Visual Design</h3>
+      <p>The primary note capture and task management interface. Users can create, categorize, prioritize, schedule, and delete notes. It also serves as the authentication entry point for the entire application.</p>
+      <ul>
+        <li><strong>Aesthetic:</strong> Classic dark editorial — deep warm blacks, gold (<code>#c9a84c</code>) accents, crimson red (<code>#c0392b</code>) for Priority A</li>
+        <li><strong>Fonts:</strong> Playfair Display (headings / character voice), Inter (UI copy)</li>
+        <li><strong>Brand character:</strong> InkThorn — a grumpy, dapper red lobster whose voice appears in quips, placeholders, and toast notifications</li>
+      </ul>
+
+      <h3 id="notes-state">4.3 Application State</h3>
+      <p>All state lives in module-scoped JavaScript variables — no framework, no store:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Variable</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>notesCache</code></td><td>In-memory array of all notes from the API</td></tr>
+            <tr><td><code>currentUser</code></td><td>JWT payload of the authenticated user</td></tr>
+            <tr><td><code>currentSection</code></td><td>Active tab: <code>daily</code> / <code>ideas</code> / <code>projects</code> / <code>someday</code></td></tr>
+            <tr><td><code>currentView</code></td><td>Within Daily: <code>week</code> or <code>day</code></td></tr>
+            <tr><td><code>currentDate</code></td><td>The selected date in Day View</td></tr>
+            <tr><td><code>currentWeekOffset</code></td><td>Week navigation offset from today (±n weeks)</td></tr>
+            <tr><td><code>currentPriorityFilter</code></td><td><code>all</code> / <code>A</code> / <code>B</code> / <code>C</code> / <code>done</code></td></tr>
+            <tr><td><code>currentLayoutMode</code></td><td>Day View layout: <code>list</code> or <code>planner</code></td></tr>
+            <tr><td><code>isPro</code></td><td>Boolean — fetched from <code>/api/me</code>, gates free tier cap</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="notes-meta">4.4 Local Meta System</h3>
+      <p>Supabase stores note text and category only. All <strong>task metadata</strong> (priority, done state, scheduled date, time slot) is stored client-side in <code>localStorage</code> under the key <code>inkthorn_daytimer_meta</code>.</p>
+      <pre>{
+  <span class="key">"&lt;note-id&gt;"</span>: {
+    <span class="key">"priority"</span>: <span class="str">"A"</span>,          <span class="comment">// "A" | "B" | "C" | null</span>
+    <span class="key">"done"</span>: <span class="kw">false</span>,
+    <span class="key">"scheduled_date"</span>: <span class="str">"2026-06-01"</span>,
+    <span class="key">"time_slot"</span>: <span class="str">9</span>            <span class="comment">// hour integer for Planner view</span>
+  }
+}</pre>
+      <div class="callout">
+        <strong>Important:</strong> Meta is device-local. Switching devices loses priority and done state. This is a known limitation, not a bug — see Section 10.
+      </div>
+
+      <h3 id="notes-views">4.5–4.7 Section Navigation & Views</h3>
+      <p>Four tabs all render into the same <code>#mainContent</code> div. <code>renderCurrentView()</code> branches on section and view state:</p>
+      <div class="flow">
+        <span class="flow-step">Daily + week</span>   → <span class="flow-end">renderWeekView()</span><br>
+        <span class="flow-step">Daily + day</span>    → <span class="flow-end">renderDayView()</span><br>
+        <span class="flow-step">Ideas</span>           → <span class="flow-end">renderListView()</span>  <span class="comment">(category: ideas)</span><br>
+        <span class="flow-step">Projects</span>        → <span class="flow-end">renderListView()</span>  <span class="comment">(category: tasks)</span><br>
+        <span class="flow-step">Someday</span>         → <span class="flow-end">renderListView()</span>  <span class="comment">(category: other)</span>
+      </div>
+      <p>All rendering is <strong>innerHTML assignment</strong> — no virtual DOM, no diffing. The entire view re-renders on every state change.</p>
+      <p><strong>Week View:</strong> 7-column CSS Grid (Mon–Sun). Each column is clickable → <code>enterDay(date)</code> switches to Day View. A "Plan Week" banner appears on Sundays after 4pm.</p>
+      <p><strong>Day View:</strong> Includes a carry-forward system — on today's view only, undone notes from past scheduled dates surface above today's list in a "Ledger of Unfinished Business" section. Supports priority filter tabs (A/B/C/all/done) and a layout toggle between flat list and time-block Planner grid.</p>
+
+      <h3 id="notes-api">4.8 API Calls</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>Endpoint</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>GET</td><td><code>/api/me</code></td><td>Fetch user profile + pro status</td></tr>
+            <tr><td>GET</td><td><code>/api/notes</code></td><td>Load all notes for the user</td></tr>
+            <tr><td>POST</td><td><code>/api/notes</code></td><td>Create a new note</td></tr>
+            <tr><td>DELETE</td><td><code>/api/notes/:id</code></td><td>Delete a note</td></tr>
+            <tr><td>POST</td><td><code>/api/disconnect-telegram</code></td><td>Unlink Telegram account</td></tr>
+            <tr><td>POST</td><td><code>/stripe/checkout</code></td><td>Start Stripe checkout session</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>All calls go through <code>apiFetch()</code>, which injects the Bearer token and handles 401 by clearing storage and showing the login overlay.</p>
+
+      <h3 id="notes-sync">4.9 Real-time Sync</h3>
+      <p><code>startLiveSync()</code> polls <code>/api/notes</code> every <strong>3 seconds</strong>. If the response differs from <code>notesCache</code> (via JSON string comparison), it updates the cache and re-renders. This provides rudimentary multi-tab sync.</p>
+
+      <h3 id="notes-pro">4.10–4.11 Free Tier Cap & Upgrade</h3>
+      <ul>
+        <li><code>FREE_LIMIT = 30</code> notes. <code>isPro</code> is fetched from <code>/api/me</code> on init.</li>
+        <li>Hitting the cap opens the upgrade modal instead of creating a note.</li>
+        <li><code>startCheckout()</code> calls <code>POST /stripe/checkout</code> and redirects to Stripe.</li>
+        <li>After payment, Stripe redirects to <code>notes.html?upgraded=1</code>, which triggers an InkThorn success toast.</li>
+      </ul>
+    </section>
+
+    <!-- 5. DAYCYCLE -->
+    <section class="section" id="daycycle">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2>daycycle.html — AI Day Cycle</h2>
+        <span class="badge badge-cyan">AI-Powered</span>
+      </div>
+
+      <h3 id="dc-design">5.2 Visual Design</h3>
+      <ul>
+        <li><strong>Aesthetic:</strong> Miami Synthwave — deep black/charcoal, amber (<code>#c8832a</code>) and cyan (<code>#00d4ff</code>) accents, scanline overlay, CSS grid pattern</li>
+        <li><strong>Fonts:</strong> Bebas Neue (brand/headings), Space Grotesk (UI), DM Sans (fallback)</li>
+        <li>Responsive — collapses to single-column on screens ≤600px with hamburger menu replacing desktop tab row</li>
+      </ul>
+
+      <h3 id="dc-flow">5.3 Data Flow</h3>
+      <div class="flow">
+        <span class="flow-step">1.</span> On load → check <code>localStorage['inkthorn_token']</code><br>
+           <span class="comment">   └── absent → redirect to notes.html immediately</span><br>
+        <span class="flow-step">2.</span> GET <code>/api/profile</code> → check <code>onboarding_complete</code><br>
+           <span class="comment">   └── false → redirect to onboarding.html</span><br>
+        <span class="flow-step">3.</span> GET <code>/api/cycle</code><br>
+           <span class="flow-branch">   ├── Cache hit</span>  → return stored JSON from Supabase <code>day_cycles</code><br>
+           <span class="flow-branch">   └── Cache miss</span> → Worker calls Claude, fetches Google Places<br>
+           <span class="comment">                   + Bandsintown, builds cycle JSON,</span><br>
+           <span class="comment">                   stores in Supabase, returns it</span><br>
+        <span class="flow-step">4.</span> <span class="flow-end">renderCycle(data, profile, places)</span> → paints the full UI
+      </div>
+
+      <h3 id="dc-json">5.4 Cycle JSON Structure</h3>
+      <pre>{
+  <span class="key">"blocks"</span>: [{
+    <span class="key">"time"</span>: <span class="str">"6:00 AM"</span>,
+    <span class="key">"icon"</span>: <span class="str">"🌅"</span>,
+    <span class="key">"label"</span>: <span class="str">"Wake Up"</span>,
+    <span class="key">"tips"</span>: [<span class="str">"First tip (white)"</span>, <span class="str">"Second tip (cyan)"</span>],
+    <span class="key">"recommendation"</span>: {          <span class="comment">// optional — local venue</span>
+      <span class="key">"name"</span>: <span class="str">"Venue Name"</span>,
+      <span class="key">"address"</span>: <span class="str">"123 Magazine St"</span>,
+      <span class="key">"note"</span>: <span class="str">"Why this spot is relevant today"</span>
+    }
+  }],
+  <span class="key">"concierge"</span>: {
+    <span class="key">"title"</span>: <span class="str">"Monday Anchor — TextOS & Reyla"</span>,
+    <span class="key">"notes"</span>: [<span class="str">"Note 1"</span>, <span class="str">"Note 2"</span>]
+  },
+  <span class="key">"private"</span>: [<span class="str">"Private note for partner"</span>],
+  <span class="key">"_city"</span>: <span class="str">"New Orleans"</span>,         <span class="comment">// Worker-injected metadata</span>
+  <span class="key">"_neighborhood"</span>: <span class="str">"Uptown"</span>,
+  <span class="key">"_lat"</span>: 29.9245,
+  <span class="key">"_lng"</span>: -90.1133,
+  <span class="key">"_places"</span>: [ <span class="comment">/* Google Places results */</span> ]
+}</pre>
+      <p><code>_*</code> fields are metadata injected by the Worker for the frontend to consume — they are not rendered directly to the user.</p>
+
+      <h3 id="dc-render">5.5 Timeline Rendering</h3>
+      <p>Each block is rendered by <code>renderBlock(b)</code>. Block status is computed by <code>getBlockStatus(b.time)</code>:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Status</th><th>Condition</th><th>Visual Treatment</th></tr></thead>
+          <tbody>
+            <tr><td><code>current</code></td><td>Within ±35 min of now</td><td>Amber glow, lifted, pulsing dot, NOW badge</td></tr>
+            <tr><td><code>past</code></td><td>More than 35 min ago</td><td>35% opacity</td></tr>
+            <tr><td>(future)</td><td>Default</td><td>Normal card style</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>On load, the timeline auto-scrolls to the current (or next upcoming) block with three deferred scroll attempts at 50ms / 300ms / 800ms to handle layout paint timing. A 60-second interval re-renders the track to update current/past state as time progresses.</p>
+
+      <h3 id="dc-tabs">5.6 View Tabs</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tab</th><th>Data Source</th><th>Block Count</th></tr></thead>
+          <tbody>
+            <tr><td>✦ Concierge</td><td>AI-generated via <code>/api/cycle</code>, cached in Supabase</td><td>Dynamic</td></tr>
+            <tr><td>Weekday</td><td>Static hardcoded <code>DAY_DATA.weekday</code></td><td>22 blocks</td></tr>
+            <tr><td>Weekend</td><td>Static hardcoded <code>DAY_DATA.weekend</code></td><td>14 blocks</td></tr>
+            <tr><td>Vacation</td><td>Static hardcoded <code>DAY_DATA.vacation</code></td><td>10 blocks</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>On mobile, the tab row is hidden and replaced by a hamburger (☰) that opens a bottom sheet picker (<code>#view-overlay</code>).</p>
+
+      <h3 id="dc-week">5.7 Week Strip</h3>
+      <p>A 7-day strip (Mon–Sun) renders immediately on page load before API calls resolve. It is navigable via ← / → week buttons. Selecting a day:</p>
+      <ul>
+        <li><strong>Today</strong> → calls <code>showConcierge()</code> to load the AI view</li>
+        <li><strong>Past or future day</strong> → calls <code>showDayType('weekday' | 'weekend')</code> with static data (AI cycle is only generated for today)</li>
+      </ul>
+      <div class="callout">
+        <strong>Timezone note:</strong> Date arithmetic uses local date parts (year/month/day extraction) directly to avoid UTC timezone shift bugs that arise from <code>new Date(dateString)</code>.
+      </div>
+
+      <h3 id="dc-nbhd">5.8 Neighborhood Bar</h3>
+      <p>Below the timeline, a neighborhood map + venue strip renders using a Google Maps <code>iframe</code> embed and Google Places results from <code>data._places[]</code>. Spots are deduplicated by name and rendered as tappable cards opening Google Maps search. Falls back to a single "Explore Nearby" placeholder if no places were returned.</p>
+
+      <h3 id="dc-private">5.9 Private Panel</h3>
+      <p>The <code>private[]</code> array renders as a blur-redacted card intended for partner/relationship nudges generated by Claude:</p>
+      <ul>
+        <li>Default state: <code>filter: blur(8px)</code></li>
+        <li>Tap header → <code>togglePrivate()</code> → <code>filter: none</code></li>
+        <li>Auto-reblurs after <strong>15 seconds</strong> via <code>setTimeout</code></li>
+      </ul>
+    </section>
+
+    <!-- 6. SHARED -->
+    <section class="section" id="shared">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2>Shared Patterns</h2>
+      </div>
+
+      <h3>6.1 Error Handling</h3>
+      <ul>
+        <li><code>apiFetch()</code> handles 401 → clear token → show login overlay</li>
+        <li>API errors surface as console logs; UI degrades gracefully to empty state</li>
+        <li>Cycle fetch failure shows a retry link inside <code>#cycle-container</code></li>
+      </ul>
+
+      <h3>6.2 Animations</h3>
+      <p>All animations are CSS keyframes only: <code>slideInTop</code>, <code>slideInDown</code>, <code>slideUp</code>, <code>fadeIn</code>, <code>spin</code>, <code>pulse-dot</code>, <code>blink-badge</code>. No animation library.</p>
+
+      <h3>6.3 Mobile Responsiveness</h3>
+      <ul>
+        <li><strong>notes.html:</strong> breaks at <code>max-width: 700px</code> — week grid collapses to 2 columns</li>
+        <li><strong>daycycle.html:</strong> breaks at <code>max-width: 600px</code> — hides desktop nav links, shows hamburger menu</li>
+      </ul>
+    </section>
+
+    <!-- 7. FILES -->
+    <section class="section" id="files">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2>Key Files & Paths</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>File</th><th>Repo Path</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><code>notes.html</code></td><td><code>/inkthorn-dashboard/notes.html</code></td><td>Auth entry point + note management app</td></tr>
+            <tr><td><code>daycycle.html</code></td><td><code>/inkthorn-dashboard/daycycle.html</code></td><td>AI day cycle product</td></tr>
+            <tr><td><code>onboarding.html</code></td><td><code>/inkthorn-dashboard/onboarding.html</code></td><td>6-screen identity wizard (profile setup)</td></tr>
+            <tr><td><code>inkthorn-mascot.png</code></td><td><code>/inkthorn-dashboard/inkthorn-mascot.png</code></td><td>Brand character image</td></tr>
+            <tr><td><code>worker/index.js</code></td><td><code>/inkthorn/worker/index.js</code></td><td>Cloudflare Worker — auth, API, Claude calls</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 8. WORKER API -->
+    <section class="section" id="worker-api">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <h2>Worker API Reference</h2>
+      </div>
+      <p>All routes served from <code>inkthorn-notes.rgaudet2023.workers.dev</code>:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>Route</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>GET</td><td><code>/auth/google</code></td><td>Initiates Google OAuth flow</td></tr>
+            <tr><td>GET</td><td><code>/auth/callback</code></td><td>OAuth callback — issues JWT, redirects to frontend</td></tr>
+            <tr><td>GET</td><td><code>/api/me</code></td><td>Returns user profile + <code>is_pro</code> flag</td></tr>
+            <tr><td>GET</td><td><code>/api/profile</code></td><td>Returns onboarding profile (identity context for Claude)</td></tr>
+            <tr><td>POST</td><td><code>/api/profile</code></td><td>Saves onboarding data to Supabase <code>profiles</code> table</td></tr>
+            <tr><td>GET</td><td><code>/api/cycle</code></td><td>Returns cached or freshly generated AI day cycle</td></tr>
+            <tr><td>GET</td><td><code>/api/notes</code></td><td>Returns all notes for the authenticated user</td></tr>
+            <tr><td>POST</td><td><code>/api/notes</code></td><td>Creates a new note</td></tr>
+            <tr><td>DELETE</td><td><code>/api/notes/:id</code></td><td>Deletes a note by ID</td></tr>
+            <tr><td>POST</td><td><code>/stripe/checkout</code></td><td>Creates Stripe checkout session, returns redirect URL</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 9. SCHEMA -->
+    <section class="section" id="schema">
+      <div class="section-header">
+        <span class="section-num">09</span>
+        <h2>Supabase Schema</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Table</th><th>Key Columns</th></tr></thead>
+          <tbody>
+            <tr><td><code>profiles</code></td><td><code>user_id</code>, <code>city</code>, <code>neighborhood</code>, <code>lat</code>, <code>lng</code>, <code>vibe_words</code>, <code>projects</code>, <code>partner</code>, <code>onboarding_complete</code></td></tr>
+            <tr><td><code>day_cycles</code></td><td><code>user_id</code>, <code>date</code>, <code>cycle_json</code> — one row per user per day (Claude output cache)</td></tr>
+            <tr><td><code>subscriptions</code></td><td><code>user_id</code>, <code>plan</code>, <code>expires_at</code></td></tr>
+            <tr><td><code>notes</code></td><td>Managed entirely by the Worker. Text + category per note. No task meta (stored locally).</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10. LIMITATIONS -->
+    <section class="section" id="limitations">
+      <div class="section-header">
+        <span class="section-num">10</span>
+        <h2>Known Limitations & Future Work</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Area</th><th>Issue / Note</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Local meta</td>
+              <td>Priority, done state, and scheduled dates are <code>localStorage</code>-only — not synced across devices</td>
+              <td><span class="badge badge-red">Known</span></td>
+            </tr>
+            <tr>
+              <td>Day cycle caching</td>
+              <td>One AI cycle per user per day. Switching to past/future dates falls back to static data</td>
+              <td><span class="badge badge-amber">By design</span></td>
+            </tr>
+            <tr>
+              <td>Supabase RLS</td>
+              <td>Row-level security disabled on <code>profiles</code> table to unblock onboarding saves — must re-enable before multi-tenant production</td>
+              <td><span class="badge badge-red">TODO</span></td>
+            </tr>
+            <tr>
+              <td>Bandsintown</td>
+              <td><code>BANDSINTOWN_APP_ID</code> worker secret not yet added — live events not currently surfaced in Neighborhood Bar</td>
+              <td><span class="badge badge-red">TODO</span></td>
+            </tr>
+            <tr>
+              <td>Custom domain</td>
+              <td><code>api.inkthorn.ai</code> → Worker mapping not yet configured; Worker accessed via <code>.workers.dev</code> URL</td>
+              <td><span class="badge badge-red">TODO</span></td>
+            </tr>
+            <tr>
+              <td>Pro billing</td>
+              <td>Stripe recurring price for new subscribers not yet created; existing pro users manually inserted in <code>subscriptions</code></td>
+              <td><span class="badge badge-red">TODO</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="footer">
+  InkThorn Architecture Document · v2026-06-01 · <a href="https://inkthorn.ai" style="color:var(--amber);text-decoration:none;">inkthorn.ai</a>
+</div>
+
+</body>
+</html>
