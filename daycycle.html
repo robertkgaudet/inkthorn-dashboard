@@ -477,24 +477,34 @@ function buildNeighborhoodBar(profile, places) {
   var mapQuery = encodeURIComponent((neighborhood ? neighborhood + ', ' : '') + city);
   var mapSrc = 'https://www.google.com/maps?q=' + mapQuery + '&output=embed&z=15';
 
-  // Build spots from Google Places data or use defaults
-  var spots = places && places.length ? places.map(function(p) {
-    return { icon: typeIcon(p.type), name: p.name, dist: p.address, desc: p.type ? p.type.replace(/_/g,' ') : '' };
-  }) : [];
+  // Build spots from Google Places data — deduplicate by name, show rating
+  var seen = {};
+  var spots = [];
+  if (places && places.length) {
+    places.forEach(function(p) {
+      if (seen[p.name]) return;
+      seen[p.name] = true;
+      spots.push({
+        icon: typeIcon(p.type),
+        name: p.name,
+        rating: p.rating ? '★ ' + p.rating : '',
+        address: p.address || '',
+        type: p.type ? p.type.replace(/_/g,' ') : '',
+        mapsUrl: 'https://www.google.com/maps/search/' + encodeURIComponent(p.name + ' ' + (p.address || ''))
+      });
+    });
+  }
 
-  // Always add a fallback if empty
   if (!spots.length) {
-    spots = [
-      { icon:'🌳', name:'Explore', dist:'Nearby', desc:'Discover your neighborhood' }
-    ];
+    spots = [{ icon:'🌳', name:'Explore Nearby', rating:'', address:'', type:'Your neighborhood', mapsUrl:'#' }];
   }
 
   var spotsHtml = spots.slice(0, 6).map(function(s) {
-    return '<div class="nbhd-spot">'
+    return '<div class="nbhd-spot" onclick="window.open(\'' + s.mapsUrl + '\',\'_blank\')" style="cursor:pointer">'
       + '<div class="nbhd-icon">' + s.icon + '</div>'
       + '<div class="nbhd-name">' + s.name + '</div>'
-      + '<div class="nbhd-dist">' + s.dist + '</div>'
-      + '<div class="nbhd-desc">' + s.desc + '</div>'
+      + '<div class="nbhd-dist">' + s.rating + '</div>'
+      + '<div class="nbhd-desc">' + s.type + '</div>'
       + '</div>';
   }).join('');
 
