@@ -1,56 +1,56 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-06-02T14:26:16.871Z",
+  "updated": "2026-06-03T14:33:37.223Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 79,
-    "feels_like_f": 78,
-    "humidity": 90,
+    "temp_f": 78,
+    "feels_like_f": 84,
+    "humidity": 82,
     "description": "Sunny",
     "code": "113",
     "emoji": "☀️",
-    "wind_mph": 5,
-    "wind_dir": "WSW",
-    "visibility_miles": 10,
-    "uv_index": 1
+    "wind_mph": 9,
+    "wind_dir": "ENE",
+    "visibility_miles": 16,
+    "uv_index": 2
   },
   "forecast": [
     {
-      "date": "2026-06-02",
-      "label": "Tue, Jun 2",
-      "high_f": 89,
-      "low_f": 75,
-      "description": "Partly Cloudy",
-      "emoji": "⛅",
-      "sunrise": "06:00 AM",
-      "sunset": "07:57 PM",
-      "avg_humidity": 77,
+      "date": "2026-06-03",
+      "label": "Wed, Jun 3",
+      "high_f": 87,
+      "low_f": 72,
+      "description": "Clear",
+      "emoji": "☀️",
+      "sunrise": "05:59 AM",
+      "sunset": "07:58 PM",
+      "avg_humidity": 85,
       "chance_of_rain": 73
     },
     {
-      "date": "2026-06-03",
-      "label": "Wed, Jun 3",
+      "date": "2026-06-04",
+      "label": "Thu, Jun 4",
+      "high_f": 82,
+      "low_f": 75,
+      "description": "Light Rain Shower",
+      "emoji": "🌨️",
+      "sunrise": "05:59 AM",
+      "sunset": "07:58 PM",
+      "avg_humidity": 68,
+      "chance_of_rain": 73
+    },
+    {
+      "date": "2026-06-05",
+      "label": "Fri, Jun 5",
       "high_f": 83,
       "low_f": 74,
       "description": "Light Rain Shower",
       "emoji": "🌨️",
       "sunrise": "05:59 AM",
-      "sunset": "07:58 PM",
-      "avg_humidity": 81,
-      "chance_of_rain": 78
-    },
-    {
-      "date": "2026-06-04",
-      "label": "Thu, Jun 4",
-      "high_f": 81,
-      "low_f": 74,
-      "description": "Light Rain Shower",
-      "emoji": "🌨️",
-      "sunrise": "05:59 AM",
-      "sunset": "07:58 PM",
-      "avg_humidity": 80,
-      "chance_of_rain": 81
+      "sunset": "07:59 PM",
+      "avg_humidity": 77,
+      "chance_of_rain": 73
     }
   ]
 }
