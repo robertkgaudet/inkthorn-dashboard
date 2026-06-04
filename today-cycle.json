@@ -1,130 +1,126 @@
 {
-  "date": "2026-06-03",
-  "generated": "2026-06-03T10:30:03Z",
+  "date": "2026-06-04",
+  "generated": "2026-06-04T10:30:03Z",
   "location": "Napoleon & Magazine, Uptown New Orleans, 70115",
   "mode": "custom",
   "concierge": {
-    "title": "Wednesday \u2014 Mid-Week Check",
+    "title": "Thursday \u2014 Momentum Day",
     "notes": [
       "\ud83c\udfc6 RISE Challenge (Virginia) \u2014 Stability accepted! Complete the application",
       "\ud83c\udfa4 InnovateSouth deck \u2014 finish it, time the pitch (must be under 4 min), upload to Claude for evaluation & improvements",
-      "\ud83d\udcca Review Reyla progress vs. week goals",
-      "\ud83d\udcec Clear inbox \u2014 flag anything from Burton or partners",
-      "\ud83c\udfd7\ufe0f InkThorn: review leads pipeline, any follow-ups?",
-      "\ud83c\udf2e Magazine Street lunch run \u2014 you've earned it",
-      "\u270d\ufe0f Journal check-in: what's working, what's not"
+      "\ud83d\ude80 Push hardest today \u2014 Thursday is underrated",
+      "\ud83d\udcc5 Confirm any weekend commitments / Camille plans",
+      "\ud83d\udcbb Reyla: demo-ready features for next week",
+      "\ud83d\udce3 One media / publishing action today",
+      "\ud83c\udfb7 Check WWOZ for weekend live music picks"
     ]
   },
   "private": [
-    "\ud83d\udc8c Put the phone away at dinner",
+    "\ud83d\udc8c A small gesture (flowers, note, her favorite wine) goes a long way",
     "\ud83d\udcac Check in with Camille today \u2014 not just a quick text"
   ],
   "blocks": [
     {
       "time": "7:30 AM",
-      "icon": "\u2600\ufe0f",
-      "label": "Mid-Week Reset",
+      "icon": "\ud83d\udd25",
+      "label": "Thursday \u2014 Push Hard",
       "tips": [
-        "Wednesday is the hinge of the week \u2014 take stock",
-        "Morning walk before anything else"
+        "Thursday is the most underrated day of the week",
+        "Two days left to make the week count \u2014 go"
       ],
       "recommendation": null
     },
     {
       "time": "9:00 AM",
-      "icon": "\ud83d\udcca",
-      "label": "Progress Review",
-      "tips": [
-        "Reyla: where are you vs. week goals?",
-        "InkThorn leads: any follow-ups from the 543?"
-      ],
-      "recommendation": null
-    },
-    {
-      "time": "10:30 AM",
       "icon": "\ud83d\udcbb",
-      "label": "Build Block",
+      "label": "Reyla Demo Prep",
       "tips": [
-        "Fix what's broken, ship what's ready",
-        "Smaller wins count \u2014 keep the streak"
+        "Build toward demo-ready. Beaux Box Realty is watching.",
+        "Clean UI, solid flow, no rough edges"
       ],
       "recommendation": null
     },
     {
-      "time": "12:30 PM",
-      "icon": "\ud83c\udf2e",
-      "label": "Magazine Street Lunch",
+      "time": "11:00 AM",
+      "icon": "\ud83d\udce3",
+      "label": "Content / Media",
       "tips": [
-        "Get out of the house. Seriously.",
-        "No-takeout challenge: cook or pick up ingredients"
-      ],
-      "recommendation": {
-        "name": "St. James Cheese Company",
-        "address": "Magazine Street, New Orleans",
-        "note": "Grab a sandwich and eat on the porch. Mid-week treat."
-      }
-    },
-    {
-      "time": "2:00 PM",
-      "icon": "\ud83d\udcec",
-      "label": "Comms + Admin",
-      "tips": [
-        "Clear email, Stability follow-ups, Jerry Hollister",
-        "Burton situation: document anything new"
+        "Publish something. Blog, social, Substack \u2014 anything",
+        "You're a media figure. Act like it."
       ],
       "recommendation": null
     },
     {
-      "time": "4:00 PM",
-      "icon": "\ud83d\ude80",
-      "label": "Afternoon Sprint",
+      "time": "1:00 PM",
+      "icon": "\ud83e\udd57",
+      "label": "Real Lunch",
       "tips": [
-        "Last hard push before the week winds down",
-        "One concrete thing. Ship it."
+        "Protein, vegetables, out of the chair",
+        "Walk to Magazine and back if nothing else"
+      ],
+      "recommendation": null
+    },
+    {
+      "time": "3:00 PM",
+      "icon": "\ud83d\udcde",
+      "label": "Call / Meeting Window",
+      "tips": [
+        "Schedule external calls here, not in morning deep work",
+        "Stability SBIR, partners, Beaux Box if needed"
       ],
       "recommendation": null
     },
     {
       "time": "5:00 PM",
+      "icon": "\ud83c\udfb7",
+      "label": "WWOZ Check",
+      "tips": [
+        "What's on this weekend? Plan something.",
+        "Crawfish, jazz, porch parties \u2014 check the calendar"
+      ],
+      "recommendation": {
+        "name": "WWOZ New Orleans",
+        "address": "wwoz.org/events",
+        "note": "Weekend picks are up Thursday afternoon."
+      }
+    },
+    {
+      "time": "5:00 PM",
       "icon": "\ud83c\udfb5",
-      "label": "Colin Myers Orchestra",
+      "label": "Bourbon Street Stars",
       "tips": [
         "Fritzel's Jazz Club \u00b7 French Quarter",
         "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"
       ],
       "recommendation": {
-        "name": "Colin Myers Orchestra",
+        "name": "Bourbon Street Stars",
         "address": "Fritzel's Jazz Club",
-        "note": "Tonight at 5:00 PM. More info: https://wwoz.org/events/1350886"
+        "note": "Tonight at 5:00 PM. More info: https://wwoz.org/events/1350971"
       }
     },
     {
-      "time": "5:00 PM",
+      "time": "6:00 PM",
       "icon": "\ud83c\udfb5",
-      "label": "Preservation All-Stars",
+      "label": "Jesse Morrow",
       "tips": [
-        "Preservation Hall",
+        "Bacchanal (OUTDOORS) \u00b7 Bywater",
         "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"
       ],
       "recommendation": {
-        "name": "Preservation All-Stars",
-        "address": "Preservation Hall",
-        "note": "Tonight at 5:00 PM. More info: https://wwoz.org/events/1347811"
+        "name": "Jesse Morrow",
+        "address": "Bacchanal (OUTDOORS)",
+        "note": "Tonight at 6:00 PM. More info: https://wwoz.org/events/1348411"
       }
     },
     {
-      "time": "7:00 PM",
-      "icon": "\ud83c\udfb6",
-      "label": "Live Music Window",
+      "time": "8:00 PM",
+      "icon": "\ud83d\udcd3",
+      "label": "Journal",
       "tips": [
-        "WWOZ always has something on a Wednesday",
-        "d.b.a. on Frenchmen is never a bad call"
+        "What are your 3 wins this week so far?",
+        "What's the one thing that would make Friday feel great?"
       ],
-      "recommendation": {
-        "name": "Frenchmen Street",
-        "address": "Frenchmen St, New Orleans, LA",
-        "note": "Best live music strip in the world. Mid-week is local crowd only."
-      }
+      "recommendation": null
     }
   ]
 }
