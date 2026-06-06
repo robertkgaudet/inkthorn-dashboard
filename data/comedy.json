@@ -1,39 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-06-05T23:24:34.994Z",
+  "updated": "2026-06-06T13:33:31.728Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-06-05",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "LGBTLOL",
-      "url": "https://504comedy.com/event/1361/lgbtlol-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Fri Jun 05 2026",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-06-05",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "The Comedy Lounge",
-      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-      "venue": "Vino: Fine Wine & Spirits",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Friday",
-      "start_dt": "2026-06-05T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-06-06",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -43,11 +15,11 @@
       "type": "Stand-up",
       "cost": "FREE",
       "repeat": "Sat Jun 06 2026",
-      "start_dt": "2026-06-05T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-06",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -61,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-06-07",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -75,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-06-07",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-06-07",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -324,50 +296,44 @@
       "cost": "$10",
       "repeat": "Every Thursday",
       "start_dt": "2026-06-11T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-06-12",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Greetings from Queer Mountain",
+      "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
+      "venue": "ALLways Lounge",
+      "type": "Storytelling",
+      "cost": "$10",
+      "repeat": "Second Friday",
+      "start_dt": "2026-06-11T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-06-12",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Comedy Lounge",
+      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+      "venue": "Vino: Fine Wine & Spirits",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Friday",
+      "start_dt": "2026-06-12T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-06-05",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-06-05",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "LGBTLOL",
-          "url": "https://504comedy.com/event/1361/lgbtlol-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Fri Jun 05 2026",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-06-05",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "The Comedy Lounge",
-          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-          "venue": "Vino: Fine Wine & Spirits",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Friday",
-          "start_dt": "2026-06-05T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-06-06",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-06",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -377,11 +343,11 @@
           "type": "Stand-up",
           "cost": "FREE",
           "repeat": "Sat Jun 06 2026",
-          "start_dt": "2026-06-05T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-06",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -396,12 +362,12 @@
       ]
     },
     {
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-06-07",
       "events": [
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-06-07",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -415,7 +381,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-06-07",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -429,7 +395,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-06-07",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -688,6 +654,40 @@
           "cost": "$10",
           "repeat": "Every Thursday",
           "start_dt": "2026-06-11T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "date": "2026-06-12",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-06-12",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Greetings from Queer Mountain",
+          "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
+          "venue": "ALLways Lounge",
+          "type": "Storytelling",
+          "cost": "$10",
+          "repeat": "Second Friday",
+          "start_dt": "2026-06-11T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-06-12",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Comedy Lounge",
+          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+          "venue": "Vino: Fine Wine & Spirits",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Friday",
+          "start_dt": "2026-06-12T20:00-05:00"
         }
       ]
     }
