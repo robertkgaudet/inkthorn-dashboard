@@ -1,126 +1,152 @@
 {
-  "date": "2026-06-06",
-  "generated": "2026-06-06T10:30:02Z",
+  "date": "2026-06-07",
+  "generated": "2026-06-07T10:30:03Z",
   "location": "Napoleon & Magazine, Uptown New Orleans, 70115",
   "mode": "custom",
   "concierge": {
-    "title": "Saturday \u2014 Recharge",
+    "title": "Sunday \u2014 New Orleans Day",
     "notes": [
       "\ud83c\udfc6 RISE Challenge (Virginia) \u2014 Stability accepted! Complete the application",
       "\ud83c\udfa4 InnovateSouth deck \u2014 finish it, time the pitch (must be under 4 min), upload to Claude for evaluation & improvements",
-      "\u2600\ufe0f No screens before coffee and a walk",
-      "\ud83d\uded2 Restock if needed \u2014 fresh ingredients beat takeout",
-      "\ud83d\udcda Read something that's not a screen (book, magazine)",
-      "\ud83c\udfb6 Check WWOZ / InkThorn for live music tonight",
-      "\ud83c\udf3f Uptown walk \u2014 Napoleon to Audubon, clear the week"
+      "\u26bd Premier League morning if a match is on",
+      "\ud83e\udd9e Crawfish season \u2014 find a spot or make a plan",
+      "\ud83c\udfb6 Porch party on Constantinople at 6pm (Ashley & Wendy)",
+      "\ud83d\udcbb Light Reyla review \u2014 prep for the week, don't grind",
+      "\ud83c\udf19 Wind down early \u2014 Sunday is for restoration"
     ]
   },
   "private": [
-    "\ud83c\udf39 Date night with Camille tonight \u2014 make it count",
-    "\ud83d\udccd Reservation idea: Clancy's \u2014 call ahead",
     "\ud83d\udc8c She loves when you just handle the reservation without being asked",
-    "\ud83d\udc8c Dress up a little \u2014 she notices"
+    "\ud83d\udcac Check in with Camille today \u2014 not just a quick text"
   ],
   "blocks": [
     {
-      "time": "8:30 AM",
-      "icon": "\u2600\ufe0f",
-      "label": "Slow Start",
+      "time": "9:30 AM",
+      "icon": "\u26bd",
+      "label": "Premier League Morning",
       "tips": [
-        "No screens for 30 minutes. Walk. Coffee. Breathe.",
-        "Uptown on Saturday morning is as good as it gets."
+        "Match on, door open \u2014 perfect Sunday start",
+        "Coffee in hand, city waking up slowly"
       ],
       "recommendation": null
     },
     {
-      "time": "10:00 AM",
-      "icon": "\ud83d\uded2",
-      "label": "Magazine Street Run",
+      "time": "11:30 AM",
+      "icon": "\ud83d\udeb6",
+      "label": "Walk to Tchoupitoulas",
       "tips": [
-        "Restock for the week. Fresh ingredients beat DoorDash.",
-        "Rouses on Magazine or Whole Foods on Magazine \u2014 your call"
+        "Walkable from Napoleon & Magazine \u2014 beautiful stroll",
+        "Crawfish season in New Orleans on a Sunday. Life is good."
       ],
       "recommendation": {
-        "name": "Rouses Market",
-        "address": "5000 Magazine St, New Orleans",
-        "note": "Local grocery chain. Good produce, great deli, very New Orleans."
+        "name": "Port of Orleans Brewing Co.",
+        "address": "4124 Tchoupitoulas St, New Orleans",
+        "note": "Crawfish boil, cold craft beer. Walk down Tchoupitoulas."
       }
     },
     {
-      "time": "12:00 PM",
-      "icon": "\ud83c\udf3f",
-      "label": "Audubon Walk",
+      "time": "1:00 PM",
+      "icon": "\ud83e\udd9e",
+      "label": "Crawfish & Beers",
       "tips": [
-        "Audubon Park loop is 1.8 miles \u2014 perfect Saturday reset",
-        "Oaks, runners, dogs \u2014 the whole Uptown scene"
+        "Order by the pound, cold beer, take your time",
+        "This is what Sunday in New Orleans is supposed to feel like"
       ],
       "recommendation": {
-        "name": "Audubon Park",
-        "address": "6500 Magazine St, New Orleans",
-        "note": "10 minutes on foot from Napoleon & Magazine."
+        "name": "Port of Orleans Brewing Co.",
+        "address": "4124 Tchoupitoulas St, New Orleans",
+        "note": "Crawfish boil, cold craft beer, outdoor seating. Pure New Orleans."
       }
     },
     {
-      "time": "2:00 PM",
-      "icon": "\ud83d\udcda",
-      "label": "Read / Rest",
+      "time": "3:00 PM",
+      "icon": "\ud83c\udf67",
+      "label": "Walk Back & Sno-Ball",
       "tips": [
-        "Book, not screen. Porch if weather cooperates.",
-        "You process better when you slow down. Trust it."
+        "Stroll back up Magazine \u2014 stop in anywhere that looks good",
+        "Porch time with Chris & Vanessa if they're out"
       ],
-      "recommendation": null
+      "recommendation": {
+        "name": "Hansen's Sno-Bliz",
+        "address": "4801 Tchoupitoulas St",
+        "note": "Best sno-balls in the city. Perfect stop on the walk back."
+      }
     },
     {
-      "time": "4:00 PM",
+      "time": "5:00 PM",
       "icon": "\ud83d\udcbb",
-      "label": "Light Reyla Review",
+      "label": "Light Reyla Hour",
       "tips": [
-        "Optional \u2014 an hour max. Prep for Monday, don't grind.",
-        "Saturday is for recharging, not depleting."
+        "One focused push \u2014 prep for the week ahead",
+        "Don't grind Sunday. One thing. Then put it down."
       ],
       "recommendation": null
     },
     {
-      "time": "7:00 PM",
-      "icon": "\ud83c\udfb6",
-      "label": "Saturday Night Out",
+      "time": "5:00 PM",
+      "icon": "\ud83c\udfb5",
+      "label": "Bourbon Matinee Jazz Band with Chuck Brackman",
       "tips": [
-        "Frenchmen Street or Uptown \u2014 something live is always on",
-        "Check WWOZ picks from Thursday for tonight"
+        "Fritzel's Jazz Club \u00b7 French Quarter",
+        "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"
       ],
       "recommendation": {
-        "name": "Frenchmen Street",
-        "address": "Frenchmen St, Marigny, New Orleans",
-        "note": "Saturday night in New Orleans. No further explanation needed."
+        "name": "Bourbon Matinee Jazz Band with Chuck Brackman",
+        "address": "Fritzel's Jazz Club",
+        "note": "Tonight at 5:00 PM. More info: https://wwoz.org/events/1351131"
+      }
+    },
+    {
+      "time": "6:00 PM",
+      "icon": "\ud83c\udfb6",
+      "label": "Porch Party on Constantinople",
+      "tips": [
+        "Ashley & Wendy Lane's \u2014 live porch band every Sunday at 6pm",
+        "One of those only-in-New-Orleans moments. Don't miss it."
+      ],
+      "recommendation": {
+        "name": "Constantinople St Porch Party",
+        "address": "1203 Constantinople St, New Orleans, LA 70115",
+        "note": "Hosted by Ashley & Wendy Lane. Live porch band, neighborhood crowd, pure Uptown Sunday magic."
       }
     },
     {
       "time": "7:00 PM",
       "icon": "\ud83c\udfb5",
-      "label": "Willie Green III",
+      "label": "Pete Olynciw",
       "tips": [
         "Bacchanal (OUTDOORS) \u00b7 Bywater",
         "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"
       ],
       "recommendation": {
-        "name": "Willie Green III",
+        "name": "Pete Olynciw",
         "address": "Bacchanal (OUTDOORS)",
-        "note": "Tonight at 7:00 PM. More info: https://wwoz.org/events/1348381"
+        "note": "Tonight at 7:00 PM. More info: https://wwoz.org/events/1348401"
       }
     },
     {
-      "time": "8:00 PM",
-      "icon": "\ud83c\udfb5",
-      "label": "A Soulful Summer Night - A Night of Women Led Musi",
+      "time": "7:30 PM",
+      "icon": "\ud83c\udf7d\ufe0f",
+      "label": "Sunday Dinner",
       "tips": [
-        "Broadside (Outdoor Stage) \u00b7 Mid-City",
-        "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"
+        "Clancy's on Annunciation \u2014 classic Uptown white tablecloth",
+        "Or Shaya on Magazine \u2014 best hummus in the South"
       ],
       "recommendation": {
-        "name": "A Soulful Summer Night - A Night of Women Led Musi",
-        "address": "Broadside (Outdoor Stage)",
-        "note": "Tonight at 8:00 PM. More info: https://wwoz.org/events/1344986"
+        "name": "Clancy's",
+        "address": "6100 Annunciation St, New Orleans",
+        "note": "Quintessential Uptown Sunday dinner. Locals only energy."
       }
+    },
+    {
+      "time": "9:30 PM",
+      "icon": "\ud83c\udf19",
+      "label": "Wind Down",
+      "tips": [
+        "Good Sunday. Lived right.",
+        "Rest well \u2014 Monday is a full-send day."
+      ],
+      "recommendation": null
     }
   ]
 }
