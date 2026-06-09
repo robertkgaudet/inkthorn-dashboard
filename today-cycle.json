@@ -1,140 +1,120 @@
 {
-  "date": "2026-06-08",
-  "generated": "2026-06-08T10:30:04Z",
+  "date": "2026-06-09",
+  "generated": "2026-06-09T10:30:39Z",
   "location": "Napoleon & Magazine, Uptown New Orleans, 70115",
   "mode": "custom",
   "concierge": {
-    "title": "Monday \u2014 Set the Week",
+    "title": "Tuesday \u2014 Deep Work",
     "notes": [
       "\ud83c\udfc6 RISE Challenge (Virginia) \u2014 Stability accepted! Complete the application",
       "\ud83c\udfa4 InnovateSouth deck \u2014 finish it, time the pitch (must be under 4 min), upload to Claude for evaluation & improvements",
-      "\ud83d\udccb Prioritize: Reyla dev, Stability SBIR, InkThorn leads",
-      "\ud83d\udcf0 Publish or draft one piece of content today",
-      "\ud83d\udcde Check in with Jerry Hollister re: SBIR if pending",
-      "\ud83d\udcaa Health first \u2014 movement before screens",
-      "\ud83d\udcb0 Log any weekend expenses in finance tracker"
+      "\ud83d\udcbb Dedicated Reyla build time \u2014 ship something",
+      "\ud83d\udcdd TextOS product decisions or feature notes",
+      "\ud83c\udfaf Stability.org: review SBIR agency targets",
+      "\ud83d\udce3 Schedule or queue a social post for the week",
+      "\ud83e\uddd8 Midday walk \u2014 Magazine Street clears the head"
     ]
   },
   "private": [
-    "\ud83d\udc8c A small gesture (flowers, note, her favorite wine) goes a long way",
-    "\ud83d\udcac Check in with Camille today \u2014 not just a quick text",
-    "\ud83d\udd25 Tonight with Camille: Set the mood \u2014 candles, music, phone on do not disturb",
-    "\ud83d\udc8b Send a flirty text earlier in the day to set the tone"
+    "\ud83d\udc8c Put the phone away at dinner",
+    "\ud83d\udcac Check in with Camille today \u2014 not just a quick text"
   ],
   "blocks": [
     {
       "time": "7:30 AM",
-      "icon": "\u2600\ufe0f",
-      "label": "Morning Activation",
+      "icon": "\u2615",
+      "label": "Morning Coffee & Focus",
       "tips": [
-        "No phone first 20 minutes \u2014 walk, stretch, coffee",
-        "Uptown mornings are quiet and good. Use them."
+        "Clear head, no noise \u2014 set your intention for the day",
+        "Deep work starts now. Tuesday is a full-speed day."
       ],
       "recommendation": null
     },
     {
-      "time": "8:30 AM",
-      "icon": "\ud83d\udccb",
-      "label": "Week Planning Sprint",
-      "tips": [
-        "Top 3 for the week: Reyla, Stability SBIR, InkThorn",
-        "Block your deep work windows now or they disappear"
-      ],
-      "recommendation": null
-    },
-    {
-      "time": "9:30 AM",
+      "time": "9:00 AM",
       "icon": "\ud83d\udcbb",
-      "label": "Reyla Build Block",
+      "label": "Reyla Deep Work",
       "tips": [
-        "First serious coding window \u2014 high focus, notifications off",
-        "Burton's job is sales. Your job is ship. Stay in your lane."
+        "Longest uninterrupted block of the week \u2014 protect it",
+        "Feature work, not admin. Build what moves the needle."
       ],
       "recommendation": null
     },
     {
-      "time": "12:00 PM",
-      "icon": "\ud83e\udd57",
-      "label": "Lunch & Walk",
+      "time": "12:30 PM",
+      "icon": "\ud83c\udf3f",
+      "label": "Lunch Walk",
       "tips": [
-        "Magazine Street is right there \u2014 walk it",
-        "Eat real food. No takeout challenge: still on."
-      ],
-      "recommendation": {
-        "name": "Dat Dog or Stein's Deli",
-        "address": "Magazine Street, New Orleans",
-        "note": "Quick and real. Better than DoorDash and you know it."
-      }
-    },
-    {
-      "time": "1:30 PM",
-      "icon": "\ud83d\udcde",
-      "label": "Comms + Business Window",
-      "tips": [
-        "Email, Stability SBIR follow-ups, Jerry Hollister check-in",
-        "Beaux Box Realty demo \u2014 confirm timeline if needed"
+        "Audubon Park is 10 minutes. Use it.",
+        "Real food. Walk. Come back sharper."
       ],
       "recommendation": null
     },
     {
-      "time": "3:00 PM",
-      "icon": "\ud83d\ude80",
-      "label": "Afternoon Build Block",
+      "time": "2:00 PM",
+      "icon": "\ud83d\udcdd",
+      "label": "TextOS / Product Notes",
       "tips": [
-        "Second deep work window \u2014 ship one visible thing today",
-        "Reyla or TextOS. One concrete deliverable."
+        "Write down ideas while they're fresh",
+        "Finance agent spec, Telegram provisioner \u2014 capture it"
+      ],
+      "recommendation": null
+    },
+    {
+      "time": "4:00 PM",
+      "icon": "\ud83d\udce3",
+      "label": "Content Block",
+      "tips": [
+        "One piece of content: blog draft, social hook, LinkedIn post",
+        "You have 500K followers. Give them something."
       ],
       "recommendation": null
     },
     {
       "time": "6:00 PM",
-      "icon": "\ud83c\udf73",
-      "label": "Cook Dinner",
-      "tips": [
-        "Day 2 of no-takeout challenge \u2014 you've got a playbook",
-        "Check playbook/eating-better.md if you need inspiration"
-      ],
-      "recommendation": {
-        "name": "Eating Better Playbook",
-        "address": "playbook/eating-better.md",
-        "note": "Day 2 menu is waiting. You planned this. Trust the plan."
-      }
-    },
-    {
-      "time": "6:00 PM",
       "icon": "\ud83c\udfb5",
-      "label": "Lauren Murphy & Dave Easley",
-      "tips": [
-        "Constantinople Stage (OUTDOORS)",
-        "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"
-      ],
-      "recommendation": {
-        "name": "Lauren Murphy & Dave Easley",
-        "address": "Constantinople Stage (OUTDOORS)",
-        "note": "Tonight at 6:00 PM. More info: https://wwoz.org/events/1295741"
-      }
-    },
-    {
-      "time": "7:00 PM",
-      "icon": "\ud83c\udfb5",
-      "label": "Noah Young",
+      "label": "Byron Asher",
       "tips": [
         "Bacchanal (OUTDOORS) \u00b7 Bywater",
         "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"
       ],
       "recommendation": {
-        "name": "Noah Young",
+        "name": "Byron Asher",
         "address": "Bacchanal (OUTDOORS)",
-        "note": "Tonight at 7:00 PM. More info: https://wwoz.org/events/1348351"
+        "note": "Tonight at 6:00 PM. More info: https://wwoz.org/events/1348311"
       }
     },
     {
-      "time": "8:00 PM",
-      "icon": "\ud83d\udcd3",
-      "label": "Journal + Wind Down",
+      "time": "6:00 PM",
+      "icon": "\ud83c\udfb5",
+      "label": "Secret Six Jazz Band",
       "tips": [
-        "What moved today? What's tomorrow's one win?",
-        "Stoics journal at night. You know this."
+        "d.b.a. \u00b7 Marigny",
+        "Live tonight \u2014 courtesy of WWOZ & InkThorn Community Events"
+      ],
+      "recommendation": {
+        "name": "Secret Six Jazz Band",
+        "address": "d.b.a.",
+        "note": "Tonight at 6:00 PM. More info: https://wwoz.org/events/1355231"
+      }
+    },
+    {
+      "time": "6:30 PM",
+      "icon": "\ud83c\udf73",
+      "label": "Cook & Decompress",
+      "tips": [
+        "No-takeout rule still holds. You've got this.",
+        "Music on, Magazine Street energy outside \u2014 enjoy it"
+      ],
+      "recommendation": null
+    },
+    {
+      "time": "8:30 PM",
+      "icon": "\ud83d\udcd3",
+      "label": "Journal",
+      "tips": [
+        "Quick wins log. What shipped? What's next?",
+        "3 sentences is enough if that's all you've got."
       ],
       "recommendation": null
     }
