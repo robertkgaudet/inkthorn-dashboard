@@ -1,25 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-06-09T23:26:52.525Z",
+  "updated": "2026-06-10T14:07:44.116Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-06-09",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "Comedy Beast",
-      "url": "https://504comedy.com/event/41/comedybeast",
-      "venue": "The Howlin' Wolf",
-      "type": "Stand-up",
-      "cost": "$5",
-      "repeat": "Every Tuesday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-06-10",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -29,11 +15,11 @@
       "type": "Stand-up",
       "cost": "FREE",
       "repeat": "Second Wednesday",
-      "start_dt": "2026-06-09T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-10",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -43,11 +29,11 @@
       "type": "Open Mic",
       "cost": "FREE",
       "repeat": "Every Wednesday",
-      "start_dt": "2026-06-10T21:00-05:00"
+      "start_dt": "2026-07-15T21:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-10",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -61,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-10",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -75,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-10",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -89,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-10",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -103,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-06-11",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -117,7 +103,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-06-11",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -131,7 +117,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-06-11",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -145,7 +131,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-06-11",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -159,7 +145,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-06-11",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -173,7 +159,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-06-11",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -352,36 +338,30 @@
       "cost": "FREE",
       "repeat": "Every Monday",
       "start_dt": "2026-06-22T21:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Tuesday",
+      "date": "2026-06-16",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Comedy Beast",
+      "url": "https://504comedy.com/event/41/comedybeast",
+      "venue": "The Howlin' Wolf",
+      "type": "Stand-up",
+      "cost": "$5",
+      "repeat": "Every Tuesday",
+      "start_dt": "2026-06-15T19:30-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-06-09",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-06-09",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "Comedy Beast",
-          "url": "https://504comedy.com/event/41/comedybeast",
-          "venue": "The Howlin' Wolf",
-          "type": "Stand-up",
-          "cost": "$5",
-          "repeat": "Every Tuesday",
-          "start_dt": "#{start_dt}"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-06-10",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-10",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -391,11 +371,11 @@
           "type": "Stand-up",
           "cost": "FREE",
           "repeat": "Second Wednesday",
-          "start_dt": "2026-06-09T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-10",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -405,11 +385,11 @@
           "type": "Open Mic",
           "cost": "FREE",
           "repeat": "Every Wednesday",
-          "start_dt": "2026-06-10T21:00-05:00"
+          "start_dt": "2026-07-15T21:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-10",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -423,7 +403,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-10",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -437,7 +417,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-10",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -451,7 +431,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-10",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -466,12 +446,12 @@
       ]
     },
     {
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-06-11",
       "events": [
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-06-11",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -485,7 +465,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-06-11",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -499,7 +479,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-06-11",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -513,7 +493,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-06-11",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -527,7 +507,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-06-11",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -541,7 +521,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-06-11",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -744,6 +724,26 @@
           "cost": "FREE",
           "repeat": "Every Monday",
           "start_dt": "2026-06-22T21:30-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-06-16",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Tuesday",
+          "date": "2026-06-16",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Comedy Beast",
+          "url": "https://504comedy.com/event/41/comedybeast",
+          "venue": "The Howlin' Wolf",
+          "type": "Stand-up",
+          "cost": "$5",
+          "repeat": "Every Tuesday",
+          "start_dt": "2026-06-15T19:30-05:00"
         }
       ]
     }
