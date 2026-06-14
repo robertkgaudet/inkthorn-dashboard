@@ -1,56 +1,56 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-06-13T23:22:41.884Z",
+  "updated": "2026-06-14T13:34:11.199Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 89,
-    "feels_like_f": 109,
-    "humidity": 61,
-    "description": "Thunderstorm In Vicinity",
-    "code": "389",
-    "emoji": "🌨️",
-    "wind_mph": 8,
-    "wind_dir": "SE",
+    "temp_f": 81,
+    "feels_like_f": 91,
+    "humidity": 85,
+    "description": "Mist",
+    "code": "143",
+    "emoji": "🌫️",
+    "wind_mph": 5,
+    "wind_dir": "W",
     "visibility_miles": 16,
-    "uv_index": 2
+    "uv_index": 0
   },
   "forecast": [
     {
-      "date": "2026-06-13",
-      "label": "Sat, Jun 13",
-      "high_f": 94,
-      "low_f": 76,
-      "description": "Clear",
-      "emoji": "☀️",
-      "sunrise": "05:59 AM",
-      "sunset": "08:02 PM",
-      "avg_humidity": 81,
-      "chance_of_rain": 85
-    },
-    {
       "date": "2026-06-14",
       "label": "Sun, Jun 14",
-      "high_f": 94,
+      "high_f": 96,
       "low_f": 76,
       "description": "Clear",
       "emoji": "☀️",
       "sunrise": "05:59 AM",
       "sunset": "08:03 PM",
-      "avg_humidity": 70,
+      "avg_humidity": 73,
       "chance_of_rain": 15
     },
     {
       "date": "2026-06-15",
       "label": "Mon, Jun 15",
-      "high_f": 86,
-      "low_f": 77,
-      "description": "Patchy Rain",
-      "emoji": "🌡️",
+      "high_f": 93,
+      "low_f": 76,
+      "description": "Clear",
+      "emoji": "☀️",
       "sunrise": "05:59 AM",
       "sunset": "08:03 PM",
-      "avg_humidity": 79,
-      "chance_of_rain": 78
+      "avg_humidity": 66,
+      "chance_of_rain": 13
+    },
+    {
+      "date": "2026-06-16",
+      "label": "Tue, Jun 16",
+      "high_f": 88,
+      "low_f": 75,
+      "description": "Light Rain Shower",
+      "emoji": "🌨️",
+      "sunrise": "05:59 AM",
+      "sunset": "08:03 PM",
+      "avg_humidity": 82,
+      "chance_of_rain": 66
     }
   ]
 }
