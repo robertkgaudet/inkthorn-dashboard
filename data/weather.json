@@ -1,56 +1,56 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-06-19T23:19:50.246Z",
+  "updated": "2026-06-20T13:34:58.975Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 90,
-    "feels_like_f": 101,
-    "humidity": 73,
-    "description": "Thunderstorm",
-    "code": "386",
-    "emoji": "🌨️",
-    "wind_mph": 7,
-    "wind_dir": "SW",
+    "temp_f": 79,
+    "feels_like_f": 86,
+    "humidity": 97,
+    "description": "Partly cloudy",
+    "code": "116",
+    "emoji": "⛅",
+    "wind_mph": 5,
+    "wind_dir": "SSW",
     "visibility_miles": 16,
-    "uv_index": 1
+    "uv_index": 0
   },
   "forecast": [
     {
-      "date": "2026-06-19",
-      "label": "Fri, Jun 19",
-      "high_f": 97,
-      "low_f": 75,
+      "date": "2026-06-20",
+      "label": "Sat, Jun 20",
+      "high_f": 93,
+      "low_f": 76,
       "description": "Clear",
       "emoji": "☀️",
       "sunrise": "06:00 AM",
       "sunset": "08:04 PM",
       "avg_humidity": 83,
-      "chance_of_rain": 84
-    },
-    {
-      "date": "2026-06-20",
-      "label": "Sat, Jun 20",
-      "high_f": 90,
-      "low_f": 77,
-      "description": "Patchy Rain",
-      "emoji": "🌡️",
-      "sunrise": "06:00 AM",
-      "sunset": "08:04 PM",
-      "avg_humidity": 77,
-      "chance_of_rain": 28
+      "chance_of_rain": 69
     },
     {
       "date": "2026-06-21",
       "label": "Sun, Jun 21",
-      "high_f": 92,
+      "high_f": 93,
       "low_f": 78,
-      "description": "Thundery Outbreaks",
-      "emoji": "⛈️",
+      "description": "Patchy Rain",
+      "emoji": "🌡️",
       "sunrise": "06:00 AM",
       "sunset": "08:04 PM",
-      "avg_humidity": 71,
-      "chance_of_rain": 22
+      "avg_humidity": 73,
+      "chance_of_rain": 28
+    },
+    {
+      "date": "2026-06-22",
+      "label": "Mon, Jun 22",
+      "high_f": 94,
+      "low_f": 78,
+      "description": "Clear",
+      "emoji": "☀️",
+      "sunrise": "06:00 AM",
+      "sunset": "08:05 PM",
+      "avg_humidity": 70,
+      "chance_of_rain": 15
     }
   ]
 }

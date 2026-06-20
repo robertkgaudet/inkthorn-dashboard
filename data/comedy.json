@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-06-19T23:19:49.460Z",
+  "updated": "2026-06-20T13:34:58.391Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-06-19",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Jourdain Fisher",
-      "url": "https://504comedy.com/event/1373/jourdain-fisher-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Fri Jun 19 2026",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-06-19",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "The Comedy Lounge",
-      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-      "venue": "Vino: Fine Wine & Spirits",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Friday",
-      "start_dt": "2026-06-19T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-06-19",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Comedy Teabag: A Dark Dirty Comedy Show",
-      "url": "https://504comedy.com/event/1156/comedy-teabag-a-dark-dirty-comedy-show",
-      "venue": "Howlin' Wolf Den",
-      "type": "Stand-up",
-      "cost": "$15",
-      "repeat": "Third Friday",
-      "start_dt": "2026-06-19T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-06-20",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -57,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$25",
       "repeat": "Sat Jun 20 2026",
-      "start_dt": "2026-07-17T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-20",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -75,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-20",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -85,11 +43,11 @@
       "type": "Stand-up",
       "cost": "FREE",
       "repeat": "Every Saturday",
-      "start_dt": "2026-06-20T20:00-05:00"
+      "start_dt": "2026-07-18T20:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-20",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-06-21",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -113,11 +71,11 @@
       "type": "Improv",
       "cost": "$10",
       "repeat": "Third Sunday",
-      "start_dt": "2026-06-20T19:00-05:00"
+      "start_dt": "2026-07-18T19:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-06-21",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -131,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-06-21",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -380,64 +338,58 @@
       "cost": "$10",
       "repeat": "Thu Jun 25 2026",
       "start_dt": "2026-06-25T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-06-26",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Jackie Fabulous",
+      "url": "https://504comedy.com/event/1376/jackie-fabulous-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Fri Jun 26 2026",
+      "start_dt": "2026-06-25T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-06-26",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "You're Invited!",
+      "url": "https://504comedy.com/event/1109/youre-invited-at-big-couch-nola",
+      "venue": "Big Couch New Orleans",
+      "type": "Improv",
+      "cost": "$10",
+      "repeat": "Fourth Friday",
+      "start_dt": "2026-06-26T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-06-26",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Comedy Lounge",
+      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+      "venue": "Vino: Fine Wine & Spirits",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Friday",
+      "start_dt": "2026-06-26T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-06-19",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-06-19",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Jourdain Fisher",
-          "url": "https://504comedy.com/event/1373/jourdain-fisher-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Fri Jun 19 2026",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-06-19",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "The Comedy Lounge",
-          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-          "venue": "Vino: Fine Wine & Spirits",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Friday",
-          "start_dt": "2026-06-19T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-06-19",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Comedy Teabag: A Dark Dirty Comedy Show",
-          "url": "https://504comedy.com/event/1156/comedy-teabag-a-dark-dirty-comedy-show",
-          "venue": "Howlin' Wolf Den",
-          "type": "Stand-up",
-          "cost": "$15",
-          "repeat": "Third Friday",
-          "start_dt": "2026-06-19T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-06-20",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-20",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -447,11 +399,11 @@
           "type": "Stand-up",
           "cost": "$25",
           "repeat": "Sat Jun 20 2026",
-          "start_dt": "2026-07-17T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-20",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -465,7 +417,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-20",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -475,11 +427,11 @@
           "type": "Stand-up",
           "cost": "FREE",
           "repeat": "Every Saturday",
-          "start_dt": "2026-06-20T20:00-05:00"
+          "start_dt": "2026-07-18T20:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-20",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -494,12 +446,12 @@
       ]
     },
     {
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-06-21",
       "events": [
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-06-21",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -509,11 +461,11 @@
           "type": "Improv",
           "cost": "$10",
           "repeat": "Third Sunday",
-          "start_dt": "2026-06-20T19:00-05:00"
+          "start_dt": "2026-07-18T19:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-06-21",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -527,7 +479,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-06-21",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -800,6 +752,54 @@
           "cost": "$10",
           "repeat": "Thu Jun 25 2026",
           "start_dt": "2026-06-25T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "date": "2026-06-26",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-06-26",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Jackie Fabulous",
+          "url": "https://504comedy.com/event/1376/jackie-fabulous-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Fri Jun 26 2026",
+          "start_dt": "2026-06-25T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-06-26",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "You're Invited!",
+          "url": "https://504comedy.com/event/1109/youre-invited-at-big-couch-nola",
+          "venue": "Big Couch New Orleans",
+          "type": "Improv",
+          "cost": "$10",
+          "repeat": "Fourth Friday",
+          "start_dt": "2026-06-26T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-06-26",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Comedy Lounge",
+          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+          "venue": "Vino: Fine Wine & Spirits",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Friday",
+          "start_dt": "2026-06-26T20:00-05:00"
         }
       ]
     }
