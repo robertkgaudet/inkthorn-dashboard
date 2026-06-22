@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-06-21T23:27:23.656Z",
+  "updated": "2026-06-22T14:54:52.244Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-06-21",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Brutal: Turning Bad Job Stories into Improv",
-      "url": "https://504comedy.com/event/996/brutal-turning-bad-job-stories-into-improv",
-      "venue": "Big Couch",
-      "type": "Improv",
-      "cost": "$10",
-      "repeat": "Third Sunday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-06-21",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Piss Yo Pants Sundays",
-      "url": "https://504comedy.com/event/1084/piss-yo-pants-sundays",
-      "venue": "The Howlin' Wolf",
-      "type": "Stand-up",
-      "cost": "$15",
-      "repeat": "Every Sunday",
-      "start_dt": "2026-07-19T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-06-21",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Open Gym Comedy Open Mic",
-      "url": "https://504comedy.com/event/1152/open-gym-comedy-open-mic",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Sunday",
-      "start_dt": "2026-06-21T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-06-22",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -57,11 +15,11 @@
       "type": "Open Mic",
       "cost": "FREE",
       "repeat": "Every Monday",
-      "start_dt": "2026-06-21T20:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-22",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-22",
       "time": "9:30pm",
       "time_sort": 2130,
@@ -89,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tuesday",
+      "day": "Tomorrow",
       "date": "2026-06-23",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -366,64 +324,58 @@
       "cost": "FREE",
       "repeat": "Last Saturday",
       "start_dt": "2026-06-27T20:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Sunday",
+      "date": "2026-06-28",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Jack Bensinger",
+      "url": "https://504comedy.com/event/1378/jack-bensinger-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$20",
+      "repeat": "Sun Jun 28 2026",
+      "start_dt": "2026-06-27T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Sunday",
+      "date": "2026-06-28",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Piss Yo Pants Sundays",
+      "url": "https://504comedy.com/event/1084/piss-yo-pants-sundays",
+      "venue": "The Howlin' Wolf",
+      "type": "Stand-up",
+      "cost": "$15",
+      "repeat": "Every Sunday",
+      "start_dt": "2026-06-28T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Sunday",
+      "date": "2026-06-28",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Open Gym Comedy Open Mic",
+      "url": "https://504comedy.com/event/1152/open-gym-comedy-open-mic",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Sunday",
+      "start_dt": "2026-06-28T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-06-21",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-06-21",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Brutal: Turning Bad Job Stories into Improv",
-          "url": "https://504comedy.com/event/996/brutal-turning-bad-job-stories-into-improv",
-          "venue": "Big Couch",
-          "type": "Improv",
-          "cost": "$10",
-          "repeat": "Third Sunday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-06-21",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Piss Yo Pants Sundays",
-          "url": "https://504comedy.com/event/1084/piss-yo-pants-sundays",
-          "venue": "The Howlin' Wolf",
-          "type": "Stand-up",
-          "cost": "$15",
-          "repeat": "Every Sunday",
-          "start_dt": "2026-07-19T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-06-21",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Open Gym Comedy Open Mic",
-          "url": "https://504comedy.com/event/1152/open-gym-comedy-open-mic",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Sunday",
-          "start_dt": "2026-06-21T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-06-22",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-22",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -433,11 +385,11 @@
           "type": "Open Mic",
           "cost": "FREE",
           "repeat": "Every Monday",
-          "start_dt": "2026-06-21T20:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-22",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -451,7 +403,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-22",
           "time": "9:30pm",
           "time_sort": 2130,
@@ -466,12 +418,12 @@
       ]
     },
     {
-      "day": "Tuesday",
+      "day": "Tomorrow",
       "date": "2026-06-23",
       "events": [
         {
           "category": "comedy",
-          "day": "Tuesday",
+          "day": "Tomorrow",
           "date": "2026-06-23",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -772,6 +724,54 @@
           "cost": "FREE",
           "repeat": "Last Saturday",
           "start_dt": "2026-06-27T20:30-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Sunday",
+      "date": "2026-06-28",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Sunday",
+          "date": "2026-06-28",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Jack Bensinger",
+          "url": "https://504comedy.com/event/1378/jack-bensinger-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$20",
+          "repeat": "Sun Jun 28 2026",
+          "start_dt": "2026-06-27T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Sunday",
+          "date": "2026-06-28",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Piss Yo Pants Sundays",
+          "url": "https://504comedy.com/event/1084/piss-yo-pants-sundays",
+          "venue": "The Howlin' Wolf",
+          "type": "Stand-up",
+          "cost": "$15",
+          "repeat": "Every Sunday",
+          "start_dt": "2026-06-28T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Sunday",
+          "date": "2026-06-28",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Open Gym Comedy Open Mic",
+          "url": "https://504comedy.com/event/1152/open-gym-comedy-open-mic",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Sunday",
+          "start_dt": "2026-06-28T20:00-05:00"
         }
       ]
     }
