@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-06-28T23:21:22.443Z",
+  "updated": "2026-06-29T14:24:04.051Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-06-28",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Jack Bensinger",
-      "url": "https://504comedy.com/event/1378/jack-bensinger-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$20",
-      "repeat": "Sun Jun 28 2026",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-06-28",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Piss Yo Pants Sundays",
-      "url": "https://504comedy.com/event/1084/piss-yo-pants-sundays",
-      "venue": "The Howlin' Wolf",
-      "type": "Stand-up",
-      "cost": "$15",
-      "repeat": "Every Sunday",
-      "start_dt": "2026-06-28T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-06-28",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Open Gym Comedy Open Mic",
-      "url": "https://504comedy.com/event/1152/open-gym-comedy-open-mic",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Sunday",
-      "start_dt": "2026-06-28T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-06-29",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -57,11 +15,11 @@
       "type": "Open Mic",
       "cost": "FREE",
       "repeat": "Every Monday",
-      "start_dt": "2026-06-28T20:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-29",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-06-29",
       "time": "9:30pm",
       "time_sort": 2130,
@@ -89,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tuesday",
+      "day": "Tomorrow",
       "date": "2026-06-30",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -103,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tuesday",
+      "day": "Tomorrow",
       "date": "2026-06-30",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -268,64 +226,58 @@
       "cost": "FREE",
       "repeat": "Every Saturday",
       "start_dt": "2026-07-03T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Sunday",
+      "date": "2026-07-05",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Free Comedy Show",
+      "url": "https://504comedy.com/event/1032/free-comedy-show-at-uncle-matts-in-harahan",
+      "venue": "Uncle Matt’s Bar and Patio",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "First Sunday",
+      "start_dt": "2026-07-04T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Sunday",
+      "date": "2026-07-05",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Piss Yo Pants Sundays",
+      "url": "https://504comedy.com/event/1084/piss-yo-pants-sundays",
+      "venue": "The Howlin' Wolf",
+      "type": "Stand-up",
+      "cost": "$15",
+      "repeat": "Every Sunday",
+      "start_dt": "2026-07-05T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Sunday",
+      "date": "2026-07-05",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Open Gym Comedy Open Mic",
+      "url": "https://504comedy.com/event/1152/open-gym-comedy-open-mic",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Sunday",
+      "start_dt": "2026-07-05T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-06-28",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-06-28",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Jack Bensinger",
-          "url": "https://504comedy.com/event/1378/jack-bensinger-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$20",
-          "repeat": "Sun Jun 28 2026",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-06-28",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Piss Yo Pants Sundays",
-          "url": "https://504comedy.com/event/1084/piss-yo-pants-sundays",
-          "venue": "The Howlin' Wolf",
-          "type": "Stand-up",
-          "cost": "$15",
-          "repeat": "Every Sunday",
-          "start_dt": "2026-06-28T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-06-28",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Open Gym Comedy Open Mic",
-          "url": "https://504comedy.com/event/1152/open-gym-comedy-open-mic",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Sunday",
-          "start_dt": "2026-06-28T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-06-29",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-29",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -335,11 +287,11 @@
           "type": "Open Mic",
           "cost": "FREE",
           "repeat": "Every Monday",
-          "start_dt": "2026-06-28T20:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-29",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -353,7 +305,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-06-29",
           "time": "9:30pm",
           "time_sort": 2130,
@@ -368,12 +320,12 @@
       ]
     },
     {
-      "day": "Tuesday",
+      "day": "Tomorrow",
       "date": "2026-06-30",
       "events": [
         {
           "category": "comedy",
-          "day": "Tuesday",
+          "day": "Tomorrow",
           "date": "2026-06-30",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -387,7 +339,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tuesday",
+          "day": "Tomorrow",
           "date": "2026-06-30",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -576,6 +528,54 @@
           "cost": "FREE",
           "repeat": "Every Saturday",
           "start_dt": "2026-07-03T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Sunday",
+      "date": "2026-07-05",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Sunday",
+          "date": "2026-07-05",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Free Comedy Show",
+          "url": "https://504comedy.com/event/1032/free-comedy-show-at-uncle-matts-in-harahan",
+          "venue": "Uncle Matt’s Bar and Patio",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "First Sunday",
+          "start_dt": "2026-07-04T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Sunday",
+          "date": "2026-07-05",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Piss Yo Pants Sundays",
+          "url": "https://504comedy.com/event/1084/piss-yo-pants-sundays",
+          "venue": "The Howlin' Wolf",
+          "type": "Stand-up",
+          "cost": "$15",
+          "repeat": "Every Sunday",
+          "start_dt": "2026-07-05T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Sunday",
+          "date": "2026-07-05",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Open Gym Comedy Open Mic",
+          "url": "https://504comedy.com/event/1152/open-gym-comedy-open-mic",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Sunday",
+          "start_dt": "2026-07-05T20:00-05:00"
         }
       ]
     }
