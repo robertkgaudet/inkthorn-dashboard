@@ -1,56 +1,56 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-07-04T23:52:09.747Z",
+  "updated": "2026-07-05T14:38:20.959Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 93,
-    "feels_like_f": 108,
-    "humidity": 46,
+    "temp_f": 83,
+    "feels_like_f": 94,
+    "humidity": 82,
     "description": "Sunny",
     "code": "113",
     "emoji": "☀️",
-    "wind_mph": 7,
-    "wind_dir": "SSE",
+    "wind_mph": 4,
+    "wind_dir": "SSW",
     "visibility_miles": 16,
-    "uv_index": 2
+    "uv_index": 1
   },
   "forecast": [
     {
-      "date": "2026-07-04",
-      "label": "Sat, Jul 4",
-      "high_f": 100,
-      "low_f": 77,
-      "description": "Clear",
-      "emoji": "☀️",
-      "sunrise": "06:04 AM",
-      "sunset": "08:05 PM",
-      "avg_humidity": 76,
-      "chance_of_rain": 18
-    },
-    {
       "date": "2026-07-05",
       "label": "Sun, Jul 5",
-      "high_f": 93,
-      "low_f": 77,
+      "high_f": 100,
+      "low_f": 76,
       "description": "Clear",
       "emoji": "☀️",
       "sunrise": "06:05 AM",
       "sunset": "08:05 PM",
-      "avg_humidity": 71,
-      "chance_of_rain": 61
+      "avg_humidity": 74,
+      "chance_of_rain": 14
     },
     {
       "date": "2026-07-06",
       "label": "Mon, Jul 6",
-      "high_f": 90,
-      "low_f": 77,
-      "description": "Clear",
-      "emoji": "☀️",
+      "high_f": 92,
+      "low_f": 78,
+      "description": "Patchy Rain",
+      "emoji": "🌡️",
       "sunrise": "06:05 AM",
       "sunset": "08:05 PM",
-      "avg_humidity": 73,
-      "chance_of_rain": 68
+      "avg_humidity": 70,
+      "chance_of_rain": 64
+    },
+    {
+      "date": "2026-07-07",
+      "label": "Tue, Jul 7",
+      "high_f": 92,
+      "low_f": 78,
+      "description": "Patchy Rain",
+      "emoji": "🌡️",
+      "sunrise": "06:05 AM",
+      "sunset": "08:05 PM",
+      "avg_humidity": 71,
+      "chance_of_rain": 38
     }
   ]
 }
