@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InkThorn — Time Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #1a1612;
+      --surface: #252018;
+      --surface-hover: #2d2820;
+      --surface-raised: #2f2820;
+      --gold: #c9a84c;
+      --gold-dim: #a08538;
+      --gold-light: #dfc26e;
+      --cream: #e8dcc8;
+      --cream-dim: #b8ad9a;
+      --red: #c0392b;
+      --red-dim: #992d21;
+      --slate: #5e7080;
+      --green: #4caf78;
+      --border: rgba(201, 168, 76, 0.18);
+      --border-hover: rgba(201, 168, 76, 0.35);
+      --shadow: 0 4px 24px rgba(0,0,0,0.45);
+      --shadow-card: 0 2px 12px rgba(0,0,0,0.35);
+      --radius: 10px;
+      --radius-sm: 6px;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(ellipse at top left, rgba(201,168,76,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(192,57,43,0.04) 0%, transparent 50%);
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+
+    .app-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ─── LOGIN OVERLAY ─── */
+    #loginOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10,8,5,0.97);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(6px);
+    }
+    #loginOverlay.hidden { display: none !important; }
+    .login-card {
+      background: var(--surface);
+      border: 1px solid var(--border-hover);
+      border-radius: 16px;
+      padding: 44px 36px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+    }
+    .login-mascot { margin-bottom: 20px; }
+    .login-mascot img { width: 72px; height: 72px; object-fit: contain; }
+    .login-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 6px; }
+    .login-tagline { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--cream-dim); font-style: italic; margin-bottom: 32px; }
+    .btn-google {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; color: #1a1612; border: none; border-radius: 8px;
+      padding: 12px 24px; font-family: 'Inter', sans-serif; font-size: 0.95rem;
+      font-weight: 600; cursor: pointer; transition: all 0.18s ease;
+      text-decoration: none; width: 100%; justify-content: center;
+    }
+    .btn-google:hover { background: #f5f5f5; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,255,255,0.15); }
+    .btn-google svg { flex-shrink: 0; }
+    .login-fine-print { margin-top: 20px; font-size: 0.75rem; color: var(--cream-dim); opacity: 0.6; font-style: italic; }
+
+    /* ─── HEADER ─── */
+    .site-header {
+      padding: 24px 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+      gap: 16px;
+    }
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .header-brand img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .header-title span {
+      color: var(--cream-dim);
+      font-weight: 400;
+      font-size: 1rem;
+    }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover { color: var(--cream); background: var(--surface); border-color: var(--border); }
+    .nav-link.active { color: var(--gold); border-color: var(--border); background: var(--surface); }
+
+    /* ─── MONTHLY SUMMARY BAR ─── */
+    .summary-bar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 24px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .summary-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--cream-dim);
+      font-weight: 500;
+    }
+    .summary-stats {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex: 1;
+      flex-wrap: wrap;
+    }
+    .summary-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .stat-unit {
+      font-size: 0.8rem;
+      color: var(--cream-dim);
+    }
+    .summary-divider {
+      width: 1px;
+      height: 28px;
+      background: var(--border);
+    }
+    .summary-month {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: var(--cream-dim);
+      font-style: italic;
+      margin-left: auto;
+    }
+
+    /* ─── CARD ─── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-card);
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    /* ─── FORM ─── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--cream-dim);
+      font-weight: 500;
+    }
+    .form-input, .form-textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      transition: border-color 0.15s ease, background 0.15s ease;
+      outline: none;
+      width: 100%;
+    }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--gold-dim);
+      background: rgba(201,168,76,0.06);
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--slate); }
+    .form-textarea { resize: vertical; min-height: 70px; }
+    .form-input[type="date"]::-webkit-calendar-picker-indicator,
+    .form-input[type="time"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.6) sepia(1) saturate(2) hue-rotate(10deg);
+      cursor: pointer;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #1a1612;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 11px 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      letter-spacing: 0.02em;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.3); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .form-actions {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .duration-preview {
+      font-size: 0.85rem;
+      color: var(--cream-dim);
+      font-style: italic;
+    }
+    .duration-preview strong { color: var(--gold); font-style: normal; }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--cream);
+      font-weight: 600;
+    }
+    .section-count {
+      font-size: 0.8rem;
+      color: var(--cream-dim);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2px 10px;
+    }
+
+    /* ─── ENTRY CARD ─── */
+    .entry-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-bottom: 12px;
+      position: relative;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .entry-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-card); }
+    .entry-card-actions {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+    }
+    .icon-btn {
+      background: none;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      color: var(--cream-dim);
+      font-size: 0.9rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: all 0.15s ease;
+      line-height: 1;
+    }
+    .icon-btn:hover { border-color: var(--border); background: var(--surface-hover); }
+    .icon-btn.delete-btn:hover { border-color: rgba(192,57,43,0.4); color: var(--red); background: rgba(192,57,43,0.08); }
+    .entry-client {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 4px;
+      padding-right: 80px;
+    }
+    .entry-meta {
+      font-size: 0.82rem;
+      color: var(--cream-dim);
+      margin-bottom: 10px;
+    }
+    .entry-details {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .entry-detail {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.88rem;
+    }
+    .entry-detail-icon { font-size: 0.8rem; opacity: 0.7; }
+    .entry-duration {
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 20px;
+      padding: 2px 10px;
+      font-size: 0.82rem;
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+    .entry-amount {
+      color: var(--green);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .entry-notes {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: var(--cream-dim);
+      font-style: italic;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    /* ─── EDIT MODE ─── */
+    .entry-edit-form .form-grid { gap: 10px; }
+    .entry-edit-form .form-input,
+    .entry-edit-form .form-textarea { font-size: 0.88rem; padding: 8px 12px; }
+    .edit-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .btn-save {
+      background: var(--gold);
+      color: #1a1612;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.15s ease;
+    }
+    .btn-save:hover { background: var(--gold-light); }
+    .btn-cancel {
+      background: transparent;
+      color: var(--cream-dim);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.15s ease;
+    }
+    .btn-cancel:hover { color: var(--cream); border-color: var(--border-hover); }
+
+    /* ─── EMPTY STATE ─── */
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--cream-dim);
+    }
+    .empty-icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.4; }
+    .empty-text { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-style: italic; margin-bottom: 6px; }
+    .empty-sub { font-size: 0.85rem; opacity: 0.6; }
+
+    /* ─── TOAST ─── */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--surface-raised);
+      border: 1px solid var(--border-hover);
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 0.9rem;
+      color: var(--cream);
+      z-index: 3000;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+      box-shadow: var(--shadow);
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    #toast.success { border-color: rgba(76,175,120,0.4); color: var(--green); }
+    #toast.error { border-color: rgba(192,57,43,0.4); color: #e57373; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .summary-stats { gap: 16px; }
+      .site-header { flex-wrap: wrap; }
+      .entry-card-actions { position: static; margin-bottom: 12px; justify-content: flex-end; }
+      .entry-client { padding-right: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Login Overlay -->
+<div id="loginOverlay">
+  <div class="login-card">
+    <div class="login-mascot">
+      <img src="https://inkthorn.ai/inkthorn-mascot-small.png" alt="InkThorn" />
+    </div>
+    <div class="login-title">InkThorn</div>
+    <div class="login-tagline">Time Tracker — because someone has to count the hours</div>
+    <a id="loginBtn" href="https://inkthorn-notes.rgaudet2023.workers.dev/auth/google" class="btn-google">
+      <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+        <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
+        <path d="M3.964 10.706c-.18-.54-.282-1.117-.282-1.706s.102-1.166.282-1.706V4.962H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.038l3.007-2.332z" fill="#FBBC05"/>
+        <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.962L3.964 6.294C4.672 4.169 6.656 3.58 9 3.58z" fill="#EA4335"/>
+      </svg>
+      Continue with Google
+    </a>
+    <p class="login-fine-print">Your consulting hours. Secured. Private.</p>
+  </div>
+</div>
+
+<div class="app-wrapper">
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="/" class="header-brand">
+      <img src="https://inkthorn.ai/inkthorn-mascot-small.png" alt="InkThorn" />
+      <div class="header-title">InkThorn <span>/ Time Tracker</span></div>
+    </a>
+    <nav class="header-nav">
+      <a href="notes.html" class="nav-link">Notes</a>
+      <a href="time-tracker.html" class="nav-link active">Time</a>
+      <a href="daycycle.html" class="nav-link">Day Cycle</a>
+    </nav>
+  </header>
+
+  <!-- Monthly Summary Bar -->
+  <div class="summary-bar" id="summaryBar">
+    <div class="summary-label">This Month</div>
+    <div class="summary-stats">
+      <div class="summary-stat">
+        <div class="stat-value" id="summaryHours">—</div>
+        <div class="stat-unit">hours logged</div>
+      </div>
+      <div class="summary-divider"></div>
+      <div class="summary-stat">
+        <div class="stat-value" id="summaryEarned">—</div>
+        <div class="stat-unit">earned</div>
+      </div>
+    </div>
+    <div class="summary-month" id="summaryMonth"></div>
+  </div>
+
+  <!-- Log New Entry -->
+  <div class="card">
+    <div class="card-title">⏱ Log New Entry</div>
+    <form id="entryForm" novalidate>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="clientName">Client Name</label>
+          <input type="text" id="clientName" class="form-input" placeholder="Acme Corp" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="rate">Hourly Rate ($)</label>
+          <input type="number" id="rate" class="form-input" placeholder="150.00" step="0.01" min="0" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="entryDate">Date</label>
+          <input type="date" id="entryDate" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="startTime">Start Time</label>
+          <input type="time" id="startTime" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="endTime">End Time</label>
+          <input type="time" id="endTime" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <!-- spacer on desktop -->
+        </div>
+        <div class="form-group full">
+          <label class="form-label" for="notes">Notes (optional)</label>
+          <textarea id="notes" class="form-textarea" placeholder="Meeting notes, topics covered, deliverables discussed..."></textarea>
+        </div>
+      </div>
+      <div class="form-actions">
+        <div class="duration-preview" id="durationPreview"></div>
+        <button type="submit" class="btn-primary" id="submitBtn">Log Entry</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Entries List -->
+  <div class="section-header">
+    <div class="section-title">Time Entries</div>
+    <div class="section-count" id="entryCount">0 entries</div>
+  </div>
+  <div id="entriesList"></div>
+
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+  const API = 'https://inkthorn-notes.rgaudet2023.workers.dev';
+  let token = null;
+  let entries = [];
+
+  // ─── Utilities ─────────────────────────────────────────────────────────────
+
+  function calcDuration(start, end) {
+    const [sh, sm] = start.split(':').map(Number);
+    const [eh, em] = end.split(':').map(Number);
+    const totalMins = (eh * 60 + em) - (sh * 60 + sm);
+    if (totalMins <= 0) return { mins: 0, display: '0m', hours: 0 };
+    const h = Math.floor(totalMins / 60);
+    const m = totalMins % 60;
+    return { mins: totalMins, display: h > 0 ? `${h}h ${m > 0 ? m + 'm' : ''}`.trim() : `${m}m`, hours: totalMins / 60 };
+  }
+
+  function fmt12(timeStr) {
+    if (!timeStr) return '';
+    const [h, m] = timeStr.substring(0,5).split(':').map(Number);
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const h12 = h % 12 || 12;
+    return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+  }
+
+  function fmtDate(dateStr) {
+    // dateStr is YYYY-MM-DD — parse as local date
+    const [y, mo, d] = dateStr.split('-').map(Number);
+    const dt = new Date(y, mo - 1, d);
+    return dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function fmtMoney(n) {
+    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function getMonthlySummary(entries) {
+    const now = new Date();
+    const thisMonth = entries.filter(e => {
+      const [y, mo] = e.entry_date.split('-').map(Number);
+      return y === now.getFullYear() && mo === now.getMonth() + 1;
+    });
+    let totalMins = 0, totalEarned = 0;
+    for (const e of thisMonth) {
+      const dur = calcDuration(e.start_time, e.end_time);
+      totalMins += dur.mins;
+      totalEarned += dur.hours * (parseFloat(e.rate) || 0);
+    }
+    const h = Math.floor(totalMins / 60), m = totalMins % 60;
+    return {
+      hoursDisplay: h > 0 ? (m > 0 ? `${h}h ${m}m` : `${h}h`) : `${m}m`,
+      earned: totalEarned,
+      count: thisMonth.length,
+    };
+  }
+
+  function showToast(msg, type = '') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = type ? `show ${type}` : 'show';
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => { t.className = ''; }, 3200);
+  }
+
+  // ─── Auth ──────────────────────────────────────────────────────────────────
+
+  async function init() {
+    // Capture token from URL (after OAuth redirect)
+    const params = new URLSearchParams(location.search);
+    const urlToken = params.get('token');
+    if (urlToken) {
+      localStorage.setItem('inkthorn_token', urlToken);
+      history.replaceState({}, '', location.pathname);
+    }
+
+    token = localStorage.getItem('inkthorn_token');
+    if (!token) { showLogin(); return; }
+
+    try {
+      const res = await fetch(`${API}/api/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) { showLogin(); return; }
+      hideLogin();
+      await loadEntries();
+    } catch {
+      showLogin();
+    }
+  }
+
+  function showLogin() {
+    document.getElementById('loginOverlay').classList.remove('hidden');
+  }
+
+  function hideLogin() {
+    document.getElementById('loginOverlay').classList.add('hidden');
+  }
+
+  // ─── Load Entries ──────────────────────────────────────────────────────────
+
+  async function loadEntries() {
+    try {
+      const res = await fetch(`${API}/api/time`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error('Failed to load');
+      entries = await res.json();
+      renderEntries();
+      renderSummary();
+    } catch (err) {
+      showToast('Failed to load entries', 'error');
+    }
+  }
+
+  // ─── Render ────────────────────────────────────────────────────────────────
+
+  function renderSummary() {
+    const summary = getMonthlySummary(entries);
+    document.getElementById('summaryHours').textContent = summary.hoursDisplay;
+    document.getElementById('summaryEarned').textContent = fmtMoney(summary.earned);
+    const now = new Date();
+    document.getElementById('summaryMonth').textContent =
+      now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  }
+
+  function renderEntries() {
+    const list = document.getElementById('entriesList');
+    const count = document.getElementById('entryCount');
+    count.textContent = `${entries.length} entr${entries.length === 1 ? 'y' : 'ies'}`;
+
+    if (!entries.length) {
+      list.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">⏱</div>
+          <div class="empty-text">No time entries yet.</div>
+          <div class="empty-sub">Log your first consulting session above.</div>
+        </div>`;
+      return;
+    }
+
+    list.innerHTML = entries.map(e => renderEntryCard(e)).join('');
+  }
+
+  function renderEntryCard(e) {
+    const dur = calcDuration(e.start_time, e.end_time);
+    const rate = parseFloat(e.rate) || 0;
+    const amount = dur.hours * rate;
+    const startStr = fmt12(e.start_time);
+    const endStr = fmt12(e.end_time);
+
+    const amountHtml = rate > 0
+      ? `<span class="entry-amount">${fmtMoney(amount)}</span>`
+      : '';
+
+    const notesHtml = e.notes
+      ? `<div class="entry-notes">${escHtml(e.notes)}</div>`
+      : '';
+
+    const rateHtml = rate > 0
+      ? `<div class="entry-detail"><span class="entry-detail-icon">💵</span> ${fmtMoney(rate)}/hr</div>`
+      : '';
+
+    return `
+      <div class="entry-card" id="card-${e.id}" data-id="${e.id}">
+        <div class="entry-card-actions">
+          <button class="icon-btn" onclick="startEdit('${e.id}')" title="Edit">✏️</button>
+          <button class="icon-btn delete-btn" onclick="deleteEntry('${e.id}')" title="Delete">🗑️</button>
+        </div>
+        <div class="entry-client">${escHtml(e.client_name)}</div>
+        <div class="entry-meta">${fmtDate(e.entry_date)}</div>
+        <div class="entry-details">
+          <div class="entry-detail"><span class="entry-detail-icon">🕐</span> ${startStr} → ${endStr}</div>
+          <span class="entry-duration">${dur.display}</span>
+          ${rateHtml}
+          ${amountHtml}
+        </div>
+        ${notesHtml}
+      </div>`;
+  }
+
+  function escHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ─── Create Entry ──────────────────────────────────────────────────────────
+
+  document.getElementById('entryForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const clientName = document.getElementById('clientName').value.trim();
+    const rate = document.getElementById('rate').value;
+    const entryDate = document.getElementById('entryDate').value;
+    const startTime = document.getElementById('startTime').value;
+    const endTime = document.getElementById('endTime').value;
+    const notes = document.getElementById('notes').value.trim();
+
+    if (!clientName || !entryDate || !startTime || !endTime) {
+      showToast('Please fill in all required fields', 'error'); return;
+    }
+    const dur = calcDuration(startTime, endTime);
+    if (dur.mins <= 0) { showToast('End time must be after start time', 'error'); return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Logging...';
+    try {
+      const res = await fetch(`${API}/api/time`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ client_name: clientName, rate: parseFloat(rate) || 0, entry_date: entryDate, start_time: startTime, end_time: endTime, notes: notes || null }),
+      });
+      if (!res.ok) throw new Error('Failed to create');
+      const entry = await res.json();
+      entries.unshift(entry);
+      renderEntries();
+      renderSummary();
+      e.target.reset();
+      document.getElementById('entryDate').value = todayStr();
+      document.getElementById('durationPreview').innerHTML = '';
+      showToast('Entry logged.', 'success');
+    } catch {
+      showToast('Failed to log entry', 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Log Entry';
+    }
+  });
+
+  // ─── Duration Preview ──────────────────────────────────────────────────────
+
+  function updateDurationPreview() {
+    const s = document.getElementById('startTime').value;
+    const e = document.getElementById('endTime').value;
+    const rate = parseFloat(document.getElementById('rate').value) || 0;
+    const preview = document.getElementById('durationPreview');
+    if (s && e) {
+      const dur = calcDuration(s, e);
+      if (dur.mins > 0) {
+        const amountStr = rate > 0 ? ` · <strong>${fmtMoney(dur.hours * rate)}</strong>` : '';
+        preview.innerHTML = `<strong>${dur.display}</strong>${amountStr}`;
+      } else {
+        preview.innerHTML = '';
+      }
+    } else {
+      preview.innerHTML = '';
+    }
+  }
+  document.getElementById('startTime').addEventListener('input', updateDurationPreview);
+  document.getElementById('endTime').addEventListener('input', updateDurationPreview);
+  document.getElementById('rate').addEventListener('input', updateDurationPreview);
+
+  // ─── Edit Entry ────────────────────────────────────────────────────────────
+
+  function startEdit(id) {
+    const e = entries.find(x => x.id === id);
+    if (!e) return;
+    const card = document.getElementById(`card-${id}`);
+    const dur = calcDuration(e.start_time, e.end_time);
+    const rate = parseFloat(e.rate) || 0;
+
+    card.innerHTML = `
+      <div class="entry-edit-form">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Client Name</label>
+            <input type="text" class="form-input" id="edit-client-${id}" value="${escHtml(e.client_name)}" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hourly Rate ($)</label>
+            <input type="number" class="form-input" id="edit-rate-${id}" value="${rate}" step="0.01" min="0" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-input" id="edit-date-${id}" value="${e.entry_date}" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Start Time</label>
+            <input type="time" class="form-input" id="edit-start-${id}" value="${e.start_time.substring(0,5)}" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">End Time</label>
+            <input type="time" class="form-input" id="edit-end-${id}" value="${e.end_time.substring(0,5)}" required />
+          </div>
+          <div class="form-group"></div>
+          <div class="form-group full">
+            <label class="form-label">Notes</label>
+            <textarea class="form-textarea" id="edit-notes-${id}">${escHtml(e.notes || '')}</textarea>
+          </div>
+        </div>
+        <div class="edit-actions">
+          <button class="btn-save" onclick="saveEdit('${id}')">Save Changes</button>
+          <button class="btn-cancel" onclick="cancelEdit('${id}')">Cancel</button>
+        </div>
+      </div>`;
+  }
+
+  async function saveEdit(id) {
+    const clientName = document.getElementById(`edit-client-${id}`).value.trim();
+    const rate = document.getElementById(`edit-rate-${id}`).value;
+    const entryDate = document.getElementById(`edit-date-${id}`).value;
+    const startTime = document.getElementById(`edit-start-${id}`).value;
+    const endTime = document.getElementById(`edit-end-${id}`).value;
+    const notes = document.getElementById(`edit-notes-${id}`).value.trim();
+
+    if (!clientName || !entryDate || !startTime || !endTime) {
+      showToast('Please fill in all required fields', 'error'); return;
+    }
+    const dur = calcDuration(startTime, endTime);
+    if (dur.mins <= 0) { showToast('End time must be after start time', 'error'); return; }
+
+    try {
+      const res = await fetch(`${API}/api/time/${id}`, {
+        method: 'PATCH',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ client_name: clientName, rate: parseFloat(rate) || 0, entry_date: entryDate, start_time: startTime, end_time: endTime, notes: notes || null }),
+      });
+      if (!res.ok) throw new Error('Failed to update');
+      const updated = await res.json();
+      const idx = entries.findIndex(x => x.id === id);
+      if (idx !== -1) entries[idx] = updated;
+      renderEntries();
+      renderSummary();
+      showToast('Entry updated.', 'success');
+    } catch {
+      showToast('Failed to update entry', 'error');
+    }
+  }
+
+  function cancelEdit(id) {
+    renderEntries();
+  }
+
+  // ─── Delete Entry ──────────────────────────────────────────────────────────
+
+  async function deleteEntry(id) {
+    if (!confirm('Delete this time entry?')) return;
+    try {
+      const res = await fetch(`${API}/api/time/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error('Failed to delete');
+      entries = entries.filter(x => x.id !== id);
+      renderEntries();
+      renderSummary();
+      showToast('Entry deleted.', 'success');
+    } catch {
+      showToast('Failed to delete entry', 'error');
+    }
+  }
+
+  // ─── Helpers ───────────────────────────────────────────────────────────────
+
+  function todayStr() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  // ─── Boot ──────────────────────────────────────────────────────────────────
+
+  document.getElementById('entryDate').value = todayStr();
+  init();
+</script>
+</body>
+</html>
