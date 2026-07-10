@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Received — InkThorn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #1a1612; --surface: #252018;
+      --gold: #c9a84c; --gold-light: #dfc26e;
+      --cream: #e8dcc8; --cream-dim: #b8ad9a;
+      --green: #4caf78; --green-dim: #3a8a5e;
+      --border: rgba(201,168,76,0.18); --border-hover: rgba(201,168,76,0.35);
+    }
+    html { font-size: 16px; }
+    body {
+      background-color: var(--bg); color: var(--cream);
+      font-family: 'Inter', sans-serif; min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 24px;
+      background-image:
+        radial-gradient(ellipse at top, rgba(76,175,120,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at bottom, rgba(201,168,76,0.04) 0%, transparent 50%);
+    }
+
+    .card {
+      background: var(--surface); border: 1px solid var(--border-hover);
+      border-radius: 20px; padding: 56px 44px; max-width: 480px; width: 100%;
+      text-align: center; box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    }
+
+    .check-circle {
+      width: 80px; height: 80px; background: rgba(76,175,120,0.15);
+      border: 2px solid rgba(76,175,120,0.4); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px; font-size: 2.2rem;
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; color: var(--green); font-weight: 700;
+      margin-bottom: 12px; letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: var(--cream-dim); font-style: italic;
+      margin-bottom: 32px; line-height: 1.6;
+    }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+    .brand {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-bottom: 16px;
+    }
+    .brand img { width: 36px; height: 36px; }
+    .brand-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); font-weight: 700; }
+
+    .fine-print {
+      font-size: 0.8rem; color: var(--cream-dim); opacity: 0.6; font-style: italic; margin-bottom: 24px;
+    }
+
+    .btn-home {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: #1a1612; border: none; border-radius: 8px;
+      padding: 12px 28px; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: all 0.18s ease;
+    }
+    .btn-home:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.35); }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .card { animation: fadeIn 0.4s ease; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="check-circle">✅</div>
+    <div class="title">Payment Received!</div>
+    <div class="subtitle">Thank you. Your payment has been processed successfully.<br>A confirmation will be sent to your email.</div>
+
+    <hr class="divider" />
+
+    <div class="brand">
+      <img src="https://inkthorn.ai/inkthorn-mascot-small.png" alt="InkThorn" />
+      <span class="brand-name">InkThorn</span>
+    </div>
+    <div class="fine-print">
+      He received it. Grumpily. But he received it.
+    </div>
+
+    <a href="https://inkthorn.ai" class="btn-home">← Back to InkThorn</a>
+  </div>
+</body>
+</html>

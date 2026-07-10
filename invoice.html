@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InkThorn Invoice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #1a1612; --surface: #252018; --surface-raised: #2f2820;
+      --gold: #c9a84c; --gold-dim: #a08538; --gold-light: #dfc26e;
+      --cream: #e8dcc8; --cream-dim: #b8ad9a; --green: #4caf78;
+      --border: rgba(201,168,76,0.18); --border-hover: rgba(201,168,76,0.35);
+      --shadow: 0 4px 24px rgba(0,0,0,0.45); --radius: 10px; --radius-sm: 6px;
+    }
+    html { font-size: 16px; }
+    body {
+      background-color: var(--bg); color: var(--cream);
+      font-family: 'Inter', sans-serif; min-height: 100vh; line-height: 1.6;
+      background-image: radial-gradient(ellipse at top left, rgba(201,168,76,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(192,57,43,0.03) 0%, transparent 50%);
+    }
+
+    /* ─── LAYOUT ─── */
+    .page-wrap { max-width: 760px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* ─── NAV ─── */
+    .inv-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+    }
+    .inv-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .inv-brand img { width: 36px; height: 36px; }
+    .inv-brand-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); font-weight: 700; }
+    .inv-actions { display: flex; gap: 10px; }
+
+    /* ─── INVOICE CARD ─── */
+    .invoice-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      overflow: hidden; box-shadow: var(--shadow);
+    }
+
+    /* ─── HEADER BAND ─── */
+    .inv-header {
+      background: linear-gradient(135deg, #252018, #1f1a10);
+      border-bottom: 1px solid var(--border); padding: 28px 32px;
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap;
+    }
+    .inv-header-left {}
+    .inv-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--cream-dim); margin-bottom: 4px; }
+    .inv-word-invoice { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); font-weight: 700; letter-spacing: -0.02em; }
+    .inv-site { font-size: 0.82rem; color: var(--cream-dim); margin-top: 4px; }
+    .inv-header-right { text-align: right; }
+    .inv-number { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--cream); font-weight: 600; margin-bottom: 4px; }
+    .inv-date { font-size: 0.85rem; color: var(--cream-dim); }
+
+    /* ─── PARTY SECTION ─── */
+    .inv-parties { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 28px 32px; border-bottom: 1px solid var(--border); }
+    .party-block {}
+    .party-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-dim); margin-bottom: 8px; font-weight: 600; }
+    .party-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); font-weight: 700; margin-bottom: 6px; }
+    .party-detail { font-size: 0.83rem; color: var(--cream-dim); line-height: 1.75; }
+
+    /* ─── LINE ITEMS ─── */
+    .inv-items { padding: 24px 32px; border-bottom: 1px solid var(--border); }
+    .items-table { width: 100%; border-collapse: collapse; }
+    .items-table th {
+      text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--gold-dim); padding: 0 12px 10px; border-bottom: 1px solid var(--border); font-weight: 600;
+    }
+    .items-table th:last-child { text-align: right; }
+    .items-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; }
+    .items-table td:last-child { text-align: right; color: var(--green); font-weight: 600; white-space: nowrap; }
+    .items-table tr:last-child td { border-bottom: none; }
+    .item-date { font-weight: 600; color: var(--cream); font-size: 0.88rem; white-space: nowrap; }
+    .item-desc { color: var(--cream); font-size: 0.88rem; }
+    .item-sub { font-size: 0.78rem; color: var(--cream-dim); margin-top: 3px; }
+
+    /* ─── TOTALS ─── */
+    .inv-totals { padding: 20px 32px; border-bottom: 1px solid var(--border); }
+    .totals-inner { max-width: 320px; margin-left: auto; }
+    .totals-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 0.9rem; }
+    .totals-label { color: var(--cream-dim); }
+    .totals-value { color: var(--cream); font-weight: 600; }
+    .totals-row.grand { border-top: 1px solid var(--border-hover); margin-top: 8px; padding-top: 14px; }
+    .totals-row.grand .totals-label { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--cream); font-weight: 700; }
+    .totals-row.grand .totals-value { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); font-weight: 700; }
+
+    /* ─── NOTES ─── */
+    .inv-notes { padding: 20px 32px; border-bottom: 1px solid var(--border); }
+    .inv-notes-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-dim); margin-bottom: 8px; font-weight: 600; }
+    .inv-notes-text { font-size: 0.88rem; color: var(--cream-dim); line-height: 1.6; white-space: pre-wrap; }
+
+    /* ─── ACTION BUTTONS ─── */
+    .inv-actions-bar { padding: 24px 32px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .btn-pay {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: #1a1612; border: none; border-radius: var(--radius-sm);
+      padding: 12px 28px; font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: all 0.18s ease;
+    }
+    .btn-pay:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.35); }
+    .btn-print {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--cream-dim); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 12px 24px; font-family: 'Inter', sans-serif;
+      font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.15s ease;
+    }
+    .btn-print:hover { color: var(--cream); border-color: var(--border-hover); }
+    .no-payment { font-size: 0.85rem; color: var(--cream-dim); font-style: italic; }
+
+    /* ─── LOADING / ERROR ─── */
+    .state-screen { text-align: center; padding: 80px 20px; color: var(--cream-dim); }
+    .state-icon { font-size: 3rem; margin-bottom: 16px; opacity: 0.5; }
+    .state-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--cream-dim); margin-bottom: 8px; font-style: italic; }
+    .state-sub { font-size: 0.9rem; opacity: 0.6; }
+    .spinner { display: inline-block; width: 40px; height: 40px; border: 3px solid rgba(201,168,76,0.2); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 16px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── PRINT STYLES ─── */
+    @media print {
+      body { background: #fff !important; color: #111 !important; }
+      .inv-nav, .inv-actions-bar { display: none !important; }
+      .page-wrap { padding: 0; max-width: 100%; }
+      .invoice-card { border: none; box-shadow: none; border-radius: 0; }
+      .inv-header { background: #f8f6f0 !important; border-bottom: 2px solid #c9a84c; }
+      .inv-word-invoice { color: #c9a84c !important; }
+      .inv-number, .party-name, .items-table td:last-child, .totals-row.grand .totals-value { color: #111 !important; }
+      .inv-label, .party-label, .inv-notes-label, .items-table th { color: #666 !important; }
+      .inv-parties, .inv-items, .inv-totals, .inv-notes { padding: 16px 24px; }
+      .party-detail, .item-sub, .inv-notes-text, .totals-label, .totals-value { color: #444 !important; }
+      .items-table td { border-bottom: 1px solid #eee; }
+      .items-table td:last-child { color: #2a7a4a !important; }
+      .totals-row.grand .totals-label { color: #111 !important; }
+      .totals-row.grand .totals-value { color: #c9a84c !important; }
+    }
+
+    @media (max-width: 600px) {
+      .inv-parties { grid-template-columns: 1fr; }
+      .inv-header, .inv-parties, .inv-items, .inv-totals, .inv-notes, .inv-actions-bar { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+  <!-- Nav (hidden on print) -->
+  <nav class="inv-nav">
+    <a href="/" class="inv-brand">
+      <img src="https://inkthorn.ai/inkthorn-mascot-small.png" alt="InkThorn" />
+      <span class="inv-brand-name">InkThorn</span>
+    </a>
+    <div class="inv-actions">
+      <a href="time-tracker.html" style="font-size:0.82rem;color:var(--cream-dim);text-decoration:none;padding:6px 12px;border:1px solid var(--border);border-radius:6px;">← Back to Tracker</a>
+    </div>
+  </nav>
+
+  <!-- Loading State -->
+  <div id="loadingState" class="state-screen">
+    <div class="spinner"></div>
+    <div class="state-title">Retrieving invoice…</div>
+  </div>
+
+  <!-- Error State -->
+  <div id="errorState" class="state-screen" style="display:none;">
+    <div class="state-icon">📄</div>
+    <div class="state-title">Invoice not found.</div>
+    <div class="state-sub">This invoice may have been removed or the link is invalid.</div>
+  </div>
+
+  <!-- Invoice Card -->
+  <div class="invoice-card" id="invoiceCard" style="display:none;">
+    <!-- Header Band -->
+    <div class="inv-header">
+      <div class="inv-header-left">
+        <div class="inv-label">InkThorn — inkthorn.ai</div>
+        <div class="inv-word-invoice">INVOICE</div>
+      </div>
+      <div class="inv-header-right">
+        <div class="inv-number" id="invNumber">—</div>
+        <div class="inv-date" id="invDate">—</div>
+      </div>
+    </div>
+
+    <!-- Parties -->
+    <div class="inv-parties">
+      <div class="party-block">
+        <div class="party-label">Billed To</div>
+        <div class="party-name" id="clientName">—</div>
+        <div class="party-detail" id="clientDetail"></div>
+      </div>
+      <div class="party-block">
+        <div class="party-label">From</div>
+        <div class="party-name">Rob Gaudet</div>
+        <div class="party-detail">rob@inkthorn.ai<br>inkthorn.ai<br>New Orleans, LA</div>
+      </div>
+    </div>
+
+    <!-- Line Items -->
+    <div class="inv-items">
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody id="lineItems"></tbody>
+      </table>
+    </div>
+
+    <!-- Totals -->
+    <div class="inv-totals">
+      <div class="totals-inner">
+        <div class="totals-row"><span class="totals-label">Subtotal</span><span class="totals-value" id="subtotal">—</span></div>
+        <div class="totals-row"><span class="totals-label">LA State Tax (10%)</span><span class="totals-value" id="taxAmount">—</span></div>
+        <div class="totals-row grand"><span class="totals-label">TOTAL DUE</span><span class="totals-value" id="totalDue">—</span></div>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div class="inv-notes" id="notesSection" style="display:none;">
+      <div class="inv-notes-label">Notes</div>
+      <div class="inv-notes-text" id="notesText"></div>
+    </div>
+
+    <!-- Action Buttons (hidden on print) -->
+    <div class="inv-actions-bar" id="actionsBar">
+      <div id="payBtn"></div>
+      <button class="btn-print" onclick="window.print()">🖨️ Print Invoice</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const API = 'https://inkthorn-notes.rgaudet2023.workers.dev';
+
+  function fmtMoney(n) {
+    return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function calcDuration(start, end) {
+    const [sh, sm] = start.split(':').map(Number);
+    const [eh, em] = end.split(':').map(Number);
+    const totalMins = (eh * 60 + em) - (sh * 60 + sm);
+    if (totalMins <= 0) return { display: '0m', hours: 0 };
+    const h = Math.floor(totalMins / 60), m = totalMins % 60;
+    return { display: h > 0 ? `${h}h ${m > 0 ? m + 'm' : ''}`.trim() : `${m}m`, hours: totalMins / 60 };
+  }
+
+  function fmt12(timeStr) {
+    if (!timeStr) return '';
+    const [h, m] = timeStr.substring(0,5).split(':').map(Number);
+    return `${h % 12 || 12}:${String(m).padStart(2,'0')} ${h >= 12 ? 'PM' : 'AM'}`;
+  }
+
+  function fmtDateShort(dateStr) {
+    const [y, mo, d] = dateStr.split('-').map(Number);
+    return new Date(y, mo - 1, d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  function fmtDateLong(dateStr) {
+    const [y, mo, d] = dateStr.split('-').map(Number);
+    return new Date(y, mo - 1, d).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function escHtml(str) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  async function loadInvoice() {
+    const params = new URLSearchParams(location.search);
+    const invoiceId = params.get('id');
+
+    if (!invoiceId) {
+      showError();
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API}/api/invoices/${invoiceId}/public`);
+      if (!res.ok) { showError(); return; }
+      const { invoice, entries, client } = await res.json();
+      renderInvoice(invoice, entries, client);
+    } catch (err) {
+      console.error('Load invoice error:', err);
+      showError();
+    }
+  }
+
+  function showError() {
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('errorState').style.display = 'block';
+  }
+
+  function renderInvoice(invoice, entries, client) {
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('invoiceCard').style.display = 'block';
+
+    // Set page title
+    document.title = `Invoice ${invoice.invoice_number} — InkThorn`;
+
+    // Header
+    document.getElementById('invNumber').textContent = invoice.invoice_number;
+    const dateStr = invoice.created_at ? fmtDateLong(invoice.created_at.substring(0,10)) : '—';
+    document.getElementById('invDate').textContent = `Date: ${dateStr}`;
+
+    // Client
+    if (client) {
+      document.getElementById('clientName').textContent = client.name;
+      let detail = '';
+      if (client.address) detail += escHtml(client.address) + '<br>';
+      if (client.poc_name) detail += 'Attn: ' + escHtml(client.poc_name) + '<br>';
+      if (client.poc_email) detail += escHtml(client.poc_email) + '<br>';
+      if (client.poc_phone) detail += escHtml(client.poc_phone);
+      document.getElementById('clientDetail').innerHTML = detail;
+    } else {
+      document.getElementById('clientName').textContent = '(No client on file)';
+    }
+
+    // Line items
+    const tbody = document.getElementById('lineItems');
+    tbody.innerHTML = (entries || []).map(e => {
+      const dur = calcDuration(e.start_time, e.end_time);
+      const rate = parseFloat(e.rate) || 0;
+      const amount = dur.hours * rate;
+      return `<tr>
+        <td class="item-date">${fmtDateShort(e.entry_date)}</td>
+        <td>
+          <div class="item-desc">${escHtml(e.client_name || 'Consulting services')}</div>
+          <div class="item-sub">${fmt12(e.start_time)} → ${fmt12(e.end_time)} · ${dur.display} @ ${fmtMoney(rate)}/hr</div>
+          ${e.notes ? `<div class="item-sub" style="margin-top:3px;">${escHtml(e.notes)}</div>` : ''}
+        </td>
+        <td>${fmtMoney(amount)}</td>
+      </tr>`;
+    }).join('');
+
+    // Totals
+    document.getElementById('subtotal').textContent = fmtMoney(invoice.subtotal);
+    document.getElementById('taxAmount').textContent = fmtMoney(invoice.tax_amount);
+    document.getElementById('totalDue').textContent = fmtMoney(invoice.total);
+
+    // Notes
+    if (invoice.notes) {
+      document.getElementById('notesSection').style.display = 'block';
+      document.getElementById('notesText').textContent = invoice.notes;
+    }
+
+    // Pay button
+    const payContainer = document.getElementById('payBtn');
+    if (invoice.stripe_payment_link) {
+      payContainer.innerHTML = `<a class="btn-pay" href="${escHtml(invoice.stripe_payment_link)}" target="_blank">💳 Pay Now via Stripe</a>`;
+    } else {
+      payContainer.innerHTML = `<span class="no-payment">Contact for payment details.</span>`;
+    }
+  }
+
+  loadInvoice();
+</script>
+</body>
+</html>

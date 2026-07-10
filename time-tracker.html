@@ -8,81 +8,38 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #1a1612;
-      --surface: #252018;
-      --surface-hover: #2d2820;
-      --surface-raised: #2f2820;
-      --gold: #c9a84c;
-      --gold-dim: #a08538;
-      --gold-light: #dfc26e;
-      --cream: #e8dcc8;
-      --cream-dim: #b8ad9a;
-      --red: #c0392b;
-      --red-dim: #992d21;
-      --slate: #5e7080;
-      --green: #4caf78;
-      --border: rgba(201, 168, 76, 0.18);
-      --border-hover: rgba(201, 168, 76, 0.35);
-      --shadow: 0 4px 24px rgba(0,0,0,0.45);
-      --shadow-card: 0 2px 12px rgba(0,0,0,0.35);
-      --radius: 10px;
-      --radius-sm: 6px;
+      --bg: #1a1612; --surface: #252018; --surface-hover: #2d2820; --surface-raised: #2f2820;
+      --gold: #c9a84c; --gold-dim: #a08538; --gold-light: #dfc26e;
+      --cream: #e8dcc8; --cream-dim: #b8ad9a; --red: #c0392b; --red-dim: #992d21;
+      --slate: #5e7080; --green: #4caf78; --green-dim: #3a8a5e;
+      --border: rgba(201,168,76,0.18); --border-hover: rgba(201,168,76,0.35);
+      --shadow: 0 4px 24px rgba(0,0,0,0.45); --shadow-card: 0 2px 12px rgba(0,0,0,0.35);
+      --radius: 10px; --radius-sm: 6px;
     }
-
     html { font-size: 16px; }
-
     body {
-      background-color: var(--bg);
-      color: var(--cream);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      line-height: 1.6;
-      overflow-x: hidden;
-      background-image:
-        radial-gradient(ellipse at top left, rgba(201,168,76,0.04) 0%, transparent 50%),
+      background-color: var(--bg); color: var(--cream);
+      font-family: 'Inter', sans-serif; min-height: 100vh; line-height: 1.6; overflow-x: hidden;
+      background-image: radial-gradient(ellipse at top left, rgba(201,168,76,0.04) 0%, transparent 50%),
         radial-gradient(ellipse at bottom right, rgba(192,57,43,0.04) 0%, transparent 50%);
     }
-
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
-
-    .app-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 20px 80px;
-    }
+    .app-wrapper { max-width: 900px; margin: 0 auto; padding: 0 20px 160px; }
 
     /* ─── LOGIN OVERLAY ─── */
     #loginOverlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(10,8,5,0.97);
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      backdrop-filter: blur(6px);
+      position: fixed; inset: 0; background: rgba(10,8,5,0.97); z-index: 2000;
+      display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(6px);
     }
     #loginOverlay.hidden { display: none !important; }
     .login-card {
-      background: var(--surface);
-      border: 1px solid var(--border-hover);
-      border-radius: 16px;
-      padding: 44px 36px;
-      max-width: 420px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+      background: var(--surface); border: 1px solid var(--border-hover); border-radius: 16px;
+      padding: 44px 36px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 24px 80px rgba(0,0,0,0.7);
     }
     .login-mascot { margin-bottom: 20px; }
     .login-mascot img { width: 72px; height: 72px; object-fit: contain; }
@@ -96,372 +53,289 @@
       text-decoration: none; width: 100%; justify-content: center;
     }
     .btn-google:hover { background: #f5f5f5; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,255,255,0.15); }
-    .btn-google svg { flex-shrink: 0; }
     .login-fine-print { margin-top: 20px; font-size: 0.75rem; color: var(--cream-dim); opacity: 0.6; font-style: italic; }
 
     /* ─── HEADER ─── */
     .site-header {
-      padding: 24px 0 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 28px;
-      gap: 16px;
+      padding: 24px 0 20px; display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border); margin-bottom: 28px; gap: 16px;
     }
-    .header-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-    .header-brand img {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-    }
-    .header-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: var(--gold);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-    .header-title span {
-      color: var(--cream-dim);
-      font-weight: 400;
-      font-size: 1rem;
-    }
-    .header-nav {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .header-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .header-brand img { width: 40px; height: 40px; object-fit: contain; }
+    .header-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); font-weight: 700; letter-spacing: -0.02em; }
+    .header-title span { color: var(--cream-dim); font-weight: 400; font-size: 1rem; }
+    .header-nav { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .nav-link {
-      color: var(--cream-dim);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      transition: all 0.15s ease;
-      border: 1px solid transparent;
+      color: var(--cream-dim); text-decoration: none; font-size: 0.85rem; font-weight: 500;
+      padding: 6px 12px; border-radius: var(--radius-sm); transition: all 0.15s ease; border: 1px solid transparent;
     }
     .nav-link:hover { color: var(--cream); background: var(--surface); border-color: var(--border); }
     .nav-link.active { color: var(--gold); border-color: var(--border); background: var(--surface); }
+    .btn-nav-action {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: transparent; color: var(--cream-dim); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 6px 12px; font-size: 0.82rem; font-weight: 500;
+      cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.15s ease;
+    }
+    .btn-nav-action:hover { color: var(--gold); border-color: var(--gold-dim); background: rgba(201,168,76,0.06); }
 
-    /* ─── MONTHLY SUMMARY BAR ─── */
+    /* ─── TABS ─── */
+    .tab-bar { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+    .tab-btn {
+      background: none; border: none; border-bottom: 2px solid transparent; color: var(--cream-dim);
+      font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 500;
+      padding: 10px 20px; cursor: pointer; transition: all 0.15s ease; margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--cream); }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ─── SUMMARY BAR ─── */
     .summary-bar {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 24px;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 16px 24px; margin-bottom: 24px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
     }
-    .summary-label {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--cream-dim);
-      font-weight: 500;
-    }
-    .summary-stats {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      flex: 1;
-      flex-wrap: wrap;
-    }
-    .summary-stat {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-    }
-    .stat-value {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
-    .stat-unit {
-      font-size: 0.8rem;
-      color: var(--cream-dim);
-    }
-    .summary-divider {
-      width: 1px;
-      height: 28px;
-      background: var(--border);
-    }
-    .summary-month {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.9rem;
-      color: var(--cream-dim);
-      font-style: italic;
-      margin-left: auto;
-    }
+    .summary-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cream-dim); font-weight: 500; }
+    .summary-stats { display: flex; align-items: center; gap: 28px; flex: 1; flex-wrap: wrap; }
+    .summary-stat { display: flex; align-items: baseline; gap: 6px; }
+    .stat-value { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); }
+    .stat-unit { font-size: 0.8rem; color: var(--cream-dim); }
+    .summary-divider { width: 1px; height: 28px; background: var(--border); }
+    .summary-month { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--cream-dim); font-style: italic; margin-left: auto; }
 
     /* ─── CARD ─── */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-bottom: 20px;
-      box-shadow: var(--shadow-card);
-    }
-    .card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--gold);
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; box-shadow: var(--shadow-card); }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); margin-bottom: 20px; font-weight: 600; }
 
     /* ─── FORM ─── */
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
     .form-group.full { grid-column: 1 / -1; }
-    .form-label {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--cream-dim);
-      font-weight: 500;
+    .form-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--cream-dim); font-weight: 500; }
+    .form-input, .form-select, .form-textarea {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: var(--radius-sm);
+      color: var(--cream); font-family: 'Inter', sans-serif; font-size: 0.95rem;
+      padding: 10px 14px; transition: border-color 0.15s ease, background 0.15s ease; outline: none; width: 100%;
     }
-    .form-input, .form-textarea {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      color: var(--cream);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      padding: 10px 14px;
-      transition: border-color 0.15s ease, background 0.15s ease;
-      outline: none;
-      width: 100%;
-    }
-    .form-input:focus, .form-textarea:focus {
-      border-color: var(--gold-dim);
-      background: rgba(201,168,76,0.06);
-    }
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b8ad9a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+    .form-select option { background: #252018; color: var(--cream); }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold-dim); background: rgba(201,168,76,0.06); }
     .form-input::placeholder, .form-textarea::placeholder { color: var(--slate); }
     .form-textarea { resize: vertical; min-height: 70px; }
     .form-input[type="date"]::-webkit-calendar-picker-indicator,
-    .form-input[type="time"]::-webkit-calendar-picker-indicator {
-      filter: invert(0.6) sepia(1) saturate(2) hue-rotate(10deg);
-      cursor: pointer;
+    .form-input[type="time"]::-webkit-calendar-picker-indicator { filter: invert(0.6) sepia(1) saturate(2) hue-rotate(10deg); cursor: pointer; }
+    .client-row { display: flex; gap: 8px; align-items: flex-end; }
+    .client-row .form-select { flex: 1; }
+    .btn-add-client {
+      background: transparent; border: 1px solid var(--border); border-radius: var(--radius-sm);
+      color: var(--cream-dim); font-size: 0.8rem; cursor: pointer; padding: 10px 12px; white-space: nowrap;
+      font-family: 'Inter', sans-serif; transition: all 0.15s ease; flex-shrink: 0;
     }
+    .btn-add-client:hover { color: var(--gold); border-color: var(--gold-dim); }
     .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--gold);
-      color: #1a1612;
-      border: none;
-      border-radius: var(--radius-sm);
-      padding: 11px 24px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.18s ease;
-      letter-spacing: 0.02em;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: #1a1612; border: none; border-radius: var(--radius-sm);
+      padding: 11px 24px; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: all 0.18s ease; letter-spacing: 0.02em;
     }
     .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.3); }
     .btn-primary:active { transform: translateY(0); }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .form-actions {
-      margin-top: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .duration-preview {
-      font-size: 0.85rem;
-      color: var(--cream-dim);
-      font-style: italic;
-    }
+    .form-actions { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; }
+    .duration-preview { font-size: 0.85rem; color: var(--cream-dim); font-style: italic; }
     .duration-preview strong { color: var(--gold); font-style: normal; }
 
     /* ─── SECTION HEADER ─── */
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      color: var(--cream);
-      font-weight: 600;
-    }
-    .section-count {
-      font-size: 0.8rem;
-      color: var(--cream-dim);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2px 10px;
-    }
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); font-weight: 600; }
+    .section-count { font-size: 0.8rem; color: var(--cream-dim); background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 2px 10px; }
 
     /* ─── ENTRY CARD ─── */
     .entry-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px 22px;
-      margin-bottom: 12px;
-      position: relative;
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px 22px; margin-bottom: 12px; position: relative;
       transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
     .entry-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-card); }
+    .entry-card.selected { border-color: var(--gold-dim); background: rgba(201,168,76,0.04); }
+    .entry-card-top { display: flex; align-items: flex-start; gap: 12px; }
+    .entry-checkbox { margin-top: 4px; flex-shrink: 0; width: 18px; height: 18px; cursor: pointer; accent-color: var(--gold); }
+    .entry-card-body { flex: 1; min-width: 0; }
     .entry-card-actions {
-      position: absolute;
-      top: 14px;
-      right: 16px;
-      display: flex;
-      gap: 6px;
+      position: absolute; top: 14px; right: 16px;
+      display: flex; gap: 6px; align-items: center;
     }
     .icon-btn {
-      background: none;
-      border: 1px solid transparent;
-      border-radius: var(--radius-sm);
-      color: var(--cream-dim);
-      font-size: 0.9rem;
-      cursor: pointer;
-      padding: 4px 8px;
-      transition: all 0.15s ease;
-      line-height: 1;
+      background: none; border: 1px solid transparent; border-radius: var(--radius-sm);
+      color: var(--cream-dim); font-size: 0.9rem; cursor: pointer; padding: 4px 8px;
+      transition: all 0.15s ease; line-height: 1;
     }
     .icon-btn:hover { border-color: var(--border); background: var(--surface-hover); }
     .icon-btn.delete-btn:hover { border-color: rgba(192,57,43,0.4); color: var(--red); background: rgba(192,57,43,0.08); }
-    .entry-client {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 4px;
-      padding-right: 80px;
+    .paid-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: rgba(76,175,120,0.15); border: 1px solid rgba(76,175,120,0.35);
+      color: var(--green); border-radius: 20px; padding: 2px 10px; font-size: 0.75rem; font-weight: 600;
     }
-    .entry-meta {
-      font-size: 0.82rem;
-      color: var(--cream-dim);
-      margin-bottom: 10px;
-    }
-    .entry-details {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .entry-detail {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.88rem;
-    }
+    .entry-client { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--gold); margin-bottom: 4px; padding-right: 80px; }
+    .entry-meta { font-size: 0.82rem; color: var(--cream-dim); margin-bottom: 10px; }
+    .entry-details { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .entry-detail { display: flex; align-items: center; gap: 5px; font-size: 0.88rem; }
     .entry-detail-icon { font-size: 0.8rem; opacity: 0.7; }
-    .entry-duration {
-      background: rgba(201,168,76,0.1);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 20px;
-      padding: 2px 10px;
-      font-size: 0.82rem;
-      color: var(--gold-light);
-      font-weight: 500;
-    }
-    .entry-amount {
-      color: var(--green);
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    .entry-notes {
-      margin-top: 10px;
-      font-size: 0.85rem;
-      color: var(--cream-dim);
-      font-style: italic;
-      padding-top: 10px;
-      border-top: 1px solid var(--border);
-      line-height: 1.5;
-    }
+    .entry-duration { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); border-radius: 20px; padding: 2px 10px; font-size: 0.82rem; color: var(--gold-light); font-weight: 500; }
+    .entry-amount { color: var(--green); font-weight: 600; font-size: 0.95rem; }
+    .entry-notes { margin-top: 10px; font-size: 0.85rem; color: var(--cream-dim); font-style: italic; padding-top: 10px; border-top: 1px solid var(--border); line-height: 1.5; }
 
     /* ─── EDIT MODE ─── */
     .entry-edit-form .form-grid { gap: 10px; }
-    .entry-edit-form .form-input,
-    .entry-edit-form .form-textarea { font-size: 0.88rem; padding: 8px 12px; }
-    .edit-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 14px;
-    }
-    .btn-save {
-      background: var(--gold);
-      color: #1a1612;
-      border: none;
-      border-radius: var(--radius-sm);
-      padding: 8px 18px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      transition: all 0.15s ease;
-    }
+    .entry-edit-form .form-input, .entry-edit-form .form-select, .entry-edit-form .form-textarea { font-size: 0.88rem; padding: 8px 12px; }
+    .edit-actions { display: flex; gap: 8px; margin-top: 14px; }
+    .btn-save { background: var(--gold); color: #1a1612; border: none; border-radius: var(--radius-sm); padding: 8px 18px; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.15s ease; }
     .btn-save:hover { background: var(--gold-light); }
-    .btn-cancel {
-      background: transparent;
-      color: var(--cream-dim);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 8px 18px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      transition: all 0.15s ease;
-    }
+    .btn-cancel { background: transparent; color: var(--cream-dim); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 18px; font-size: 0.85rem; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.15s ease; }
     .btn-cancel:hover { color: var(--cream); border-color: var(--border-hover); }
 
     /* ─── EMPTY STATE ─── */
-    .empty-state {
-      text-align: center;
-      padding: 48px 20px;
-      color: var(--cream-dim);
-    }
+    .empty-state { text-align: center; padding: 48px 20px; color: var(--cream-dim); }
     .empty-icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.4; }
     .empty-text { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-style: italic; margin-bottom: 6px; }
     .empty-sub { font-size: 0.85rem; opacity: 0.6; }
 
+    /* ─── FLOATING ACTION BAR ─── */
+    #floatingBar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+      background: var(--surface-raised); border-top: 1px solid var(--gold-dim);
+      padding: 16px 24px; display: none; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap; box-shadow: 0 -4px 24px rgba(0,0,0,0.5);
+    }
+    #floatingBar.visible { display: flex; }
+    .bar-info { font-size: 0.9rem; color: var(--cream-dim); }
+    .bar-info strong { color: var(--gold); }
+    .btn-invoice {
+      background: var(--gold); color: #1a1612; border: none; border-radius: var(--radius-sm);
+      padding: 10px 22px; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 700;
+      cursor: pointer; transition: all 0.18s ease; white-space: nowrap;
+    }
+    .btn-invoice:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(10,8,5,0.88); z-index: 1000;
+      display: none; align-items: center; justify-content: center; padding: 20px;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface); border: 1px solid var(--border-hover); border-radius: 14px;
+      max-width: 680px; width: 100%; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+    }
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; background: var(--surface); z-index: 1;
+    }
+    .modal-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); font-weight: 700; }
+    .modal-close { background: none; border: none; color: var(--cream-dim); font-size: 1.4rem; cursor: pointer; line-height: 1; padding: 4px 8px; transition: color 0.15s ease; }
+    .modal-close:hover { color: var(--cream); }
+    .modal-body { padding: 24px; }
+    .modal-footer { padding: 16px 24px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+
+    /* ─── CLIENT MANAGEMENT ─── */
+    .client-list { margin-bottom: 20px; }
+    .client-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+      margin-bottom: 8px; background: rgba(255,255,255,0.02);
+    }
+    .client-item-info { flex: 1; min-width: 0; }
+    .client-item-name { font-weight: 600; color: var(--cream); font-size: 0.95rem; }
+    .client-item-meta { font-size: 0.8rem; color: var(--cream-dim); margin-top: 2px; }
+    .client-item-actions { display: flex; gap: 6px; }
+    .btn-icon-sm {
+      background: none; border: 1px solid var(--border); border-radius: 4px;
+      color: var(--cream-dim); font-size: 0.8rem; cursor: pointer; padding: 4px 8px;
+      transition: all 0.15s ease;
+    }
+    .btn-icon-sm:hover { color: var(--cream); border-color: var(--border-hover); }
+    .btn-icon-sm.danger:hover { color: var(--red); border-color: rgba(192,57,43,0.4); }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+    .add-client-form .form-group { margin-bottom: 12px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .btn-secondary {
+      background: transparent; color: var(--cream-dim); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 9px 20px; font-family: 'Inter', sans-serif;
+      font-size: 0.88rem; font-weight: 500; cursor: pointer; transition: all 0.15s ease;
+    }
+    .btn-secondary:hover { color: var(--cream); border-color: var(--border-hover); }
+
+    /* ─── INVOICE PREVIEW ─── */
+    .invoice-preview-section { margin-bottom: 20px; }
+    .invoice-preview-section h3 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cream-dim); margin-bottom: 12px; font-weight: 500; }
+    .invoice-client-block { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 16px; }
+    .invoice-client-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--gold); margin-bottom: 4px; }
+    .invoice-client-detail { font-size: 0.83rem; color: var(--cream-dim); line-height: 1.7; }
+    .line-items-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .line-items-table th { text-align: left; color: var(--cream-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 6px 10px; border-bottom: 1px solid var(--border); font-weight: 500; }
+    .line-items-table th:last-child { text-align: right; }
+    .line-items-table td { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--cream); }
+    .line-items-table td:last-child { text-align: right; color: var(--green); font-weight: 600; }
+    .line-items-table .line-sub { font-size: 0.78rem; color: var(--cream-dim); }
+    .invoice-totals { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 4px; }
+    .totals-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 10px; font-size: 0.88rem; }
+    .totals-row.total-row { border-top: 1px solid var(--border-hover); margin-top: 8px; padding-top: 12px; }
+    .totals-row.total-row .totals-label { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); font-weight: 700; }
+    .totals-row.total-row .totals-value { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); font-weight: 700; }
+    .totals-label { color: var(--cream-dim); }
+    .totals-value { color: var(--cream); font-weight: 600; }
+    .success-box {
+      background: rgba(76,175,120,0.1); border: 1px solid rgba(76,175,120,0.3);
+      border-radius: var(--radius-sm); padding: 16px; text-align: center; margin-top: 16px;
+    }
+    .success-box .success-icon { font-size: 2rem; margin-bottom: 8px; }
+    .success-box .success-msg { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--green); margin-bottom: 8px; }
+    .success-box .success-url { font-size: 0.8rem; color: var(--cream-dim); margin-bottom: 12px; word-break: break-all; }
+    .btn-copy {
+      background: var(--green); color: #1a1612; border: none; border-radius: var(--radius-sm);
+      padding: 8px 18px; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; transition: all 0.15s ease; margin-right: 8px;
+    }
+    .btn-copy:hover { background: #5cbf87; }
+    .btn-open-invoice {
+      background: transparent; color: var(--gold); border: 1px solid var(--gold-dim);
+      border-radius: var(--radius-sm); padding: 8px 18px; font-family: 'Inter', sans-serif;
+      font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.15s ease; text-decoration: none;
+    }
+    .btn-open-invoice:hover { background: rgba(201,168,76,0.1); }
+
+    /* ─── INVOICES TAB ─── */
+    .invoice-row {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+      margin-bottom: 8px; background: rgba(255,255,255,0.02);
+      cursor: pointer; transition: all 0.15s ease; text-decoration: none;
+    }
+    .invoice-row:hover { border-color: var(--border-hover); background: rgba(201,168,76,0.04); }
+    .invoice-num { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+    .invoice-client-name-sm { font-size: 0.9rem; color: var(--cream); font-weight: 500; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .invoice-date { font-size: 0.8rem; color: var(--cream-dim); flex-shrink: 0; }
+    .invoice-total { font-weight: 700; color: var(--green); font-size: 0.95rem; flex-shrink: 0; }
+    .invoice-status {
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+      border-radius: 20px; padding: 2px 8px; flex-shrink: 0;
+    }
+    .invoice-status.sent { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+    .invoice-status.paid { background: rgba(76,175,120,0.15); color: var(--green); border: 1px solid rgba(76,175,120,0.3); }
+
     /* ─── TOAST ─── */
     #toast {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
+      position: fixed; bottom: 80px; left: 50%;
       transform: translateX(-50%) translateY(80px);
-      background: var(--surface-raised);
-      border: 1px solid var(--border-hover);
-      border-radius: 8px;
-      padding: 12px 24px;
-      font-size: 0.9rem;
-      color: var(--cream);
-      z-index: 3000;
-      transition: transform 0.25s ease, opacity 0.25s ease;
-      opacity: 0;
-      pointer-events: none;
-      white-space: nowrap;
-      box-shadow: var(--shadow);
+      background: var(--surface-raised); border: 1px solid var(--border-hover); border-radius: 8px;
+      padding: 12px 24px; font-size: 0.9rem; color: var(--cream); z-index: 3000;
+      transition: transform 0.25s ease, opacity 0.25s ease; opacity: 0; pointer-events: none;
+      white-space: nowrap; box-shadow: var(--shadow);
     }
     #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     #toast.success { border-color: rgba(76,175,120,0.4); color: var(--green); }
@@ -469,11 +343,12 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 600px) {
-      .form-grid { grid-template-columns: 1fr; }
+      .form-grid, .form-row { grid-template-columns: 1fr; }
       .summary-stats { gap: 16px; }
       .site-header { flex-wrap: wrap; }
       .entry-card-actions { position: static; margin-bottom: 12px; justify-content: flex-end; }
       .entry-client { padding-right: 0; }
+      .invoice-row { flex-wrap: wrap; gap: 8px; }
     }
   </style>
 </head>
@@ -482,9 +357,7 @@
 <!-- Login Overlay -->
 <div id="loginOverlay">
   <div class="login-card">
-    <div class="login-mascot">
-      <img src="https://inkthorn.ai/inkthorn-mascot-small.png" alt="InkThorn" />
-    </div>
+    <div class="login-mascot"><img src="https://inkthorn.ai/inkthorn-mascot-small.png" alt="InkThorn" /></div>
     <div class="login-title">InkThorn</div>
     <div class="login-tagline">Time Tracker — because someone has to count the hours</div>
     <a id="loginBtn" href="https://inkthorn-notes.rgaudet2023.workers.dev/auth/google?return_to=time-tracker.html" class="btn-google">
@@ -501,7 +374,6 @@
 </div>
 
 <div class="app-wrapper">
-
   <!-- Header -->
   <header class="site-header">
     <a href="/" class="header-brand">
@@ -512,10 +384,11 @@
       <a href="notes.html" class="nav-link">Notes</a>
       <a href="time-tracker.html" class="nav-link active">Time</a>
       <a href="daycycle.html" class="nav-link">Day Cycle</a>
+      <button class="btn-nav-action" onclick="openClientModal()">👤 Manage Clients</button>
     </nav>
   </header>
 
-  <!-- Monthly Summary Bar -->
+  <!-- Summary Bar -->
   <div class="summary-bar" id="summaryBar">
     <div class="summary-label">This Month</div>
     <div class="summary-stats">
@@ -532,62 +405,160 @@
     <div class="summary-month" id="summaryMonth"></div>
   </div>
 
-  <!-- Log New Entry -->
-  <div class="card">
-    <div class="card-title">⏱ Log New Entry</div>
-    <form id="entryForm" novalidate>
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label" for="clientName">Client Name</label>
-          <input type="text" id="clientName" class="form-input" placeholder="Acme Corp" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="rate">Hourly Rate ($)</label>
-          <input type="number" id="rate" class="form-input" placeholder="150.00" step="0.01" min="0" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="entryDate">Date</label>
-          <input type="date" id="entryDate" class="form-input" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="startTime">Start Time</label>
-          <input type="time" id="startTime" class="form-input" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="endTime">End Time</label>
-          <input type="time" id="endTime" class="form-input" required />
-        </div>
-        <div class="form-group">
-          <!-- spacer on desktop -->
-        </div>
-        <div class="form-group full">
-          <label class="form-label" for="notes">Notes (optional)</label>
-          <textarea id="notes" class="form-textarea" placeholder="Meeting notes, topics covered, deliverables discussed..."></textarea>
-        </div>
-      </div>
-      <div class="form-actions">
-        <div class="duration-preview" id="durationPreview"></div>
-        <button type="submit" class="btn-primary" id="submitBtn">Log Entry</button>
-      </div>
-    </form>
+  <!-- Tabs -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('time')">⏱ Time Entries</button>
+    <button class="tab-btn" onclick="switchTab('invoices')">📄 Invoices</button>
   </div>
 
-  <!-- Entries List -->
-  <div class="section-header">
-    <div class="section-title">Time Entries</div>
-    <div class="section-count" id="entryCount">0 entries</div>
-  </div>
-  <div id="entriesList"></div>
+  <!-- Time Tab -->
+  <div class="tab-panel active" id="tab-time">
+    <!-- Log New Entry -->
+    <div class="card">
+      <div class="card-title">⏱ Log New Entry</div>
+      <form id="entryForm" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="clientSelect">Client</label>
+            <div class="client-row">
+              <select id="clientSelect" class="form-select">
+                <option value="">— Select Client —</option>
+              </select>
+              <button type="button" class="btn-add-client" onclick="openClientModal()">+ New</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="rate">Hourly Rate ($)</label>
+            <input type="number" id="rate" class="form-input" placeholder="150.00" step="0.01" min="0" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="entryDate">Date</label>
+            <input type="date" id="entryDate" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="startTime">Start Time</label>
+            <input type="time" id="startTime" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="endTime">End Time</label>
+            <input type="time" id="endTime" class="form-input" required />
+          </div>
+          <div class="form-group"><!-- spacer --></div>
+          <div class="form-group full">
+            <label class="form-label" for="entryNotes">Notes (optional)</label>
+            <textarea id="entryNotes" class="form-textarea" placeholder="Meeting notes, topics covered, deliverables..."></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <div class="duration-preview" id="durationPreview"></div>
+          <button type="submit" class="btn-primary" id="submitBtn">Log Entry</button>
+        </div>
+      </form>
+    </div>
 
+    <!-- Entries List -->
+    <div class="section-header">
+      <div class="section-title">Time Entries</div>
+      <div class="section-count" id="entryCount">0 entries</div>
+    </div>
+    <div id="entriesList"></div>
+  </div>
+
+  <!-- Invoices Tab -->
+  <div class="tab-panel" id="tab-invoices">
+    <div class="section-header">
+      <div class="section-title">Past Invoices</div>
+      <div class="section-count" id="invoiceCount">0 invoices</div>
+    </div>
+    <div id="invoicesList"></div>
+  </div>
+</div>
+
+<!-- Floating Invoice Bar -->
+<div id="floatingBar">
+  <div class="bar-info" id="barInfo">0 entries selected</div>
+  <button class="btn-invoice" onclick="openInvoiceModal()">📄 Generate Invoice</button>
 </div>
 
 <!-- Toast -->
 <div id="toast"></div>
 
+<!-- ─── CLIENT MANAGEMENT MODAL ─── -->
+<div class="modal-overlay" id="clientModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">👤 Client Management</div>
+      <button class="modal-close" onclick="closeClientModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="client-list" id="clientList">
+        <div style="color:var(--cream-dim);font-style:italic;text-align:center;padding:20px;">Loading clients…</div>
+      </div>
+      <hr class="section-divider" />
+      <div class="add-client-form" id="addClientForm">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold);margin-bottom:16px;">Add New Client</h3>
+        <div class="form-group">
+          <label class="form-label">Client Name *</label>
+          <input type="text" id="newClientName" class="form-input" placeholder="Acme Corporation" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Address</label>
+          <input type="text" id="newClientAddress" class="form-input" placeholder="123 Main St, New Orleans, LA" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">POC Name</label>
+            <input type="text" id="newClientPocName" class="form-input" placeholder="Jane Smith" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">POC Email</label>
+            <input type="email" id="newClientPocEmail" class="form-input" placeholder="jane@acme.com" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">POC Phone</label>
+            <input type="tel" id="newClientPocPhone" class="form-input" placeholder="(555) 555-5555" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Website</label>
+            <input type="url" id="newClientWebsite" class="form-input" placeholder="https://acme.com" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeClientModal()">Close</button>
+      <button class="btn-primary" onclick="createClient()">+ Add Client</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── INVOICE PREVIEW MODAL ─── -->
+<div class="modal-overlay" id="invoiceModal">
+  <div class="modal" style="max-width:740px;">
+    <div class="modal-header">
+      <div class="modal-title">📄 Invoice Preview</div>
+      <button class="modal-close" onclick="closeInvoiceModal()">×</button>
+    </div>
+    <div class="modal-body" id="invoiceModalBody">
+      <!-- Filled dynamically -->
+    </div>
+    <div class="modal-footer" id="invoiceModalFooter">
+      <button class="btn-secondary" onclick="closeInvoiceModal()">Cancel</button>
+      <button class="btn-primary" id="createInvoiceBtn" onclick="submitInvoice()">💳 Create Invoice &amp; Payment Link</button>
+    </div>
+  </div>
+</div>
+
 <script>
   const API = 'https://inkthorn-notes.rgaudet2023.workers.dev';
   let token = null;
   let entries = [];
+  let clients = [];
+  let invoices = [];
+  let selectedEntryIds = new Set();
+  let pendingInvoiceData = null;
 
   // ─── Utilities ─────────────────────────────────────────────────────────────
 
@@ -605,19 +576,21 @@
     if (!timeStr) return '';
     const [h, m] = timeStr.substring(0,5).split(':').map(Number);
     const ampm = h >= 12 ? 'PM' : 'AM';
-    const h12 = h % 12 || 12;
-    return `${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+    return `${h % 12 || 12}:${String(m).padStart(2,'0')} ${ampm}`;
   }
 
   function fmtDate(dateStr) {
-    // dateStr is YYYY-MM-DD — parse as local date
     const [y, mo, d] = dateStr.split('-').map(Number);
-    const dt = new Date(y, mo - 1, d);
-    return dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    return new Date(y, mo - 1, d).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function fmtDateShort(dateStr) {
+    const [y, mo, d] = dateStr.split('-').map(Number);
+    return new Date(y, mo - 1, d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   }
 
   function fmtMoney(n) {
-    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   function getMonthlySummary(entries) {
@@ -636,7 +609,6 @@
     return {
       hoursDisplay: h > 0 ? (m > 0 ? `${h}h ${m}m` : `${h}h`) : `${m}m`,
       earned: totalEarned,
-      count: thisMonth.length,
     };
   }
 
@@ -648,124 +620,257 @@
     t._timer = setTimeout(() => { t.className = ''; }, 3200);
   }
 
+  function escHtml(str) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function todayStr() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  // ─── Tabs ──────────────────────────────────────────────────────────────────
+
+  function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach((b, i) => {
+      b.classList.toggle('active', (i === 0 && name === 'time') || (i === 1 && name === 'invoices'));
+    });
+    document.getElementById('tab-time').classList.toggle('active', name === 'time');
+    document.getElementById('tab-invoices').classList.toggle('active', name === 'invoices');
+    if (name === 'invoices') loadInvoices();
+  }
+
   // ─── Auth ──────────────────────────────────────────────────────────────────
 
   async function init() {
-    // Capture token from URL (after OAuth redirect)
     const params = new URLSearchParams(location.search);
     const urlToken = params.get('token');
-    if (urlToken) {
-      localStorage.setItem('inkthorn_token', urlToken);
-      history.replaceState({}, '', location.pathname);
-    }
-
+    if (urlToken) { localStorage.setItem('inkthorn_token', urlToken); history.replaceState({}, '', location.pathname); }
     token = localStorage.getItem('inkthorn_token');
     if (!token) { showLogin(); return; }
-
     try {
-      const res = await fetch(`${API}/api/me`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(`${API}/api/me`, { headers: { Authorization: `Bearer ${token}` } });
       if (!res.ok) { showLogin(); return; }
       hideLogin();
-      await loadEntries();
-    } catch {
-      showLogin();
+      await Promise.all([loadEntries(), loadClients()]);
+    } catch { showLogin(); }
+  }
+
+  function showLogin() { document.getElementById('loginOverlay').classList.remove('hidden'); }
+  function hideLogin() { document.getElementById('loginOverlay').classList.add('hidden'); }
+
+  // ─── Clients ───────────────────────────────────────────────────────────────
+
+  async function loadClients() {
+    try {
+      const res = await fetch(`${API}/api/clients`, { headers: { Authorization: `Bearer ${token}` } });
+      if (res.ok) {
+        clients = await res.json();
+        refreshClientDropdown();
+        renderClientList();
+      }
+    } catch (err) { console.warn('Failed to load clients:', err); }
+  }
+
+  function refreshClientDropdown() {
+    const sel = document.getElementById('clientSelect');
+    const current = sel.value;
+    sel.innerHTML = '<option value="">— Select Client —</option>';
+    for (const c of clients) {
+      const opt = document.createElement('option');
+      opt.value = c.id;
+      opt.textContent = c.name;
+      sel.appendChild(opt);
+    }
+    if (current) sel.value = current;
+  }
+
+  function openClientModal() {
+    document.getElementById('clientModal').classList.add('open');
+    renderClientList();
+  }
+
+  function closeClientModal() {
+    document.getElementById('clientModal').classList.remove('open');
+    clearAddClientForm();
+  }
+
+  function clearAddClientForm() {
+    ['newClientName','newClientAddress','newClientPocName','newClientPocEmail','newClientPocPhone','newClientWebsite']
+      .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  }
+
+  function renderClientList() {
+    const container = document.getElementById('clientList');
+    if (!clients.length) {
+      container.innerHTML = '<div style="color:var(--cream-dim);font-style:italic;text-align:center;padding:16px;">No clients yet. Add one below.</div>';
+      return;
+    }
+    container.innerHTML = clients.map(c => `
+      <div class="client-item" id="citem-${c.id}">
+        <div class="client-item-info">
+          <div class="client-item-name">${escHtml(c.name)}</div>
+          <div class="client-item-meta">
+            ${c.poc_name ? escHtml(c.poc_name) : ''}
+            ${c.poc_email ? ` · ${escHtml(c.poc_email)}` : ''}
+            ${c.poc_phone ? ` · ${escHtml(c.poc_phone)}` : ''}
+          </div>
+        </div>
+        <div class="client-item-actions">
+          <button class="btn-icon-sm danger" onclick="deleteClient('${c.id}')">🗑️</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  async function createClient() {
+    const name = document.getElementById('newClientName').value.trim();
+    if (!name) { showToast('Client name is required', 'error'); return; }
+    const body = {
+      name,
+      address: document.getElementById('newClientAddress').value.trim() || null,
+      poc_name: document.getElementById('newClientPocName').value.trim() || null,
+      poc_email: document.getElementById('newClientPocEmail').value.trim() || null,
+      poc_phone: document.getElementById('newClientPocPhone').value.trim() || null,
+      website: document.getElementById('newClientWebsite').value.trim() || null,
+    };
+    try {
+      const res = await fetch(`${API}/api/clients`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      const client = await res.json();
+      clients.push(client);
+      clients.sort((a, b) => a.name.localeCompare(b.name));
+      refreshClientDropdown();
+      renderClientList();
+      clearAddClientForm();
+      // Auto-select the new client in the dropdown
+      document.getElementById('clientSelect').value = client.id;
+      showToast('Client added.', 'success');
+    } catch (err) {
+      showToast('Failed to add client: ' + err.message, 'error');
     }
   }
 
-  function showLogin() {
-    document.getElementById('loginOverlay').classList.remove('hidden');
+  async function deleteClient(id) {
+    if (!confirm('Delete this client?')) return;
+    try {
+      const res = await fetch(`${API}/api/clients/${id}`, {
+        method: 'DELETE', headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error(await res.text());
+      clients = clients.filter(c => c.id !== id);
+      refreshClientDropdown();
+      renderClientList();
+      showToast('Client deleted.', 'success');
+    } catch (err) {
+      showToast('Failed to delete client', 'error');
+    }
   }
 
-  function hideLogin() {
-    document.getElementById('loginOverlay').classList.add('hidden');
-  }
-
-  // ─── Load Entries ──────────────────────────────────────────────────────────
+  // ─── Entries ───────────────────────────────────────────────────────────────
 
   async function loadEntries() {
     try {
-      const res = await fetch(`${API}/api/time`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(`${API}/api/time`, { headers: { Authorization: `Bearer ${token}` } });
       if (!res.ok) throw new Error('Failed to load');
       entries = await res.json();
       renderEntries();
       renderSummary();
-    } catch (err) {
-      showToast('Failed to load entries', 'error');
-    }
+    } catch { showToast('Failed to load entries', 'error'); }
   }
-
-  // ─── Render ────────────────────────────────────────────────────────────────
 
   function renderSummary() {
     const summary = getMonthlySummary(entries);
     document.getElementById('summaryHours').textContent = summary.hoursDisplay;
     document.getElementById('summaryEarned').textContent = fmtMoney(summary.earned);
-    const now = new Date();
     document.getElementById('summaryMonth').textContent =
-      now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   }
 
   function renderEntries() {
     const list = document.getElementById('entriesList');
     const count = document.getElementById('entryCount');
     count.textContent = `${entries.length} entr${entries.length === 1 ? 'y' : 'ies'}`;
-
     if (!entries.length) {
-      list.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon">⏱</div>
-          <div class="empty-text">No time entries yet.</div>
-          <div class="empty-sub">Log your first consulting session above.</div>
-        </div>`;
+      list.innerHTML = `<div class="empty-state"><div class="empty-icon">⏱</div><div class="empty-text">No time entries yet.</div><div class="empty-sub">Log your first consulting session above.</div></div>`;
       return;
     }
-
     list.innerHTML = entries.map(e => renderEntryCard(e)).join('');
+    updateFloatingBar();
   }
 
   function renderEntryCard(e) {
     const dur = calcDuration(e.start_time, e.end_time);
     const rate = parseFloat(e.rate) || 0;
     const amount = dur.hours * rate;
-    const startStr = fmt12(e.start_time);
-    const endStr = fmt12(e.end_time);
+    const isPaid = !!e.paid;
+    const isSelected = selectedEntryIds.has(e.id);
 
-    const amountHtml = rate > 0
-      ? `<span class="entry-amount">${fmtMoney(amount)}</span>`
-      : '';
+    const checkboxHtml = !isPaid ? `<input type="checkbox" class="entry-checkbox" ${isSelected ? 'checked' : ''} onchange="toggleEntry('${e.id}', this.checked)" />` : '';
+    const paidBadge = isPaid ? `<span class="paid-badge">✓ PAID</span>` : '';
 
-    const notesHtml = e.notes
-      ? `<div class="entry-notes">${escHtml(e.notes)}</div>`
-      : '';
-
-    const rateHtml = rate > 0
-      ? `<div class="entry-detail"><span class="entry-detail-icon">💵</span> ${fmtMoney(rate)}/hr</div>`
-      : '';
+    const amountHtml = rate > 0 ? `<span class="entry-amount">${fmtMoney(amount)}</span>` : '';
+    const rateHtml = rate > 0 ? `<div class="entry-detail"><span class="entry-detail-icon">💵</span> ${fmtMoney(rate)}/hr</div>` : '';
+    const notesHtml = e.notes ? `<div class="entry-notes">${escHtml(e.notes)}</div>` : '';
+    const clientLabel = e.client_name ? `<div class="entry-client">${escHtml(e.client_name)}</div>` : '';
 
     return `
-      <div class="entry-card" id="card-${e.id}" data-id="${e.id}">
+      <div class="entry-card${isSelected ? ' selected' : ''}" id="card-${e.id}" data-id="${e.id}">
         <div class="entry-card-actions">
-          <button class="icon-btn" onclick="startEdit('${e.id}')" title="Edit">✏️</button>
+          ${paidBadge}
+          ${!isPaid ? `<button class="icon-btn" onclick="startEdit('${e.id}')" title="Edit">✏️</button>` : ''}
           <button class="icon-btn delete-btn" onclick="deleteEntry('${e.id}')" title="Delete">🗑️</button>
         </div>
-        <div class="entry-client">${escHtml(e.client_name)}</div>
-        <div class="entry-meta">${fmtDate(e.entry_date)}</div>
-        <div class="entry-details">
-          <div class="entry-detail"><span class="entry-detail-icon">🕐</span> ${startStr} → ${endStr}</div>
-          <span class="entry-duration">${dur.display}</span>
-          ${rateHtml}
-          ${amountHtml}
+        <div class="entry-card-top">
+          ${checkboxHtml}
+          <div class="entry-card-body">
+            ${clientLabel}
+            <div class="entry-meta">${fmtDate(e.entry_date)}</div>
+            <div class="entry-details">
+              <div class="entry-detail"><span class="entry-detail-icon">🕐</span> ${fmt12(e.start_time)} → ${fmt12(e.end_time)}</div>
+              <span class="entry-duration">${dur.display}</span>
+              ${rateHtml}
+              ${amountHtml}
+            </div>
+            ${notesHtml}
+          </div>
         </div>
-        ${notesHtml}
       </div>`;
   }
 
-  function escHtml(str) {
-    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  function toggleEntry(id, checked) {
+    if (checked) {
+      selectedEntryIds.add(id);
+      document.getElementById(`card-${id}`).classList.add('selected');
+    } else {
+      selectedEntryIds.delete(id);
+      document.getElementById(`card-${id}`).classList.remove('selected');
+    }
+    updateFloatingBar();
+  }
+
+  function updateFloatingBar() {
+    const bar = document.getElementById('floatingBar');
+    const info = document.getElementById('barInfo');
+    const ids = [...selectedEntryIds];
+    if (!ids.length) { bar.classList.remove('visible'); return; }
+
+    let subtotal = 0;
+    for (const id of ids) {
+      const e = entries.find(x => x.id === id);
+      if (e) {
+        const dur = calcDuration(e.start_time, e.end_time);
+        subtotal += dur.hours * (parseFloat(e.rate) || 0);
+      }
+    }
+    const tax = subtotal * 0.10;
+    const total = subtotal + tax;
+    info.innerHTML = `<strong>${ids.length}</strong> entr${ids.length === 1 ? 'y' : 'ies'} selected · ${fmtMoney(subtotal)} + 10% tax = <strong>${fmtMoney(total)}</strong>`;
+    bar.classList.add('visible');
   }
 
   // ─── Create Entry ──────────────────────────────────────────────────────────
@@ -773,26 +878,34 @@
   document.getElementById('entryForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
-    const clientName = document.getElementById('clientName').value.trim();
+    const clientId = document.getElementById('clientSelect').value || null;
+    const clientOption = clientId ? clients.find(c => c.id === clientId) : null;
+    const clientName = clientOption ? clientOption.name : (clientId ? '' : '');
+
     const rate = document.getElementById('rate').value;
     const entryDate = document.getElementById('entryDate').value;
     const startTime = document.getElementById('startTime').value;
     const endTime = document.getElementById('endTime').value;
-    const notes = document.getElementById('notes').value.trim();
+    const notes = document.getElementById('entryNotes').value.trim();
 
-    if (!clientName || !entryDate || !startTime || !endTime) {
-      showToast('Please fill in all required fields', 'error'); return;
-    }
+    if (!entryDate || !startTime || !endTime) { showToast('Please fill in date and times', 'error'); return; }
     const dur = calcDuration(startTime, endTime);
     if (dur.mins <= 0) { showToast('End time must be after start time', 'error'); return; }
 
-    btn.disabled = true;
-    btn.textContent = 'Logging...';
+    btn.disabled = true; btn.textContent = 'Logging…';
     try {
       const res = await fetch(`${API}/api/time`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ client_name: clientName, rate: parseFloat(rate) || 0, entry_date: entryDate, start_time: startTime, end_time: endTime, notes: notes || null }),
+        body: JSON.stringify({
+          client_name: clientName || '(No Client)',
+          client_id: clientId,
+          rate: parseFloat(rate) || 0,
+          entry_date: entryDate,
+          start_time: startTime,
+          end_time: endTime,
+          notes: notes || null,
+        }),
       });
       if (!res.ok) throw new Error('Failed to create');
       const entry = await res.json();
@@ -803,16 +916,11 @@
       document.getElementById('entryDate').value = todayStr();
       document.getElementById('durationPreview').innerHTML = '';
       showToast('Entry logged.', 'success');
-    } catch {
-      showToast('Failed to log entry', 'error');
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Log Entry';
-    }
+    } catch { showToast('Failed to log entry', 'error'); }
+    finally { btn.disabled = false; btn.textContent = 'Log Entry'; }
   });
 
-  // ─── Duration Preview ──────────────────────────────────────────────────────
-
+  // Duration Preview
   function updateDurationPreview() {
     const s = document.getElementById('startTime').value;
     const e = document.getElementById('endTime').value;
@@ -823,16 +931,10 @@
       if (dur.mins > 0) {
         const amountStr = rate > 0 ? ` · <strong>${fmtMoney(dur.hours * rate)}</strong>` : '';
         preview.innerHTML = `<strong>${dur.display}</strong>${amountStr}`;
-      } else {
-        preview.innerHTML = '';
-      }
-    } else {
-      preview.innerHTML = '';
-    }
+      } else preview.innerHTML = '';
+    } else preview.innerHTML = '';
   }
-  document.getElementById('startTime').addEventListener('input', updateDurationPreview);
-  document.getElementById('endTime').addEventListener('input', updateDurationPreview);
-  document.getElementById('rate').addEventListener('input', updateDurationPreview);
+  ['startTime','endTime','rate'].forEach(id => document.getElementById(id).addEventListener('input', updateDurationPreview));
 
   // ─── Edit Entry ────────────────────────────────────────────────────────────
 
@@ -840,15 +942,16 @@
     const e = entries.find(x => x.id === id);
     if (!e) return;
     const card = document.getElementById(`card-${id}`);
-    const dur = calcDuration(e.start_time, e.end_time);
     const rate = parseFloat(e.rate) || 0;
+    const clientOptionsHtml = `<option value="">— No Client —</option>` +
+      clients.map(c => `<option value="${c.id}" ${e.client_id === c.id ? 'selected' : ''}>${escHtml(c.name)}</option>`).join('');
 
     card.innerHTML = `
       <div class="entry-edit-form">
         <div class="form-grid">
           <div class="form-group">
-            <label class="form-label">Client Name</label>
-            <input type="text" class="form-input" id="edit-client-${id}" value="${escHtml(e.client_name)}" required />
+            <label class="form-label">Client</label>
+            <select class="form-select" id="edit-client-${id}">${clientOptionsHtml}</select>
           </div>
           <div class="form-group">
             <label class="form-label">Hourly Rate ($)</label>
@@ -880,16 +983,16 @@
   }
 
   async function saveEdit(id) {
-    const clientName = document.getElementById(`edit-client-${id}`).value.trim();
+    const clientId = document.getElementById(`edit-client-${id}`).value || null;
+    const clientOption = clientId ? clients.find(c => c.id === clientId) : null;
+    const clientName = clientOption ? clientOption.name : '(No Client)';
     const rate = document.getElementById(`edit-rate-${id}`).value;
     const entryDate = document.getElementById(`edit-date-${id}`).value;
     const startTime = document.getElementById(`edit-start-${id}`).value;
     const endTime = document.getElementById(`edit-end-${id}`).value;
     const notes = document.getElementById(`edit-notes-${id}`).value.trim();
 
-    if (!clientName || !entryDate || !startTime || !endTime) {
-      showToast('Please fill in all required fields', 'error'); return;
-    }
+    if (!entryDate || !startTime || !endTime) { showToast('Please fill in all required fields', 'error'); return; }
     const dur = calcDuration(startTime, endTime);
     if (dur.mins <= 0) { showToast('End time must be after start time', 'error'); return; }
 
@@ -897,7 +1000,7 @@
       const res = await fetch(`${API}/api/time/${id}`, {
         method: 'PATCH',
         headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ client_name: clientName, rate: parseFloat(rate) || 0, entry_date: entryDate, start_time: startTime, end_time: endTime, notes: notes || null }),
+        body: JSON.stringify({ client_name: clientName, client_id: clientId, rate: parseFloat(rate) || 0, entry_date: entryDate, start_time: startTime, end_time: endTime, notes: notes || null }),
       });
       if (!res.ok) throw new Error('Failed to update');
       const updated = await res.json();
@@ -906,43 +1009,219 @@
       renderEntries();
       renderSummary();
       showToast('Entry updated.', 'success');
-    } catch {
-      showToast('Failed to update entry', 'error');
-    }
+    } catch { showToast('Failed to update entry', 'error'); }
   }
 
-  function cancelEdit(id) {
-    renderEntries();
-  }
+  function cancelEdit(id) { renderEntries(); }
 
   // ─── Delete Entry ──────────────────────────────────────────────────────────
 
   async function deleteEntry(id) {
     if (!confirm('Delete this time entry?')) return;
     try {
-      const res = await fetch(`${API}/api/time/${id}`, {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(`${API}/api/time/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
       if (!res.ok) throw new Error('Failed to delete');
       entries = entries.filter(x => x.id !== id);
+      selectedEntryIds.delete(id);
       renderEntries();
       renderSummary();
       showToast('Entry deleted.', 'success');
-    } catch {
-      showToast('Failed to delete entry', 'error');
+    } catch { showToast('Failed to delete entry', 'error'); }
+  }
+
+  // ─── Invoice Generation ────────────────────────────────────────────────────
+
+  function openInvoiceModal() {
+    const ids = [...selectedEntryIds];
+    if (!ids.length) { showToast('Select at least one entry', 'error'); return; }
+
+    const selectedEntries = ids.map(id => entries.find(e => e.id === id)).filter(Boolean);
+
+    // Determine if all entries are from the same client
+    const clientIds = [...new Set(selectedEntries.map(e => e.client_id).filter(Boolean))];
+    let client = null;
+    if (clientIds.length === 1) {
+      client = clients.find(c => c.id === clientIds[0]);
+    }
+
+    let subtotal = 0;
+    for (const e of selectedEntries) {
+      const dur = calcDuration(e.start_time, e.end_time);
+      subtotal += dur.hours * (parseFloat(e.rate) || 0);
+    }
+    const tax = subtotal * 0.10;
+    const total = subtotal + tax;
+
+    // Client selector if multiple clients or no client
+    const clientSelectorHtml = clientIds.length !== 1 ? `
+      <div class="invoice-preview-section">
+        <h3>Select Client for Invoice</h3>
+        <select id="invoiceClientSelect" class="form-select" style="max-width:400px;">
+          <option value="">— Select Client —</option>
+          ${clients.map(c => `<option value="${c.id}">${escHtml(c.name)}</option>`).join('')}
+        </select>
+      </div>` : '';
+
+    const clientInfoHtml = client ? `
+      <div class="invoice-client-block">
+        <div class="invoice-client-name">${escHtml(client.name)}</div>
+        <div class="invoice-client-detail">
+          ${client.address ? escHtml(client.address) + '<br>' : ''}
+          ${client.poc_name ? 'Attn: ' + escHtml(client.poc_name) + '<br>' : ''}
+          ${client.poc_email ? escHtml(client.poc_email) + '<br>' : ''}
+          ${client.poc_phone ? escHtml(client.poc_phone) : ''}
+        </div>
+      </div>` : '';
+
+    const lineItemsHtml = selectedEntries.map(e => {
+      const dur = calcDuration(e.start_time, e.end_time);
+      const rate = parseFloat(e.rate) || 0;
+      const amount = dur.hours * rate;
+      return `<tr>
+        <td>${fmtDateShort(e.entry_date)}</td>
+        <td>
+          ${escHtml(e.client_name || '(No client)')}
+          <div class="line-sub">${fmt12(e.start_time)} → ${fmt12(e.end_time)} · ${dur.display} @ ${fmtMoney(rate)}/hr</div>
+          ${e.notes ? `<div class="line-sub">${escHtml(e.notes)}</div>` : ''}
+        </td>
+        <td>${fmtMoney(amount)}</td>
+      </tr>`;
+    }).join('');
+
+    pendingInvoiceData = {
+      entry_ids: ids,
+      client_id: client ? client.id : null,
+      selectedEntries,
+    };
+
+    document.getElementById('invoiceModalBody').innerHTML = `
+      ${clientSelectorHtml}
+      ${!clientSelectorHtml ? `
+      <div class="invoice-preview-section">
+        <h3>Billed To</h3>
+        ${clientInfoHtml}
+      </div>` : ''}
+      <div class="invoice-preview-section">
+        <h3>Line Items</h3>
+        <table class="line-items-table">
+          <thead><tr><th>Date</th><th>Description</th><th>Amount</th></tr></thead>
+          <tbody>${lineItemsHtml}</tbody>
+        </table>
+        <div class="invoice-totals">
+          <div class="totals-row"><span class="totals-label">Subtotal</span><span class="totals-value">${fmtMoney(subtotal)}</span></div>
+          <div class="totals-row"><span class="totals-label">LA State Tax (10%)</span><span class="totals-value">${fmtMoney(tax)}</span></div>
+          <div class="totals-row total-row"><span class="totals-label">TOTAL</span><span class="totals-value">${fmtMoney(total)}</span></div>
+        </div>
+      </div>
+      <div class="invoice-preview-section">
+        <h3>Notes (optional)</h3>
+        <textarea id="invoiceNotes" class="form-textarea" placeholder="Payment terms, thank you note, etc."></textarea>
+      </div>`;
+
+    document.getElementById('invoiceModalFooter').innerHTML = `
+      <button class="btn-secondary" onclick="closeInvoiceModal()">Cancel</button>
+      <button class="btn-primary" onclick="submitInvoice()">💳 Create Invoice &amp; Payment Link</button>`;
+
+    document.getElementById('invoiceModal').classList.add('open');
+  }
+
+  function closeInvoiceModal() {
+    document.getElementById('invoiceModal').classList.remove('open');
+    pendingInvoiceData = null;
+  }
+
+  async function submitInvoice() {
+    if (!pendingInvoiceData) return;
+
+    // Get client_id from selector if shown
+    const sel = document.getElementById('invoiceClientSelect');
+    let client_id = pendingInvoiceData.client_id;
+    if (sel) {
+      client_id = sel.value;
+      if (!client_id) { showToast('Please select a client', 'error'); return; }
+    }
+
+    const notes = document.getElementById('invoiceNotes')?.value?.trim() || null;
+    const btn = document.querySelector('#invoiceModalFooter .btn-primary');
+    if (btn) { btn.disabled = true; btn.textContent = 'Creating…'; }
+
+    try {
+      const res = await fetch(`${API}/api/invoices`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entry_ids: pendingInvoiceData.entry_ids, client_id, notes }),
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Failed to create invoice');
+      }
+      const { invoice } = await res.json();
+
+      // Mark entries as paid in local state
+      for (const id of pendingInvoiceData.entry_ids) {
+        const e = entries.find(x => x.id === id);
+        if (e) { e.paid = true; e.invoice_id = invoice.id; }
+      }
+      selectedEntryIds.clear();
+      renderEntries();
+      renderSummary();
+
+      const invoiceUrl = `https://inkthorn.ai/invoice.html?id=${invoice.id}`;
+      const stripeLink = invoice.stripe_payment_link;
+
+      document.getElementById('invoiceModalBody').innerHTML = `
+        <div class="success-box">
+          <div class="success-icon">✅</div>
+          <div class="success-msg">Invoice Created!</div>
+          <div class="success-url">${invoiceUrl}</div>
+          <button class="btn-copy" onclick="navigator.clipboard.writeText('${invoiceUrl}').then(()=>showToast('Link copied!','success'))">📋 Copy Link</button>
+          <a class="btn-open-invoice" href="${invoiceUrl}" target="_blank">🔗 Open Invoice</a>
+          ${stripeLink ? `<div style="margin-top:12px;"><a class="btn-open-invoice" href="${stripeLink}" target="_blank">💳 View Stripe Payment Link</a></div>` : '<div style="margin-top:8px;font-size:0.8rem;color:var(--cream-dim);">No Stripe link — SQL tables may need to be run first.</div>'}
+        </div>`;
+      document.getElementById('invoiceModalFooter').innerHTML = `<button class="btn-primary" onclick="closeInvoiceModal()">Done</button>`;
+    } catch (err) {
+      showToast('Error: ' + err.message, 'error');
+      if (btn) { btn.disabled = false; btn.textContent = '💳 Create Invoice & Payment Link'; }
     }
   }
 
-  // ─── Helpers ───────────────────────────────────────────────────────────────
+  // ─── Invoices Tab ──────────────────────────────────────────────────────────
 
-  function todayStr() {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  async function loadInvoices() {
+    try {
+      const res = await fetch(`${API}/api/invoices`, { headers: { Authorization: `Bearer ${token}` } });
+      if (!res.ok) throw new Error('Failed to load');
+      invoices = await res.json();
+      renderInvoicesList();
+    } catch { showToast('Failed to load invoices', 'error'); }
+  }
+
+  function renderInvoicesList() {
+    const list = document.getElementById('invoicesList');
+    const count = document.getElementById('invoiceCount');
+    count.textContent = `${invoices.length} invoice${invoices.length === 1 ? '' : 's'}`;
+
+    if (!invoices.length) {
+      list.innerHTML = `<div class="empty-state"><div class="empty-icon">📄</div><div class="empty-text">No invoices yet.</div><div class="empty-sub">Select entries and click "Generate Invoice" to create one.</div></div>`;
+      return;
+    }
+
+    list.innerHTML = invoices.map(inv => {
+      const client = clients.find(c => c.id === inv.client_id);
+      const clientName = client ? client.name : '(Unknown client)';
+      const dateStr = inv.created_at ? fmtDateShort(inv.created_at.substring(0,10)) : '—';
+      return `
+        <a class="invoice-row" href="invoice.html?id=${inv.id}" target="_blank">
+          <span class="invoice-num">${escHtml(inv.invoice_number)}</span>
+          <span class="invoice-client-name-sm">${escHtml(clientName)}</span>
+          <span class="invoice-date">${dateStr}</span>
+          <span class="invoice-total">${fmtMoney(inv.total)}</span>
+          <span class="invoice-status ${inv.status}">${escHtml(inv.status)}</span>
+        </a>`;
+    }).join('');
   }
 
   // ─── Boot ──────────────────────────────────────────────────────────────────
-
   document.getElementById('entryDate').value = todayStr();
   init();
 </script>
