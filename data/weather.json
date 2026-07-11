@@ -1,56 +1,56 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-07-10T23:46:46.254Z",
+  "updated": "2026-07-11T14:19:47.897Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 87,
-    "feels_like_f": 101,
-    "humidity": 70,
-    "description": "Patchy rain nearby",
-    "code": "176",
-    "emoji": "🌡️",
-    "wind_mph": 8,
-    "wind_dir": "NW",
+    "temp_f": 82,
+    "feels_like_f": 91,
+    "humidity": 88,
+    "description": "Sunny",
+    "code": "113",
+    "emoji": "☀️",
+    "wind_mph": 4,
+    "wind_dir": "SSE",
     "visibility_miles": 16,
-    "uv_index": 0
+    "uv_index": 1
   },
   "forecast": [
     {
-      "date": "2026-07-10",
-      "label": "Fri, Jul 10",
-      "high_f": 96,
+      "date": "2026-07-11",
+      "label": "Sat, Jul 11",
+      "high_f": 95,
       "low_f": 76,
       "description": "Clear",
       "emoji": "☀️",
       "sunrise": "06:07 AM",
       "sunset": "08:04 PM",
-      "avg_humidity": 77,
-      "chance_of_rain": 42
-    },
-    {
-      "date": "2026-07-11",
-      "label": "Sat, Jul 11",
-      "high_f": 95,
-      "low_f": 77,
-      "description": "Light Rain Shower",
-      "emoji": "🌨️",
-      "sunrise": "06:07 AM",
-      "sunset": "08:04 PM",
-      "avg_humidity": 74,
-      "chance_of_rain": 64
+      "avg_humidity": 81,
+      "chance_of_rain": 92
     },
     {
       "date": "2026-07-12",
       "label": "Sun, Jul 12",
       "high_f": 95,
-      "low_f": 76,
-      "description": "Light Rain + Thunder",
-      "emoji": "🌨️",
+      "low_f": 75,
+      "description": "Thundery Outbreaks",
+      "emoji": "⛈️",
       "sunrise": "06:08 AM",
       "sunset": "08:04 PM",
-      "avg_humidity": 78,
-      "chance_of_rain": 88
+      "avg_humidity": 74,
+      "chance_of_rain": 82
+    },
+    {
+      "date": "2026-07-13",
+      "label": "Mon, Jul 13",
+      "high_f": 79,
+      "low_f": 74,
+      "description": "Light Rain Shower",
+      "emoji": "🌨️",
+      "sunrise": "06:08 AM",
+      "sunset": "08:03 PM",
+      "avg_humidity": 86,
+      "chance_of_rain": 75
     }
   ]
 }
