@@ -341,6 +341,44 @@
     #toast.success { border-color: rgba(76,175,120,0.4); color: var(--green); }
     #toast.error { border-color: rgba(192,57,43,0.4); color: #e57373; }
 
+    /* ─── PROPOSAL BUILDER ─── */
+    .proposal-line-header {
+      display: flex; gap: 10px; margin-bottom: 8px;
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--cream-dim); font-weight: 500; padding: 0 4px;
+    }
+    .proposal-line-item {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    }
+    .proposal-line-desc { flex: 2; }
+    .proposal-line-hours { width: 90px; flex-shrink: 0; }
+    .proposal-line-rate { width: 110px; flex-shrink: 0; }
+    .proposal-line-amount {
+      width: 90px; flex-shrink: 0; text-align: right;
+      color: var(--green); font-weight: 600; font-size: 0.9rem;
+    }
+    .btn-remove-line {
+      background: none; border: 1px solid transparent; border-radius: var(--radius-sm);
+      color: var(--cream-dim); font-size: 1.1rem; cursor: pointer; padding: 4px 8px;
+      transition: all 0.15s ease; flex-shrink: 0; line-height: 1;
+    }
+    .btn-remove-line:hover:not(:disabled) { border-color: rgba(192,57,43,0.4); color: var(--red); background: rgba(192,57,43,0.08); }
+    .btn-remove-line:disabled { opacity: 0.25; cursor: not-allowed; }
+    .proposal-totals-section {
+      border-top: 1px solid var(--border); margin-top: 16px; padding-top: 14px;
+      display: flex; justify-content: flex-end;
+    }
+    .proposal-totals-inner { display: flex; flex-direction: column; gap: 6px; min-width: 220px; }
+    .proposal-total-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 4px 0; font-size: 0.9rem; color: var(--cream-dim);
+    }
+    .proposal-total-row.grand {
+      border-top: 1px solid var(--border-hover); margin-top: 6px; padding-top: 12px;
+    }
+    .proposal-total-row.grand span:first-child { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); font-weight: 700; }
+    .proposal-total-row.grand span:last-child { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--gold); font-weight: 700; }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 600px) {
       .form-grid, .form-row { grid-template-columns: 1fr; }
@@ -349,6 +387,8 @@
       .entry-card-actions { position: static; margin-bottom: 12px; justify-content: flex-end; }
       .entry-client { padding-right: 0; }
       .invoice-row { flex-wrap: wrap; gap: 8px; }
+      .proposal-line-item { flex-wrap: wrap; }
+      .proposal-line-hours, .proposal-line-rate { width: 80px; }
     }
   </style>
 </head>
@@ -409,6 +449,7 @@
   <div class="tab-bar">
     <button class="tab-btn active" onclick="switchTab('time')">⏱ Time Entries</button>
     <button class="tab-btn" onclick="switchTab('invoices')">📄 Invoices</button>
+    <button class="tab-btn" onclick="switchTab('proposal')">📝 Proposal</button>
   </div>
 
   <!-- Time Tab -->
@@ -471,6 +512,91 @@
       <div class="section-count" id="invoiceCount">0 invoices</div>
     </div>
     <div id="invoicesList"></div>
+  </div>
+
+  <!-- Proposal Tab -->
+  <div class="tab-panel" id="tab-proposal">
+
+    <!-- Header Controls -->
+    <div class="card">
+      <div class="card-title">📝 Proposal Builder</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Client</label>
+          <div class="client-row">
+            <select id="proposalClientSelect" class="form-select" onchange="onProposalClientChange()">
+              <option value="">— Select Client —</option>
+            </select>
+            <button type="button" class="btn-add-client" onclick="openClientModal()">+ New</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Default Hourly Rate ($)</label>
+          <input type="number" id="proposalRate" class="form-input" placeholder="150.00" step="0.01" min="0" oninput="recomputeProposalTotals()" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Proposal Date</label>
+          <input type="date" id="proposalDate" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Valid Until</label>
+          <input type="date" id="proposalValidUntil" class="form-input" />
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Proposal Summary / Intro</label>
+          <textarea id="proposalSummary" class="form-textarea" style="min-height:90px;" placeholder="Briefly describe the scope of work, goals, and context for this proposal…"></textarea>
+        </div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn-secondary" onclick="importFromTimeTracker()" title="Pull hours & rate from your selected time entries">⏱ Pull from Time Entries</button>
+        <button class="btn-primary" onclick="generateProposalPreview()">👁 Preview Proposal</button>
+        <button class="btn-secondary" onclick="printProposal()" style="margin-left:auto;">🖨️ Print / PDF</button>
+      </div>
+    </div>
+
+    <!-- Line Items -->
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div class="card-title" style="margin-bottom:0;">Work Description Line Items</div>
+        <button class="btn-primary" onclick="addProposalLine()" style="padding:8px 16px;font-size:0.82rem;">+ Add Line</button>
+      </div>
+      <div class="proposal-line-header">
+        <div style="flex:2;">Description</div>
+        <div style="width:90px;flex-shrink:0;">Hours</div>
+        <div style="width:110px;flex-shrink:0;">Rate ($/hr)</div>
+        <div style="width:90px;flex-shrink:0;text-align:right;">Amount</div>
+        <div style="width:36px;flex-shrink:0;"></div>
+      </div>
+      <div id="proposalLineItems"></div>
+      <div class="proposal-totals-section">
+        <div class="proposal-totals-inner">
+          <div class="proposal-total-row">
+            <span>Subtotal</span>
+            <span id="proposalSubtotal">$0.00</span>
+          </div>
+          <div class="proposal-total-row grand">
+            <span>Total</span>
+            <span id="proposalGrandTotal">$0.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── PROPOSAL PREVIEW MODAL ─── -->
+<div class="modal-overlay" id="proposalPreviewModal">
+  <div class="modal" style="max-width:760px;">
+    <div class="modal-header">
+      <div class="modal-title">📝 Proposal Preview</div>
+      <button class="modal-close" onclick="document.getElementById('proposalPreviewModal').classList.remove('open')">×</button>
+    </div>
+    <div class="modal-body" id="proposalPreviewBody"></div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="document.getElementById('proposalPreviewModal').classList.remove('open')">Close</button>
+      <button class="btn-primary" onclick="printProposal()">🖨️ Print / Save as PDF</button>
+    </div>
   </div>
 </div>
 
@@ -632,12 +758,13 @@
   // ─── Tabs ──────────────────────────────────────────────────────────────────
 
   function switchTab(name) {
+    const tabs = ['time', 'invoices', 'proposal'];
     document.querySelectorAll('.tab-btn').forEach((b, i) => {
-      b.classList.toggle('active', (i === 0 && name === 'time') || (i === 1 && name === 'invoices'));
+      b.classList.toggle('active', tabs[i] === name);
     });
-    document.getElementById('tab-time').classList.toggle('active', name === 'time');
-    document.getElementById('tab-invoices').classList.toggle('active', name === 'invoices');
+    tabs.forEach(t => document.getElementById(`tab-${t}`).classList.toggle('active', t === name));
     if (name === 'invoices') loadInvoices();
+    if (name === 'proposal') initProposalTab();
   }
 
   // ─── Auth ──────────────────────────────────────────────────────────────────
@@ -673,16 +800,19 @@
   }
 
   function refreshClientDropdown() {
-    const sel = document.getElementById('clientSelect');
-    const current = sel.value;
-    sel.innerHTML = '<option value="">— Select Client —</option>';
-    for (const c of clients) {
-      const opt = document.createElement('option');
-      opt.value = c.id;
-      opt.textContent = c.name;
-      sel.appendChild(opt);
-    }
-    if (current) sel.value = current;
+    ['clientSelect', 'proposalClientSelect'].forEach(selId => {
+      const sel = document.getElementById(selId);
+      if (!sel) return;
+      const current = sel.value;
+      sel.innerHTML = '<option value="">— Select Client —</option>';
+      for (const c of clients) {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = c.name;
+        sel.appendChild(opt);
+      }
+      if (current) sel.value = current;
+    });
   }
 
   function openClientModal() {
@@ -1219,6 +1349,293 @@
           <span class="invoice-status ${inv.status}">${escHtml(inv.status)}</span>
         </a>`;
     }).join('');
+  }
+
+  // ─── Proposal Builder ─────────────────────────────────────────────────────
+
+  let proposalLines = []; // [{id, description, hours, rate}]
+  let proposalLineCounter = 0;
+
+  function initProposalTab() {
+    // Populate client dropdown
+    const sel = document.getElementById('proposalClientSelect');
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">— Select Client —</option>';
+    for (const c of clients) {
+      const opt = document.createElement('option');
+      opt.value = c.id;
+      opt.textContent = c.name;
+      sel.appendChild(opt);
+    }
+    if (cur) sel.value = cur;
+
+    // Default dates
+    if (!document.getElementById('proposalDate').value) {
+      document.getElementById('proposalDate').value = todayStr();
+    }
+    if (!document.getElementById('proposalValidUntil').value) {
+      // default valid for 30 days
+      const d = new Date(); d.setDate(d.getDate() + 30);
+      document.getElementById('proposalValidUntil').value =
+        `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    }
+
+    // Add a starter line if empty
+    if (!proposalLines.length) addProposalLine();
+    renderProposalLines();
+  }
+
+  function onProposalClientChange() {
+    // When a client is selected, optionally pre-fill rate from last entry
+    const clientId = document.getElementById('proposalClientSelect').value;
+    if (!clientId) return;
+    const match = entries.find(e => e.client_id === clientId && e.rate);
+    if (match && !document.getElementById('proposalRate').value) {
+      document.getElementById('proposalRate').value = parseFloat(match.rate).toFixed(2);
+      recomputeProposalTotals();
+    }
+  }
+
+  function addProposalLine(description = '', hours = '', rate = '') {
+    const defaultRate = document.getElementById('proposalRate')?.value || '';
+    proposalLineCounter++;
+    proposalLines.push({
+      id: proposalLineCounter,
+      description,
+      hours: hours !== '' ? hours : '',
+      rate: rate !== '' ? rate : defaultRate,
+    });
+    renderProposalLines();
+  }
+
+  function removeProposalLine(id) {
+    proposalLines = proposalLines.filter(l => l.id !== id);
+    if (!proposalLines.length) addProposalLine();
+    else renderProposalLines();
+  }
+
+  function renderProposalLines() {
+    const container = document.getElementById('proposalLineItems');
+    if (!container) return;
+
+    container.innerHTML = proposalLines.map(line => {
+      const hrs = parseFloat(line.hours) || 0;
+      const rt = parseFloat(line.rate) || 0;
+      const amt = hrs * rt;
+      const canRemove = proposalLines.length > 1;
+      return `
+        <div class="proposal-line-item" id="pline-${line.id}">
+          <div class="proposal-line-desc">
+            <input type="text" class="form-input" value="${escHtml(line.description)}"
+              placeholder="e.g. Website redesign, API integration…"
+              oninput="updateProposalLine(${line.id},'description',this.value)" />
+          </div>
+          <div class="proposal-line-hours">
+            <input type="number" class="form-input" value="${line.hours}" placeholder="0"
+              min="0" step="0.25" style="text-align:right;"
+              oninput="updateProposalLine(${line.id},'hours',this.value)" />
+          </div>
+          <div class="proposal-line-rate">
+            <input type="number" class="form-input" value="${line.rate}" placeholder="0.00"
+              min="0" step="0.01" style="text-align:right;"
+              oninput="updateProposalLine(${line.id},'rate',this.value)" />
+          </div>
+          <div class="proposal-line-amount">${amt > 0 ? fmtMoney(amt) : '—'}</div>
+          <button class="btn-remove-line" onclick="removeProposalLine(${line.id})"
+            ${canRemove ? '' : 'disabled'} title="Remove line">✕</button>
+        </div>`;
+    }).join('');
+
+    recomputeProposalTotals();
+  }
+
+  function updateProposalLine(id, field, value) {
+    const line = proposalLines.find(l => l.id === id);
+    if (!line) return;
+    line[field] = value;
+    // Update just the amount cell without full re-render (preserve focus)
+    const hrs = parseFloat(line.hours) || 0;
+    const rt = parseFloat(line.rate) || 0;
+    const amt = hrs * rt;
+    const amtEl = document.querySelector(`#pline-${id} .proposal-line-amount`);
+    if (amtEl) amtEl.textContent = amt > 0 ? fmtMoney(amt) : '—';
+    recomputeProposalTotals();
+  }
+
+  function recomputeProposalTotals() {
+    let subtotal = 0;
+    for (const line of proposalLines) {
+      subtotal += (parseFloat(line.hours) || 0) * (parseFloat(line.rate) || 0);
+    }
+    const el1 = document.getElementById('proposalSubtotal');
+    const el2 = document.getElementById('proposalGrandTotal');
+    if (el1) el1.textContent = fmtMoney(subtotal);
+    if (el2) el2.textContent = fmtMoney(subtotal);
+  }
+
+  function importFromTimeTracker() {
+    const ids = [...selectedEntryIds];
+    if (!ids.length) {
+      showToast('Select time entries in the Time Entries tab first', 'error');
+      return;
+    }
+
+    const selected = ids.map(id => entries.find(e => e.id === id)).filter(Boolean);
+
+    // Try to auto-set client
+    const clientIds = [...new Set(selected.map(e => e.client_id).filter(Boolean))];
+    if (clientIds.length === 1) {
+      const sel = document.getElementById('proposalClientSelect');
+      if (sel) sel.value = clientIds[0];
+    }
+
+    // Use the first rate found
+    const firstRate = selected.find(e => e.rate)?.rate;
+    if (firstRate) {
+      document.getElementById('proposalRate').value = parseFloat(firstRate).toFixed(2);
+    }
+
+    // Build one line per entry: date + notes as description, actual hours, actual rate
+    const newLines = selected.map(e => {
+      const dur = calcDuration(e.start_time, e.end_time);
+      const desc = `${fmtDateShort(e.entry_date)}${e.notes ? ' — ' + e.notes : ''}`;
+      return {
+        id: ++proposalLineCounter,
+        description: desc,
+        hours: Number(dur.hours.toFixed(2)),
+        rate: parseFloat(e.rate) || parseFloat(document.getElementById('proposalRate').value) || 0,
+      };
+    });
+
+    // Replace lines or append
+    proposalLines = newLines.length ? newLines : proposalLines;
+    if (!proposalLines.length) addProposalLine();
+    renderProposalLines();
+    showToast(`Imported ${selected.length} entr${selected.length === 1 ? 'y' : 'ies'} as line items.`, 'success');
+  }
+
+  function generateProposalPreview() {
+    const clientId = document.getElementById('proposalClientSelect').value;
+    const client = clients.find(c => c.id === clientId);
+    const summary = document.getElementById('proposalSummary').value.trim();
+    const proposalDate = document.getElementById('proposalDate').value;
+    const validUntil = document.getElementById('proposalValidUntil').value;
+
+    let subtotal = 0;
+    for (const line of proposalLines) {
+      subtotal += (parseFloat(line.hours) || 0) * (parseFloat(line.rate) || 0);
+    }
+
+    const lineItemsHtml = proposalLines.filter(l => l.description || parseFloat(l.hours)).map(line => {
+      const hrs = parseFloat(line.hours) || 0;
+      const rt = parseFloat(line.rate) || 0;
+      const amt = hrs * rt;
+      return `
+        <tr>
+          <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--cream);">${escHtml(line.description || '—')}</td>
+          <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.05);text-align:right;color:var(--cream-dim);">${hrs > 0 ? hrs : '—'}</td>
+          <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.05);text-align:right;color:var(--cream-dim);">${rt > 0 ? fmtMoney(rt) : '—'}</td>
+          <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.05);text-align:right;color:var(--green);font-weight:600;">${amt > 0 ? fmtMoney(amt) : '—'}</td>
+        </tr>`;
+    }).join('');
+
+    document.getElementById('proposalPreviewBody').innerHTML = `
+      <div style="border:1px solid var(--border);border-radius:10px;padding:28px;background:rgba(255,255,255,0.02);" id="proposalPrintArea">
+
+        <!-- Header row -->
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;flex-wrap:wrap;gap:16px;">
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);font-weight:700;margin-bottom:4px;">Proposal</div>
+            <div style="font-size:0.85rem;color:var(--cream-dim);">
+              ${proposalDate ? 'Date: <strong>' + fmtDate(proposalDate) + '</strong>' : ''}
+              ${validUntil ? ' · Valid until: <strong>' + fmtDate(validUntil) + '</strong>' : ''}
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <img src="https://inkthorn.ai/inkthorn-mascot-small.png" style="width:44px;height:44px;object-fit:contain;" />
+            <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold);margin-top:4px;">InkThorn</div>
+          </div>
+        </div>
+
+        ${client ? `
+        <!-- Client block -->
+        <div style="margin-bottom:24px;padding:14px 16px;background:rgba(201,168,76,0.06);border:1px solid var(--border);border-radius:8px;">
+          <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--cream-dim);margin-bottom:6px;font-weight:500;">Prepared For</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);font-weight:700;">${escHtml(client.name)}</div>
+          <div style="font-size:0.83rem;color:var(--cream-dim);line-height:1.8;margin-top:4px;">
+            ${client.poc_name ? 'Attn: ' + escHtml(client.poc_name) + '<br>' : ''}
+            ${client.poc_email ? escHtml(client.poc_email) + '<br>' : ''}
+            ${client.poc_phone ? escHtml(client.poc_phone) + '<br>' : ''}
+            ${client.address ? escHtml(client.address) : ''}
+          </div>
+        </div>` : ''}
+
+        ${summary ? `
+        <!-- Summary -->
+        <div style="margin-bottom:24px;">
+          <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--cream-dim);margin-bottom:10px;font-weight:500;">Scope of Work</div>
+          <div style="font-size:0.93rem;color:var(--cream);line-height:1.7;">${escHtml(summary).replace(/\n/g,'<br>')}</div>
+        </div>` : ''}
+
+        <!-- Line items -->
+        <div style="margin-bottom:16px;">
+          <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--cream-dim);margin-bottom:10px;font-weight:500;">Line Items</div>
+          <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border);">
+                <th style="text-align:left;padding:6px 10px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--cream-dim);font-weight:500;">Description</th>
+                <th style="text-align:right;padding:6px 10px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--cream-dim);font-weight:500;">Hours</th>
+                <th style="text-align:right;padding:6px 10px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--cream-dim);font-weight:500;">Rate</th>
+                <th style="text-align:right;padding:6px 10px;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--cream-dim);font-weight:500;">Amount</th>
+              </tr>
+            </thead>
+            <tbody>${lineItemsHtml}</tbody>
+          </table>
+        </div>
+
+        <!-- Totals -->
+        <div style="display:flex;justify-content:flex-end;border-top:1px solid var(--border);padding-top:14px;">
+          <div style="min-width:220px;">
+            <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:0.9rem;color:var(--cream-dim);">
+              <span>Subtotal</span><span>${fmtMoney(subtotal)}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:12px 0 6px;border-top:1px solid var(--border-hover);margin-top:6px;">
+              <span style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--cream);font-weight:700;">Total</span>
+              <span style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);font-weight:700;">${fmtMoney(subtotal)}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer note -->
+        <div style="margin-top:28px;padding-top:16px;border-top:1px solid var(--border);font-size:0.8rem;color:var(--cream-dim);font-style:italic;text-align:center;">
+          This proposal is valid through ${validUntil ? fmtDate(validUntil) : '30 days from date of issue'}.
+          Thank you for the opportunity to work together.
+        </div>
+      </div>`;
+
+    document.getElementById('proposalPreviewModal').classList.add('open');
+  }
+
+  function printProposal() {
+    const area = document.getElementById('proposalPrintArea');
+    if (!area) { generateProposalPreview(); setTimeout(printProposal, 300); return; }
+    const win = window.open('', '_blank');
+    win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Proposal</title>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+      <style>
+        *{box-sizing:border-box;margin:0;padding:0;}
+        :root{--gold:#c9a84c;--green:#4caf78;--cream:#e8dcc8;--cream-dim:#b8ad9a;--border:rgba(201,168,76,0.2);--border-hover:rgba(201,168,76,0.35);}
+        body{background:#fff;color:#1a1612;font-family:'Inter',sans-serif;padding:40px;max-width:760px;margin:0 auto;}
+        @media print{body{padding:0;}}
+      </style>
+    </head><body>
+      <div style="color:#1a1612;">
+        ${area.innerHTML.replace(/var\(--gold\)/g,'#c9a84c').replace(/var\(--green\)/g,'#4caf78').replace(/var\(--cream\)/g,'#1a1612').replace(/var\(--cream-dim\)/g,'#666').replace(/var\(--border\)/g,'#ddd').replace(/var\(--border-hover\)/g,'#bbb').replace(/rgba\(255,255,255,0\.[0-9]+\)/g,'#f9f8f5').replace(/rgba\(201,168,76,0\.[0-9]+\)/g,'#fdf8ee')}
+      </div>
+    </body></html>`);
+    win.document.close();
+    win.focus();
+    setTimeout(() => { win.print(); }, 600);
   }
 
   // ─── Boot ──────────────────────────────────────────────────────────────────
