@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>InkThorn Invoice</title>
+  <title>Trustlight Invoice</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -33,9 +33,16 @@
       margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
     }
     .inv-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .inv-brand img { width: 36px; height: 36px; }
     .inv-brand-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); font-weight: 700; }
-    .inv-actions { display: flex; gap: 10px; }
+    .inv-nav-actions { display: flex; gap: 10px; }
+
+    /* ─── TOP PAY BAR ─── */
+    .top-pay-bar {
+      display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+      margin-bottom: 20px; padding: 16px 20px;
+      background: var(--surface); border: 1px solid var(--border-hover);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+    }
 
     /* ─── INVOICE CARD ─── */
     .invoice-card {
@@ -49,17 +56,14 @@
       border-bottom: 1px solid var(--border); padding: 28px 32px;
       display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap;
     }
-    .inv-header-left {}
     .inv-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--cream-dim); margin-bottom: 4px; }
     .inv-word-invoice { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); font-weight: 700; letter-spacing: -0.02em; }
-    .inv-site { font-size: 0.82rem; color: var(--cream-dim); margin-top: 4px; }
     .inv-header-right { text-align: right; }
     .inv-number { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--cream); font-weight: 600; margin-bottom: 4px; }
     .inv-date { font-size: 0.85rem; color: var(--cream-dim); }
 
     /* ─── PARTY SECTION ─── */
     .inv-parties { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 28px 32px; border-bottom: 1px solid var(--border); }
-    .party-block {}
     .party-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-dim); margin-bottom: 8px; font-weight: 600; }
     .party-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); font-weight: 700; margin-bottom: 6px; }
     .party-detail { font-size: 0.83rem; color: var(--cream-dim); line-height: 1.75; }
@@ -94,8 +98,10 @@
     .inv-notes-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-dim); margin-bottom: 8px; font-weight: 600; }
     .inv-notes-text { font-size: 0.88rem; color: var(--cream-dim); line-height: 1.6; white-space: pre-wrap; }
 
-    /* ─── ACTION BUTTONS ─── */
+    /* ─── BOTTOM ACTION BAR ─── */
     .inv-actions-bar { padding: 24px 32px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+    /* ─── BUTTONS ─── */
     .btn-pay {
       display: inline-flex; align-items: center; gap: 8px;
       background: var(--gold); color: #1a1612; border: none; border-radius: var(--radius-sm);
@@ -123,7 +129,7 @@
     /* ─── PRINT STYLES ─── */
     @media print {
       body { background: #fff !important; color: #111 !important; }
-      .inv-nav, .inv-actions-bar { display: none !important; }
+      .inv-nav, .top-pay-bar, .inv-actions-bar { display: none !important; }
       .page-wrap { padding: 0; max-width: 100%; }
       .invoice-card { border: none; box-shadow: none; border-radius: 0; }
       .inv-header { background: #f8f6f0 !important; border-bottom: 2px solid #c9a84c; }
@@ -141,6 +147,7 @@
     @media (max-width: 600px) {
       .inv-parties { grid-template-columns: 1fr; }
       .inv-header, .inv-parties, .inv-items, .inv-totals, .inv-notes, .inv-actions-bar { padding: 20px; }
+      .top-pay-bar { padding: 14px 16px; }
     }
   </style>
 </head>
@@ -148,11 +155,10 @@
 <div class="page-wrap">
   <!-- Nav (hidden on print) -->
   <nav class="inv-nav">
-    <a href="/" class="inv-brand">
-      <img src="https://inkthorn.ai/inkthorn-mascot-small.png" alt="InkThorn" />
-      <span class="inv-brand-name">InkThorn</span>
+    <a href="https://trustlight.ai" class="inv-brand">
+      <span class="inv-brand-name">Trustlight.ai</span>
     </a>
-    <div class="inv-actions">
+    <div class="inv-nav-actions">
       <a href="time-tracker.html" style="font-size:0.82rem;color:var(--cream-dim);text-decoration:none;padding:6px 12px;border:1px solid var(--border);border-radius:6px;">← Back to Tracker</a>
     </div>
   </nav>
@@ -170,12 +176,18 @@
     <div class="state-sub">This invoice may have been removed or the link is invalid.</div>
   </div>
 
+  <!-- Top Pay Bar (hidden on print, shown after load) -->
+  <div class="top-pay-bar" id="topPayBar" style="display:none;">
+    <div id="topPayBtn"></div>
+    <button class="btn-print" onclick="window.print()">🖨️ Print Invoice</button>
+  </div>
+
   <!-- Invoice Card -->
   <div class="invoice-card" id="invoiceCard" style="display:none;">
     <!-- Header Band -->
     <div class="inv-header">
       <div class="inv-header-left">
-        <div class="inv-label">InkThorn — inkthorn.ai</div>
+        <div class="inv-label">Trustlight.ai — trustlight.ai</div>
         <div class="inv-word-invoice">INVOICE</div>
       </div>
       <div class="inv-header-right">
@@ -227,9 +239,9 @@
       <div class="inv-notes-text" id="notesText"></div>
     </div>
 
-    <!-- Action Buttons (hidden on print) -->
-    <div class="inv-actions-bar" id="actionsBar">
-      <div id="payBtn"></div>
+    <!-- Bottom Action Bar (hidden on print) -->
+    <div class="inv-actions-bar" id="bottomActionsBar">
+      <div id="bottomPayBtn"></div>
       <button class="btn-print" onclick="window.print()">🖨️ Print Invoice</button>
     </div>
   </div>
@@ -271,14 +283,18 @@
     return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
+  function makePayBtn(link) {
+    if (link) {
+      return `<a class="btn-pay" href="${escHtml(link)}" target="_blank">💳 Pay Now via Stripe</a>`;
+    }
+    return `<span class="no-payment">Contact Rob@Trustlight.ai for payment details.</span>`;
+  }
+
   async function loadInvoice() {
     const params = new URLSearchParams(location.search);
     const invoiceId = params.get('id');
 
-    if (!invoiceId) {
-      showError();
-      return;
-    }
+    if (!invoiceId) { showError(); return; }
 
     try {
       const res = await fetch(`${API}/api/invoices/${invoiceId}/public`);
@@ -299,9 +315,10 @@
   function renderInvoice(invoice, entries, client) {
     document.getElementById('loadingState').style.display = 'none';
     document.getElementById('invoiceCard').style.display = 'block';
+    document.getElementById('topPayBar').style.display = 'flex';
 
-    // Set page title
-    document.title = `Invoice ${invoice.invoice_number} — InkThorn`;
+    // Page title
+    document.title = `Invoice ${invoice.invoice_number} — Trustlight.ai`;
 
     // Header
     document.getElementById('invNumber').textContent = invoice.invoice_number;
@@ -349,13 +366,10 @@
       document.getElementById('notesText').textContent = invoice.notes;
     }
 
-    // Pay button
-    const payContainer = document.getElementById('payBtn');
-    if (invoice.stripe_payment_link) {
-      payContainer.innerHTML = `<a class="btn-pay" href="${escHtml(invoice.stripe_payment_link)}" target="_blank">💳 Pay Now via Stripe</a>`;
-    } else {
-      payContainer.innerHTML = `<span class="no-payment">Contact for payment details.</span>`;
-    }
+    // Pay buttons — top and bottom
+    const payHtml = makePayBtn(invoice.stripe_payment_link);
+    document.getElementById('topPayBtn').innerHTML = payHtml;
+    document.getElementById('bottomPayBtn').innerHTML = payHtml;
   }
 
   loadInvoice();
