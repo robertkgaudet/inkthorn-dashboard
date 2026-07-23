@@ -229,6 +229,12 @@
       font-size: 0.78rem; color: var(--text-dim);
     }
     .inv-footer a { color: var(--green-dark); text-decoration: none; }
+    .inv-footer-paylink {
+      font-size: 0.82rem; color: var(--text-muted); margin-top: 12px;
+    }
+    .inv-footer-paylink a {
+      color: var(--green-dark); word-break: break-all; text-decoration: underline;
+    }
 
     /* ─── LOADING / ERROR ─── */
     .state-screen { text-align: center; padding: 80px 20px; color: var(--text-muted); }
@@ -245,7 +251,9 @@
     /* ─── PRINT ─── */
     @media print {
       body { background: #fff !important; }
-      .inv-nav, .top-pay-bar, .inv-actions-bar, .inv-footer { display: none !important; }
+      .inv-nav, .top-pay-bar, .inv-actions-bar { display: none !important; }
+      .inv-footer { display: block !important; padding: 20px 0 0; }
+      .inv-footer-paylink { display: block !important; }
       .page-wrap { padding: 0; max-width: 100%; }
       .invoice-card { border: none; box-shadow: none; border-radius: 0; }
       .inv-header { background: var(--hero-bg) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -369,6 +377,9 @@
     <!-- Footer -->
     <div class="inv-footer" id="invFooter" style="display:none;">
       Questions? Contact <a href="mailto:Rob@Trustlight.ai">Rob@Trustlight.ai</a> or call <a href="tel:5043028656">504-302-8656</a>
+      <div class="inv-footer-paylink" id="footerPayLink" style="display:none; margin-top:12px;">
+        Pay online: <a id="footerPayUrl" href="#" target="_blank"></a>
+      </div>
     </div>
 
   </div><!-- /page-wrap -->
@@ -482,6 +493,15 @@
     const payHtml = makePayBtn(invoice.stripe_payment_link);
     document.getElementById('topPayBtn').innerHTML = payHtml;
     document.getElementById('bottomPayBtn').innerHTML = payHtml;
+
+    // Plain-text payment URL in footer (visible when printed as PDF)
+    if (invoice.stripe_payment_link) {
+      const footerPayLink = document.getElementById('footerPayLink');
+      const footerPayUrl = document.getElementById('footerPayUrl');
+      footerPayLink.style.display = 'block';
+      footerPayUrl.href = invoice.stripe_payment_link;
+      footerPayUrl.textContent = invoice.stripe_payment_link;
+    }
   }
 
   loadInvoice();
