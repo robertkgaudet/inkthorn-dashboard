@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-07-24T23:54:39.595Z",
+  "updated": "2026-07-25T14:27:45.814Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-07-24",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Will Merrill & Madison Thomas",
-      "url": "https://504comedy.com/event/1384/will-merrill--madison-thomas-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$20",
-      "repeat": "Fri Jul 24 2026",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-07-24",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "You're Invited!",
-      "url": "https://504comedy.com/event/1109/youre-invited-at-big-couch-nola",
-      "venue": "Big Couch New Orleans",
-      "type": "Improv",
-      "cost": "$10",
-      "repeat": "Fourth Friday",
-      "start_dt": "2026-07-24T19:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-07-24",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "The Comedy Lounge",
-      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-      "venue": "Vino: Fine Wine & Spirits",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Friday",
-      "start_dt": "2026-08-28T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-07-25",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -57,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$25",
       "repeat": "Sat Jul 25 2026",
-      "start_dt": "2026-07-24T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-07-25",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-07-25",
       "time": "8:30pm",
       "time_sort": 2030,
@@ -89,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-07-26",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-07-26",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -296,64 +254,44 @@
       "cost": "$10",
       "repeat": "Every Thursday",
       "start_dt": "2026-07-30T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-07-31",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Joseph Tolpi & Misho Shakur",
+      "url": "https://504comedy.com/event/1386/joseph-tolpi--misho-shakur-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$20",
+      "repeat": "Fri Jul 31 2026",
+      "start_dt": "2026-07-30T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-07-31",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Comedy Lounge",
+      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+      "venue": "Vino: Fine Wine & Spirits",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Friday",
+      "start_dt": "2026-07-31T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-07-24",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-07-24",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Will Merrill & Madison Thomas",
-          "url": "https://504comedy.com/event/1384/will-merrill--madison-thomas-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$20",
-          "repeat": "Fri Jul 24 2026",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-07-24",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "You're Invited!",
-          "url": "https://504comedy.com/event/1109/youre-invited-at-big-couch-nola",
-          "venue": "Big Couch New Orleans",
-          "type": "Improv",
-          "cost": "$10",
-          "repeat": "Fourth Friday",
-          "start_dt": "2026-07-24T19:30-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-07-24",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "The Comedy Lounge",
-          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-          "venue": "Vino: Fine Wine & Spirits",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Friday",
-          "start_dt": "2026-08-28T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-07-25",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-07-25",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -363,11 +301,11 @@
           "type": "Stand-up",
           "cost": "$25",
           "repeat": "Sat Jul 25 2026",
-          "start_dt": "2026-07-24T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-07-25",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -381,7 +319,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-07-25",
           "time": "8:30pm",
           "time_sort": 2030,
@@ -396,12 +334,12 @@
       ]
     },
     {
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-07-26",
       "events": [
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-07-26",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -415,7 +353,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-07-26",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -632,6 +570,40 @@
           "cost": "$10",
           "repeat": "Every Thursday",
           "start_dt": "2026-07-30T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "date": "2026-07-31",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-07-31",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Joseph Tolpi & Misho Shakur",
+          "url": "https://504comedy.com/event/1386/joseph-tolpi--misho-shakur-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$20",
+          "repeat": "Fri Jul 31 2026",
+          "start_dt": "2026-07-30T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-07-31",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Comedy Lounge",
+          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+          "venue": "Vino: Fine Wine & Spirits",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Friday",
+          "start_dt": "2026-07-31T20:00-05:00"
         }
       ]
     }
