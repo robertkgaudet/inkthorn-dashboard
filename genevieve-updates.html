@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mistress Genevieve — Updates</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #080808;
+    --deep: #0d0d0d;
+    --card: #111111;
+    --card2: #0f0f0f;
+    --crimson: #9B0000;
+    --crimson-light: #cc1111;
+    --crimson-glow: #cc1111;
+    --gold: #8a6f3a;
+    --gold-light: #c9a84c;
+    --text: #d4c8bc;
+    --text-muted: #7a6e68;
+    --border: #1e1515;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--black);
+    background-image:
+      radial-gradient(ellipse at top, #1a0505 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5 L35 20 L50 20 L38 29 L43 44 L30 35 L17 44 L22 29 L10 20 L25 20 Z' fill='none' stroke='%231a0808' stroke-width='0.5' opacity='0.4'/%3E%3C/svg%3E");
+    color: var(--text);
+    font-family: 'IM Fell English', serif;
+    min-height: 100vh;
+    line-height: 1.75;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    text-align: center;
+    padding: 60px 20px 50px;
+    border-bottom: 1px solid var(--crimson);
+    background: linear-gradient(180deg, #1a0000 0%, transparent 100%);
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center top, rgba(139,0,0,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .site-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.45em;
+    color: var(--crimson-light);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .site-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 7vw, 5rem);
+    color: #fff;
+    text-shadow:
+      0 0 30px rgba(180,0,0,0.6),
+      0 0 80px rgba(180,0,0,0.2),
+      2px 2px 0 #3a0000;
+    line-height: 1.1;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+  }
+
+  .site-sub {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    letter-spacing: 0.3em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .ornament {
+    color: var(--crimson);
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #1e0a0a;
+    background: #0a0101;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--crimson-light); }
+
+  /* ── MAIN LAYOUT ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+
+  .page-heading {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+
+  .page-heading h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    color: var(--crimson-light);
+    letter-spacing: 0.15em;
+    text-shadow: 0 0 20px rgba(180,0,0,0.4);
+    margin-bottom: 16px;
+  }
+
+  .page-heading .rule {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  .page-heading .rule span { flex: 1; max-width: 140px; height: 1px; background: linear-gradient(90deg, transparent, var(--crimson), transparent); }
+  .page-heading .rule em { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.3em; color: var(--gold); font-style: normal; }
+
+  /* ── POST ── */
+  .post {
+    position: relative;
+    margin-bottom: 80px;
+    background: var(--card);
+    border: 1px solid #1e1010;
+    border-top: 2px solid var(--crimson);
+    box-shadow: 0 4px 40px rgba(0,0,0,0.7), inset 0 1px 0 rgba(139,0,0,0.15);
+  }
+
+  .post-date-banner {
+    background: linear-gradient(90deg, var(--crimson) 0%, #3a0000 100%);
+    padding: 10px 28px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .post-date-month {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .post-date-day {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.4rem;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .post-date-year {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.5);
+    margin-left: auto;
+  }
+
+  .post-body {
+    padding: 36px 40px 40px;
+  }
+
+  .post-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.06em;
+    margin-bottom: 22px;
+    line-height: 1.3;
+    text-shadow: 0 0 20px rgba(139,0,0,0.3);
+  }
+
+  .post-body p {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+
+  .post-body p em {
+    color: var(--crimson-light);
+    font-style: italic;
+  }
+
+  .post-body strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* ── IMAGE GRIDS ── */
+  .img-single {
+    width: 100%;
+    margin: 28px 0;
+    overflow: hidden;
+    border: 1px solid #1e0a0a;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.8);
+  }
+  .img-single img { width: 100%; display: block; }
+
+  .img-grid {
+    display: grid;
+    gap: 4px;
+    margin: 28px 0;
+  }
+  .img-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .img-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .img-grid.asymmetric { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
+  .img-grid.asymmetric .span2 { grid-column: span 2; }
+
+  .img-grid img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.92) contrast(1.05);
+    transition: filter 0.3s, transform 0.4s;
+    border: 1px solid #1e0a0a;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  }
+  .img-grid img:hover { filter: brightness(1.05) contrast(1.1); transform: scale(1.01); }
+
+  .img-grid.cols-3 img { height: 220px; }
+  .img-grid.asymmetric img.tall { height: 420px; }
+
+  /* full-width single hero image */
+  .img-hero {
+    margin: 28px -40px;
+    overflow: hidden;
+    border-top: 1px solid #1e0a0a;
+    border-bottom: 1px solid #1e0a0a;
+  }
+  .img-hero img {
+    width: 100%;
+    display: block;
+    max-height: 600px;
+    object-fit: cover;
+    filter: brightness(0.88) contrast(1.08);
+  }
+
+  /* ── AFFIRMATION CARD ── */
+  .affirmation-card {
+    background: #080808;
+    border: 1px solid var(--crimson);
+    padding: 30px 36px;
+    margin: 28px 0;
+    text-align: center;
+    position: relative;
+  }
+  .affirmation-card::before,
+  .affirmation-card::after {
+    content: '✦';
+    position: absolute;
+    color: var(--crimson);
+    font-size: 1rem;
+    top: 12px;
+  }
+  .affirmation-card::before { left: 16px; }
+  .affirmation-card::after { right: 16px; }
+
+  .affirmation-date {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .affirmation-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.5;
+  }
+  .affirmation-credit {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--text-muted);
+    margin-top: 12px;
+    text-transform: uppercase;
+  }
+
+  /* ── CTA / BOOKING ── */
+  .booking-block {
+    background: linear-gradient(135deg, #100000 0%, #0d0000 100%);
+    border: 1px solid var(--crimson);
+    border-left: 3px solid var(--crimson-light);
+    padding: 24px 30px;
+    margin: 28px 0;
+  }
+  .booking-block h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--crimson-light);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .booking-block p {
+    font-family: 'IM Fell English', serif;
+    font-size: 0.98rem;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .booking-block .phone {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.2rem;
+    color: #fff;
+    letter-spacing: 0.08em;
+    margin-top: 10px;
+    display: block;
+    text-shadow: 0 0 12px rgba(200,0,0,0.4);
+  }
+  .booking-block .email {
+    color: var(--gold-light);
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    margin-top: 6px;
+    display: block;
+  }
+  .booking-block .email:hover { color: #fff; }
+
+  /* ── DATE LIST ── */
+  .date-list {
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+  }
+  .date-list li {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: var(--text);
+    padding: 8px 0;
+    border-bottom: 1px solid #1a0a0a;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .date-list li::before {
+    content: '⬥';
+    color: var(--crimson-light);
+    font-size: 0.6rem;
+  }
+  .date-list li span { color: #fff; font-weight: 600; }
+
+  /* ── SOCIAL LINKS ── */
+  .social-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0;
+  }
+  .social-link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 1px solid var(--crimson);
+    color: var(--crimson-light);
+    text-decoration: none;
+    transition: all 0.2s;
+    background: transparent;
+  }
+  .social-link:hover {
+    background: var(--crimson);
+    color: #fff;
+    box-shadow: 0 0 12px rgba(139,0,0,0.4);
+  }
+
+  /* ── NITEFLIRT BADGE ── */
+  .niteflirt-block {
+    background: #0a0010;
+    border: 1px solid #2a0050;
+    padding: 20px 28px;
+    margin: 24px 0;
+    text-align: center;
+  }
+  .niteflirt-block .label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #7a5acc;
+    margin-bottom: 8px;
+  }
+  .niteflirt-block p {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.05rem;
+    color: #c9a8ff;
+    margin-bottom: 0;
+  }
+  .niteflirt-block a {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: #9966ff;
+    text-decoration: none;
+    border-bottom: 1px solid #4a2a8a;
+  }
+
+  /* ── POST DIVIDER ── */
+  .post-divider {
+    text-align: center;
+    margin: 0 0 70px;
+    position: relative;
+  }
+  .post-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #1e0808, var(--crimson), #1e0808, transparent);
+  }
+  .post-divider span {
+    position: relative;
+    background: var(--black);
+    padding: 0 20px;
+    font-size: 1.2rem;
+    color: var(--crimson);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--crimson);
+    background: linear-gradient(0deg, #100000 0%, transparent 100%);
+    padding: 60px 24px 40px;
+    text-align: center;
+  }
+  footer .footer-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.6rem;
+    color: var(--crimson-light);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    text-shadow: 0 0 20px rgba(180,0,0,0.4);
+  }
+  footer .footer-tagline {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+  }
+  footer .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+  footer .footer-links a {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer .footer-links a:hover { color: var(--crimson-light); }
+  footer .disclaimer {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: #3a2e2e;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #080808; }
+  ::-webkit-scrollbar-thumb { background: #3a0000; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--crimson); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .post-body { padding: 24px 20px; }
+    .img-grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
+    .img-hero { margin: 28px -20px; }
+    nav { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <p class="site-eyebrow">New Orleans & Houston ✦ Professional Dominatrix</p>
+  <h1 class="site-title">Mistress Genevieve</h1>
+  <p class="site-sub">The Official Website</p>
+  <div class="ornament">— ✦ —</div>
+</header>
+
+<nav>
+  <a href="https://msgenevieve.com">Home</a>
+  <a href="https://msgenevieve.com/updates/">Updates</a>
+  <a href="https://www.niteflirt.com/listings/8009906/call_now">NiteFlirt</a>
+  <a href="https://onlyfans.com/neworleansdominatrix">OnlyFans</a>
+  <a href="http://clips4sale.com/store/4083">Clips4Sale</a>
+  <a href="mailto:Genevieve@MsGenevieve.com">Contact</a>
+</nav>
+
+<!-- ══ CONTENT ══ -->
+<main class="container">
+
+  <div class="page-heading">
+    <h2>Updates</h2>
+    <div class="rule">
+      <span></span>
+      <em>✦ Dispatches from the Dungeon ✦</em>
+      <span></span>
+    </div>
+  </div>
+
+  <!-- ══ POST 1 — 2026.05.24 ══ -->
+  <article class="post">
+    <div class="post-date-banner">
+      <span class="post-date-month">May</span>
+      <span class="post-date-day">24</span>
+      <span class="post-date-year">2026</span>
+    </div>
+    <div class="post-body">
+      <h2 class="post-title">CATCH ME IF YOU CAN, HOUSTON!!!</h2>
+
+      <p>Tomorrow is your <strong>last chance</strong> to catch Mistress Genevieve in Houston — exclusively at <em>The Vault</em> dungeon in downtown.</p>
+
+      <p>I resume taking appointments in my <strong>New Orleans dungeon</strong> on Tuesday, May 25th.</p>
+
+      <p>I've had so much fun in Houston this weekend, playing at the Vault dungeon — but all good things must come to an end.</p>
+
+      <p>Tuesday, I return to my own dungeon, my kitties, and the sluts and subs that are eagerly awaiting my return home.</p>
+
+      <p><em>Don't delay. Book now.</em></p>
+
+      <div class="booking-block">
+        <h3>Book Your Session</h3>
+        <p>The Vault Dungeon — Downtown Houston</p>
+        <a class="phone">(713) 539-7002</a>
+        <a href="http://msgenevieve.com" class="email">msgenevieve.com</a>
+      </div>
+
+      <div class="social-row">
+        <a href="http://niteflirt.com/MistressGenevieve" class="social-link">NiteFlirt</a>
+        <a href="http://instagram.com/houstondominatrix.com" class="social-link">HoustonDominatrix</a>
+        <a href="http://instagram.com/neworleansdominatrix" class="social-link">NewOrleansDominatrix</a>
+      </div>
+    </div>
+  </article>
+
+  <div class="post-divider"><span>✦</span></div>
+
+  <!-- ══ POST 2 — 2026.05.09 ══ -->
+  <article class="post">
+    <div class="post-date-banner">
+      <span class="post-date-month">May</span>
+      <span class="post-date-day">09</span>
+      <span class="post-date-year">2026</span>
+    </div>
+    <div class="post-body">
+      <h2 class="post-title">Still Here. Over Three Decades Strong.</h2>
+
+      <p>I was recently asked if I am still here, taking sessions.</p>
+
+      <p>The answer is <strong>"YES!"</strong> — over 3 decades strong.</p>
+
+      <p>My home dungeon in New Orleans has been in this same exact spot for the last <strong>10 years</strong>. You can also catch me fairly regularly in my original hometown of Houston, at the <em>Vault Dungeon</em> downtown.</p>
+
+      <p>I am currently booking sessions for my next Houston trip, <strong>May 22nd to 25th</strong>. Advanced booking and deposit is required — don't delay.</p>
+
+      <div class="booking-block">
+        <h3>Book Now</h3>
+        <a class="phone">(504) 302-3769</a>
+        <a href="mailto:Genevieve@MsGenevieve.com" class="email">Genevieve@MsGenevieve.com</a>
+      </div>
+
+      <p>I have also started a new Instagram for my Houston sessions:</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/houstondominatrix" class="social-link">@HoustonDominatrix</a>
+      </div>
+    </div>
+  </article>
+
+  <div class="post-divider"><span>✦</span></div>
+
+  <!-- ══ POST 3 — 2024.04.13 ══ -->
+  <article class="post">
+    <div class="post-date-banner">
+      <span class="post-date-month">April</span>
+      <span class="post-date-day">13</span>
+      <span class="post-date-year">2024</span>
+    </div>
+    <div class="post-body">
+      <h2 class="post-title">Femdom Fetish Daily Affirmations</h2>
+
+      <p>Those who follow me on various social media platforms probably already know about the <em>Femdom Fetish Daily Affirmations</em> graphics I try to post as close to daily as my ADHD's inconsistent nature allows.</p>
+
+      <p>I started making these images because I found it hard to really connect or relate to the basic, generic daily affirmation memes that everyone else seems to make. The images weren't images I related to or found soothing — and both the majority of the affirmations and their background images were <em>not speaking to me on any level.</em></p>
+
+      <p>Follow my new private Instagram to see these affirmations and the majority of photos I post free for viewing without subscribing to one of my fan sites or PPV downloads.</p>
+
+      <div class="affirmation-card">
+        <div class="affirmation-date">Daily Affirmations — April 4</div>
+        <div class="affirmation-text">"I manifest a life aligned with my heart."</div>
+        <div class="affirmation-credit">MsGenevieve.com</div>
+      </div>
+
+      <!-- 9-image grid — affirmation set -->
+      <div class="img-grid cols-3">
+        <img src="http://msgenevieve.com/wp-content/uploads/2024/04/IMG_9089.jpeg" alt="Daily Affirmation" loading="lazy">
+        <img src="http://msgenevieve.com/wp-content/uploads/2024/04/IMG_9088.jpeg" alt="Daily Affirmation" loading="lazy">
+        <img src="http://msgenevieve.com/wp-content/uploads/2024/04/IMG_9062.jpeg" alt="Daily Affirmation" loading="lazy">
+        <img src="http://msgenevieve.com/wp-content/uploads/2024/04/IMG_9061.jpeg" alt="Daily Affirmation" loading="lazy">
+        <img src="http://msgenevieve.com/wp-content/uploads/2024/04/IMG_9057.jpeg" alt="Daily Affirmation" loading="lazy">
+        <img src="http://msgenevieve.com/wp-content/uploads/2024/04/IMG_8908.jpeg" alt="Daily Affirmation" loading="lazy">
+        <img src="http://msgenevieve.com/wp-content/uploads/2024/04/IMG_8906.jpeg" alt="Daily Affirmation" loading="lazy">
+        <img src="http://msgenevieve.com/wp-content/uploads/2024/04/IMG_8890.jpeg" alt="Daily Affirmation" loading="lazy">
+        <img src="http://msgenevieve.com/wp-content/uploads/2024/04/IMG_8889.jpeg" alt="Daily Affirmation" loading="lazy">
+      </div>
+
+      <div class="booking-block">
+        <h3>Also Announcing — Houston Dates</h3>
+        <ul class="date-list">
+          <li><span>May 3rd – 5th</span> Houston, Texas</li>
+        </ul>
+      </div>
+
+      <div class="social-row">
+        <a href="http://instagram.com/neworleans_domme" class="social-link">Private Instagram</a>
+      </div>
+    </div>
+  </article>
+
+  <div class="post-divider"><span>✦</span></div>
+
+  <!-- ══ POST 4 — 2024.03.09 ══ -->
+  <article class="post">
+    <div class="post-date-banner">
+      <span class="post-date-month">March</span>
+      <span class="post-date-day">09</span>
+      <span class="post-date-year">2024</span>
+    </div>
+    <div class="post-body">
+      <h2 class="post-title">Big Sexy Dungeon News</h2>
+
+      <p>New Orleans' most established, experienced, and diverse <em>Dominatrix of Distinction</em> has just leveled up the most extensively well-equipped personal kink collection in the city's most well-equipped private dungeon.</p>
+
+      <p><strong>Book your overnight and extended stay sessions in Mistress Genevieve's new sleeping cage — arriving Late March 2024.</strong></p>
+
+      <p>I finally ordered a sleeping cage for when very lucky subs and slaves lose themselves in the ultimate session dream of overnight and extended stay sessions.</p>
+
+      <p><em>Do you feel lucky enough to sign yourself over in April?</em></p>
+
+      <div class="affirmation-card">
+        <div class="affirmation-date">Dungeon Expansion 2024</div>
+        <div class="affirmation-text">"Contributing to this year's dungeon expansion project is super simple — send any denomination of Amazon Gift Card, or choose from the wishlist."</div>
+        <div class="affirmation-credit">MsGenevieve.com</div>
+      </div>
+
+      <p>Would you like to be an integral part of making Mistress Genevieve's dreams of exciting dungeon upgrades come true throughout 2024? <em>Of course you do.</em></p>
+
+      <div class="social-row">
+        <a href="https://www.amazon.com/hz/wishlist/ls/4CSZ70MEKIAR?ref_=wl_share" class="social-link">Amazon Wishlist</a>
+      </div>
+    </div>
+  </article>
+
+  <div class="post-divider"><span>✦</span></div>
+
+  <!-- ══ POST 5 — 2024.02.14 ══ -->
+  <article class="post">
+    <div class="post-date-banner">
+      <span class="post-date-month">Feb</span>
+      <span class="post-date-day">14</span>
+      <span class="post-date-year">2024</span>
+    </div>
+    <div class="post-body">
+      <h2 class="post-title">Happy Valentine's — Birthday Season Begins</h2>
+
+      <p>Happy Valentine's. <em>It's that time again.</em></p>
+
+      <p>Valentine's always signals the 10-day countdown to my birthday has begun. I have decided to spend this birthday in Houston — and I will be taking appointments while there, exclusively at the Vault, of course.</p>
+
+      <div class="booking-block">
+        <h3>Serve Me at the Vault Dungeon, Downtown Houston</h3>
+        <ul class="date-list">
+          <li><span>February 22–24</span> — Birthday Sessions</li>
+          <li><span>March 13–14</span> — Return to the Vault</li>
+        </ul>
+        <p style="margin-top:14px;">Advanced booking and deposit required.</p>
+        <a href="mailto:genevieve@msgenevieve.com" class="email">genevieve@msgenevieve.com</a>
+      </div>
+
+      <div class="social-row">
+        <a href="https://www.amazon.com/hz/wishlist/ls/4CSZ70MEKIAR?ref_=wl_share" class="social-link">Spoil Mistress on Her Birthday ✦ Amazon Wishlist</a>
+      </div>
+    </div>
+  </article>
+
+  <div class="post-divider"><span>✦</span></div>
+
+  <!-- ══ POST 6 — 2024.02.11 ══ -->
+  <article class="post">
+    <div class="post-date-banner">
+      <span class="post-date-month">Feb</span>
+      <span class="post-date-day">11</span>
+      <span class="post-date-year">2024</span>
+    </div>
+    <div class="post-body">
+      <h2 class="post-title">What Mistress Fantasizes About</h2>
+
+      <p>Everyone seems to wonder what my fantasies and kinks are — just my own wickedness, with no partner input required. <em>Here you go.</em></p>
+
+      <p>When my canopy bed eventually needs to be replaced, I am almost considering one of those enclosure-style beds — so I can keep subbies <em>inside</em> it during overnight sessions.</p>
+
+      <p>I could do some wicked, kinky, perverted fun with a bed like that. Pack you subbies in like sardines and educate you on why some have called me <strong>the Queen of Mean.</strong></p>
+
+      <p>Day dreaming about having someone inside there in a leather or latex sleep sack, all wired up with e-stim and all sorts of other remote control toys — while I have a slumber party or fuck-fest topside.</p>
+
+      <p>A video baby monitor inside with them. For good measure. One that can display picture-in-picture on the TV.</p>
+
+      <p>Even better if the baby monitor is the intercom type — so I can communicate with them and <em>talk shit to them.</em></p>
+
+      <p style="font-size:2rem; line-height:1; margin: 16px 0;">😈</p>
+
+      <p><strong>Mistress Genevieve</strong></p>
+
+      <div class="niteflirt-block">
+        <div class="label">Call Me on NiteFlirt</div>
+        <p>First Time Callers Get<br><strong>3 FREE MINUTES</strong></p>
+        <a href="https://www.niteflirt.com/listings/8009906/call_now">niteflirt.com/MistressGenevieve</a>
+      </div>
+
+      <p style="font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.25em; color:var(--crimson-light); margin-top:20px;">⬥ BIRTHDAY COUNTDOWN — 12 DAYS TO GO</p>
+
+      <div class="social-row">
+        <a href="https://www.amazon.com/hz/wishlist/ls/4CSZ70MEKIAR?ref_=wl_share" class="social-link">Send a Birthday Gift ✦ Wishlist</a>
+      </div>
+    </div>
+  </article>
+
+  <div class="post-divider"><span>✦</span></div>
+
+  <!-- ══ POST 7 — 2023.12.31 ══ -->
+  <article class="post">
+    <div class="post-date-banner">
+      <span class="post-date-month">Dec</span>
+      <span class="post-date-day">31</span>
+      <span class="post-date-year">2023</span>
+    </div>
+    <div class="post-body">
+      <h2 class="post-title">Booking for 2024 — Houston and New Orleans</h2>
+
+      <p>Mistress Genevieve is now booking fetish and femme domme sessions in Houston for <strong>February and March 2024.</strong></p>
+
+      <p>Book now to see me in <em>New Orleans or Houston</em> in 2024.</p>
+
+      <div class="social-row">
+        <a href="http://Clips4sale.com/store/4083" class="social-link">Clips4Sale</a>
+        <a href="https://www.niteflirt.com/listings/8009906/call_now" class="social-link">NiteFlirt</a>
+      </div>
+
+      <div class="niteflirt-block">
+        <div class="label">Call Me on NiteFlirt</div>
+        <p>First Time Callers Get<br><strong>3 FREE MINUTES</strong></p>
+        <a href="https://www.niteflirt.com/listings/8009906/call_now">niteflirt.com/MistressGenevieve</a>
+      </div>
+    </div>
+  </article>
+
+  <div class="post-divider"><span>✦</span></div>
+
+  <!-- ══ POST 8 — 2023.12.26 ══ -->
+  <article class="post">
+    <div class="post-date-banner">
+      <span class="post-date-month">Dec</span>
+      <span class="post-date-day">26</span>
+      <span class="post-date-year">2023</span>
+    </div>
+    <div class="post-body">
+      <h2 class="post-title">4 Days Till New Year's</h2>
+
+      <p><em>What are your resolutions for the new year?</em></p>
+
+      <p>We should work out a program in which I reinforce your New Year's resolutions. <strong>Get with me.</strong></p>
+
+      <p>Having a Domme is guaranteed to motivate you to stick to those resolutions and make self-improvement all around a more <em>inspired and enjoyable pursuit.</em></p>
+
+      <p>Such an arrangement can be worked out over any type of session — IRL, phone, or cam.</p>
+
+      <div class="booking-block">
+        <h3>Start 2024 Properly</h3>
+        <a href="http://Http://msgenevieve.com" class="email">msgenevieve.com</a>
+      </div>
+
+      <div class="social-row">
+        <a href="http://instagram.com/neworleans_domme" class="social-link">Private Instagram</a>
+        <a href="http://twitter.com/msgenevieve" class="social-link">Twitter / X</a>
+        <a href="https://www.niteflirt.com/listings/8009906/call_now" class="social-link">NiteFlirt</a>
+        <a href="http://Onlyfans.com/neworleansdominatrix" class="social-link">OnlyFans</a>
+        <a href="http://Clips4sale.com/store/4083" class="social-link">Clips4Sale</a>
+      </div>
+    </div>
+  </article>
+
+  <div class="post-divider"><span>✦</span></div>
+
+  <!-- ══ POST 9 — 2023.12.23 ══ -->
+  <article class="post">
+    <div class="post-date-banner">
+      <span class="post-date-month">Dec</span>
+      <span class="post-date-day">23</span>
+      <span class="post-date-year">2023</span>
+    </div>
+    <div class="post-body">
+      <h2 class="post-title">Season's Sluttiest Beatings & Happy New Year</h2>
+
+      <p><em>HEY TEXAS.</em> This could be the chance to explore the depths of your desires under my expert guidance — as either my <strong>last session of 2023</strong> or my very first of 2024.</p>
+
+      <p>But only if you are the first and fastest to book it.</p>
+
+      <p>Though it's a very brief trip, I do have availability for <strong>one appointment on New Year's Eve</strong> and <strong>one session on New Year's Day</strong> for a lucky someone.</p>
+
+      <p>Houston and 2024 await — brimming with possibilities and tantalizing adventures.</p>
+
+      <div class="booking-block">
+        <h3>2024 Travel Dates</h3>
+        <ul class="date-list">
+          <li><span>Dec 31 / Jan 1</span> — New Year's Eve &amp; Day — Houston</li>
+          <li><span>Feb 22–24</span> — My Birthday — Houston</li>
+          <li><span>Mar 12–16</span> — Houston</li>
+        </ul>
+        <a class="phone">(504) 302-3769</a>
+      </div>
+
+      <div class="affirmation-card">
+        <div class="affirmation-date">— A Message —</div>
+        <div class="affirmation-text">"Keep it Kinky."</div>
+        <div class="affirmation-credit">— Mistress Genevieve</div>
+      </div>
+
+      <div class="social-row">
+        <a href="https://www.niteflirt.com/listings/8009906/call_now" class="social-link">NiteFlirt — 3 Free Minutes</a>
+        <a href="http://Clips4sale.com/store/4083" class="social-link">Clips4Sale</a>
+        <a href="http://Onlyfans.com/neworleansdominatrix" class="social-link">OnlyFans</a>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-title">Mistress Genevieve</div>
+  <p class="footer-tagline">New Orleans & Houston — Professional Dominatrix — Over Three Decades</p>
+  <div class="footer-links">
+    <a href="https://msgenevieve.com">Home</a>
+    <a href="https://www.niteflirt.com/listings/8009906/call_now">NiteFlirt</a>
+    <a href="http://Clips4sale.com/store/4083">Clips4Sale</a>
+    <a href="http://Onlyfans.com/neworleansdominatrix">OnlyFans</a>
+    <a href="http://instagram.com/neworleans_domme">Instagram</a>
+    <a href="http://twitter.com/msgenevieve">Twitter</a>
+    <a href="mailto:Genevieve@MsGenevieve.com">Email</a>
+  </div>
+  <p class="disclaimer">
+    This site promotes the professional domination services and media of Mistress Genevieve.<br>
+    All services are legal adult consensual fetish and BDSM activities.<br>
+    No illegal acts or vanilla escort services are offered.
+  </p>
+</footer>
+
+</body>
+</html>
