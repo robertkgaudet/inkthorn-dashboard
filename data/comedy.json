@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-07-30T23:52:40.877Z",
+  "updated": "2026-07-31T15:15:48.370Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-07-30",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "Comedy Gumbeaux",
-      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-      "venue": "Howlin' Wolf Den",
-      "type": "Open Mic",
-      "cost": "$5",
-      "repeat": "Every Thursday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-07-30",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Queers Of Comedy New Orleans",
-      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-      "venue": "Oz New Orleans",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-07-30T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-07-30",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Punchlines & Pasties",
-      "url": "https://504comedy.com/event/1317/punchlines--pasties",
-      "venue": "The Original NiteCap",
-      "type": "Open Mic",
-      "cost": "$10",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-07-30T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-07-31",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -57,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$20",
       "repeat": "Fri Jul 31 2026",
-      "start_dt": "2026-07-30T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-07-31",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-08-01",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -89,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-08-01",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -310,64 +268,86 @@
       "cost": "FREE",
       "repeat": "Every Wednesday",
       "start_dt": "2026-08-05T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-08-06",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Comedy Gumbeaux",
+      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+      "venue": "Howlin' Wolf Den",
+      "type": "Open Mic",
+      "cost": "$5",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-08-05T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-08-06",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Queers Of Comedy New Orleans",
+      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+      "venue": "Oz New Orleans",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-08-06T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-08-06",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Punchlines & Pasties",
+      "url": "https://504comedy.com/event/1317/punchlines--pasties",
+      "venue": "The Original NiteCap",
+      "type": "Open Mic",
+      "cost": "$10",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-08-06T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-08-06",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Hassan Phills",
+      "url": "https://504comedy.com/event/1388/hassan-phills-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Thu Aug 06 2026",
+      "start_dt": "2026-08-06T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-08-06",
+      "time": "10:00pm",
+      "time_sort": 2200,
+      "title": "The Split Personalities Comedy Roadshow",
+      "url": "https://504comedy.com/event/1397/the-split-personalities-comedy-roadshow",
+      "venue": "Howlin' Wolf Den",
+      "type": "Stand-up",
+      "cost": "$10",
+      "repeat": "Thu Aug 06 2026",
+      "start_dt": "2026-08-06T22:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-07-30",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-07-30",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "Comedy Gumbeaux",
-          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-          "venue": "Howlin' Wolf Den",
-          "type": "Open Mic",
-          "cost": "$5",
-          "repeat": "Every Thursday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-07-30",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Queers Of Comedy New Orleans",
-          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-          "venue": "Oz New Orleans",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-07-30T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-07-30",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Punchlines & Pasties",
-          "url": "https://504comedy.com/event/1317/punchlines--pasties",
-          "venue": "The Original NiteCap",
-          "type": "Open Mic",
-          "cost": "$10",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-07-30T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-07-31",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-07-31",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -377,11 +357,11 @@
           "type": "Stand-up",
           "cost": "$20",
           "repeat": "Fri Jul 31 2026",
-          "start_dt": "2026-07-30T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-07-31",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -396,12 +376,12 @@
       ]
     },
     {
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-08-01",
       "events": [
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-08-01",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -415,7 +395,7 @@
         },
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-08-01",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -660,6 +640,82 @@
           "cost": "FREE",
           "repeat": "Every Wednesday",
           "start_dt": "2026-08-05T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Thursday",
+      "date": "2026-08-06",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-08-06",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Comedy Gumbeaux",
+          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+          "venue": "Howlin' Wolf Den",
+          "type": "Open Mic",
+          "cost": "$5",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-08-05T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-08-06",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Queers Of Comedy New Orleans",
+          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+          "venue": "Oz New Orleans",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-08-06T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-08-06",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Punchlines & Pasties",
+          "url": "https://504comedy.com/event/1317/punchlines--pasties",
+          "venue": "The Original NiteCap",
+          "type": "Open Mic",
+          "cost": "$10",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-08-06T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-08-06",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Hassan Phills",
+          "url": "https://504comedy.com/event/1388/hassan-phills-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Thu Aug 06 2026",
+          "start_dt": "2026-08-06T21:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-08-06",
+          "time": "10:00pm",
+          "time_sort": 2200,
+          "title": "The Split Personalities Comedy Roadshow",
+          "url": "https://504comedy.com/event/1397/the-split-personalities-comedy-roadshow",
+          "venue": "Howlin' Wolf Den",
+          "type": "Stand-up",
+          "cost": "$10",
+          "repeat": "Thu Aug 06 2026",
+          "start_dt": "2026-08-06T22:00-05:00"
         }
       ]
     }
