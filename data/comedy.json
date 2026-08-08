@@ -1,67 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-08-07T23:23:34.743Z",
+  "updated": "2026-08-08T13:41:29.024Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-08-07",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Maggie Shipley & John Merrifield",
-      "url": "https://504comedy.com/event/1389/maggie-shipley--john-merrifield-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$20",
-      "repeat": "Fri Aug 07 2026",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-07",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Michael Henry and Tim Murray LIVE! A Stand-Up Show",
-      "url": "https://504comedy.com/event/1395/michael-henry-and-tim-murray-live-a-standup-show",
-      "venue": "ALLways Lounge",
-      "type": "Stand-up",
-      "cost": "$25.5",
-      "repeat": "Fri Aug 07 2026",
-      "start_dt": "2026-08-07T19:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-07",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "The Comedy Lounge",
-      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-      "venue": "Vino: Fine Wine & Spirits",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Friday",
-      "start_dt": "2026-08-07T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-07",
-      "time": "10:00pm",
-      "time_sort": 2200,
-      "title": "The Split Personalities Comedy Roadshow",
-      "url": "https://504comedy.com/event/1397/the-split-personalities-comedy-roadshow",
-      "venue": "Howlin' Wolf Den",
-      "type": "Stand-up",
-      "cost": "$10",
-      "repeat": "Fri Aug 07 2026",
-      "start_dt": "2026-08-07T22:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-08-08",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -71,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$25",
       "repeat": "Sat Aug 08 2026",
-      "start_dt": "2026-08-07T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-08-08",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -89,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-08-08",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-08-08",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -117,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-08-09",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -131,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-08-09",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -145,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-08-09",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -352,78 +296,58 @@
       "cost": "$25",
       "repeat": "Thu Aug 13 2026",
       "start_dt": "2026-08-13T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-08-14",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Troy Duchane & Schoen Favorite",
+      "url": "https://504comedy.com/event/1393/troy-duchane--schoen-favorite-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$20",
+      "repeat": "Fri Aug 14 2026",
+      "start_dt": "2026-08-14T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-08-14",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Greetings from Queer Mountain",
+      "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
+      "venue": "ALLways Lounge",
+      "type": "Storytelling",
+      "cost": "$10",
+      "repeat": "Second Friday",
+      "start_dt": "2026-08-13T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-08-14",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Comedy Lounge",
+      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+      "venue": "Vino: Fine Wine & Spirits",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Friday",
+      "start_dt": "2026-08-14T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-08-07",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-07",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Maggie Shipley & John Merrifield",
-          "url": "https://504comedy.com/event/1389/maggie-shipley--john-merrifield-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$20",
-          "repeat": "Fri Aug 07 2026",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-07",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Michael Henry and Tim Murray LIVE! A Stand-Up Show",
-          "url": "https://504comedy.com/event/1395/michael-henry-and-tim-murray-live-a-standup-show",
-          "venue": "ALLways Lounge",
-          "type": "Stand-up",
-          "cost": "$25.5",
-          "repeat": "Fri Aug 07 2026",
-          "start_dt": "2026-08-07T19:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-07",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "The Comedy Lounge",
-          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-          "venue": "Vino: Fine Wine & Spirits",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Friday",
-          "start_dt": "2026-08-07T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-07",
-          "time": "10:00pm",
-          "time_sort": 2200,
-          "title": "The Split Personalities Comedy Roadshow",
-          "url": "https://504comedy.com/event/1397/the-split-personalities-comedy-roadshow",
-          "venue": "Howlin' Wolf Den",
-          "type": "Stand-up",
-          "cost": "$10",
-          "repeat": "Fri Aug 07 2026",
-          "start_dt": "2026-08-07T22:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-08-08",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-08",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -433,11 +357,11 @@
           "type": "Stand-up",
           "cost": "$25",
           "repeat": "Sat Aug 08 2026",
-          "start_dt": "2026-08-07T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-08",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -451,7 +375,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-08",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -465,7 +389,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-08",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -480,12 +404,12 @@
       ]
     },
     {
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-08-09",
       "events": [
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-08-09",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -499,7 +423,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-08-09",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -513,7 +437,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-08-09",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -744,6 +668,54 @@
           "cost": "$25",
           "repeat": "Thu Aug 13 2026",
           "start_dt": "2026-08-13T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "date": "2026-08-14",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-08-14",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Troy Duchane & Schoen Favorite",
+          "url": "https://504comedy.com/event/1393/troy-duchane--schoen-favorite-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$20",
+          "repeat": "Fri Aug 14 2026",
+          "start_dt": "2026-08-14T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-08-14",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Greetings from Queer Mountain",
+          "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
+          "venue": "ALLways Lounge",
+          "type": "Storytelling",
+          "cost": "$10",
+          "repeat": "Second Friday",
+          "start_dt": "2026-08-13T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-08-14",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Comedy Lounge",
+          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+          "venue": "Vino: Fine Wine & Spirits",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Friday",
+          "start_dt": "2026-08-14T20:00-05:00"
         }
       ]
     }
