@@ -17,7 +17,7 @@ const fs    = require('fs');
 const path  = require('path');
 
 // ── Config ──────────────────────────────────────────────────────────────────
-const API_KEY   = 'AIzaSyAH8hrdixADjgcGPvDY8dPIshCGILs8Nzo';
+const API_KEY   = 'AIzaSyBYZoSeGlLW0jyt8mE_Ii9TtAzZSfT00-0';
 const OUT_DIR   = path.join(__dirname, '..', 'data');
 const LEADS_JSON = path.join(OUT_DIR, 'leads.json');
 const LEADS_CSV  = path.join(OUT_DIR, 'leads.csv');
@@ -99,7 +99,29 @@ function httpGet(url) {
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// ── Fetch one category across all zones (old Places API) ─────────────────────
+// ── HTTP POST helper ──────────────────────────────────────────────────────────
+function httpPost(url, headers, body) {
+  return new Promise((resolve, reject) => {
+    const data = JSON.stringify(body);
+    const opts = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data), ...headers },
+    };
+    const req = require('https').request(url, opts, res => {
+      let buf = '';
+      res.on('data', c => buf += c);
+      res.on('end', () => {
+        try { resolve({ status: res.statusCode, body: JSON.parse(buf) }); }
+        catch (e) { reject(new Error('JSON parse error: ' + buf.slice(0, 200))); }
+      });
+    });
+    req.on('error', reject);
+    req.write(data);
+    req.end();
+  });
+}
+
+// ── Fetch one category across all zones (Places API New) ─────────────────────
 async function fetchCategory(type) {
   const results = [];
   const seenIds = new Set();
@@ -108,56 +130,62 @@ async function fetchCategory(type) {
     let pageToken = null;
 
     do {
-      let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json`
-        + `?location=${zone.lat},${zone.lng}`
-        + `&radius=${zone.radius}`
-        + `&type=${encodeURIComponent(type)}`
-        + `&key=${API_KEY}`;
-      if (pageToken) url += `&pagetoken=${encodeURIComponent(pageToken)}`;
+      const reqBody = {
+        includedTypes: [type],
+        maxResultCount: 20,
+        locationRestriction: {
+          circle: {
+            center: { latitude: zone.lat, longitude: zone.lng },
+            radius: zone.radius,
+          },
+        },
+      };
+      if (pageToken) reqBody.pageToken = pageToken;
 
-      const res = await httpGet(url);
+      const fieldMask = 'places.id,places.displayName,places.formattedAddress,places.nationalPhoneNumber,places.websiteUri,places.rating,places.userRatingCount,places.types,places.businessStatus,places.googleMapsUri,places.photos';
+      const res = await httpPost(
+        'https://places.googleapis.com/v1/places:searchNearby',
+        { 'X-Goog-Api-Key': API_KEY, 'X-Goog-FieldMask': fieldMask },
+        reqBody
+      );
 
-      if (res.status !== 200 || res.body.status === 'REQUEST_DENIED' || res.body.status === 'INVALID_REQUEST') {
-        process.stdout.write(`[${res.body.status||res.status}] `);
+      if (res.status !== 200) {
+        const errStatus = res.body?.error?.status || res.status;
+        process.stdout.write(`[${errStatus}] `);
         break;
       }
 
-      // ZERO_RESULTS is fine — just no results in this zone for this type
-      if (res.body.status === 'ZERO_RESULTS') break;
+      const places = res.body.places || [];
+      if (places.length === 0) break;
 
-      const places = res.body.results || [];
       for (const p of places) {
-        if (seenIds.has(p.place_id)) continue;
-        seenIds.add(p.place_id);
+        const placeId = p.id || '';
+        if (seenIds.has(placeId)) continue;
+        seenIds.add(placeId);
 
-        // Skip permanently closed
-        if (p.business_status === 'CLOSED_PERMANENTLY') continue;
+        if (p.businessStatus === 'CLOSED_PERMANENTLY') continue;
+        if (p.websiteUri) continue; // has a website — skip
 
-        // Key filter: no website field in basic response
-        // We'll do a detail lookup only for promising leads (rated businesses)
-        // to keep API costs low — unrated/low-review places get skipped
-        if (!p.website) {
-          results.push({
-            id:          p.place_id || '',
-            name:        p.name || '',
-            address:     p.vicinity || '',
-            phone:       '', // populated in detail pass
-            website:     '',
-            rating:      p.rating || null,
-            reviewCount: p.user_ratings_total || 0,
-            types:       (p.types || []).join(', '),
-            category:    type,
-            zone:        zone.name,
-            mapsUrl:     `https://www.google.com/maps/place/?q=place_id:${p.place_id}`,
-            photoRef:    p.photos?.[0]?.photo_reference || '',
-            status:      p.business_status || 'OPERATIONAL',
-            scrapedAt:   new Date().toISOString(),
-          });
-        }
+        results.push({
+          id:          placeId,
+          name:        p.displayName?.text || '',
+          address:     p.formattedAddress || '',
+          phone:       p.nationalPhoneNumber || '',
+          website:     '',
+          rating:      p.rating || null,
+          reviewCount: p.userRatingCount || 0,
+          types:       (p.types || []).join(', '),
+          category:    type,
+          zone:        zone.name,
+          mapsUrl:     p.googleMapsUri || `https://www.google.com/maps/place/?q=place_id:${placeId}`,
+          photoRef:    p.photos?.[0]?.name || '',
+          status:      p.businessStatus || 'OPERATIONAL',
+          scrapedAt:   new Date().toISOString(),
+        });
       }
 
-      pageToken = res.body.next_page_token || null;
-      if (pageToken) await sleep(2000); // Google requires ~2s before next_page_token is valid
+      pageToken = res.body.nextPageToken || null;
+      if (pageToken) await sleep(2000);
     } while (pageToken && results.length < maxResults);
 
     await sleep(150);
@@ -166,20 +194,17 @@ async function fetchCategory(type) {
   return results;
 }
 
-// ── Enrich a lead with phone via Place Details ────────────────────────────────
+// ── Enrich a lead with phone via Place Details (Places API New) ───────────────
 async function enrichLeadPhone(lead) {
-  const url = `https://maps.googleapis.com/maps/api/place/details/json`
-    + `?place_id=${lead.id}`
-    + `&fields=formatted_phone_number,website,formatted_address`
-    + `&key=${API_KEY}`;
+  if (lead.phone) return lead; // already have phone from searchNearby
   try {
-    const res = await httpGet(url);
-    if (res.body.status === 'OK') {
-      const r = res.body.result;
-      // If they actually have a website in details, remove from leads
-      if (r.website) return null;
-      lead.phone   = r.formatted_phone_number || '';
-      lead.address = r.formatted_address || lead.address;
+    const url = `https://places.googleapis.com/v1/places/${lead.id}`;
+    const res = await httpGet(url + `?key=${API_KEY}&fields=nationalPhoneNumber,websiteUri,formattedAddress`);
+    if (res.status === 200) {
+      const r = res.body;
+      if (r.websiteUri) return null; // has a website — discard
+      lead.phone   = r.nationalPhoneNumber || '';
+      lead.address = r.formattedAddress || lead.address;
     }
   } catch {}
   return lead;

@@ -17,7 +17,7 @@ const fs    = require('fs');
 const path  = require('path');
 
 // ── Config ──────────────────────────────────────────────────────────────────
-const API_KEY   = 'AIzaSyAH8hrdixADjgcGPvDY8dPIshCGILs8Nzo';
+const API_KEY   = 'AIzaSyBYZoSeGlLW0jyt8mE_Ii9TtAzZSfT00-0';
 const OUT_DIR   = path.join(__dirname, '..', 'data');
 const LEADS_JSON = path.join(OUT_DIR, 'lafayette-leads.json');
 const LEADS_CSV  = path.join(OUT_DIR, 'lafayette-leads.csv');
