@@ -1,67 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-08-13T23:29:49.865Z",
+  "updated": "2026-08-14T14:13:40.770Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-08-13",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Moral Panic",
-      "url": "https://504comedy.com/event/856/moral-panic",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$20",
-      "repeat": "Second Thursday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-13",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "Comedy Gumbeaux",
-      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-      "venue": "Howlin' Wolf Den",
-      "type": "Open Mic",
-      "cost": "$5",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-09-10T19:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-13",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Queers Of Comedy New Orleans",
-      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-      "venue": "Oz New Orleans",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-08-13T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-13",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "Mike Eaton",
-      "url": "https://504comedy.com/event/1392/mike-eaton-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Thu Aug 13 2026",
-      "start_dt": "2026-08-13T21:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-08-14",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -71,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$20",
       "repeat": "Fri Aug 14 2026",
-      "start_dt": "2026-08-14T19:00-05:00"
+      "start_dt": "2026-09-11T19:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-08-14",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -85,11 +29,11 @@
       "type": "Storytelling",
       "cost": "$10",
       "repeat": "Second Friday",
-      "start_dt": "2026-08-13T19:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-08-14",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-08-15",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -117,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-08-15",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -131,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-08-15",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -324,78 +268,72 @@
       "cost": "FREE",
       "repeat": "Every Wednesday",
       "start_dt": "2026-08-19T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-08-20",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Comedy Gumbeaux",
+      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+      "venue": "Howlin' Wolf Den",
+      "type": "Open Mic",
+      "cost": "$5",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-08-19T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-08-20",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Queers Of Comedy New Orleans",
+      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+      "venue": "Oz New Orleans",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-08-20T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-08-20",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Fungus Among Us Open Mic",
+      "url": "https://504comedy.com/event/1327/fungus-among-us-open-mic",
+      "venue": "Mushroom New Orleans",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Third Thursday",
+      "start_dt": "2026-08-20T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-08-20",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Kellen Erskine",
+      "url": "https://504comedy.com/event/1394/kellen-erskine-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Thu Aug 20 2026",
+      "start_dt": "2026-08-20T21:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-08-13",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-13",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Moral Panic",
-          "url": "https://504comedy.com/event/856/moral-panic",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$20",
-          "repeat": "Second Thursday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-13",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "Comedy Gumbeaux",
-          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-          "venue": "Howlin' Wolf Den",
-          "type": "Open Mic",
-          "cost": "$5",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-09-10T19:30-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-13",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Queers Of Comedy New Orleans",
-          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-          "venue": "Oz New Orleans",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-08-13T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-13",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "Mike Eaton",
-          "url": "https://504comedy.com/event/1392/mike-eaton-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Thu Aug 13 2026",
-          "start_dt": "2026-08-13T21:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-08-14",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-14",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -405,11 +343,11 @@
           "type": "Stand-up",
           "cost": "$20",
           "repeat": "Fri Aug 14 2026",
-          "start_dt": "2026-08-14T19:00-05:00"
+          "start_dt": "2026-09-11T19:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-14",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -419,11 +357,11 @@
           "type": "Storytelling",
           "cost": "$10",
           "repeat": "Second Friday",
-          "start_dt": "2026-08-13T19:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-14",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -438,12 +376,12 @@
       ]
     },
     {
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-08-15",
       "events": [
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-08-15",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -457,7 +395,7 @@
         },
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-08-15",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -471,7 +409,7 @@
         },
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-08-15",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -688,6 +626,68 @@
           "cost": "FREE",
           "repeat": "Every Wednesday",
           "start_dt": "2026-08-19T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Thursday",
+      "date": "2026-08-20",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-08-20",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Comedy Gumbeaux",
+          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+          "venue": "Howlin' Wolf Den",
+          "type": "Open Mic",
+          "cost": "$5",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-08-19T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-08-20",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Queers Of Comedy New Orleans",
+          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+          "venue": "Oz New Orleans",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-08-20T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-08-20",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Fungus Among Us Open Mic",
+          "url": "https://504comedy.com/event/1327/fungus-among-us-open-mic",
+          "venue": "Mushroom New Orleans",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Third Thursday",
+          "start_dt": "2026-08-20T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-08-20",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Kellen Erskine",
+          "url": "https://504comedy.com/event/1394/kellen-erskine-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Thu Aug 20 2026",
+          "start_dt": "2026-08-20T21:00-05:00"
         }
       ]
     }
