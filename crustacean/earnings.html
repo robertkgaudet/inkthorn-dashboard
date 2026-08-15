@@ -406,6 +406,21 @@
           <input type="number" id="calc-premium" value="5" min="0" max="500" oninput="calcUpdate()" />
         </div>
       </div>
+      <div class="calc-row" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:24px;">
+        <div class="calc-field" style="grid-column:1/2;">
+          <label>Custom Price ($/mo)</label>
+          <input type="number" id="calc-custom-price" value="" min="0" placeholder="Enter price…" oninput="calcUpdate()" style="border-color:rgba(251,191,36,0.4);" />
+        </div>
+        <div class="calc-field" style="grid-column:2/3;">
+          <label>Custom Customers</label>
+          <input type="number" id="calc-custom-qty" value="0" min="0" max="500" oninput="calcUpdate()" style="border-color:rgba(251,191,36,0.4);" />
+        </div>
+        <div class="calc-field" style="grid-column:3/4;display:flex;align-items:flex-end;">
+          <div style="width:100%;padding:10px 14px;background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.25);border-radius:8px;font-size:0.78rem;color:#7878a8;line-height:1.5;">
+            Add any custom plan price to model non-standard deals or future tiers.
+          </div>
+        </div>
+      </div>
       <div class="calc-results">
         <div class="calc-result">
           <div class="calc-result-label">Total Customers</div>
@@ -520,9 +535,11 @@
       var s = parseInt(document.getElementById('calc-starter').value) || 0;
       var g = parseInt(document.getElementById('calc-growth').value) || 0;
       var p = parseInt(document.getElementById('calc-premium').value) || 0;
-      var mrr = (s * 47) + (g * 95) + (p * 179);
+      var cp = parseFloat(document.getElementById('calc-custom-price').value) || 0;
+      var cq = parseInt(document.getElementById('calc-custom-qty').value) || 0;
+      var mrr = (s * 47) + (g * 95) + (p * 179) + (cp * cq);
       var comm = mrr * 0.30;
-      document.getElementById('calc-total-customers').textContent = s + g + p;
+      document.getElementById('calc-total-customers').textContent = s + g + p + cq;
       document.getElementById('calc-mrr').textContent = fmt(mrr);
       document.getElementById('calc-comm-monthly').textContent = fmt(comm);
       document.getElementById('calc-comm-annual').textContent = fmt(comm * 12);
