@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-08-14T23:10:52.342Z",
+  "updated": "2026-08-15T13:26:27.262Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-08-14",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Troy Duchane & Schoen Favorite",
-      "url": "https://504comedy.com/event/1393/troy-duchane--schoen-favorite-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$20",
-      "repeat": "Fri Aug 14 2026",
-      "start_dt": "2026-09-11T19:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-14",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Greetings from Queer Mountain",
-      "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
-      "venue": "ALLways Lounge",
-      "type": "Storytelling",
-      "cost": "$10",
-      "repeat": "Second Friday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-14",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "The Comedy Lounge",
-      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-      "venue": "Vino: Fine Wine & Spirits",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Friday",
-      "start_dt": "2026-08-14T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-08-15",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -57,11 +15,11 @@
       "type": "Improv",
       "cost": "$8",
       "repeat": "Third Saturday",
-      "start_dt": "2026-08-14T19:30-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-08-15",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-08-15",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-08-16",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -103,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-08-16",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -117,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-08-16",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -324,64 +282,44 @@
       "cost": "$25",
       "repeat": "Thu Aug 20 2026",
       "start_dt": "2026-08-20T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-08-21",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Comedy Lounge",
+      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+      "venue": "Vino: Fine Wine & Spirits",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Friday",
+      "start_dt": "2026-08-20T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-08-21",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Comedy Teabag: A Dark Dirty Comedy Show",
+      "url": "https://504comedy.com/event/1156/comedy-teabag-a-dark-dirty-comedy-show",
+      "venue": "Howlin' Wolf Den",
+      "type": "Stand-up",
+      "cost": "$15",
+      "repeat": "Third Friday",
+      "start_dt": "2026-08-21T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-08-14",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-14",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Troy Duchane & Schoen Favorite",
-          "url": "https://504comedy.com/event/1393/troy-duchane--schoen-favorite-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$20",
-          "repeat": "Fri Aug 14 2026",
-          "start_dt": "2026-09-11T19:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-14",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Greetings from Queer Mountain",
-          "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
-          "venue": "ALLways Lounge",
-          "type": "Storytelling",
-          "cost": "$10",
-          "repeat": "Second Friday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-14",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "The Comedy Lounge",
-          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-          "venue": "Vino: Fine Wine & Spirits",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Friday",
-          "start_dt": "2026-08-14T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-08-15",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-15",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -391,11 +329,11 @@
           "type": "Improv",
           "cost": "$8",
           "repeat": "Third Saturday",
-          "start_dt": "2026-08-14T19:30-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-15",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -409,7 +347,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-15",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -424,12 +362,12 @@
       ]
     },
     {
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-08-16",
       "events": [
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-08-16",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -443,7 +381,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-08-16",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -457,7 +395,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-08-16",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -688,6 +626,40 @@
           "cost": "$25",
           "repeat": "Thu Aug 20 2026",
           "start_dt": "2026-08-20T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "date": "2026-08-21",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-08-21",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Comedy Lounge",
+          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+          "venue": "Vino: Fine Wine & Spirits",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Friday",
+          "start_dt": "2026-08-20T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-08-21",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Comedy Teabag: A Dark Dirty Comedy Show",
+          "url": "https://504comedy.com/event/1156/comedy-teabag-a-dark-dirty-comedy-show",
+          "venue": "Howlin' Wolf Den",
+          "type": "Stand-up",
+          "cost": "$15",
+          "repeat": "Third Friday",
+          "start_dt": "2026-08-21T20:00-05:00"
         }
       ]
     }
