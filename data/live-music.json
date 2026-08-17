@@ -1,77 +1,41 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-08-16T23:09:17.344Z",
+  "updated": "2026-08-17T13:35:48.962Z",
   "source": "WWOZ Livewire",
-  "date": "Sunday, August 16, 2026",
+  "date": "Monday, August 17, 2026",
   "shows": [
-    {
-      "time": "9:00am",
-      "time_sort": 900,
-      "artist": "John Rankin",
-      "url": "https://wwoz.org/events/1377866",
-      "venue": "PJ's Coffeehouse - Canal",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "11:00am",
-      "time_sort": 1100,
-      "artist": "Some Like It Hot!",
-      "url": "https://wwoz.org/events/1372426",
-      "venue": "Buffa's",
-      "genre": "Other",
-      "neighborhood": "Marigny"
-    },
     {
       "time": "11:00am",
       "time_sort": 1100,
       "artist": "Steamboat Stompers",
-      "url": "https://wwoz.org/events/1374791",
+      "url": "https://wwoz.org/events/1374766",
       "venue": "Steamboat Natchez",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "11:00am",
-      "time_sort": 1100,
-      "artist": "Don Vappie & Dr. Ben Redwine",
-      "url": "https://wwoz.org/events/1369341",
-      "venue": "Tchefuncte’s Restaurant - Madisonville",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "11:30am",
-      "time_sort": 1130,
-      "artist": "Adam Pearce",
-      "url": "https://wwoz.org/events/1371731",
-      "venue": "Boxer & The Barrel, The - Houma",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "12:00pm",
       "time_sort": 1200,
-      "artist": "Rolling Elvi & Sassyracs Summer Blood Drive ft. Cortland Burke & His Close Company + School of Rock",
-      "url": "https://wwoz.org/events/1377271",
-      "venue": "Tipitina's",
-      "genre": "Rock",
+      "artist": "The New Orleans Rug Cutters",
+      "url": "https://wwoz.org/events/1377561",
+      "venue": "Bamboula's",
+      "genre": "Other",
+      "neighborhood": "French Quarter"
+    },
+    {
+      "time": "12:00pm",
+      "time_sort": 1200,
+      "artist": "Keva Holiday",
+      "url": "https://wwoz.org/events/1374421",
+      "venue": "Bourbon Square Jazz Bar",
+      "genre": "Jazz",
       "neighborhood": null
     },
     {
       "time": "1:00pm",
       "time_sort": 1300,
-      "artist": "Piety Market ft. Nat & Kat Cajun String Band",
-      "url": "https://wwoz.org/events/1377881",
-      "venue": "Church at Hotel Peter & Paul, The",
-      "genre": "Cajun",
-      "neighborhood": null
-    },
-    {
-      "time": "1:00pm",
-      "time_sort": 1300,
-      "artist": "Doyle Cooper Band",
-      "url": "https://wwoz.org/events/1371091",
+      "artist": "Open Jazz Jam Session with Matinee All Stars Band",
+      "url": "https://wwoz.org/events/1371166",
       "venue": "Fritzel's Jazz Club",
       "genre": "Jazz",
       "neighborhood": "French Quarter"
@@ -79,8 +43,8 @@
     {
       "time": "2:00pm",
       "time_sort": 1400,
-      "artist": "Jacky Blaire & the Hot Biscuits",
-      "url": "https://wwoz.org/events/1378461",
+      "artist": "Jenavieve Cooke & the Winding Boys",
+      "url": "https://wwoz.org/events/1378496",
       "venue": "Spotted Cat",
       "genre": "Other",
       "neighborhood": null
@@ -89,7 +53,7 @@
       "time": "2:00pm",
       "time_sort": 1400,
       "artist": "Steamboat Stompers",
-      "url": "https://wwoz.org/events/1374841",
+      "url": "https://wwoz.org/events/1374816",
       "venue": "Steamboat Natchez",
       "genre": "Other",
       "neighborhood": null
@@ -97,89 +61,17 @@
     {
       "time": "3:00pm",
       "time_sort": 1500,
-      "artist": "Sierra & the Green Notes",
-      "url": "https://wwoz.org/events/1375491",
-      "venue": "BMC",
-      "genre": "Other",
-      "neighborhood": "Uptown"
-    },
-    {
-      "time": "3:00pm",
-      "time_sort": 1500,
-      "artist": "Keva Holiday",
-      "url": "https://wwoz.org/events/1374416",
-      "venue": "Bourbon Square Jazz Bar",
-      "genre": "Jazz",
-      "neighborhood": null
-    },
-    {
-      "time": "3:00pm",
-      "time_sort": 1500,
-      "artist": "Oogum Boogum",
-      "url": "https://wwoz.org/events/1376651",
-      "venue": "Old Point Bar",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "3:00pm",
-      "time_sort": 1500,
-      "artist": "Maddspinz (DJ Sets)",
-      "url": "https://wwoz.org/events/1378576",
-      "venue": "Virgin Hotels New Orleans",
-      "genre": "Electronic",
-      "neighborhood": null
-    },
-    {
-      "time": "4:00pm",
-      "time_sort": 1600,
-      "artist": "Davis Rogan",
-      "url": "https://wwoz.org/events/1375881",
-      "venue": "Bourbon O Bar at The Bourbon Orleans Hotel",
-      "genre": "Other",
-      "neighborhood": "French Quarter"
-    },
-    {
-      "time": "4:00pm",
-      "time_sort": 1600,
-      "artist": "Ingrid Lucia",
-      "url": "https://wwoz.org/events/1376631",
-      "venue": "Maison, The",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "4:00pm",
-      "time_sort": 1600,
-      "artist": "Emerging Artists Concert ft. Soprano Haley Whitney & Tenor Brett Ochoa",
-      "url": "https://wwoz.org/events/1373671",
-      "venue": "Women's Opera Guild Home",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "4:30pm",
-      "time_sort": 1630,
-      "artist": "The Rumpshakers",
-      "url": "https://wwoz.org/events/1372991",
-      "venue": "Café Negril",
-      "genre": "Other",
-      "neighborhood": "Marigny"
-    },
-    {
-      "time": "4:30pm",
-      "time_sort": 1630,
-      "artist": "Wendell Brunious & Tom Hook",
-      "url": "https://wwoz.org/events/1376241",
-      "venue": "Snug Harbor",
-      "genre": "Other",
+      "artist": "Les Getrex",
+      "url": "https://wwoz.org/events/1372251",
+      "venue": "Cajun Boil House",
+      "genre": "Cajun",
       "neighborhood": null
     },
     {
       "time": "5:00pm",
       "time_sort": 1700,
-      "artist": "Sazerac Jazz Band",
-      "url": "https://wwoz.org/events/1371116",
+      "artist": "Tin Men",
+      "url": "https://wwoz.org/events/1371191",
       "venue": "Fritzel's Jazz Club",
       "genre": "Jazz",
       "neighborhood": "French Quarter"
@@ -187,35 +79,35 @@
     {
       "time": "5:00pm",
       "time_sort": 1700,
-      "artist": "The Preservation Legacy Band ft. Gregg Stafford",
-      "url": "https://wwoz.org/events/1369961",
-      "venue": "Preservation Hall",
+      "artist": "Gene's Music Machine",
+      "url": "https://wwoz.org/events/1376421",
+      "venue": "Maison, The",
       "genre": "Other",
+      "neighborhood": null
+    },
+    {
+      "time": "5:00pm",
+      "time_sort": 1700,
+      "artist": "Preservation Brass",
+      "url": "https://wwoz.org/events/1370061",
+      "venue": "Preservation Hall",
+      "genre": "Brass",
       "neighborhood": null
     },
     {
       "time": "5:30pm",
       "time_sort": 1730,
-      "artist": "The New Orleans Rug Cutters",
-      "url": "https://wwoz.org/events/1377556",
-      "venue": "Bamboula's",
-      "genre": "Other",
-      "neighborhood": "French Quarter"
-    },
-    {
-      "time": "5:30pm",
-      "time_sort": 1730,
-      "artist": "Lisa Bittick-Lowe, Matt Hayden & Emelie Guidry",
-      "url": "https://wwoz.org/events/1376736",
-      "venue": "Pat O'Brien's",
-      "genre": "Other",
+      "artist": "\"Live Music in Conversation\" Oral History Series with Herlin Riley & Lula Elzy, featuring Germaine Bazzle & Lawrence Cotton",
+      "url": "https://wwoz.org/events/1377751",
+      "venue": "George & Joyce Wein Jazz & Heritage Center",
+      "genre": "Jazz",
       "neighborhood": null
     },
     {
       "time": "5:30pm",
       "time_sort": 1730,
       "artist": "David Boeddinghaus",
-      "url": "https://wwoz.org/events/1357971",
+      "url": "https://wwoz.org/events/1358116",
       "venue": "Polo Club at The Windsor Court, The",
       "genre": "Other",
       "neighborhood": null
@@ -223,17 +115,17 @@
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Danny Ray & the Electric Barrelhouse",
-      "url": "https://wwoz.org/events/1375496",
-      "venue": "BMC",
+      "artist": "Byron Asher",
+      "url": "https://wwoz.org/events/1373456",
+      "venue": "Bacchanal (OUTDOORS)",
       "genre": "Other",
-      "neighborhood": "Uptown"
+      "neighborhood": "Bywater"
     },
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Ryan Robertson Jazz Quintet",
-      "url": "https://wwoz.org/events/1378161",
+      "artist": "Secret Six Jazz Band",
+      "url": "https://wwoz.org/events/1378191",
       "venue": "d.b.a.",
       "genre": "Jazz",
       "neighborhood": "Marigny"
@@ -241,17 +133,8 @@
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Manny Arteaga (..of the Lunch Truck Specials Band)",
-      "url": "https://wwoz.org/events/1370956",
-      "venue": "La Carreta - Magazine St.",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "6:00pm",
-      "time_sort": 1800,
-      "artist": "Big Joe Kennedy",
-      "url": "https://wwoz.org/events/1370656",
+      "artist": "Tom Hook",
+      "url": "https://wwoz.org/events/1370821",
       "venue": "Mahogany Jazz Hall",
       "genre": "Jazz",
       "neighborhood": null
@@ -259,27 +142,18 @@
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Open Mic Night with Guest Host Holmes",
-      "url": "https://wwoz.org/events/1372851",
-      "venue": "Old Arabi Lighthouse Records & Books",
+      "artist": "Hannah Kreiger-Benson + Matt Hayden",
+      "url": "https://wwoz.org/events/1376741",
+      "venue": "Pat O'Brien's",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "6:00pm",
       "time_sort": 1800,
-      "artist": "Treme Brass Band",
-      "url": "https://wwoz.org/events/1378466",
+      "artist": "Dominick Grillo & the Frenchmen Street All-Stars",
+      "url": "https://wwoz.org/events/1378491",
       "venue": "Spotted Cat",
-      "genre": "Brass",
-      "neighborhood": null
-    },
-    {
-      "time": "6:00pm",
-      "time_sort": 1800,
-      "artist": "Craig Cortello, The “Canine Crooner”",
-      "url": "https://wwoz.org/events/1371926",
-      "venue": "St. Roch Market",
       "genre": "Other",
       "neighborhood": null
     },
@@ -287,7 +161,7 @@
       "time": "6:00pm",
       "time_sort": 1800,
       "artist": "Dukes of Dixieland",
-      "url": "https://wwoz.org/events/1374571",
+      "url": "https://wwoz.org/events/1374586",
       "venue": "Steamboat Natchez",
       "genre": "Other",
       "neighborhood": null
@@ -295,26 +169,17 @@
     {
       "time": "6:15pm",
       "time_sort": 1815,
-      "artist": "The Preservation Legacy Band ft. Gregg Stafford",
-      "url": "https://wwoz.org/events/1369986",
+      "artist": "Preservation Brass",
+      "url": "https://wwoz.org/events/1370086",
       "venue": "Preservation Hall",
-      "genre": "Other",
+      "genre": "Brass",
       "neighborhood": null
     },
     {
       "time": "7:00pm",
       "time_sort": 1900,
-      "artist": "David Sigler",
-      "url": "https://wwoz.org/events/1373406",
-      "venue": "Bacchanal (OUTDOORS)",
-      "genre": "Other",
-      "neighborhood": "Bywater"
-    },
-    {
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "artist": "Daniel Louis",
-      "url": "https://wwoz.org/events/1375741",
+      "artist": "David Doucet",
+      "url": "https://wwoz.org/events/1372371",
       "venue": "Buffa's",
       "genre": "Other",
       "neighborhood": "Marigny"
@@ -322,62 +187,53 @@
     {
       "time": "7:00pm",
       "time_sort": 1900,
-      "artist": "Jenavieve & The Winding Boys",
-      "url": "https://wwoz.org/events/1376616",
-      "venue": "Maison, The",
+      "artist": "Subterranean Songwriter Night",
+      "url": "https://wwoz.org/events/1346061",
+      "venue": "Howlin' Wolf - The Den",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "7:00pm",
       "time_sort": 1900,
-      "artist": "De Los Proyectos + Panasoul + Andrea Beltrán + DJ Jamil",
-      "url": "https://wwoz.org/events/1377936",
-      "venue": "Okay Bar",
-      "genre": "Electronic",
+      "artist": "NOLA Pickin’ Party Bluegrass Jam",
+      "url": "https://wwoz.org/events/1312866",
+      "venue": "NOLA Brewing",
+      "genre": "Other",
       "neighborhood": null
     },
     {
-      "time": "7:15pm",
-      "time_sort": 1915,
-      "artist": "The Leroy Marshall Band",
-      "url": "https://wwoz.org/events/1362641",
-      "venue": "Maison Bourbon Jazz Club",
-      "genre": "Jazz",
-      "neighborhood": null
-    },
-    {
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "artist": "The Preservation Legacy Band ft. Gregg Stafford",
-      "url": "https://wwoz.org/events/1370011",
-      "venue": "Preservation Hall",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "artist": "Dave Ferrato",
+      "url": "https://wwoz.org/events/1372176",
+      "venue": "Tropical Isle Original",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "7:30pm",
       "time_sort": 1930,
-      "artist": "Betty Shirley with Will Thompson Trio",
-      "url": "https://wwoz.org/events/1376251",
-      "venue": "Snug Harbor",
-      "genre": "Jazz",
+      "artist": "Preservation Brass",
+      "url": "https://wwoz.org/events/1370111",
+      "venue": "Preservation Hall",
+      "genre": "Brass",
       "neighborhood": null
     },
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Sunday Swing with The Steve DeTroy Jazz Band",
-      "url": "https://wwoz.org/events/1372961",
-      "venue": "AllWays Lounge",
-      "genre": "Jazz",
-      "neighborhood": null
+      "artist": "The Jelly Roll Stompers",
+      "url": "https://wwoz.org/events/1375306",
+      "venue": "21st Amendment",
+      "genre": "Other",
+      "neighborhood": "Central Business District"
     },
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Justin Donovan",
-      "url": "https://wwoz.org/events/1375896",
+      "artist": "Khris Royal",
+      "url": "https://wwoz.org/events/1375916",
       "venue": "Bourbon O Bar at The Bourbon Orleans Hotel",
       "genre": "Other",
       "neighborhood": "French Quarter"
@@ -385,26 +241,17 @@
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Raphael Bas",
-      "url": "https://wwoz.org/events/1373511",
-      "venue": "Dos Jefes",
+      "artist": "Tom Hook",
+      "url": "https://wwoz.org/events/1378651",
+      "venue": "Carousel Bar & Lounge at Hotel Monteleone",
       "genre": "Other",
-      "neighborhood": "Uptown"
+      "neighborhood": "French Quarter"
     },
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Christian Coleman & His Band",
-      "url": "https://wwoz.org/events/1374986",
-      "venue": "Favela Chic",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "artist": "Fritzel's All Star Band with Mike Fulton",
-      "url": "https://wwoz.org/events/1371141",
+      "artist": "Richard Scott & Friends",
+      "url": "https://wwoz.org/events/1371216",
       "venue": "Fritzel's Jazz Club",
       "genre": "Jazz",
       "neighborhood": "French Quarter"
@@ -412,8 +259,8 @@
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Mahogany Hall Swingsters ft. Roderick Paulin",
-      "url": "https://wwoz.org/events/1370681",
+      "artist": "The Original Tuxedo Jazz Band",
+      "url": "https://wwoz.org/events/1370711",
       "venue": "Mahogany Jazz Hall",
       "genre": "Jazz",
       "neighborhood": null
@@ -421,89 +268,62 @@
     {
       "time": "8:00pm",
       "time_sort": 2000,
-      "artist": "Higher Ground",
-      "url": "https://wwoz.org/events/1378716",
-      "venue": "Maple Leaf",
-      "genre": "Other",
+      "artist": "Danny Rubio & the Catahoula Music Company ft. Jack Pritchett",
+      "url": "https://wwoz.org/events/1364021",
+      "venue": "Maison Bourbon Jazz Club",
+      "genre": "Jazz",
       "neighborhood": null
+    },
+    {
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "artist": "George Porter Jr. Trio ft. Chris Adkins",
+      "url": "https://wwoz.org/events/1378721",
+      "venue": "Maple Leaf",
+      "genre": "Jazz",
+      "neighborhood": null
+    },
+    {
+      "time": "8:30pm",
+      "time_sort": 2030,
+      "artist": "John Fohl",
+      "url": "https://wwoz.org/events/1373551",
+      "venue": "Dos Jefes",
+      "genre": "Other",
+      "neighborhood": "Uptown"
     },
     {
       "time": "8:45pm",
       "time_sort": 2045,
-      "artist": "The Preservation Legacy Band ft. Gregg Stafford",
-      "url": "https://wwoz.org/events/1370036",
+      "artist": "Preservation Brass",
+      "url": "https://wwoz.org/events/1370136",
       "venue": "Preservation Hall",
-      "genre": "Other",
+      "genre": "Brass",
       "neighborhood": null
     },
     {
       "time": "9:00pm",
       "time_sort": 2100,
-      "artist": "James McClaskey & the Rhythm Band",
-      "url": "https://wwoz.org/events/1371836",
+      "artist": "Red Beans & Blues with Washboard Chaz & Jonathan Freilich",
+      "url": "https://wwoz.org/events/1371851",
       "venue": "BJ's Lounge",
-      "genre": "Other",
+      "genre": "Blues",
       "neighborhood": "Bywater"
     },
     {
       "time": "9:00pm",
       "time_sort": 2100,
-      "artist": "Mother Ruckus",
-      "url": "https://wwoz.org/events/1377396",
-      "venue": "BMC",
-      "genre": "Other",
-      "neighborhood": "Uptown"
-    },
-    {
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "artist": "Maurice Cade & the E.S.S. Band",
-      "url": "https://wwoz.org/events/1373091",
-      "venue": "Café Negril",
-      "genre": "Other",
-      "neighborhood": "Marigny"
-    },
-    {
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "artist": "Fudge + NOLO",
-      "url": "https://wwoz.org/events/1369536",
-      "venue": "Gasa Gasa",
-      "genre": "Other",
-      "neighborhood": "Uptown"
-    },
-    {
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "artist": "The Montvales + Nathan Evans Fox",
-      "url": "https://wwoz.org/events/1359601",
-      "venue": "No Dice",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "artist": "Soft Palms with Donny's Demeanor + Dummy Plug",
-      "url": "https://wwoz.org/events/1334081",
-      "venue": "Siberia",
-      "genre": "Other",
-      "neighborhood": null
-    },
-    {
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "artist": "Pat Casey & the New Sound",
-      "url": "https://wwoz.org/events/1378531",
-      "venue": "Spotted Cat",
+      "artist": "Rose Vaughn + Trent Pruitt",
+      "url": "https://wwoz.org/events/1373606",
+      "venue": "St. Roch Tavern",
       "genre": "Other",
       "neighborhood": null
     },
     {
       "time": "9:30pm",
       "time_sort": 2130,
-      "artist": "The Jump Hounds",
-      "url": "https://wwoz.org/events/1378176",
+      "artist": "Corey Henry & The Treme Funktet : Red Beans & Ricely Yours",
+      "url": "https://wwoz.org/events/1378206",
       "venue": "d.b.a.",
       "genre": "Other",
       "neighborhood": "Marigny"
@@ -511,20 +331,29 @@
     {
       "time": "9:30pm",
       "time_sort": 2130,
-      "artist": "Betty Shirley with Will Thompson Trio",
-      "url": "https://wwoz.org/events/1376246",
-      "venue": "Snug Harbor",
-      "genre": "Jazz",
+      "artist": "Sporty's Brass Band",
+      "url": "https://wwoz.org/events/1357551",
+      "venue": "Da Jump Off Lounge",
+      "genre": "Brass",
       "neighborhood": null
     },
     {
-      "time": "10:30pm",
-      "time_sort": 2230,
-      "artist": "Hot 8 Brass Band",
-      "url": "https://wwoz.org/events/1359071",
-      "venue": "Howlin' Wolf",
-      "genre": "Brass",
+      "time": "9:30pm",
+      "time_sort": 2130,
+      "artist": "Tuba Skinny",
+      "url": "https://wwoz.org/events/1378511",
+      "venue": "Spotted Cat",
+      "genre": "Other",
       "neighborhood": null
+    },
+    {
+      "time": "10:00pm",
+      "time_sort": 2200,
+      "artist": "Biscuits n' Jam with Meryl Zimmerman & Friends",
+      "url": "https://wwoz.org/events/1372641",
+      "venue": "Carrollton Station",
+      "genre": "Other",
+      "neighborhood": "Carrollton"
     }
   ]
 }
