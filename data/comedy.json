@@ -1,67 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-08-19T23:13:08.605Z",
+  "updated": "2026-08-20T13:41:39.991Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-08-19",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "Think You're Funny?",
-      "url": "https://504comedy.com/event/44/thinkyourefunny",
-      "venue": "Carrollton Station",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Wednesday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-19",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "Humpday HiJenks",
-      "url": "https://504comedy.com/event/1297/humpday-hijenks",
-      "venue": "One More Pie",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Wednesday",
-      "start_dt": "2026-08-19T21:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-19",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "One More Pie Comedy Open Mic",
-      "url": "https://504comedy.com/event/1316/one-more-pie-comedy-open-mic",
-      "venue": "One More Pie",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Wednesday",
-      "start_dt": "2026-08-19T21:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-19",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "Open Gym Comedy Open Mic",
-      "url": "https://504comedy.com/event/1322/open-gym-comedy-open-mic",
-      "venue": "Sports Drink",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Wednesday",
-      "start_dt": "2026-08-19T21:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-08-20",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -71,11 +15,11 @@
       "type": "Open Mic",
       "cost": "$5",
       "repeat": "Every Thursday",
-      "start_dt": "2026-08-19T19:30-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-08-20",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-08-20",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-08-20",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -113,11 +57,11 @@
       "type": "Stand-up",
       "cost": "$25",
       "repeat": "Thu Aug 20 2026",
-      "start_dt": "2026-08-20T21:00-05:00"
+      "start_dt": "2026-09-17T21:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Friday",
+      "day": "Tomorrow",
       "date": "2026-08-21",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -131,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Friday",
+      "day": "Tomorrow",
       "date": "2026-08-21",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -231,6 +175,20 @@
       "category": "comedy",
       "day": "Monday",
       "date": "2026-08-24",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Open Mic",
+      "url": "https://504comedy.com/event/1399/the-open-mic-at-gasa-gasa",
+      "venue": "Gasa Gasa",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Monday",
+      "start_dt": "2026-08-24T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Monday",
+      "date": "2026-08-24",
       "time": "9:30pm",
       "time_sort": 2130,
       "title": "Gumbolaya All Acts Open Mic",
@@ -268,78 +226,86 @@
       "cost": "FREE",
       "repeat": "Every Tuesday",
       "start_dt": "2026-08-25T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Wednesday",
+      "date": "2026-08-26",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Stoned vs. Drunk vs. Sober",
+      "url": "https://504comedy.com/event/1128/stoned-vs-drunk-vs-sober",
+      "venue": "The Howlin' Wolf",
+      "type": "Stand-up",
+      "cost": "$15",
+      "repeat": "Fourth Wednesday",
+      "start_dt": "2026-08-25T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Wednesday",
+      "date": "2026-08-26",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Think You're Funny?",
+      "url": "https://504comedy.com/event/44/thinkyourefunny",
+      "venue": "Carrollton Station",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Wednesday",
+      "start_dt": "2026-08-26T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Wednesday",
+      "date": "2026-08-26",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Humpday HiJenks",
+      "url": "https://504comedy.com/event/1297/humpday-hijenks",
+      "venue": "One More Pie",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Wednesday",
+      "start_dt": "2026-08-26T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Wednesday",
+      "date": "2026-08-26",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "One More Pie Comedy Open Mic",
+      "url": "https://504comedy.com/event/1316/one-more-pie-comedy-open-mic",
+      "venue": "One More Pie",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Wednesday",
+      "start_dt": "2026-08-26T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Wednesday",
+      "date": "2026-08-26",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Open Gym Comedy Open Mic",
+      "url": "https://504comedy.com/event/1322/open-gym-comedy-open-mic",
+      "venue": "Sports Drink",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Wednesday",
+      "start_dt": "2026-08-26T21:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-08-19",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-19",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "Think You're Funny?",
-          "url": "https://504comedy.com/event/44/thinkyourefunny",
-          "venue": "Carrollton Station",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Wednesday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-19",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "Humpday HiJenks",
-          "url": "https://504comedy.com/event/1297/humpday-hijenks",
-          "venue": "One More Pie",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Wednesday",
-          "start_dt": "2026-08-19T21:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-19",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "One More Pie Comedy Open Mic",
-          "url": "https://504comedy.com/event/1316/one-more-pie-comedy-open-mic",
-          "venue": "One More Pie",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Wednesday",
-          "start_dt": "2026-08-19T21:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-19",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "Open Gym Comedy Open Mic",
-          "url": "https://504comedy.com/event/1322/open-gym-comedy-open-mic",
-          "venue": "Sports Drink",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Wednesday",
-          "start_dt": "2026-08-19T21:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-08-20",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-20",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -349,11 +315,11 @@
           "type": "Open Mic",
           "cost": "$5",
           "repeat": "Every Thursday",
-          "start_dt": "2026-08-19T19:30-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-20",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -367,7 +333,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-20",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -381,7 +347,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-20",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -391,17 +357,17 @@
           "type": "Stand-up",
           "cost": "$25",
           "repeat": "Thu Aug 20 2026",
-          "start_dt": "2026-08-20T21:00-05:00"
+          "start_dt": "2026-09-17T21:00-05:00"
         }
       ]
     },
     {
-      "day": "Friday",
+      "day": "Tomorrow",
       "date": "2026-08-21",
       "events": [
         {
           "category": "comedy",
-          "day": "Friday",
+          "day": "Tomorrow",
           "date": "2026-08-21",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -415,7 +381,7 @@
         },
         {
           "category": "comedy",
-          "day": "Friday",
+          "day": "Tomorrow",
           "date": "2026-08-21",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -533,6 +499,20 @@
           "category": "comedy",
           "day": "Monday",
           "date": "2026-08-24",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Open Mic",
+          "url": "https://504comedy.com/event/1399/the-open-mic-at-gasa-gasa",
+          "venue": "Gasa Gasa",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Monday",
+          "start_dt": "2026-08-24T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Monday",
+          "date": "2026-08-24",
           "time": "9:30pm",
           "time_sort": 2130,
           "title": "Gumbolaya All Acts Open Mic",
@@ -576,6 +556,82 @@
           "cost": "FREE",
           "repeat": "Every Tuesday",
           "start_dt": "2026-08-25T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-08-26",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Wednesday",
+          "date": "2026-08-26",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Stoned vs. Drunk vs. Sober",
+          "url": "https://504comedy.com/event/1128/stoned-vs-drunk-vs-sober",
+          "venue": "The Howlin' Wolf",
+          "type": "Stand-up",
+          "cost": "$15",
+          "repeat": "Fourth Wednesday",
+          "start_dt": "2026-08-25T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Wednesday",
+          "date": "2026-08-26",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Think You're Funny?",
+          "url": "https://504comedy.com/event/44/thinkyourefunny",
+          "venue": "Carrollton Station",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Wednesday",
+          "start_dt": "2026-08-26T21:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Wednesday",
+          "date": "2026-08-26",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Humpday HiJenks",
+          "url": "https://504comedy.com/event/1297/humpday-hijenks",
+          "venue": "One More Pie",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Wednesday",
+          "start_dt": "2026-08-26T21:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Wednesday",
+          "date": "2026-08-26",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "One More Pie Comedy Open Mic",
+          "url": "https://504comedy.com/event/1316/one-more-pie-comedy-open-mic",
+          "venue": "One More Pie",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Wednesday",
+          "start_dt": "2026-08-26T21:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Wednesday",
+          "date": "2026-08-26",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Open Gym Comedy Open Mic",
+          "url": "https://504comedy.com/event/1322/open-gym-comedy-open-mic",
+          "venue": "Sports Drink",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Wednesday",
+          "start_dt": "2026-08-26T21:00-05:00"
         }
       ]
     }
