@@ -1,67 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-08-20T23:15:24.862Z",
+  "updated": "2026-08-21T13:41:06.375Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-08-20",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "Comedy Gumbeaux",
-      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-      "venue": "Howlin' Wolf Den",
-      "type": "Open Mic",
-      "cost": "$5",
-      "repeat": "Every Thursday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-20",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Queers Of Comedy New Orleans",
-      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-      "venue": "Oz New Orleans",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-08-20T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-20",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Fungus Among Us Open Mic",
-      "url": "https://504comedy.com/event/1327/fungus-among-us-open-mic",
-      "venue": "Mushroom New Orleans",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Third Thursday",
-      "start_dt": "2026-08-20T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2026-08-20",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "Kellen Erskine",
-      "url": "https://504comedy.com/event/1394/kellen-erskine-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Thu Aug 20 2026",
-      "start_dt": "2026-09-17T21:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-08-21",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -71,11 +15,11 @@
       "type": "Stand-up",
       "cost": "FREE",
       "repeat": "Every Friday",
-      "start_dt": "2026-08-20T20:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-08-21",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-08-22",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -99,11 +43,11 @@
       "type": "Stand-up",
       "cost": "FREE",
       "repeat": "Every Saturday",
-      "start_dt": "2026-08-21T20:00-05:00"
+      "start_dt": "2026-09-18T20:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-08-22",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -296,78 +240,58 @@
       "cost": "FREE",
       "repeat": "Every Wednesday",
       "start_dt": "2026-08-26T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-08-27",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Ted & Kev: A Comedy Showcase",
+      "url": "https://504comedy.com/event/1343/ted--kev-a-comedy-showcase-at-sports-drink",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$10",
+      "repeat": "Fourth Thursday",
+      "start_dt": "2026-08-26T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-08-27",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Comedy Gumbeaux",
+      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+      "venue": "Howlin' Wolf Den",
+      "type": "Open Mic",
+      "cost": "$5",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-08-27T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-08-27",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Queers Of Comedy New Orleans",
+      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+      "venue": "Oz New Orleans",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-08-27T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2026-08-20",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-20",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "Comedy Gumbeaux",
-          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-          "venue": "Howlin' Wolf Den",
-          "type": "Open Mic",
-          "cost": "$5",
-          "repeat": "Every Thursday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-20",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Queers Of Comedy New Orleans",
-          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-          "venue": "Oz New Orleans",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-08-20T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-20",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Fungus Among Us Open Mic",
-          "url": "https://504comedy.com/event/1327/fungus-among-us-open-mic",
-          "venue": "Mushroom New Orleans",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Third Thursday",
-          "start_dt": "2026-08-20T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2026-08-20",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "Kellen Erskine",
-          "url": "https://504comedy.com/event/1394/kellen-erskine-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Thu Aug 20 2026",
-          "start_dt": "2026-09-17T21:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-08-21",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-21",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -377,11 +301,11 @@
           "type": "Stand-up",
           "cost": "FREE",
           "repeat": "Every Friday",
-          "start_dt": "2026-08-20T20:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-21",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -396,12 +320,12 @@
       ]
     },
     {
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-08-22",
       "events": [
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-08-22",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -411,11 +335,11 @@
           "type": "Stand-up",
           "cost": "FREE",
           "repeat": "Every Saturday",
-          "start_dt": "2026-08-21T20:00-05:00"
+          "start_dt": "2026-09-18T20:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-08-22",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -632,6 +556,54 @@
           "cost": "FREE",
           "repeat": "Every Wednesday",
           "start_dt": "2026-08-26T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Thursday",
+      "date": "2026-08-27",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-08-27",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Ted & Kev: A Comedy Showcase",
+          "url": "https://504comedy.com/event/1343/ted--kev-a-comedy-showcase-at-sports-drink",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$10",
+          "repeat": "Fourth Thursday",
+          "start_dt": "2026-08-26T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-08-27",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Comedy Gumbeaux",
+          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+          "venue": "Howlin' Wolf Den",
+          "type": "Open Mic",
+          "cost": "$5",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-08-27T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-08-27",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Queers Of Comedy New Orleans",
+          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+          "venue": "Oz New Orleans",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-08-27T20:00-05:00"
         }
       ]
     }
