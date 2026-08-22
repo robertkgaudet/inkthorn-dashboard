@@ -1,56 +1,56 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-08-21T23:13:16.812Z",
+  "updated": "2026-08-22T13:27:46.085Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 99,
-    "feels_like_f": 103,
-    "humidity": 38,
-    "description": "Overcast ",
-    "code": "122",
-    "emoji": "☁️",
-    "wind_mph": 5,
-    "wind_dir": "E",
-    "visibility_miles": 9,
-    "uv_index": 2
+    "temp_f": 76,
+    "feels_like_f": 85,
+    "humidity": 96,
+    "description": "Light drizzle",
+    "code": "266",
+    "emoji": "🌡️",
+    "wind_mph": 2,
+    "wind_dir": "NNW",
+    "visibility_miles": 10,
+    "uv_index": 0
   },
   "forecast": [
     {
-      "date": "2026-08-21",
-      "label": "Fri, Aug 21",
-      "high_f": 101,
-      "low_f": 79,
-      "description": "Clear",
-      "emoji": "☀️",
-      "sunrise": "06:31 AM",
-      "sunset": "07:35 PM",
-      "avg_humidity": 72,
-      "chance_of_rain": 22
-    },
-    {
       "date": "2026-08-22",
       "label": "Sat, Aug 22",
-      "high_f": 95,
-      "low_f": 77,
-      "description": "Partly Cloudy",
-      "emoji": "⛅",
+      "high_f": 96,
+      "low_f": 75,
+      "description": "Light Drizzle",
+      "emoji": "🌡️",
       "sunrise": "06:32 AM",
       "sunset": "07:34 PM",
-      "avg_humidity": 62,
-      "chance_of_rain": 25
+      "avg_humidity": 76,
+      "chance_of_rain": 63
     },
     {
       "date": "2026-08-23",
       "label": "Sun, Aug 23",
-      "high_f": 98,
+      "high_f": 101,
       "low_f": 81,
       "description": "Clear",
       "emoji": "☀️",
       "sunrise": "06:32 AM",
       "sunset": "07:33 PM",
-      "avg_humidity": 59,
-      "chance_of_rain": 21
+      "avg_humidity": 62,
+      "chance_of_rain": 30
+    },
+    {
+      "date": "2026-08-24",
+      "label": "Mon, Aug 24",
+      "high_f": 98,
+      "low_f": 81,
+      "description": "Partly Cloudy",
+      "emoji": "⛅",
+      "sunrise": "06:33 AM",
+      "sunset": "07:32 PM",
+      "avg_humidity": 54,
+      "chance_of_rain": 17
     }
   ]
 }
