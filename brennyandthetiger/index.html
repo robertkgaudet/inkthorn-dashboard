@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brenny and the Tiger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #050508;
+      --deep: #0b0b18;
+      --purple: #7b2fff;
+      --teal: #00e5cc;
+      --gold: #f0c060;
+      --white: #f0eeff;
+      --mid: #999aaa;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 48px;
+      background: linear-gradient(to bottom, rgba(5,5,8,0.95) 0%, transparent 100%);
+      backdrop-filter: blur(2px);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--teal); }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 24px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(123,47,255,0.28) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(0,229,204,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 20% 80%, rgba(240,192,96,0.08) 0%, transparent 60%),
+        var(--black);
+    }
+
+    /* animated waveform rings */
+    .rings {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+    }
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(123,47,255,0.18);
+      animation: pulse-ring 6s ease-out infinite;
+    }
+    .ring:nth-child(1) { width: 420px; height: 420px; animation-delay: 0s; }
+    .ring:nth-child(2) { width: 620px; height: 620px; animation-delay: 1.5s; }
+    .ring:nth-child(3) { width: 820px; height: 820px; animation-delay: 3s; border-color: rgba(0,229,204,0.1); }
+    .ring:nth-child(4) { width: 1020px; height: 1020px; animation-delay: 4.5s; border-color: rgba(0,229,204,0.06); }
+
+    @keyframes pulse-ring {
+      0%   { transform: scale(0.85); opacity: 0; }
+      20%  { opacity: 1; }
+      100% { transform: scale(1.15); opacity: 0; }
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 14vw, 14rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      text-shadow:
+        0 0 80px rgba(123,47,255,0.6),
+        0 0 160px rgba(123,47,255,0.25);
+    }
+
+    .hero-title .tiger {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--teal);
+      text-shadow: 0 0 60px rgba(0,229,204,0.5);
+    }
+
+    .hero-tagline {
+      margin-top: 28px;
+      font-size: 0.85rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      margin-top: 48px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      border-radius: 2px;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--purple);
+      color: #fff;
+      border: 1px solid var(--purple);
+      box-shadow: 0 0 30px rgba(123,47,255,0.4);
+    }
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--purple);
+      box-shadow: 0 0 50px rgba(123,47,255,0.6);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--teal);
+      border: 1px solid rgba(0,229,204,0.4);
+    }
+    .btn-outline:hover {
+      background: rgba(0,229,204,0.08);
+      border-color: var(--teal);
+      box-shadow: 0 0 30px rgba(0,229,204,0.2);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--mid);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--teal), transparent);
+      animation: scroll-bounce 2s ease-in-out infinite;
+    }
+    @keyframes scroll-bounce {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 120px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 6rem);
+      line-height: 1;
+      letter-spacing: 0.04em;
+      margin-bottom: 48px;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(123,47,255,0.4), rgba(0,229,204,0.4), transparent);
+    }
+
+    /* ─── ABOUT ─── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-card {
+      background: linear-gradient(135deg, rgba(123,47,255,0.15) 0%, rgba(0,229,204,0.08) 100%);
+      border: 1px solid rgba(123,47,255,0.25);
+      border-radius: 4px;
+      aspect-ratio: 4/5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-card-inner {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12rem;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(123,47,255,0.3);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .about-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--deep);
+      border: 1px solid rgba(0,229,204,0.3);
+      border-radius: 2px;
+      padding: 16px 24px;
+    }
+
+    .about-badge-city {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 4px;
+    }
+
+    .about-badge-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.06em;
+    }
+
+    .about-text p {
+      color: var(--mid);
+      line-height: 1.8;
+      font-size: 1rem;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    .about-text p strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .genre-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+    }
+
+    .tag {
+      padding: 6px 16px;
+      border: 1px solid rgba(123,47,255,0.35);
+      border-radius: 100px;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--purple);
+      background: rgba(123,47,255,0.08);
+    }
+
+    /* ─── LISTEN ─── */
+    #listen-section {
+      text-align: center;
+      background: linear-gradient(to bottom, var(--black), var(--deep), var(--black));
+      max-width: 100%;
+      padding: 120px 48px;
+    }
+
+    .listen-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .platform-card {
+      padding: 36px 24px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.02);
+      text-decoration: none;
+      color: var(--mid);
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .platform-card:hover {
+      border-color: rgba(123,47,255,0.4);
+      background: rgba(123,47,255,0.08);
+      color: var(--white);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(123,47,255,0.2);
+    }
+
+    .platform-icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .platform-name {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* ─── WAVEFORM VISUAL ─── */
+    .waveform {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 80px;
+      margin: 48px auto 0;
+    }
+
+    .wave-bar {
+      width: 4px;
+      border-radius: 2px;
+      background: linear-gradient(to top, var(--purple), var(--teal));
+      animation: wave-anim 1.4s ease-in-out infinite;
+    }
+
+    @keyframes wave-anim {
+      0%, 100% { transform: scaleY(0.2); opacity: 0.4; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* stagger each bar */
+    .wave-bar:nth-child(1)  { height: 30px; animation-delay: 0.0s; }
+    .wave-bar:nth-child(2)  { height: 50px; animation-delay: 0.1s; }
+    .wave-bar:nth-child(3)  { height: 70px; animation-delay: 0.2s; }
+    .wave-bar:nth-child(4)  { height: 55px; animation-delay: 0.3s; }
+    .wave-bar:nth-child(5)  { height: 80px; animation-delay: 0.4s; }
+    .wave-bar:nth-child(6)  { height: 65px; animation-delay: 0.5s; }
+    .wave-bar:nth-child(7)  { height: 80px; animation-delay: 0.6s; }
+    .wave-bar:nth-child(8)  { height: 55px; animation-delay: 0.5s; }
+    .wave-bar:nth-child(9)  { height: 70px; animation-delay: 0.4s; }
+    .wave-bar:nth-child(10) { height: 50px; animation-delay: 0.3s; }
+    .wave-bar:nth-child(11) { height: 30px; animation-delay: 0.2s; }
+    .wave-bar:nth-child(12) { height: 55px; animation-delay: 0.1s; }
+    .wave-bar:nth-child(13) { height: 40px; animation-delay: 0.0s; }
+    .wave-bar:nth-child(14) { height: 65px; animation-delay: 0.15s; }
+    .wave-bar:nth-child(15) { height: 80px; animation-delay: 0.3s; }
+    .wave-bar:nth-child(16) { height: 60px; animation-delay: 0.45s; }
+    .wave-bar:nth-child(17) { height: 45px; animation-delay: 0.55s; }
+    .wave-bar:nth-child(18) { height: 70px; animation-delay: 0.35s; }
+    .wave-bar:nth-child(19) { height: 35px; animation-delay: 0.2s; }
+    .wave-bar:nth-child(20) { height: 50px; animation-delay: 0.05s; }
+
+    /* ─── EVENTS ─── */
+    #events-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 48px;
+    }
+
+    .events-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+    }
+
+    .event-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .event-item {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      gap: 32px;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.25s;
+    }
+
+    .event-item:hover { padding-left: 16px; }
+    .event-item:hover .event-title { color: var(--teal); }
+
+    .event-date {
+      text-align: center;
+    }
+
+    .event-month {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .event-day {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    .event-year {
+      font-size: 0.65rem;
+      color: var(--mid);
+    }
+
+    .event-info {}
+
+    .event-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      transition: color 0.25s;
+    }
+
+    .event-venue {
+      font-size: 0.82rem;
+      color: var(--mid);
+      font-weight: 300;
+    }
+
+    .event-action .btn {
+      padding: 10px 24px;
+      font-size: 0.7rem;
+    }
+
+    .no-events {
+      text-align: center;
+      padding: 64px;
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: 4px;
+    }
+
+    .no-events p {
+      color: var(--mid);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+    }
+
+    .contact-intro p {
+      color: var(--mid);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 32px;
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.25s;
+    }
+
+    .social-link:hover { color: var(--white); padding-left: 8px; }
+    .social-link:hover .social-arrow { color: var(--teal); }
+
+    .social-platform {
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      width: 100px;
+    }
+
+    .social-arrow { margin-left: auto; color: var(--mid); transition: color 0.25s; }
+
+    .contact-form {}
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      padding: 14px 18px;
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.25s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: rgba(123,47,255,0.5);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: var(--mid);
+    }
+
+    .footer-logo span { color: var(--teal); }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(153,154,170,0.5);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: rgba(153,154,170,0.5);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--mid); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      .nav-links { gap: 20px; }
+
+      #about,
+      #contact-section {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .about-card { aspect-ratio: 16/9; }
+      .about-card-inner { font-size: 6rem; }
+
+      .events-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .event-item { grid-template-columns: 80px 1fr; }
+      .event-action { display: none; }
+
+      section, #listen-section, #events-section, #contact-section {
+        padding: 80px 24px;
+      }
+
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">BRENNY <span>&</span> THE TIGER</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#listen">Listen</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" style="max-width:100%; padding:0;">
+    <div class="hero-bg"></div>
+    <div class="rings">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Los Angeles · Electronic · Trance</p>
+      <h1 class="hero-title">
+        BRENNY
+        <span class="tiger">&amp; THE TIGER</span>
+      </h1>
+      <p class="hero-tagline">Do everything in love</p>
+      <div class="hero-cta">
+        <a href="#listen" class="btn btn-primary">Listen Now</a>
+        <a href="#events" class="btn btn-outline">See Events</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-visual">
+      <div class="about-card">
+        <div class="about-card-inner">B&T</div>
+      </div>
+      <div class="about-badge">
+        <div class="about-badge-city">Los Angeles, CA</div>
+        <div class="about-badge-label">Electronic Duo</div>
+      </div>
+    </div>
+    <div class="about-text">
+      <p class="section-label">About</p>
+      <h2 class="section-title">WHERE TRANCE<br>BECOMES<br>TRANSCENDENCE</h2>
+      <p>
+        <strong>Brenny and the Tiger</strong> are an American electronic music duo from Los Angeles — masters of sonic architecture who fuse trance subgenres into something completely their own.
+      </p>
+      <p>
+        Their music doesn't just pulse — it breathes. Airy melodies collide with intense basslines. Upbeat synths wrap around catchy rhythms. Every track tells a story and invites you to feel something real.
+      </p>
+      <p>
+        They don't settle for formulas. They push into new aural territory with each release, building soundscapes that capture the senses and refuse to let go.
+      </p>
+      <div class="genre-tags">
+        <span class="tag">Trance</span>
+        <span class="tag">Electronic</span>
+        <span class="tag">Progressive</span>
+        <span class="tag">Uplifting</span>
+        <span class="tag">Melodic</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LISTEN -->
+  <section id="listen" id="listen-section" style="max-width:100%; padding:120px 48px; text-align:center; background: linear-gradient(to bottom, var(--black), var(--deep), var(--black));">
+    <div style="max-width:1200px; margin:0 auto;">
+      <p class="section-label" style="text-align:center;">Listen</p>
+      <h2 class="section-title" style="text-align:center;">FIND US<br>EVERYWHERE</h2>
+
+      <div class="waveform">
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div>
+      </div>
+
+      <div class="platform-grid" style="margin-top:64px;">
+        <a href="#" class="platform-card">
+          <div class="platform-icon">🎵</div>
+          <div class="platform-name">Spotify</div>
+        </a>
+        <a href="#" class="platform-card">
+          <div class="platform-icon">🍎</div>
+          <div class="platform-name">Apple Music</div>
+        </a>
+        <a href="#" class="platform-card">
+          <div class="platform-icon">▶️</div>
+          <div class="platform-name">YouTube Music</div>
+        </a>
+        <a href="#" class="platform-card">
+          <div class="platform-icon">☁️</div>
+          <div class="platform-name">SoundCloud</div>
+        </a>
+        <a href="#" class="platform-card">
+          <div class="platform-icon">🎧</div>
+          <div class="platform-name">Beatport</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EVENTS -->
+  <section id="events" style="max-width:1200px; margin:0 auto; padding:120px 48px;">
+    <div class="events-header">
+      <div>
+        <p class="section-label">Live</p>
+        <h2 class="section-title">UPCOMING<br>EVENTS</h2>
+      </div>
+      <a href="https://www.brennyandthetiger.com/event-list" class="btn btn-outline" target="_blank">Full Calendar</a>
+    </div>
+
+    <!-- Placeholder — replace with real events -->
+    <div class="no-events">
+      <p>No upcoming shows listed yet — check back soon.</p>
+      <a href="https://www.facebook.com/brennyandthetiger/" class="btn btn-outline" target="_blank">Follow on Facebook for Announcements</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact" style="max-width:1200px; margin:0 auto; padding:120px 48px; display:grid; grid-template-columns:1fr 1fr; gap:80px;">
+    <div class="contact-intro">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">LET'S<br>CONNECT</h2>
+      <p>Bookings, collabs, press, or just want to say hello — reach out. We listen to everything.</p>
+
+      <div class="social-links">
+        <a href="https://www.facebook.com/brennyandthetiger/" class="social-link" target="_blank">
+          <span class="social-platform">Facebook</span>
+          <span>/brennyandthetiger</span>
+          <span class="social-arrow">→</span>
+        </a>
+        <a href="https://www.instagram.com/brennyandthetiger_music" class="social-link" target="_blank">
+          <span class="social-platform">Instagram</span>
+          <span>@brennyandthetiger_music</span>
+          <span class="social-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="return false;">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Who's reaching out?" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <input type="text" placeholder="Booking / Press / General" />
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us what's on your mind..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; border:none; cursor:pointer;">Send Message</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">BRENNY <span>&</span> THE TIGER</div>
+    <div class="footer-copy">© 2026 Brenny and the Tiger · All rights reserved</div>
+    <div class="footer-links">
+      <a href="https://www.brennyandthetiger.com/privacy-policy" target="_blank">Privacy</a>
+      <a href="https://www.brennyandthetiger.com/terms-and-conditions" target="_blank">Terms</a>
+    </div>
+  </footer>
+
+</body>
+</html>
