@@ -1,56 +1,56 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-08-28T06:25:13.702Z",
+  "updated": "2026-08-28T22:51:43.249Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 75,
-    "feels_like_f": 82,
-    "humidity": 91,
-    "description": "Overcast ",
-    "code": "122",
-    "emoji": "☁️",
-    "wind_mph": 3,
-    "wind_dir": "SSW",
+    "temp_f": 91,
+    "feels_like_f": 105,
+    "humidity": 65,
+    "description": "Sunny",
+    "code": "113",
+    "emoji": "☀️",
+    "wind_mph": 6,
+    "wind_dir": "NNE",
     "visibility_miles": 10,
-    "uv_index": 0
+    "uv_index": 2
   },
   "forecast": [
     {
       "date": "2026-08-28",
       "label": "Fri, Aug 28",
-      "high_f": 92,
-      "low_f": 75,
-      "description": "Patchy Rain",
-      "emoji": "🌡️",
+      "high_f": 91,
+      "low_f": 76,
+      "description": "Clear",
+      "emoji": "☀️",
       "sunrise": "06:35 AM",
       "sunset": "07:28 PM",
-      "avg_humidity": 71,
-      "chance_of_rain": 31
+      "avg_humidity": 82,
+      "chance_of_rain": 30
     },
     {
       "date": "2026-08-29",
       "label": "Sat, Aug 29",
       "high_f": 93,
-      "low_f": 79,
+      "low_f": 78,
       "description": "Clear",
       "emoji": "☀️",
       "sunrise": "06:36 AM",
       "sunset": "07:26 PM",
-      "avg_humidity": 64,
-      "chance_of_rain": 24
+      "avg_humidity": 65,
+      "chance_of_rain": 20
     },
     {
       "date": "2026-08-30",
       "label": "Sun, Aug 30",
-      "high_f": 86,
+      "high_f": 89,
       "low_f": 78,
-      "description": "Moderate Rain Shower",
-      "emoji": "🌨️",
+      "description": "Patchy Rain",
+      "emoji": "🌡️",
       "sunrise": "06:36 AM",
       "sunset": "07:25 PM",
-      "avg_humidity": 73,
-      "chance_of_rain": 72
+      "avg_humidity": 68,
+      "chance_of_rain": 20
     }
   ]
 }
