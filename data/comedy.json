@@ -1,39 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-08-30T00:53:08.225Z",
+  "updated": "2026-08-30T17:10:29.123Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2027-08-29",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Jokes on Oak",
-      "url": "https://504comedy.com/event/1116/jokes-on-oak",
-      "venue": "Oak St Brewery",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Saturday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-08-29",
-      "time": "8:30pm",
-      "time_sort": 2030,
-      "title": "Bing-Oh",
-      "url": "https://504comedy.com/event/943/bingoh",
-      "venue": "Twelve Mile Limit",
-      "type": "Improv",
-      "cost": "FREE",
-      "repeat": "Last Saturday",
-      "start_dt": "2026-08-29T20:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-08-30",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -43,11 +15,11 @@
       "type": "Stand-up",
       "cost": "$15",
       "repeat": "Every Sunday",
-      "start_dt": "2026-08-29T20:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-08-30",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -61,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-08-31",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-08-31",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-08-31",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-08-31",
       "time": "9:30pm",
       "time_sort": 2130,
@@ -254,50 +226,30 @@
       "cost": "FREE",
       "repeat": "Every Friday",
       "start_dt": "2026-09-03T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-09-05",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Jokes on Oak",
+      "url": "https://504comedy.com/event/1116/jokes-on-oak",
+      "venue": "Oak St Brewery",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Saturday",
+      "start_dt": "2026-09-04T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2027-08-29",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-08-29",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Jokes on Oak",
-          "url": "https://504comedy.com/event/1116/jokes-on-oak",
-          "venue": "Oak St Brewery",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Saturday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-08-29",
-          "time": "8:30pm",
-          "time_sort": 2030,
-          "title": "Bing-Oh",
-          "url": "https://504comedy.com/event/943/bingoh",
-          "venue": "Twelve Mile Limit",
-          "type": "Improv",
-          "cost": "FREE",
-          "repeat": "Last Saturday",
-          "start_dt": "2026-08-29T20:30-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-08-30",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-30",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -307,11 +259,11 @@
           "type": "Stand-up",
           "cost": "$15",
           "repeat": "Every Sunday",
-          "start_dt": "2026-08-29T20:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-08-30",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -326,12 +278,12 @@
       ]
     },
     {
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-08-31",
       "events": [
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-08-31",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -345,7 +297,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-08-31",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -359,7 +311,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-08-31",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -373,7 +325,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-08-31",
           "time": "9:30pm",
           "time_sort": 2130,
@@ -548,6 +500,26 @@
           "cost": "FREE",
           "repeat": "Every Friday",
           "start_dt": "2026-09-03T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Saturday",
+      "date": "2026-09-05",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-09-05",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Jokes on Oak",
+          "url": "https://504comedy.com/event/1116/jokes-on-oak",
+          "venue": "Oak St Brewery",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Saturday",
+          "start_dt": "2026-09-04T20:00-05:00"
         }
       ]
     }
