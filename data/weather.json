@@ -1,56 +1,56 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-08-31T00:58:44.305Z",
+  "updated": "2026-08-31T19:21:35.211Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 81,
-    "feels_like_f": 87,
-    "humidity": 85,
-    "description": "Light rain",
-    "code": "296",
-    "emoji": "🌧️",
-    "wind_mph": 10,
-    "wind_dir": "E",
+    "temp_f": 93,
+    "feels_like_f": 99,
+    "humidity": 47,
+    "description": "Light rain shower",
+    "code": "353",
+    "emoji": "🌨️",
+    "wind_mph": 6,
+    "wind_dir": "ESE",
     "visibility_miles": 10,
-    "uv_index": 0
+    "uv_index": 9
   },
   "forecast": [
     {
-      "date": "2026-08-30",
-      "label": "Sun, Aug 30",
-      "high_f": 85,
-      "low_f": 78,
-      "description": "Light Drizzle",
-      "emoji": "🌡️",
-      "sunrise": "06:36 AM",
-      "sunset": "07:25 PM",
-      "avg_humidity": 85,
-      "chance_of_rain": 71
-    },
-    {
       "date": "2026-08-31",
       "label": "Mon, Aug 31",
-      "high_f": 91,
-      "low_f": 78,
-      "description": "Light Rain Shower",
-      "emoji": "🌨️",
+      "high_f": 93,
+      "low_f": 77,
+      "description": "Patchy Rain",
+      "emoji": "🌡️",
       "sunrise": "06:37 AM",
       "sunset": "07:24 PM",
-      "avg_humidity": 69,
-      "chance_of_rain": 46
+      "avg_humidity": 73,
+      "chance_of_rain": 57
     },
     {
       "date": "2026-09-01",
       "label": "Tue, Sep 1",
       "high_f": 93,
       "low_f": 79,
-      "description": "Clear",
-      "emoji": "☀️",
+      "description": "Cloudy",
+      "emoji": "☁️",
       "sunrise": "06:37 AM",
       "sunset": "07:23 PM",
-      "avg_humidity": 68,
-      "chance_of_rain": 25
+      "avg_humidity": 67,
+      "chance_of_rain": 26
+    },
+    {
+      "date": "2026-09-02",
+      "label": "Wed, Sep 2",
+      "high_f": 93,
+      "low_f": 80,
+      "description": "Clear",
+      "emoji": "☀️",
+      "sunrise": "06:38 AM",
+      "sunset": "07:22 PM",
+      "avg_humidity": 63,
+      "chance_of_rain": 27
     }
   ]
 }
