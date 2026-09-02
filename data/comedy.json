@@ -1,39 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-09-02T00:38:55.897Z",
+  "updated": "2026-09-02T16:57:42.420Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2027-09-01",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "Comedy Beast",
-      "url": "https://504comedy.com/event/41/comedybeast",
-      "venue": "The Howlin' Wolf",
-      "type": "Stand-up",
-      "cost": "$5",
-      "repeat": "Every Tuesday",
-      "start_dt": "#{start_dt}"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-09-01",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Standup Jokerz Open Mic & Comedy Showcase",
-      "url": "https://504comedy.com/event/1396/standup-jokerz-open-mic--comedy-showcase",
-      "venue": "Hurricanes Sports Bar and Grill",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Tuesday",
-      "start_dt": "2026-09-01T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-09-02",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -43,11 +15,11 @@
       "type": "Improv",
       "cost": "$8",
       "repeat": "First Wednesday",
-      "start_dt": "2026-09-01T20:00-05:00"
+      "start_dt": "#{start_dt}"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-09-02",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -57,11 +29,11 @@
       "type": "Open Mic",
       "cost": "FREE",
       "repeat": "Every Wednesday",
-      "start_dt": "2026-09-02T21:00-05:00"
+      "start_dt": "2026-10-07T21:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-09-02",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -75,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-09-02",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -89,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-09-02",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -103,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-09-03",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -117,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-09-03",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -268,50 +240,44 @@
       "cost": "FREE",
       "repeat": "Every Monday",
       "start_dt": "2026-09-07T21:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Tuesday",
+      "date": "2026-09-08",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Comedy Beast",
+      "url": "https://504comedy.com/event/41/comedybeast",
+      "venue": "The Howlin' Wolf",
+      "type": "Stand-up",
+      "cost": "$5",
+      "repeat": "Every Tuesday",
+      "start_dt": "2026-09-07T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Tuesday",
+      "date": "2026-09-08",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Standup Jokerz Open Mic & Comedy Showcase",
+      "url": "https://504comedy.com/event/1396/standup-jokerz-open-mic--comedy-showcase",
+      "venue": "Hurricanes Sports Bar and Grill",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Tuesday",
+      "start_dt": "2026-09-08T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2027-09-01",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-09-01",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "Comedy Beast",
-          "url": "https://504comedy.com/event/41/comedybeast",
-          "venue": "The Howlin' Wolf",
-          "type": "Stand-up",
-          "cost": "$5",
-          "repeat": "Every Tuesday",
-          "start_dt": "#{start_dt}"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-09-01",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Standup Jokerz Open Mic & Comedy Showcase",
-          "url": "https://504comedy.com/event/1396/standup-jokerz-open-mic--comedy-showcase",
-          "venue": "Hurricanes Sports Bar and Grill",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Tuesday",
-          "start_dt": "2026-09-01T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-09-02",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-09-02",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -321,11 +287,11 @@
           "type": "Improv",
           "cost": "$8",
           "repeat": "First Wednesday",
-          "start_dt": "2026-09-01T20:00-05:00"
+          "start_dt": "#{start_dt}"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-09-02",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -335,11 +301,11 @@
           "type": "Open Mic",
           "cost": "FREE",
           "repeat": "Every Wednesday",
-          "start_dt": "2026-09-02T21:00-05:00"
+          "start_dt": "2026-10-07T21:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-09-02",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -353,7 +319,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-09-02",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -367,7 +333,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-09-02",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -382,12 +348,12 @@
       ]
     },
     {
-      "day": "Thursday",
+      "day": "Tomorrow",
       "date": "2026-09-03",
       "events": [
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-09-03",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -401,7 +367,7 @@
         },
         {
           "category": "comedy",
-          "day": "Thursday",
+          "day": "Tomorrow",
           "date": "2026-09-03",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -576,6 +542,40 @@
           "cost": "FREE",
           "repeat": "Every Monday",
           "start_dt": "2026-09-07T21:30-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-09-08",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Tuesday",
+          "date": "2026-09-08",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Comedy Beast",
+          "url": "https://504comedy.com/event/41/comedybeast",
+          "venue": "The Howlin' Wolf",
+          "type": "Stand-up",
+          "cost": "$5",
+          "repeat": "Every Tuesday",
+          "start_dt": "2026-09-07T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Tuesday",
+          "date": "2026-09-08",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Standup Jokerz Open Mic & Comedy Showcase",
+          "url": "https://504comedy.com/event/1396/standup-jokerz-open-mic--comedy-showcase",
+          "venue": "Hurricanes Sports Bar and Grill",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Tuesday",
+          "start_dt": "2026-09-08T20:00-05:00"
         }
       ]
     }
