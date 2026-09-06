@@ -1,25 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-09-06T00:21:50.593Z",
+  "updated": "2026-09-06T15:57:21.709Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2027-09-05",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Jokes on Oak",
-      "url": "https://504comedy.com/event/1116/jokes-on-oak",
-      "venue": "Oak St Brewery",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Saturday",
-      "start_dt": "2026-09-05T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-09-06",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -29,11 +15,11 @@
       "type": "Stand-up",
       "cost": "FREE",
       "repeat": "First Sunday",
-      "start_dt": "2026-09-06T19:00-05:00"
+      "start_dt": "2026-10-04T19:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-09-06",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -47,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-09-06",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -61,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-09-07",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-09-07",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-09-07",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-09-07",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -117,7 +103,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-09-07",
       "time": "9:30pm",
       "time_sort": 2130,
@@ -296,36 +282,58 @@
       "cost": "FREE",
       "repeat": "Every Friday",
       "start_dt": "2026-09-11T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-09-12",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Cheers! An Improvised Comedy Celebration",
+      "url": "https://504comedy.com/event/951/cheers-an-improvised-comedy-celebration",
+      "venue": "Big Couch",
+      "type": "Improv",
+      "cost": "$10",
+      "repeat": "Second Saturday",
+      "start_dt": "2026-09-12T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-09-12",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Jokes on Oak",
+      "url": "https://504comedy.com/event/1116/jokes-on-oak",
+      "venue": "Oak St Brewery",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Saturday",
+      "start_dt": "2026-09-12T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-09-12",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Anger Management: Comedy Meets Therapy",
+      "url": "https://504comedy.com/event/1121/anger-management-comedy-meets-therapy",
+      "venue": "Howlin' Wolf Den",
+      "type": "Stand-up",
+      "cost": "$15",
+      "repeat": "Second Saturday",
+      "start_dt": "2026-09-12T21:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2027-09-05",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-09-05",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Jokes on Oak",
-          "url": "https://504comedy.com/event/1116/jokes-on-oak",
-          "venue": "Oak St Brewery",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Saturday",
-          "start_dt": "2026-09-05T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-09-06",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-09-06",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -335,11 +343,11 @@
           "type": "Stand-up",
           "cost": "FREE",
           "repeat": "First Sunday",
-          "start_dt": "2026-09-06T19:00-05:00"
+          "start_dt": "2026-10-04T19:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-09-06",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -353,7 +361,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-09-06",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -368,12 +376,12 @@
       ]
     },
     {
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-09-07",
       "events": [
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-09-07",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -387,7 +395,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-09-07",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -401,7 +409,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-09-07",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -415,7 +423,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-09-07",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -429,7 +437,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-09-07",
           "time": "9:30pm",
           "time_sort": 2130,
@@ -632,6 +640,54 @@
           "cost": "FREE",
           "repeat": "Every Friday",
           "start_dt": "2026-09-11T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Saturday",
+      "date": "2026-09-12",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-09-12",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Cheers! An Improvised Comedy Celebration",
+          "url": "https://504comedy.com/event/951/cheers-an-improvised-comedy-celebration",
+          "venue": "Big Couch",
+          "type": "Improv",
+          "cost": "$10",
+          "repeat": "Second Saturday",
+          "start_dt": "2026-09-12T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-09-12",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Jokes on Oak",
+          "url": "https://504comedy.com/event/1116/jokes-on-oak",
+          "venue": "Oak St Brewery",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Saturday",
+          "start_dt": "2026-09-12T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-09-12",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Anger Management: Comedy Meets Therapy",
+          "url": "https://504comedy.com/event/1121/anger-management-comedy-meets-therapy",
+          "venue": "Howlin' Wolf Den",
+          "type": "Stand-up",
+          "cost": "$15",
+          "repeat": "Second Saturday",
+          "start_dt": "2026-09-12T21:00-05:00"
         }
       ]
     }
