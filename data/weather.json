@@ -1,56 +1,56 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-09-08T00:47:09.929Z",
+  "updated": "2026-09-08T17:02:54.415Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 94,
-    "feels_like_f": 109,
-    "humidity": 59,
-    "description": "Sunny",
-    "code": "113",
-    "emoji": "☀️",
-    "wind_mph": 6,
-    "wind_dir": "SE",
+    "temp_f": 86,
+    "feels_like_f": 98,
+    "humidity": 77,
+    "description": "Overcast ",
+    "code": "122",
+    "emoji": "☁️",
+    "wind_mph": 8,
+    "wind_dir": "ESE",
     "visibility_miles": 10,
-    "uv_index": 1
+    "uv_index": 4
   },
   "forecast": [
     {
-      "date": "2026-09-07",
-      "label": "Mon, Sep 7",
-      "high_f": 102,
-      "low_f": 78,
-      "description": "Clear",
-      "emoji": "☀️",
-      "sunrise": "06:40 AM",
-      "sunset": "07:16 PM",
-      "avg_humidity": 75,
-      "chance_of_rain": 27
-    },
-    {
       "date": "2026-09-08",
       "label": "Tue, Sep 8",
-      "high_f": 93,
-      "low_f": 80,
-      "description": "Clear",
-      "emoji": "☀️",
+      "high_f": 92,
+      "low_f": 76,
+      "description": "Overcast",
+      "emoji": "☁️",
       "sunrise": "06:41 AM",
       "sunset": "07:14 PM",
-      "avg_humidity": 68,
-      "chance_of_rain": 38
+      "avg_humidity": 78,
+      "chance_of_rain": 30
     },
     {
       "date": "2026-09-09",
       "label": "Wed, Sep 9",
-      "high_f": 91,
+      "high_f": 90,
+      "low_f": 79,
+      "description": "Overcast",
+      "emoji": "☁️",
+      "sunrise": "06:42 AM",
+      "sunset": "07:13 PM",
+      "avg_humidity": 73,
+      "chance_of_rain": 33
+    },
+    {
+      "date": "2026-09-10",
+      "label": "Thu, Sep 10",
+      "high_f": 92,
       "low_f": 79,
       "description": "Patchy Rain",
       "emoji": "🌡️",
       "sunrise": "06:42 AM",
-      "sunset": "07:13 PM",
-      "avg_humidity": 71,
-      "chance_of_rain": 65
+      "sunset": "07:12 PM",
+      "avg_humidity": 72,
+      "chance_of_rain": 20
     }
   ]
 }
