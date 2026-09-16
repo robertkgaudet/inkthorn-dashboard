@@ -1,56 +1,56 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-09-15T01:03:08.228Z",
+  "updated": "2026-09-16T17:26:23.011Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 92,
+    "temp_f": 89,
     "feels_like_f": 98,
-    "humidity": 48,
-    "description": "Sunny",
-    "code": "113",
-    "emoji": "☀️",
-    "wind_mph": 4,
-    "wind_dir": "SSE",
+    "humidity": 59,
+    "description": "Patchy rain nearby",
+    "code": "176",
+    "emoji": "🌡️",
+    "wind_mph": 15,
+    "wind_dir": "E",
     "visibility_miles": 10,
-    "uv_index": 0
+    "uv_index": 6
   },
   "forecast": [
     {
-      "date": "2026-09-14",
-      "label": "Mon, Sep 14",
-      "high_f": 95,
-      "low_f": 80,
-      "description": "Clear",
-      "emoji": "☀️",
-      "sunrise": "06:44 AM",
-      "sunset": "07:07 PM",
-      "avg_humidity": 68,
-      "chance_of_rain": 43
-    },
-    {
-      "date": "2026-09-15",
-      "label": "Tue, Sep 15",
-      "high_f": 94,
+      "date": "2026-09-16",
+      "label": "Wed, Sep 16",
+      "high_f": 90,
       "low_f": 81,
-      "description": "Clear",
-      "emoji": "☀️",
+      "description": "Thundery Outbreaks",
+      "emoji": "⛈️",
       "sunrise": "06:45 AM",
-      "sunset": "07:06 PM",
-      "avg_humidity": 63,
+      "sunset": "07:04 PM",
+      "avg_humidity": 68,
       "chance_of_rain": 23
     },
     {
-      "date": "2026-09-16",
-      "label": "Wed, Sep 16",
+      "date": "2026-09-17",
+      "label": "Thu, Sep 17",
       "high_f": 91,
-      "low_f": 80,
+      "low_f": 79,
       "description": "Clear",
       "emoji": "☀️",
-      "sunrise": "06:45 AM",
-      "sunset": "07:04 PM",
-      "avg_humidity": 66,
-      "chance_of_rain": 13
+      "sunrise": "06:46 AM",
+      "sunset": "07:03 PM",
+      "avg_humidity": 64,
+      "chance_of_rain": 21
+    },
+    {
+      "date": "2026-09-18",
+      "label": "Fri, Sep 18",
+      "high_f": 91,
+      "low_f": 76,
+      "description": "Clear",
+      "emoji": "☀️",
+      "sunrise": "06:46 AM",
+      "sunset": "07:02 PM",
+      "avg_humidity": 57,
+      "chance_of_rain": 7
     }
   ]
 }
