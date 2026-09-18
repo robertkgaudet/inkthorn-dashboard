@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trustlight Invoice</title>
+  <title>Gaudet Systems Invoice</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
@@ -274,8 +274,8 @@
 
   <!-- Nav — clean, no tracker link -->
   <nav class="inv-nav">
-    <a href="https://trustlight.ai" class="inv-brand">TRUSTLIGHT</a>
-    <span class="inv-nav-sub">trustlight.ai</span>
+    <a href="https://gaudetsystems.com" class="inv-brand">GAUDET SYSTEMS</a>
+    <span class="inv-nav-sub">GaudetSystems.com</span>
   </nav>
 
   <div class="page-wrap">
@@ -308,8 +308,8 @@
       <!-- Header -->
       <div class="inv-header">
         <div>
-          <div class="inv-header-brand">TRUSTLIGHT</div>
-          <div class="inv-header-tagline">trustlight.ai &nbsp;·&nbsp; Rob@Trustlight.ai &nbsp;·&nbsp; 504-302-8656</div>
+          <div class="inv-header-brand">GAUDET SYSTEMS</div>
+          <div class="inv-header-tagline">GaudetSystems.com &nbsp;·&nbsp; rob@gaudetsystems.com &nbsp;·&nbsp; 318-572-3161</div>
         </div>
         <div class="inv-header-right">
           <div class="inv-word-invoice">INVOICE</div>
@@ -329,9 +329,9 @@
           <div class="party-label">From</div>
           <div class="party-name">Rob Gaudet</div>
           <div class="party-detail">
-            Rob@Trustlight.ai<br>
-            Trustlight.ai<br>
-            504-302-8656<br>
+            rob@gaudetsystems.com<br>
+            GaudetSystems.com<br>
+            318-572-3161<br>
             1023 Jena Street<br>
             New Orleans, LA 70115
           </div>
@@ -376,7 +376,7 @@
 
     <!-- Footer -->
     <div class="inv-footer" id="invFooter" style="display:none;">
-      Questions? Contact <a href="mailto:Rob@Trustlight.ai">Rob@Trustlight.ai</a> or call <a href="tel:5043028656">504-302-8656</a>
+      Questions? Contact <a href="mailto:rob@gaudetsystems.com">rob@gaudetsystems.com</a> or call <a href="tel:3185723161">318-572-3161</a>
       <div class="inv-footer-paylink" id="footerPayLink" style="display:none; margin-top:12px;">
         Pay online: <a id="footerPayUrl" href="#" target="_blank"></a>
       </div>
@@ -416,7 +416,7 @@
   }
   function makePayBtn(link) {
     if (link) return `<a class="btn-pay" href="${escHtml(link)}" target="_blank">💳 Pay Now via Stripe</a>`;
-    return `<span class="no-payment">Contact Rob@Trustlight.ai for payment details.</span>`;
+    return `<span class="no-payment">Contact rob@gaudetsystems.com for payment details.</span>`;
   }
 
   async function loadInvoice() {
@@ -445,7 +445,7 @@
     document.getElementById('topPayBar').classList.add('visible');
     document.getElementById('invFooter').style.display = 'block';
 
-    document.title = `Invoice ${invoice.invoice_number} — Trustlight.ai`;
+    document.title = `Invoice ${invoice.invoice_number} — Gaudet Systems`;
 
     document.getElementById('invNumber').textContent = invoice.invoice_number;
     const dateStr = invoice.created_at ? fmtDateLong(invoice.created_at.substring(0,10)) : '—';
