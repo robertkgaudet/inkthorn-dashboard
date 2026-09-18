@@ -1,12 +1,12 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-09-17T17:26:18.938Z",
+  "updated": "2026-09-18T00:52:59.860Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-09-17",
+      "date": "2027-09-17",
       "time": "7:30pm",
       "time_sort": 1930,
       "title": "Comedy Gumbeaux",
@@ -20,7 +20,7 @@
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-09-17",
+      "date": "2027-09-17",
       "time": "8:00pm",
       "time_sort": 2000,
       "title": "Queers Of Comedy New Orleans",
@@ -34,7 +34,7 @@
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2026-09-17",
+      "date": "2027-09-17",
       "time": "8:00pm",
       "time_sort": 2000,
       "title": "Fungus Among Us Open Mic",
@@ -114,6 +114,20 @@
       "cost": "$10",
       "repeat": "Third Saturday",
       "start_dt": "2026-09-19T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-09-19",
+      "time": "10:00pm",
+      "time_sort": 2200,
+      "title": "Grave Yard Shift Open Mic",
+      "url": "https://504comedy.com/event/1402/grave-yard-shift-open-mic",
+      "venue": "VooDoo Lounge",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Saturday",
+      "start_dt": "2026-09-19T22:00-05:00"
     },
     {
       "category": "comedy",
@@ -329,12 +343,12 @@
   "days": [
     {
       "day": "Today",
-      "date": "2026-09-17",
+      "date": "2027-09-17",
       "events": [
         {
           "category": "comedy",
           "day": "Today",
-          "date": "2026-09-17",
+          "date": "2027-09-17",
           "time": "7:30pm",
           "time_sort": 1930,
           "title": "Comedy Gumbeaux",
@@ -348,7 +362,7 @@
         {
           "category": "comedy",
           "day": "Today",
-          "date": "2026-09-17",
+          "date": "2027-09-17",
           "time": "8:00pm",
           "time_sort": 2000,
           "title": "Queers Of Comedy New Orleans",
@@ -362,7 +376,7 @@
         {
           "category": "comedy",
           "day": "Today",
-          "date": "2026-09-17",
+          "date": "2027-09-17",
           "time": "8:00pm",
           "time_sort": 2000,
           "title": "Fungus Among Us Open Mic",
@@ -454,6 +468,20 @@
           "cost": "$10",
           "repeat": "Third Saturday",
           "start_dt": "2026-09-19T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-09-19",
+          "time": "10:00pm",
+          "time_sort": 2200,
+          "title": "Grave Yard Shift Open Mic",
+          "url": "https://504comedy.com/event/1402/grave-yard-shift-open-mic",
+          "venue": "VooDoo Lounge",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Saturday",
+          "start_dt": "2026-09-19T22:00-05:00"
         }
       ]
     },
