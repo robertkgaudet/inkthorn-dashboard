@@ -1,81 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-09-27T01:00:16.531Z",
+  "updated": "2026-09-27T17:26:06.710Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2027-09-26",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "The Susanna Johanna Fontana Show",
-      "url": "https://504comedy.com/event/1400/the-susanna-johanna-fontana-show",
-      "venue": "The Actor’s Apothecary",
-      "type": "Improv",
-      "cost": "$20",
-      "repeat": "Sat Sep 26 2026",
-      "start_dt": "2026-09-26T19:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-09-26",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Jokes on Oak",
-      "url": "https://504comedy.com/event/1116/jokes-on-oak",
-      "venue": "Oak St Brewery",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Saturday",
-      "start_dt": "2026-09-26T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-09-26",
-      "time": "8:30pm",
-      "time_sort": 2030,
-      "title": "Bing-Oh",
-      "url": "https://504comedy.com/event/943/bingoh",
-      "venue": "Twelve Mile Limit",
-      "type": "Improv",
-      "cost": "FREE",
-      "repeat": "Last Saturday",
-      "start_dt": "2026-09-26T20:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-09-26",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "The Last Laugh",
-      "url": "https://504comedy.com/event/1398/the-last-laugh",
-      "venue": "Le Roux's chicken shack",
-      "type": "Stand-up",
-      "cost": "$20",
-      "repeat": "Fourth Saturday",
-      "start_dt": "2026-10-24T21:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-09-26",
-      "time": "10:00pm",
-      "time_sort": 2200,
-      "title": "Grave Yard Shift Open Mic",
-      "url": "https://504comedy.com/event/1402/grave-yard-shift-open-mic",
-      "venue": "VooDoo Lounge",
-      "type": "Open Mic",
-      "cost": "FREE",
-      "repeat": "Every Saturday",
-      "start_dt": "2026-09-26T22:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-09-27",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +19,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-09-27",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-09-28",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -117,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-09-28",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -131,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-09-28",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -145,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-09-28",
       "time": "9:30pm",
       "time_sort": 2130,
@@ -296,92 +226,44 @@
       "cost": "FREE",
       "repeat": "Every Friday",
       "start_dt": "2026-10-02T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-10-03",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Jokes on Oak",
+      "url": "https://504comedy.com/event/1116/jokes-on-oak",
+      "venue": "Oak St Brewery",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Saturday",
+      "start_dt": "2026-10-03T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-10-03",
+      "time": "10:00pm",
+      "time_sort": 2200,
+      "title": "Grave Yard Shift Open Mic",
+      "url": "https://504comedy.com/event/1402/grave-yard-shift-open-mic",
+      "venue": "VooDoo Lounge",
+      "type": "Open Mic",
+      "cost": "FREE",
+      "repeat": "Every Saturday",
+      "start_dt": "2026-10-03T22:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2027-09-26",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-09-26",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "The Susanna Johanna Fontana Show",
-          "url": "https://504comedy.com/event/1400/the-susanna-johanna-fontana-show",
-          "venue": "The Actor’s Apothecary",
-          "type": "Improv",
-          "cost": "$20",
-          "repeat": "Sat Sep 26 2026",
-          "start_dt": "2026-09-26T19:30-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-09-26",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Jokes on Oak",
-          "url": "https://504comedy.com/event/1116/jokes-on-oak",
-          "venue": "Oak St Brewery",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Saturday",
-          "start_dt": "2026-09-26T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-09-26",
-          "time": "8:30pm",
-          "time_sort": 2030,
-          "title": "Bing-Oh",
-          "url": "https://504comedy.com/event/943/bingoh",
-          "venue": "Twelve Mile Limit",
-          "type": "Improv",
-          "cost": "FREE",
-          "repeat": "Last Saturday",
-          "start_dt": "2026-09-26T20:30-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-09-26",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "The Last Laugh",
-          "url": "https://504comedy.com/event/1398/the-last-laugh",
-          "venue": "Le Roux's chicken shack",
-          "type": "Stand-up",
-          "cost": "$20",
-          "repeat": "Fourth Saturday",
-          "start_dt": "2026-10-24T21:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-09-26",
-          "time": "10:00pm",
-          "time_sort": 2200,
-          "title": "Grave Yard Shift Open Mic",
-          "url": "https://504comedy.com/event/1402/grave-yard-shift-open-mic",
-          "venue": "VooDoo Lounge",
-          "type": "Open Mic",
-          "cost": "FREE",
-          "repeat": "Every Saturday",
-          "start_dt": "2026-09-26T22:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-09-27",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-09-27",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -395,7 +277,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-09-27",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -410,12 +292,12 @@
       ]
     },
     {
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-09-28",
       "events": [
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-09-28",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -429,7 +311,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-09-28",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -443,7 +325,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-09-28",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -457,7 +339,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-09-28",
           "time": "9:30pm",
           "time_sort": 2130,
@@ -632,6 +514,40 @@
           "cost": "FREE",
           "repeat": "Every Friday",
           "start_dt": "2026-10-02T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Saturday",
+      "date": "2026-10-03",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-10-03",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Jokes on Oak",
+          "url": "https://504comedy.com/event/1116/jokes-on-oak",
+          "venue": "Oak St Brewery",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Saturday",
+          "start_dt": "2026-10-03T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-10-03",
+          "time": "10:00pm",
+          "time_sort": 2200,
+          "title": "Grave Yard Shift Open Mic",
+          "url": "https://504comedy.com/event/1402/grave-yard-shift-open-mic",
+          "venue": "VooDoo Lounge",
+          "type": "Open Mic",
+          "cost": "FREE",
+          "repeat": "Every Saturday",
+          "start_dt": "2026-10-03T22:00-05:00"
         }
       ]
     }
