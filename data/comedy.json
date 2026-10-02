@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-10-02T01:52:06.018Z",
+  "updated": "2026-10-02T18:11:00.368Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2027-10-01",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Sit. Stay. Stand-Up! Comedy Showcase",
-      "url": "https://504comedy.com/event/1427/sit-stay-standup-comedy-showcase",
-      "venue": "The Dog House",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Thu Oct 01 2026",
-      "start_dt": "2026-10-01T19:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-10-01",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "Comedy Gumbeaux",
-      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-      "venue": "Howlin' Wolf Den",
-      "type": "Open Mic",
-      "cost": "$5",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-10-01T19:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-10-01",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Queers Of Comedy New Orleans",
-      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-      "venue": "Oz New Orleans",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-10-01T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-10-02",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -61,7 +19,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-10-02",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-10-03",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -89,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-10-03",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -324,64 +282,72 @@
       "cost": "FREE",
       "repeat": "Every Wednesday",
       "start_dt": "2026-10-07T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-10-08",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Moral Panic",
+      "url": "https://504comedy.com/event/856/moral-panic",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$20",
+      "repeat": "Second Thursday",
+      "start_dt": "2026-10-15T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-10-08",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Comedy Gumbeaux",
+      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+      "venue": "Howlin' Wolf Den",
+      "type": "Open Mic",
+      "cost": "$5",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-10-08T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-10-08",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Queers Of Comedy New Orleans",
+      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+      "venue": "Oz New Orleans",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-10-08T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-10-08",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Dave Ross",
+      "url": "https://504comedy.com/event/1403/dave-ross",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Thu Oct 08 2026",
+      "start_dt": "2026-10-08T21:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2027-10-01",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-01",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Sit. Stay. Stand-Up! Comedy Showcase",
-          "url": "https://504comedy.com/event/1427/sit-stay-standup-comedy-showcase",
-          "venue": "The Dog House",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Thu Oct 01 2026",
-          "start_dt": "2026-10-01T19:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-01",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "Comedy Gumbeaux",
-          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-          "venue": "Howlin' Wolf Den",
-          "type": "Open Mic",
-          "cost": "$5",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-10-01T19:30-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-01",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Queers Of Comedy New Orleans",
-          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-          "venue": "Oz New Orleans",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-10-01T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-10-02",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-02",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -395,7 +361,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-02",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -410,12 +376,12 @@
       ]
     },
     {
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-10-03",
       "events": [
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-10-03",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -429,7 +395,7 @@
         },
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-10-03",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -688,6 +654,68 @@
           "cost": "FREE",
           "repeat": "Every Wednesday",
           "start_dt": "2026-10-07T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Thursday",
+      "date": "2026-10-08",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-10-08",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Moral Panic",
+          "url": "https://504comedy.com/event/856/moral-panic",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$20",
+          "repeat": "Second Thursday",
+          "start_dt": "2026-10-15T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-10-08",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Comedy Gumbeaux",
+          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+          "venue": "Howlin' Wolf Den",
+          "type": "Open Mic",
+          "cost": "$5",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-10-08T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-10-08",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Queers Of Comedy New Orleans",
+          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+          "venue": "Oz New Orleans",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-10-08T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-10-08",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Dave Ross",
+          "url": "https://504comedy.com/event/1403/dave-ross",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Thu Oct 08 2026",
+          "start_dt": "2026-10-08T21:00-05:00"
         }
       ]
     }
