@@ -1,39 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-10-03T01:32:19.098Z",
+  "updated": "2026-10-03T16:56:54.837Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2027-10-02",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Caitlin Peluffo",
-      "url": "https://504comedy.com/event/1424/caitlin-peluffo",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Fri Oct 02 2026",
-      "start_dt": "2026-10-02T19:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-10-02",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "The Comedy Lounge",
-      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-      "venue": "Vino: Fine Wine & Spirits",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Friday",
-      "start_dt": "2026-10-02T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-10-03",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -47,7 +19,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-10-03",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -61,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-10-04",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -75,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-10-04",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -89,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-10-04",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-10-04",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -338,50 +310,58 @@
       "cost": "$25",
       "repeat": "Thu Oct 08 2026",
       "start_dt": "2026-10-08T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-10-09",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Peyton Ruddy",
+      "url": "https://504comedy.com/event/1404/peyton-ruddy",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Fri Oct 09 2026",
+      "start_dt": "2026-10-09T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-10-09",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Greetings from Queer Mountain",
+      "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
+      "venue": "ALLways Lounge",
+      "type": "Storytelling",
+      "cost": "$10",
+      "repeat": "Second Friday",
+      "start_dt": "2026-10-09T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-10-09",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Comedy Lounge",
+      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+      "venue": "Vino: Fine Wine & Spirits",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Friday",
+      "start_dt": "2026-10-09T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2027-10-02",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-02",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Caitlin Peluffo",
-          "url": "https://504comedy.com/event/1424/caitlin-peluffo",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Fri Oct 02 2026",
-          "start_dt": "2026-10-02T19:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-02",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "The Comedy Lounge",
-          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-          "venue": "Vino: Fine Wine & Spirits",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Friday",
-          "start_dt": "2026-10-02T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-10-03",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-03",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -395,7 +375,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-03",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -410,12 +390,12 @@
       ]
     },
     {
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-10-04",
       "events": [
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-10-04",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -429,7 +409,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-10-04",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -443,7 +423,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-10-04",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -457,7 +437,7 @@
         },
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-10-04",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -716,6 +696,54 @@
           "cost": "$25",
           "repeat": "Thu Oct 08 2026",
           "start_dt": "2026-10-08T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "date": "2026-10-09",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-10-09",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Peyton Ruddy",
+          "url": "https://504comedy.com/event/1404/peyton-ruddy",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Fri Oct 09 2026",
+          "start_dt": "2026-10-09T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-10-09",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Greetings from Queer Mountain",
+          "url": "https://504comedy.com/event/119/greetings-from-queer-mountain",
+          "venue": "ALLways Lounge",
+          "type": "Storytelling",
+          "cost": "$10",
+          "repeat": "Second Friday",
+          "start_dt": "2026-10-09T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-10-09",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Comedy Lounge",
+          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+          "venue": "Vino: Fine Wine & Spirits",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Friday",
+          "start_dt": "2026-10-09T20:00-05:00"
         }
       ]
     }
