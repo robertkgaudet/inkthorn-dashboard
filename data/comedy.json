@@ -1,39 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-10-04T02:13:07.622Z",
+  "updated": "2026-10-04T17:15:41.319Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2027-10-03",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Caitlin Peluffo",
-      "url": "https://504comedy.com/event/1425/caitlin-peluffo",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Sat Oct 03 2026",
-      "start_dt": "2026-10-03T19:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-10-03",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Jokes on Oak",
-      "url": "https://504comedy.com/event/1116/jokes-on-oak",
-      "venue": "Oak St Brewery",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Saturday",
-      "start_dt": "2026-10-03T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-10-04",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -47,7 +19,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-10-04",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -57,11 +29,11 @@
       "type": "Stand-up",
       "cost": "FREE",
       "repeat": "First Sunday",
-      "start_dt": "2026-10-04T19:00-05:00"
+      "start_dt": "2026-11-08T19:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-10-04",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-10-04",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -89,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-10-05",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-10-05",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -117,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-10-05",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -131,7 +103,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-10-05",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -145,7 +117,7 @@
     },
     {
       "category": "comedy",
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-10-05",
       "time": "9:30pm",
       "time_sort": 2130,
@@ -352,50 +324,72 @@
       "cost": "FREE",
       "repeat": "Every Friday",
       "start_dt": "2026-10-09T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-10-10",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Peyton Ruddy",
+      "url": "https://504comedy.com/event/1405/peyton-ruddy",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Sat Oct 10 2026",
+      "start_dt": "2026-10-10T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-10-10",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Cheers! An Improvised Comedy Celebration",
+      "url": "https://504comedy.com/event/951/cheers-an-improvised-comedy-celebration",
+      "venue": "Big Couch",
+      "type": "Improv",
+      "cost": "$10",
+      "repeat": "Second Saturday",
+      "start_dt": "2026-10-10T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-10-10",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Jokes on Oak",
+      "url": "https://504comedy.com/event/1116/jokes-on-oak",
+      "venue": "Oak St Brewery",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Saturday",
+      "start_dt": "2026-10-10T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Saturday",
+      "date": "2026-10-10",
+      "time": "9:00pm",
+      "time_sort": 2100,
+      "title": "Anger Management: Comedy Meets Therapy",
+      "url": "https://504comedy.com/event/1121/anger-management-comedy-meets-therapy",
+      "venue": "Howlin' Wolf Den",
+      "type": "Stand-up",
+      "cost": "$15",
+      "repeat": "Second Saturday",
+      "start_dt": "2026-10-10T21:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2027-10-03",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-03",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Caitlin Peluffo",
-          "url": "https://504comedy.com/event/1425/caitlin-peluffo",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Sat Oct 03 2026",
-          "start_dt": "2026-10-03T19:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-03",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Jokes on Oak",
-          "url": "https://504comedy.com/event/1116/jokes-on-oak",
-          "venue": "Oak St Brewery",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Saturday",
-          "start_dt": "2026-10-03T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-10-04",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-04",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -409,7 +403,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-04",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -419,11 +413,11 @@
           "type": "Stand-up",
           "cost": "FREE",
           "repeat": "First Sunday",
-          "start_dt": "2026-10-04T19:00-05:00"
+          "start_dt": "2026-11-08T19:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-04",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -437,7 +431,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-04",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -452,12 +446,12 @@
       ]
     },
     {
-      "day": "Monday",
+      "day": "Tomorrow",
       "date": "2026-10-05",
       "events": [
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-10-05",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -471,7 +465,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-10-05",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -485,7 +479,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-10-05",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -499,7 +493,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-10-05",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -513,7 +507,7 @@
         },
         {
           "category": "comedy",
-          "day": "Monday",
+          "day": "Tomorrow",
           "date": "2026-10-05",
           "time": "9:30pm",
           "time_sort": 2130,
@@ -744,6 +738,68 @@
           "cost": "FREE",
           "repeat": "Every Friday",
           "start_dt": "2026-10-09T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Saturday",
+      "date": "2026-10-10",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-10-10",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Peyton Ruddy",
+          "url": "https://504comedy.com/event/1405/peyton-ruddy",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Sat Oct 10 2026",
+          "start_dt": "2026-10-10T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-10-10",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Cheers! An Improvised Comedy Celebration",
+          "url": "https://504comedy.com/event/951/cheers-an-improvised-comedy-celebration",
+          "venue": "Big Couch",
+          "type": "Improv",
+          "cost": "$10",
+          "repeat": "Second Saturday",
+          "start_dt": "2026-10-10T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-10-10",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Jokes on Oak",
+          "url": "https://504comedy.com/event/1116/jokes-on-oak",
+          "venue": "Oak St Brewery",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Saturday",
+          "start_dt": "2026-10-10T20:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Saturday",
+          "date": "2026-10-10",
+          "time": "9:00pm",
+          "time_sort": 2100,
+          "title": "Anger Management: Comedy Meets Therapy",
+          "url": "https://504comedy.com/event/1121/anger-management-comedy-meets-therapy",
+          "venue": "Howlin' Wolf Den",
+          "type": "Stand-up",
+          "cost": "$15",
+          "repeat": "Second Saturday",
+          "start_dt": "2026-10-10T21:00-05:00"
         }
       ]
     }
