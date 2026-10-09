@@ -1,56 +1,56 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-10-09T02:38:53.530Z",
+  "updated": "2026-10-09T18:37:51.126Z",
   "status": "ok",
   "location": "New Orleans, LA",
   "current": {
-    "temp_f": 78,
-    "feels_like_f": 80,
-    "humidity": 73,
-    "description": "Overcast ",
-    "code": "122",
-    "emoji": "☁️",
-    "wind_mph": 12,
-    "wind_dir": "E",
+    "temp_f": 81,
+    "feels_like_f": 81,
+    "humidity": 52,
+    "description": "Patchy rain nearby",
+    "code": "176",
+    "emoji": "🌡️",
+    "wind_mph": 23,
+    "wind_dir": "NE",
     "visibility_miles": 10,
-    "uv_index": 0
+    "uv_index": 7
   },
   "forecast": [
     {
-      "date": "2026-10-08",
-      "label": "Thu, Oct 8",
-      "high_f": 85,
-      "low_f": 73,
+      "date": "2026-10-09",
+      "label": "Fri, Oct 9",
+      "high_f": 81,
+      "low_f": 69,
       "description": "Overcast",
       "emoji": "☁️",
       "sunrise": "06:58 AM",
-      "sunset": "06:37 PM",
-      "avg_humidity": 68,
-      "chance_of_rain": 22
-    },
-    {
-      "date": "2026-10-09",
-      "label": "Fri, Oct 9",
-      "high_f": 82,
-      "low_f": 71,
-      "description": "Clear",
-      "emoji": "☀️",
-      "sunrise": "06:58 AM",
       "sunset": "06:36 PM",
-      "avg_humidity": 72,
-      "chance_of_rain": 66
+      "avg_humidity": 67,
+      "chance_of_rain": 57
     },
     {
       "date": "2026-10-10",
       "label": "Sat, Oct 10",
-      "high_f": 74,
+      "high_f": 82,
       "low_f": 66,
-      "description": "Patchy Rain",
-      "emoji": "🌡️",
+      "description": "Clear",
+      "emoji": "☀️",
       "sunrise": "06:59 AM",
       "sunset": "06:35 PM",
-      "avg_humidity": 74,
-      "chance_of_rain": 55
+      "avg_humidity": 66,
+      "chance_of_rain": 49
+    },
+    {
+      "date": "2026-10-11",
+      "label": "Sun, Oct 11",
+      "high_f": 85,
+      "low_f": 67,
+      "description": "Clear",
+      "emoji": "☀️",
+      "sunrise": "07:00 AM",
+      "sunset": "06:34 PM",
+      "avg_humidity": 54,
+      "chance_of_rain": 5
     }
   ]
 }
