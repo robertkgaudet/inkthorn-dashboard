@@ -273,9 +273,13 @@
       transition: all 0.15s; animation: fadeIn 0.2s ease;
     }
     .k-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+    .k-card.g-delegate { background: rgba(214,76,63,0.10); border-color: rgba(214,76,63,0.25); }
     .k-card.g-delegate::before    { background: var(--group-delegate); }
+    .k-card.g-work  { background: rgba(61,107,142,0.10); border-color: rgba(61,107,142,0.25); }
     .k-card.g-work::before  { background: var(--group-work); }
+    .k-card.g-learn { background: rgba(74,124,89,0.10); border-color: rgba(74,124,89,0.25); }
     .k-card.g-learn::before { background: var(--group-learn); }
+    .k-card.g-think { background: rgba(124,90,142,0.10); border-color: rgba(124,90,142,0.25); }
     .k-card.g-think::before { background: var(--group-think); }
     .k-card.g-none::before  { background: var(--group-none); }
     .k-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-card); }
@@ -316,9 +320,13 @@
       overflow: hidden; transition: all 0.18s; cursor: grab;
     }
     .m-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+    .m-card.g-delegate { background: rgba(214,76,63,0.10); border-color: rgba(214,76,63,0.25); }
     .m-card.g-delegate::before    { background: var(--group-delegate); }
+    .m-card.g-work  { background: rgba(61,107,142,0.10); border-color: rgba(61,107,142,0.25); }
     .m-card.g-work::before  { background: var(--group-work); }
+    .m-card.g-learn { background: rgba(74,124,89,0.10); border-color: rgba(74,124,89,0.25); }
     .m-card.g-learn::before { background: var(--group-learn); }
+    .m-card.g-think { background: rgba(124,90,142,0.10); border-color: rgba(124,90,142,0.25); }
     .m-card.g-think::before { background: var(--group-think); }
     .m-card.g-none::before  { background: var(--group-none); }
     .m-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-card); transform: translateY(-1px); }
@@ -352,9 +360,13 @@
       position: relative; overflow: hidden; transition: all 0.18s; animation: slideInTop 0.25s ease;
     }
     .l-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+    .l-card.g-delegate { background: rgba(214,76,63,0.10); border-color: rgba(214,76,63,0.25); }
     .l-card.g-delegate::before    { background: var(--group-delegate); }
+    .l-card.g-work  { background: rgba(61,107,142,0.10); border-color: rgba(61,107,142,0.25); }
     .l-card.g-work::before  { background: var(--group-work); }
+    .l-card.g-learn { background: rgba(74,124,89,0.10); border-color: rgba(74,124,89,0.25); }
     .l-card.g-learn::before { background: var(--group-learn); }
+    .l-card.g-think { background: rgba(124,90,142,0.10); border-color: rgba(124,90,142,0.25); }
     .l-card.g-think::before { background: var(--group-think); }
     .l-card.g-none::before  { background: var(--group-none); }
     .l-card:hover { border-color: var(--border-hover); }
@@ -610,11 +622,11 @@
         <!-- Priority -->
         <div class="priority-input-group">
           <input type="radio" name="globalPri" id="gPriA" value="A" class="priority-radio">
-          <label for="gPriA" class="priority-label label-A">A</label>
+          <label for="gPriA" class="priority-label label-A">High</label>
           <input type="radio" name="globalPri" id="gPriB" value="B" class="priority-radio">
-          <label for="gPriB" class="priority-label label-B">B</label>
+          <label for="gPriB" class="priority-label label-B">Medium</label>
           <input type="radio" name="globalPri" id="gPriC" value="C" class="priority-radio">
-          <label for="gPriC" class="priority-label label-C">C</label>
+          <label for="gPriC" class="priority-label label-C">Low</label>
           <input type="radio" name="globalPri" id="gPriN" value="" class="priority-radio" checked>
           <label for="gPriN" class="priority-label label-N">None</label>
         </div>
@@ -1019,7 +1031,7 @@ function renderKanban() {
     </select>
     <div class="toolbar-sep"></div>
     <span class="toolbar-label">Priority:</span>
-    ${['all','A','B','C'].map(p=>`<button class="filter-pill ${priFilter===p?'active':''}" onclick="setVP('kanban','priFilter','${p}');renderKanban()">${p==='all'?'All':p}</button>`).join('')}
+    ${['all','A','B','C'].map(p=>`<button class="filter-pill ${priFilter===p?'active':''}" onclick="setVP('kanban','priFilter','${p}');renderKanban()">${p==='all'?'All':p==='A'?'High':p==='B'?'Medium':'Low'}</button>`).join('')}
     <div class="toolbar-sep"></div>
     <button class="filter-pill ${showDone?'active':''}" onclick="setVP('kanban','showDone',${!showDone});renderKanban()">✓ Done</button>
   </div>`;
@@ -1269,7 +1281,7 @@ function renderList() {
     ${groupPills}
     <div class="toolbar-sep"></div>
     <span class="toolbar-label">Priority:</span>
-    ${['all','A','B','C','done'].map(p=>`<button class="filter-pill ${priFilter===p?'active':''}" onclick="setVP('list','priFilter','${p}');renderList()">${p==='all'?'All':p==='done'?'✓ Done':p}</button>`).join('')}
+    ${['all','A','B','C','done'].map(p=>`<button class="filter-pill ${priFilter===p?'active':''}" onclick="setVP('list','priFilter','${p}');renderList()">${p==='all'?'All':p==='done'?'✓ Done':p==='A'?'High':p==='B'?'Medium':'Low'}</button>`).join('')}
     <div class="toolbar-sep"></div>
     <span class="toolbar-label">Sort:</span>
     <select class="toolbar-select" onchange="setVP('list','sort',this.value);renderList()">
@@ -1462,9 +1474,9 @@ function renderDayView() {
           <button class="group-btn"           data-group="think" onclick="selectDayGroup(this,'think')">-think</button>
         </div>
         <div class="priority-input-group">
-          <input type="radio" name="dayPri" id="dpA" value="A" class="priority-radio"><label for="dpA" class="priority-label label-A">A</label>
-          <input type="radio" name="dayPri" id="dpB" value="B" class="priority-radio"><label for="dpB" class="priority-label label-B">B</label>
-          <input type="radio" name="dayPri" id="dpC" value="C" class="priority-radio"><label for="dpC" class="priority-label label-C">C</label>
+          <input type="radio" name="dayPri" id="dpA" value="A" class="priority-radio"><label for="dpA" class="priority-label label-A">High</label>
+          <input type="radio" name="dayPri" id="dpB" value="B" class="priority-radio"><label for="dpB" class="priority-label label-B">Medium</label>
+          <input type="radio" name="dayPri" id="dpC" value="C" class="priority-radio"><label for="dpC" class="priority-label label-C">Low</label>
           <input type="radio" name="dayPri" id="dpN" value="" class="priority-radio" checked>
           <label for="dpN" class="priority-label label-N">None</label>
         </div>
@@ -1483,7 +1495,7 @@ function renderDayView() {
 
   const toolbarHtml=`<div class="day-toolbar">
     <div class="priority-tabs">
-      ${['all','A','B','C','done'].map(p=>`<button class="priority-tab${p==='all'?'':p==='done'?' tab-done':` tab-${p}`}${currentPriorityFilter===p?' active':''}" onclick="setPriorityFilter('${p}',this)">${p==='all'?'All':p==='done'?'✓ Done':p}</button>`).join('')}
+      ${['all','A','B','C','done'].map(p=>`<button class="priority-tab${p==='all'?'':p==='done'?' tab-done':` tab-${p}`}${currentPriorityFilter===p?' active':''}" onclick="setPriorityFilter('${p}',this)">${p==='all'?'All':p==='done'?'✓ Done':p==='A'?'High':p==='B'?'Medium':'Low'}</button>`).join('')}
     </div>
     <button class="layout-toggle" onclick="toggleLayout()">${currentLayoutMode==='list'?'⊞ Planner':'☰ List'}</button>
   </div>`;
@@ -1571,7 +1583,7 @@ async function submitDayNote(){
 function dayNoteCardHTML(note,isCarried){
   const meta=getMeta(note.id); const pri=meta.priority||'null'; const isDone=meta.done;
   const ts=note.created_at||note.createdAt;
-  const pillLabels={A:'A — Must Do',B:'B — Should Do',C:'C — Nice to Do',null:'— Unranked'};
+  const pillLabels={A:'⬆ High',B:'➡ Medium',C:'⬇ Low',null:'— Priority'};
   const pillClass={A:'pill-A',B:'pill-B',C:'pill-C',null:'pill-null'}[pri];
   const badgeClass={ideas:'badge-ideas',tasks:'badge-tasks',other:'badge-other'}[note.category]||'badge-other';
   const badgeLabel={ideas:'💡 Ideas',tasks:'📋 Tasks',other:'🗄 Other'}[note.category]||note.category;
