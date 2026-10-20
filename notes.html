@@ -303,10 +303,12 @@
     .k-del:hover { opacity: 1; }
 
     /* ─── MASONRY ─── */
-    .masonry-grid { columns: 4; gap: 12px; }
-    @media (max-width: 1200px) { .masonry-grid { columns: 3; } }
-    @media (max-width: 900px)  { .masonry-grid { columns: 2; } }
-    @media (max-width: 600px)  { .masonry-grid { columns: 1; } }
+    .masonry-grid { columns: 8; gap: 8px; }
+    @media (max-width: 1600px) { .masonry-grid { columns: 6; } }
+    @media (max-width: 1200px) { .masonry-grid { columns: 5; } }
+    @media (max-width: 900px)  { .masonry-grid { columns: 4; } }
+    @media (max-width: 700px)  { .masonry-grid { columns: 3; } }
+    @media (max-width: 500px)  { .masonry-grid { columns: 2; } }
     .m-card {
       break-inside: avoid; display: block; background: var(--surface);
       border: 1px solid var(--border); border-radius: var(--radius);
