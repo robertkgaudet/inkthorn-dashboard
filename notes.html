@@ -32,7 +32,7 @@
       --radius: 10px;
       --radius-sm: 6px;
       /* group colors */
-      --group-do: #d64c3f;
+      --group-delegate: #d64c3f;
       --group-work: #3d6b8e;
       --group-learn: #4a7c59;
       --group-think: #7c5a8e;
@@ -167,7 +167,7 @@
       border: 1.5px solid transparent; cursor: pointer; font-family: 'Inter', sans-serif;
       transition: all 0.15s; background: var(--surface-raised); color: var(--cream-dim);
     }
-    .group-btn.active-do   { background: rgba(214,76,63,0.15);  color: #d64c3f; border-color: #d64c3f; }
+    .group-btn.active-delegate   { background: rgba(214,76,63,0.15);  color: #d64c3f; border-color: #d64c3f; }
     .group-btn.active-work { background: rgba(61,107,142,0.15); color: #3d6b8e; border-color: #3d6b8e; }
     .group-btn.active-learn{ background: rgba(74,124,89,0.15);  color: #4a7c59; border-color: #4a7c59; }
     .group-btn.active-think{ background: rgba(124,90,142,0.15); color: #7c5a8e; border-color: #7c5a8e; }
@@ -229,7 +229,7 @@
     }
     .filter-pill:hover { border-color: var(--gold-dim); color: var(--cream); }
     .filter-pill.active { background: var(--surface-raised); color: var(--cream); border-color: var(--gold-dim); }
-    .filter-pill.pill-do.active   { background: rgba(214,76,63,0.12);  color: #d64c3f; border-color: #d64c3f; }
+    .filter-pill.pill-delegate.active   { background: rgba(214,76,63,0.12);  color: #d64c3f; border-color: #d64c3f; }
     .filter-pill.pill-work.active { background: rgba(61,107,142,0.12); color: #3d6b8e; border-color: #3d6b8e; }
     .filter-pill.pill-learn.active{ background: rgba(74,124,89,0.12);  color: #4a7c59; border-color: #4a7c59; }
     .filter-pill.pill-think.active{ background: rgba(124,90,142,0.12); color: #7c5a8e; border-color: #7c5a8e; }
@@ -273,7 +273,7 @@
       transition: all 0.15s; animation: fadeIn 0.2s ease;
     }
     .k-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
-    .k-card.g-do::before    { background: var(--group-do); }
+    .k-card.g-delegate::before    { background: var(--group-delegate); }
     .k-card.g-work::before  { background: var(--group-work); }
     .k-card.g-learn::before { background: var(--group-learn); }
     .k-card.g-think::before { background: var(--group-think); }
@@ -316,7 +316,7 @@
       overflow: hidden; transition: all 0.18s; cursor: grab;
     }
     .m-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
-    .m-card.g-do::before    { background: var(--group-do); }
+    .m-card.g-delegate::before    { background: var(--group-delegate); }
     .m-card.g-work::before  { background: var(--group-work); }
     .m-card.g-learn::before { background: var(--group-learn); }
     .m-card.g-think::before { background: var(--group-think); }
@@ -352,7 +352,7 @@
       position: relative; overflow: hidden; transition: all 0.18s; animation: slideInTop 0.25s ease;
     }
     .l-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
-    .l-card.g-do::before    { background: var(--group-do); }
+    .l-card.g-delegate::before    { background: var(--group-delegate); }
     .l-card.g-work::before  { background: var(--group-work); }
     .l-card.g-learn::before { background: var(--group-learn); }
     .l-card.g-think::before { background: var(--group-think); }
@@ -601,7 +601,7 @@
       <div class="add-form-row">
         <!-- Group picker -->
         <div class="group-picker" id="globalGroupPicker">
-          <button class="group-btn active-do" data-group="do"    onclick="selectGroup(this,'do')"   >-do</button>
+          <button class="group-btn active-delegate" data-group="delegate"    onclick="selectGroup(this,'delegate')"   >-delegate</button>
           <button class="group-btn"           data-group="work"  onclick="selectGroup(this,'work')" >-work</button>
           <button class="group-btn"           data-group="learn" onclick="selectGroup(this,'learn')">-learn</button>
           <button class="group-btn"           data-group="think" onclick="selectGroup(this,'think')">-think</button>
@@ -666,9 +666,9 @@ const TOKEN_KEY = 'inkthorn_token';
 const META_KEY  = 'inkthorn_daytimer_meta';
 const FREE_LIMIT = 30;
 
-const GROUP_COLORS = { do:'#d64c3f', work:'#3d6b8e', learn:'#4a7c59', think:'#7c5a8e', '':'#8a7a6a' };
-const GROUP_LABELS = { do:'-do', work:'-work', learn:'-learn', think:'-think', '':'none' };
-const GROUP_ICONS  = { do:'⚡', work:'💼', learn:'📖', think:'💭', '':'·' };
+const GROUP_COLORS = { delegate:'#d64c3f', work:'#3d6b8e', learn:'#4a7c59', think:'#7c5a8e', '':'#8a7a6a' };
+const GROUP_LABELS = { delegate:'-delegate', work:'-work', learn:'-learn', think:'-think', '':'none' };
+const GROUP_ICONS  = { delegate:'⚡', work:'💼', learn:'📖', think:'💭', '':'·' };
 
 const GRUMPY_RESPONSES = [
   "Filed. Try not to send me anything else tonight.",
@@ -709,7 +709,7 @@ let currentPriorityFilter = 'all';
 let currentLayoutMode = 'list';
 let isPro = false;
 let doneQuipTimeout = null;
-let globalSelectedGroup = 'do';
+let globalSelectedGroup = 'delegate';
 
 // per-view prefs (loaded from localStorage)
 let viewPrefs = {};
@@ -801,7 +801,7 @@ async function submitGlobalNote() {
   const btn = document.getElementById('globalFileBtn');
   btn.disabled = true; btn.textContent = 'Filing…';
   try {
-    const note = await createNoteAPI(text, globalSelectedGroup === 'do' || !globalSelectedGroup ? 'tasks' : globalSelectedGroup === 'work' ? 'tasks' : 'ideas');
+    const note = await createNoteAPI(text, globalSelectedGroup === 'delegate' || !globalSelectedGroup ? 'tasks' : globalSelectedGroup === 'work' ? 'tasks' : 'ideas');
     setMeta(note.id, { priority: priority || null, group: globalSelectedGroup || null, scheduled_date: dateVal, order: Date.now() });
     notesCache.unshift(note);
     textarea.value = '';
@@ -1024,7 +1024,7 @@ function renderKanban() {
     <button class="filter-pill ${showDone?'active':''}" onclick="setVP('kanban','showDone',${!showDone});renderKanban()">✓ Done</button>
   </div>`;
 
-  const groups = ['do','work','learn','think'];
+  const groups = ['delegate','work','learn','think'];
   const unassignedNotes = notesCache.filter(n=>!getMeta(n.id).group);
   const hasUnassigned = unassignedNotes.length > 0;
 
@@ -1164,8 +1164,8 @@ function renderMasonry() {
   notes = applyGroupFilter(notes, groupFilter);
   notes = applySort(notes, sortBy);
 
-  const groupPills = ['all','do','work','learn','think','none'].map(g=>
-    `<button class="filter-pill ${g==='do'?'pill-do':g==='work'?'pill-work':g==='learn'?'pill-learn':g==='think'?'pill-think':''} ${groupFilter===g?'active':''}"
+  const groupPills = ['all','delegate','work','learn','think','none'].map(g=>
+    `<button class="filter-pill ${g==='delegate'?'pill-delegate':g==='work'?'pill-work':g==='learn'?'pill-learn':g==='think'?'pill-think':''} ${groupFilter===g?'active':''}"
       onclick="setVP('masonry','group','${g}');renderMasonry()">${g==='all'?'All':GROUP_LABELS[g]||g}</button>`
   ).join('');
 
@@ -1256,8 +1256,8 @@ function renderList() {
   notes = applyPriorityFilter(notes, priFilter);
   notes = applySort(notes, sortBy);
 
-  const groupPills = ['all','do','work','learn','think'].map(g=>
-    `<button class="filter-pill ${g==='do'?'pill-do':g==='work'?'pill-work':g==='learn'?'pill-learn':g==='think'?'pill-think':''} ${groupFilter===g?'active':''}"
+  const groupPills = ['all','delegate','work','learn','think'].map(g=>
+    `<button class="filter-pill ${g==='delegate'?'pill-delegate':g==='work'?'pill-work':g==='learn'?'pill-learn':g==='think'?'pill-think':''} ${groupFilter===g?'active':''}"
       onclick="setVP('list','group','${g}');renderList()">${g==='all'?'All':GROUP_LABELS[g]||g}</button>`
   ).join('');
 
@@ -1409,7 +1409,7 @@ async function weekQuickSubmit() {
   if(!text){input.focus();input.style.borderColor='rgba(192,57,43,0.5)';setTimeout(()=>{input.style.borderColor='';},1200);return;}
   try {
     const note=await createNoteAPI(text,'tasks');
-    setMeta(note.id,{scheduled_date:dateKey(new Date()),group:'do',order:Date.now()});
+    setMeta(note.id,{scheduled_date:dateKey(new Date()),group:'delegate',order:Date.now()});
     notesCache.unshift(note); input.value='';
     showDoneQuip(GRUMPY_RESPONSES); renderWeekView();
   } catch(e){console.error(e);}
@@ -1456,7 +1456,7 @@ function renderDayView() {
       <textarea id="noteInput" placeholder="${INPUT_PLACEHOLDERS[0]}" rows="3" onkeydown="handleDayInputKeydown(event)"></textarea>
       <div class="add-form-row">
         <div class="group-picker" id="dayGroupPicker">
-          <button class="group-btn active-do" data-group="do"    onclick="selectDayGroup(this,'do')"   >-do</button>
+          <button class="group-btn active-delegate" data-group="delegate"    onclick="selectDayGroup(this,'delegate')"   >-delegate</button>
           <button class="group-btn"           data-group="work"  onclick="selectDayGroup(this,'work')" >-work</button>
           <button class="group-btn"           data-group="learn" onclick="selectDayGroup(this,'learn')">-learn</button>
           <button class="group-btn"           data-group="think" onclick="selectDayGroup(this,'think')">-think</button>
@@ -1474,7 +1474,7 @@ function renderDayView() {
     </div>
   </section>`;
 
-  let daySelectedGroup = 'do';
+  let daySelectedGroup = 'delegate';
   function toggleDayInput() {
     const form = document.getElementById('dayNoteForm');
     form.classList.toggle('open');
@@ -1537,7 +1537,7 @@ function toggleDayInput() {
   const form=document.getElementById('dayNoteForm');
   if(form) form.classList.toggle('open');
 }
-let daySelectedGroup='do';
+let daySelectedGroup='delegate';
 function selectDayGroup(btn,group){
   daySelectedGroup=group;
   document.querySelectorAll('#dayGroupPicker .group-btn').forEach(b=>{
