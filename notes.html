@@ -985,6 +985,7 @@ function applyPriorityFilter(notes, pri) {
 // ═══════════════════════════════════════════
 function switchSection(section, tabEl) {
   currentSection=section;
+  setVP('app','lastSection',section);
   document.querySelectorAll('.section-tab').forEach(t=>t.classList.remove('active'));
   if(tabEl) tabEl.classList.add('active');
   if(section==='daily') currentView='week';
@@ -1685,7 +1686,10 @@ async function init(){
   }catch(e){console.warn('Could not fetch pro status:',e);}
 
   await loadNotesFromAPI();
-  renderCurrentView();
+  // Restore last active section + activate its tab
+  const lastSection = getVP('app','lastSection','daily');
+  const restoredTab = document.querySelector(`[data-section="${lastSection}"]`);
+  switchSection(lastSection, restoredTab);
   startTimestampTicker();
   startLiveSync();
 }
