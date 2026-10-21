@@ -487,9 +487,17 @@ let filterPri = 'all';
 async function loadNotes() {
   try {
     const res = await apiFetch('/api/notes');
-    if (!res.ok) return;
-    allNotes = await res.json();
-  } catch(e) { console.warn(e); }
+    if (!res.ok) {
+      document.getElementById('pbTaskList').innerHTML = `<div class="pb-empty">⚠️ Could not load tasks (HTTP ${res.status}). <a href="notes.html" style="color:var(--gold)">Return to Notes</a> to refresh your session.</div>`;
+      return;
+    }
+    const data = await res.json();
+    allNotes = Array.isArray(data) ? data : (data.notes || []);
+  } catch(e) {
+    if (e.message !== 'Unauthorized') {
+      document.getElementById('pbTaskList').innerHTML = `<div class="pb-empty">⚠️ ${e.message}. <a href="notes.html" style="color:var(--gold)">Return to Notes</a> to refresh.</div>`;
+    }
+  }
 }
 
 // ════════════════════════════════════════
