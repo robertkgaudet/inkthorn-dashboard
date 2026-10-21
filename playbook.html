@@ -797,7 +797,9 @@ async function init() {
   renderTasks();
 }
 
-init();
+init().catch(err => {
+  document.getElementById('pbTaskList').innerHTML = `<div class="pb-empty">⚠️ Init error: ${err.message}. <a href="notes.html" style="color:var(--gold)">Return to Notes</a></div>`;
+});
 </script>
 <!-- ── TASK DETAIL MODAL ── -->
 <div id="taskModal">
