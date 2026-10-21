@@ -110,7 +110,8 @@ body { background: var(--bg); color: var(--cream); font-family: 'Inter', sans-se
 .pb-tasks-header span:last-child { border-right: none; }
 .task-row { display: grid; grid-template-columns: 32px 80px 96px 1fr 80px; gap: 0; border-bottom: 1px solid var(--border); align-items: stretch; transition: background 0.12s; }
 .task-row:last-child { border-bottom: none; }
-.task-row:hover { background: rgba(255,220,150,0.03); }
+.task-row { cursor: pointer; }
+.task-row:hover { background: rgba(154,111,32,0.06); }
 .task-row.done-row { opacity: 0.45; }
 .task-row.done-row .task-text-cell { text-decoration: line-through; color: var(--cream-dim); }
 .task-cell { padding: 7px 10px; border-right: 1px solid var(--border); display: flex; align-items: center; font-size: 0.82rem; min-width: 0; }
@@ -118,7 +119,7 @@ body { background: var(--bg); color: var(--cream); font-family: 'Inter', sans-se
 .task-num { font-size: 0.65rem; color: var(--cream-dim); opacity: 0.45; justify-content: center; }
 .task-cat-cell { }
 .task-pri-cell { }
-.task-text-cell { color: var(--cream); word-break: break-word; white-space: pre-wrap; }
+.task-text-cell { color: var(--cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .task-done-cell { justify-content: center; }
 
 /* category pill */
@@ -142,6 +143,21 @@ body { background: var(--bg); color: var(--cream); font-family: 'Inter', sans-se
 
 /* empty state */
 .pb-empty { padding: 24px; text-align: center; color: var(--cream-dim); font-style: italic; font-size: 0.85rem; }
+
+/* ── TASK MODAL ── */
+#taskModal { position: fixed; inset: 0; z-index: 8000; display: none; align-items: flex-start; justify-content: center; background: rgba(20,16,12,0.55); backdrop-filter: blur(4px); padding: 0; }
+#taskModal.open { display: flex; }
+.task-modal-inner { background: var(--surface); width: 100%; height: 100%; max-width: 100%; display: flex; flex-direction: column; overflow: hidden; }
+.task-modal-header { display: flex; align-items: center; gap: 12px; padding: 18px 24px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; background: var(--surface-raised); }
+.task-modal-close { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border-hover); background: var(--surface); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--cream-dim); flex-shrink: 0; transition: background 0.12s; }
+.task-modal-close:hover { background: var(--surface-raised); color: var(--cream); }
+.task-modal-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.task-modal-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.task-modal-done-btn { padding: 6px 16px; border-radius: 20px; border: 1px solid var(--border-hover); background: var(--surface-raised); color: var(--cream-dim); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.task-modal-done-btn.done { background: rgba(46,102,68,0.2); border-color: var(--green); color: #6fcf97; }
+.task-modal-body { flex: 1; overflow-y: auto; padding: 28px 32px 40px; }
+.task-modal-title { font-family: 'Playfair Display', serif; font-size: 1.55rem; color: var(--cream); margin-bottom: 20px; line-height: 1.35; }
+.task-modal-desc { font-size: 0.92rem; color: var(--cream-dim); line-height: 1.75; white-space: pre-wrap; word-break: break-word; }
 
 /* ── EISENHOWER MATRIX ── */
 .pb-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
@@ -538,12 +554,12 @@ function renderTasks() {
   notes.forEach((n, i) => {
     const meta = getMeta(n.id);
     const isDone = meta.done;
-    html += `<div class="task-row${isDone?' done-row':''}" data-id="${n.id}">
+    html += `<div class="task-row${isDone?' done-row':''}" data-id="${n.id}" onclick="openTaskModal('${n.id}')">
       <div class="task-cell task-num">${i+1}</div>
       <div class="task-cell task-cat-cell">${catPill(meta.group)}</div>
       <div class="task-cell task-pri-cell">${priPill(meta.priority)}</div>
       <div class="task-cell task-text-cell">${escH(n.text)}</div>
-      <div class="task-cell task-done-cell">
+      <div class="task-cell task-done-cell" onclick="event.stopPropagation()">
         <div class="done-toggle${isDone?' checked':''}" onclick="toggleDone('${n.id}')">${isDone?'✓':''}</div>
       </div>
     </div>`;
@@ -563,6 +579,65 @@ function toggleDone(id) {
   setMeta(id, { done: !meta.done });
   renderTasks();
 }
+
+// ════════════════════════════════════════
+//  TASK DETAIL MODAL
+// ════════════════════════════════════════
+let _modalNoteId = null;
+
+function openTaskModal(id) {
+  const note = allNotes.find(n => n.id === id);
+  if (!note) return;
+  _modalNoteId = id;
+  const meta = getMeta(id);
+
+  // meta pills
+  document.getElementById('modalMeta').innerHTML =
+    catPill(meta.group) + ' ' + priPill(meta.priority);
+
+  // title = first line of text
+  const lines = (note.text || '').split('\n');
+  document.getElementById('modalTitle').textContent = lines[0] || '(untitled)';
+
+  // body = everything after the first line, or empty
+  const bodyText = lines.slice(1).join('\n').trim();
+  const descEl = document.getElementById('modalDesc');
+  descEl.textContent = bodyText || '';
+  descEl.style.display = bodyText ? 'block' : 'none';
+
+  // done button
+  _refreshModalDoneBtn(meta.done);
+
+  document.getElementById('taskModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTaskModal() {
+  document.getElementById('taskModal').classList.remove('open');
+  document.body.style.overflow = '';
+  _modalNoteId = null;
+}
+
+function toggleModalDone() {
+  if (!_modalNoteId) return;
+  const meta = getMeta(_modalNoteId);
+  setMeta(_modalNoteId, { done: !meta.done });
+  _refreshModalDoneBtn(!meta.done);
+  renderTasks();
+}
+
+function _refreshModalDoneBtn(isDone) {
+  const btn = document.getElementById('modalDoneBtn');
+  btn.textContent = isDone ? '✓ Done' : 'Mark Done';
+  btn.classList.toggle('done', isDone);
+}
+
+// Close modal on backdrop click
+document.getElementById('taskModal').addEventListener('click', function(e) {
+  if (e.target === this) closeTaskModal();
+});
+// Close on Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTaskModal(); });
 
 // ════════════════════════════════════════
 //  EISENHOWER MATRIX
@@ -722,5 +797,21 @@ async function init() {
 
 init();
 </script>
+<!-- ── TASK DETAIL MODAL ── -->
+<div id="taskModal">
+  <div class="task-modal-inner">
+    <div class="task-modal-header">
+      <button class="task-modal-close" onclick="closeTaskModal()">✕</button>
+      <div class="task-modal-meta" id="modalMeta"></div>
+      <div class="task-modal-actions">
+        <button class="task-modal-done-btn" id="modalDoneBtn" onclick="toggleModalDone()"></button>
+      </div>
+    </div>
+    <div class="task-modal-body">
+      <div class="task-modal-title" id="modalTitle"></div>
+      <div class="task-modal-desc" id="modalDesc"></div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
