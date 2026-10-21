@@ -394,6 +394,23 @@ body { background: var(--bg); color: var(--cream); font-family: 'Inter', sans-se
   </div>
 </div>
 
+<!-- ── TASK DETAIL MODAL (must be before script so getElementById works at parse time) ── -->
+<div id="taskModal">
+  <div class="task-modal-inner">
+    <div class="task-modal-header">
+      <button class="task-modal-close" onclick="closeTaskModal()">✕</button>
+      <div class="task-modal-meta" id="modalMeta"></div>
+      <div class="task-modal-actions">
+        <button class="task-modal-done-btn" id="modalDoneBtn" onclick="toggleModalDone()"></button>
+      </div>
+    </div>
+    <div class="task-modal-body">
+      <div class="task-modal-title" id="modalTitle"></div>
+      <div class="task-modal-desc" id="modalDesc"></div>
+    </div>
+  </div>
+</div>
+
 <script>
 // ════════════════════════════════════════
 //  CONFIG (shared with notes.html)
@@ -634,7 +651,7 @@ function _refreshModalDoneBtn(isDone) {
 }
 
 // Close modal on backdrop click
-// Modal event listeners wired up in init() after DOM is ready
+
 
 // ════════════════════════════════════════
 //  EISENHOWER MATRIX
@@ -775,12 +792,6 @@ function initHealthChecks() {
 async function init() {
   if (!getToken()) { window.location.href = 'notes.html'; return; }
 
-  // Wire modal event listeners now that DOM is ready
-  document.getElementById('taskModal').addEventListener('click', function(e) {
-    if (e.target === this) closeTaskModal();
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTaskModal(); });
-
   initDayPicker();
   initFilters();
   initEditables();
@@ -797,25 +808,14 @@ async function init() {
   renderTasks();
 }
 
-init().catch(err => {
-  document.getElementById('pbTaskList').innerHTML = `<div class="pb-empty">⚠️ Init error: ${err.message}. <a href="notes.html" style="color:var(--gold)">Return to Notes</a></div>`;
+// Close modal on backdrop click
+document.getElementById('taskModal').addEventListener('click', function(e) {
+  if (e.target === this) closeTaskModal();
 });
+// Close on Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTaskModal(); });
+
+init();
 </script>
-<!-- ── TASK DETAIL MODAL ── -->
-<div id="taskModal">
-  <div class="task-modal-inner">
-    <div class="task-modal-header">
-      <button class="task-modal-close" onclick="closeTaskModal()">✕</button>
-      <div class="task-modal-meta" id="modalMeta"></div>
-      <div class="task-modal-actions">
-        <button class="task-modal-done-btn" id="modalDoneBtn" onclick="toggleModalDone()"></button>
-      </div>
-    </div>
-    <div class="task-modal-body">
-      <div class="task-modal-title" id="modalTitle"></div>
-      <div class="task-modal-desc" id="modalDesc"></div>
-    </div>
-  </div>
-</div>
 </body>
 </html>
