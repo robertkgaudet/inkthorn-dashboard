@@ -97,11 +97,12 @@ body { background: var(--bg); color: var(--cream); font-family: 'Inter', sans-se
 .sidebar-section { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .sidebar-section-header { background: var(--surface-raised); border-bottom: 1px solid var(--border); padding: 8px 12px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--gold-dim); }
 .sidebar-rows { display: flex; flex-direction: column; }
-.sidebar-row { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-bottom: 1px solid var(--border); }
+.sidebar-row { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-bottom: 1px solid var(--border); min-height: 34px; cursor: text; }
 .sidebar-row:last-child { border-bottom: none; }
-.sidebar-row-num { font-size: 0.65rem; color: var(--cream-dim); opacity: 0.5; width: 14px; flex-shrink: 0; text-align: right; }
-.sidebar-input { background: transparent; border: none; outline: none; color: var(--cream); font-family: 'Inter', sans-serif; font-size: 0.8rem; flex: 1; min-width: 0; }
-.sidebar-input::placeholder { color: var(--cream-dim); opacity: 0.35; }
+.sidebar-row-num { font-size: 0.65rem; color: var(--cream-dim); opacity: 0.7; width: 14px; flex-shrink: 0; text-align: right; }
+.sidebar-input { background: transparent; border: none; outline: none; color: var(--cream); font-family: 'Inter', sans-serif; font-size: 0.8rem; flex: 1; min-width: 0; width: 100%; }
+.sidebar-input::placeholder { color: var(--cream-dim); opacity: 0.55; }
+.sidebar-row:focus-within { background: var(--surface-raised); }
 
 /* ── MAIN TASK TABLE ── */
 .pb-main { display: flex; flex-direction: column; gap: 14px; }
