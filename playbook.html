@@ -634,11 +634,7 @@ function _refreshModalDoneBtn(isDone) {
 }
 
 // Close modal on backdrop click
-document.getElementById('taskModal').addEventListener('click', function(e) {
-  if (e.target === this) closeTaskModal();
-});
-// Close on Escape
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTaskModal(); });
+// Modal event listeners wired up in init() after DOM is ready
 
 // ════════════════════════════════════════
 //  EISENHOWER MATRIX
@@ -779,6 +775,11 @@ function initHealthChecks() {
 async function init() {
   if (!getToken()) { window.location.href = 'notes.html'; return; }
 
+  // Wire modal event listeners now that DOM is ready
+  document.getElementById('taskModal').addEventListener('click', function(e) {
+    if (e.target === this) closeTaskModal();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTaskModal(); });
 
   initDayPicker();
   initFilters();
