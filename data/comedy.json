@@ -1,67 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-10-23T01:04:08.059Z",
+  "updated": "2026-10-23T17:40:01.958Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2027-10-22",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Ted & Kev: A Comedy Showcase",
-      "url": "https://504comedy.com/event/1343/ted--kev-a-comedy-showcase-at-sports-drink",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$10",
-      "repeat": "Fourth Thursday",
-      "start_dt": "2026-11-26T19:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-10-22",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "Comedy Gumbeaux",
-      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-      "venue": "Howlin' Wolf Den",
-      "type": "Open Mic",
-      "cost": "$5",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-10-22T19:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-10-22",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "Queers Of Comedy New Orleans",
-      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-      "venue": "Oz New Orleans",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Thursday",
-      "start_dt": "2026-10-22T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-10-22",
-      "time": "9:00pm",
-      "time_sort": 2100,
-      "title": "Abby Govindan",
-      "url": "https://504comedy.com/event/1412/abby-govindan",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Thu Oct 22 2026",
-      "start_dt": "2026-10-22T21:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-10-23",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -75,7 +19,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-10-23",
       "time": "7:30pm",
       "time_sort": 1930,
@@ -85,11 +29,11 @@
       "type": "Improv",
       "cost": "$10",
       "repeat": "Fourth Friday",
-      "start_dt": "2026-10-23T19:30-05:00"
+      "start_dt": "2026-11-27T19:30-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-10-23",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -103,7 +47,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-10-24",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -117,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-10-24",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -131,7 +75,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-10-24",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -145,7 +89,7 @@
     },
     {
       "category": "comedy",
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-10-24",
       "time": "10:00pm",
       "time_sort": 2200,
@@ -324,78 +268,58 @@
       "cost": "FREE",
       "repeat": "Every Wednesday",
       "start_dt": "2026-10-28T21:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-10-29",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Max Castillo & Aaron Monte",
+      "url": "https://504comedy.com/event/1419/max-castillo--aaron-monte",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Thu Oct 29 2026",
+      "start_dt": "2026-10-29T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-10-29",
+      "time": "7:30pm",
+      "time_sort": 1930,
+      "title": "Comedy Gumbeaux",
+      "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+      "venue": "Howlin' Wolf Den",
+      "type": "Open Mic",
+      "cost": "$5",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-10-29T19:30-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Thursday",
+      "date": "2026-10-29",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "Queers Of Comedy New Orleans",
+      "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+      "venue": "Oz New Orleans",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Thursday",
+      "start_dt": "2026-10-29T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2027-10-22",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-22",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Ted & Kev: A Comedy Showcase",
-          "url": "https://504comedy.com/event/1343/ted--kev-a-comedy-showcase-at-sports-drink",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$10",
-          "repeat": "Fourth Thursday",
-          "start_dt": "2026-11-26T19:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-22",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "Comedy Gumbeaux",
-          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
-          "venue": "Howlin' Wolf Den",
-          "type": "Open Mic",
-          "cost": "$5",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-10-22T19:30-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-22",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "Queers Of Comedy New Orleans",
-          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
-          "venue": "Oz New Orleans",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Thursday",
-          "start_dt": "2026-10-22T20:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-22",
-          "time": "9:00pm",
-          "time_sort": 2100,
-          "title": "Abby Govindan",
-          "url": "https://504comedy.com/event/1412/abby-govindan",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Thu Oct 22 2026",
-          "start_dt": "2026-10-22T21:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-10-23",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-23",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -409,7 +333,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-23",
           "time": "7:30pm",
           "time_sort": 1930,
@@ -419,11 +343,11 @@
           "type": "Improv",
           "cost": "$10",
           "repeat": "Fourth Friday",
-          "start_dt": "2026-10-23T19:30-05:00"
+          "start_dt": "2026-11-27T19:30-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-23",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -438,12 +362,12 @@
       ]
     },
     {
-      "day": "Saturday",
+      "day": "Tomorrow",
       "date": "2026-10-24",
       "events": [
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-10-24",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -457,7 +381,7 @@
         },
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-10-24",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -471,7 +395,7 @@
         },
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-10-24",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -485,7 +409,7 @@
         },
         {
           "category": "comedy",
-          "day": "Saturday",
+          "day": "Tomorrow",
           "date": "2026-10-24",
           "time": "10:00pm",
           "time_sort": 2200,
@@ -688,6 +612,54 @@
           "cost": "FREE",
           "repeat": "Every Wednesday",
           "start_dt": "2026-10-28T21:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Thursday",
+      "date": "2026-10-29",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-10-29",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Max Castillo & Aaron Monte",
+          "url": "https://504comedy.com/event/1419/max-castillo--aaron-monte",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Thu Oct 29 2026",
+          "start_dt": "2026-10-29T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-10-29",
+          "time": "7:30pm",
+          "time_sort": 1930,
+          "title": "Comedy Gumbeaux",
+          "url": "https://504comedy.com/event/117/comedy-gumbeaux",
+          "venue": "Howlin' Wolf Den",
+          "type": "Open Mic",
+          "cost": "$5",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-10-29T19:30-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Thursday",
+          "date": "2026-10-29",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "Queers Of Comedy New Orleans",
+          "url": "https://504comedy.com/event/934/queers-of-comedy-new-orleans",
+          "venue": "Oz New Orleans",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Thursday",
+          "start_dt": "2026-10-29T20:00-05:00"
         }
       ]
     }
