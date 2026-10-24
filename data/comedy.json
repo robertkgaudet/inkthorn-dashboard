@@ -1,53 +1,11 @@
 {
   "agent": "Rob-Agent",
-  "updated": "2026-10-24T01:14:21.620Z",
+  "updated": "2026-10-24T16:25:05.528Z",
   "source": "504Comedy.com",
   "shows": [
     {
       "category": "comedy",
       "day": "Today",
-      "date": "2027-10-23",
-      "time": "7:00pm",
-      "time_sort": 1900,
-      "title": "Eagle Witt",
-      "url": "https://504comedy.com/event/1413/eagle-witt",
-      "venue": "Sports Drink",
-      "type": "Stand-up",
-      "cost": "$25",
-      "repeat": "Fri Oct 23 2026",
-      "start_dt": "2026-10-23T19:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-10-23",
-      "time": "7:30pm",
-      "time_sort": 1930,
-      "title": "You're Invited!",
-      "url": "https://504comedy.com/event/1109/youre-invited-at-big-couch-nola",
-      "venue": "Big Couch New Orleans",
-      "type": "Improv",
-      "cost": "$10",
-      "repeat": "Fourth Friday",
-      "start_dt": "2026-11-27T19:30-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Today",
-      "date": "2027-10-23",
-      "time": "8:00pm",
-      "time_sort": 2000,
-      "title": "The Comedy Lounge",
-      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-      "venue": "Vino: Fine Wine & Spirits",
-      "type": "Stand-up",
-      "cost": "FREE",
-      "repeat": "Every Friday",
-      "start_dt": "2026-10-23T20:00-05:00"
-    },
-    {
-      "category": "comedy",
-      "day": "Tomorrow",
       "date": "2026-10-24",
       "time": "7:00pm",
       "time_sort": 1900,
@@ -61,7 +19,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-10-24",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -75,7 +33,7 @@
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-10-24",
       "time": "9:00pm",
       "time_sort": 2100,
@@ -85,11 +43,11 @@
       "type": "Stand-up",
       "cost": "$20",
       "repeat": "Fourth Saturday",
-      "start_dt": "2026-10-24T21:00-05:00"
+      "start_dt": "2026-11-28T21:00-05:00"
     },
     {
       "category": "comedy",
-      "day": "Tomorrow",
+      "day": "Today",
       "date": "2026-10-24",
       "time": "10:00pm",
       "time_sort": 2200,
@@ -103,7 +61,7 @@
     },
     {
       "category": "comedy",
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-10-25",
       "time": "8:00pm",
       "time_sort": 2000,
@@ -310,64 +268,44 @@
       "cost": "FREE",
       "repeat": "Every Thursday",
       "start_dt": "2026-10-29T20:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-10-30",
+      "time": "7:00pm",
+      "time_sort": 1900,
+      "title": "Zak Toscani",
+      "url": "https://504comedy.com/event/1420/zak-toscani",
+      "venue": "Sports Drink",
+      "type": "Stand-up",
+      "cost": "$25",
+      "repeat": "Fri Oct 30 2026",
+      "start_dt": "2026-10-30T19:00-05:00"
+    },
+    {
+      "category": "comedy",
+      "day": "Friday",
+      "date": "2026-10-30",
+      "time": "8:00pm",
+      "time_sort": 2000,
+      "title": "The Comedy Lounge",
+      "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+      "venue": "Vino: Fine Wine & Spirits",
+      "type": "Stand-up",
+      "cost": "FREE",
+      "repeat": "Every Friday",
+      "start_dt": "2026-10-30T20:00-05:00"
     }
   ],
   "days": [
     {
       "day": "Today",
-      "date": "2027-10-23",
-      "events": [
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-23",
-          "time": "7:00pm",
-          "time_sort": 1900,
-          "title": "Eagle Witt",
-          "url": "https://504comedy.com/event/1413/eagle-witt",
-          "venue": "Sports Drink",
-          "type": "Stand-up",
-          "cost": "$25",
-          "repeat": "Fri Oct 23 2026",
-          "start_dt": "2026-10-23T19:00-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-23",
-          "time": "7:30pm",
-          "time_sort": 1930,
-          "title": "You're Invited!",
-          "url": "https://504comedy.com/event/1109/youre-invited-at-big-couch-nola",
-          "venue": "Big Couch New Orleans",
-          "type": "Improv",
-          "cost": "$10",
-          "repeat": "Fourth Friday",
-          "start_dt": "2026-11-27T19:30-05:00"
-        },
-        {
-          "category": "comedy",
-          "day": "Today",
-          "date": "2027-10-23",
-          "time": "8:00pm",
-          "time_sort": 2000,
-          "title": "The Comedy Lounge",
-          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
-          "venue": "Vino: Fine Wine & Spirits",
-          "type": "Stand-up",
-          "cost": "FREE",
-          "repeat": "Every Friday",
-          "start_dt": "2026-10-23T20:00-05:00"
-        }
-      ]
-    },
-    {
-      "day": "Tomorrow",
       "date": "2026-10-24",
       "events": [
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-24",
           "time": "7:00pm",
           "time_sort": 1900,
@@ -381,7 +319,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-24",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -395,7 +333,7 @@
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-24",
           "time": "9:00pm",
           "time_sort": 2100,
@@ -405,11 +343,11 @@
           "type": "Stand-up",
           "cost": "$20",
           "repeat": "Fourth Saturday",
-          "start_dt": "2026-10-24T21:00-05:00"
+          "start_dt": "2026-11-28T21:00-05:00"
         },
         {
           "category": "comedy",
-          "day": "Tomorrow",
+          "day": "Today",
           "date": "2026-10-24",
           "time": "10:00pm",
           "time_sort": 2200,
@@ -424,12 +362,12 @@
       ]
     },
     {
-      "day": "Sunday",
+      "day": "Tomorrow",
       "date": "2026-10-25",
       "events": [
         {
           "category": "comedy",
-          "day": "Sunday",
+          "day": "Tomorrow",
           "date": "2026-10-25",
           "time": "8:00pm",
           "time_sort": 2000,
@@ -660,6 +598,40 @@
           "cost": "FREE",
           "repeat": "Every Thursday",
           "start_dt": "2026-10-29T20:00-05:00"
+        }
+      ]
+    },
+    {
+      "day": "Friday",
+      "date": "2026-10-30",
+      "events": [
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-10-30",
+          "time": "7:00pm",
+          "time_sort": 1900,
+          "title": "Zak Toscani",
+          "url": "https://504comedy.com/event/1420/zak-toscani",
+          "venue": "Sports Drink",
+          "type": "Stand-up",
+          "cost": "$25",
+          "repeat": "Fri Oct 30 2026",
+          "start_dt": "2026-10-30T19:00-05:00"
+        },
+        {
+          "category": "comedy",
+          "day": "Friday",
+          "date": "2026-10-30",
+          "time": "8:00pm",
+          "time_sort": 2000,
+          "title": "The Comedy Lounge",
+          "url": "https://504comedy.com/event/1319/the-comedy-lounge-at-vino",
+          "venue": "Vino: Fine Wine & Spirits",
+          "type": "Stand-up",
+          "cost": "FREE",
+          "repeat": "Every Friday",
+          "start_dt": "2026-10-30T20:00-05:00"
         }
       ]
     }
